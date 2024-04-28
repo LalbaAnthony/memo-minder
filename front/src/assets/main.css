@@ -1,35 +1,89 @@
-@import './base.css';
+:root {
+  /* Vue App */
+  --primary: #78E0DC;
+  --primary-light: #478a84;
+  --light: #ffffff;
+  --gray: #4B5563;
+  --dark: #090E16;
+  --light-dark: #121826;
+  --success: #3caf57;
+  --light-success: #b8ffc9;
+  --warning: #cf4a02;
+  --light-warning: #fabd9c;
+  --danger: #cf0d0d;
+  --light-danger: #fda8a8;
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  /* Overload vue-carousel stuff */
+  --vc-clr-primary: var(--primary) !important;
+  --vc-clr-secondary: #090f207f !important;
+  --vc-clr-white: var(--light) !important;
+  --vc-icn-width: 1.2em !important;
+  --vc-nav-width: 30px !important;
+  --vc-nav-height: 30px !important;
+  --vc-nav-border-radius: 25px !important;
+  --vc-nav-color: var(--vc-clr-primary) !important;
+  --vc-nav-color-hover: var(--vc-clr-secondary) !important;
+  --vc-nav-background: var(--vc-clr-white) !important;
+  --vc-pgn-width: 12px !important;
+  --vc-pgn-height: 4px !important;
+  --vc-pgn-margin: 4px !important;
+  --vc-pgn-border-radius: 0 !important;
+  --vc-pgn-background-color: var(--vc-clr-secondary) !important;
+  --vc-pgn-active-color: var(--vc-clr-primary) !important;
+}
+
+/* Overload vue-toastification stuff */
+.Vue-Toastification__toast {
+  /* background-color: var(--secondary) !important; */
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2) !important;
+  /* border: solid 2px var(--light) !important; */
+  border: solid 2px transparent !important;
+  border-radius: 25px !important;
+}
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  box-sizing: border-box;
   font-weight: normal;
 }
 
-a,
-.green {
+ul,
+ol {
+  list-style-type: none;
+}
+
+a {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+address {
+  font-style: normal;
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+/* Code for Firefox */
+::-moz-selection {
+  color: var(--light);
+  background: var(--primary);
+}
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+::selection {
+  color: var(--light);
+  background: var(--primary);
+}
+
+body {
+  min-height: 100vh;
+  transition: color 0.5s, background-color 0.5s;
+  line-height: 1.6;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--light);
+  background: var(--dark);
 }
