@@ -1,7 +1,7 @@
 :root {
   /* Vue App */
-  --primary: #78E0DC;
-  --primary-light: #478a84;
+  --primary: #248f89;
+  --primary-light: #4dcfc1;
   --light: #ffffff;
   --gray: #4B5563;
   --dark: #090E16;
@@ -60,10 +60,6 @@ a {
   text-decoration: none;
 }
 
-address {
-  font-style: normal;
-}
-
 /* Code for Firefox */
 ::-moz-selection {
   color: var(--light);
@@ -79,7 +75,7 @@ body {
   min-height: 100vh;
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
-  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", "Roboto", sans-serif;
   font-size: 15px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
