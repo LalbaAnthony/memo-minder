@@ -1,4 +1,4 @@
-# Memo Minder
+# 💌 - Memo Minder
 
 Memory Minder is an application designed to help you capture, organize, and cherish your memories and special moments. Whether it's a favorite song, or simply jotting down your thoughts, Memory Minder is your personal companion for preserving life's precious moments.
 
