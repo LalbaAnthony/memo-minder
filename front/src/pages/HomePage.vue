@@ -1,6 +1,7 @@
 <template>
   <div>
-    <apexChart width="500" height="350" type="candlestick" :options="chartOptions" :series="series"></apexChart>
+    <apexChart width="400" height="350" type="candlestick" :options="chartOptions" :series="series">
+    </apexChart>
   </div>
 </template>
 
