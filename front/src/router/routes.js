@@ -8,9 +8,33 @@ const routes = [
     },
   },
   {
+    path: '/time-spans',
+    name: 'time-spans',
+    component: () => import('../pages/timespan/TimeSpansPage.vue'),
+    meta: {
+      title: 'Time span', private: false,
+    },
+  },
+  {
+    path: '/events',
+    name: 'events',
+    component: () => import('../pages/event/EventsPage.vue'),
+    meta: {
+      title: 'Events', private: false,
+    },
+  },
+  {
+    path: '/account',
+    name: 'account',
+    component: () => import('../pages/account/AccountPage.vue'),
+    meta: {
+      title: 'Account', private: false,
+    },
+  },
+  {
     path: '/musics',
     name: 'musics',
-    component: () => import('../pages/MusicsPage.vue'),
+    component: () => import('../pages/music/MusicsPage.vue'),
     meta: {
       title: 'Musics', private: false,
     },

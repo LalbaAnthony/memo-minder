@@ -22,7 +22,8 @@ CREATE TABLE music(
         music_id INT AUTO_INCREMENT NOT NULL UNIQUE,
         title VARCHAR (50) NOT NULL,
         artist VARCHAR (50),
-        spotify_link VARCHAR (100),
+        release_date DATE,
+        streaming_link VARCHAR (150),
         is_deleted BOOLEAN NOT NULL DEFAULT 0,
         created_at DATETIME NOT NULL DEFAULT NOW(),
         CONSTRAINT music_PK PRIMARY KEY (music_id)

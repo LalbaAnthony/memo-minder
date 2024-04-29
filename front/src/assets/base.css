@@ -48,6 +48,11 @@ section {
     border: 0;
 }
 
+hr {
+    border: 0;
+    border-top: 1px solid var(--gray);
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
     width: 10px;
