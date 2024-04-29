@@ -1,11 +1,17 @@
 :root {
   /* Vue App */
-  --primary: #248f89;
-  --primary-light: #4dcfc1;
+
+  --primary: #76a9fa;
+
   --light: #ffffff;
-  --gray: #4B5563;
-  --dark: #090E16;
-  --light-dark: #121826;
+  
+  --light-gray: #9ca3af;
+  --gray: #4b5563;
+  --dark-gray: #374151;
+
+  --light-dark: #1f2937;
+  --dark: #111827;
+
   --success: #3caf57;
   --light-success: #b8ffc9;
   --warning: #cf4a02;
