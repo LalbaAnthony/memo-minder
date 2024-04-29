@@ -1,6 +1,6 @@
 -- Create user
 DROP USER IF EXISTS 'memo-minder-user'@'localhost';
-CREATE USER 'memo-minder-user'@'localhost' IDENTIFIED BY 'w11xBg50G2t4YtC1BlbQ';
+CREATE USER 'memo-minder-user'@'localhost' IDENTIFIED BY 'ejo9uSRkmPzZxtWIFSM1AqDkgT2Lw';
 
 -- Grant privileges
 GRANT SELECT ON `memo-minder`.mood TO 'memo-minder-user'@'localhost';

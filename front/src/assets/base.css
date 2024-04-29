@@ -54,12 +54,11 @@ section {
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--light-gray);
-    border-radius: 25px;
+    background: var(--gray);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--secondary);
+    background: var(--light-gray);
     border-radius: 25px;
 }
 
