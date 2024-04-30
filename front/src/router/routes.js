@@ -12,7 +12,7 @@ const routes = [
     name: 'time-spans',
     component: () => import('../pages/timespan/TimeSpansPage.vue'),
     meta: {
-      title: 'Time span', private: false,
+      title: 'Time spans', private: false,
     },
   },
   {
