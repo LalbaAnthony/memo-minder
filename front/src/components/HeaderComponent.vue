@@ -3,8 +3,8 @@
 
     <header class="flex justify-between items-center bg-light-dark border-b border-gray p-4 gap-3">
       <Bars3Icon class="size-8 text-light-gray" @click.stop="showSidebar = !showSidebar" />
-      <h1 class="text-2xl font-bold text-light">Memo M<span
-          class="text-primary text-2xl font-bold text-light">i</span>nder
+      <h1 class="text-2xl font-bold text-light">
+        {{ SITE_NAME }}
       </h1>
       <MagnifyingGlassIcon class="size-8 text-light-gray cursor-pointer" @click.stop="focusSearchBar" />
     </header>
@@ -42,7 +42,7 @@
           <router-link to="/time-spans" class="flex items-center text-light rounded-lg 
           hover:bg-dark-gray p-2">
             <FilmIcon class="size-6 text-light-gray" />
-            <span class="ml-3 mt-0.5">Time span</span>
+            <span class="ml-3 mt-0.5">Time spans</span>
           </router-link>
           <router-link to="/events" class="flex items-center text-light rounded-lg 
         hover:bg-dark-gray p-2">
@@ -77,6 +77,7 @@ import { MusicalNoteIcon } from '@heroicons/vue/24/solid'
 import { UserIcon } from '@heroicons/vue/24/solid'
 import { ref } from 'vue'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
+import { SITE_NAME } from '@/config';
 
 const showSidebar = ref(true)
 const search = ref('')
