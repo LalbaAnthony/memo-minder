@@ -4,6 +4,7 @@ Memory Minder is an application designed to help you capture, organize, and cher
 
 ## Technos
 
+- Node.js
 - Vue.js
 - Tailwind
 - Headless UI
