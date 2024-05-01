@@ -8,10 +8,10 @@
     <Dropdown title="Sort" side="right">
       <div class="space-y-2">
         <button @click="resetSort" class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Default</button>
-        <button @click="toggleSort('title-ASC')" class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Title (A-Z)</button>
-        <button @click="toggleSort('title-DESC')" class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Title (Z-A)</button>
-        <button @click="toggleSort('date-ASC')" class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Date (Oldest)</button>
-        <button @click="toggleSort('date-DESC')" class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Date (Newest)</button>
+        <button @click="toggleSort('title-asc')" class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Title (A-Z)</button>
+        <button @click="toggleSort('title-desc')" class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Title (Z-A)</button>
+        <button @click="toggleSort('date-asc')" class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Date (Oldest)</button>
+        <button @click="toggleSort('date-desc')" class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Date (Newest)</button>
       </div>
     </Dropdown>
   </div>
