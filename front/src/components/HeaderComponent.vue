@@ -79,6 +79,10 @@ import { UserIcon } from '@heroicons/vue/24/solid'
 import { ref } from 'vue'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { SITE_NAME } from '@/config';
+import { useRoute, useRouter } from 'vue-router'
+
+const route = useRoute()
+const router = useRouter()
 
 const showSidebar = ref(false)
 const search = ref('')
@@ -92,8 +96,13 @@ function focusSearchBar() {
 }
 
 function triggerSearch() {
-  console.log('Search triggered: ', search.value)
-  search.value = ''
+  const query = { ...route.query }
+  delete query.search
+  if (search.value) {
+    query.search = search.value
+    search.value = ''
+  }
+  router.push({ path: route.path, query }) 
 }
 
 // Add shortcuts
