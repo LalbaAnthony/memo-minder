@@ -1,6 +1,7 @@
 <template>
   <div>
-    <GridComponent :items="musics">
+    <LoaderComponent v-if="musicStore.musics.loading" />
+    <GridComponent v-else :items="musicStore.musics.data">
       <template #item="{ item }">
         <Music :music="item" />
       </template> 
@@ -9,29 +10,32 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import GridComponent from '@/components/GridComponent.vue'
 import Music from '@/components/music/MusicItem.vue'
+import LoaderComponent from '@/components/LoaderComponent.vue'
+import { useRoute } from 'vue-router'
+import { useMusicStore } from '@/stores/music'
+import { watch } from 'vue'
 
-const musics = ref([
-  { title: 'Hasarder', artist: 'Lompal', release_date: '2021-10-31', streaming_link: 'https://open.spotify.com/track/4lp2Zff8wuXAccfNkFn1Q9?si=f056cbb4d1454813' },
-  { title: 'Hasarder', artist: 'Lompal', release_date: '2021-10-31', streaming_link: 'https://open.spotify.com/track/4lp2Zff8wuXAccfNkFn1Q9?si=f056cbb4d1454813' },
-  { title: 'Hasarder', artist: 'Lompal', release_date: '2021-10-31', streaming_link: 'https://open.spotify.com/track/4lp2Zff8wuXAccfNkFn1Q9?si=f056cbb4d1454813' },
-  { title: 'Hasarder', artist: 'Lompal', release_date: '2021-10-31', streaming_link: 'https://open.spotify.com/track/4lp2Zff8wuXAccfNkFn1Q9?si=f056cbb4d1454813' },
-  { title: 'Hasarder', artist: 'Lompal', release_date: '2021-10-31', streaming_link: 'https://open.spotify.com/track/4lp2Zff8wuXAccfNkFn1Q9?si=f056cbb4d1454813' },
-  { title: 'Hasarder', artist: 'Lompal', release_date: '2021-10-31', streaming_link: 'https://open.spotify.com/track/4lp2Zff8wuXAccfNkFn1Q9?si=f056cbb4d1454813' },
-  { title: 'Hasarder', artist: 'Lompal', release_date: '2021-10-31', streaming_link: 'https://open.spotify.com/track/4lp2Zff8wuXAccfNkFn1Q9?si=f056cbb4d1454813' },
-  { title: 'Hasarder', artist: 'Lompal', release_date: '2021-10-31', streaming_link: 'https://open.spotify.com/track/4lp2Zff8wuXAccfNkFn1Q9?si=f056cbb4d1454813' },
-  { title: 'Hasarder', artist: 'Lompal', release_date: '2021-10-31', streaming_link: 'https://open.spotify.com/track/4lp2Zff8wuXAccfNkFn1Q9?si=f056cbb4d1454813' },
-  { title: 'Hasarder', artist: 'Lompal', release_date: '2021-10-31', streaming_link: 'https://open.spotify.com/track/4lp2Zff8wuXAccfNkFn1Q9?si=f056cbb4d1454813' },
-  { title: 'Hasarder', artist: 'Lompal', release_date: '2021-10-31', streaming_link: 'https://open.spotify.com/track/4lp2Zff8wuXAccfNkFn1Q9?si=f056cbb4d1454813' },
-  { title: 'Hasarder', artist: 'Lompal', release_date: '2021-10-31', streaming_link: 'https://open.spotify.com/track/4lp2Zff8wuXAccfNkFn1Q9?si=f056cbb4d1454813' },
-  { title: 'Hasarder', artist: 'Lompal', release_date: '2021-10-31', streaming_link: 'https://open.spotify.com/track/4lp2Zff8wuXAccfNkFn1Q9?si=f056cbb4d1454813' },
-  { title: 'Hasarder', artist: 'Lompal', release_date: '2021-10-31', streaming_link: 'https://open.spotify.com/track/4lp2Zff8wuXAccfNkFn1Q9?si=f056cbb4d1454813' },
-  { title: 'Hasarder', artist: 'Lompal', release_date: '2021-10-31', streaming_link: 'https://open.spotify.com/track/4lp2Zff8wuXAccfNkFn1Q9?si=f056cbb4d1454813' },
-  { title: 'Hasarder', artist: 'Lompal', release_date: '2021-10-31', streaming_link: 'https://open.spotify.com/track/4lp2Zff8wuXAccfNkFn1Q9?si=f056cbb4d1454813' },
-  { title: 'Hasarder', artist: 'Lompal', release_date: '2021-10-31', streaming_link: 'https://open.spotify.com/track/4lp2Zff8wuXAccfNkFn1Q9?si=f056cbb4d1454813' },
-  { title: 'Hasarder', artist: 'Lompal', release_date: '2021-10-31', streaming_link: 'https://open.spotify.com/track/4lp2Zff8wuXAccfNkFn1Q9?si=f056cbb4d1454813' },
-])
+const route = useRoute()
+const musicStore = useMusicStore()
+
+async function loadMusics() {
+    musicStore.fetchMusics({
+        sort: route.query.sort ? [{
+            order_by: route.query.sort?.split('-')[0] || null,
+            order: route.query.sort?.split('-')[1] || null
+        }] : [
+            { order: 'ASC', order_by: 'title' },
+        ]
+    })
+}
+
+// Fetch musics on component mount
+// musicStore.musics = []
+loadMusics()
+
+// Watch route changes
+watch(() => route.query, loadMusics)
 
 </script>

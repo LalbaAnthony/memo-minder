@@ -79,7 +79,7 @@ import { ref } from 'vue'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { SITE_NAME } from '@/config';
 
-const showSidebar = ref(true)
+const showSidebar = ref(false)
 const search = ref('')
 
 function focusSearchBar() {
