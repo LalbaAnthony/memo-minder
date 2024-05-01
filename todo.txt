@@ -3,3 +3,4 @@
 - [X] Create logo
 - [ ] Make integration from something like https://flowbite.com/blocks/application/shells/
 - [ ] Refaire logo avec new couleurs
+- [ ] Back en node
