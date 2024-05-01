@@ -30,33 +30,32 @@
           </form>
         </div>
 
-
         <!-- Navigation -->
         <nav class="py-2 px-4 flex flex-col gap-4">
           <router-link to="/" class="flex items-center text-light rounded-lg 
-            hover:bg-dark-gray p-2">
+            hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
             <ListBulletIcon class="size-6 text-light-gray" />
             <span class="ml-3 mt-0.5">Home</span>
           </router-link>
           <hr>
           <router-link to="/time-spans" class="flex items-center text-light rounded-lg 
-          hover:bg-dark-gray p-2">
+          hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
             <FilmIcon class="size-6 text-light-gray" />
             <span class="ml-3 mt-0.5">Time spans</span>
           </router-link>
           <router-link to="/events" class="flex items-center text-light rounded-lg 
-        hover:bg-dark-gray p-2">
+        hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
             <CalendarDaysIcon class="size-6 text-light-gray" />
             <span class="ml-3 mt-0.5">Events</span>
           </router-link>
           <router-link to="/musics" class="flex items-center text-light rounded-lg 
-      hover:bg-dark-gray p-2">
+      hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
             <MusicalNoteIcon class="size-6 text-light-gray" />
             <span class="ml-3 mt-0.5">Musics</span>
           </router-link>
           <hr>
           <router-link to="/account" class="flex items-center text-light rounded-lg 
-    hover:bg-dark-gray p-2">
+    hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
             <UserIcon class="size-6 text-light-gray" />
             <span class="ml-3 mt-0.5">Account</span>
           </router-link>
