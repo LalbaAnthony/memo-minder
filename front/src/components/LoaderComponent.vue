@@ -1,5 +1,5 @@
 <template>
-  <div v-if="props.enabled" class="main-center">
+  <div v-if="props.enabled" class="flex items-center justify-center h-96 min-h-screen">
     <span class="loader"></span>
   </div>
 </template>
@@ -16,13 +16,6 @@ const props = defineProps({
 </script>
 
 <style scoped>
-.main-center {
-  margin: 225px auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .loader {
   width: 84px;
   height: 84px;
@@ -43,3 +36,4 @@ const props = defineProps({
     transform: rotate(360deg);
   }
 }
+</style>
