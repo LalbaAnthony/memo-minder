@@ -16,7 +16,8 @@
         enter="transition ease-out duration-100 transform" enter-from="opacity-0 scale-95"
         enter-to="opacity-100 scale-100" leave="transition ease-in duration-75 transform"
         leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95"
-        class="origin-top-right absolute right-0 mt-2 w-56 rounded-lg bg-gray p-4 z-20">
+        :class="['origin-top-right absolute', props.side === 'right' ? 'right-0' : 'left-0', 'mt-2 w-56 rounded-lg bg-gray p-4 z-20']"
+        >
         <slot></slot>
       </TransitionChild>
     </TransitionRoot>
@@ -32,6 +33,11 @@ const props = defineProps({
   title: {
     type: String,
     required: true,
+  },
+  side: {
+    type: String,
+    required: false,
+    default: 'left',
   },
 })
 
