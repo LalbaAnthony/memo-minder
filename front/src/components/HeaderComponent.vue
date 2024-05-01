@@ -3,9 +3,11 @@
 
     <header class="flex justify-between items-center bg-light-dark border-b border-gray p-4 gap-3">
       <Bars3Icon class="size-8 text-light-gray" @click.stop="showSidebar = !showSidebar" />
-      <h1 class="text-2xl font-bold text-light">
-        {{ SITE_NAME }}
-      </h1>
+      <router-link to="/">
+        <h1 class="text-2xl font-bold text-light">
+          {{ SITE_NAME }}
+        </h1>
+      </router-link>
       <MagnifyingGlassIcon class="size-8 text-light-gray cursor-pointer" @click.stop="focusSearchBar" />
     </header>
 
@@ -86,13 +88,22 @@ function focusSearchBar() {
   setTimeout(() => {
     const input = document.querySelector('input')
     input.focus()
-  }, 200)
+  }, 200) // wait for sidebar to be visible
 }
 
 function triggerSearch() {
   console.log('Search triggered: ', search.value)
   search.value = ''
 }
+
+// Add shortcuts
+window.addEventListener('keydown', (e) => {
+  // ctrl + F short to focus search
+  if (e.ctrlKey && e.key === 'f') {
+    e.preventDefault()
+    focusSearchBar()
+  }
+})
 
 // Directive click outside
 const vClickOutside = {

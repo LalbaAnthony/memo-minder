@@ -4,11 +4,11 @@
       <slot name="item" :item="item"></slot>
     </div>
   </div>
-  <NoItemComponent v-else />
+  <NoItem v-else />
 </template>
 
 <script setup>
-import NoItemComponent from '@/components/NoItemComponent.vue'
+import NoItem from '@/components/NoItemComponent.vue'
 
 const props = defineProps({
   items: {

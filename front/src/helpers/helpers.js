@@ -11,6 +11,17 @@ export function threeDotString(str, maxLen = 100) {
     return str.slice(0, maxLen).trim() + " ...";
 }
 
+export function ageFromDate(birthDate) {
+    const today = new Date();
+    const birth = new Date(birthDate);
+    let age = today.getFullYear() - birth.getFullYear();
+    const m = today.getMonth() - birth.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
+        age--;
+    }
+    return age;
+}
+
 export async function imageExists(url) {
     new Promise((resolve) => {
         var img = new Image();
