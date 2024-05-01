@@ -1,7 +1,7 @@
 <template>
   <div class="overflow-hidden h-6 my-2 flex rounded-lg bg-dark-gray">
     <div :style="{ width: props.value + '%' }"
-      class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-light-gray">
+      class="flex flex-col text-center text-white justify-center bg-light-gray">
       {{ roundNb(props.value, 1) }} %</div>
   </div>
 </template>
