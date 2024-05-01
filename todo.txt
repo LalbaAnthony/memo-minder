@@ -1,6 +1,7 @@
 - [X] Project startup
 - [X] Create DB
 - [X] Create logo
+- [ ] Make bottom action the same as grid (slots)
 - [ ] Make integration from something like https://flowbite.com/blocks/application/shells/
 - [ ] Refaire logo avec new couleurs
 - [ ] Back en node
