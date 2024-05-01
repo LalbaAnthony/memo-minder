@@ -1,13 +1,33 @@
 <template>
   <div>
+    <div class="progress-bars-grid">
+      <section>
+        <h2 class="text-xl font-bold">Remaining childhood</h2>
+        <ProgressBarComponent :value="((21 / 18) * 100) > 100 ? 100 : ((21 / 18) * 100)" />
+      </section>
+      <section>
+        <h2 class="text-xl font-bold">Remaining adulthood</h2>
+        <ProgressBarComponent :value="((21 / 64) * 100) > 100 ? 100 : ((21 / 64) * 100)" />
+      </section>
+      <section>
+        <h2 class="text-xl font-bold">Remaining life time</h2>
+        <ProgressBarComponent :value="((21 / 80) * 100) > 100 ? 100 : ((21 / 80) * 100)" />
+      </section>
+    </div>
     <section>
-      <h2 class="text-xl font-bold">Remaining life time</h2>
-      <ProgressBarComponent :value="(21/80)*100"/>
+      <h2 class="text-xl font-bold">Lasts added</h2>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim quis deleniti laboriosam nemo quisquam hic
+        magnam dolore consequuntur libero aliquam nam mollitia sed architecto omnis quaerat voluptatum, rem minima
+        totam!</p>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim quis deleniti laboriosam nemo quisquam hic
+        magnam dolore consequuntur libero aliquam nam mollitia sed architecto omnis quaerat voluptatum, rem minima
+        totam!</p>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim quis deleniti laboriosam nemo quisquam hic
+        magnam dolore consequuntur libero aliquam nam mollitia sed architecto omnis quaerat voluptatum, rem minima
+        totam!</p>
     </section>
-    <section>
-      <!-- <apexChart width="400" height="350" type="candlestick" :options="chartOptions" :series="series">
+    <!-- <apexChart width="400" height="350" type="candlestick" :options="chartOptions" :series="series">
     </apexChart> -->
-    </section>
   </div>
 </template>
 
@@ -132,3 +152,12 @@ import ProgressBarComponent from '@/components/ProgressBarComponent.vue'
 // ]);
 
 </script>
+
+<style scoped>
+/* Between 1 and 3 items per rows + last item take the remaining space */
+.progress-bars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 0 3rem;
+}
+</style>
