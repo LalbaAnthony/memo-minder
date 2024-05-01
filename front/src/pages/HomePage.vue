@@ -1,10 +1,19 @@
 <template>
-  <div></div>
-  <!-- <apexChart width="400" height="350" type="candlestick" :options="chartOptions" :series="series">
+  <div>
+    <section>
+      <h2 class="text-xl font-bold">Remaining life time</h2>
+      <ProgressBarComponent :value="(21/80)*100"/>
+    </section>
+    <section>
+      <!-- <apexChart width="400" height="350" type="candlestick" :options="chartOptions" :series="series">
     </apexChart> -->
+    </section>
+  </div>
 </template>
 
+
 <script setup>
+import ProgressBarComponent from '@/components/ProgressBarComponent.vue'
 // import { ref } from "vue";
 
 // const chartOptions = ref({
