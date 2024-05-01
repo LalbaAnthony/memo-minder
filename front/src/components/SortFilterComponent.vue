@@ -2,32 +2,27 @@
   <div class="flex justify-between items-center m-2 mb-6">
     <!-- Filter -->
     <Dropdown title="Filter" side="left">
-      hey
+      
     </Dropdown>
     <!-- Sort -->
     <Dropdown title="Sort" side="right">
-      hey
+      <div class="space-y-2">
+        <button @click="resetSort" class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Default</button>
+        <button @click="toggleSort('title-ASC')" class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Title (A-Z)</button>
+        <button @click="toggleSort('title-DESC')" class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Title (Z-A)</button>
+        <button @click="toggleSort('date-ASC')" class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Date (Oldest)</button>
+        <button @click="toggleSort('date-DESC')" class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Date (Newest)</button>
+      </div>
     </Dropdown>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import Dropdown from '@/components/DropdownComponent.vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()
-
-const showFilter = ref(false)
-const showSort = ref(false)
-
-function resetFilter() {
-  const query = { ...route.query }
-  delete query.categories
-  delete query.materials
-  router.push({ path: route.path, query })
-}
 
 function resetSort() {
   const query = { ...route.query }
@@ -43,20 +38,5 @@ function toggleSort(value) {
     query.sort = value
   }
   router.push({ path: route.path, query })
-}
-
-// Directive click outside
-const vClickOutside = {
-  beforeMount(el, binding) {
-    el.clickOutsideEvent = function (event) {
-      if (!(el == event.target || el.contains(event.target))) {
-        binding.value()
-      }
-    }
-    document.body.addEventListener('click', el.clickOutsideEvent)
-  },
-  unmounted(el) {
-    document.body.removeEventListener('click', el.clickOutsideEvent)
-  }
 }
 </script>
