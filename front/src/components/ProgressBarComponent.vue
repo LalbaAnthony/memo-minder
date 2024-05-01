@@ -1,11 +1,13 @@
 <template>
   <div class="overflow-hidden h-6 my-2 flex rounded-lg bg-dark-gray">
     <div :style="{ width: props.value + '%' }"
-      class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-light-gray"></div>
+      class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-light-gray">
+      {{ roundNb(props.value, 1) }} %</div>
   </div>
 </template>
 
 <script setup>
+import { roundNb } from '@/helpers/helpers.js'
 
 const props = defineProps({
   value: {

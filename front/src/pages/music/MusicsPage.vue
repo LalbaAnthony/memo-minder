@@ -4,7 +4,7 @@
     <GridComponent v-else :items="musicStore.musics.data">
       <template #item="{ item }">
         <Music :music="item" />
-      </template> 
+      </template>
     </GridComponent>
   </div>
 </template>
@@ -21,21 +21,20 @@ const route = useRoute()
 const musicStore = useMusicStore()
 
 async function loadMusics() {
-    musicStore.fetchMusics({
-        sort: route.query.sort ? [{
-            order_by: route.query.sort?.split('-')[0] || null,
-            order: route.query.sort?.split('-')[1] || null
-        }] : [
-            { order: 'ASC', order_by: 'title' },
-        ]
-    })
+  musicStore.fetchMusics({
+    sort: route.query.sort ? [{
+      order_by: route.query.sort?.split('-')[0] || null,
+      order: route.query.sort?.split('-')[1] || null
+    }] : [
+      { order: 'ASC', order_by: 'title' },
+    ]
+  })
 }
 
-// Fetch musics on component mount
-// musicStore.musics = []
-loadMusics()
+// Fetch musics on mount
+if (!musicStore.musics.data.length) loadMusics()
 
-// Watch route changes
+// Watch route for changes
 watch(() => route.query, loadMusics)
 
 </script>
