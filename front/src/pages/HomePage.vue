@@ -2,16 +2,20 @@
   <div>
     <div class="progress-bars-grid">
       <section>
-        <h2 class="text-xl font-bold">Remaining childhood</h2>
-        <ProgressBarComponent :value="((21 / 18) * 100) > 100 ? 100 : ((21 / 18) * 100)" />
+        <h2 class="text-xl font-bold">Spent childhood</h2>
+        <ProgressBar :value="childhoodPercentage" />
       </section>
       <section>
-        <h2 class="text-xl font-bold">Remaining adulthood</h2>
-        <ProgressBarComponent :value="((21 / 64) * 100) > 100 ? 100 : ((21 / 64) * 100)" />
+        <h2 class="text-xl font-bold">Spent adulthood</h2>
+        <ProgressBar :value="adulthoodPercentage" />
       </section>
       <section>
-        <h2 class="text-xl font-bold">Remaining life time</h2>
-        <ProgressBarComponent :value="((21 / 80) * 100) > 100 ? 100 : ((21 / 80) * 100)" />
+        <h2 class="text-xl font-bold">Spent oldhood</h2>
+        <ProgressBar :value="oldhoodPercentage" />
+      </section>
+      <section>
+        <h2 class="text-xl font-bold">Total spent</h2>
+        <ProgressBar :value="lifeTimePercentage" />
       </section>
     </div>
     <section>
@@ -26,15 +30,55 @@
         magnam dolore consequuntur libero aliquam nam mollitia sed architecto omnis quaerat voluptatum, rem minima
         totam!</p>
     </section>
-    <!-- <apexChart width="400" height="350" type="candlestick" :options="chartOptions" :series="series">
-    </apexChart> -->
+    <section>
+      <!-- <apexChart width="400" height="350" type="candlestick" :options="chartOptions" :series="series">
+        </apexChart> -->
+    </section>
   </div>
 </template>
 
-
 <script setup>
-import ProgressBarComponent from '@/components/ProgressBarComponent.vue'
-// import { ref } from "vue";
+import { ref, computed } from "vue";
+import ProgressBar from '@/components/ProgressBarComponent.vue'
+import { ageFromDate } from "@/helpers/helpers.js";
+
+const birthDate = ref("2003-03-19");
+
+const childhoodPercentage = computed(() => {
+  const yearStart = 0;
+  const yearEnd = 18;
+  const percent = ((ageFromDate(birthDate.value) - yearStart) / yearEnd) * 100;
+  if (percent < 0) return 0;
+  if (percent > 100) return 100;
+  return percent;
+});
+
+const adulthoodPercentage = computed(() => {
+  const yearStart = 18;
+  const yearEnd = 64;
+  const percent = ((ageFromDate(birthDate.value) - yearStart) / yearEnd) * 100;
+  if (percent < 0) return 0;
+  if (percent > 100) return 100;
+  return percent;
+});
+
+const oldhoodPercentage = computed(() => {
+  const yearStart = 64;
+  const yearEnd = 80;
+  const percent = ((ageFromDate(birthDate.value) - yearStart) / yearEnd) * 100;
+  if (percent < 0) return 0;
+  if (percent > 100) return 100;
+  return percent;
+});
+
+const lifeTimePercentage = computed(() => {
+  const yearStart = 0;
+  const yearEnd = 80;
+  const percent = ((ageFromDate(birthDate.value) - yearStart) / yearEnd) * 100;
+  if (percent < 0) return 0;
+  if (percent > 100) return 100;
+  return percent;
+});
 
 // const chartOptions = ref({
 //   chart: {
@@ -154,7 +198,6 @@ import ProgressBarComponent from '@/components/ProgressBarComponent.vue'
 </script>
 
 <style scoped>
-/* Between 1 and 3 items per rows + last item take the remaining space */
 .progress-bars-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

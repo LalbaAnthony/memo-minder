@@ -1,18 +1,20 @@
 <template>
   <div>
-    <LoaderComponent v-if="musicStore.musics.loading" />
-    <GridComponent v-else :items="musicStore.musics.data">
+    <SortFilter />
+    <Loader v-if="musicStore.musics.loading" />
+    <Grid v-else :items="musicStore.musics.data">
       <template #item="{ item }">
         <Music :music="item" />
       </template>
-    </GridComponent>
+    </Grid>
   </div>
 </template>
 
 <script setup>
-import GridComponent from '@/components/GridComponent.vue'
+import SortFilter from '@/components/SortFilterComponent.vue'
+import Grid from '@/components/GridComponent.vue'
 import Music from '@/components/music/MusicItem.vue'
-import LoaderComponent from '@/components/LoaderComponent.vue'
+import Loader from '@/components/LoaderComponent.vue'
 import { useRoute } from 'vue-router'
 import { useMusicStore } from '@/stores/music'
 import { watch } from 'vue'
