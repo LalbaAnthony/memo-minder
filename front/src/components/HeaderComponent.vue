@@ -37,13 +37,18 @@
         <!-- Navigation -->
         <nav class="py-2 px-4 flex flex-col gap-4">
           <router-link to="/" class="flex items-center text-light rounded-lg 
-            hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
+        hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
             <ListBulletIcon class="size-6 text-light-gray" />
             <span class="ml-3 mt-0.5">Home</span>
           </router-link>
+          <router-link to="/infos" class="flex items-center text-light rounded-lg 
+        hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
+            <InformationCircleIcon class="size-6 text-light-gray" />
+            <span class="ml-3 mt-0.5">Infos</span>
+          </router-link>
           <hr>
           <router-link to="/seasons" class="flex items-center text-light rounded-lg 
-          hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
+        hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
             <FilmIcon class="size-6 text-light-gray" />
             <span class="ml-3 mt-0.5">Seasons</span>
           </router-link>
@@ -58,21 +63,21 @@
             <span class="ml-3 mt-0.5">People</span>
           </router-link>
           <router-link to="/musics" class="flex items-center text-light rounded-lg 
-      hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
+        hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
             <MusicalNoteIcon class="size-6 text-light-gray" />
             <span class="ml-3 mt-0.5">Musics</span>
           </router-link>
           <hr>
           <router-link to="/account" class="flex items-center text-light rounded-lg 
-    hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
+        hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
             <UserCircleIcon class="size-6 text-light-gray" />
             <span class="ml-3 mt-0.5">Account</span>
           </router-link>
-          <router-link to="/infos" class="flex items-center text-light rounded-lg 
-    hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
-            <InformationCircleIcon class="size-6 text-light-gray" />
-            <span class="ml-3 mt-0.5">Infos</span>
-          </router-link>
+          <div class="flex items-center text-light-danger rounded-lg 
+        hover:bg-gray p-2" @click.stop="showSidebar = false">
+            <ArrowLeftEndOnRectangleIcon class="size-6 text-danger" />
+            <span class="ml-3 mt-0.5">Log out</span>
+          </div>
         </nav>
       </TransitionChild>
     </TransitionRoot>
@@ -84,12 +89,13 @@ import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { Bars3Icon } from '@heroicons/vue/24/solid'
 import { XMarkIcon } from '@heroicons/vue/24/solid'
 import { ListBulletIcon } from '@heroicons/vue/24/solid'
+import { InformationCircleIcon } from '@heroicons/vue/24/solid'
 import { FilmIcon } from '@heroicons/vue/24/solid'
 import { CalendarDaysIcon } from '@heroicons/vue/24/solid'
 import { UsersIcon } from '@heroicons/vue/24/solid'
 import { MusicalNoteIcon } from '@heroicons/vue/24/solid'
 import { UserCircleIcon } from '@heroicons/vue/24/solid'
-import { InformationCircleIcon } from '@heroicons/vue/24/solid'
+import { ArrowLeftEndOnRectangleIcon } from '@heroicons/vue/24/solid'
 import { ref } from 'vue'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { useRoute, useRouter } from 'vue-router'

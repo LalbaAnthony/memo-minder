@@ -8,6 +8,15 @@ const routes = [
       title: 'Home', private: true,
     },
   },
+  // ==================== INFOS ====================
+  {
+    path: '/infos',
+    name: 'infos',
+    component: () => import('../pages/InfosPage.vue'),
+    meta: {
+      title: 'Infos', private: true,
+    },
+  },
   // ==================== SEARCH ====================
   {
     path: '/search',
@@ -184,15 +193,6 @@ const routes = [
     component: () => import('../pages/account/AccountPage.vue'),
     meta: {
       title: 'My account', private: true,
-    },
-  },
-  // ==================== INFOS ====================
-  {
-    path: '/infos',
-    name: 'infos',
-    component: () => import('../pages/InfosPage.vue'),
-    meta: {
-      title: 'Infos', private: true,
     },
   },
   // ==================== CATCH ====================
