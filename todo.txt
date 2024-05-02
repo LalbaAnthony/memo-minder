@@ -6,3 +6,4 @@
 - [ ] Front de login (sans register) => auth store, ...
 - [ ] Make integration from something like https://flowbite.com/blocks/application/shells/
 - [ ] Back en node
+- [ ] Faire bare de recherche qui recherche aussi dans les routes et affiche une lsit de page
