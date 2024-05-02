@@ -30,16 +30,12 @@
         magnam dolore consequuntur libero aliquam nam mollitia sed architecto omnis quaerat voluptatum, rem minima
         totam!</p>
     </section>
-    <section>
-      <!-- <SpanGraph /> -->
-    </section>
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from "vue";
 import ProgressBar from '@/components/ProgressBarComponent.vue'
-// import SpanGraph from '@/components/SpanGraphComponent.vue'
 import { ageFromDate } from "@/helpers/helpers.js";
 
 const birthDate = ref("2003-03-19");

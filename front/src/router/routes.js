@@ -8,11 +8,19 @@ const routes = [
     },
   },
   {
-    path: '/time-spans',
-    name: 'time-spans',
-    component: () => import('../pages/timespan/TimeSpansPage.vue'),
+    path: '/search',
+    name: 'search',
+    component: () => import('../pages/SearchPage.vue'),
     meta: {
-      title: 'Time spans', private: false,
+      title: 'Search', private: false,
+    },
+  },
+  {
+    path: '/seasons',
+    name: 'seasons',
+    component: () => import('../pages/season/SeasonsPage.vue'),
+    meta: {
+      title: 'Seasons', private: false,
     },
   },
   {
@@ -24,11 +32,11 @@ const routes = [
     },
   },
   {
-    path: '/account',
-    name: 'account',
-    component: () => import('../pages/account/AccountPage.vue'),
+    path: '/People',
+    name: 'People',
+    component: () => import('../pages/person/PeoplePage.vue'),
     meta: {
-      title: 'Account', private: false,
+      title: 'People', private: false,
     },
   },
   {
@@ -37,6 +45,14 @@ const routes = [
     component: () => import('../pages/music/MusicsPage.vue'),
     meta: {
       title: 'Musics', private: false,
+    },
+  },
+  {
+    path: '/account',
+    name: 'account',
+    component: () => import('../pages/account/AccountPage.vue'),
+    meta: {
+      title: 'Account', private: true,
     },
   },
   {
