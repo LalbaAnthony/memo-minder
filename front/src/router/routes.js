@@ -186,6 +186,15 @@ const routes = [
       title: 'My account', private: true,
     },
   },
+  // ==================== INFOS ====================
+  {
+    path: '/infos',
+    name: 'infos',
+    component: () => import('../pages/InfosPage.vue'),
+    meta: {
+      title: 'Infos', private: true,
+    },
+  },
   // ==================== CATCH ====================
   {
     path: '/:catchAll(.*)*',

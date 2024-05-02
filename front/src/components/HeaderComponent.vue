@@ -2,13 +2,15 @@
   <div>
 
     <header class="flex justify-between items-center bg-light-dark border-b border-gray p-4 gap-3">
-      <Bars3Icon class="size-10 text-light-gray hover:bg-dark-gray rounded-lg p-1 cursor-pointery" @click.stop="showSidebar = !showSidebar" />
+      <Bars3Icon class="size-10 text-light-gray hover:bg-dark-gray rounded-lg p-1 cursor-pointery"
+        @click.stop="showSidebar = !showSidebar" />
       <router-link to="/">
         <h1 class="text-2xl font-bold text-light">
           {{ route.meta.title }}
         </h1>
       </router-link>
-      <MagnifyingGlassIcon class="size-10 text-light-gray hover:bg-dark-gray rounded-full p-1 cursor-pointer" @click.stop="focusSearchBar" />
+      <MagnifyingGlassIcon class="size-10 text-light-gray hover:bg-dark-gray rounded-full p-1 cursor-pointer"
+        @click.stop="focusSearchBar" />
     </header>
 
     <!-- Sidebar -->
@@ -66,6 +68,11 @@
             <UserCircleIcon class="size-6 text-light-gray" />
             <span class="ml-3 mt-0.5">Account</span>
           </router-link>
+          <router-link to="/infos" class="flex items-center text-light rounded-lg 
+    hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
+            <InformationCircleIcon class="size-6 text-light-gray" />
+            <span class="ml-3 mt-0.5">Infos</span>
+          </router-link>
         </nav>
       </TransitionChild>
     </TransitionRoot>
@@ -82,6 +89,7 @@ import { CalendarDaysIcon } from '@heroicons/vue/24/solid'
 import { UsersIcon } from '@heroicons/vue/24/solid'
 import { MusicalNoteIcon } from '@heroicons/vue/24/solid'
 import { UserCircleIcon } from '@heroicons/vue/24/solid'
+import { InformationCircleIcon } from '@heroicons/vue/24/solid'
 import { ref } from 'vue'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -108,7 +116,7 @@ function triggerSearch() {
     query.search = search.value
     search.value = ''
   }
-  router.push({ path: '/search', query }) 
+  router.push({ path: '/search', query })
 }
 
 // Add shortcuts
