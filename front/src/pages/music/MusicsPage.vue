@@ -7,15 +7,7 @@
         <Music :music="item" />
       </template>
     </Grid>
-    <BottomActions :actions="[{
-      label: 'Add Music 1',
-      icon: 'Add',
-      to: '/musics/add',
-    }, {
-      label: 'Add Music 2',
-      icon: 'Add',
-      to: '/musics/add',
-    }]" />
+    <BottomActions/>
   </div>
 </template>
 

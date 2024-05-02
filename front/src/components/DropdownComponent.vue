@@ -28,6 +28,7 @@
 import { ref } from 'vue'
 import { Menu, TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/24/solid'
+import vClickOutside from '@/directives/clickOutside.js'
 
 const props = defineProps({
   title: {
@@ -42,19 +43,4 @@ const props = defineProps({
 })
 
 const showDropdown = ref(false)
-
-// Directive click outside
-const vClickOutside = {
-  beforeMount(el, binding) {
-    el.clickOutsideEvent = function (event) {
-      if (!(el == event.target || el.contains(event.target))) {
-        binding.value()
-      }
-    }
-    document.body.addEventListener('click', el.clickOutsideEvent)
-  },
-  unmounted(el) {
-    document.body.removeEventListener('click', el.clickOutsideEvent)
-  }
-}
 </script>
