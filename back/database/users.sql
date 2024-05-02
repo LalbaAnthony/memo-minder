@@ -13,15 +13,20 @@ GRANT INSERT ON `memo-minder`.music TO 'memo-minder-user'@'localhost';
 GRANT UPDATE ON `memo-minder`.music TO 'memo-minder-user'@'localhost';
 GRANT DELETE ON `memo-minder`.music TO 'memo-minder-user'@'localhost';
 
+GRANT SELECT ON `memo-minder`.person TO 'memo-minder-user'@'localhost';
+GRANT INSERT ON `memo-minder`.person TO 'memo-minder-user'@'localhost';
+GRANT UPDATE ON `memo-minder`.person TO 'memo-minder-user'@'localhost';
+GRANT DELETE ON `memo-minder`.person TO 'memo-minder-user'@'localhost';
+
 GRANT SELECT ON `memo-minder`.event TO 'memo-minder-user'@'localhost';
 GRANT INSERT ON `memo-minder`.event TO 'memo-minder-user'@'localhost';
 GRANT UPDATE ON `memo-minder`.event TO 'memo-minder-user'@'localhost';
 GRANT DELETE ON `memo-minder`.event TO 'memo-minder-user'@'localhost';
 
-GRANT SELECT ON `memo-minder`.time_span TO 'memo-minder-user'@'localhost';
-GRANT INSERT ON `memo-minder`.time_span TO 'memo-minder-user'@'localhost';
-GRANT UPDATE ON `memo-minder`.time_span TO 'memo-minder-user'@'localhost';
-GRANT DELETE ON `memo-minder`.time_span TO 'memo-minder-user'@'localhost';
+GRANT SELECT ON `memo-minder`.season TO 'memo-minder-user'@'localhost';
+GRANT INSERT ON `memo-minder`.season TO 'memo-minder-user'@'localhost';
+GRANT UPDATE ON `memo-minder`.season TO 'memo-minder-user'@'localhost';
+GRANT DELETE ON `memo-minder`.season TO 'memo-minder-user'@'localhost';
 
 GRANT SELECT ON `memo-minder`.user TO 'memo-minder-user'@'localhost';
 GRANT INSERT ON `memo-minder`.user TO 'memo-minder-user'@'localhost';

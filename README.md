@@ -15,4 +15,4 @@ We welcome any feedback or suggestions you may have to improve Memo Minder. Feel
 
 ## Contributing
 
-Contributions are always appreciated! If you'd like to contribute to MemoryMaster, please fork the repository and submit a pull request with your changes.
+Contributions are always appreciated! If you'd like to contribute to Memo Minder, please fork the repository and submit a pull request with your changes.

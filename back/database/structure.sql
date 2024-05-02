@@ -1,7 +1,9 @@
-DROP TABLE IF EXISTS music;
+DROP TABLE IF EXISTS season;
 DROP TABLE IF EXISTS event;
-DROP TABLE IF EXISTS time_span
 DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS person;
+DROP TABLE IF EXISTS music;
+DROP TABLE IF EXISTS mood;
 
 #------------------------------------------------------------
 # Table: mood
@@ -11,6 +13,7 @@ CREATE TABLE mood(
         name VARCHAR (50) NOT NULL,
         color VARCHAR (7) NOT NULL UNIQUE DEFAULT '#000000',
         is_deleted BOOLEAN NOT NULL DEFAULT 0,
+        updated_at DATETIME NOT NULL DEFAULT NOW(),
         created_at DATETIME NOT NULL DEFAULT NOW(),
         CONSTRAINT mood_PK PRIMARY KEY (mood_id)
 ) ENGINE = InnoDB;
@@ -25,8 +28,22 @@ CREATE TABLE music(
         release_date DATE,
         streaming_link VARCHAR (150),
         is_deleted BOOLEAN NOT NULL DEFAULT 0,
+        updated_at DATETIME NOT NULL DEFAULT NOW(),
         created_at DATETIME NOT NULL DEFAULT NOW(),
         CONSTRAINT music_PK PRIMARY KEY (music_id)
+) ENGINE = InnoDB;
+
+#------------------------------------------------------------
+# Table: person
+#------------------------------------------------------------
+CREATE TABLE person(
+        person_id INT AUTO_INCREMENT NOT NULL UNIQUE,
+        name VARCHAR (50) NOT NULL,
+        description VARCHAR (1000),
+        is_deleted BOOLEAN NOT NULL DEFAULT 0,
+        updated_at DATETIME NOT NULL DEFAULT NOW(),
+        created_at DATETIME NOT NULL DEFAULT NOW(),
+        CONSTRAINT person_PK PRIMARY KEY (person_id)
 ) ENGINE = InnoDB;
 
 #------------------------------------------------------------
@@ -41,30 +58,11 @@ CREATE TABLE event(
         date DATE NOT NULL,
         location VARCHAR (100),
         is_deleted BOOLEAN NOT NULL DEFAULT 0,
+        updated_at DATETIME NOT NULL DEFAULT NOW(),
         created_at DATETIME NOT NULL DEFAULT NOW(),
         CONSTRAINT event_PK PRIMARY KEY (event_id),
         CONSTRAINT event_user_FK FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
         CONSTRAINT event_music_FK FOREIGN KEY (music_id) REFERENCES music(music_id)
-) ENGINE = InnoDB;
-
-#------------------------------------------------------------
-# Table: time_span
-#------------------------------------------------------------
-CREATE TABLE time_span(
-        time_span_id INT AUTO_INCREMENT NOT NULL UNIQUE,
-        user_id INT NOT NULL,
-        music_id INT,
-        mood_id INT,
-        title VARCHAR (50) NOT NULL,
-        description VARCHAR (1000),
-        date_start DATE NOT NULL,
-        date_end DATE,
-        is_deleted BOOLEAN NOT NULL DEFAULT 0,
-        created_at DATETIME NOT NULL DEFAULT NOW(),
-        CONSTRAINT time_span_PK PRIMARY KEY (time_span_id),
-        CONSTRAINT time_span_user_FK FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
-        CONSTRAINT time_span_music_FK FOREIGN KEY (music_id) REFERENCES music(music_id),
-        CONSTRAINT time_span_mood_FK FOREIGN KEY (mood_id) REFERENCES mood(mood_id)
 ) ENGINE = InnoDB;
 
 #------------------------------------------------------------
@@ -82,6 +80,31 @@ CREATE TABLE user(
         password VARCHAR (150) NOT NULL,
         last_login DATETIME,
         is_deleted BOOLEAN NOT NULL DEFAULT 0,
+        updated_at DATETIME NOT NULL DEFAULT NOW(),
         created_at DATETIME NOT NULL DEFAULT NOW(),
         CONSTRAINT customer_PK PRIMARY KEY (customer_id)
+) ENGINE = InnoDB;
+
+#------------------------------------------------------------
+# Table: season
+#------------------------------------------------------------
+CREATE TABLE season(
+        season_id INT AUTO_INCREMENT NOT NULL UNIQUE,
+        user_id INT NOT NULL,
+        music_id INT,
+        mood_id INT,
+        person_id INT,
+        title VARCHAR (50) NOT NULL,
+        color VARCHAR (7) NOT NULL DEFAULT '#000000',
+        description VARCHAR (1000),
+        date_start DATE NOT NULL,
+        date_end DATE,
+        is_deleted BOOLEAN NOT NULL DEFAULT 0,
+        updated_at DATETIME NOT NULL DEFAULT NOW(),
+        created_at DATETIME NOT NULL DEFAULT NOW(),
+        CONSTRAINT season_PK PRIMARY KEY (season_id),
+        CONSTRAINT season_user_FK FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
+        CONSTRAINT season_music_FK FOREIGN KEY (music_id) REFERENCES music(music_id),
+        CONSTRAINT season_mood_FK FOREIGN KEY (mood_id) REFERENCES mood(mood_id),
+        CONSTRAINT season_person_FK FOREIGN KEY (person_id) REFERENCES person(person_id)
 ) ENGINE = InnoDB;

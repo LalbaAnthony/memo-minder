@@ -1,4 +1,5 @@
 const routes = [
+  // ==================== HOME ====================
   {
     path: '/',
     name: 'home',
@@ -7,6 +8,7 @@ const routes = [
       title: 'Home', private: true,
     },
   },
+  // ==================== SEARCH ====================
   {
     path: '/search',
     name: 'search',
@@ -15,27 +17,27 @@ const routes = [
       title: 'Search', private: true,
     },
   },
-
+  // ==================== SEASON ====================
   {
     path: '/seasons',
-    name: 'seasons',
+    name: 'seasons.list',
+    component: () => import('../pages/season/SeasonsPage.vue'),
+    meta: {
+      title: 'Seasons', private: true,
+    },
+  },
+  {
+    path: '/seasons/add',
+    name: 'seasons.add',
+    component: () => import('../pages/season/SeasonAddPage.vue'),
+    meta: {
+      title: 'Add a season', private: true,
+    },
+  },
+  {
+    path: '/season',
+    name: 'season',
     children: [
-      {
-        path: '',
-        name: 'seasons.list',
-        component: () => import('../pages/season/SeasonsPage.vue'),
-        meta: {
-          title: 'Seasons', private: true,
-        },
-      },
-      {
-        path: '/add',
-        name: 'seasons.add',
-        component: () => import('../pages/season/SeasonAddPage.vue'),
-        meta: {
-          title: 'Add a season', private: true,
-        },
-      },
       {
         path: ':id_season',
         name: 'seasons.details',
@@ -52,28 +54,30 @@ const routes = [
           title: 'Edit the season', private: true,
         },
       },
+
     ],
   },
+  // ==================== EVENT ====================
   {
     path: '/events',
-    name: 'events',
+    name: 'events.list',
+    component: () => import('../pages/event/EventsPage.vue'),
+    meta: {
+      title: 'Events', private: true,
+    },
+  },
+  {
+    path: '/events/add',
+    name: 'events.add',
+    component: () => import('../pages/event/EventAddPage.vue'),
+    meta: {
+      title: 'Add an event', private: true,
+    },
+  },
+  {
+    path: '/event',
+    name: 'event',
     children: [
-      {
-        path: '',
-        name: 'events.list',
-        component: () => import('../pages/event/EventsPage.vue'),
-        meta: {
-          title: 'Events', private: true,
-        },
-      },
-      {
-        path: '/add',
-        name: 'events.add',
-        component: () => import('../pages/event/EventAddPage.vue'),
-        meta: {
-          title: 'Add an event', private: true,
-        },
-      },
       {
         path: ':id_event',
         name: 'events.details',
@@ -90,28 +94,30 @@ const routes = [
           title: 'Edit the event', private: true,
         },
       },
+
     ],
   },
+  // ==================== PERSON ====================
   {
-    path: '/People',
-    name: 'People',
+    path: '/people',
+    name: 'people.list',
+    component: () => import('../pages/person/PeoplePage.vue'),
+    meta: {
+      title: 'People', private: true,
+    },
+  },
+  {
+    path: '/people/add',
+    name: 'people.add',
+    component: () => import('../pages/person/PersonAddPage.vue'),
+    meta: {
+      title: 'Add a person', private: true,
+    },
+  },
+  {
+    path: '/person',
+    name: 'Person',
     children: [
-      {
-        path: '',
-        name: 'people.list',
-        component: () => import('../pages/person/PeoplePage.vue'),
-        meta: {
-          title: 'People', private: true,
-        },
-      },
-      {
-        path: '/add',
-        name: 'people.add',
-        component: () => import('../pages/person/PersonAddPage.vue'),
-        meta: {
-          title: 'Add a person', private: true,
-        },
-      },
       {
         path: ':id_person',
         name: 'people.details',
@@ -128,28 +134,30 @@ const routes = [
           title: 'Edit the person', private: true,
         },
       },
+
     ],
   },
+  // ==================== MUSIC ====================
   {
     path: '/musics',
-    name: 'musics',
+    name: 'musics.list',
+    component: () => import('../pages/music/MusicsPage.vue'),
+    meta: {
+      title: 'Musics', private: true,
+    },
+  },
+  {
+    path: '/musics/add',
+    name: 'musics.add',
+    component: () => import('../pages/music/MusicAddPage.vue'),
+    meta: {
+      title: 'Add a music', private: true,
+    },
+  },
+  {
+    path: '/music',
+    name: 'music',
     children: [
-      {
-        path: '',
-        name: 'musics.list',
-        component: () => import('../pages/music/MusicsPage.vue'),
-        meta: {
-          title: 'Musics', private: true,
-        },
-      },
-      {
-        path: '/add',
-        name: 'musics.add',
-        component: () => import('../pages/music/MusicAddPage.vue'),
-        meta: {
-          title: 'Add a music', private: true,
-        },
-      },
       {
         path: ':id_music',
         name: 'musics.details',
@@ -166,16 +174,19 @@ const routes = [
           title: 'Edit the music', private: true,
         },
       },
+
     ],
   },
+  // ==================== ACCOUNT ====================
   {
     path: '/account',
     name: 'account',
     component: () => import('../pages/account/AccountPage.vue'),
     meta: {
-      title: 'Account', private: true,
+      title: 'My account', private: true,
     },
   },
+  // ==================== CATCH ====================
   {
     path: '/:catchAll(.*)*',
     component: () => import('../pages/error/ErrorPage.vue'),
