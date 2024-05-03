@@ -19,10 +19,6 @@
       </section>
     </div>
 
-    <Dialog :show="true" text="Wanna delete that stuff?" @confirm="console.log('confirm')"
-      @cancel="console.log('cancel')" />
-
-
     <section>
       <h2 class="text-xl font-bold">Lasts added</h2>
       <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim quis deleniti laboriosam nemo quisquam hic
