@@ -3,9 +3,10 @@ import { useToast } from 'vue-toastification';
 const toast = useToast();
 
 export function notify(message, type = 'info') {
+    console.log('notify', message, type);
     toast[type](message, {
         position: 'top-right',
-        timeout: 5000,
+        timeout: 50000,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
