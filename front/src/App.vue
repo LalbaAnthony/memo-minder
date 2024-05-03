@@ -9,8 +9,18 @@
 </template>
 
 <script setup>
-import { RouterView } from 'vue-router'
+import { onMounted } from 'vue'
 import Header from '@/components/HeaderComponent.vue'
 import Footer from '@/components/FooterComponent.vue'
+import { RouterView, useRoute } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
 
+const route = useRoute()
+const authStore = useAuthStore()
+
+onMounted(() => {
+  if (route.query.email && route.query.token) {
+    authStore.verifyEmail(route.query.email, route.query.token)
+  }
+});
 </script>

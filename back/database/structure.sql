@@ -53,6 +53,7 @@ CREATE TABLE event(
         event_id INT AUTO_INCREMENT NOT NULL UNIQUE,
         music_id INT,
         user_id INT NOT NULL,
+        season_id INT,
         title VARCHAR (50) NOT NULL,
         description VARCHAR (1000),
         date DATE NOT NULL,
@@ -61,6 +62,7 @@ CREATE TABLE event(
         updated_at DATETIME NOT NULL DEFAULT NOW(),
         created_at DATETIME NOT NULL DEFAULT NOW(),
         CONSTRAINT event_PK PRIMARY KEY (event_id),
+        CONSTRAINT event_season_FK FOREIGN KEY (season_id) REFERENCES user(season_id),
         CONSTRAINT event_user_FK FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
         CONSTRAINT event_music_FK FOREIGN KEY (music_id) REFERENCES music(music_id)
 ) ENGINE = InnoDB;

@@ -1,5 +1,5 @@
 <template>
-  <div :class="`${platform}-item flex justify-between cursor-pointer border-2 border-gray p-5 rounded-lg bg-light-dark p-2 h-full`"
+  <div :class="`${platform}-item flex justify-between cursor-pointer border-2 border-gray p-5 rounded-lg bg-light-dark p-2 h-full transition-colors	 duration-200`"
     @click="openLink()">
     <div>
       <h1 class="text-2xl font-bold">{{ props?.music?.title }}</h1>

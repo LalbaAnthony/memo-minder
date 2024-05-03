@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between items-center m-2 mb-6">
+  <div class="flex justify-between items-center m-2 mb-4">
     <!-- Filter -->
     <Dropdown title="Filter" side="left">
       
