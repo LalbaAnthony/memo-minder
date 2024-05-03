@@ -19,7 +19,8 @@
       </section>
     </div>
 
-    <Dialog :show="true" text="Wanna delete that stuff?" @confirm="console.log('confirm')" @cancel="console.log('cancel')" />
+    <Dialog :show="true" text="Wanna delete that stuff?" @confirm="console.log('confirm')"
+      @cancel="console.log('cancel')" />
 
 
     <section>

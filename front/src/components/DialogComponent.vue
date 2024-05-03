@@ -24,7 +24,7 @@
             @click="cancel">
             Cancel
           </div>
-          <div class="flex justify-center items-center bg-primary text-light p-2 rounded-lg min-w-48 cursor-pointer"
+          <div class="flex justify-center items-center bg-primary text-light-dark p-2 rounded-lg min-w-48 cursor-pointer"
             @click="confirm">
             Confirm
           </div>

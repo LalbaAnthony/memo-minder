@@ -4,6 +4,9 @@
 - [X] Make bottom action the same as grid (slots)
 - [X] Refaire logo avec new couleurs
 - [X] Faire bare de recherche qui recherche aussi dans les routes et affiche une lsit de page
+- [X] Debug notif et les imprpoves
 - [ ] Front de login (sans register) => auth store, ...
 - [ ] Make integration from something like https://flowbite.com/blocks/application/shells/
 - [ ] Back en node
+- [ ] Fonction de Rappels de Souvenirs
+

@@ -13,7 +13,7 @@
         <router-link :to="item.path" class="item block p-4 border-b border-gray flex items-center justify-between">
           <DocumentTextIcon v-if="item.type === 'page'" class="size-8 text-light-gray" />
           <h3 class="text-lg font-semibold">{{ item.title }}</h3>
-          <ArrowLongRightIcon class="arrow size-8 text-light-gray ml-2 hover:text-light transition ease-in-out duration-300 transform delay-500" />
+          <ArrowLongRightIcon class="arrow size-8 text-light-gray ml-2 hover:text-light transition ease-in-out duration-300 transform" />
         </router-link>
       </template>
     </Grid>
