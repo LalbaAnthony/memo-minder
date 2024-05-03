@@ -7,7 +7,7 @@
         <Music :music="item" />
       </template>
     </Grid>
-    <BottomActions/>
+      <BottomActions/>
   </div>
 </template>
 
