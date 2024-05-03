@@ -18,6 +18,10 @@
         <ProgressBar :value="lifeTimePercentage" />
       </section>
     </div>
+
+    <Dialog :show="true" text="Wanna delete that stuff?" @confirm="console.log('confirm')" @cancel="console.log('cancel')" />
+
+
     <section>
       <h2 class="text-xl font-bold">Lasts added</h2>
       <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim quis deleniti laboriosam nemo quisquam hic
@@ -36,6 +40,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import ProgressBar from '@/components/ProgressBarComponent.vue'
+import Dialog from '@/components/DialogComponent.vue'
 import { ageFromDate } from "@/helpers/helpers.js";
 
 const birthDate = ref("2003-03-19");
