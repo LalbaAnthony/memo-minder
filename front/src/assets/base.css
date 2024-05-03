@@ -1,90 +1,74 @@
-@import './base.css';
+:root {
+    /* Vue App */
 
-/* * {
-    box-shadow: 0 0 0 3px red;
-} */
+    --primary: #76a9fa;
 
-/* DESKTOP */
-@media (min-width: 1024px) {
-    main {
-        margin: 1rem 4rem;
-        padding: 1rem 4rem;
-    }
+    --light: #ffffff;
+
+    --light-gray: #9ca3af;
+    --gray: #4b5563;
+    --dark-gray: #374151;
+
+    --light-dark: #1f2937;
+    --dark: #111827;
+
+    --light-success: #34d399;
+    --success: #10b981;
+    --dark-success: #047857;
+    --light-warning: #fbbf24;
+    --warning: #f59e0b;
+    --dark-warning: #d97706;
+    --light-danger: #ef4444;
+    --danger: #dc2626;
+    --dark-danger: #991b1b;
+
+    /* Overload vue-carousel stuff */
+    --vc-clr-primary: var(--primary) !important;
+    --vc-clr-secondary: #090f207f !important;
+    --vc-clr-white: var(--light) !important;
+    --vc-icn-width: 1.2em !important;
+    --vc-nav-width: 30px !important;
+    --vc-nav-height: 30px !important;
+    --vc-nav-border-radius: 25px !important;
+    --vc-nav-color: var(--vc-clr-primary) !important;
+    --vc-nav-color-hover: var(--vc-clr-secondary) !important;
+    --vc-nav-background: var(--vc-clr-white) !important;
+    --vc-pgn-width: 12px !important;
+    --vc-pgn-height: 4px !important;
+    --vc-pgn-margin: 4px !important;
+    --vc-pgn-border-radius: 0 !important;
+    --vc-pgn-background-color: var(--vc-clr-secondary) !important;
+    --vc-pgn-active-color: var(--vc-clr-primary) !important;
 }
 
-/* TABLET */
-@media (min-width: 768px) and (max-width: 1023px) {
-    main {
-        margin: 1rem 2rem;
-        padding: 1rem 3rem;
-    }
+/* Overload vue-toastification stuff */
+.Vue-Toastification__toast {
+    /* background-color: var(--secondary) !important; */
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2) !important;
+    /* border: solid 2px var(--light) !important; */
+    border: solid 2px transparent !important;
+    border-radius: 25px !important;
 }
 
-/* MOBILE */
-@media (max-width: 767px) {
-    main {
-        margin: 0.5rem 0.5rem;
-        padding: 0.5rem 0.5rem;
-    }
-}
-
-main {
-    min-height: 100vh;
-}
-
-section {
-    padding: 0.5rem 0rem;
-    margin: 0.5rem 0rem;
-}
-
-ul,
-ol {
-  list-style-type: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-input:focus,
-textarea:focus {
-    outline: var(--light) auto 1px;
-}
-
-textarea {
-    resize: none;
-}
-
-input[type="search"]::-webkit-search-cancel-button {
-    display: none;
-}
-
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
+*,
+*::before,
+*::after {
     padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+    margin: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-weight: normal;
 }
 
-hr {
-    border: 0;
-    border-top: 1px solid var(--gray);
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--gray);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--light-gray);
-    border-radius: 25px;
+body {
+    min-height: 100vh;
+    transition: color 0.5s, background-color 0.5s;
+    line-height: 1.6;
+    font-family: "Poppins", "Roboto", sans-serif;
+    font-size: 15px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--light);
+    background: var(--dark);
 }

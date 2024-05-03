@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="flex justify-between items-center bg-light-dark border-b border-gray p-4 gap-3">
-      <Bars3Icon class="size-10 text-light-gray hover:bg-dark-gray rounded-lg p-1 cursor-pointery"
+      <Bars3Icon class="size-10 text-light-gray hover:bg-dark-gray rounded-lg p-1 cursor-pointer"
         @click.stop="showSidebar = !showSidebar" />
       <router-link to="/">
         <h1 class="text-2xl font-bold text-light">
