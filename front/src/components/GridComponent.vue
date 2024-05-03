@@ -31,31 +31,39 @@ const props = defineProps({
   grid-gap: 1rem;
 }
 
-/* CINEMA SCREEN */
-@media (min-width: 1600px) {
+@media (min-width: 1536px) {
   .grid {
     grid-gap: 3rem;
   }
 }
 
-/* DESKTOP */
-@media (min-width: 1024px) and (max-width: 1599px) {
+@media (min-width: 1280px) and (max-width: 1535px) {
+  .grid {
+    grid-gap: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
   .grid {
     grid-gap: 2rem;
   }
 }
 
-/* TABLET */
 @media (min-width: 768px) and (max-width: 1023px) {
   .grid {
     grid-gap: 1.5rem;
   }
 }
 
-/* MOBILE */
-@media (max-width: 767px) {
+@media (min-width: 640px) and (max-width: 767px) {
   .grid {
-    grid-gap: 1rem;
+    grid-gap: 1.5rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .grid {
+    grid-gap: 2.5rem;
   }
 }
 </style>
