@@ -13,11 +13,12 @@
         <router-link :to="item.path" class="item block p-4 border-b border-gray flex items-center justify-between">
           <DocumentTextIcon v-if="item.type === 'page'" class="size-8 text-light-gray" />
           <h3 class="text-lg font-semibold">{{ item.title }}</h3>
-          <ArrowLongRightIcon class="arrow size-8 text-light-gray ml-2 hover:text-light transition ease-in-out duration-300 transform" />
+          <ArrowLongRightIcon
+            class="arrow size-8 text-light-gray ml-2 hover:text-light transition ease-in-out duration-300 transform" />
         </router-link>
       </template>
     </Grid>
-    
+
   </div>
 </template>
 
@@ -41,8 +42,13 @@ function loadSearch() {
   if (search.value) {
     const pagesResults = []
     router.options.routes.forEach((route) => {
-      if ((route.meta && route.meta.title && route.meta.title.toLowerCase().includes(search.value.toLowerCase()))
-        || (route.name && route.name.toLowerCase().includes(search.value.toLowerCase()))
+      if (
+        (route.meta && route.meta.displayInSearch) ||
+        (route.meta && route.meta.title) && (
+          (route.name && route.name.toLowerCase().includes(search.value.toLowerCase())) ||
+          (route.path && route.path.toLowerCase().includes(search.value.toLowerCase())) ||
+          (route.meta && route.meta.tags && route.meta.tags.includes(search.value.toLowerCase()))
+        )
       ) {
         pagesResults.push({
           title: route.meta.title || route.name,
@@ -74,9 +80,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
 .item:hover .arrow {
   transform: translateX(10px);
 }
-
 </style>
