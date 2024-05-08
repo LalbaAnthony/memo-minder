@@ -1,15 +1,22 @@
-- [X] Project startup
-- [X] Create DB
-- [X] Create logo
-- [X] Make bottom action the same as grid (slots)
-- [X] Refaire logo avec new couleurs
-- [X] Faire bare de recherche qui recherche aussi dans les routes et affiche une lsit de page
-- [X] Debug notif et les imprpoves
-- [ ] Front de login (sans register) => auth store, ...
-- [ ] Make integration from something like https://flowbite.com/blocks/application/shells/
-- [ ] Back en node
-- [ ] Fonction de Rappels de Souvenirs
-- [ ] Mettre tout les store en perssistant pour pour etre en offline
-- [ ] Faire systeme de stockage des données en local, puis d'envoie au serveur
-- [ ] Faire PWA
+Misc:
+    - [X] Project startup
+    - [X] Create logo
+    - [X] Refaire logo avec new couleurs
 
+Back:
+    - [X] Create DB
+    - [ ] Add log systeme
+    - [ ] Use https://codesandbox.io/p/devbox/github/Awesome-Node-js/node-pokemons-api?file=%2Fapp.js%3A33%2C1
+
+Front:
+    - [X] Make bottom action the same as grid (slots)
+    - [X] Faire bare de recherche qui recherche aussi dans les routes et affiche une lsit de page
+    - [X] Debug notif et les imprpoves
+    - [ ] Front de login (sans register) => auth store, ...
+    - [ ] Make integration from something like https://flowbite.com/blocks/application/shells/
+    - [ ] Mettre tout les store en perssistant pour pour etre en offline
+    - [ ] Faire systeme de stockage des données en local, puis d'envoie au serveur
+    - [ ] Faire PWA
+
+Ideas:
+    - [ ] Fonction de Rappels de Souvenirs (what happened a year ago, ...)
