@@ -1,7 +1,7 @@
 <template>
   <div>
+    <h1 class="text-2xl font-bold text-light">Infos</h1>
     <section>
-      <h1 class="text-2xl font-bold text-light">Infos</h1>
       <p>{{ SITE_NAME }} is a unique web application crafted with Vue.js and Node.js, designed to capture and preserve
         life's memorable moments in a delightful and secure way. With a focus on encapsulating memories into four
         distinct
@@ -11,7 +11,7 @@
     </section>
 
     <section>
-      <h2 class="text-xl font-bold text-light mt-4">Key Features:</h2>
+      <h2 class="text-xl font-bold text-light my-4">Key Features:</h2>
       <ul class="list-disc list-inside">
         <li>Seasonal Organization: Seamlessly organize memories into four seasons, reflecting the changing landscapes of
           life.</li>
@@ -27,7 +27,7 @@
     </section>
 
     <section>
-      <h2 class="text-xl font-bold text-light mt-4">How It Works:</h2>
+      <h2 class="text-xl font-bold text-light my-4">How It Works:</h2>
       <ol class="list-decimal list-inside">
         <li>Create Your Seasons: Start by creating a new season for each quarter of the year, providing a canvas for
           your
@@ -44,7 +44,7 @@
     </section>
 
     <section>
-      <h2 class="text-xl font-bold text-light mt-4">Why {{ SITE_NAME }}?</h2>
+      <h2 class="text-xl font-bold text-light my-4">Why {{ SITE_NAME }}?</h2>
       <ul class="list-disc list-inside">
         <li>Nostalgic Reflection: Rediscover the magic of past moments by immersing yourself in a chronological journey
           through the seasons of your life.</li>
