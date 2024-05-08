@@ -6,6 +6,7 @@ Misc:
 Back:
     - [X] Create DB
     - [X] Add log systeme
+    - [ ] Inst et setup bcrypt
     - [ ] Use https://codesandbox.io/p/devbox/github/Awesome-Node-js/node-pokemons-api?file=%2Fapp.js%3A33%2C1
 
 Front:
