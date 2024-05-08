@@ -1,9 +1,0 @@
-2024-05-08T14:15:41.379Z | URL: /api/seasons, METHOD: GET 
-2024-05-08T14:15:41.799Z | URL: /favicon.ico, METHOD: GET 
-2024-05-08T14:16:10.794Z | App listening on http://localhost:3000/
-2024-05-08T14:17:53.280Z | URL: /api/seasons, METHOD: GET 
-2024-05-08T14:17:53.635Z | URL: /favicon.ico, METHOD: GET 
-2024-05-08T14:20:24.387Z | URL: /api/seasons, METHOD: GET 
-2024-05-08T14:20:24.838Z | URL: /favicon.ico, METHOD: GET 
-2024-05-08T14:22:26.788Z | URL: /api/seasons, METHOD: GET 
-2024-05-08T14:22:27.135Z | URL: /favicon.ico, METHOD: GET 
