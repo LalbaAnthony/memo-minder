@@ -4,17 +4,18 @@ const favicon = require('serve-favicon')
 const app = express()
 const port = 3000
 
-const helpers = require('./src/helpers')
+// Importing helpers
+const fullRes = require('./src/helpers/fullRes')
+const log = require('./src/helpers/log')
 
-app
-    .use((req, res, next) => {
-        console.log(`URL: ${req.url}, METHOD: ${req.method} `)
-        next()
-    }) // Logger
-    .use(({ res }) => {
-        res.status(404).json(helpers.fullRes('error', null, 'Nothing found here!'))
-    }) // Handle 404
-    .use(favicon(__dirname + '/public/favicon.ico')) // Favicon
+// Middleware logger
+app.use((req, res, next) => {
+    log(`IP: ${req.socket.remoteAddress}, URL: ${req.url}, METHOD: ${req.method} `)
+    next()
+})
+
+// Middleware to put favicon
+app.use(favicon(__dirname + '/public/favicon.ico'))
 
 const seasons = [
     {
@@ -77,7 +78,7 @@ const seasons = [
 
 app.get('/api/seasons', (req, res) => {
     let status = seasons ? "success" : "error"
-    res.json(helpers.fullRes(status, seasons))
+    res.json(fullRes(status, seasons))
 })
 
 app.get('/api/seasons/:idSeason', (req, res) => {
@@ -86,7 +87,7 @@ app.get('/api/seasons/:idSeason', (req, res) => {
     const season = seasons.find(t => t.id === idSeason)
 
     let status = seasons && seasons ? "success" : "error"
-    res.json(helpers.fullRes(status, season))
+    res.json(fullRes(status, season))
 })
 
 app.post('/api/seasons', (req, res) => {
@@ -97,7 +98,13 @@ app.post('/api/seasons', (req, res) => {
     season.createdDate = createdDate
     seasons.push(season)
     let status = seasons ? "success" : "error"
-    res.json(helpers.fullRes(status, season))
+    res.json(fullRes(status, season))
 })
 
-app.listen(port, () => console.log(`main.js listening on http://localhost:${port}/`))
+// If nothing found above, return 404
+app.use(({ res }) => {
+    res.status(404).json(fullRes('error', null, 'Nothing found here!'))
+}) 
+
+// Start the server
+app.listen(port, () => console.log(`App listening on http://localhost:${port}/`))
