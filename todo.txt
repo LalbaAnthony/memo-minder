@@ -9,4 +9,7 @@
 - [ ] Make integration from something like https://flowbite.com/blocks/application/shells/
 - [ ] Back en node
 - [ ] Fonction de Rappels de Souvenirs
+- [ ] Mettre tout les store en perssistant pour pour etre en offline
+- [ ] Faire systeme de stockage des données en local, puis d'envoie au serveur
+- [ ] Faire PWR
 
