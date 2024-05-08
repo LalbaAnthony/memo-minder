@@ -4,19 +4,17 @@ const favicon = require('serve-favicon')
 const app = express()
 const port = 3000
 
+const helpers = require('./src/helpers')
+
 app
     .use((req, res, next) => {
         console.log(`URL: ${req.url}, METHOD: ${req.method} `)
         next()
-    })
-    .use(favicon(__dirname + '/public/favicon.ico'))
-
-const helper = (status, data) => {
-    return {
-        status: status,
-        data: data
-    }
-}
+    }) // Logger
+    .use(({ res }) => {
+        res.status(404).json(helpers.fullRes('error', null, 'Nothing found here!'))
+    }) // Handle 404
+    .use(favicon(__dirname + '/public/favicon.ico')) // Favicon
 
 const seasons = [
     {
@@ -79,16 +77,16 @@ const seasons = [
 
 app.get('/api/seasons', (req, res) => {
     let status = seasons ? "success" : "error"
-    res.json(helper(status, seasons))
+    res.json(helpers.fullRes(status, seasons))
 })
 
-app.get('/api/seasons/:seasonId', (req, res) => {
+app.get('/api/seasons/:idSeason', (req, res) => {
 
-    const seasonId = parseInt(req.params.seasonId)
-    const season = seasons.find(t => t.id === seasonId)
+    const idSeason = parseInt(req.params.idSeason)
+    const season = seasons.find(t => t.id === idSeason)
 
     let status = seasons && seasons ? "success" : "error"
-    res.json(helper(status, season))
+    res.json(helpers.fullRes(status, season))
 })
 
 app.post('/api/seasons', (req, res) => {
@@ -99,7 +97,7 @@ app.post('/api/seasons', (req, res) => {
     season.createdDate = createdDate
     seasons.push(season)
     let status = seasons ? "success" : "error"
-    res.json(helper(status, season))
+    res.json(helpers.fullRes(status, season))
 })
 
 app.listen(port, () => console.log(`main.js listening on http://localhost:${port}/`))
