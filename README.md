@@ -10,6 +10,18 @@ This web app is meant for personal use only. It is not intended for commercial p
 - Tailwind
 - Headless UI
 
+## Quick Start
+
+1. FRONTEND
+```bash
+cd front/ && npm i && npm run dev
+```
+
+2. BACKEND
+```bash
+cd back/ && npm i && npm run start
+```
+
 ## Feedback
 
 We welcome any feedback or suggestions you may have to improve Memo Minder. Feel free to [open an issue](https://github.com/LalbaAnthony/memo-minder/issues)
