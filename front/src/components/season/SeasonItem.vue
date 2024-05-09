@@ -9,7 +9,7 @@
       </div>
       <div class="my-4">
         <div class="flex justify-start flex-wrap items-center w-full m-2 gap-2">
-          <div class="rounded-full px-2 bg-primary">Calm</div>
+          <div class="rounded-full px-2 bg-gray">Calm</div>
           <div class="rounded-full px-2 bg-gray">Romain</div>
           <div class="rounded-full px-2 bg-gray">Maga</div>
         </div>
