@@ -5,7 +5,7 @@ const app = express()
 const port = 3000
 
 // Importing helpers
-const fullRes = require('./src/helpers/fullRes')
+const formatRes = require('./src/helpers/formatRes')
 const log = require('./src/helpers/log')
 
 // Middleware logger
@@ -78,7 +78,7 @@ const seasons = [
 
 app.get('/api/seasons', (req, res) => {
     let status = seasons ? "success" : "error"
-    res.json(fullRes(status, seasons))
+    res.json(formatRes(status, seasons))
 })
 
 app.get('/api/seasons/:idSeason', (req, res) => {
@@ -87,7 +87,7 @@ app.get('/api/seasons/:idSeason', (req, res) => {
     const season = seasons.find(t => t.id === idSeason)
 
     let status = seasons && seasons ? "success" : "error"
-    res.json(fullRes(status, season))
+    res.json(formatRes(status, season))
 })
 
 app.post('/api/seasons', (req, res) => {
@@ -98,12 +98,12 @@ app.post('/api/seasons', (req, res) => {
     season.createdDate = createdDate
     seasons.push(season)
     let status = seasons ? "success" : "error"
-    res.json(fullRes(status, season))
+    res.json(formatRes(status, season))
 })
 
 // If nothing found above, return 404
 app.use(({ res }) => {
-    res.status(404).json(fullRes('error', null, 'Nothing found here!'))
+    res.status(404).json(formatRes('error', null, 'Nothing found here!'))
 }) 
 
 // Start the server

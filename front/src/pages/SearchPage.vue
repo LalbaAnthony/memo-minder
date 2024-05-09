@@ -8,6 +8,14 @@
       </form>
     </div>
 
+    <!-- Nb of results -->
+    <div v-if="results.length > 0">
+      <p class="text-center text-light-gray text-sm p-4">
+        {{ results.length }} {{ results.length > 1 ? 'results' : 'result' }}
+      </p>
+    </div>
+
+    <!-- Results -->
     <Grid :items="results">
       <template #item="{ item }">
         <router-link :to="item.path" class="item block p-4 border-b border-gray flex items-center justify-between">
@@ -36,37 +44,33 @@ const search = ref(route.query.search)
 const results = ref([])
 
 function loadSearch() {
+  if (!search.value) return
+
   results.value = []
 
   // Pages
-  if (search.value) {
-    const pagesResults = []
-    router.options.routes.forEach((route) => {
-      if (
-        (route.meta && route.meta.displayInSearch) ||
-        (route.meta && route.meta.title) && (
-          (route.name && route.name.toLowerCase().includes(search.value.toLowerCase())) ||
-          (route.path && route.path.toLowerCase().includes(search.value.toLowerCase())) ||
-          (route.meta && route.meta.tags && route.meta.tags.includes(search.value.toLowerCase()))
-        )
-      ) {
-        pagesResults.push({
-          title: route.meta.title || route.name,
-          path: route.path,
-          type: 'page'
-        })
-      }
-    })
-
-    results.value = [...results.value, ...pagesResults]
-  }
+  router.options.routes.forEach((route) => {
+    if (
+      route.meta &&
+      route.meta.displayInSearch &&
+      route.meta.title &&
+      route.path && (
+        (route.name && route.name.toLowerCase().includes(search.value.toLowerCase())) ||
+        (route.path && route.path.toLowerCase().includes(search.value.toLowerCase())) ||
+        (route.meta && route.meta.tags && route.meta.tags.includes(search.value.toLowerCase()))
+      )
+    ) {
+      results.value.push({
+        title: route.meta.title || route.name,
+        path: route.path,
+        type: 'page'
+      })
+    }
+  })
 
   // Musics
-  // if (search) {
   // ...
-  // }
 
-  return []
 }
 
 onMounted(() => {
