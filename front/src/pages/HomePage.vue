@@ -37,7 +37,6 @@
 <script setup>
 import { ref, computed } from "vue";
 import ProgressBar from '@/components/ProgressBarComponent.vue'
-import Dialog from '@/components/DialogComponent.vue'
 import { ageFromDate } from "@/helpers/helpers.js";
 
 const birthDate = ref("2003-03-19");
