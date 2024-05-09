@@ -85,6 +85,6 @@ onMounted(() => {
 
 <style scoped>
 .item:hover .arrow {
-  transform: translateX(10px);
+  /* transform: translateX(10px); */
 }
 </style>
