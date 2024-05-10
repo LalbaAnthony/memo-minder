@@ -53,11 +53,13 @@ function loadSearch() {
     if (
       route.meta &&
       route.meta.displayInSearch &&
-      route.meta.title &&
-      route.path && (
-        (route.name && route.name.toLowerCase().includes(search.value.toLowerCase())) ||
+      route.path &&
+      (route.meta.title || route.meta.name) &&
+      (
         (route.path && route.path.toLowerCase().includes(search.value.toLowerCase())) ||
-        (route.meta && route.meta.tags && route.meta.tags.includes(search.value.toLowerCase()))
+        (route.name && route.name.toLowerCase().includes(search.value.toLowerCase())) ||
+        (route.meta.name && route.meta.name.toLowerCase().includes(search.value.toLowerCase())) ||
+        (route.meta.tags && route.meta.tags.includes(search.value.toLowerCase()))
       )
     ) {
       results.value.push({
