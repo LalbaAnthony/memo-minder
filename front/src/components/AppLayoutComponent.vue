@@ -1,6 +1,19 @@
 <template>
   <div>
-    <header class="flex justify-between items-center bg-light-dark border-b border-gray p-4 gap-3">
+
+    <!-- Mobile bottom menu -->
+    <div v-if="isMobile()"
+      class="fixed bottom-0 left-0 z-20 w-full flex justify-around items-center bg-light-dark border-t border-gray p-4 gap-3">
+      <Bars3Icon class="size-12 text-light-gray hover:bg-dark-gray rounded-lg p-1 cursor-pointer"
+        @click.stop="showSidebar = !showSidebar" />
+      <FilmIcon class="size-12 text-light-gray hover:bg-dark-gray rounded-lg p-1 cursor-pointer"
+        @click.stop="goTo('/seasons')" />
+      <MagnifyingGlassIcon class="size-12 text-light-gray hover:bg-dark-gray rounded-full p-1 cursor-pointer"
+        @click.stop="focusSearchBar" />
+    </div>
+
+    <!-- Desktop header -->
+    <header v-else class="flex justify-between items-center bg-light-dark border-b border-gray p-4 gap-3">
       <Bars3Icon class="size-10 text-light-gray hover:bg-dark-gray rounded-lg p-1 cursor-pointer"
         @click.stop="showSidebar = !showSidebar" />
       <router-link to="/">
@@ -35,45 +48,45 @@
 
         <!-- Navigation -->
         <nav class="py-2 px-4 flex flex-col gap-4">
-          <router-link to="/" class="flex items-center cursor-pointer text-light rounded-lg 
-        hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
+          <router-link to="/" class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
+            @click.stop="showSidebar = false">
             <ListBulletIcon class="size-6 text-light-gray" />
             <span class="ml-3 mt-0.5">Home</span>
           </router-link>
-          <router-link to="/infos" class="flex items-center cursor-pointer text-light rounded-lg 
-        hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
+          <router-link to="/infos" class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
+            @click.stop="showSidebar = false">
             <InformationCircleIcon class="size-6 text-light-gray" />
             <span class="ml-3 mt-0.5">Infos</span>
           </router-link>
           <hr>
-          <router-link to="/seasons" class="flex items-center cursor-pointer text-light rounded-lg 
-        hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
+          <router-link to="/seasons" class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
+            @click.stop="showSidebar = false">
             <FilmIcon class="size-6 text-light-gray" />
             <span class="ml-3 mt-0.5">Seasons</span>
           </router-link>
-          <router-link to="/events" class="flex items-center cursor-pointer text-light rounded-lg 
-        hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
+          <router-link to="/events" class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
+            @click.stop="showSidebar = false">
             <CalendarDaysIcon class="size-6 text-light-gray" />
             <span class="ml-3 mt-0.5">Events</span>
           </router-link>
-          <router-link to="/people" class="flex items-center cursor-pointer text-light rounded-lg 
-        hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
+          <router-link to="/people" class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
+            @click.stop="showSidebar = false">
             <UsersIcon class="size-6 text-light-gray" />
             <span class="ml-3 mt-0.5">People</span>
           </router-link>
-          <router-link to="/musics" class="flex items-center cursor-pointer text-light rounded-lg 
-        hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
+          <router-link to="/musics" class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
+            @click.stop="showSidebar = false">
             <MusicalNoteIcon class="size-6 text-light-gray" />
             <span class="ml-3 mt-0.5">Musics</span>
           </router-link>
           <hr>
-          <router-link to="/account" class="flex items-center cursor-pointer text-light rounded-lg 
-        hover:bg-dark-gray p-2" @click.stop="showSidebar = false">
+          <router-link to="/account" class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
+            @click.stop="showSidebar = false">
             <UserCircleIcon class="size-6 text-light-gray" />
             <span class="ml-3 mt-0.5">Account</span>
           </router-link>
-          <div class="flex items-center cursor-pointer text-light-danger rounded-lg 
-        hover:bg-gray p-2" @click.stop="showSidebar = false">
+          <div class="flex items-center cursor-pointer text-light-danger rounded-lg hover:bg-gray p-2"
+            @click.stop="showSidebar = false">
             <ArrowLeftEndOnRectangleIcon class="size-6 text-danger" />
             <span class="ml-3 mt-0.5">Log out</span>
           </div>
@@ -84,6 +97,7 @@
 </template>
 
 <script setup>
+import { isMobile } from '@/helpers/helpers.js'
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { Bars3Icon } from '@heroicons/vue/24/solid'
 import { XMarkIcon } from '@heroicons/vue/24/solid'
@@ -125,13 +139,19 @@ function triggerSearch() {
   }
 }
 
+function goTo(path = '/') {
+  router.push(path)
+}
+
 // Add shortcuts
-window.addEventListener('keydown', (e) => {
-  // ctrl + F short to focus search
-  if (e.ctrlKey && e.key === 'f') {
-    e.preventDefault()
-    focusSearchBar()
-  }
-})
+if (!isMobile()) {
+  window.addEventListener('keydown', (e) => {
+    // ctrl + F short to focus search
+    if (e.ctrlKey && e.key === 'f') {
+      e.preventDefault()
+      focusSearchBar()
+    }
+  })
+}
 
 </script>

@@ -1,17 +1,19 @@
 <template>
   <div>
-    <Header />
+    <AppLayout />
     <main>
       <RouterView />
     </main>
     <Footer />
+    <div v-if="isMobile()" class="h-24"></div>
   </div>
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
-import Header from '@/components/HeaderComponent.vue'
+import AppLayout from '@/components/AppLayoutComponent.vue'
 import Footer from '@/components/FooterComponent.vue'
+import { isMobile } from '@/helpers/helpers.js'
 import { RouterView, useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 

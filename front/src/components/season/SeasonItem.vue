@@ -1,6 +1,6 @@
 <template>
   <router-link class="flex flex-col cursor-pointer border-2 border-gray rounded-[8px] bg-light-dark h-full"
-    :to="{ path: '/season/', query: { season: props?.season?.season_id } }">
+    :to="{ path: `'/season/${props?.season?.season_id}` }">
     <div class="h-6 w-full rounded-t-[6px]" :style="`background-color: ${props?.season?.color};`"></div>
     <div class="p-5">
       <div class="flex flex-col justify-center items-center w-full my-2">
@@ -13,7 +13,7 @@
           <div class="rounded-full px-2 bg-gray">Romain</div>
           <div class="rounded-full px-2 bg-gray">Maga</div>
         </div>
-        <p>{{ threeDotString('Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat eveniet mollitia labore repellendus ?') }}</p>
+        <p>{{ threeDotString('Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat eveniet mollitia') }}</p>
       </div>
     </div>
     <div class="grid grid-cols-2 divide-x-2 divide-gray cursor-pointer">
