@@ -19,6 +19,20 @@ Front:
     - [ ] Mettre tout les store en perssistant pour pour etre en offline
     - [ ] Faire systeme de stockage des données en local, puis d'envoie au serveur
     - [ ] Faire PWA
+    - [ ] Stats randoms temps restant (avec une info expl a chaque fois au survol)
+           - Nombre de premier apero en plein aire de l'année restant
+           - Nb Election presidentiels
+           - Nombre de coupe du monde à regarder
+           - Block buster à regarder au cinema
+           - Nombre d'éclipses solaires
+           - Nombre de concert à voir
+           - Temps pour apprendre d'un instrument
+           - Temps pour apprendre une langue
+           - Temps pour lire un livre
+           - Temps pour regarder une série
+           - Voyages restant (2 par an)
+           - Nombre de chat/chien (un tout les 15 ans)
 
 Ideas:
     - [ ] Fonction de Rappels de Souvenirs (what happened a year ago, ...)
+    - [ ] Faire une seule bar de recherche pour créer des items, faires des recherches et globalement tout
