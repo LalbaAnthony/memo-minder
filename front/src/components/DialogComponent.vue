@@ -6,7 +6,7 @@
       <TransitionChild v-click-outside="() => showDialog = false" as="div"
         enter="transition ease-in-out duration-300 transform" enter-from="translate-y-full" enter-to="translate-y-0"
         leave="transition ease-in-out duration-300 transform" leave-from="translate-y-0" leave-to="translate-y-full"
-        class="fixed bottom-0 left-0 h-64 w-full bg-light-dark z-50 border-t border-gray">
+        class="fixed bottom-0 left-0 h-64 w-full bg-light-dark z-30 border-t border-gray">
 
         <!-- Close dialog -->
         <div class="flex justify-end p-4">

@@ -17,7 +17,7 @@
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <router-link :to="`${'season'}/add`"
+          <router-link :to="{ path: `${'season'}/add`, query: { title: search } }"
             class="flex justify-center items-center bg-light-dark text-light p-2 rounded-lg cursor-pointer hover:bg-dark-gray">
             <PlusIcon class="size-6 text-primary mr-3" />
             <FilmIcon class="size-6 text-light" />
@@ -29,7 +29,7 @@
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <router-link :to="`${'event'}/add`"
+          <router-link :to="{ path: `${'event'}/add`, query: { title: search } }"
             class="flex justify-center items-center bg-light-dark text-light p-2 rounded-lg cursor-pointer hover:bg-dark-gray">
             <PlusIcon class="size-6 text-primary mr-3" />
             <CalendarDaysIcon class="size-6 text-light" />
@@ -41,7 +41,7 @@
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <router-link :to="`${'person'}/add`"
+          <router-link :to="{ path: `${'person'}/add`, query: { name: search } }"
             class="flex justify-center items-center bg-light-dark text-light p-2 rounded-lg cursor-pointer hover:bg-dark-gray">
             <PlusIcon class="size-6 text-primary mr-3" />
             <UsersIcon class="size-6 text-light" />
@@ -53,7 +53,7 @@
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <router-link :to="`${'music'}/add`"
+          <router-link :to="{ path: `${'music'}/add`, query: { title: search } }"
             class="flex justify-center items-center bg-light-dark text-light p-2 rounded-lg cursor-pointer hover:bg-dark-gray">
             <PlusIcon class="size-6 text-primary mr-3" />
             <MusicalNoteIcon class="size-6 text-light" />

@@ -19,6 +19,7 @@ Front:
     - [ ] Mettre tout les store en perssistant pour pour etre en offline
     - [ ] Faire systeme de stockage des données en local, puis d'envoie au serveur
     - [ ] Faire PWA
+    - [X] Faire une seule bar de recherche pour créer des items, faires des recherches et globalement tout
     - [ ] Stats randoms temps restant (avec une info expl a chaque fois au survol)
            - Nombre de premier apero en plein aire de l'année restant
            - Nb Election presidentiels
@@ -35,4 +36,3 @@ Front:
 
 Ideas:
     - [ ] Fonction de Rappels de Souvenirs (what happened a year ago, ...)
-    - [ ] Faire une seule bar de recherche pour créer des items, faires des recherches et globalement tout
