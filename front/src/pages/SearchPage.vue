@@ -74,7 +74,7 @@
     <Grid :items="results">
       <template #item="{ item }">
         <router-link :to="item.path" class="item block p-4 border-b border-gray flex items-center justify-between"
-          :style="['animation-delay: 0.' + randomInt(1, 10) / 15 + 's;']">
+          :style="['animation-delay: 0.' + randomInt(1, 10) / 10 + 's;']">
           <DocumentTextIcon v-if="item.type === 'page'" class="size-8 text-light-gray" />
           <h3 class="text-lg font-semibold">{{ item.title }}</h3>
           <ArrowLongRightIcon
@@ -116,12 +116,6 @@ function loadSearch() {
 
   results.value = []
 
-  // Show add buttons
-  if (search.value.toLowerCase().includes('season')) addButtons.value.season.show = true
-  if (search.value.toLowerCase().includes('event')) addButtons.value.event.show = true
-  if (search.value.toLowerCase().includes('person')) addButtons.value.person.show = true
-  if (search.value.toLowerCase().includes('music')) addButtons.value.music.show = true
-
   // Pages
   router.options.routes.forEach((route) => {
     if (
@@ -143,6 +137,12 @@ function loadSearch() {
       })
     }
   })
+
+  // Add buttons
+  if (results.value.length < 1 || search.value.toLowerCase().includes('season')) addButtons.value.season.show = true
+  if (results.value.length < 1 || search.value.toLowerCase().includes('event')) addButtons.value.event.show = true
+  if (results.value.length < 1 || search.value.toLowerCase().includes('person')) addButtons.value.person.show = true
+  if (results.value.length < 1 || search.value.toLowerCase().includes('music')) addButtons.value.music.show = true
 
   // Musics
   // ...
