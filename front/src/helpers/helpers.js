@@ -52,3 +52,7 @@ export function getYearFromDate(date) { // take a date as YYYY-MM-DD
     if (date) return date.split("-")[0];
     return "";
 }
+
+export function randomInt(min = 1, max = 100) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
