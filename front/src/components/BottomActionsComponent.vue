@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed bottom-20 right-0 z-20 flex flex-col justify-end gap-2 p-4">
+  <div :class="['fixed right-0 z-20 flex flex-col justify-end gap-2 p-4', isMobile() ? 'bottom-20' : 'bottom-0']">
     <!-- Scroll to top -->
     <div v-if="isMobile()" @click="goTop()"
       class="flex items-center justify-center bg-dark-gray text-white rounded-full p-4 hover:scale-105 transition-transform duration-200 border border-dark-gray">
