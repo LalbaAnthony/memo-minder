@@ -1,8 +1,10 @@
 const express = require('express')
 const favicon = require('serve-favicon')
 
+const path = require('path'); // Ajoutez cette ligne
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+
 const app = express()
-const port = 3000
 
 // Importing helpers
 const formatRes = require('./src/helpers/formatRes')
@@ -107,4 +109,4 @@ app.use(({ res }) => {
 }) 
 
 // Start the server
-app.listen(port, () => console.log(`App listening on http://localhost:${port}/`))
+app.listen(process.env.BACK_API_PORT, () => console.log(`App listening on http://localhost:${process.env.BACK_API_PORT}/`))

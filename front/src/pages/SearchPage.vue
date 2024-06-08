@@ -14,7 +14,7 @@
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <router-link :to="{ path: `${'seasons'}/add`, query: { title: search } }"
+          <router-link :to="{ path: `${'seasons'}/add`, query: { title: toAddString } }"
             class="flex justify-center items-center bg-light-dark text-light p-2 rounded-lg cursor-pointer hover:bg-dark-gray">
             <PlusIcon class="size-6 text-primary mr-3" />
             <FilmIcon class="size-6 text-light" />
@@ -26,7 +26,7 @@
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <router-link :to="{ path: `${'events'}/add`, query: { title: search } }"
+          <router-link :to="{ path: `${'events'}/add`, query: { title: toAddString } }"
             class="flex justify-center items-center bg-light-dark text-light p-2 rounded-lg cursor-pointer hover:bg-dark-gray">
             <PlusIcon class="size-6 text-primary mr-3" />
             <CalendarDaysIcon class="size-6 text-light" />
@@ -50,7 +50,7 @@
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <router-link :to="{ path: `${'musics'}/add`, query: { title: search } }"
+          <router-link :to="{ path: `${'musics'}/add`, query: { title: toAddString } }"
             class="flex justify-center items-center bg-light-dark text-light p-2 rounded-lg cursor-pointer hover:bg-dark-gray">
             <PlusIcon class="size-6 text-primary mr-3" />
             <MusicalNoteIcon class="size-6 text-light" />
@@ -83,7 +83,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import Grid from '@/components/GridComponent.vue'
 import { PlusIcon } from '@heroicons/vue/24/solid'
@@ -107,6 +107,12 @@ const addButtons = ref({
   person: { show: false },
   music: { show: false }
 })
+
+const toAddString = computed(() => { // same as search but with first letter in uppercase and 'add' removed
+  return search.value.replace('add', '').replace('Add', '').trim()
+    .replace(/^\w/, (c) => c.toUpperCase())
+});
+
 
 function loadSearch() {
   if (!search.value) return
