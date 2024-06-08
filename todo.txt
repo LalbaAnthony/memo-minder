@@ -8,6 +8,7 @@ Back:
     - [X] Add log systeme
     - [ ] Make config file
     - [ ] Inst et setup bcrypt for login
+    - [ ] Crypt data with user password, make recovery system with keys
     - [ ] Use https://codesandbox.io/p/devbox/github/Awesome-Node-js/node-pokemons-api?file=%2Fapp.js%3A33%2C1
 
 Front:

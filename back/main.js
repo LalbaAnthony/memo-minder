@@ -8,11 +8,12 @@ const app = express()
 
 // Importing helpers
 const formatRes = require('./src/helpers/formatRes')
-const log = require('./src/helpers/log')
+const logFile = require('./src/helpers/logFile')
+const logConsole = require('./src/helpers/logConsole')
 
 // Middleware logger
 app.use((req, res, next) => {
-    log(`IP: ${req.socket.remoteAddress}, URL: ${req.url}, METHOD: ${req.method} `)
+    logFile(`ADDRESS: ${req.socket.remoteAddress}, URL: ${req.url}, METHOD: ${req.method} `)
     next()
 })
 
@@ -109,4 +110,4 @@ app.use(({ res }) => {
 }) 
 
 // Start the server
-app.listen(process.env.BACK_API_PORT, () => console.log(`App listening on http://localhost:${process.env.BACK_API_PORT}/`))
+app.listen(process.env.BACK_API_PORT, () => logConsole(`Listening on http://localhost:${process.env.BACK_API_PORT}/`))
