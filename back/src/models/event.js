@@ -1,65 +1,39 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const Season = sequelize.define('Season', {
-    season_id: {
+const Event = sequelize.define('Event', {
+    event_id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
     },
+    music_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+    },
     user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-            model: 'User', // Name of the target model
-            key: 'user_id'  // Key in the target model
-        },
-        onDelete: 'CASCADE',
     },
-    music_id: {
+    season_id: {
         type: DataTypes.INTEGER,
-        references: {
-            model: 'Music',
-            key: 'music_id'
-        },
-        allowNull: true,
-    },
-    mood_id: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'Mood',
-            key: 'mood_id'
-        },
-        allowNull: true,
-    },
-    person_id: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'Person',
-            key: 'person_id'
-        },
         allowNull: true,
     },
     title: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING,
         allowNull: false,
-    },
-    color: {
-        type: DataTypes.STRING(7),
-        allowNull: false,
-        defaultValue: '#000000',
     },
     description: {
-        type: DataTypes.STRING(1000),
+        type: DataTypes.STRING,
         allowNull: true,
     },
-    date_start: {
+    date: {
         type: DataTypes.DATE,
         allowNull: false,
     },
-    date_end: {
-        type: DataTypes.DATE,
+    location: {
+        type: DataTypes.STRING,
         allowNull: true,
     },
     is_deleted: {
@@ -81,7 +55,7 @@ const Season = sequelize.define('Season', {
     timestamps: true,
     updatedAt: 'updated_at',
     createdAt: 'created_at',
-    tableName: 'season',
+    tableName: 'event',
 });
 
-module.exports = Season;
+module.exports = Event;
