@@ -13,6 +13,7 @@ exports.getAllSeasons = async (req, res) => {
 
 exports.getSeasonById = async (req, res) => {
     try {
+        if (!req.params.id) res.status(404).json(formatRes('error', null, 'No id provided'))
         const season = await Season.findByPk(req.params.id);
         if (!season) res.status(404).json(formatRes('sucess', null, 'No season found with this id'))
         res.status(201).json(formatRes('success', season))
@@ -33,6 +34,7 @@ exports.createSeason = async (req, res) => {
 
 exports.updateSeason = async (req, res) => {
     try {
+        if (!req.params.id) res.status(404).json(formatRes('error', null, 'No id provided'))
         const season = await Season.findByPk(req.params.id);
         if (!season) res.status(404).json(formatRes('error', null, 'No season found with this id'))
         const { title, description } = req.body;
