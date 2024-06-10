@@ -12,8 +12,8 @@ const Season = sequelize.define('Season', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'User', // Name of the target model
-            key: 'user_id'  // Key in the target model
+            model: 'User',
+            key: 'user_id'
         },
         onDelete: 'CASCADE',
     },
