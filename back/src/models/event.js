@@ -8,16 +8,29 @@ const Event = sequelize.define('Event', {
         allowNull: false,
         primaryKey: true,
     },
-    music_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-    },
     user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+            model: 'User',
+            key: 'user_id'
+        },
+        onDelete: 'SET NULL',
+    },
+    music_id: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'Music',
+            key: 'music_id'
+        },
+        allowNull: true,
     },
     season_id: {
         type: DataTypes.INTEGER,
+        references: {
+            model: 'Season',
+            key: 'season_id'
+        },
         allowNull: true,
     },
     title: {
@@ -35,11 +48,6 @@ const Event = sequelize.define('Event', {
     location: {
         type: DataTypes.STRING,
         allowNull: true,
-    },
-    is_deleted: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
     },
     updated_at: {
         type: DataTypes.DATE,
