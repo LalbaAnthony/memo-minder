@@ -1,9 +1,6 @@
-
-const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
-
 const express = require('express');
 const favicon = require('serve-favicon')
+const path = require('path');
 const bodyParser = require('body-parser');
 const sequelize = require('./src/config/database');
 const routes = require('./src/routes');
@@ -14,6 +11,8 @@ const logFile = require('./src/helpers/logFile')
 const logConsole = require('./src/helpers/logConsole')
 
 const app = express()
+
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 // Middleware logger
 app.use((req, res, next) => {

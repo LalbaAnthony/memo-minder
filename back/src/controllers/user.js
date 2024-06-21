@@ -1,3 +1,118 @@
 const formatRes = require('../helpers/formatRes')
-
+const generateCode = require('../helpers/generateCode')
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+
+exports.register = async (req, res) => {
+    const { pseudo, email, password, language } = req.body;
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = await User.create({ pseudo, email, password: hashedPassword, language: language || 'en' });
+
+        res.status(201).json(formatRes('success', newUser, 'Account created successfully'))
+    } catch (error) {
+        res.status(500).json(formatRes('error', null, error.message))
+    }
+};
+
+exports.login = async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const user = await User.findOne({ where: { email } });
+        if (!user) res.status(404).json(formatRes('error', null, 'No user found with this email'))
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) res.status(404).json(formatRes('error', null, 'Invalid password'))
+
+        const token = jwt.sign({ userId: user.user_id }, process.env.SECRET_KEY, { expiresIn: '1h' });
+        user.connection_token = token;
+        user.last_login = new Date().toISOString();
+        await user.save();
+        user.password = null; // Remove the password from the resp
+
+        res.status(201).json(formatRes('success', user, 'Logged in successfully'))
+    } catch (error) {
+        res.status(500).json(formatRes('error', null, error.message))
+    }
+};
+
+exports.verifyEmail = async (req, res) => {
+    const { email, token } = req.body;
+    try {
+        const user = await User.findOne({ where: { email, validate_email_token: token } });
+        if (!user) res.status(404).json(formatRes('error', null, 'Invalid email or token'));
+
+        user.has_validated_email = true;
+        user.validate_email_token = null;
+        await user.save();
+
+        res.status(201).json(formatRes('success', null, 'Email verified successfully'))
+    } catch (error) {
+        res.status(500).json(formatRes('error', null, error.message))
+    }
+};
+
+exports.forgotPassword = async (req, res) => {
+    const { email } = req.body;
+    try {
+        const user = await User.findOne({ where: { email } });
+        if (!user) res.status(404).json(formatRes('error', null, 'No user found with this email'));
+
+        // Generate a reset code and save it to the user
+        const resetCode = generateCode();
+        user.reset_password_code = resetCode;
+        await user.save();
+
+        // TODO: Send an email with the reset code
+
+        res.status(201).json(formatRes('success', null, 'Reset code sent to your email'))
+    } catch (error) {
+        res.status(500).json(formatRes('error', null, error.message))
+    }
+};
+
+exports.resetPassword = async (req, res) => {
+    const { email, resetCode, newPassword } = req.body;
+    try {
+        const user = await User.findOne({ where: { email, reset_password_code: resetCode } });
+        if (!user) res.status(404).json(formatRes('error', null, 'Invalid email or reset code'));
+
+        // Reset the password
+        user.password = await bcrypt.hash(newPassword, 10);
+        user.reset_password_code = null;
+        await user.save();
+
+        res.status(201).json(formatRes('success', null, 'Password reset successfully'))
+    } catch (error) {
+        res.status(500).json(formatRes('error', null, error.message))
+    }
+};
+
+exports.infos = async (req, res) => {
+    const { userId, token } = req.body;
+    try {
+        const decoded = jwt.verify(token, process.env.SECRET_KEY);
+        const user = await User.findByPk(decoded.userId);
+        if (!user) res.status(404).json(formatRes('error', null, 'No user found with this id'));
+        user.password = null; // Remove the password from the response
+
+        res.status(201).json(formatRes('success', user))
+
+    } catch (error) {
+        res.status(500).json(formatRes('error', null, error.message))
+    }
+};
+
+exports.validateToken = async (req, res) => {
+    const { token } = req.body;
+    try {
+        const decoded = jwt.verify(token, process.env.SECRET_KEY);
+        const user = await User.findByPk(decoded.userId);
+        if (!user) res.status(404).json(formatRes('error', null, 'No user found with this id'));
+
+        res.status(201).json(formatRes('success', null, 'Token is valid'))
+    } catch (error) {
+        res.status(401).json({ valid: false, error: 'Token invalide' });
+    }
+};

@@ -13,13 +13,10 @@ exports.getAllMoods = async (req, res) => {
 
 exports.getMoodById = async (req, res) => {
     try {
-
-        // Check if id exists
-        if (!req.params.id) res.status(404).json(formatRes('error', null, 'No id provided'))
-
         // Check if mood exists
-        const mood = await Mood.findByPk(req.params.id);
-        if (!mood) res.status(404).json(formatRes('sucess', null, 'No mood found with this id'))
+        if (!req.params.id) res.status(404).json(formatRes('error', null, 'No id provided'));
+        const mood = await Mood.findByPk(parseInt(req.params.id));
+        if (!mood) res.status(404).json(formatRes('error', null, 'No mood found with this id'));
 
         res.status(201).json(formatRes('success', mood))
     } catch (error) {
