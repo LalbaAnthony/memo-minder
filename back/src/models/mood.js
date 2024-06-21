@@ -17,11 +17,6 @@ const Mood = sequelize.define('Mood', {
         allowNull: false,
         defaultValue: '#000000',
     },
-    is_deleted: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
-    },
     updated_at: {
         type: DataTypes.DATE,
         allowNull: false,

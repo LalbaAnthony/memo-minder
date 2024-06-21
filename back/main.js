@@ -1,13 +1,13 @@
 
-const path = require('path'); // Ajoutez cette ligne
+const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
-
 
 const express = require('express');
 const favicon = require('serve-favicon')
 const bodyParser = require('body-parser');
 const sequelize = require('./src/config/database');
 const routes = require('./src/routes');
+
 // Importing helpers
 const formatRes = require('./src/helpers/formatRes')
 const logFile = require('./src/helpers/logFile')

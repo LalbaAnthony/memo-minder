@@ -47,11 +47,6 @@ const User = sequelize.define('User', {
         type: DataTypes.DATE,
         allowNull: true,
     },
-    is_deleted: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
-    },
     updated_at: {
         type: DataTypes.DATE,
         allowNull: false,

@@ -8,8 +8,10 @@ Back:
     - [X] Add log systeme
     - [ ] Make config file
     - [ ] Inst et setup bcrypt for login
+    - [ ] All endpoints
+    - [ ] Auth systeme
+    - [ ] Implement auth systeme to all endpoints, make sure to check if user is auth, each endpoint should be secure exept /mood(s)
     - [ ] Crypt data with user password, make recovery system with keys
-    - [ ] Use https://codesandbox.io/p/devbox/github/Awesome-Node-js/node-pokemons-api?file=%2Fapp.js%3A33%2C1
 
 Front:
     - [X] Make bottom action the same as grid (slots)

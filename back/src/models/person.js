@@ -8,6 +8,15 @@ const Person = sequelize.define('Person', {
         allowNull: false,
         primaryKey: true,
     },
+    user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'User',
+            key: 'user_id'
+        },
+        onDelete: 'SET NULL',
+    },
     name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -15,11 +24,6 @@ const Person = sequelize.define('Person', {
     description: {
         type: DataTypes.STRING,
         allowNull: true,
-    },
-    is_deleted: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
     },
     updated_at: {
         type: DataTypes.DATE,

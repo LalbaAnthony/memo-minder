@@ -8,6 +8,15 @@ const Music = sequelize.define('Music', {
         allowNull: false,
         primaryKey: true,
     },
+    user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'User',
+            key: 'user_id'
+        },
+        onDelete: 'SET NULL',
+    },
     title: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -23,11 +32,6 @@ const Music = sequelize.define('Music', {
     streaming_link: {
         type: DataTypes.STRING,
         allowNull: true,
-    },
-    is_deleted: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false,
     },
     updated_at: {
         type: DataTypes.DATE,

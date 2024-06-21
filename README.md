@@ -21,13 +21,23 @@ PORT=3000
 ```
 
 2. FRONTEND
+
 ```bash
 cd front/ && npm i && npm run dev
 ```
 
 1. BACKEND
+
 ```bash
 cd back/ && npm i && npm run start
+```
+
+## Development
+
+Load test data:
+
+```bash
+cd back/ && node seed.js
 ```
 
 ## Feedback
