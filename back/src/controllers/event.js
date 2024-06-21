@@ -4,7 +4,6 @@ const Event = require('../models/event');
 const Music = require('../models/music');
 const User = require('../models/user');
 const Seasons = require('../models/season');
-const e = require('express');
 
 exports.getAllEvents = async (req, res) => {
     try {
@@ -17,16 +16,11 @@ exports.getAllEvents = async (req, res) => {
 
 exports.getEventById = async (req, res) => {
     try {
-        let errors = [];
-
-        // Check for id
-        if (!req.params.id) errors.push('No id provided')
 
         // Check if event exists
-        const event = await Event.findByPk(req.params.id);
-        if (!event) errors.push('No event found with this id')
-
-        if (errors.length > 0) res.status(404).json(formatRes('error', null, errors[0]))
+        if (!req.params.id) res.status(404).json(formatRes('error', null, 'No id provided'));
+        const event = await Event.findByPk(parseInt(req.params.id));
+        if (!event) res.status(404).json(formatRes('error', null, 'No event found with this id'));
 
         res.status(201).json(formatRes('success', event))
     } catch (error) {
@@ -35,39 +29,26 @@ exports.getEventById = async (req, res) => {
 };
 
 exports.createEvent = async (req, res) => {
+    const { music_id, user_id, season_id, title, description, date, location } = req.body;
     try {
-        const { music_id, user_id, season_id, title, description, date, location } = req.body;
-
-        let errors = [];
-
-        // Check for user_id
-        if (errors.length === 0 && !user_id) errors.push('No user_id provided')
-        if (errors.length === 0 && isNaN(user_id)) errors.push('user_id must be an integer')
-
         // Check if user_id exists
-        const user = await User.findByPk(user_id);
-        if (errors.length === 0 && !user) errors.push('No user found with this id')
+        const user = await User.findByPk(parseInt(user_id));
+        if (!user) res.status(404).json(formatRes('error', null, 'No user found with this id'));
 
         if (music_id) {
-            // Check if music_id is an integer
-            if (errors.length === 0 && isNaN(music_id)) errors.push('music_id must be an integer')
             // Check if music_id exists
-            const music = await Music.findByPk(music_id);
-            if (errors.length === 0 && !music) errors.push('No music found with this id')
+            const music = await Music.findByPk(parseInt(music_id));
+            if (!music) res.status(404).json(formatRes('error', null, 'No music found with this id'));
         }
 
         if (season_id) {
-            // Check if music_id is an integer
-            if (errors.length === 0 && isNaN(music_id)) errors.push('music_id must be an integer')
             // Check if season_id exists
-            const season = await Seasons.findByPk(season_id);
-            if (errors.length === 0 && !season) errors.push('No season found with this id')
+            const season = await Seasons.findByPk(parseInt(season_id));
+            if (!season) res.status(404).json(formatRes('error', null, 'No season found with this id'));
         }
 
         const event = await Event.create({ music_id, user_id, season_id, title, description, date, location });
-        if (!event) errors.push('Error creating event')
-
-        if (errors.length > 0) res.status(404).json(formatRes('error', null, errors[0]))
+        if (!event) res.status(404).json(formatRes('error', null, 'Error creating event'));
 
         res.status(201).json(formatRes('success', event))
 
@@ -77,46 +58,31 @@ exports.createEvent = async (req, res) => {
 };
 
 exports.updateEvent = async (req, res) => {
+    const { music_id, user_id, season_id, title, description, date, location } = req.body;
     try {
-        const { music_id, user_id, season_id, title, description, date, location } = req.body;
-
-        let errors = [];
-
-        // Check if id exists
-        if (!req.params.id) errors.push('No id provided')
-
         // Check if event exists
-        const event = await Event.findByPk(req.params.id);
-        if (!event) errors.push('No event found with this id')
-
-        // Check for user_id
-        if (errors.length === 0 && !user_id) errors.push('No user_id provided')
-        if (errors.length === 0 && isNaN(user_id)) errors.push('user_id must be an integer')
+        if (!req.params.id) res.status(404).json(formatRes('error', null, 'No id provided'));
+        const event = await Event.findByPk(parseInt(req.params.id));
+        if (!event) res.status(404).json(formatRes('error', null, 'No event found with this id'));
 
         // Check if user_id exists
-        const user = await User.findByPk(user_id);
-        if (errors.length === 0 && !user) errors.push('No user found with this id')
+        const user = await User.findByPk(parseInt(user_id));
+        if (!user) res.status(404).json(formatRes('error', null, 'No user found with this id'));
 
         if (music_id) {
-            // Check if music_id is an integer
-            if (errors.length === 0 && isNaN(music_id)) errors.push('music_id must be an integer')
             // Check if music_id exists
-            const music = await Music.findByPk(music_id);
-            if (errors.length === 0 && !music) errors.push('No music found with this id')
+            const music = await Music.findByPk(parseInt(music_id));
+            if (!music) res.status(404).json(formatRes('error', null, 'No music found with this id'));
         }
 
         if (season_id) {
-            // Check if music_id is an integer
-            if (errors.length === 0 && isNaN(music_id)) errors.push('music_id must be an integer')
             // Check if season_id exists
-            const season = await Seasons.findByPk(season_id);
-            if (errors.length === 0 && !season) errors.push('No season found with this id')
+            const season = await Seasons.findByPk(parseInt(season_id));
+            if (!season) res.status(404).json(formatRes('error', null, 'No season found with this id'));
         }
 
         const resp = await event.update({ music_id, user_id, season_id, title, description, date, location });
-        if (!resp) errors.push('Error updating event')
-
-        if (errors.length > 0) res.status(404).json(formatRes('error', null, errors[0]))
+        if (!resp) res.status(404).json(formatRes('error', null, 'Error updating event'));
 
         res.status(201).json(formatRes('success', event))
 
@@ -127,20 +93,13 @@ exports.updateEvent = async (req, res) => {
 
 exports.deleteEvent = async (req, res) => {
     try {
-
-        let errors = [];
-
-        // Check if id exists
-        if (!req.params.id) errors.push('No id provided')
-
         // Check if event exists
-        const event = await Event.findByPk(req.params.id);
-        if (!event) errors.push('No event found with this id')
+        if (!req.params.id) res.status(404).json(formatRes('error', null, 'No id provided'));
+        const event = await Event.findByPk(parseInt(req.params.id));
+        if (!event) res.status(404).json(formatRes('error', null, 'No event found with this id'));
 
         const resp = await event.destroy();
-        if (!resp) errors.push('Error deleting event')
-
-        if (errors.length > 0) res.status(404).json(formatRes('error', null, errors[0]))
+        if (!resp) res.status(404).json(formatRes('error', null, 'Error deleting event'));
 
         res.status(201).json(formatRes('success', null, 'Event deleted'))
 

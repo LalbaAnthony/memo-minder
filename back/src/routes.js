@@ -5,7 +5,7 @@ const moodController = require('./controllers/mood');
 const musicController = require('./controllers/music');
 const personController = require('./controllers/person');
 const seasonController = require('./controllers/season');
-// const userController = require('./controllers/user');
+const userController = require('./controllers/user');
 
 const router = express.Router();
 
@@ -17,11 +17,8 @@ router.put('/event/:id', eventController.updateEvent);
 router.delete('/event/:id', eventController.deleteEvent);
 
 // Mood
-// router.get('/moods', moodController.getAllMoods);
-// router.get('/mood/:id', moodController.getMoodById);
-// router.post('/moods', moodController.createMood);
-// router.put('/mood/:id', moodController.updateMood);
-// router.delete('/mood/:id', moodController.deleteMood);
+router.get('/moods', moodController.getAllMoods);
+router.get('/mood/:id', moodController.getMoodById);
 
 // Music
 // router.get('/musics', musicController.getAllMusics);
@@ -45,10 +42,12 @@ router.delete('/event/:id', eventController.deleteEvent);
 // router.delete('/season/:id', seasonController.deleteSeason);
 
 // User
-// router.get('/users', userController.getAllUsers);
-// router.get('/user/:id', userController.getUserById);
-// router.post('/users', userController.createUser);
-// router.put('/user/:id', userController.updateUser);
-// router.delete('/user/:id', userController.deleteUser);
+router.post('/register', userController.register);
+router.get('/login', userController.login);
+router.post('/verify-email', userController.verifyEmail);
+router.get('/forgot-password', userController.forgotPassword);
+router.post('/reset-password', userController.resetPassword);
+router.get('/infos/:id', userController.infos);
+router.get('/validate-token', userController.validateToken);
 
 module.exports = router;
