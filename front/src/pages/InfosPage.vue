@@ -34,12 +34,10 @@
           memories.</li>
         <li>Add Events: Populate each season with memorable events, whether it's a family gathering, a graduation
           ceremony, or a spontaneous road trip.</li>
-        <li>Tag People: Attach the names of friends, family members, or colleagues who shared those moments, fostering a
+        <li>Add People: Attach the names of friends, family members, or colleagues who shared those moments, fostering a
           sense of community within your memories.</li>
         <li>Set the Mood: Select and link music tracks that resonate with the ambiance of each season, elevating the
           reminiscing experience to new heights.</li>
-        <li>Secure Storage: Rest easy knowing that all your data is encrypted, safeguarding your memories against prying
-          eyes while maintaining accessibility for your eyes only.</li>
       </ol>
     </section>
 

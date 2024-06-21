@@ -13,7 +13,6 @@ Back:
     - [ ] Implement auth systeme to all endpoints, make sure to check if user is auth, each endpoint should be secure exept /mood(s)
 
 Front:
-    - [ ] Crypt data with user password
     - [X] Make bottom action the same as grid (slots)
     - [X] Faire bare de recherche qui recherche aussi dans les routes et affiche une lsit de page
     - [X] Debug notif et les imprpoves
