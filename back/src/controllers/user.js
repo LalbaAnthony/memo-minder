@@ -1,7 +1,9 @@
 const formatRes = require('../helpers/formatRes')
 const generateCode = require('../helpers/generateCode')
+const verifiyingToken = require('../helpers/verifiyingToken')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+
 const User = require('../models/user');
 
 exports.register = async (req, res) => {
@@ -94,7 +96,7 @@ exports.infos = async (req, res) => {
     try {
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
         const user = await User.findByPk(decoded.userId);
-        if (!user) return res.status(404).json(formatRes('error', null, 'No user found with this id'));
+        if (!user) return res.status(404).json(formatRes('error', null, 'Error while verifiying the token'));
         user.password = null; // Remove the password from the response
 
         return res.status(201).json(formatRes('success', user))
@@ -107,9 +109,7 @@ exports.infos = async (req, res) => {
 exports.validateToken = async (req, res) => {
     const { token } = req.body;
     try {
-        const decoded = jwt.verify(token, process.env.SECRET_KEY);
-        const user = await User.findByPk(decoded.userId);
-        if (!user) return res.status(404).json(formatRes('error', null, 'No user found with this id'));
+        if (!verifiyingToken(token)) return res.status(404).json(formatRes('error', null, 'Error while verifiying the token'));
 
         return res.status(201).json(formatRes('success', null, 'Token is valid'))
     } catch (error) {
