@@ -31,7 +31,7 @@ app.use('/api', routes);
 
 // If nothing found above, return 404
 app.use(({ res }) => {
-    res.status(404).json(formatRes('error', null, 'Nothing found here!'))
+    return res.status(404).json(formatRes('error', null, 'Nothing found here!'))
 })
 
 // Synchronisation de la base de données et démarrage du serveur
