@@ -243,7 +243,18 @@ const routes = [
 
     ],
   },
-  // ==================== ACCOUNT ====================
+  // ==================== AUTH & ACCOUNT ====================
+  {
+    path: '/auth',
+    name: 'auth',
+    component: () => import('../pages/auth/AuthPage.vue'),
+    meta: {
+      title: 'Authentication',
+      private: false,
+      displayInSearch: false,
+      tags: [],
+    },
+  },
   {
     path: '/account',
     name: 'account',
