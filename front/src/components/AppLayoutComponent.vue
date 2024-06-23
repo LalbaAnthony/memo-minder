@@ -21,7 +21,7 @@
           {{ route.meta.title }}
         </h1>
       </router-link>
-      <MagnifyingGlassIcon class="size-10 text-light-gray hover:bg-dark-gray rounded-full p-1 cursor-pointer"
+      <MagnifyingGlassIcon class="size-10 text-light-gray hover:bg-dark-gray rounded-full p-1.5 cursor-pointer"
         @click.stop="focusSearchBar" />
     </header>
 

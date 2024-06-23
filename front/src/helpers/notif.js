@@ -3,7 +3,6 @@ import { useToast } from 'vue-toastification';
 const toast = useToast();
 
 export function notify(message, type = 'info') {
-    console.log('notify', message, type);
     toast[type](message, {
         position: 'top-right',
         timeout: 50000,
