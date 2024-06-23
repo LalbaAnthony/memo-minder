@@ -84,6 +84,24 @@ input[type="search"]::-webkit-search-cancel-button {
   display: none;
 }
 
+input[type="checkbox"] {
+  accent-color: var(--primary);
+  color: var(--primary);
+  width: 1rem;
+}
+
+select {
+  background-color: var(--dark-gray);
+  color: var(--light);
+  appearance: none;
+  border: none;
+}
+
+select:focus {
+  border-color: var(--secondary);
+  outline: var(--light) auto 1px;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

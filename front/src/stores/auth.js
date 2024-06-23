@@ -10,15 +10,9 @@ export const useAuthStore = defineStore('auth',
       authenticated: false,
       token: null,
       user: {},
-      formType: 'login',
     }),
 
     actions: {
-
-      setFormType(type) {
-        this.formType = type;
-      },
-
       async validateToken() {
 
         if (!this.authenticated) {

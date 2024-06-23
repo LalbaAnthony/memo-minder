@@ -56,3 +56,14 @@ export function getYearFromDate(date) { // take a date as YYYY-MM-DD
 export function randomInt(min = 1, max = 100) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+export function missingElementsPassword(password) {
+    let missing_element = [];
+    if (password.length <= 10) missing_element.push('10 characters')
+    if (!password.match(/[a-z]/)) missing_element.push('one lowercase letter')
+    if (!password.match(/[A-Z]/)) missing_element.push('one uppercase letter')
+    if (!password.match(/[0-9]/)) missing_element.push('one number')
+    if (!password.match(/[^a-zA-Z\d]/)) missing_element.push('one special character')
+
+    return missing_element;
+}
