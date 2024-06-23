@@ -1,8 +1,46 @@
 <template>
     <div>
-        WIP
+        <div class="flex flex-col items-center justify-center space-y-4 mt-4 mx-4">
+            <input v-model="email" id="email" type="email" class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light"
+                placeholder="Email" />
+        </div>
+        <slot />
+        <div class="flex flex-col md:flex-row-reverse items-center justify-center md:justify-around gap-4 mt-8 md:m-6">
+            <button class="bg-light-dark text-light p-2 rounded-lg cursor-pointer hover:bg-dark-gray"
+                @click="handleForgotPassword()">
+                <span class="mx-2 my-0.5">Send</span>
+            </button>
+        </div>
     </div>
 </template>
 
 <script setup>
+import { notify } from '@/helpers/notif.js'
+import { isValidEmail } from '@/helpers/helpers.js'
+import { useAuthStore } from '@/stores/auth'
+
+const emit = defineEmits(['setAuthType'])
+
+const authStore = useAuthStore()
+
+function valid() {
+    // return false // ? uncomment this line to skip form validation
+    if (authStore.fogotPasswordEmail.length < 1) return "Please enter your email"
+    if (!isValidEmail(authStore.fogotPasswordEmail)) return "Please enter a valid email"
+    return false
+}
+
+async function handleForgotPassword() {
+
+    authStore.fogotPasswordEmail = authStore.fogotPasswordEmail.trim()
+
+    const error = valid()
+    if (error) {
+        notify(error, 'error')
+    } else {
+        authStore.forgotPassword(authStore.fogotPasswordEmail)
+        emit('setAuthType', 'resetPassword')
+        authStore.fogotPasswordEmail = ''
+    }
+}
 </script>

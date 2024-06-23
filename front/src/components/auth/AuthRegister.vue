@@ -14,7 +14,7 @@
             <input v-model="confirmPassword" id="confirmPassword" type="password"
                 class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Confirm password" />
             <PasswordStrength :password="password || confirmPassword || ''" />
-            <label class="flex items -center space-x-2">
+            <label class="flex flex-start space-x-2">
                 <input v-model="accept_terms" id="accept_terms" type="checkbox" />
                 <span class="text-light">I accept the terms and conditions</span>
             </label>
@@ -27,7 +27,7 @@
             </button>
             <hr class="block md:hidden w-1/3" />
             <button class="text-light p-2 rounded-lg cursor-pointer hover:bg-dark-gray"
-                @click="$emit('setType', 'login')">
+                @click="emit('setAuthType', 'login')">
                 <span class="mx-2 my-0.5">Login</span>
             </button>
         </div>
@@ -41,6 +41,8 @@ import PasswordStrength from '@/components/PasswordStrengthComponent.vue'
 import { isValidEmail } from '@/helpers/helpers.js'
 import { missingElementsPassword } from '@/helpers/helpers.js'
 import { useAuthStore } from '@/stores/auth'
+
+const emit = defineEmits(['setAuthType'])
 
 const authStore = useAuthStore()
 
@@ -56,13 +58,13 @@ const languages = ref({
 })
 
 function valid() {
-    // return false; // ? uncomment this line to enable form validation
-    if (pseudo.value.length < 1) return "Please enter your username";
-    if (language.value.length < 1) return "Please select your language";
-    if (email.value.length < 1) return "Please enter your email";
-    if (!isValidEmail(email.value)) return "Please enter a valid email";
-    if (password.value.length < 1) return "Please enter your password";
-    if (confirmPassword.value.length < 1) return "Please enter your password";
+    // return false // ? uncomment this line to enable form validation
+    if (pseudo.value.length < 1) return "Please enter your username"
+    if (language.value.length < 1) return "Please select your language"
+    if (email.value.length < 1) return "Please enter your email"
+    if (!isValidEmail(email.value)) return "Please enter a valid email"
+    if (password.value.length < 1) return "Please enter your password"
+    if (confirmPassword.value.length < 1) return "Please enter your password"
     if (password.value !== confirmPassword.value) return 'Passwords do not match'
     if (missingElementsPassword(password.value).length > 0) return `Password must at least contain: ${missingElementsPassword(password.value).join(', ')}`
     if (!accept_terms.value) return 'Please accept the terms and conditions'
@@ -84,12 +86,12 @@ async function handleRegister() {
             email: email.value,
             language: language.value,
             password: password.value,
-            accept_terms: accept_terms.value
         })
         pseudo.value = ''
         email.value = ''
         language.value = ''
         password.value = ''
+        confirmPassword.value = ''
         accept_terms.value = false
     }
 }

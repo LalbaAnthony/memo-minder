@@ -3,14 +3,14 @@
 
     <h2 class="text-center text-light text-2xl font-semibold mt-4 mb-8">{{ tabs[type].title }}</h2>
 
-    <component :is="tabs[type].component" @set-type="(type) => setType(type)">
+    <component :is="tabs[type].component" @set-auth-type="(type) => setAuthType(type)">
       <div class="flex flex-row-reverse align-items-center justify-between m-4">
         <button v-if="type === 'login' || type === 'register'" class="text-light hover:text-light-gray cursor-pointer"
-          @click="setType('forgotPassword')">Forgot password ?</button>
+          @click="setAuthType('forgotPassword')">Forgot password ?</button>
         <button v-if="type === 'forgotPassword'" class="text-light hover:text-light-gray cursor-pointer"
-          @click="setType('login')">Back</button>
+          @click="setAuthType('login')">Back</button>
         <button v-if="type === 'resetPassword'" class="text-light hover:text-light-gray cursor-pointer"
-          @click="setType('forgotPassword')">Back</button>
+          @click="setAuthType('forgotPassword')">Back</button>
       </div>
     </component>
   </div>
@@ -44,7 +44,7 @@ const tabs = ref({
   }
 })
 
-function setType(type) {
+function setAuthType(type) {
   this.type = type
 }
 
