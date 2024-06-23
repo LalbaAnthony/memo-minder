@@ -1,11 +1,9 @@
 <template>
   <TransitionRoot :show="percentage > 0" class="w-full">
-    password: {{ password }}<br>
-    percentage: {{ percentage }}<br>
-    color: {{ color }}<br>
     <TransitionChild enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
       enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
       leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
+      <span class="text-light text-sm">Password strength</span>
       <div class="overflow-hidden h-4 my-2 flex rounded-full bg-dark-gray">
         <div :style="`width: ${percentage}%`" :class="color"></div>
       </div>
@@ -31,28 +29,19 @@ const percentage = computed(() => {
 })
 
 const color = computed(() => {
-  let hexa = ''
   switch (true) {
     case percentage.value < 20:
-      hexa = '#dc2626'
-      break
+      return 'bg-password-step-1'
     case percentage.value < 40:
-      hexa = '#f59e0b'
-      break
+      return 'bg-password-step-1'
     case percentage.value < 60:
-      hexa = '#fbbf24'
-      break
+      return 'bg-password-step-2'
     case percentage.value < 80:
-      hexa = '#34d399'
-      break
+      return 'bg-password-step-3'
     case percentage.value < 100:
-      hexa = '#047857'
-      break
+      return 'bg-password-step-4'
     default:
-      hexa = '#047857'
-      break
+      return 'bg-password-step-5'
   }
-
-  return `bg-[${hexa}]`
 })
 </script>

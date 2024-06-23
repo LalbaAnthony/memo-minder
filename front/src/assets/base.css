@@ -1,6 +1,4 @@
 :root {
-    /* Vue App */
-
     --primary: #76a9fa;
 
     --light: #ffffff;
@@ -21,6 +19,12 @@
     --light-danger: #ef4444;
     --danger: #dc2626;
     --dark-danger: #991b1b;
+
+    --password-step-1: #dc2626;
+    --password-step-2: #dc7e26;
+    --password-step-3: #dcd926;
+    --password-step-4: #78dc26;
+    --password-step-5: #29af00;
 }
 
 /* Overload vue-toastification stuff */
