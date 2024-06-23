@@ -30,7 +30,7 @@
 <script setup>
 import { TrashIcon } from '@heroicons/vue/24/solid'
 import { PencilSquareIcon } from '@heroicons/vue/24/solid'
-import { threeDotString } from '@/helpers/helpers';
+import { threeDotString } from '@/helpers/helpers'
 
 const props = defineProps({
   season: {

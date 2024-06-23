@@ -5,7 +5,7 @@ const toast = useToast();
 export function notify(message, type = 'info') {
     toast[type](message, {
         position: 'top-right',
-        timeout: 50000,
+        timeout: 5000,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,

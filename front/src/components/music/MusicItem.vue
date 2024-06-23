@@ -29,7 +29,7 @@
 
 <script setup>
 import { getYearFromDate } from '@/helpers/helpers.js'
-import { computed } from 'vue';
+import { computed } from 'vue'
 
 const props = defineProps({
   music: {
@@ -39,14 +39,14 @@ const props = defineProps({
 })
 
 const platform = computed(() => {
-  if (props.music.streaming_link.includes('spotify')) return 'spotify';
-  if (props.music.streaming_link.includes('apple')) return 'apple';
-  if (props.music.streaming_link.includes('youtube')) return 'youtube';
-  return '';
+  if (props.music.streaming_link.includes('spotify')) return 'spotify'
+  if (props.music.streaming_link.includes('apple')) return 'apple'
+  if (props.music.streaming_link.includes('youtube')) return 'youtube'
+  return ''
 })
 
 function openLink() {
-  if(props.music.streaming_link) window.open(props.music.streaming_link, '_blank');
+  if(props.music.streaming_link) window.open(props.music.streaming_link, '_blank')
 }
 
 </script>

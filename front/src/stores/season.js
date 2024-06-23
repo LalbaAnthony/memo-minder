@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { get } from '@/helpers/api';
+import { get, post, put, del } from '@/helpers/api';
 
 export const useSeasonStore = defineStore('season', {
   state: () => ({

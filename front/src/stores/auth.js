@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { notify } from '@/helpers/notif.js'
 import router from '@/router';
-// import { get, post } from '@/helpers/api';
+import { get, post, put, del } from '@/helpers/api';
 
 export const useAuthStore = defineStore('auth',
   {
@@ -10,6 +10,7 @@ export const useAuthStore = defineStore('auth',
       authenticated: false,
       token: null,
       user: {},
+      fogotPasswordEmail: '',
     }),
 
     actions: {
@@ -67,7 +68,27 @@ export const useAuthStore = defineStore('auth',
 
       async login(email, password, redirect = '/') {
 
-        console.log('login', email, password, redirect);
+        post('login', {
+          email,
+          password,
+        }).then(resp => {
+
+          if (resp.error) {
+            notify(resp.error, 'error');
+            return false;
+          }
+
+          this.user = resp.data
+          this.token = resp.data.connection_token
+          this.authenticated = true
+          notify('You have been logged in', 'success');
+
+          return true;
+        }).catch(error => {
+          this.authenticated = false
+          notify(`An error occured: ${error}`, 'error');
+          return false;
+        });
 
         if (redirect) {
           router.push(redirect)

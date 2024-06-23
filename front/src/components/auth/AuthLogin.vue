@@ -12,7 +12,7 @@
                 <span class="mx-2 my-0.5">Login</span>
             </button>
             <hr class="block md:hidden w-1/3" />
-            <button class="text-light p-2 rounded-lg cursor-pointer hover:bg-light-dark" @click="$emit('setType', 'register')">
+            <button class="text-light p-2 rounded-lg cursor-pointer hover:bg-light-dark" @click="emit('setAuthType', 'register')">
                 <span class="mx-2 my-0.5">Register</span>
             </button>
         </div>
@@ -20,32 +20,34 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref } from "vue"
 import { notify } from '@/helpers/notif.js'
 import { isValidEmail } from '@/helpers/helpers.js'
 import { useAuthStore } from '@/stores/auth'
 
+const emit = defineEmits(['setAuthType'])
+
 const authStore = useAuthStore()
 
-const email = ref('');
-const password = ref('');
+const email = ref('')
+const password = ref('')
 
 function valid() {
-    // return false; // ? uncomment this line to skip form validation
-    if (password.value.length < 1) return "Please enter your password";
-    if (email.value.length < 1) return "Please enter your email";
-    if (!isValidEmail(email.value)) return "Please enter a valid email";
-    return false;
+    // return false // ? uncomment this line to skip form validation
+    if (password.value.length < 1) return "Please enter your password"
+    if (email.value.length < 1) return "Please enter your email"
+    if (!isValidEmail(email.value)) return "Please enter a valid email"
+    return false
 }
 
 async function handleLogin() {
 
-    email.value = email.value.trim();
-    password.value = password.value.trim();
+    email.value = email.value.trim()
+    password.value = password.value.trim()
 
-    const error = valid();
+    const error = valid()
     if (error) {
-        notify(error, 'error');
+        notify(error, 'error')
     } else {
         authStore.login(email.value, password.value)
         email.value = ''
