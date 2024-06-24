@@ -2,22 +2,23 @@ Misc:
     - [X] Project startup
     - [X] Create logo
     - [X] Refaire logo avec new couleurs
-    - [ ] Use .env everywhere
 
 Back:
     - [X] Create DB
     - [X] Add log systeme
-    - [ ] Make config file
+    - [X] Make config file
+    - [ ] Clean seed.js and make two version: one with actual all-user data for production and one with fake data for dev
     - [ ] Inst et setup bcrypt for login
     - [ ] All endpoints
     - [ ] Auth systeme
-    - [ ] Create and implement email systeme
+    - [ ] Create and implement email systeme with back/src/helpers/email.js
     - [ ] Implement auth systeme to all endpoints, make sure to check if user is auth, each endpoint should be secure exept /mood(s)
 
 Front:
     - [X] Make bottom action the same as grid (slots)
     - [X] Faire bare de recherche qui recherche aussi dans les routes et affiche une lsit de page
     - [X] Debug notif et les imprpoves
+    - [ ] CORS ERROR
     - [ ] Front de login (sans register) => auth store, ...
     - [ ] Make integration from something like https://flowbite.com/blocks/application/shells/
     - [ ] Mettre tout les store en perssistant pour pour etre en offline
