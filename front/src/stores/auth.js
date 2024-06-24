@@ -17,33 +17,54 @@ export const useAuthStore = defineStore('auth',
       async validateToken() {
 
         if (!this.authenticated) {
-          router.push('/auth')
+          this.logout()
           return false;
         }
 
-        // get('validate-token', { email: this.user.email, token: this.token || this.user.connection_token }).then(resp => {
+        await get('validate-token', { userId: this.user.userId, token: this.user.connection_token || this.token }).then(resp => {
 
-        //   if (resp.error) {
-        //     this.logout()
-        //     notify(resp.error, 'error');
-        //     return false;
-        //   }
+          if (resp.status === 'error') {
+            this.logout()
+            notify(resp.message, 'error');
+            return false;
+          } else if (resp.status === 'success') {
 
-        //   if (!resp.data[0].token_ok) {
-        //     this.logout()
-        //     return false;
-        //   }
+            if (resp.data.connection_token !== this.token) {
+              this.logout()
+              notify('Invalid token', 'error');
+              return false;
+            }
 
-        //   return true;
-        // }).catch(error => {
-        //   this.logout()
-        //   notify(`Une erreur est survenue: ${error}`, 'error');
-        //   return false;
-        // });
+            return true;
+          }
+        }).catch(error => {
+          this.logout()
+          notify(`An error occured: ${error}`, 'error');
+          return false;
+        });
       },
 
       async getUserInfos() {
-        console.log('getUserInfos');
+
+        await get('user-infos', { email: this.user.email, token: this.user.connection_token || this.token }).then(resp => {
+
+          if (resp.status === 'error') {
+            notify(resp.message, 'error');
+            return false;
+          }
+
+          this.user = resp.data
+          this.token = resp.data.connection_token
+          this.authenticated = true
+
+          notify('You have been logged in', 'success');
+
+          return true;
+        }).catch(error => {
+          this.logout()
+          notify(`An error occured: ${error}`, 'error');
+          return false;
+        });
       },
 
       async verifyEmail(email, token) {
@@ -58,8 +79,24 @@ export const useAuthStore = defineStore('auth',
         console.log('resetPassword', code, newPassword, email);
       },
 
-      async register(user, redirect = '/') {
-        console.log('register', user, redirect);
+      async register(user, redirect = '/auth') {
+
+        this.logout()
+
+        await post('register', user).then(resp => {
+
+          if (resp.status === 'error') {
+            notify(resp.message, 'error');
+            return false;
+          }
+
+          notify(`You have been registered`, 'success');
+
+          return true;
+        }).catch(error => {
+          notify(`An error occured: ${error}`, 'error');
+          return false;
+        });
 
         if (redirect) {
           router.push(redirect)
@@ -68,24 +105,22 @@ export const useAuthStore = defineStore('auth',
 
       async login(email, password, redirect = '/') {
 
-        post('login', {
-          email,
-          password,
-        }).then(resp => {
+        await post('login', { email, password }).then(resp => {
 
-          if (resp.error) {
-            notify(resp.error, 'error');
+          if (resp.status === 'error') {
+            notify(resp.message, 'error');
             return false;
           }
 
           this.user = resp.data
           this.token = resp.data.connection_token
           this.authenticated = true
+
           notify('You have been logged in', 'success');
 
           return true;
         }).catch(error => {
-          this.authenticated = false
+          this.logout()
           notify(`An error occured: ${error}`, 'error');
           return false;
         });
@@ -104,9 +139,8 @@ export const useAuthStore = defineStore('auth',
         if (redirect) {
           router.push(redirect)
         }
-        notify('You have been logged out', 'success');
+        notify('You have been logged out', 'info');
       },
-
     },
   },
 )

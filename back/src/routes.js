@@ -47,7 +47,7 @@ router.post('/login', userController.login);
 router.post('/verify-email', userController.verifyEmail);
 router.get('/forgot-password', userController.forgotPassword);
 router.post('/reset-password', userController.resetPassword);
-router.get('/infos/:id', userController.infos);
+router.get('/user-infos/:id', userController.userInfos);
 router.get('/validate-token', userController.validateToken);
 
 module.exports = router;
