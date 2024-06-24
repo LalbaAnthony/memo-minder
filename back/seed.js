@@ -1,20 +1,34 @@
 const bcrypt = require('bcrypt');
 
-const database = require('../config/database');
-const Season = require('../models/season');
-const Mood = require('../models/mood');
-const Music = require('../models/music');
-const Person = require('../models/person');
-const Event = require('../models/event');
-const User = require('../models/user');
+const sequelize = require('./src/config/database');
+
+const Season = require('./src/models/season');
+const Mood = require('./src/models/mood');
+const Music = require('./src/models/music');
+const Person = require('./src/models/person');
+const Event = require('./src/models/event');
+const User = require('./src/models/user');
 
 // ? This script is meant to be run only once, to seed the database with sample data just for test purposes. It will drop all existing tables and recreate them, then insert the sample data.
 // ? This file should remain a standalone script, not part of the main application.
 
 const seedData = async () => {
     try {
+        // Check the database connection
+        await sequelize.authenticate();
+
+        // Drop database tables
+        await sequelize.query('PRAGMA foreign_keys = OFF'); // Disable foreign key checks
+        await Event.drop();
+        await Season.drop();
+        await Person.drop();
+        await Music.drop();
+        await User.drop();
+        await Mood.drop();
+        await sequelize.query('PRAGMA foreign_keys = ON'); // Re-enable foreign key checks
+
         // Synchronize the database (drop all existing tables and recreate them)
-        await database.sync({ force: true });
+        await sequelize.sync({ force: true });
         console.log('Database synchronized');
 
         // Sample data for Mood table
@@ -40,8 +54,8 @@ const seedData = async () => {
         const sampleUsers = [
             {
                 user_id: 1,
-                pseudo: 'jdoe',
-                email: 'John Doe',
+                username: 'jdoe',
+                email: 'j.doe@test.com',
                 password: 'password',
                 language: 'en',
                 has_validated_email: true,
@@ -146,13 +160,28 @@ const seedData = async () => {
         } catch (error) {
             console.error('Error inserting sample data for Event:', error);
         }
+        
+        // Verify that the data has been inserted with a SELECT query
+        try {
+            const events = await Event.findAll();
+            console.log('All Events:', JSON.stringify(events, null, 2));
+            if (events.length === 0) {
+                console.log('❌ Error seeding data ❌');
+                console.error('No events found in the database');
+                process.exit(1); // Terminate the script with an error
+            }
+        } catch (error) {
+            console.error('Error fetching all events:', error);
+        }
 
-        console.log('✅ Sample data insertion completed ✅');
-
+        console.log('✅ Data seeding completed ✅');
         process.exit(0); // Terminate the script
     } catch (error) {
-        console.error('Error seeding data:', error);
+        console.log('❌ Error seeding data ❌');
+        console.error(error);
         process.exit(1); // Terminate the script with an error
+    } finally {
+        await sequelize.close();
     }
 };
 

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="flex flex-col items-center justify-center space-y-4 mt-4 mx-4">
-            <input v-model="pseudo" id="pseudo" type="text" class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light"
+            <input v-model="username" id="username" type="text" class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light"
                 placeholder="Username" />
             <input v-model="email" id="email" type="email" class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light"
                 placeholder="Email" />
@@ -46,7 +46,7 @@ const emit = defineEmits(['setAuthType'])
 
 const authStore = useAuthStore()
 
-const pseudo = ref('')
+const username = ref('')
 const email = ref('')
 const language = ref('en')
 const password = ref('')
@@ -59,7 +59,7 @@ const languages = ref({
 
 function valid() {
     // return false // ? uncomment this line to enable form validation
-    if (pseudo.value.length < 1) return "Please enter your username"
+    if (username.value.length < 1) return "Please enter your username"
     if (language.value.length < 1) return "Please select your language"
     if (email.value.length < 1) return "Please enter your email"
     if (!isValidEmail(email.value)) return "Please enter a valid email"
@@ -72,7 +72,7 @@ function valid() {
 }
 
 async function handleRegister() {
-    pseudo.value = pseudo.value.trim()
+    username.value = username.value.trim()
     email.value = email.value.trim()
     password.value = password.value.trim()
     confirmPassword.value = confirmPassword.value.trim()
@@ -82,12 +82,12 @@ async function handleRegister() {
         notify(error, 'error')
     } else {
         authStore.register({
-            pseudo: pseudo.value,
+            username: username.value,
             email: email.value,
             language: language.value,
             password: password.value,
         })
-        pseudo.value = ''
+        username.value = ''
         email.value = ''
         language.value = ''
         password.value = ''

@@ -33,7 +33,7 @@ cd back/ && npm i && npm run start
 Load test data:
 
 ```bash
-cd back/ && node src/seed/seedDev.js
+cd back/ && node src/seed.js
 ```
 
 ## Feedback
