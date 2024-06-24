@@ -2,7 +2,7 @@
     <div>
         <div class="flex flex-col items-center justify-center space-y-4 mt-4 mx-4">
             <input v-model="email" id="email" type="email"
-                class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Email or username" />
+                class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Email" />
             <input v-model="password" id="password" type="password"
                 class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Password" />
         </div>

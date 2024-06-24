@@ -7,10 +7,10 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 exports.register = async (req, res) => {
-    const { pseudo, email, password, language } = req.body;
+    const { username, email, password, language } = req.body;
     try {
         // Check if all fields are provided
-        if (!pseudo || !email || !password) return res.status(404).json(formatRes('error', null, 'Missing fields: pseudo, email, password'));
+        if (!username || !email || !password) return res.status(404).json(formatRes('error', null, 'Missing fields: username, email, password'));
 
         // Check if the email is already used
         const user = await User.findOne({ where: { email } });
@@ -20,7 +20,7 @@ exports.register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create the user
-        const newUser = await User.create({ pseudo, email, password: hashedPassword, language: language || 'en' });
+        const newUser = await User.create({ username, email, password: hashedPassword, language: language || 'en' });
         if (!newUser) return res.status(500).json(formatRes('error', null, 'Error while creating the account'));
 
         return res.status(201).json(formatRes('success', newUser, 'Account created successfully'))

@@ -4,7 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const database = require('./src/config/database');
+const sequelize = require('./src/config/database');
 const routes = require('./src/routes');
 
 // Importing helpers
@@ -45,7 +45,7 @@ app.use(({ res }) => {
 })
 
 // Synchronisation de la base de données et démarrage du serveur
-database.sync()
+sequelize.sync()
     .then(() => {
         logConsole('Database & tables created!');
         app.listen(process.env.BACK_API_PORT, () => {

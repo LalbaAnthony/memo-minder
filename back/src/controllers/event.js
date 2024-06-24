@@ -1,11 +1,9 @@
 const formatRes = require('../helpers/formatRes')
-const jwt = require('jsonwebtoken');
 
 const Event = require('../models/event');
 const Music = require('../models/music');
 const User = require('../models/user');
 const Seasons = require('../models/season');
-const { where } = require('sequelize');
 
 exports.getAllEvents = async (req, res) => {
     const { token, user_id, sort, page, per_page } = req.body;
