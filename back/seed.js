@@ -1,4 +1,4 @@
-const sequelize = require('./src/config/database');
+const database = require('./src/config/database');
 const Season = require('./src/models/season');
 const Mood = require('./src/models/mood');
 const Music = require('./src/models/music');
@@ -9,7 +9,7 @@ const User = require('./src/models/user');
 const seedData = async () => {
     try {
         // Synchronize the database (drop all existing tables and recreate them)
-        await sequelize.sync({ force: true });
+        await database.sync({ force: true });
         console.log('Database synchronized');
 
         // Sample data for Mood table

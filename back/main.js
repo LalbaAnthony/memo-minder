@@ -2,7 +2,9 @@ const express = require('express');
 const favicon = require('serve-favicon')
 const path = require('path');
 const bodyParser = require('body-parser');
-const sequelize = require('./src/config/database');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const database = require('./src/config/database');
 const routes = require('./src/routes');
 
 // Importing helpers
@@ -10,17 +12,25 @@ const formatRes = require('./src/helpers/formatRes')
 const logFile = require('./src/helpers/logFile')
 const logConsole = require('./src/helpers/logConsole')
 
+// Load .env file
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
 const app = express()
 
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+// CORS middleware
+app.use(cors({
+    origin: process.env.VITE_APP_URL, 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+    allowedHeaders: ['Content-Type', 'Authorization'] 
+}));
 
-// Middleware logger
+// Log middleware
 app.use((req, res, next) => {
     logFile(`ADDRESS: ${req.socket.remoteAddress}, URL: ${req.url}, METHOD: ${req.method} `)
     next()
 })
 
-// Middleware to put favicon
+// Favicon middleware
 app.use(favicon(__dirname + '/public/favicon.ico'))
 
 // Middleware to parse the body of the request
@@ -35,7 +45,7 @@ app.use(({ res }) => {
 })
 
 // Synchronisation de la base de données et démarrage du serveur
-sequelize.sync()
+database.sync()
     .then(() => {
         logConsole('Database & tables created!');
         app.listen(process.env.BACK_API_PORT, () => {

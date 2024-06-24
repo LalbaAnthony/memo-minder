@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import routes from './routes'
 import { useAuthStore } from '@/stores/auth'
-import { SITE_NAME } from '@/config';
+import { VITE_SITE_NAME } from '@/config';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -10,7 +10,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title ? `${to.meta.title} - ${SITE_NAME}` : SITE_NAME;
+  document.title = to.meta.title ? `${to.meta.title} - ${VITE_SITE_NAME}` : VITE_SITE_NAME;
 
   // Check if the route is private and validate the token
   const authStore = useAuthStore()
