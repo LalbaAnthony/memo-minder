@@ -14,11 +14,7 @@ This web app is meant for personal use only. It is not intended for commercial p
 
 0. CONFIG
 
-Create a `.env` file in the project directory with the following content:
-
-```bash
-PORT=3000
-```
+Create a `.env` file in the project directory. Use the `.env.example` file as a template.
 
 2. FRONTEND
 
@@ -37,7 +33,7 @@ cd back/ && npm i && npm run start
 Load test data:
 
 ```bash
-cd back/ && node seed.js
+cd back/ && node src/seed/seedDev.js
 ```
 
 ## Feedback
