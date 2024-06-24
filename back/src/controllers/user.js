@@ -1,6 +1,5 @@
 const formatRes = require('../helpers/formatRes')
 const generateCode = require('../helpers/generateCode')
-const verifiyingToken = require('../helpers/verifiyingToken')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -44,7 +43,7 @@ exports.login = async (req, res) => {
         if (!isPasswordValid) return res.status(404).json(formatRes('error', null, 'Invalid password'))
 
         // Generate a token
-        const token = jwt.sign({ userId: user.user_id }, process.env.BACK_SECRET_KEY, { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user.user_id }, process.env.BACK_SECRET_KEY, { expiresIn: '24h' });
         user.connection_token = token;
         user.last_login = new Date().toISOString();
         await user.save();
@@ -94,6 +93,7 @@ exports.forgotPassword = async (req, res) => {
         user.reset_password_code = resetCode;
         await user.save();
 
+        console.log('Reset code:', resetCode);
         // TODO: Send an email with the reset code
 
         return res.status(201).json(formatRes('success', null, 'Reset code sent to your email'))
@@ -134,7 +134,8 @@ exports.userInfos = async (req, res) => {
         if (!user) return res.status(404).json(formatRes('error', null, 'Error while verifiying the token'));
 
         // Check if the token is valid
-        if (!verifiyingToken(token)) return res.status(404).json(formatRes('error', null, 'Error while verifiying the token'));
+        const decoded = jwt.verify(token, process.env.BACK_SECRET_KEY);
+        if (user.user_id !== decoded.userId) return res.status(404).json(formatRes('error', null, 'Error while verifiying the token'));
 
         // Remove the password from the response
         user.password = null;
@@ -149,14 +150,17 @@ exports.validateToken = async (req, res) => {
     const { userId, token } = req.body;
     try {
         // Check if all fields are provided
-        if (!userId || !token) return res.status(404).json(formatRes('error', null, 'Missing fields: userId, token'));
+        if (!userId) return res.status(404).json(formatRes('error', null, 'Missing fields: userId'));
+        if (!token) return res.status(403).json(formatRes('error', null, 'Missing fields: token'));
 
         // Check if the user exists
         const user = await User.findByPk(userId);
-        if (!user) return res.status(404).json(formatRes('error', null, 'Error while verifiying the token'));
+        if (!user) return res.status(404).json(formatRes('error', null, 'User not found'));
 
         // Check if the token is valid
-        if (!verifiyingToken(token)) return res.status(404).json(formatRes('error', null, 'Error while verifiying the token'));
+        jwt.verify(token, process.env.BACK_SECRET_KEY, (err, user) => {
+            if (err) return res.sendStatus(403).json(formatRes('error', null, 'Error while verifiying the token'));            
+        });
 
         return res.status(201).json(formatRes('success', null, 'Token is valid'))
     } catch (error) {

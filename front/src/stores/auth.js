@@ -21,20 +21,13 @@ export const useAuthStore = defineStore('auth',
           return false;
         }
 
-        await get('validate-token', { userId: this.user.userId, token: this.user.connection_token || this.token }).then(resp => {
+        await post('validate-token', { userId: this.user.user_id, token: this.user.connection_token || this.token }).then(resp => {
 
           if (resp.status === 'error') {
             this.logout()
             notify(resp.message, 'error');
             return false;
           } else if (resp.status === 'success') {
-
-            if (resp.data.connection_token !== this.token) {
-              this.logout()
-              notify('Invalid token', 'error');
-              return false;
-            }
-
             return true;
           }
         }).catch(error => {
@@ -46,7 +39,7 @@ export const useAuthStore = defineStore('auth',
 
       async getUserInfos() {
 
-        await get('user-infos', { email: this.user.email, token: this.user.connection_token || this.token }).then(resp => {
+        await get('user-infos', { email: this.user.email }).then(resp => {
 
           if (resp.status === 'error') {
             notify(resp.message, 'error');
