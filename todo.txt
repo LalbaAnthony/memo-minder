@@ -10,6 +10,9 @@ Back:
     - [ ] Clean seed.js and make two version: one with actual all-user data for production and one with fake data for dev
     - [ ] Inst et setup bcrypt for login
     - [ ] All endpoints
+    - [ ] Tester et imrpove token systeme
+    - [ ] Terminier middleware token
+    - [ ] Depl tt middleware dans dossier middleware
     - [ ] Auth systeme
     - [ ] Create and implement email systeme with back/src/helpers/email.js
     - [ ] Implement auth systeme to all endpoints, make sure to check if user is auth, each endpoint should be secure exept /mood(s)
