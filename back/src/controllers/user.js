@@ -44,7 +44,7 @@ exports.login = async (req, res) => {
         if (!isPasswordValid) return res.status(404).json(formatRes('error', null, 'Invalid password'))
 
         // Generate a token
-        const token = jwt.sign({ userId: user.user_id }, process.env.SECRET_KEY, { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user.user_id }, process.env.BACK_SECRET_KEY, { expiresIn: '1h' });
         user.connection_token = token;
         user.last_login = new Date().toISOString();
         await user.save();
@@ -123,16 +123,18 @@ exports.resetPassword = async (req, res) => {
     }
 };
 
-exports.infos = async (req, res) => {
+exports.userInfos = async (req, res) => {
     const { userId, token } = req.body;
     try {
         // Check if all fields are provided
         if (!userId || !token) return res.status(404).json(formatRes('error', null, 'Missing fields: userId, token'));
 
-        // Check if the user exists and the token is valid
-        const decoded = jwt.verify(token, process.env.SECRET_KEY);
-        const user = await User.findByPk(decoded.userId);
+        // Check if the user exists
+        const user = await User.findByPk(userId);
         if (!user) return res.status(404).json(formatRes('error', null, 'Error while verifiying the token'));
+
+        // Check if the token is valid
+        if (!verifiyingToken(token)) return res.status(404).json(formatRes('error', null, 'Error while verifiying the token'));
 
         // Remove the password from the response
         user.password = null;
@@ -144,10 +146,14 @@ exports.infos = async (req, res) => {
 };
 
 exports.validateToken = async (req, res) => {
-    const { token } = req.body;
+    const { userId, token } = req.body;
     try {
         // Check if all fields are provided
-        if (!token) return res.status(404).json(formatRes('error', null, 'Missing fields: token'));
+        if (!userId || !token) return res.status(404).json(formatRes('error', null, 'Missing fields: userId, token'));
+
+        // Check if the user exists
+        const user = await User.findByPk(userId);
+        if (!user) return res.status(404).json(formatRes('error', null, 'Error while verifiying the token'));
 
         // Check if the token is valid
         if (!verifiyingToken(token)) return res.status(404).json(formatRes('error', null, 'Error while verifiying the token'));

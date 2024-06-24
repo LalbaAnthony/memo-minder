@@ -86,7 +86,7 @@
             <span class="ml-3 mt-0.5">Account</span>
           </router-link>
           <div class="flex items-center cursor-pointer text-light-danger rounded-lg hover:bg-gray p-2"
-            @click.stop="showSidebar = false">
+            @click.stop="logout()">
             <ArrowLeftEndOnRectangleIcon class="size-6 text-danger" />
             <span class="ml-3 mt-0.5">Log out</span>
           </div>
@@ -113,9 +113,11 @@ import { ref } from 'vue'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { useRoute, useRouter } from 'vue-router'
 import vClickOutside from '@/directives/clickOutside.js'
+import { useAuthStore } from '@/stores/auth'
 
 const route = useRoute()
 const router = useRouter()
+const authStore = useAuthStore()
 
 const showSidebar = ref(false)
 const search = ref('')
@@ -141,6 +143,11 @@ function triggerSearch() {
 
 function goTo(path = '/') {
   router.push(path)
+}
+
+function logout() {
+  showSidebar.value = false
+  authStore.logout()
 }
 
 // Add shortcuts

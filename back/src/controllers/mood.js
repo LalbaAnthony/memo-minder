@@ -5,7 +5,6 @@ const Mood = require('../models/mood');
 exports.getAllMoods = async (req, res) => {
     try {
         const moods = await Mood.findAll();
-        console.log(moods)
         return res.status(201).json(formatRes('success', moods))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))

@@ -1,4 +1,4 @@
-module.exports = (subject = '', text = '', to = '', from = process.env.MAIL_FROM) => {
+module.exports = (subject = '', text = '', to = '', from = process.env.BACK_MAIL_FROM) => {
     if (!subject || !text || !to || !from) return;
 
     const nodemailer = require('nodemailer');
@@ -6,8 +6,8 @@ module.exports = (subject = '', text = '', to = '', from = process.env.MAIL_FROM
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
+            user: process.env.BACK_EMAIL_USER,
+            pass: process.env.BACK_EMAIL_PASS,
         },
     });
 

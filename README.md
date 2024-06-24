@@ -16,16 +16,16 @@ This web app is meant for personal use only. It is not intended for commercial p
 
 Create a `.env` file in the project directory. Use the `.env.example` file as a template.
 
-2. FRONTEND
-
-```bash
-cd front/ && npm i && npm run dev
-```
-
 1. BACKEND
 
 ```bash
 cd back/ && npm i && npm run start
+```
+
+1. FRONTEND
+
+```bash
+cd front/ && npm i && npm run dev
 ```
 
 ## Development
