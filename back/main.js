@@ -26,7 +26,7 @@ app.use(cors({
 
 // Log middleware
 app.use((req, res, next) => {
-    logFile(`ADDRESS: ${req.socket.remoteAddress}, URL: ${req.url}, METHOD: ${req.method} `)
+    logFile(`ADDRESS: ${req.socket.remoteAddress}, URL: ${req.url}, METHOD: ${req.method}, RESPONSE: ${res.statusCode}`)
     next()
 })
 

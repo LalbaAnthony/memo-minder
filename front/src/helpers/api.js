@@ -1,7 +1,23 @@
 import axios from 'axios'
 import { VITE_API_URL } from '@/config';
+import { useAuthStore } from '@/stores/auth'
 
-const api = axios.create({ baseURL: VITE_API_URL })
+
+const api = axios.create({
+  baseURL: VITE_API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+
+api.interceptors.request.use((config) => {
+  const authStore = useAuthStore()
+  const token = authStore.token || authStore.user.connection_token || null
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
 export async function get(endpoint, params = {}) {
 
