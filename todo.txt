@@ -2,6 +2,7 @@ Misc:
     - [X] Project startup
     - [X] Create logo
     - [X] Refaire logo avec new couleurs
+    - [ ] Use .env everywhere
 
 Back:
     - [X] Create DB
@@ -10,6 +11,7 @@ Back:
     - [ ] Inst et setup bcrypt for login
     - [ ] All endpoints
     - [ ] Auth systeme
+    - [ ] Create and implement email systeme
     - [ ] Implement auth systeme to all endpoints, make sure to check if user is auth, each endpoint should be secure exept /mood(s)
 
 Front:

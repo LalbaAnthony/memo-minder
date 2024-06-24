@@ -43,7 +43,7 @@ router.get('/mood/:id', moodController.getMoodById);
 
 // User
 router.post('/register', userController.register);
-router.get('/login', userController.login);
+router.post('/login', userController.login);
 router.post('/verify-email', userController.verifyEmail);
 router.get('/forgot-password', userController.forgotPassword);
 router.post('/reset-password', userController.resetPassword);

@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { BACKEND_API_URL } from '@/config';
+import { BACK_API_URL } from '@/config';
 
-const api = axios.create({ baseURL: BACKEND_API_URL })
+const api = axios.create({ baseURL: BACK_API_URL })
 
 export async function get(endpoint, params = {}) {
 
