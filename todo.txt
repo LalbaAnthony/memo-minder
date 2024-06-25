@@ -26,6 +26,7 @@ Front:
     - [ ] Make integration from something like https://flowbite.com/blocks/application/shells/
     - [ ] Mettre tout les store en perssistant pour pour etre en offline
     - [ ] Faire systeme de stockage des données en local, puis d'envoie au serveur
+    - [ ] Faire scroll infini pr tout les type de contenu
     - [ ] Faire PWA
     - [X] Faire une seule bar de recherche pour créer des items, faires des recherches et globalement tout
     - [ ] Stats randoms temps restant (avec une info expl a chaque fois au survol)
