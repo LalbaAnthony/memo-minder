@@ -6,12 +6,8 @@ const User = require('../models/user');
 const Seasons = require('../models/season');
 
 exports.getAllEvents = async (req, res) => {
-    const { token, user_id, sort, page, per_page } = req.body;
+    const { user_id, sort, page, per_page } = req.body;
     try {
-        // Check for token
-        if (!token) return res.status(400).json(formatRes('error', null, 'No token provided'));
-        if (!verifiyingToken(token)) return res.status(404).json(formatRes('error', null, 'Invalid token'));
-
         // Check if all fields are provided
         if (!user_id) return res.status(400).json(formatRes('error', null, 'Missing fields: user_id'));
 
@@ -27,12 +23,8 @@ exports.getAllEvents = async (req, res) => {
 };
 
 exports.getEventById = async (req, res) => {
-    const { token, user_id } = req.body;
+    const { user_id } = req.body;
     try {
-        // Check for token
-        if (!token) return res.status(400).json(formatRes('error', null, 'No token provided'));
-        if (!verifiyingToken(token)) return res.status(404).json(formatRes('error', null, 'Invalid token'));
-
         // Check if all fields are provided
         if (!user_id) return res.status(400).json(formatRes('error', null, 'Missing fields: user_id'));
 
@@ -48,12 +40,8 @@ exports.getEventById = async (req, res) => {
 };
 
 exports.createEvent = async (req, res) => {
-    const { token, music_id, user_id, season_id, title, description, date, location } = req.body;
+    const { music_id, user_id, season_id, title, description, date, location } = req.body;
     try {
-        // Check for token
-        if (!token) return res.status(400).json(formatRes('error', null, 'No token provided'));
-        if (!verifiyingToken(token)) return res.status(404).json(formatRes('error', null, 'Invalid token'));
-
         // Check if all fields are provided
         if (!music_id || !user_id || !title || !description || !date || !location) return res.status(400).json(formatRes('error', null, 'Missing fields: music_id, user_id, title, description, date, location'));
 
@@ -84,12 +72,8 @@ exports.createEvent = async (req, res) => {
 };
 
 exports.updateEvent = async (req, res) => {
-    const { token, music_id, user_id, season_id, title, description, date, location } = req.body;
+    const { music_id, user_id, season_id, title, description, date, location } = req.body;
     try {
-        // Check for token
-        if (!token) return res.status(400).json(formatRes('error', null, 'No token provided'));
-        if (!verifiyingToken(token)) return res.status(404).json(formatRes('error', null, 'Invalid token'));
-
         // Get the event and check if it exists
         if (!req.params.id) return res.status(400).json(formatRes('error', null, 'No id provided'));
         const event = await Event.findByPk(parseInt(req.params.id));
@@ -122,13 +106,7 @@ exports.updateEvent = async (req, res) => {
     }
 };
 
-exports.deleteEvent = async (req, res) => {
-    const { token } = req.body;
-    try {
-        // Check for token
-        if (!token) return res.status(400).json(formatRes('error', null, 'No token provided'));
-        if (!verifiyingToken(token)) return res.status(404).json(formatRes('error', null, 'Invalid token'));
-
+exports.deleteEvent = async (req, res) => {    try {
         // Get the event and check if it exists
         if (!req.params.id) return res.status(400).json(formatRes('error', null, 'No id provided'));
         const event = await Event.findByPk(parseInt(req.params.id));

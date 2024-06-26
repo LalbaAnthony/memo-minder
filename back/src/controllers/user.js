@@ -48,8 +48,10 @@ exports.login = async (req, res) => {
         user.last_login = new Date().toISOString();
         await user.save();
 
-        // Remove the password from the resp
-        user.password = null;
+        // Remove sensitive data from the response
+        delete user.dataValues.password;
+        delete user.dataValues.validate_email_token
+        delete user.dataValues.reset_password_code
 
         return res.status(201).json(formatRes('success', user, 'Logged in successfully'))
     } catch (error) {
@@ -124,23 +126,18 @@ exports.resetPassword = async (req, res) => {
 };
 
 exports.userInfos = async (req, res) => {
-    const { userId, token } = req.body;
+    const userId = req.params.id
     try {
-        // Check if all fields are provided
-        if (!userId || !token) return res.status(400).json(formatRes('error', null, 'Missing fields: userId, token'));
-
         // Check if the user exists
-        const user = await User.findByPk(userId);
-        if (!user) return res.status(404).json(formatRes('error', null, 'Error while verifiying the token'));
+        const user = await User.findByPk(1);
+        if (!user) return res.status(404).json(formatRes('error', null, 'Error while getting user infos'));
 
-        // Check if the token is valid
-        const decoded = jwt.verify(token, process.env.BACK_SECRET_KEY);
-        if (user.user_id !== decoded.userId) return res.status(404).json(formatRes('error', null, 'Error while verifiying the token'));
+        // Remove sensitive data from the response
+        delete user.dataValues.password;
+        delete user.dataValues.validate_email_token
+        delete user.dataValues.reset_password_code
 
-        // Remove the password from the response
-        user.password = null;
-
-        return res.status(201).json(formatRes('success', user))
+        return res.status(201).json(formatRes('success', user, ))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
     }
@@ -159,7 +156,7 @@ exports.validateToken = async (req, res) => {
 
         // Check if the token is valid
         jwt.verify(token, process.env.BACK_SECRET_KEY, (err, user) => {
-            if (err) return res.sendStatus(403).json(formatRes('error', null, 'Error while verifiying the token'));            
+            if (err) return res.sendStatus(403).json(formatRes('error', null, 'Error while verifiying the token'));
         });
 
         return res.status(201).json(formatRes('success', null, 'Token is valid'))

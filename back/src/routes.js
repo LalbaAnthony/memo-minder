@@ -45,10 +45,10 @@ router.get('/mood/:id', moodController.getMoodById);
 // User
 router.post('/register', userController.register);
 router.post('/login', userController.login);
+router.post('/validate-token', userController.validateToken);
 router.post('/verify-email', userController.verifyEmail);
 router.get('/forgot-password', checkToken, userController.forgotPassword);
 router.post('/reset-password', userController.resetPassword);
 router.get('/user-infos/:id', checkToken, userController.userInfos);
-router.post('/validate-token', checkToken, userController.validateToken);
 
 module.exports = router;
