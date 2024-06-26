@@ -14,7 +14,7 @@ exports.getAllMoods = async (req, res) => {
 exports.getMoodById = async (req, res) => {
     try {
         // Check if mood exists
-        if (!req.params.id) return res.status(404).json(formatRes('error', null, 'No id provided'));
+        if (!req.params.id) return res.status(400).json(formatRes('error', null, 'No id provided'));
         const mood = await Mood.findByPk(parseInt(req.params.id));
         if (!mood) return res.status(404).json(formatRes('error', null, 'No mood found with this id'));
 

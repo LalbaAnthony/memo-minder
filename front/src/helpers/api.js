@@ -10,14 +10,19 @@ const api = axios.create({
   },
 })
 
-api.interceptors.request.use((config) => {
-  const authStore = useAuthStore()
-  const token = authStore.token || authStore.user.connection_token || null
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
+// api.interceptors.request.use((config) => {
+//   const authStore = useAuthStore()
+
+//   if (authStore.authenticated) {
+//     const user_id = authStore.user.user_id || null
+//     if (user_id) config.headers.UserId = user_id;
+
+//     const token = authStore.token || authStore.user.connection_token || null
+//     if (token) config.headers.Authorization = `Bearer ${token}`;
+//   }
+
+//   return config;
+// });
 
 export async function get(endpoint, params = {}) {
 

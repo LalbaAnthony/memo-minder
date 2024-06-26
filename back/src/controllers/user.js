@@ -9,7 +9,7 @@ exports.register = async (req, res) => {
     const { username, email, password, language } = req.body;
     try {
         // Check if all fields are provided
-        if (!username || !email || !password) return res.status(404).json(formatRes('error', null, 'Missing fields: username, email, password'));
+        if (!username || !email || !password) return res.status(400).json(formatRes('error', null, 'Missing fields: username, email, password'));
 
         // Check if the email is already used
         const user = await User.findOne({ where: { email } });
@@ -32,7 +32,7 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
     try {
         // Check if all fields are provided
-        if (!email || !password) return res.status(404).json(formatRes('error', null, 'Missing fields: email, password'));
+        if (!email || !password) return res.status(400).json(formatRes('error', null, 'Missing fields: email, password'));
 
         // Check if the user exists
         const user = await User.findOne({ where: { email } });
@@ -61,7 +61,7 @@ exports.verifyEmail = async (req, res) => {
     const { email, token } = req.body;
     try {
         // Check if all fields are provided
-        if (!email || !token) return res.status(404).json(formatRes('error', null, 'Missing fields: email, token'));
+        if (!email || !token) return res.status(400).json(formatRes('error', null, 'Missing fields: email, token'));
 
         // Check if the user exists
         const user = await User.findOne({ where: { email, validate_email_token: token } });
@@ -82,7 +82,7 @@ exports.forgotPassword = async (req, res) => {
     const { email } = req.body;
     try {
         // Check if all fields are provided
-        if (!email) return res.status(404).json(formatRes('error', null, 'Missing fields: email'));
+        if (!email) return res.status(400).json(formatRes('error', null, 'Missing fields: email'));
 
         // Check if the user exists
         const user = await User.findOne({ where: { email } });
@@ -127,7 +127,7 @@ exports.userInfos = async (req, res) => {
     const { userId, token } = req.body;
     try {
         // Check if all fields are provided
-        if (!userId || !token) return res.status(404).json(formatRes('error', null, 'Missing fields: userId, token'));
+        if (!userId || !token) return res.status(400).json(formatRes('error', null, 'Missing fields: userId, token'));
 
         // Check if the user exists
         const user = await User.findByPk(userId);
@@ -150,8 +150,8 @@ exports.validateToken = async (req, res) => {
     const { userId, token } = req.body;
     try {
         // Check if all fields are provided
-        if (!userId) return res.status(404).json(formatRes('error', null, 'Missing fields: userId'));
-        if (!token) return res.status(403).json(formatRes('error', null, 'Missing fields: token'));
+        if (!userId) return res.status(400).json(formatRes('error', null, 'Missing fields: userId'));
+        if (!token) return res.status(400).json(formatRes('error', null, 'Missing fields: token'));
 
         // Check if the user exists
         const user = await User.findByPk(userId);
