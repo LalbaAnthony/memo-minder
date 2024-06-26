@@ -63,7 +63,7 @@ const routes = [
     name: 'season',
     children: [
       {
-        path: ':id_season',
+        path: ':seasonId',
         name: 'seasons.details',
         component: () => import('../pages/season/SeasonPage.vue'),
         meta: {
@@ -74,7 +74,7 @@ const routes = [
         },
       },
       {
-        path: ':id_season/edit',
+        path: ':seasonId/edit',
         name: 'seasons.edit',
         component: () => import('../pages/season/SeasonEditPage.vue'),
         meta: {
@@ -115,7 +115,7 @@ const routes = [
     name: 'event',
     children: [
       {
-        path: ':id_event',
+        path: ':eventId',
         name: 'events.details',
         component: () => import('../pages/event/EventPage.vue'),
         meta: {
@@ -126,7 +126,7 @@ const routes = [
         },
       },
       {
-        path: ':id_event/edit',
+        path: ':eventId/edit',
         name: 'events.edit',
         component: () => import('../pages/event/EventEditPage.vue'),
         meta: {
@@ -167,7 +167,7 @@ const routes = [
     name: 'Person',
     children: [
       {
-        path: ':id_person',
+        path: ':personId',
         name: 'people.details',
         component: () => import('../pages/person/PersonPage.vue'),
         meta: {
@@ -178,7 +178,7 @@ const routes = [
         },
       },
       {
-        path: ':id_person/edit',
+        path: ':personId/edit',
         name: 'people.edit',
         component: () => import('../pages/person/PersonEditPage.vue'),
         meta: {
@@ -219,7 +219,7 @@ const routes = [
     name: 'music',
     children: [
       {
-        path: ':id_music',
+        path: ':musicId',
         name: 'musics.details',
         component: () => import('../pages/music/MusicPage.vue'),
         meta: {
@@ -230,7 +230,7 @@ const routes = [
         },
       },
       {
-        path: ':id_music/edit',
+        path: ':musicId/edit',
         name: 'musics.edit',
         component: () => import('../pages/music/MusicEditPage.vue'),
         meta: {

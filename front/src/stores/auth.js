@@ -21,7 +21,7 @@ export const useAuthStore = defineStore('auth',
           return false;
         }
 
-        await post('validate-token', { userId: this.user.user_id, token: this.user.connection_token || this.token }).then(resp => {
+        await post('validate-token', { userId: this.user.userId, token: this.user.connectionToken || this.token }).then(resp => {
 
           if (resp.status === 'error') {
             this.logout()
@@ -39,7 +39,7 @@ export const useAuthStore = defineStore('auth',
 
       async fetchUserInfos() {
 
-        await get(`user-infos/${this.user.user_id}`).then(resp => {
+        await get(`user-infos/${this.user.userId}`).then(resp => {
 
           if (resp.status === 'error') {
             notify(resp.message, 'error');
@@ -47,7 +47,7 @@ export const useAuthStore = defineStore('auth',
           }
 
           this.user = resp.data
-          this.token = resp.data.connection_token
+          this.token = resp.data.connectionToken
           this.authenticated = true
 
           return true;
@@ -60,7 +60,7 @@ export const useAuthStore = defineStore('auth',
 
       async updateUserInfos() {
 
-        await put(`user-update/${this.user.user_id}`, this.user).then(resp => {
+        await put(`user-update/${this.user.userId}`, this.user).then(resp => {
 
           if (resp.status === 'error') {
             notify(resp.message, 'error');
@@ -122,7 +122,7 @@ export const useAuthStore = defineStore('auth',
           }
 
           this.user = resp.data
-          this.token = resp.data.connection_token
+          this.token = resp.data.connectionToken
           this.authenticated = true
 
           notify('You have been logged in', 'success');

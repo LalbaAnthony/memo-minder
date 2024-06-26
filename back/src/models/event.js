@@ -2,34 +2,34 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Event = sequelize.define('Event', {
-    event_id: {
+    eventId: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
     },
-    user_id: {
+    userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'User',
-            key: 'user_id'
+            key: 'userId'
         },
         onDelete: 'SET NULL',
     },
-    music_id: {
+    musicId: {
         type: DataTypes.INTEGER,
         references: {
             model: 'Music',
-            key: 'music_id'
+            key: 'musicId'
         },
         allowNull: true,
     },
-    season_id: {
+    seasonId: {
         type: DataTypes.INTEGER,
         references: {
             model: 'Season',
-            key: 'season_id'
+            key: 'seasonId'
         },
         allowNull: true,
     },
@@ -49,20 +49,20 @@ const Event = sequelize.define('Event', {
         type: DataTypes.STRING,
         allowNull: true,
     },
-    updated_at: {
+    updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
-    created_at: {
+    createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
 }, {
     timestamps: true,
-    updatedAt: 'updated_at',
-    createdAt: 'created_at',
+    updatedAt: 'updatedAt',
+    createdAt: 'createdAt',
     tableName: 'event',
 });
 

@@ -1,6 +1,6 @@
 <template>
   <router-link class="flex flex-col cursor-pointer border-2 border-gray rounded-[8px] bg-light-dark h-full"
-    :to="{ path: `'/season/${props?.season?.season_id}` }">
+    :to="{ path: `'/season/${props?.season?.seasonId}` }">
     <div class="h-6 w-full rounded-t-[6px]" :style="`background-color: ${props?.season?.color};`"></div>
     <div class="p-5">
       <div class="flex flex-col justify-center items-center w-full my-2">

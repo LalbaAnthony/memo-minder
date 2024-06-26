@@ -9,7 +9,7 @@ export const useEventStore = defineStore('event', {
     events: {
       loading: true,
       data: [],
-      pagination: { page: 1, per_page: 10, total: 1 },
+      pagination: { page: 1, perPage: 10, total: 1 },
     },
   }),
 
@@ -24,12 +24,11 @@ export const useEventStore = defineStore('event', {
 
       // Request
       const params = {
-        user_id: authStore.user.user_id,
+        userId: authStore.user.userId,
         page: this.events.pagination.page || 1,
-        per_page: this.events.pagination.per_page || 10,
+        perPage: this.events.pagination.perPage || 10,
         sort: [
-          { order: 'ASC', order_by: 'sort_order' },
-          { order: 'DESC', order_by: 'stock_quantity' }
+          { order: 'DESC', orderBy: 'createdAt' },
         ],
       }
 
@@ -38,7 +37,7 @@ export const useEventStore = defineStore('event', {
 
       const resp = await get('events', params);
       this.events.data = resp.data || [];
-      this.events.pagination = resp.pagination || { page: 1, per_page: 10, total: 1 };
+      this.events.pagination = resp.pagination || { page: 1, perPage: 10, total: 1 };
 
       // Loading
       this.events.loading = false

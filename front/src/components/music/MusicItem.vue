@@ -3,7 +3,7 @@
     @click="openLink()">
     <div>
       <h1 class="text-2xl font-bold">{{ props?.music?.title }}</h1>
-      <p class="text-light-gray">{{ props?.music?.artist }} - {{ getYearFromDate(props?.music?.release_date) }}</p>
+      <p class="text-light-gray">{{ props?.music?.artist }} - {{ getYearFromDate(props?.music?.releaseDate) }}</p>
     </div>
     <div :class="`flex items-center justify-center gap-4 p-2 pr-4 ${platform}-logo`">
       <svg v-if="platform === 'spotify'" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
@@ -39,14 +39,14 @@ const props = defineProps({
 })
 
 const platform = computed(() => {
-  if (props.music.streaming_link.includes('spotify')) return 'spotify'
-  if (props.music.streaming_link.includes('apple')) return 'apple'
-  if (props.music.streaming_link.includes('youtube')) return 'youtube'
+  if (props.music.streamingLink.includes('spotify')) return 'spotify'
+  if (props.music.streamingLink.includes('apple')) return 'apple'
+  if (props.music.streamingLink.includes('youtube')) return 'youtube'
   return ''
 })
 
 function openLink() {
-  if(props.music.streaming_link) window.open(props.music.streaming_link, '_blank')
+  if(props.music.streamingLink) window.open(props.music.streamingLink, '_blank')
 }
 
 </script>

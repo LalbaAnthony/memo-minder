@@ -13,7 +13,7 @@ api.interceptors.request.use((config) => {
   const authStore = useAuthStore()
 
   if (authStore.authenticated) {
-    const token = authStore.token || authStore.user.connection_token || null
+    const token = authStore.token || authStore.user.connectionToken || null
     if (token) config.headers.Authorization = `Bearer ${token}`;
   }
 

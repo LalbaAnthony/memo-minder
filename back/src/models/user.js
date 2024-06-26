@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const User = sequelize.define('User', {
-    user_id: {
+    userId: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
@@ -17,19 +17,19 @@ const User = sequelize.define('User', {
         allowNull: false,
         unique: true,
     },
-    connection_token: {
+    connectionToken: {
         type: DataTypes.STRING,
         allowNull: true,
     },
-    validate_email_token: {
+    validateEmailToken: {
         type: DataTypes.STRING,
         allowNull: true,
     },
-    reset_password_code: {
+    resetPasswordCode: {
         type: DataTypes.INTEGER,
         allowNull: true,
     },
-    has_validated_email: {
+    hasValidatedEmail: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
@@ -43,24 +43,24 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    last_login: {
+    lastLogin: {
         type: DataTypes.DATE,
         allowNull: true,
     },
-    updated_at: {
+    updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
-    created_at: {
+    createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
 }, {
     timestamps: true,
-    updatedAt: 'updated_at',
-    createdAt: 'created_at',
+    updatedAt: 'updatedAt',
+    createdAt: 'createdAt',
     tableName: 'user',
 });
 
