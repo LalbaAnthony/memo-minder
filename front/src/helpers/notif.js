@@ -1,11 +1,12 @@
 import { useToast } from 'vue-toastification'; 
+import { isMobile } from '@/helpers/helpers.js'
 
 const toast = useToast();
 
 export function notify(message, type = 'info') {
     toast[type](message, {
-        position: 'top-right',
-        timeout: 5000,
+        position: isMobile() ? 'top-right' : 'bottom-right',
+        timeout: 4000,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,

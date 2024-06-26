@@ -4,11 +4,11 @@
     <!-- Mobile bottom menu -->
     <div v-if="isMobile()"
       class="fixed bottom-0 left-0 z-20 w-full flex justify-around items-center bg-light-dark border-t border-gray p-4 gap-3">
-      <Bars3Icon class="size-12 text-light-gray hover:bg-dark-gray rounded-lg p-1 cursor-pointer"
+      <Bars3Icon class="size-10 text-light-gray hover:bg-dark-gray rounded-lg p-1 cursor-pointer"
         @click.stop="showSidebar = !showSidebar" />
-      <FilmIcon class="size-12 text-light-gray hover:bg-dark-gray rounded-lg p-1 cursor-pointer"
+      <FilmIcon class="size-10 text-light-gray hover:bg-dark-gray rounded-lg p-1 cursor-pointer"
         @click.stop="goTo('/seasons')" />
-      <MagnifyingGlassIcon class="size-12 text-light-gray hover:bg-dark-gray rounded-full p-1 cursor-pointer"
+      <MagnifyingGlassIcon class="size-10 text-light-gray hover:bg-dark-gray rounded-full p-1 cursor-pointer"
         @click.stop="focusSearchBar" />
     </div>
 
@@ -91,6 +91,9 @@
             <span class="ml-3 mt-0.5">Log out</span>
           </div>
         </nav>
+        <div class="text-left text-light-gray m-4 absolute bottom-0">
+          Version {{ VITE_APP_VERSION }}
+        </div>
       </TransitionChild>
     </TransitionRoot>
   </div>
@@ -114,6 +117,8 @@ import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { useRoute, useRouter } from 'vue-router'
 import vClickOutside from '@/directives/clickOutside.js'
 import { useAuthStore } from '@/stores/auth'
+import { VITE_APP_VERSION } from '@/config';
+
 
 const route = useRoute()
 const router = useRouter()

@@ -9,20 +9,13 @@ module.exports = async (req, res, next) => {
         return res.status(401).json(formatRes('error', null, 'No token provided'));
     }
 
-    const token = authHeader.split(' ')[1]; // Bearer <token>
+    const token = authHeader.split(' ')[1] || authHeader || null; // Bearer <token>
 
     jwt.verify(token, process.env.BACK_SECRET_KEY, async (err, decoded) => {
-        console.log('====================================', decoded);
-        if (err) {
-            return res.status(403).json(formatRes('error', null, 'Error while verifying the token'));
-        }
-
+        if (err) return res.status(403).json(formatRes('error', null, 'Error while verifying the token'));
         try {
             const user = await User.findByPk(decoded.userId);
-            if (!user) {
-                return res.status(404).json(formatRes('error', null, 'User not found'));
-            }
-
+            if (!user) return res.status(404).json(formatRes('error', null, 'User not found'));
             req.user = user;
             next();
         } catch (error) {

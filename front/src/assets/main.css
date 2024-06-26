@@ -76,6 +76,11 @@ textarea:focus {
   outline: var(--light) auto 1px;
 }
 
+textarea:disabled,
+input:disabled {
+  color: var(--light-gray);
+}
+
 textarea {
   resize: none;
 }
@@ -83,6 +88,7 @@ textarea {
 input[type="search"]::-webkit-search-cancel-button {
   display: none;
 }
+
 
 input[type="checkbox"] {
   accent-color: var(--primary);

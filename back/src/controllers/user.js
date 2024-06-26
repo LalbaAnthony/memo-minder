@@ -129,8 +129,31 @@ exports.userInfos = async (req, res) => {
     const userId = req.params.id
     try {
         // Check if the user exists
-        const user = await User.findByPk(1);
-        if (!user) return res.status(404).json(formatRes('error', null, 'Error while getting user infos'));
+        const user = await User.findByPk(userId);
+        if (!user) return res.status(404).json(formatRes('error', null, 'User not found'));
+
+        // Remove sensitive data from the response
+        delete user.dataValues.password;
+        delete user.dataValues.validate_email_token
+        delete user.dataValues.reset_password_code
+
+        return res.status(201).json(formatRes('success', user, ))
+    } catch (error) {
+        return res.status(500).json(formatRes('error', null, error.message))
+    }
+};
+
+exports.userUpdate = async (req, res) => {
+    const userId = req.params.id
+    const { username, email, language } = req.body;
+    try {
+        // Check if the user exists
+        const user = await User.findByPk(userId);
+        if (!user) return res.status(404).json(formatRes('error', null, 'User not found'));
+
+        // Update the user
+        const resp = await user.update({ username, email, language });
+        if (!resp) return res.status(404).json(formatRes('error', null, 'Error updating user'));
 
         // Remove sensitive data from the response
         delete user.dataValues.password;

@@ -2,7 +2,6 @@ import axios from 'axios'
 import { VITE_API_URL } from '@/config';
 import { useAuthStore } from '@/stores/auth'
 
-
 const api = axios.create({
   baseURL: VITE_API_URL,
   headers: {
@@ -10,19 +9,16 @@ const api = axios.create({
   },
 })
 
-// api.interceptors.request.use((config) => {
-//   const authStore = useAuthStore()
+api.interceptors.request.use((config) => {
+  const authStore = useAuthStore()
 
-//   if (authStore.authenticated) {
-//     const user_id = authStore.user.user_id || null
-//     if (user_id) config.headers.UserId = user_id;
+  if (authStore.authenticated) {
+    const token = authStore.token || authStore.user.connection_token || null
+    if (token) config.headers.Authorization = `Bearer ${token}`;
+  }
 
-//     const token = authStore.token || authStore.user.connection_token || null
-//     if (token) config.headers.Authorization = `Bearer ${token}`;
-//   }
-
-//   return config;
-// });
+  return config;
+});
 
 export async function get(endpoint, params = {}) {
 
