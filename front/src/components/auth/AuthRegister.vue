@@ -15,7 +15,7 @@
                 class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Confirm password" />
             <PasswordStrength :password="password || confirmPassword || ''" />
             <label class="flex flex-start space-x-2">
-                <input v-model="accept_terms" id="accept_terms" type="checkbox" />
+                <input v-model="acceptTerms" id="acceptTerms" type="checkbox" />
                 <span class="text-light">I accept the terms and conditions</span>
             </label>
         </div>
@@ -51,7 +51,7 @@ const email = ref('')
 const language = ref('en')
 const password = ref('')
 const confirmPassword = ref('')
-const accept_terms = ref(false)
+const acceptTerms = ref(false)
 
 const languages = ref({
     en: 'English',
@@ -67,7 +67,7 @@ function valid() {
     if (confirmPassword.value.length < 1) return "Please enter your password"
     if (password.value !== confirmPassword.value) return 'Passwords do not match'
     if (missingElementsPassword(password.value).length > 0) return `Password must at least contain: ${missingElementsPassword(password.value).join(', ')}`
-    if (!accept_terms.value) return 'Please accept the terms and conditions'
+    if (!acceptTerms.value) return 'Please accept the terms and conditions'
     return false
 }
 
@@ -92,7 +92,7 @@ async function handleRegister() {
         language.value = ''
         password.value = ''
         confirmPassword.value = ''
-        accept_terms.value = false
+        acceptTerms.value = false
     }
 }
 </script>

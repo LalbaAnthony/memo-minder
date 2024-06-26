@@ -58,12 +58,12 @@ export function randomInt(min = 1, max = 100) {
 }
 
 export function missingElementsPassword(password) {
-    let missing_element = [];
-    if (password.length <= 10) missing_element.push('10 characters')
-    if (!password.match(/[a-z]/)) missing_element.push('one lowercase letter')
-    if (!password.match(/[A-Z]/)) missing_element.push('one uppercase letter')
-    if (!password.match(/[0-9]/)) missing_element.push('one number')
-    if (!password.match(/[^a-zA-Z\d]/)) missing_element.push('one special character')
+    let missingElement = [];
+    if (password.length <= 10) missingElement.push('10 characters')
+    if (!password.match(/[a-z]/)) missingElement.push('one lowercase letter')
+    if (!password.match(/[A-Z]/)) missingElement.push('one uppercase letter')
+    if (!password.match(/[0-9]/)) missingElement.push('one number')
+    if (!password.match(/[^a-zA-Z\d]/)) missingElement.push('one special character')
 
-    return missing_element;
+    return missingElement;
 }

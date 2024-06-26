@@ -2,18 +2,18 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Music = sequelize.define('Music', {
-    music_id: {
+    musicId: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
     },
-    user_id: {
+    userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'User',
-            key: 'user_id'
+            key: 'userId'
         },
         onDelete: 'SET NULL',
     },
@@ -25,28 +25,28 @@ const Music = sequelize.define('Music', {
         type: DataTypes.STRING,
         allowNull: true,
     },
-    release_date: {
+    releaseDate: {
         type: DataTypes.DATE,
         allowNull: true,
     },
-    streaming_link: {
+    streamingLink: {
         type: DataTypes.STRING,
         allowNull: true,
     },
-    updated_at: {
+    updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
-    created_at: {
+    createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
 }, {
     timestamps: true,
-    updatedAt: 'updated_at',
-    createdAt: 'created_at',
+    updatedAt: 'updatedAt',
+    createdAt: 'createdAt',
     tableName: 'music',
 });
 

@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Mood = sequelize.define('Mood', {
-    mood_id: {
+    moodId: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
@@ -17,20 +17,20 @@ const Mood = sequelize.define('Mood', {
         allowNull: false,
         defaultValue: '#000000',
     },
-    updated_at: {
+    updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
-    created_at: {
+    createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
 }, {
     timestamps: true,
-    updatedAt: 'updated_at',
-    createdAt: 'created_at',
+    updatedAt: 'updatedAt',
+    createdAt: 'createdAt',
     tableName: 'mood',
 });
 

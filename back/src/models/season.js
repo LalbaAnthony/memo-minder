@@ -2,42 +2,42 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Season = sequelize.define('Season', {
-    season_id: {
+    seasonId: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
     },
-    user_id: {
+    userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'User',
-            key: 'user_id'
+            key: 'userId'
         },
         onDelete: 'SET NULL',
     },
-    music_id: {
+    musicId: {
         type: DataTypes.INTEGER,
         references: {
             model: 'Music',
-            key: 'music_id'
+            key: 'musicId'
         },
         allowNull: true,
     },
-    mood_id: {
+    moodId: {
         type: DataTypes.INTEGER,
         references: {
             model: 'Mood',
-            key: 'mood_id'
+            key: 'moodId'
         },
         allowNull: true,
     },
-    person_id: {
+    personId: {
         type: DataTypes.INTEGER,
         references: {
             model: 'Person',
-            key: 'person_id'
+            key: 'personId'
         },
         allowNull: true,
     },
@@ -54,28 +54,28 @@ const Season = sequelize.define('Season', {
         type: DataTypes.STRING(1000),
         allowNull: true,
     },
-    date_start: {
+    dateStart: {
         type: DataTypes.DATE,
         allowNull: false,
     },
-    date_end: {
+    dateEnd: {
         type: DataTypes.DATE,
         allowNull: true,
     },
-    updated_at: {
+    updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
-    created_at: {
+    createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
 }, {
     timestamps: true,
-    updatedAt: 'updated_at',
-    createdAt: 'created_at',
+    updatedAt: 'updatedAt',
+    createdAt: 'createdAt',
     tableName: 'season',
 });
 

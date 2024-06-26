@@ -27,10 +27,10 @@ const seasonStore = useSeasonStore()
 async function loadSeasons() {
   seasonStore.fetchSeasons({
     sort: route.query.sort ? [{
-      order_by: route.query.sort?.split('-')[0] || null,
+      orderBy: route.query.sort?.split('-')[0] || null,
       order: route.query.sort?.split('-')[1] || null
     }] : [
-      { order: 'ASC', order_by: 'title' },
+      { order: 'ASC', orderBy: 'title' },
     ]
   })
 }

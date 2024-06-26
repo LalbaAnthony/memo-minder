@@ -53,12 +53,12 @@ const seedData = async () => {
         // Sample data for User table, with crypted passwords
         const sampleUsers = [
             {
-                user_id: 1,
+                userId: 1,
                 username: 'jdoe',
                 email: 'j.doe@test.com',
                 password: 'password',
                 language: 'en',
-                has_validated_email: true,
+                hasValidatedEmail: true,
             },
         ];
 
@@ -76,20 +76,20 @@ const seedData = async () => {
         // Sample data for Music table
         const sampleMusics = [
             {
-                music_id: 1,
-                user_id: 1,
+                musicId: 1,
+                userId: 1,
                 title: 'Hasarder',
                 artist: 'Lompal',
-                release_date: '2022-09-16',
-                streaming_link: 'https://open.spotify.com/track/6V40xLcDlYwZpz3oKIVNhL?si=e5c24c7bb393460c'
+                releaseDate: '2022-09-16',
+                streamingLink: 'https://open.spotify.com/track/6V40xLcDlYwZpz3oKIVNhL?si=e5c24c7bb393460c'
             },
             {
-                music_id: 2,
-                user_id: 1,
+                musicId: 2,
+                userId: 1,
                 title: 'To live is to die',
                 artist: 'Metallica',
-                release_date: '1988-07-07',
-                streaming_link: 'https://www.youtube.com/watch?v=k7_hwgD1ugg'
+                releaseDate: '1988-07-07',
+                streamingLink: 'https://www.youtube.com/watch?v=k7_hwgD1ugg'
             },
         ];
 
@@ -103,8 +103,8 @@ const seedData = async () => {
         // Sample data for Person table
         const samplePersons = [
             {
-                person_id: 1,
-                user_id: 1,
+                personId: 1,
+                userId: 1,
                 name: 'Smith',
                 description: 'This man is a legend',
             },
@@ -120,16 +120,16 @@ const seedData = async () => {
         // Sample data for Season table
         const sampleSeasons = [
             {
-                season_id: 1,
-                user_id: 1,
-                person_id: 1,
-                music_id: 1,
-                mood_id: 1,
+                seasonId: 1,
+                userId: 1,
+                personId: 1,
+                musicId: 1,
+                moodId: 1,
                 title: 'Summer 2022',
                 color: '#FF0000',
                 description: 'The best season of the year',
-                date_start: '2022-06-21',
-                date_end: '2022-09-23',
+                dateStart: '2022-06-21',
+                dateEnd: '2022-09-23',
             },
         ];
 
@@ -143,10 +143,10 @@ const seedData = async () => {
         // Sample data for Event table
         const sampleEvents = [
             {
-                event_id: 1,
-                user_id: 1,
-                music_id: 1,
-                season_id: 1,
+                eventId: 1,
+                userId: 1,
+                musicId: 1,
+                seasonId: 1,
                 title: 'Summer party',
                 description: 'The best party of the year',
                 date: '2022-08-15',

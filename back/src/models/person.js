@@ -2,18 +2,18 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Person = sequelize.define('Person', {
-    person_id: {
+    personId: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
     },
-    user_id: {
+    userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'User',
-            key: 'user_id'
+            key: 'userId'
         },
         onDelete: 'SET NULL',
     },
@@ -25,20 +25,20 @@ const Person = sequelize.define('Person', {
         type: DataTypes.STRING,
         allowNull: true,
     },
-    updated_at: {
+    updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
-    created_at: {
+    createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
 }, {
     timestamps: true,
-    updatedAt: 'updated_at',
-    createdAt: 'created_at',
+    updatedAt: 'updatedAt',
+    createdAt: 'createdAt',
     tableName: 'person',
 });
 

@@ -43,15 +43,15 @@ exports.login = async (req, res) => {
         if (!isPasswordValid) return res.status(404).json(formatRes('error', null, 'Invalid password'))
 
         // Generate a token
-        const token = jwt.sign({ userId: user.user_id }, process.env.BACK_SECRET_KEY, { expiresIn: '24h' });
-        user.connection_token = token;
-        user.last_login = new Date().toISOString();
+        const token = jwt.sign({ userId: user.userId }, process.env.BACK_SECRET_KEY, { expiresIn: '24h' });
+        user.connectionToken = token;
+        user.lastLogin = new Date().toISOString();
         await user.save();
 
         // Remove sensitive data from the response
         delete user.dataValues.password;
-        delete user.dataValues.validate_email_token
-        delete user.dataValues.reset_password_code
+        delete user.dataValues.validateEmailToken
+        delete user.dataValues.resetPasswordCode
 
         return res.status(201).json(formatRes('success', user, 'Logged in successfully'))
     } catch (error) {
@@ -66,12 +66,12 @@ exports.verifyEmail = async (req, res) => {
         if (!email || !token) return res.status(400).json(formatRes('error', null, 'Missing fields: email, token'));
 
         // Check if the user exists
-        const user = await User.findOne({ where: { email, validate_email_token: token } });
+        const user = await User.findOne({ where: { email, validateEmailToken: token } });
         if (!user) return res.status(404).json(formatRes('error', null, 'Invalid email or token'));
 
         // Validate the email and remove the token
-        user.has_validated_email = true;
-        user.validate_email_token = null;
+        user.hasValidatedEmail = true;
+        user.validateEmailToken = null;
         await user.save();
 
         return res.status(201).json(formatRes('success', null, 'Email verified successfully'))
@@ -92,7 +92,7 @@ exports.forgotPassword = async (req, res) => {
 
         // Generate a reset code and save it to the user
         const resetCode = generateCode();
-        user.reset_password_code = resetCode;
+        user.resetPasswordCode = resetCode;
         await user.save();
 
         console.log('Reset code:', resetCode);
@@ -111,12 +111,12 @@ exports.resetPassword = async (req, res) => {
         if (!email || !resetCode || !newPassword) return res.status(404).json(formatRes('error', null, 'Missing fields: email, resetCode, newPassword'));
 
         // Check if the user exists
-        const user = await User.findOne({ where: { email, reset_password_code: resetCode } });
+        const user = await User.findOne({ where: { email, resetPasswordCode: resetCode } });
         if (!user) return res.status(404).json(formatRes('error', null, 'Invalid email or reset code'));
 
         // Reset the password
         user.password = await bcrypt.hash(newPassword, 10);
-        user.reset_password_code = null;
+        user.resetPasswordCode = null;
         await user.save();
 
         return res.status(201).json(formatRes('success', null, 'Password reset successfully'))
@@ -134,8 +134,8 @@ exports.userInfos = async (req, res) => {
 
         // Remove sensitive data from the response
         delete user.dataValues.password;
-        delete user.dataValues.validate_email_token
-        delete user.dataValues.reset_password_code
+        delete user.dataValues.validateEmailToken
+        delete user.dataValues.resetPasswordCode
 
         return res.status(201).json(formatRes('success', user, ))
     } catch (error) {
@@ -157,8 +157,8 @@ exports.userUpdate = async (req, res) => {
 
         // Remove sensitive data from the response
         delete user.dataValues.password;
-        delete user.dataValues.validate_email_token
-        delete user.dataValues.reset_password_code
+        delete user.dataValues.validateEmailToken
+        delete user.dataValues.resetPasswordCode
 
         return res.status(201).json(formatRes('success', user, ))
     } catch (error) {
