@@ -37,9 +37,9 @@ export const useAuthStore = defineStore('auth',
         });
       },
 
-      async getUserInfos() {
+      async fetchUserInfos() {
 
-        await get('user-infos', { email: this.user.email }).then(resp => {
+        await get(`user-infos/${this.user.user_id}`).then(resp => {
 
           if (resp.status === 'error') {
             notify(resp.message, 'error');
@@ -50,11 +50,27 @@ export const useAuthStore = defineStore('auth',
           this.token = resp.data.connection_token
           this.authenticated = true
 
-          notify('You have been logged in', 'success');
-
           return true;
         }).catch(error => {
           this.logout()
+          notify(`An error occured: ${error}`, 'error');
+          return false;
+        });
+      },
+
+      async updateUserInfos() {
+
+        await put(`user-update/${this.user.user_id}`, this.user).then(resp => {
+
+          if (resp.status === 'error') {
+            notify(resp.message, 'error');
+            return false;
+          }
+
+          notify('Your informations have been updated', 'success');
+
+          return true;
+        }).catch(error => {
           notify(`An error occured: ${error}`, 'error');
           return false;
         });

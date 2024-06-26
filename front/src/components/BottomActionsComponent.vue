@@ -3,13 +3,13 @@
     <!-- Scroll to top -->
     <div v-if="isMobile()" @click="goTop()"
       class="flex items-center justify-center bg-dark-gray text-white rounded-full p-4 hover:scale-105 transition-transform duration-200 border border-dark-gray">
-      <ChevronUpIcon class="size-8" />
+      <ChevronUpIcon class="size-6" />
     </div>
 
     <!-- Add button -->
     <router-link :to="`${route.path}/add`"
       class="flex items-center justify-center bg-primary text-white rounded-full p-4 hover:scale-105 transition-transform duration-200 border border-dark-gray">
-      <PlusIcon class="size-8" />
+      <PlusIcon class="size-6" />
     </router-link>
     
   </div>

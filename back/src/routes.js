@@ -50,5 +50,6 @@ router.post('/verify-email', userController.verifyEmail);
 router.get('/forgot-password', checkToken, userController.forgotPassword);
 router.post('/reset-password', userController.resetPassword);
 router.get('/user-infos/:id', checkToken, userController.userInfos);
+router.put('/user-update/:id', checkToken, userController.userUpdate);
 
 module.exports = router;

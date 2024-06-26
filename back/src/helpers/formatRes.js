@@ -1,7 +1,8 @@
-module.exports = (status, data = [], message = null) => {
+module.exports = (status, data = [], message = null, pagination = {}) => {
         return {
             status,
             message,
-            data
+            data,
+            pagination
         }
     }

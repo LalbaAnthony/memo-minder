@@ -6,24 +6,34 @@ const User = require('../models/user');
 const Seasons = require('../models/season');
 
 exports.getAllEvents = async (req, res) => {
-    const { user_id, sort, page, per_page } = req.body;
+    const { user_id, sort, page, per_page } = req.query;
+    console.log('req.query', req.query)
     try {
         // Check if all fields are provided
         if (!user_id) return res.status(400).json(formatRes('error', null, 'Missing fields: user_id'));
 
         const sortReq = sort || [{ order: 'DESC', order_by: 'date' }];
+        
         const pageReq = parseInt(page) || 1;
         const per_pageReq = parseInt(per_page) || 10;
 
+        const total = await Event.count({ where: { user_id } });
+
+        const pagination = {
+            page: pageReq,
+            per_page: per_pageReq,
+            total
+        }
+
         const events = await Event.findAll({ where: { user_id }, order: [[sortReq.order_by, sortReq.order]], limit: per_pageReq, offset: (pageReq - 1) * per_pageReq });
-        return res.status(201).json(formatRes('success', events))
+        return res.status(201).json(formatRes('success', events, null, pagination))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
     }
 };
 
 exports.getEventById = async (req, res) => {
-    const { user_id } = req.body;
+    const { user_id } = req.query;
     try {
         // Check if all fields are provided
         if (!user_id) return res.status(400).json(formatRes('error', null, 'Missing fields: user_id'));

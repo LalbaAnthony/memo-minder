@@ -12,6 +12,7 @@ Back:
     - [ ] All endpoints
     - [ ] Tester et imrpove token systeme
     - [ ] Terminier middleware token
+    - [ ] Add pagination
     - [ ] Depl tt middleware dans dossier middleware
     - [ ] Auth systeme
     - [ ] Create and implement email systeme with back/src/helpers/email.js
