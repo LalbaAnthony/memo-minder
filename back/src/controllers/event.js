@@ -12,20 +12,23 @@ exports.getAllEvents = async (req, res) => {
         // Check if all fields are provided
         if (!userId) return res.status(400).json(formatRes('error', null, 'Missing fields: userId'));
 
-        const sortReq = sort || [{ order: 'DESC', orderBy: 'date' }];
-        
-        const pageReq = parseInt(page) || 1;
-        const perPageReq = parseInt(perPage) || 10;
+        if (!sort) sort = [
+            { order: 'DESC', orderBy: 'date' },
+            { order: 'ASC', orderBy: 'title' },
+        ];
 
-        const total = await Event.count({ where: { userId } });
+        const order = sort.map(param => [param.orderBy, param.order]);
 
+        // Pagination
+        const eventsCount = await Event.count({ where: { userId } });
         const pagination = {
-            page: pageReq,
-            perPage: perPageReq,
-            total
+            page: parseInt(page) || 1,
+            perPage: parseInt(perPage) || 10,
+            total: Math.floor(eventsCount / parseInt(perPage)) || 1,
         }
+        const offset = (pagination.page - 1) * pagination.perPage;
 
-        const events = await Event.findAll({ where: { userId }, order: [[sortReq.orderBy, sortReq.order]], limit: perPageReq, offset: (pageReq - 1) * perPageReq });
+        const events = await Event.findAll({ where: { userId }, limit: pagination.perPage, offset, order });
         return res.status(201).json(formatRes('success', events, null, pagination))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
@@ -116,7 +119,8 @@ exports.updateEvent = async (req, res) => {
     }
 };
 
-exports.deleteEvent = async (req, res) => {    try {
+exports.deleteEvent = async (req, res) => {
+    try {
         // Get the event and check if it exists
         if (!req.params.id) return res.status(400).json(formatRes('error', null, 'No id provided'));
         const event = await Event.findByPk(parseInt(req.params.id));
