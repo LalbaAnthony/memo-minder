@@ -1,15 +1,16 @@
 const formatRes = require('../helpers/formatRes')
 const generateCode = require('../helpers/generateCode')
+const isoDateToDate = require('../helpers/isoDateToDate')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
 exports.register = async (req, res) => {
-    const { username, email, password, language } = req.body;
+    const { username, birthdate, email, password, language } = req.body;
     try {
         // Check if all fields are provided
-        if (!username || !email || !password) return res.status(400).json(formatRes('error', null, 'Missing fields: username, email, password'));
+        if (!username || !birthdate || !email || !password) return res.status(400).json(formatRes('error', null, 'Missing fields, must have: username, birthdate, email, password'));
 
         // Check if the email is already used
         const user = await User.findOne({ where: { email } });
@@ -19,7 +20,8 @@ exports.register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create the user
-        const newUser = await User.create({ username, email, password: hashedPassword, language: language || 'en' });
+    const { username, birthdate, email, password, language } = req.body;
+    const newUser = await User.create({ username, birthdate, email, password: hashedPassword, language: language || 'en' });
         if (!newUser) return res.status(500).json(formatRes('error', null, 'Error while creating the account'));
 
         return res.status(201).json(formatRes('success', newUser, 'Account created successfully'))
@@ -49,9 +51,12 @@ exports.login = async (req, res) => {
         await user.save();
 
         // Remove sensitive data from the response
-        delete user.dataValues.password;
+        delete user.dataValues.password
         delete user.dataValues.validateEmailToken
         delete user.dataValues.resetPasswordCode
+
+        // Format the date
+        user.dataValues.birthdate = isoDateToDate(user.dataValues.birthdate)
 
         return res.status(201).json(formatRes('success', user, 'Logged in successfully'))
     } catch (error) {
@@ -137,6 +142,9 @@ exports.userInfos = async (req, res) => {
         delete user.dataValues.validateEmailToken
         delete user.dataValues.resetPasswordCode
 
+        // Format the date
+        user.dataValues.birthdate = isoDateToDate(user.dataValues.birthdate)
+
         return res.status(201).json(formatRes('success', user, ))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
@@ -145,14 +153,14 @@ exports.userInfos = async (req, res) => {
 
 exports.userUpdate = async (req, res) => {
     const userId = req.params.id
-    const { username, email, language } = req.body;
+    const { username, birthdate, email, language } = req.body;
     try {
         // Check if the user exists
         const user = await User.findByPk(userId);
         if (!user) return res.status(404).json(formatRes('error', null, 'User not found'));
 
         // Update the user
-        const resp = await user.update({ username, email, language });
+        const resp = await user.update({ username, birthdate, email, language });
         if (!resp) return res.status(404).json(formatRes('error', null, 'Error updating user'));
 
         // Remove sensitive data from the response

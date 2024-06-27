@@ -9,6 +9,9 @@
                 <option value="" disabled selected>Language</option>
                 <option v-for="(value, key) in languages" :key="key" :value="key">{{ value }}</option>
             </select>
+            <input v-model="birthdate" id="birthdate" type="date"
+                class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Birthdate" />
+            <hr class="w-full" />            
             <input v-model="password" id="password" type="password"
                 class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Password" />
             <input v-model="confirmPassword" id="confirmPassword" type="password"
@@ -39,6 +42,7 @@ import { ref } from 'vue'
 import { notify } from '@/helpers/notif.js'
 import PasswordStrength from '@/components/PasswordStrengthComponent.vue'
 import { isValidEmail } from '@/helpers/helpers.js'
+import { isValidDate } from '@/helpers/helpers.js'
 import { missingElementsPassword } from '@/helpers/helpers.js'
 import { useAuthStore } from '@/stores/auth'
 
@@ -47,6 +51,7 @@ const emit = defineEmits(['setAuthType'])
 const authStore = useAuthStore()
 
 const username = ref('')
+const birthdate = ref('2000-01-01')
 const email = ref('')
 const language = ref('en')
 const password = ref('')
@@ -60,6 +65,8 @@ const languages = ref({
 function valid() {
     // return false // ? uncomment this line to enable form validation
     if (username.value.length < 1) return "Please enter your username"
+    if (birthdate.value.length < 1) return "Please enter your birthdate"
+    if (isValidDate(birthdate.value)) return "Please enter a valid birthdate"
     if (language.value.length < 1) return "Please select your language"
     if (email.value.length < 1) return "Please enter your email"
     if (!isValidEmail(email.value)) return "Please enter a valid email"
@@ -74,6 +81,7 @@ function valid() {
 async function handleRegister() {
     username.value = username.value.trim()
     email.value = email.value.trim()
+    birthdate.value = birthdate.value.trim()
     password.value = password.value.trim()
     confirmPassword.value = confirmPassword.value.trim()
 
@@ -84,11 +92,13 @@ async function handleRegister() {
         authStore.register({
             username: username.value,
             email: email.value,
+            birthdate: birthdate.value,
             language: language.value,
             password: password.value,
         })
         username.value = ''
         email.value = ''
+        birthdate.value = ''
         language.value = ''
         password.value = ''
         confirmPassword.value = ''

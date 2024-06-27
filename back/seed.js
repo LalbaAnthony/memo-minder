@@ -55,6 +55,7 @@ const seedData = async () => {
             {
                 userId: 1,
                 username: 'jdoe',
+                birthdate: '1990-01-01',
                 email: 'j.doe@test.com',
                 password: 'password',
                 language: 'en',
