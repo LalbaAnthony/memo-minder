@@ -47,10 +47,10 @@ const languages = ref({
 
 function valid() {
   // return false // ? uncomment this line to enable form validation
-  if (authStore.user.username.length === 1) return "Username is required"
-  if (authStore.user.birthdate.length === 1) return "Birthdate is required"
-  if (authStore.user.language.length === 1) return "Language is required"
-  if (authStore.user.email.length === 1) return "Email is required"
+  if (authStore.user.username.length === 0) return "Username is required"
+  if (authStore.user.birthdate.length === 0) return "Birthdate is required"
+  if (authStore.user.language.length === 0) return "Language is required"
+  if (authStore.user.email.length === 0) return "Email is required"
   if (!isValidEmail(authStore.user.email)) return "Please enter a valid email"
   if (!isValidDate(authStore.user.birthdate)) return "Please enter a valid birthdate"
   return false
