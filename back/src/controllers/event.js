@@ -19,9 +19,8 @@ exports.getAllEvents = async (req, res) => {
                 { order: 'DESC', orderBy: 'date' },
                 { order: 'ASC', orderBy: 'title' },
             ];
-        } else {
-            sort = JSON.parse(sort); // Ensure sort is parsed if it's a string
         }
+
         const order = sort.map(param => [param.orderBy, param.order]);
 
         // Pagination
