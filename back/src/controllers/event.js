@@ -29,6 +29,21 @@ exports.getAllEvents = async (req, res) => {
         const offset = (pagination.page - 1) * pagination.perPage;
 
         const events = await Event.findAll({ where: { userId }, limit: pagination.perPage, offset, order });
+
+        for (let i = 0; i < events.length; i++) {
+            // Add music to the event
+            if (events[i].musicId) {
+                const music = await Music.findByPk(parseInt(events[i].musicId));
+                if (music) events[i].dataValues.music = music.dataValues;
+            }
+
+            // Add season to the event
+            if (events[i].seasonId) {
+                const season = await Seasons.findByPk(parseInt(events[i].seasonId));
+                if (season) events[i].dataValues.season = season.dataValues;
+            }
+        }
+
         return res.status(201).json(formatRes('success', events, null, pagination))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
@@ -45,6 +60,18 @@ exports.getEventById = async (req, res) => {
         if (!req.params.id) return res.status(400).json(formatRes('error', null, 'No id provided'));
         const event = await Event.findByPk(parseInt(req.params.id));
         if (!event) return res.status(404).json(formatRes('error', null, 'No event found with this id'));
+
+        // Add music to the event
+        if (events.musicId) {
+            const music = await Music.findByPk(parseInt(events.musicId));
+            if (music) events.dataValues.music = music.dataValues;
+        }
+
+        // Add season to the event
+        if (events.seasonId) {
+            const season = await Seasons.findByPk(parseInt(events.seasonId));
+            if (season) events.dataValues.season = season.dataValues;
+        }
 
         return res.status(201).json(formatRes('success', event))
     } catch (error) {

@@ -1,50 +1,54 @@
 <template>
   <div>
-    <div class="progress-bars-grid">
-      <section>
+    <section class="progress-bars-grid">
+      <div>
         <h2 class="text-xl font-bold">Spent childhood</h2>
         <ProgressBar :value="childhoodPercentage" />
-      </section>
-      <section>
+      </div>
+      <div>
         <h2 class="text-xl font-bold">Spent adulthood</h2>
         <ProgressBar :value="adulthoodPercentage" />
-      </section>
-      <section>
+      </div>
+      <div>
         <h2 class="text-xl font-bold">Spent oldhood</h2>
         <ProgressBar :value="oldhoodPercentage" />
-      </section>
-      <section>
+      </div>
+      <div>
         <h2 class="text-xl font-bold">Total spent</h2>
         <ProgressBar :value="lifeTimePercentage" />
-      </section>
-    </div>
+      </div>
+    </section>
 
     <section>
       <h2 class="text-xl font-bold">Lasts added</h2>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim quis deleniti laboriosam nemo quisquam hic
-        magnam dolore consequuntur libero aliquam nam mollitia sed architecto omnis quaerat voluptatum, rem minima
-        totam!</p>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim quis deleniti laboriosam nemo quisquam hic
-        magnam dolore consequuntur libero aliquam nam mollitia sed architecto omnis quaerat voluptatum, rem minima
-        totam!</p>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim quis deleniti laboriosam nemo quisquam hic
-        magnam dolore consequuntur libero aliquam nam mollitia sed architecto omnis quaerat voluptatum, rem minima
-        totam!</p>
+      <div class="mt-4">
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim quis deleniti laboriosam nemo quisquam hic
+          magnam dolore consequuntur libero aliquam nam mollitia sed architecto omnis quaerat voluptatum, rem minima
+          totam!</p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim quis deleniti laboriosam nemo quisquam hic
+          magnam dolore consequuntur libero aliquam nam mollitia sed architecto omnis quaerat voluptatum, rem minima
+          totam!</p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim quis deleniti laboriosam nemo quisquam hic
+          magnam dolore consequuntur libero aliquam nam mollitia sed architecto omnis quaerat voluptatum, rem minima
+          totam!</p>
+      </div>
     </section>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue"
+import { computed } from "vue"
 import ProgressBar from '@/components/ProgressBarComponent.vue'
 import { ageFromDate } from "@/helpers/helpers.js"
 
-const birthDate = ref("2003-03-19")
+import { useAuthStore } from '@/stores/auth'
+
+const authStore = useAuthStore()
 
 const childhoodPercentage = computed(() => {
   const yearStart = 0
   const yearEnd = 18
-  const percent = ((ageFromDate(birthDate.value) - yearStart) / yearEnd) * 100
+  const percent = ((ageFromDate(authStore.user.birthdate) - yearStart) / yearEnd) * 100
   if (percent < 0) return 0
   if (percent > 100) return 100
   return percent
@@ -53,7 +57,7 @@ const childhoodPercentage = computed(() => {
 const adulthoodPercentage = computed(() => {
   const yearStart = 18
   const yearEnd = 64
-  const percent = ((ageFromDate(birthDate.value) - yearStart) / yearEnd) * 100
+  const percent = ((ageFromDate(authStore.user.birthdate) - yearStart) / yearEnd) * 100
   if (percent < 0) return 0
   if (percent > 100) return 100
   return percent
@@ -62,7 +66,7 @@ const adulthoodPercentage = computed(() => {
 const oldhoodPercentage = computed(() => {
   const yearStart = 64
   const yearEnd = 80
-  const percent = ((ageFromDate(birthDate.value) - yearStart) / yearEnd) * 100
+  const percent = ((ageFromDate(authStore.user.birthdate) - yearStart) / yearEnd) * 100
   if (percent < 0) return 0
   if (percent > 100) return 100
   return percent
@@ -71,7 +75,7 @@ const oldhoodPercentage = computed(() => {
 const lifeTimePercentage = computed(() => {
   const yearStart = 0
   const yearEnd = 80
-  const percent = ((ageFromDate(birthDate.value) - yearStart) / yearEnd) * 100
+  const percent = ((ageFromDate(authStore.user.birthdate) - yearStart) / yearEnd) * 100
   if (percent < 0) return 0
   if (percent > 100) return 100
   return percent

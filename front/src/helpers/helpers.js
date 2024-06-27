@@ -44,12 +44,21 @@ export function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+export function isValidDate(date) {
+    return !isNaN(Date.parse(date));
+}
+
 export function roundNb(nb, precision = 2) {
     return nb.toFixed(precision);
 }
 
 export function getYearFromDate(date) { // take a date as YYYY-MM-DD
     if (date) return date.split("-")[0];
+    return "";
+}
+
+export function dateToNiceDate(date) {
+    if (date) return new Date(date).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
     return "";
 }
 
