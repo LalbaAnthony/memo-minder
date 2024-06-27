@@ -4,7 +4,7 @@
     <div class="py-2 px-4">
       <form action="" @submit.prevent="loadSearch()">
         <input v-model="search" id="search" type="search" class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light"
-          placeholder="Search..." @input="loadSearch()">
+          placeholder="Search">
       </form>
     </div>
 
@@ -83,7 +83,8 @@
 </template>
 
 <script setup>
-import { onMounted, ref, computed } from 'vue'
+import { watch, onMounted, ref, computed } from 'vue'
+import debounce from 'lodash/debounce'
 import { useRoute, useRouter } from 'vue-router'
 import Grid from '@/components/GridComponent.vue'
 import { PlusIcon } from '@heroicons/vue/24/solid'
@@ -95,18 +96,21 @@ import { UsersIcon } from '@heroicons/vue/24/solid'
 import { MusicalNoteIcon } from '@heroicons/vue/24/solid'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { randomInt } from '@/helpers/helpers.js'
+import { useEventStore } from '@/stores/event'
 
 const route = useRoute()
 const router = useRouter()
 
-const search = ref(route.query.search)
-const results = ref([])
+const eventStore = useEventStore()
+
 const addButtons = ref({
   season: { show: false },
   event: { show: false },
   person: { show: false },
   music: { show: false }
 })
+const search = ref(route.query.search)
+const results = ref([])
 
 const toAddString = computed(() => { // same as search but with first letter in uppercase and 'add' removed
   return search.value.replace('add', '').replace('Add', '').trim()
@@ -114,7 +118,7 @@ const toAddString = computed(() => { // same as search but with first letter in 
 });
 
 
-function loadSearch() {
+const loadSearch = debounce(async () => {
   if (!search.value) return
 
   results.value = []
@@ -141,16 +145,30 @@ function loadSearch() {
     }
   })
 
-  // Add buttons
-  if (results.value.length < 1 || search.value.toLowerCase().includes('season')) addButtons.value.season.show = true
-  if (results.value.length < 1 || search.value.toLowerCase().includes('event')) addButtons.value.event.show = true
-  if (results.value.length < 1 || search.value.toLowerCase().includes('person')) addButtons.value.person.show = true
-  if (results.value.length < 1 || search.value.toLowerCase().includes('music')) addButtons.value.music.show = true
+  // Events
+  await eventStore.fetchEvents({ search: search.value }).then(() => {
+    results.value.push(...eventStore.events.data.map((event) => ({
+      title: event.title,
+      path: `/events/${event.eventId}`,
+      type: 'event'
+    })))
+  })
+
+  // People
+  // ...
 
   // Musics
   // ...
 
-}
+  // Seasons
+  // ...
+
+  // Add buttons
+  if (results.value.length === 0 || search.value.toLowerCase().includes('season')) addButtons.value.season.show = true
+  if (results.value.length === 0 || search.value.toLowerCase().includes('event')) addButtons.value.event.show = true
+  if (results.value.length === 0 || search.value.toLowerCase().includes('person')) addButtons.value.person.show = true
+  if (results.value.length === 0 || search.value.toLowerCase().includes('music')) addButtons.value.music.show = true
+}, 1000)
 
 onMounted(() => {
   setTimeout(() => {
@@ -159,6 +177,9 @@ onMounted(() => {
   }, 200)
   loadSearch()
 })
+
+// Watch search for changes
+watch(() => search.value, loadSearch)
 
 </script>
 

@@ -64,14 +64,14 @@ const languages = ref({
 
 function valid() {
     // return false // ? uncomment this line to enable form validation
-    if (username.value.length < 1) return "Please enter your username"
-    if (birthdate.value.length < 1) return "Please enter your birthdate"
+    if (username.value.length === 1) return "Please enter your username"
+    if (birthdate.value.length === 1) return "Please enter your birthdate"
     if (isValidDate(birthdate.value)) return "Please enter a valid birthdate"
-    if (language.value.length < 1) return "Please select your language"
-    if (email.value.length < 1) return "Please enter your email"
+    if (language.value.length === 1) return "Please select your language"
+    if (email.value.length === 1) return "Please enter your email"
     if (!isValidEmail(email.value)) return "Please enter a valid email"
-    if (password.value.length < 1) return "Please enter your password"
-    if (confirmPassword.value.length < 1) return "Please enter your password"
+    if (password.value.length === 1) return "Please enter your password"
+    if (confirmPassword.value.length === 1) return "Please enter your password"
     if (password.value !== confirmPassword.value) return 'Passwords do not match'
     if (missingElementsPassword(password.value).length > 0) return `Password must at least contain: ${missingElementsPassword(password.value).join(', ')}`
     if (!acceptTerms.value) return 'Please accept the terms and conditions'

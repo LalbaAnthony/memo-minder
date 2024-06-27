@@ -14,7 +14,7 @@
         </div>
 
         <!-- Dialog content -->
-        <div class="flex flex-col justify-center items-center w-full">
+        <div class="flex flex-col justify-center items-center w-full mx-6">
           <h2 class="text-xl font-bold"> {{ text }} </h2>
         </div>
 
@@ -44,7 +44,8 @@ import vClickOutside from '@/directives/clickOutside.js'
 const props = defineProps({
   text: {
     type: String,
-    required: true,
+    default: 'Are you sure you want to perform this action?',
+    required: false,
   },
   show: {
     type: Boolean,

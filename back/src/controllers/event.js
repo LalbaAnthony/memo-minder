@@ -1,22 +1,27 @@
 const formatRes = require('../helpers/formatRes')
 
+const { Op } = require('sequelize');
+
 const Event = require('../models/event');
+const Season = require('../models/season');
 const Music = require('../models/music');
 const User = require('../models/user');
-const Seasons = require('../models/season');
 
 exports.getAllEvents = async (req, res) => {
-    const { userId, sort, page, perPage } = req.query;
-    console.log('req.query', req.query)
+    let { userId, sort, page, perPage, search } = req.query; // Use let instead of const
     try {
-        // Check if all fields are provided
+        // Check if userId is provided
         if (!userId) return res.status(400).json(formatRes('error', null, 'Missing fields: userId'));
 
-        if (!sort) sort = [
-            { order: 'DESC', orderBy: 'date' },
-            { order: 'ASC', orderBy: 'title' },
-        ];
-
+        // Sort
+        if (!sort) {
+            sort = [
+                { order: 'DESC', orderBy: 'date' },
+                { order: 'ASC', orderBy: 'title' },
+            ];
+        } else {
+            sort = JSON.parse(sort); // Ensure sort is parsed if it's a string
+        }
         const order = sort.map(param => [param.orderBy, param.order]);
 
         // Pagination
@@ -24,11 +29,21 @@ exports.getAllEvents = async (req, res) => {
         const pagination = {
             page: parseInt(page) || 1,
             perPage: parseInt(perPage) || 10,
-            total: Math.floor(eventsCount / parseInt(perPage)) || 1,
-        }
+            total: Math.ceil(eventsCount / (parseInt(perPage) || 10)),
+        };
         const offset = (pagination.page - 1) * pagination.perPage;
 
-        const events = await Event.findAll({ where: { userId }, limit: pagination.perPage, offset, order });
+        // Construct the where clause
+        let where = { userId };
+        if (search) {
+            where[Op.or] = [
+                { title: { [Op.like]: `%${search}%` } },
+                { description: { [Op.like]: `%${search}%` } },
+                { location: { [Op.like]: `%${search}%` } },
+            ];
+        }
+
+        const events = await Event.findAll({ where, order, offset, limit: pagination.perPage });
 
         for (let i = 0; i < events.length; i++) {
             // Add music to the event
@@ -39,14 +54,14 @@ exports.getAllEvents = async (req, res) => {
 
             // Add season to the event
             if (events[i].seasonId) {
-                const season = await Seasons.findByPk(parseInt(events[i].seasonId));
+                const season = await Season.findByPk(parseInt(events[i].seasonId));
                 if (season) events[i].dataValues.season = season.dataValues;
             }
         }
 
-        return res.status(201).json(formatRes('success', events, null, pagination))
+        return res.status(201).json(formatRes('success', events, null, pagination));
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message))
+        return res.status(500).json(formatRes('error', null, error.message));
     }
 };
 

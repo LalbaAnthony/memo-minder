@@ -42,5 +42,14 @@ export const useEventStore = defineStore('event', {
       // Loading
       this.events.loading = false
     },
+
+    async deleteEvent(idEvent) {
+
+      // Remove in local
+      this.events.data.splice(this.events.data.findIndex(event => event.idEvent === idEvent), 1)
+
+      // Request
+      console.log('delete idEvent', idEvent)
+    },
   },
 })
