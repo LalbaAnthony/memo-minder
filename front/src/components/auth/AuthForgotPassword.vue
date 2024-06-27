@@ -25,7 +25,7 @@ const authStore = useAuthStore()
 
 function valid() {
     // return false // ? uncomment this line to skip form validation
-    if (authStore.fogotPasswordEmail.length < 1) return "Please enter your email"
+    if (authStore.fogotPasswordEmail.length === 1) return "Please enter your email"
     if (!isValidEmail(authStore.fogotPasswordEmail)) return "Please enter a valid email"
     return false
 }

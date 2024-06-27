@@ -42,7 +42,7 @@
         <div class="py-2 px-4">
           <form action="" @submit.prevent="triggerSearch()">
             <input v-model="search" id="search" type="search" class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light"
-              placeholder="Search..." />
+              placeholder="Search" />
           </form>
         </div>
 
