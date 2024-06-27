@@ -34,8 +34,8 @@ const password = ref('')
 
 function valid() {
     // return false // ? uncomment this line to skip form validation
-    if (password.value.length === 1) return "Please enter your password"
-    if (email.value.length === 1) return "Please enter your email"
+    if (password.value.length === 0) return "Please enter your password"
+    if (email.value.length === 0) return "Please enter your email"
     if (!isValidEmail(email.value)) return "Please enter a valid email"
     return false
 }
