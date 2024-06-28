@@ -1,23 +1,13 @@
 <template>
   <ul class="list-disc list-inside">
-    <li>You still have time to adpopt <span class="text-primary font-bold">{{ nbOfPet }}</span> pets</li>
-    <!-- TODO: - Nombre de premier apero en plein aire de l'année restant -->
-    <!-- TODO: - Nb Election presidentiels -->
-    <!-- TODO: - Nombre de coupe du monde à regarder -->
-    <!-- TODO: - Block buster à regarder au cinema -->
-    <!-- TODO: - Nombre d'éclipses solaires -->
-    <!-- TODO: - Nombre de concert à voir -->
-    <!-- TODO: - Temps pour apprendre d'un instrument -->
-    <!-- TODO: - Temps pour apprendre une langue -->
-    <!-- TODO: - Temps pour lire un livre -->
-    <!-- TODO: - Temps pour regarder une série -->
-    <!-- TODO: - Voyages restant (2 par an) -->
-    <!-- TODO: - Nombre de chat/chien (un tout les 15 ans) -->
+    <li v-for="(stat, index) in randomStats" :key="index">
+      <span v-html="stat"></span>
+    </li>
   </ul>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { ageFromDate } from "@/helpers/helpers.js"
 import { roundNb } from "@/helpers/helpers.js"
 
@@ -28,9 +18,103 @@ const props = defineProps({
   }
 })
 
+const lifeExpectancy = ref(80)
+
 const nbOfPet = computed(() => {
-  const remainingYears = 80 - ageFromDate(props.age)
-  return roundNb((remainingYears / 12), 0) // 12 years for a pet
+  const every = 15
+  const remainingYears = lifeExpectancy.value - ageFromDate(props.age)
+  return roundNb((remainingYears / every), 0)
 })
+
+const presidentialElections = computed(() => {
+  const every = 5
+  const remainingYears = lifeExpectancy.value - ageFromDate(props.age)
+  return roundNb((remainingYears / every), 0)
+})
+
+const trips = computed(() => {
+  const every = 2
+  const remainingYears = lifeExpectancy.value - ageFromDate(props.age)
+  return roundNb((remainingYears / every), 0)
+})
+
+const firstDrinkOfYear = computed(() => {
+  const every = 1
+  const remainingYears = lifeExpectancy.value - ageFromDate(props.age)
+  return roundNb((remainingYears / every), 0)
+})
+
+const nbOfWorldCup = computed(() => {
+  const every = 4
+  const remainingYears = lifeExpectancy.value - ageFromDate(props.age)
+  return roundNb((remainingYears / every), 0)
+})
+
+const solarEclipse = computed(() => {
+  const every = 18
+  const remainingYears = lifeExpectancy.value - ageFromDate(props.age)
+  return roundNb((remainingYears / every), 0)
+})
+
+const masterAnInstrument = computed(() => {
+  const every = 10
+  const remainingYears = lifeExpectancy.value - ageFromDate(props.age)
+  return roundNb((remainingYears / every), 0)
+})
+
+const learnALanguage = computed(() => {
+  const every = 5
+  const remainingYears = lifeExpectancy.value - ageFromDate(props.age)
+  return roundNb((remainingYears / every), 0)
+})
+
+const readABook = computed(() => {
+  const every = 0.5
+  const remainingYears = lifeExpectancy.value - ageFromDate(props.age)
+  return roundNb((remainingYears / every), 0)
+})
+
+const watchASerie = computed(() => {
+  const every = 0.2
+  const remainingYears = lifeExpectancy.value - ageFromDate(props.age)
+  return roundNb((remainingYears / every), 0)
+})
+
+const nbOfRoadTrips = computed(() => {
+  const every = 1.2
+  const remainingYears = 80 - ageFromDate(props.age)
+  return roundNb((remainingYears / every), 0)
+})
+
+const nbOfHikes = computed(() => {
+  const every = 0.7
+  const remainingYears = 80 - ageFromDate(props.age)
+  return roundNb((remainingYears / every), 0)
+})
+
+// Life stats
+const lifeStats = computed(() => [
+  `You still have time to adopt <span class="text-primary font-bold">${nbOfPet.value}</span> pets`,
+  `You will be able to vote <span class="text-primary font-bold">${presidentialElections.value}</span> times for presidential elections`,
+  `You have <span class="text-primary font-bold">${trips.value}</span> trips left`,
+  `<span class="text-primary font-bold">${firstDrinkOfYear.value}</span> opportunities to grab the first drink of the year outside`,
+  `You still have <span class="text-primary font-bold">${nbOfWorldCup.value}</span> world cup to watch`,
+  `You will be able to see <span class="text-primary font-bold">${solarEclipse.value}</span> solar eclipses`,
+  `You can manage to master <span class="text-primary font-bold">${masterAnInstrument.value}</span> instruments`,
+  `You can still learn <span class="text-primary font-bold">${learnALanguage.value}</span> languages`,
+  `You still have the time to read <span class="text-primary font-bold">${readABook.value}</span> books`,
+  `You can still watch <span class="text-primary font-bold">${watchASerie.value}</span> series`,
+  `You still have time to plan <span class="text-primary font-bold">${nbOfRoadTrips.value}</span> road trips`,
+  `You have time to plan <span class="text-primary font-bold">${nbOfHikes.value}</span> hikes`,
+])
+
+// Shuffle the array and get the first 3 elements
+function getRandomStats(array) {
+  const shuffled = array.sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, 3);
+}
+
+// Stats to display
+const randomStats = computed(() => getRandomStats(lifeStats.value));
 
 </script>

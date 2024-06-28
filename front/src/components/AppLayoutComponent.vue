@@ -50,39 +50,44 @@
         <nav class="py-2 px-4 flex flex-col gap-4">
           <router-link to="/" class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
             @click.stop="showSidebar = false">
-            <ListBulletIcon class="size-6 text-light-gray" />
+            <ListBulletIcon :class="['size-6', route.name.includes('home') ? 'text-primary' : 'text-light-gray']" />
             <span class="ml-3 mt-0.5">Home</span>
           </router-link>
           <router-link to="/infos" class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
             @click.stop="showSidebar = false">
-            <InformationCircleIcon class="size-6 text-light-gray" />
+            <InformationCircleIcon :class="['size-6', route.name.includes('infos') ? 'text-primary' : 'text-light-gray']" />
             <span class="ml-3 mt-0.5">Infos</span>
           </router-link>
           <hr>
-          <router-link to="/seasons" class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
+          <router-link to="/seasons"
+            class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
             @click.stop="showSidebar = false">
-            <FilmIcon class="size-6 text-light-gray" />
+            <FilmIcon :class="['size-6', route.name.includes('season') ? 'text-primary' : 'text-light-gray']" />
             <span class="ml-3 mt-0.5">Seasons</span>
           </router-link>
-          <router-link to="/events" class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
+          <router-link to="/events"
+            class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
             @click.stop="showSidebar = false">
-            <CalendarDaysIcon class="size-6 text-light-gray" />
+            <CalendarDaysIcon :class="['size-6', route.name.includes('event') ? 'text-primary' : 'text-light-gray']" />
             <span class="ml-3 mt-0.5">Events</span>
           </router-link>
-          <router-link to="/people" class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
+          <router-link to="/people"
+            class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
             @click.stop="showSidebar = false">
-            <UsersIcon class="size-6 text-light-gray" />
+            <UsersIcon :class="['size-6', route.name.includes('person') ? 'text-primary' : 'text-light-gray']" />
             <span class="ml-3 mt-0.5">People</span>
           </router-link>
-          <router-link to="/musics" class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
+          <router-link to="/musics"
+            class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
             @click.stop="showSidebar = false">
-            <MusicalNoteIcon class="size-6 text-light-gray" />
+            <MusicalNoteIcon :class="['size-6', route.name.includes('music') ? 'text-primary' : 'text-light-gray']" />
             <span class="ml-3 mt-0.5">Musics</span>
           </router-link>
           <hr>
-          <router-link to="/account" class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
+          <router-link to="/account"
+            class="flex items-center cursor-pointer text-light rounded-lg hover:bg-dark-gray p-2"
             @click.stop="showSidebar = false">
-            <UserCircleIcon class="size-6 text-light-gray" />
+            <UserCircleIcon :class="['size-6', route.name.includes('account') ? 'text-primary' : 'text-light-gray']" />
             <span class="ml-3 mt-0.5">Account</span>
           </router-link>
           <div class="flex items-center cursor-pointer text-light-danger rounded-lg hover:bg-gray p-2"

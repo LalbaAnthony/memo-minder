@@ -164,7 +164,7 @@ const routes = [
   },
   {
     path: '/person',
-    name: 'Person',
+    name: 'person',
     children: [
       {
         path: ':personId',

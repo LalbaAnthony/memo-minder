@@ -24,7 +24,7 @@ Front:
     - [X] Debug notif et les imprpoves
     - [X] CORS ERROR
     - [X] Front de login (sans register) => auth store, ...
-    - [ ] Stats randoms temps restant (avec une info expl a chaque fois au survol) avec les todo du composant
+    - [X] Stats randoms temps restant (avec une info expl a chaque fois au survol) avec les todo du composant
     - [ ] Make integration from something like https://flowbite.com/blocks/application/shells/
     - [ ] Mettre tout les store en perssistant pour pour etre en offline
     - [ ] Faire systeme de stockage des données en local, puis d'envoie au serveur
