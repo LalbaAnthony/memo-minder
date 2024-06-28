@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1 class="text-2xl font-bold text-light">Infos</h1>
     <section>
       <p>{{ VITE_SITE_NAME }} is a unique web application crafted with Vue.js and Node.js, designed to capture and preserve
         life's memorable moments in a delightful and secure way. With a focus on encapsulating memories into four

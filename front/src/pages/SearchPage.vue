@@ -79,7 +79,7 @@
           <MusicalNoteIcon v-if="item.type === 'music'" class="size-8 text-light-gray" />
           <h3 class="text-lg font-semibold">{{ item.title }}</h3>
           <ArrowLongRightIcon
-            class="arrow size-8 text-primary ml-2 hover:text-light transition ease-in-out duration-300 transform" />
+            class="arrow size-8 text-primary ml-2 hover:text-primary-light transition ease-in-out duration-300 transform" />
         </router-link>
       </template>
     </Grid>
