@@ -1,11 +1,11 @@
 <template>
   <div class="flex items-center gap-2 rounded-full px-3 py-0.5 bg-gray">
-    <FilmIcon v-if="props.type === 'season'" class="size-6 text-primary"/>
-    <CalendarDaysIcon v-if="props.type === 'event'" class="size-6 text-primary"/>
-    <UsersIcon v-if="props.type === 'person'" class="size-6 text-primary"/>
-    <MusicalNoteIcon v-if="props.type === 'music'" class="size-6 text-primary"/>
+    <FilmIcon v-if="props.type === 'season'" class="size-6 text-primary-light" />
+    <CalendarDaysIcon v-if="props.type === 'event'" class="size-6 text-primary-light" />
+    <UsersIcon v-if="props.type === 'person'" class="size-6 text-primary-light" />
+    <MusicalNoteIcon v-if="props.type === 'music'" class="size-6 text-primary-light" />
     <span class="text-sm">{{ props.text }}</span>
-    </div>
+  </div>
 </template>
 
 <script setup>
