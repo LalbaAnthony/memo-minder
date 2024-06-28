@@ -6,16 +6,10 @@
     <!-- Sort -->
     <Dropdown title="Sort" side="right">
       <div class="space-y-2">
-        <button @click="resetSort"
+        <button v-if="enebleDefault" @click="resetSort"
           class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Default</button>
-        <button @click="toggleSort('title-asc')"
-          class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Title (A-Z)</button>
-        <button @click="toggleSort('title-desc')"
-          class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Title (Z-A)</button>
-        <button @click="toggleSort('date-asc')"
-          class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Date (Oldest)</button>
-        <button @click="toggleSort('date-desc')"
-          class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Date (Newest)</button>
+        <button v-for="item in sortItems" :key="item.value" @click="toggleSort(item.value)"
+          class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">{{ item.label }}</button>
       </div>
     </Dropdown>
   </div>
@@ -24,6 +18,18 @@
 <script setup>
 import Dropdown from '@/components/DropdownComponent.vue'
 import { useRoute, useRouter } from 'vue-router'
+
+const props = defineProps({
+  sortItems: {
+    type: Array,
+    required: false,
+  },
+  enebleDefault: {
+    type: Boolean,
+    default: true,
+    required: false,
+  },
+})
 
 const route = useRoute()
 const router = useRouter()

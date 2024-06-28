@@ -19,7 +19,7 @@
         <TrashIcon class="size-6" />
       </div>
       <router-link class="flex justify-center items-center p-2 bg-light-gray rounded-br-[6px]"
-        :to="{ path: `/event/${props?.event?.eventId}` }">
+        :to="{ path: `/event/${props?.event?.eventId}/edit` }">
         <PencilSquareIcon class="size-6" />
       </router-link>
     </div>

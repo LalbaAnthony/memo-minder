@@ -1,13 +1,18 @@
 <template>
   <div>
-    <SortFilter />
+    <SortFilter :sortItems="[
+      { value: 'title-asc', label: 'Title (A-Z)' },
+      { value: 'title-desc', label: 'Title (Z-A)' },
+      { value: 'date-asc', label: 'Date (Oldest)' },
+      { value: 'date-desc', label: 'Date (Newest)' }
+    ]" />
     <Loader v-if="seasonStore.seasons.loading" />
     <Grid v-else :items="seasonStore.seasons.data">
       <template #item="{ item }">
         <Season :season="item" />
       </template>
     </Grid>
-    <BottomActions/>
+    <BottomActions />
   </div>
 </template>
 
