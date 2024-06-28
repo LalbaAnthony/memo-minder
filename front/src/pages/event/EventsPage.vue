@@ -1,13 +1,18 @@
 <template>
   <div>
-    <SortFilter />
+    <SortFilter :sortItems="[
+      { value: 'title-asc', label: 'Title (A-Z)' },
+      { value: 'title-desc', label: 'Title (Z-A)' },
+      { value: 'date-asc', label: 'Date (Oldest)' },
+      { value: 'date-desc', label: 'Date (Newest)' }
+    ]" />
     <Loader v-if="eventStore.events.loading" />
     <Grid v-else :items="eventStore.events.data">
       <template #item="{ item }">
         <Event :event="item" />
       </template>
     </Grid>
-    <BottomActions/>
+    <BottomActions />
   </div>
 </template>
 
@@ -36,7 +41,7 @@ async function loadEvents() {
 }
 
 // Fetch events on mount
-if (!eventStore.events.data.length) loadEvents()
+if (!eventStore.events.data || eventStore.events.data.length === 0) loadEvents()
 
 // Watch route for changes
 watch(() => route.query, loadEvents)

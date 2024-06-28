@@ -73,6 +73,10 @@
         <router-link :to="item.path" class="item block p-4 border-b border-gray flex items-center justify-between"
           :style="['animation-delay: 0.' + randomInt(1, 10) / 10 + 's;']">
           <DocumentTextIcon v-if="item.type === 'page'" class="size-8 text-light-gray" />
+          <FilmIcon v-if="item.type === 'season'" class="size-8 text-light-gray" />
+          <CalendarDaysIcon v-if="item.type === 'event'" class="size-8 text-light-gray" />
+          <UsersIcon v-if="item.type === 'person'" class="size-8 text-light-gray" />
+          <MusicalNoteIcon v-if="item.type === 'music'" class="size-8 text-light-gray" />
           <h3 class="text-lg font-semibold">{{ item.title }}</h3>
           <ArrowLongRightIcon
             class="arrow size-8 text-primary ml-2 hover:text-light transition ease-in-out duration-300 transform" />
@@ -116,7 +120,6 @@ const toAddString = computed(() => { // same as search but with first letter in 
   return search.value.replace('add', '').replace('Add', '').trim()
     .replace(/^\w/, (c) => c.toUpperCase())
 });
-
 
 const loadSearch = debounce(async () => {
   if (!search.value) return
@@ -163,7 +166,7 @@ const loadSearch = debounce(async () => {
   // Seasons
   // ...
 
-  // Add buttons
+  // Trigger add buttons
   if (results.value.length === 0 || search.value.toLowerCase().includes('season')) addButtons.value.season.show = true
   if (results.value.length === 0 || search.value.toLowerCase().includes('event')) addButtons.value.event.show = true
   if (results.value.length === 0 || search.value.toLowerCase().includes('person')) addButtons.value.person.show = true

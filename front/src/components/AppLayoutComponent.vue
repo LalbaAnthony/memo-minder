@@ -91,7 +91,7 @@
             <span class="ml-3 mt-0.5">Log out</span>
           </div>
         </nav>
-        <div class="text-left text-light-gray m-4 absolute bottom-0">
+        <div class="text-light-gray mb-2 mr-4 absolute bottom-0 right-0">
           Version {{ VITE_APP_VERSION }}
         </div>
       </TransitionChild>
