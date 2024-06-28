@@ -2,35 +2,38 @@
   <div>
     <section class="progress-bars-grid">
       <div>
-        <h2 class="text-xl font-bold">Spent childhood</h2>
+        <h4 class="text-l font-bold">Spent childhood</h4>
         <ProgressBar :value="childhoodPercentage" />
       </div>
       <div>
-        <h2 class="text-xl font-bold">Spent adulthood</h2>
+        <h4 class="text-l font-bold">Spent adulthood</h4>
         <ProgressBar :value="adulthoodPercentage" />
       </div>
       <div>
-        <h2 class="text-xl font-bold">Spent oldhood</h2>
+        <h4 class="text-l font-bold">Spent oldhood</h4>
         <ProgressBar :value="oldhoodPercentage" />
       </div>
       <div>
-        <h2 class="text-xl font-bold">Total spent</h2>
+        <h4 class="text-l font-bold">Total spent</h4>
         <ProgressBar :value="lifeTimePercentage" />
       </div>
     </section>
 
     <section>
+      <h2 class="text-xl font-bold">Stats</h2>
+      <div class="my-4">
+        <Stats :age="authStore.user.birthdate" />
+      </div>
+    </section>
+    <section>
       <h2 class="text-xl font-bold">Lasts added</h2>
-      <div class="mt-4">
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim quis deleniti laboriosam nemo quisquam hic
-          magnam dolore consequuntur libero aliquam nam mollitia sed architecto omnis quaerat voluptatum, rem minima
-          totam!</p>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim quis deleniti laboriosam nemo quisquam hic
-          magnam dolore consequuntur libero aliquam nam mollitia sed architecto omnis quaerat voluptatum, rem minima
-          totam!</p>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim quis deleniti laboriosam nemo quisquam hic
-          magnam dolore consequuntur libero aliquam nam mollitia sed architecto omnis quaerat voluptatum, rem minima
-          totam!</p>
+      <div class="my-4">
+        <Loader v-if="eventStore.events.loading" />
+        <Grid v-else :items="eventStore.events.data">
+          <template #item="{ item }">
+            <Event :event="item" />
+          </template>
+        </Grid>
       </div>
     </section>
   </div>
@@ -38,12 +41,20 @@
 
 <script setup>
 import { computed } from "vue"
+import Grid from '@/components/GridComponent.vue'
+import Event from '@/components/event/EventItem.vue'
+import Loader from '@/components/LoaderComponent.vue'
 import ProgressBar from '@/components/ProgressBarComponent.vue'
+import Stats from '@/components/StatsComponent.vue'
 import { ageFromDate } from "@/helpers/helpers.js"
-
 import { useAuthStore } from '@/stores/auth'
+import { useEventStore } from '@/stores/event'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 
 const authStore = useAuthStore()
+const eventStore = useEventStore()
 
 const childhoodPercentage = computed(() => {
   const yearStart = 0
@@ -81,6 +92,19 @@ const lifeTimePercentage = computed(() => {
   return percent
 });
 
+async function loadEvents() {
+  eventStore.fetchEvents({
+    sort: route.query.sort ? [{
+      orderBy: route.query.sort?.split('-')[0] || null,
+      order: route.query.sort?.split('-')[1] || null
+    }] : [
+      { order: 'ASC', orderBy: 'title' },
+    ]
+  })
+}
+
+// Fetch events on mount
+if (!eventStore.events.data || eventStore.events.data.length === 0) loadEvents()
 </script>
 
 <style scoped>
