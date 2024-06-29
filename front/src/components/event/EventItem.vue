@@ -8,8 +8,8 @@
       </div>
       <div class="my-4">
         <div class="flex justify-start flex-wrap items-center w-full m-2 gap-2">
-          <Pill :text="props?.event?.season?.title" type="season" />
-          <Pill :text="props?.event?.music?.title" type="music" />
+          <Pill v-if="props?.event?.season" :text="props?.event?.season?.title" type="season" />
+          <Pill v-if="props?.event?.music" :text="props?.event?.music?.title" type="music" />
         </div>
         <p class="m-2 my-4">{{ threeDotString(event?.description) }}</p>
       </div>
@@ -19,7 +19,7 @@
         <TrashIcon class="size-6" />
       </div>
       <router-link class="flex justify-center items-center p-2 bg-light-gray rounded-br-[6px]"
-        :to="{ path: `/event/${props?.event?.eventId}/edit` }">
+        :to="{ path: `/event/${props?.event?.eventId}` }">
         <PencilSquareIcon class="size-6" />
       </router-link>
     </div>

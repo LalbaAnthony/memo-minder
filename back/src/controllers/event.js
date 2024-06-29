@@ -76,15 +76,15 @@ exports.getEventById = async (req, res) => {
         if (!event) return res.status(404).json(formatRes('error', null, 'No event found with this id'));
 
         // Add music to the event
-        if (events.musicId) {
-            const music = await Music.findByPk(parseInt(events.musicId));
-            if (music) events.dataValues.music = music.dataValues;
+        if (event.musicId) {
+            const music = await Music.findByPk(parseInt(event.musicId));
+            if (music) event.dataValues.music = music.dataValues;
         }
 
         // Add season to the event
-        if (events.seasonId) {
-            const season = await Seasons.findByPk(parseInt(events.seasonId));
-            if (season) events.dataValues.season = season.dataValues;
+        if (event.seasonId) {
+            const season = await Season.findByPk(parseInt(event.seasonId));
+            if (season) event.dataValues.season = season.dataValues;
         }
 
         return res.status(201).json(formatRes('success', event))
@@ -112,7 +112,7 @@ exports.createEvent = async (req, res) => {
 
         if (seasonId) {
             // Check if seasonId exists
-            const season = await Seasons.findByPk(parseInt(seasonId));
+            const season = await Season.findByPk(parseInt(seasonId));
             if (!season) return res.status(404).json(formatRes('error', null, 'No season found with this id'));
         }
 
@@ -146,7 +146,7 @@ exports.updateEvent = async (req, res) => {
 
         if (seasonId) {
             // Check if seasonId exists
-            const season = await Seasons.findByPk(parseInt(seasonId));
+            const season = await Season.findByPk(parseInt(seasonId));
             if (!season) return res.status(404).json(formatRes('error', null, 'No season found with this id'));
         }
 

@@ -45,14 +45,15 @@ export function isValidEmail(email) {
 }
 
 export function isValidDate(date) {
-    return !isNaN(Date.parse(date));
+    return !isNaN(new Date(date)) &&
+        (new Date(date) !== "Invalid Date");
 }
 
 export function roundNb(nb, precision = 2) {
     return nb.toFixed(precision);
 }
 
-export function getYearFromDate(date) { // take a date as YYYY-MM-DD
+export function getYearFromDate(date) {
     if (date) return date.split("-")[0];
     return "";
 }

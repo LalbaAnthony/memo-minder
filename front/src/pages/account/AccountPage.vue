@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ authStore.user }}
     <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 m-4">
       <div class="flex flex-col gap-2">
         <label for="username">Username</label>
@@ -13,9 +12,8 @@
           class="px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Email" disabled />
       </div>
       <div class="flex flex-col gap-2">
-        <label for="email">Birthdate</label>
-        <input v-model="authStore.user.birthdate" id="birthdate" type="date"
-        class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Birthdate" />
+        <label for="birthdate">Birthdate</label>
+        <DatePicker :value="authStore.user.birthdate" @update="(v) => { authStore.user.birthdate = v }" />
       </div>
       <div class="flex flex-col gap-2">
         <label for="language">Language</label>
@@ -33,6 +31,7 @@
 import { ref, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import debounce from 'lodash/debounce'
+import DatePicker from '@/components/DatePickerComponent.vue'
 import { isValidEmail } from '@/helpers/helpers.js'
 import { isValidDate } from '@/helpers/helpers.js'
 import { notify } from '@/helpers/notif.js'
@@ -71,7 +70,7 @@ const handleSave = debounce(() => {
     authStore.updateUserInfos()
   }
 
-}, 1000)
+}, 3000)
 
 // Save user infos when user changes them
 watch(() => authStore.user.email, handleSave)
