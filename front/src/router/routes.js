@@ -73,18 +73,6 @@ const routes = [
           tags: ['seasons', 'years', 'periods', 'details'],
         },
       },
-      {
-        path: ':seasonId/edit',
-        name: 'seasons.edit',
-        component: () => import('../pages/season/SeasonEditPage.vue'),
-        meta: {
-          title: 'Edit the season',
-          private: true,
-          displayInSearch: false,
-          tags: ['seasons', 'years', 'periods', 'edit'],
-        },
-      },
-
     ],
   },
   // ==================== EVENT ====================
@@ -125,18 +113,6 @@ const routes = [
           tags: ['events', 'happenings', 'occurrences', 'details'],
         },
       },
-      {
-        path: ':eventId/edit',
-        name: 'events.edit',
-        component: () => import('../pages/event/EventEditPage.vue'),
-        meta: {
-          title: 'Edit the event',
-          private: true,
-          displayInSearch: false,
-          tags: ['events', 'happenings', 'occurrences', 'edit'],
-        },
-      },
-
     ],
   },
   // ==================== PERSON ====================
@@ -177,18 +153,6 @@ const routes = [
           tags: ['people', 'persons', 'humans', 'details'],
         },
       },
-      {
-        path: ':personId/edit',
-        name: 'people.edit',
-        component: () => import('../pages/person/PersonEditPage.vue'),
-        meta: {
-          title: 'Edit the person',
-          private: true,
-          displayInSearch: false,
-          tags: ['people', 'persons', 'humans', 'edit'],
-        },
-      },
-
     ],
   },
   // ==================== MUSIC ====================
@@ -229,18 +193,6 @@ const routes = [
           tags: ['musics', 'songs', 'tunes', 'details'],
         },
       },
-      {
-        path: ':musicId/edit',
-        name: 'musics.edit',
-        component: () => import('../pages/music/MusicEditPage.vue'),
-        meta: {
-          title: 'Edit the music',
-          private: true,
-          displayInSearch: false,
-          tags: ['musics', 'songs', 'tunes', 'edit'],
-        },
-      },
-
     ],
   },
   // ==================== AUTH & ACCOUNT ====================

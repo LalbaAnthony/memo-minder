@@ -22,7 +22,7 @@
     <section>
       <h2 class="text-xl font-bold">Stats</h2>
       <div class="my-4">
-        <Stats :age="authStore.user.birthdate" />
+        <Stats :birthdate="authStore.user.birthdate" />
       </div>
     </section>
     <section>

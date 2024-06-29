@@ -1,23 +1,25 @@
 <template>
   <div :class="['fixed right-0 z-20 flex flex-col justify-end gap-2 p-4', isMobile() ? 'bottom-20' : 'bottom-0']">
+
     <!-- Scroll to top -->
-    <div v-if="isMobile()" @click="goTop()"
+    <div v-if="route.name.includes('list') && isMobile()" @click="goTop()"
       class="flex items-center justify-center bg-dark-gray text-white rounded-full p-4 hover:scale-105 transition-transform duration-200 border border-dark-gray">
       <ChevronUpIcon class="size-6" />
     </div>
 
     <!-- Add button -->
-    <router-link :to="`${route.path}/add`"
+    <router-link v-if="route.name.includes('list')" :to="`${route.path}/add`"
       class="flex items-center justify-center bg-primary text-white rounded-full p-4 hover:scale-105 transition-transform duration-200 border border-dark-gray">
       <PlusIcon class="size-6" />
     </router-link>
-    
+
   </div>
 </template>
 
 <script setup>
 import { ChevronUpIcon } from '@heroicons/vue/24/solid'
 import { PlusIcon } from '@heroicons/vue/24/solid'
+import { PencilSquareIcon } from '@heroicons/vue/24/solid'
 import { isMobile } from '@/helpers/helpers.js'
 import { useRoute, } from 'vue-router'
 

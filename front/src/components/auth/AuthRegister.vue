@@ -9,8 +9,7 @@
                 <option value="" disabled selected>Language</option>
                 <option v-for="(value, key) in languages" :key="key" :value="key">{{ value }}</option>
             </select>
-            <input v-model="birthdate" id="birthdate" type="date"
-                class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Birthdate" />
+            <DatePicker :value="birthdate" @update="(v) => { birthdate = v }" />
             <hr class="w-full" />            
             <input v-model="password" id="password" type="password"
                 class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Password" />
@@ -40,6 +39,7 @@
 <script setup>
 import { ref } from 'vue'
 import { notify } from '@/helpers/notif.js'
+import DatePicker from '@/components/DatePickerComponent.vue'
 import PasswordStrength from '@/components/PasswordStrengthComponent.vue'
 import { isValidEmail } from '@/helpers/helpers.js'
 import { isValidDate } from '@/helpers/helpers.js'
@@ -51,7 +51,7 @@ const emit = defineEmits(['setAuthType'])
 const authStore = useAuthStore()
 
 const username = ref('')
-const birthdate = ref('2000-01-01')
+const birthdate = ref('2000-01-01T00:00:00.000Z')
 const email = ref('')
 const language = ref('en')
 const password = ref('')

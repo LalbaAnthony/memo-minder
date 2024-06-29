@@ -11,9 +11,32 @@ export const useEventStore = defineStore('event', {
       data: [],
       pagination: { page: 1, perPage: 10, total: 1 },
     },
+    event: {
+      loading: false,
+      data: {},
+    },
   }),
 
   actions: {
+    async fetchEvent(idEvent) {
+      // Loading
+      this.event.loading = true
+
+
+      // Data
+      this.event.data = {}
+
+      const params = {
+        userId: authStore.user.userId,
+      }
+
+      const resp = await get(`event/${idEvent}`, params);
+      this.event.data = resp.data || {};
+
+      // Loading
+      this.event.loading = false
+    },
+
     async fetchEvents(givenParams = {}) {
       // Loading
       this.events.loading = true

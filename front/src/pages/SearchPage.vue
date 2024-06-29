@@ -9,7 +9,7 @@
     </div>
 
     <!-- Add buttons -->
-    <div class="py-2 px-4 grid">
+    <div class="py-2 px-4 btn-grid">
       <TransitionRoot :show="addButtons.season.show">
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
@@ -152,7 +152,7 @@ const loadSearch = debounce(async () => {
   await eventStore.fetchEvents({ search: search.value }).then(() => {
     results.value.push(...eventStore.events.data.map((event) => ({
       title: event.title,
-      path: `/events/${event.eventId}`,
+      path: `/event/${event.eventId}`,
       type: 'event'
     })))
   })
@@ -187,7 +187,7 @@ watch(() => search.value, loadSearch)
 </script>
 
 <style scoped>
-.grid {
+.btn-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 1rem;

@@ -82,7 +82,7 @@ input:disabled {
 }
 
 textarea {
-  resize: none;
+  resize: none !important;
 }
 
 input[type="search"]::-webkit-search-cancel-button {
