@@ -19,7 +19,7 @@ Create a `.env` file in the project directory. Use the `.env.example` file as a 
 1. BACKEND
 
 ```bash
-cd back/ && npm i && npm run start
+cd back/ && npm i && npm run dev
 ```
 
 1. FRONTEND
@@ -35,11 +35,3 @@ Load test data:
 ```bash
 cd back/ && node src/seed.js
 ```
-
-## Feedback
-
-We welcome any feedback or suggestions you may have to improve Memo Minder. Feel free to [open an issue](https://github.com/LalbaAnthony/memo-minder/issues)
-
-## Contributing
-
-Contributions are always appreciated! If you'd like to contribute to Memo Minder, please fork the repository and submit a pull request with your changes.

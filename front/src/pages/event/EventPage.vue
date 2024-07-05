@@ -16,33 +16,31 @@
         </div>
       </section>
 
+      <!-- Location section -->
+      <section class="flex items-center justify-center gap-2">
+        <MapPinIcon class="size-6 text-gray cursor-pointer" @click="openMaps()" />
+        <input v-model="eventStore.event.data.location" id="location"
+          class="w-full sm:w-2/3 md:w-1/2 p-2 rounded-lg bg-dark-gray text-light" placeholder="Location" />
+      </section>
+
       <!-- Description section -->
       <section>
         <textarea v-model="eventStore.event.data.description" class="w-full p-2 rounded-lg bg-dark-gray text-light"
           rows="10" placeholder="..."> </textarea>
       </section>
 
-      <!-- Location section -->
-      <section class="flex items-center justify-center gap-2 flex-wrap">
-        <input v-model="eventStore.event.data.location" id="location"
-          class="w-full sm:w-2/3 md:w-1/2 p-2 rounded-lg bg-dark-gray text-light" placeholder="Location" />
-      </section>
-
       <!-- Pills section -->
       <section>
         <h4 class="text-lg font-semibold text-light mb-4">Linked items</h4>
         <div v-if="eventStore.event?.data?.season || eventStore.event?.data?.music"
-          class="flex justify-start flex-wrap items-center w-full m-2 gap-2">
+          class="flex justify-start flex-wrap items-center w-full m-2 my-4 gap-2">
           <Pill v-if="eventStore.event?.data?.season" :text="eventStore.event?.data?.season?.title" type="season"
             deleteable @delete="deleteSeason()" />
           <Pill v-if="eventStore.event?.data?.music" :text="eventStore.event?.data?.music?.title" type="music"
             deleteable @delete="deleteMusic()" />
-          <div class="flex items-center gap-2 rounded-full p-0.5 bg-gray cursor-pointer" @click="showItemPicker = true">
-            <PlusIcon class="size-6 text-light" />
-          </div>
         </div>
-        <div v-else
-          class="flex items-center justify-center rounded-lg p-8 border-dashed border-2 border-light-gray cursor-pointer"
+        <div
+          class="flex items-center justify-center rounded-lg p-8 border-dashed border-2 cursor-pointer border-light-gray hover:border-light transition-all transition-200"
           @click="showItemPicker = true">
           <PlusIcon class="size-8 text-light" />
         </div>
@@ -61,10 +59,12 @@ import Loader from '@/components/LoaderComponent.vue'
 import Pill from '@/components/PillComponent.vue'
 import BottomActions from '@/components/BottomActionsComponent.vue'
 import { PlusIcon } from '@heroicons/vue/24/solid'
+import { MapPinIcon } from '@heroicons/vue/24/solid'
 import { useRoute } from 'vue-router'
 import { useEventStore } from '@/stores/event'
 import { dateToNiceDate } from '@/helpers/helpers.js'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import debounce from 'lodash/debounce'
 
 const route = useRoute()
 const eventStore = useEventStore()
@@ -84,5 +84,21 @@ function deleteMusic() {
   eventStore.event.data.music = null
   eventStore.event.data.musicId = null
 }
+
+function openMaps() {
+  window.open(`http://maps.google.com/?q=${eventStore.event.data.location}`)
+}
+
+watch(() => route.params.eventId, () => {
+  eventStore.fetchEvent(route.params.eventId).then(() => {
+    if (eventStore.event.data.title) route.meta.title = eventStore.event.data.title
+  })
+})
+
+watch(() => eventStore.event.data,
+  debounce(() => {
+    eventStore.updateEvent(eventStore.event.data)
+  }, 3000)
+  , { deep: true })
 
 </script>

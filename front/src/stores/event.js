@@ -22,7 +22,6 @@ export const useEventStore = defineStore('event', {
       // Loading
       this.event.loading = true
 
-
       // Data
       this.event.data = {}
 
@@ -44,7 +43,6 @@ export const useEventStore = defineStore('event', {
       // Data
       this.events.data = []
 
-
       // Request
       const params = {
         userId: authStore.user.userId,
@@ -56,7 +54,6 @@ export const useEventStore = defineStore('event', {
       }
 
       Object.assign(params, givenParams)
-
 
       const resp = await get('events', params);
       this.events.data = resp.data || [];
@@ -73,6 +70,16 @@ export const useEventStore = defineStore('event', {
 
       // Request
       console.log('delete idEvent', idEvent)
+    },
+
+    async createEvent(event) {
+      // Request
+      console.log('create event', event)
+    },
+
+    async updateEvent(event) {
+      // Request
+      console.log('update event', event)
     },
   },
 })
