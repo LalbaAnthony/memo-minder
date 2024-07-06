@@ -1,5 +1,6 @@
 <template>
   <div>
+    <MoodPicker />
     <section class="progress-bars-grid">
       <div>
         <h4 class="text-l font-bold">Spent childhood</h4>
@@ -44,6 +45,7 @@ import { computed } from "vue"
 import Grid from '@/components/GridComponent.vue'
 import Event from '@/components/event/EventItem.vue'
 import Loader from '@/components/LoaderComponent.vue'
+import MoodPicker from '@/components/MoodPickerComponent.vue'
 import ProgressBar from '@/components/ProgressBarComponent.vue'
 import Stats from '@/components/StatsComponent.vue'
 import { ageFromDate } from "@/helpers/helpers.js"
