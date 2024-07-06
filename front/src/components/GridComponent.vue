@@ -1,5 +1,5 @@
 <template>
-  <div v-if="props?.items && props?.items.length > 0" class="grid my-2">
+  <div v-if="props?.items && props?.items.length > 0" class="grid my-2 min-h-80">
     <div v-for="(item, index) in props.items" :key="index"
       :class="[props.clickables ? 'hover:scale-105 transition-transform ease-in-out transform duration-200 cursor-pointer' : '']">
       <slot name="item" :item="item"></slot>

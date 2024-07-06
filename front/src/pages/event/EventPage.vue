@@ -18,7 +18,7 @@
 
       <!-- Location section -->
       <section class="flex items-center justify-center gap-2">
-        <MapPinIcon class="size-6 text-gray cursor-pointer" @click="openMaps()" />
+        <MapPinIcon class="size-6 text-gray hover:text-light-gray cursor-pointer" @click="openMaps()" />
         <input v-model="eventStore.event.data.location" id="location"
           class="w-full sm:w-2/3 md:w-1/2 p-2 rounded-lg bg-dark-gray text-light" placeholder="Location" />
       </section>
@@ -32,22 +32,23 @@
       <!-- Pills section -->
       <section>
         <h4 class="text-lg font-semibold text-light mb-4">Linked items</h4>
-        <div v-if="eventStore.event?.data?.season || eventStore.event?.data?.music"
-          class="flex justify-start flex-wrap items-center w-full m-2 my-4 gap-2">
+        <div class="flex justify-start flex-wrap items-center w-full m-2 my-4 gap-4">
           <Pill v-if="eventStore.event?.data?.season" :text="eventStore.event?.data?.season?.title" type="season"
             deleteable @delete="deleteSeason()" />
           <Pill v-if="eventStore.event?.data?.music" :text="eventStore.event?.data?.music?.title" type="music"
             deleteable @delete="deleteMusic()" />
-        </div>
-        <div
-          class="flex items-center justify-center rounded-lg p-8 border-dashed border-2 cursor-pointer border-light-gray hover:border-light transition-all transition-200"
-          @click="showItemPicker = true">
-          <PlusIcon class="size-8 text-light" />
+
+          <div v-if="!eventStore.event?.data?.season || !eventStore.event?.data?.music"
+            class="flex items-center justify-center rounded-full px-16 py-0.5 border-dashed border-2 cursor-pointer border-light-gray hover:border-light transition-all transition-200"
+            @click="showItemPicker = true">
+            <PlusIcon class="size-6 text-light" />
+          </div>
         </div>
       </section>
-
     </div>
-    <ItemPicker :show="showItemPicker" @close="showItemPicker = false" />
+
+    <ItemPicker :show="showItemPicker" @close="showItemPicker = false" :types="['season', 'music']"
+      @selected="(v) => { console.log(v) }" />
     <BottomActions />
   </div>
 </template>

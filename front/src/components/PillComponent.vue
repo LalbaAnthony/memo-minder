@@ -34,8 +34,6 @@ const props = defineProps({
   },
 })
 
-// const emit = defineEmits(['delete'])
-
 </script>
 
 <style scoped></style>
