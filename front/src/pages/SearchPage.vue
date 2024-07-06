@@ -70,17 +70,7 @@
     <!-- Results -->
     <Grid :items="results">
       <template #item="{ item }">
-        <router-link :to="item.path" class="item block p-4 border-b border-gray flex items-center justify-between"
-          :style="['animation-delay: 0.' + randomInt(1, 10) / 10 + 's;']">
-          <DocumentTextIcon v-if="item.type === 'page'" class="size-8 text-light-gray" />
-          <FilmIcon v-if="item.type === 'season'" class="size-8 text-light-gray" />
-          <CalendarDaysIcon v-if="item.type === 'event'" class="size-8 text-light-gray" />
-          <UsersIcon v-if="item.type === 'person'" class="size-8 text-light-gray" />
-          <MusicalNoteIcon v-if="item.type === 'music'" class="size-8 text-light-gray" />
-          <h3 class="text-lg font-semibold">{{ item.title }}</h3>
-          <ArrowLongRightIcon
-            class="arrow size-8 text-primary ml-2 hover:text-primary-light transition ease-in-out duration-300 transform" />
-        </router-link>
+        <Result :item="item" />
       </template>
     </Grid>
   </div>
@@ -91,15 +81,13 @@ import { watch, onMounted, ref, computed } from 'vue'
 import debounce from 'lodash/debounce'
 import { useRoute, useRouter } from 'vue-router'
 import Grid from '@/components/GridComponent.vue'
+import Result from '@/components/ResultItem.vue'
 import { PlusIcon } from '@heroicons/vue/24/solid'
-import { DocumentTextIcon } from '@heroicons/vue/24/solid'
-import { ArrowLongRightIcon } from '@heroicons/vue/24/solid'
 import { FilmIcon } from '@heroicons/vue/24/solid'
 import { CalendarDaysIcon } from '@heroicons/vue/24/solid'
 import { UsersIcon } from '@heroicons/vue/24/solid'
 import { MusicalNoteIcon } from '@heroicons/vue/24/solid'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
-import { randomInt } from '@/helpers/helpers.js'
 import { useEventStore } from '@/stores/event'
 
 const route = useRoute()
@@ -142,8 +130,8 @@ const loadSearch = debounce(async () => {
     ) {
       results.value.push({
         title: route.meta.title || route.name,
-        path: route.path,
-        type: 'page'
+        type: 'page',
+        action: () => router.push(route.path)
       })
     }
   })
@@ -152,8 +140,8 @@ const loadSearch = debounce(async () => {
   await eventStore.fetchEvents({ search: search.value }).then(() => {
     results.value.push(...eventStore.events.data.map((event) => ({
       title: event.title,
-      path: `/event/${event.eventId}`,
-      type: 'event'
+      type: 'event',
+      action: () => router.push(`/event/${event.eventId}`)
     })))
   })
 
@@ -191,24 +179,5 @@ watch(() => search.value, loadSearch)
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 1rem;
-}
-
-.item:hover .arrow {
-  /* transform: translateX(10px); */
-}
-
-.item {
-  animation-name: slide-in;
-  animation-duration: 0.3s;
-}
-
-@keyframes slide-in {
-  from {
-    transform: translateX(-100%);
-  }
-
-  to {
-    transform: translateX(0);
-  }
 }
 </style>
