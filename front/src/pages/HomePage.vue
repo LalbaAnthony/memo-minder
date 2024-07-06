@@ -1,6 +1,5 @@
 <template>
   <div>
-    <MoodPicker />
     <section class="progress-bars-grid">
       <div>
         <h4 class="text-l font-bold">Spent childhood</h4>
