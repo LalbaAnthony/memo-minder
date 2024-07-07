@@ -1,29 +1,53 @@
 <template>
   <div>
-    <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 m-4">
-      <div class="flex flex-col gap-2">
-        <label for="username">Username</label>
-        <input v-model="authStore.user.username" id="username" type="text"
-          class="px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Username" />
+    <section>
+      <h2 class="text-xl font-bold my-4">Global</h2>
+      <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 m-4">
+        <div class="flex flex-col gap-2">
+          <label for="username">Username</label>
+          <input v-model="authStore.user.username" id="username" type="text"
+            class="px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Username" />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="email">Email</label>
+          <input v-model="authStore.user.email" id="email" type="email"
+            class="px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Email" disabled />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="birthdate">Birthdate</label>
+          <DatePicker :value="authStore.user.birthdate" @update="(v) => { authStore.user.birthdate = v }" />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="language">Language</label>
+          <select v-model="authStore.user.language" id="language" class="px-4 p-2 rounded-lg bg-dark-gray text-light">
+            <option value="" disabled>Language</option>
+            <option v-for="(value, key) in languages" :key="key" :value="key" :selected="key === authStore.user.language">
+              {{ value }}</option>
+          </select>
+        </div>
       </div>
-      <div class="flex flex-col gap-2">
-        <label for="email">Email</label>
-        <input v-model="authStore.user.email" id="email" type="email"
-          class="px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Email" disabled />
+    </section>
+    <hr>
+    <section>
+      <h2 class="text-xl font-bold my-4">Security</h2>
+      <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 m-4">
+        <div class="flex flex-col gap-2">
+          <label for="password">Password</label>
+          <input id="password" type="password" class="px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Password"
+            disabled />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="new-password">New password</label>
+          <input id="new-password" type="password" class="px-4 p-2 rounded-lg bg-dark-gray text-light"
+            placeholder="New password" disabled />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="confirm-password">Confirm password</label>
+          <input id="confirm-password" type="password" class="px-4 p-2 rounded-lg bg-dark-gray text-light"
+            placeholder="Confirm password" disabled />
+        </div>
       </div>
-      <div class="flex flex-col gap-2">
-        <label for="birthdate">Birthdate</label>
-        <DatePicker :value="authStore.user.birthdate" @update="(v) => { authStore.user.birthdate = v }" />
-      </div>
-      <div class="flex flex-col gap-2">
-        <label for="language">Language</label>
-        <select v-model="authStore.user.language" id="language" class="px-4 p-2 rounded-lg bg-dark-gray text-light">
-          <option value="" disabled>Language</option>
-          <option v-for="(value, key) in languages" :key="key" :value="key" :selected="key === authStore.user.language">
-            {{ value }}</option>
-        </select>
-      </div>
-    </div>
+    </section>
   </div>
 </template>
 
