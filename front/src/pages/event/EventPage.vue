@@ -72,9 +72,13 @@ const eventStore = useEventStore()
 
 const showItemPicker = ref(false)
 
-eventStore.fetchEvent(route.params.eventId).then(() => {
-  if (eventStore.event.data.title) route.meta.title = eventStore.event.data.title
-})
+function loadEvent () {
+  if (!route.params.eventId) return // No event id
+  if (eventStore?.event?.data && eventStore.event.data.eventId == route.params.eventId) return // Already loaded
+  eventStore.fetchEvent(route.params.eventId).then(() => {
+    if (eventStore.event.data.title) route.meta.title = eventStore.event.data.title
+  })
+}
 
 function deleteSeason() {
   eventStore.event.data.season = null
@@ -110,10 +114,11 @@ const types = computed(() => {
   return t
 })
 
+// Fetch event on mount
+loadEvent()
+
 watch(() => route.params.eventId, () => {
-  eventStore.fetchEvent(route.params.eventId).then(() => {
-    if (eventStore.event.data.title) route.meta.title = eventStore.event.data.title
-  })
+  loadEvent()
 })
 
 watch(() => eventStore.event.data,
