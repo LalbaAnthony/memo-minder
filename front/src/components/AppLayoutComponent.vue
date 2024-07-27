@@ -14,7 +14,7 @@
     <header v-else class="flex justify-between items-center bg-light-dark border-b border-gray p-4 gap-3">
       <Bars3Icon class="size-10 text-light-gray rounded-lg p-1 cursor-pointer"
         @click.stop="showSidebar = !showSidebar" />
-      <router-link to="/">
+      <router-link :to="route.path">
         <h1 class="text-2xl font-bold text-light">
           {{ route.meta.title }}
         </h1>
