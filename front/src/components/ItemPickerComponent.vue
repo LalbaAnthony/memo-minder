@@ -52,9 +52,10 @@ import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { XMarkIcon } from '@heroicons/vue/24/solid'
 import Grid from '@/components/GridComponent.vue'
 import Result from '@/components/ResultItem.vue'
-import { watch, ref } from 'vue'
+import { watch, ref, computed } from 'vue'
 import debounce from 'lodash/debounce'
 import { useEventStore } from '@/stores/event'
+import { useMusicStore } from '@/stores/music'
 
 const props = defineProps({
   show: {
@@ -64,44 +65,71 @@ const props = defineProps({
   },
   types: {
     type: Array,
-    required: false
+    required: true
   }
 })
 
 const search = ref('')
-const results = ref([])
 
 const eventStore = useEventStore()
+const musicStore = useMusicStore()
 
-const emit = defineEmits(['selected'])
+const emit = defineEmits(['selected', 'close'])
 
 const loadSearch = debounce(async () => {
   if (!search.value) return
 
-  results.value = []
-
-  console.log('Searching for:', search.value, 'with types:', props.types)
-
   // Events
-  if (!props.types || (props.types &&  props.types.includes('event'))) {
-    await eventStore.fetchEvents({ search: search.value }).then(() => {
-      results.value.push(...eventStore.events.data.map((event) => ({
-        title: event.title,
-        type: 'event',
-        action: () => emit('selected', event)
-      })))
-    })
+  if (props.types && props.types.includes('event')) {
+    await eventStore.fetchEvents({ search: search.value })
+    console.log(eventStore.events.data)
   }
 
   // People
   // ...
 
   // Musics
-  // ...
+  if (props.types && props.types.includes('music')) {
+    await musicStore.fetchMusics({ search: search.value })
+    console.log(musicStore.musics.data)
+  }
 
   // Seasons
   // ...
+
 }, 1000)
+
+
+const results = computed(() => {
+  let res = []
+
+  // Events
+  if (props.types && props.types.includes('event')) {
+    res.push(...eventStore.events.data.map((event) => ({
+      title: event.title,
+      type: 'event',
+      action: () => { emit('selected', { type: 'event', data: event }), emit('close', true)}
+    })))
+  }
+
+  // People
+  // ...
+
+  // Musics
+  if (props.types && props.types.includes('music')) {
+    res.push(...musicStore.musics.data.map((music) => ({
+      title: music.title,
+      type: 'music',
+      action: () => { emit('selected', { type: 'music', data: music }), emit('close', true)}
+    })))
+  }
+
+  // Seasons
+  // ...
+
+  return res
+})
+
 
 // Watch search for changes
 watch(() => search.value, loadSearch)

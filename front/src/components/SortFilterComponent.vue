@@ -6,9 +6,9 @@
     <!-- Sort -->
     <Dropdown title="Sort" side="right">
       <div class="space-y-2">
-        <button v-if="enebleDefault" @click="resetSort"
+        <button v-if="props.enableDefault" @click="resetSort"
           class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">Default</button>
-        <button v-for="item in sortItems" :key="item.value" @click="toggleSort(item.value)"
+        <button v-for="item in props.sortItems" :key="item.value" @click="toggleSort(item.value)"
           class="w-full text-left text-light hover:bg-light-gray px-4 py-2 rounded-md">{{ item.label }}</button>
       </div>
     </Dropdown>
@@ -24,7 +24,7 @@ const props = defineProps({
     type: Array,
     required: false,
   },
-  enebleDefault: {
+  enableDefault: {
     type: Boolean,
     default: true,
     required: false,

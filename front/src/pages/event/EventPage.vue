@@ -47,8 +47,8 @@
       </section>
     </div>
 
-    <ItemPicker :show="showItemPicker" @close="showItemPicker = false" :types="['season', 'music']"
-      @selected="(v) => { console.log(v) }" />
+    <ItemPicker :show="showItemPicker" :types="types" @close="showItemPicker = false"
+      @selected="(object) => { addItem(object) }" />
     <BottomActions />
   </div>
 </template>
@@ -64,7 +64,7 @@ import { MapPinIcon } from '@heroicons/vue/24/solid'
 import { useRoute } from 'vue-router'
 import { useEventStore } from '@/stores/event'
 import { dateToNiceDate } from '@/helpers/helpers.js'
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import debounce from 'lodash/debounce'
 
 const route = useRoute()
@@ -89,6 +89,26 @@ function deleteMusic() {
 function openMaps() {
   window.open(`http://maps.google.com/?q=${eventStore.event.data.location}`)
 }
+
+function addItem(object) {
+  console.log(object)
+  if (object.type === 'season') {
+    eventStore.event.data.season = object.data
+    eventStore.event.data.seasonId = object.data.seasonId
+  } else if (object.type === 'music') {
+    eventStore.event.data.music = object.data
+    eventStore.event.data.musicId = object.data.musicId
+  }
+}
+
+const types = computed(() => {
+  let t = []
+
+  if (!eventStore.event.data.season) t.push('season')
+  if (!eventStore.event.data.music) t.push('music')
+
+  return t
+})
 
 watch(() => route.params.eventId, () => {
   eventStore.fetchEvent(route.params.eventId).then(() => {
