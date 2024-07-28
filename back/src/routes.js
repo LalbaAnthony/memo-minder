@@ -22,11 +22,11 @@ router.get('/moods', moodController.getAllMoods);
 router.get('/mood/:id', moodController.getMoodById);
 
 // Music
-// router.get('/musics', checkToken, musicController.getAllMusics);
-// router.get('/music/:id', checkToken, musicController.getMusicById);
-// router.post('/musics', checkToken, musicController.createMusic);
-// router.put('/music/:id', checkToken, musicController.updateMusic);
-// router.delete('/music/:id', checkToken, musicController.deleteMusic);
+router.get('/musics', checkToken, musicController.getAllMusics);
+router.get('/music/:id', checkToken, musicController.getMusicById);
+router.post('/musics', checkToken, musicController.createMusic);
+router.put('/music/:id', checkToken, musicController.updateMusic);
+router.delete('/music/:id', checkToken, musicController.deleteMusic);
 
 // Person
 // router.get('/people', checkToken, personController.getAllPeople);
