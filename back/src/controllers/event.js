@@ -8,7 +8,7 @@ const Music = require('../models/music');
 const User = require('../models/user');
 
 exports.getAllEvents = async (req, res) => {
-    let { userId, sort, page, perPage, search } = req.query; // Use let instead of const
+    let { userId, sort, page, perPage, search } = req.query;
     try {
         // Check if userId is provided
         if (!userId) return res.status(400).json(formatRes('error', null, 'Missing fields: userId'));
