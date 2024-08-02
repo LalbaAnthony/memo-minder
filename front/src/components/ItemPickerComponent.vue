@@ -32,7 +32,6 @@
                   </Grid>
                 </TransitionChild>
               </TransitionRoot>
-
             </DialogPanel>
           </TransitionChild>
         </div>
@@ -99,7 +98,6 @@ const loadSearch = debounce(async () => {
 
 }, 1000)
 
-
 const results = computed(() => {
   let res = []
 
@@ -108,7 +106,7 @@ const results = computed(() => {
     res.push(...eventStore.events.data.map((event) => ({
       title: event.title,
       type: 'event',
-      action: () => { emit('selected', { type: 'event', data: event }), emit('close', true)}
+      action: () => { emit('selected', { type: 'event', data: event }), emit('close', true) }
     })))
   }
 
@@ -120,7 +118,7 @@ const results = computed(() => {
     res.push(...musicStore.musics.data.map((music) => ({
       title: music.title,
       type: 'music',
-      action: () => { emit('selected', { type: 'music', data: music }), emit('close', true)}
+      action: () => { emit('selected', { type: 'music', data: music }), emit('close', true) }
     })))
   }
 
