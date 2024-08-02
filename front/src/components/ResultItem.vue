@@ -1,5 +1,5 @@
 <template>
-  <div class="item block p-4 border-b border-gray flex items-center justify-between"
+  <div class="pop-animation block p-4 border-b border-gray flex items-center justify-between"
     :style="['animation-delay: 0.' + randomInt(1, 10) / 10 + 's;']" @click="props.item.action">
     <DocumentTextIcon v-if="props.item.type === 'page'" class="size-8 text-light-gray" />
     <FilmIcon v-if="props.item.type === 'season'" class="size-8 text-light-gray" />
@@ -40,18 +40,19 @@ const props = defineProps({
 </script>
 
 <style scoped>
-.item {
-  animation-name: slide-in;
+.pop-animation {
+  animation-name: pop;
   animation-duration: 0.3s;
 }
 
-@keyframes slide-in {
-  from {
-    transform: translateX(-100%);
+@keyframes pop {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
   }
-
-  to {
-    transform: translateX(0);
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 </style>
