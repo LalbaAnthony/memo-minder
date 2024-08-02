@@ -89,11 +89,13 @@ import { UsersIcon } from '@heroicons/vue/24/solid'
 import { MusicalNoteIcon } from '@heroicons/vue/24/solid'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { useEventStore } from '@/stores/event'
+import { useMusicStore } from '@/stores/music'
 
 const route = useRoute()
 const router = useRouter()
 
 const eventStore = useEventStore()
+const musicStore = useMusicStore()
 
 const addButtons = ref({
   season: { show: false },
@@ -149,7 +151,13 @@ const loadSearch = debounce(async () => {
   // ...
 
   // Musics
-  // ...
+  await musicStore.fetchMusics({ search: search.value }).then(() => {
+    results.value.push(...musicStore.musics.data.map((music) => ({
+      title: music.title,
+      type: 'music',
+      action: () => router.push(`/music/${music.musicId}`)
+    })))
+  })
 
   // Seasons
   // ...
