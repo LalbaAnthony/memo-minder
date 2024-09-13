@@ -5,6 +5,8 @@ const { Op } = require('sequelize');
 const Event = require('../models/event');
 const Season = require('../models/season');
 const Music = require('../models/music');
+const Person = require('../models/person');
+const Mood = require('../models/mood');
 const User = require('../models/user');
 
 exports.getAllEvents = async (req, res) => {
@@ -51,6 +53,18 @@ exports.getAllEvents = async (req, res) => {
                 if (music) events[i].dataValues.music = music.dataValues;
             }
 
+            // Add person to the event
+            if (events[i].personId) {
+                const person = await Person.findByPk(parseInt(events[i].personId));
+                if (person) events[i].dataValues.person = person.dataValues;
+            }
+
+            // Add mood to the event
+            if (events[i].moodId) {
+                const mood = await Mood.findByPk(parseInt(events[i].moodId));
+                if (mood) events[i].dataValues.mood = mood.dataValues;
+            }
+
             // Add season to the event
             if (events[i].seasonId) {
                 const season = await Season.findByPk(parseInt(events[i].seasonId));
@@ -81,6 +95,18 @@ exports.getEventById = async (req, res) => {
             if (music) event.dataValues.music = music.dataValues;
         }
 
+        // Add person to the event
+        if (event.personId) {
+            const person = await Person.findByPk(parseInt(event.personId));
+            if (person) event.dataValues.person = person.dataValues;
+        }
+
+        // Add mood to the event
+        if (event.moodId) {
+            const mood = await Mood.findByPk(parseInt(event.moodId));
+            if (mood) event.dataValues.mood = mood.dataValues;
+        }
+
         // Add season to the event
         if (event.seasonId) {
             const season = await Season.findByPk(parseInt(event.seasonId));
@@ -94,10 +120,10 @@ exports.getEventById = async (req, res) => {
 };
 
 exports.createEvent = async (req, res) => {
-    const { musicId, userId, seasonId, title, description, date, location } = req.body;
+    const { musicId, personId, moodId, userId, seasonId, title, description, date, location } = req.body;
     try {
         // Check if all fields are provided
-        if (!musicId || !userId || !title || !description || !date || !location) return res.status(400).json(formatRes('error', null, 'Missing fields: musicId, userId, title, description, date, location'));
+        if (!userId || !title || !description || !date || !location) return res.status(400).json(formatRes('error', null, 'Missing fields: musicId, moodId, userId, title, description, date, location'));
 
         // Check if userId exists
         if (!userId) return res.status(400).json(formatRes('error', null, 'Missing fields: userId'));
@@ -108,6 +134,18 @@ exports.createEvent = async (req, res) => {
             // Check if musicId exists
             const music = await Music.findByPk(parseInt(musicId));
             if (!music) return res.status(404).json(formatRes('error', null, 'No music found with this id'));
+        }
+
+        if (personId) {
+            // Check if personId exists
+            const person = await Person.findByPk(parseInt(personId));
+            if (!person) return res.status(404).json(formatRes('error', null, 'No person found with this id'));
+        }
+
+        if (moodId) {
+            // Check if moodId exists
+            const mood = await Mood.findByPk(parseInt(moodId));
+            if (!mood) return res.status(404).json(formatRes('error', null, 'No mood found with this id'));
         }
 
         if (seasonId) {
@@ -126,7 +164,7 @@ exports.createEvent = async (req, res) => {
 };
 
 exports.updateEvent = async (req, res) => {
-    const { musicId, userId, seasonId, title, description, date, location } = req.body;
+    const { musicId, personId, moodId, userId, seasonId, title, description, date, location } = req.body;
     try {
         // Get the event and check if it exists
         if (!req.params.id) return res.status(400).json(formatRes('error', null, 'No id provided'));
@@ -142,6 +180,18 @@ exports.updateEvent = async (req, res) => {
             // Check if musicId exists
             const music = await Music.findByPk(parseInt(musicId));
             if (!music) return res.status(404).json(formatRes('error', null, 'No music found with this id'));
+        }
+
+        if (personId) {
+            // Check if personId exists
+            const person = await Person.findByPk(parseInt(personId));
+            if (!person) return res.status(404).json(formatRes('error', null, 'No person found with this id'));
+        }
+
+        if (moodId) {
+            // Check if moodId exists
+            const mood = await Mood.findByPk(parseInt(moodId));
+            if (!mood) return res.status(404).json(formatRes('error', null, 'No mood found with this id'));
         }
 
         if (seasonId) {

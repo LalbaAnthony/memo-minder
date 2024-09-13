@@ -29,11 +29,11 @@ router.put('/music/:id', checkToken, musicController.updateMusic);
 router.delete('/music/:id', checkToken, musicController.deleteMusic);
 
 // Person
-// router.get('/people', checkToken, personController.getAllPeople);
-// router.get('/person/:id', checkToken, personController.getPersonById);
-// router.post('/people', checkToken, personController.createPerson);
-// router.put('/person/:id', checkToken, personController.updatePerson);
-// router.delete('/person/:id', checkToken, personController.deletePerson);
+router.get('/people', checkToken, personController.getAllPeople);
+router.get('/person/:id', checkToken, personController.getPersonById);
+router.post('/people', checkToken, personController.createPerson);
+router.put('/person/:id', checkToken, personController.updatePerson);
+router.delete('/person/:id', checkToken, personController.deletePerson);
 
 // Seaons
 // router.get('/seasons', checkToken, seasonController.getAllSeasons);

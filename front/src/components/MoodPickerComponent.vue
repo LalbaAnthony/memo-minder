@@ -2,7 +2,7 @@
   <Menu as="div" class="relative inline-block text-left">
     <div>
       <button
-        class="inline-flex w-full justify-center items-center rounded-full px-3 py-1 text-md font-medium text-light bg-primary"
+        class="inline-flex w-full justify-center items-center rounded-lg px-4 py-2 text-md font-medium text-light bg-primary"
         :style="mood ? `background-color: ${mood?.color} !important;` : ''" @click.stop="show = !show">
         {{ mood?.name || 'Mood' }}
         <ChevronDownIcon
@@ -67,7 +67,6 @@ onMounted(() => {
     setMood(moodId.value)
   }
 })
-
 
 watch(() => moodId.value, () => {
   emit('update', moodId.value)

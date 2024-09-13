@@ -4,7 +4,7 @@
     <DocumentTextIcon v-if="props.item.type === 'page'" class="size-8 text-light-gray" />
     <FilmIcon v-if="props.item.type === 'season'" class="size-8 text-light-gray" />
     <CalendarDaysIcon v-if="props.item.type === 'event'" class="size-8 text-light-gray" />
-    <UsersIcon v-if="props.item.type === 'person'" class="size-8 text-light-gray" />
+    <UserIcon v-if="props.item.type === 'person'" class="size-8 text-light-gray" />
     <MusicalNoteIcon v-if="props.item.type === 'music'" class="size-8 text-light-gray" />
     <h3 class="text-lg font-semibold">{{ props.item.title }}</h3>
     <ArrowLongRightIcon v-if="props.icon === 'arrow'"
@@ -19,7 +19,7 @@
 import { DocumentTextIcon } from '@heroicons/vue/24/solid'
 import { FilmIcon } from '@heroicons/vue/24/solid'
 import { CalendarDaysIcon } from '@heroicons/vue/24/solid'
-import { UsersIcon } from '@heroicons/vue/24/solid'
+import { UserIcon } from '@heroicons/vue/24/solid'
 import { MusicalNoteIcon } from '@heroicons/vue/24/solid'
 import { randomInt } from '@/helpers/helpers.js'
 import { PlusIcon } from '@heroicons/vue/24/solid'

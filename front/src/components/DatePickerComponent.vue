@@ -1,5 +1,5 @@
 <template>
-  <input v-model="date" id="datepicker" type="date" class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light"
+  <input v-model="date" id="datepicker" type="date" class="w-full p-2 rounded-lg bg-dark-gray text-light"
     :placeholder="props.placeholder" />
 </template>
 
