@@ -184,6 +184,8 @@ const seedData = async () => {
                 eventId: 1,
                 userId: 1,
                 musicId: 1,
+                personId: 1,
+                moodId: 1,
                 seasonId: 1,
                 title: 'Summer party',
                 description: 'The best party of the year',

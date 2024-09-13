@@ -25,11 +25,27 @@ const Event = sequelize.define('Event', {
         },
         allowNull: true,
     },
+    moodId: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'Mood',
+            key: 'moodId'
+        },
+        allowNull: true,
+    },
     seasonId: {
         type: DataTypes.INTEGER,
         references: {
             model: 'Season',
             key: 'seasonId'
+        },
+        allowNull: true,
+    },
+    personId: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'Person',
+            key: 'personId'
         },
         allowNull: true,
     },

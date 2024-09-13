@@ -21,7 +21,7 @@
               </div>
 
               <!-- Results -->
-              <TransitionRoot :show="search.length > 0" class="w-full">
+              <TransitionRoot :show="search.length > 0" class="w-full mt-8">
                 <TransitionChild enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
                   enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
                   leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
@@ -55,6 +55,7 @@ import { watch, ref, computed } from 'vue'
 import debounce from 'lodash/debounce'
 import { useEventStore } from '@/stores/event'
 import { useMusicStore } from '@/stores/music'
+import { usePersonStore } from '@/stores/person'
 
 const props = defineProps({
   show: {
@@ -72,6 +73,7 @@ const search = ref('')
 
 const eventStore = useEventStore()
 const musicStore = useMusicStore()
+const personStore = usePersonStore()
 
 const emit = defineEmits(['selected', 'close'])
 
@@ -85,7 +87,11 @@ const loadSearch = debounce(async () => {
   }
 
   // People
-  // ...
+  if (props.types && props.types.includes('person')) {
+    await personStore.fetchPeople({ search: search.value })
+    console.log(personStore.musics.data)
+  }
+  
 
   // Musics
   if (props.types && props.types.includes('music')) {
@@ -111,7 +117,13 @@ const results = computed(() => {
   }
 
   // People
-  // ...
+  if (props.types && props.types.includes('person')) {
+    res.push(...personStore.people.data.map((person) => ({
+      title: person.name,
+      type: 'person',
+      action: () => { emit('selected', { type: 'person', data: person }), emit('close', true) }
+    })))
+  }
 
   // Musics
   if (props.types && props.types.includes('music')) {
