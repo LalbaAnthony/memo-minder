@@ -1,38 +1,20 @@
 Misc:
-    - [X] Project startup
-    - [X] Create logo
-    - [X] Refaire logo avec new couleurs
+    - [ ] Finir tout par couche
 
 Back:
-    - [X] Create DB
-    - [X] Add log systeme
-    - [X] Make config file
-    - [X] Clean seed.js and make two version: one with actual all-user data for production and one with fake data for dev
-    - [X] Inst et setup bcrypt for login
-    - [X] Auth systeme
-    - [X] Terminier middleware token
-    - [X] Add pagination
-    - [-] Depl tt middleware dans dossier middleware
-    - [ ] All auth endpoints as forgotten password, reset password, login, register, ...
-    - [ ] Tester et imrpove token systeme
     - [ ] Create and implement email systeme with back/src/helpers/email.js
-    - [ ] Duplicate all event to others data type    
 
 Front:
-    - [X] Make bottom action the same as grid (slots)
-    - [X] Faire bare de recherche qui recherche aussi dans les routes et affiche une lsit de page
-    - [X] Debug notif et les imprpoves
-    - [X] CORS ERROR
-    - [X] Front de login (sans register) => auth store, ...
-    - [X] Stats randoms temps restant (avec une info expl a chaque fois au survol) avec les todo du composant
-    - [ ] Citations aléatoires
     - [ ] Make integration from something like https://flowbite.com/blocks/application/shells/
+    - [ ] Bug inté botom buttons on event list
+    - [ ] Faire récuperation de caque item le plus récent
+    - [ ] Citations aléatoires
     - [ ] Mettre tout les store en perssistant pour pour etre en offline
     - [ ] Faire systeme de stockage des données en local, puis d'envoie au serveur
     - [ ] Faire scroll infini pr tout les type de contenu (ou pagination)
     - [ ] Faire PWA
-    - [X] Faire une seule bar de recherche pour créer des items, faires des recherches et globalement tout
 
 
 Ideas:
+    - [ ] Pouvoir parametrer la home page
     - [ ] Fonction de Rappels de Souvenirs (what happened a year ago, ...)

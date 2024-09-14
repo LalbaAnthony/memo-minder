@@ -3,8 +3,8 @@
     <SortFilter :sortItems="[
       { value: 'title-asc', label: 'Title (A-Z)' },
       { value: 'title-desc', label: 'Title (Z-A)' },
-      { value: 'date-asc', label: 'Date (Oldest)' },
-      { value: 'date-desc', label: 'Date (Newest)' }
+      { value: 'releaseDate-asc', label: 'Date (Oldest)' },
+      { value: 'releaseDate-desc', label: 'Date (Newest)' }
     ]" />
     <Loader v-if="musicStore.musics.loading" />
     <Grid v-else :items="musicStore.musics.data">
