@@ -12,7 +12,7 @@
     </TransitionRoot>
 
     <!-- Adjustments button -->
-    <!-- <div v-if="props.adjustmentsButton && route.name.includes('list')" @click="ToggleAdjustments()"
+    <!-- <div v-if="props.adjustmentsButton && route.name.includes('list')" @click="toggleAdjustments()"
       class="flex items-center justify-center cursor-pointer bg-dark-gray text-white rounded-2xl p-2 hover:scale-105 transition-transform duration-200 border-2 border-dark-gray">
       <AdjustmentsHorizontalIcon class="size-10" />
     </div> -->
@@ -64,6 +64,10 @@ function goTop() {
     behavior: 'smooth',
   })
 }
+
+// function toggleAdjustments() {
+//   console.log('toggleAdjustments')
+// }
 
 // Enable go top button when scrolling
 window.addEventListener('scroll', debounce(() => {
