@@ -192,6 +192,18 @@ const seedData = async () => {
                 date: '2022-08-15',
                 location: 'Paris',
             },
+            {
+                eventId: 2,
+                userId: 1,
+                musicId: 2,
+                personId: 1,
+                moodId: 1,
+                seasonId: 1,
+                title: 'Party at Smith\'s',
+                description: 'Did you know that Smith is a legend?',
+                date: '2022-08-20',
+                location: 'Toulouse',
+            },
         ];
 
         try {
