@@ -19,14 +19,27 @@
       </div>
     </section>
 
+    <div class="md:grid md:grid-cols-2 md:gap-4">
+      <section v-if="authStore?.user?.birthdate">
+        <h2 class="text-xl font-bold">Stats</h2>
+        <div class="my-4">
+          <Stats :birthdate="authStore.user.birthdate" />
+        </div>
+      </section>
+
+      <section v-if="quoteStore?.quote?.data?.quote">
+        <h2 class="text-xl font-bold">Quote</h2>
+        <div class="my-4">
+          <p class="my-2">
+            <span class="text-md">"</span> {{ quoteStore.quote.data.quote }} <span class="text-md">"</span>
+          </p>
+          <p class="text-right text-light-gray">{{ quoteStore.quote.data.author }}</p>
+        </div>
+      </section>
+    </div>
+
     <section>
-      <h2 class="text-xl font-bold">Stats</h2>
-      <div class="my-4">
-        <Stats :birthdate="authStore.user.birthdate" />
-      </div>
-    </section>
-    <section>
-      <h2 class="text-xl font-bold">Lasts added</h2>
+      <h2 class="text-xl font-bold">Lasts events added</h2>
       <div class="my-4">
         <Loader v-if="eventStore.events.loading" />
         <Grid v-else :items="eventStore.events.data">
@@ -49,11 +62,13 @@ import Stats from '@/components/StatsComponent.vue'
 import { ageFromDate } from "@/helpers/helpers.js"
 import { useAuthStore } from '@/stores/auth'
 import { useEventStore } from '@/stores/event'
+import { useQuoteStore } from '@/stores/quote'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
 const authStore = useAuthStore()
+const quoteStore = useQuoteStore()
 const eventStore = useEventStore()
 
 const childhoodPercentage = computed(() => {
@@ -103,8 +118,10 @@ async function loadEvents() {
   })
 }
 
-// Fetch events on mount
+// Fetch data on mount
 if (!eventStore.events.data || eventStore.events.data.length === 0) loadEvents()
+quoteStore.fetchQuoteIfTooOld()
+
 </script>
 
 <style scoped>

@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col cursor-pointer border-2 border-gray rounded-[8px] bg-light-dark h-full">
-    <router-link class="p-5" :to="{ path: `/event/${props?.event?.eventId}` }">
+    <router-link class="flex-1 p-5" :to="{ path: `/event/${props?.event?.eventId}` }">
       <div class="flex flex-col justify-center items-center w-full my-2">
         <h1 class="text-2xl font-bold">{{ props?.event?.title }}</h1>
         <p class="text-sm text-light-gray">the {{ dateToNiceDate(props?.event?.date) }} {{ props?.event?.location ? `at
@@ -16,7 +16,7 @@
       </div>
     </router-link>
     <div class="grid grid-cols-2 divide-x-2 divide-gray cursor-pointer">
-      <div class="flex justify-center items-center p-2 bg-light-gray rounded-bl-[6px]" @click="deleteEvent">
+      <div class="flex justify-center items-center p-2 bg-light-gray rounded-bl-[6px]" @click="deleteEvent()">
         <TrashIcon class="size-6" />
       </div>
       <router-link class="flex justify-center items-center p-2 bg-light-gray rounded-br-[6px]"
@@ -37,15 +37,15 @@ import { useEventStore } from '@/stores/event'
 
 const eventStore = useEventStore()
 
-function deleteEvent() {
-  if (confirm('Are you sure you want to delete this event?')) eventStore.deleteEvent(props.event.eventId)
-}
-
 const props = defineProps({
   event: {
     type: Object,
     required: true,
   },
 })
+
+function deleteEvent() {
+  if (confirm('Are you sure you want to delete this event?')) eventStore.deleteEvent(props.event.eventId)
+}
 
 </script>

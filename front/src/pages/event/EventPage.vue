@@ -37,7 +37,7 @@
       <!-- Pills section -->
       <section>
         <h4 class="text-lg font-semibold text-light mb-4">Linked items</h4>
-        <div class="flex justify-start flex-wrap items-center w-full m-2 my-4 gap-4">
+        <div class="flex justify-start flex-wrap items-center w-full my-4 gap-4">
           <Pill v-if="eventStore.event?.data?.season" :text="eventStore.event?.data?.season?.title" type="season"
             deleteable @delete="deleteSeason()" clickable @click="router.push(`/season/${eventStore.event?.data?.seasonId}`)" />
           <Pill v-if="eventStore.event?.data?.music" :text="eventStore.event?.data?.music?.title" type="music"
