@@ -131,22 +131,22 @@ const showSidebar = ref(false)
 const search = ref('')
 
 function blurApp() {
-  const BLUR = '2px'
-  const main = document.querySelector('main')
-  const header = document.querySelector('header')
-  const nav = document.querySelector('nav')
-  if (main) main.style.filter = `blur(${BLUR})`
-  if (header) header.style.filter = `blur(${BLUR})`
-  if (nav) nav.style.filter = `blur(${BLUR})`
+  // const BLUR = '2px'
+  // const main = document.querySelector('main')
+  // const header = document.querySelector('header')
+  // const nav = document.querySelector('nav')
+  // if (main) main.style.filter = `blur(${BLUR})`
+  // if (header) header.style.filter = `blur(${BLUR})`
+  // if (nav) nav.style.filter = `blur(${BLUR})`
 }
 
 function unblurApp() {
-  const main = document.querySelector('main')
-  const header = document.querySelector('header')
-  const nav = document.querySelector('nav')
-  if (main) main.style.filter = 'none'
-  if (header) header.style.filter = 'none'
-  if (nav) nav.style.filter = 'none'
+  // const main = document.querySelector('main')
+  // const header = document.querySelector('header')
+  // const nav = document.querySelector('nav')
+  // if (main) main.style.filter = 'none'
+  // if (header) header.style.filter = 'none'
+  // if (nav) nav.style.filter = 'none'
 }
 
 function hideSidebar() {
