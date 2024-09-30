@@ -8,9 +8,9 @@
       </div>
       <div class="my-4">
         <div class="flex justify-start flex-wrap items-center w-full m-2 gap-2">
-          <Pill :text="'Calm'" type="mood" />
-          <Pill :text="'Calm'" type="mood" />
-          <Pill :text="'Calm'" type="mood" />
+          <Pill v-if="props?.season?.season" :text="props?.season?.season?.title" type="season" />
+          <Pill v-if="props?.season?.music" :text="props?.season?.music?.title" type="music" />
+          <Pill v-if="props?.season?.person" :text="props?.season?.person?.name" type="person" />
         </div>
         <p class="m-2 my-4">{{ threeDotString('Lorem adipisicing elit mollitia') }}</p>
       </div>
