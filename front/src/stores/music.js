@@ -18,6 +18,10 @@ export const useMusicStore = defineStore('music', {
   }),
 
   actions: {
+    clearMusic() {
+      this.music.data = {}
+    },
+
     async fetchMusic(musicId) {
       // Loading
       this.music.loading = true

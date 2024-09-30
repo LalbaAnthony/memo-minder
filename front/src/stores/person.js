@@ -18,6 +18,10 @@ export const usePersonStore = defineStore('person', {
   }),
 
   actions: {
+    clearPerson() {
+      this.person.data = {}
+    },
+
     async fetchPerson(personId) {
       // Loading
       this.person.loading = true

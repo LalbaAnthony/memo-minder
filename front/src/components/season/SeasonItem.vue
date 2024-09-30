@@ -1,10 +1,10 @@
 <template>
-  <div class="flex flex-col cursor-pointer border-2 border-gray rounded-[8px] bg-light-dark h-full">
+  <div class="flex flex-col cursor-pointer border-2 border-gray rounded-[8px] bg-dark-light h-full">
     <div class="h-6 w-full rounded-t-[6px]" :style="`background-color: ${props?.season?.color};`"></div>
     <router-link class="flex-1 p-5" :to="{ path: `/season/${props?.season?.seasonId}` }">
       <div class="flex flex-col justify-center items-center w-full my-2">
         <h1 class="text-2xl font-bold">{{ props?.season?.title }}</h1>
-        <p class="text-sm text-light-gray">on 05/03/2023</p>
+        <p class="text-sm text-gray-light">on 05/03/2023</p>
       </div>
       <div class="my-4">
         <div class="flex justify-start flex-wrap items-center w-full m-2 gap-2">
@@ -16,10 +16,10 @@
       </div>
     </router-link>
     <div class="grid grid-cols-2 divide-x-2 divide-gray cursor-pointer">
-      <div class="flex justify-center items-center p-2 bg-light-gray rounded-bl-[6px]" @click="deleteSeason()">
+      <div class="flex justify-center items-center p-2 bg-gray-light rounded-bl-[6px]" @click="deleteSeason()">
         <TrashIcon class="size-6" />
       </div>
-      <router-link class="flex justify-center items-center p-2 bg-light-gray rounded-br-[6px]"
+      <router-link class="flex justify-center items-center p-2 bg-gray-light rounded-br-[6px]"
         :to="{ path: `/season/${props?.season?.seasonId}` }">
         <PencilSquareIcon class="size-6" />
       </router-link>

@@ -18,7 +18,7 @@ exports.getAllSeasons = async (req, res) => {
         if (!sort) {
             sort = [
                 { order: 'DESC', orderBy: 'dateStart' },
-                { order: 'ASC', orderBy: 'title' },
+                { order: 'ASC', orderBy: 'createdAt' },
             ];
         }
 

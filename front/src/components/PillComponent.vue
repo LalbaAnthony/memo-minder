@@ -5,7 +5,7 @@
     <UserIcon v-if="props.type === 'person'" class="size-6 text-primary-light" />
     <MusicalNoteIcon v-if="props.type === 'music'" class="size-6 text-primary-light" />
     <span class="text-sm text-light">{{ props.text }}</span>
-    <XMarkIcon v-if="props.deleteable" class="size-6 text-light-gray hover:text-light cursor-pointer" @click.stop="$emit('delete', true)" />
+    <XMarkIcon v-if="props.deleteable" class="size-6 text-gray-light hover:text-light cursor-pointer" @click.stop="$emit('delete', true)" />
   </div>
 </template>
 

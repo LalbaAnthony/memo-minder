@@ -1,5 +1,8 @@
 import { defineStore } from 'pinia'
 import { get, post, put, del } from '@/helpers/api';
+import { useAuthStore } from '@/stores/auth'
+
+const authStore = useAuthStore()
 
 export const useSeasonStore = defineStore('season', {
   state: () => ({
@@ -8,81 +11,79 @@ export const useSeasonStore = defineStore('season', {
       data: [],
       pagination: { page: 1, perPage: 10, total: 1 },
     },
+    season: {
+      loading: false,
+      data: {},
+    },
   }),
 
   actions: {
-    async fetchSeasons() {
+    clearSeason() {
+      this.season.data = {}
+    },
+
+    async fetchSeason(seasonId) {
+      // Loading
+      this.season.loading = true
+
+      // Data
+      this.season.data = {}
+
+      const params = {
+        userId: authStore.user.userId,
+      }
+
+      const resp = await get(`season/${seasonId}`, params);
+      this.season.data = resp.data || {};
+
+      // Loading
+      this.season.loading = false
+    },
+
+    async fetchSeasons(givenParams = {}) {
       // Loading
       this.seasons.loading = true
 
       // Data
       this.seasons.data = []
 
-      // const resp = await get('seasons');
-      // this.seasons.data = resp.data || [];
+      // Request
+      const params = {
+        userId: authStore.user.userId,
+        page: this.seasons.pagination.page || 1,
+        perPage: this.seasons.pagination.perPage || 10,
+        sort: [
+          { order: 'DESC', orderBy: 'createdAt' },
+        ],
+      }
 
-      // Fake data fetch for demo
-      setTimeout(() => {
-        this.seasons.data = [
-          {
-            seasonId: 1,
-            userId: 1,
-            musicId: 1,
-            moodId: 1,
-            personId: 1,
-            title: 'Spring 2021',
-            color: '#ff0000',
-            description: 'Spring 2021 description',
-            dateStart: '2021-03-21',
-            dateEnd: '2021-06-21',
-            updatedAt: '2021-03-21',
-            createdAt: '2021-03-21',
-          },
-          {
-            seasonId: 2,
-            userId: 1,
-            musicId: 2,
-            moodId: 2,
-            personId: 2,
-            title: 'Summer 2021',
-            color: '#00ff00',
-            description: 'Summer 2021 description',
-            dateStart: '2021-06-21',
-            dateEnd: '2021-09-21',
-            updatedAt: '2021-06-21',
-            createdAt: '2021-06-21',
-          },
-          {
-            seasonId: 3,
-            userId: 1,
-            musicId: 3,
-            moodId: 3,
-            personId: 3,
-            title: 'Autumn 2021',
-            color: '#0000ff',
-            description: 'Autumn 2021 description',
-            dateStart: '2021-09-21',
-            dateEnd: '2021-12-21',
-            updatedAt: '2021-09-21',
-            createdAt: '2021-09-21',
-          },
-          {
-            seasonId: 4,
-            userId: 1,
-            musicId: 4,
-            moodId: 4,
-            personId: 4,
-            title: 'Winter 2021',
-            color: '#ff00ff',
-            description: 'Winter 2021 description',
-            dateStart: '2021-12-21',
-            dateEnd: '2022-03-21',
-            updatedAt: '2021-12-21',
-            createdAt: '2021-12-21',
-          },
-        ]
-        this.seasons.loading = false
-      }, 1000);
+      Object.assign(params, givenParams)
+
+      const resp = await get('seasons', params);
+      this.seasons.data = resp.data || [];
+      this.seasons.pagination = resp.pagination || { page: 1, perPage: 10, total: 1 };
+
+      // Loading
+      this.seasons.loading = false
+    },
+
+    async deleteSeason(seasonId) {
+
+      // Remove in local
+      this.seasons.data.splice(this.seasons.data.findIndex(season => season.seasonId === seasonId), 1)
+
+      // Request
+      console.log('delete seasonId', seasonId)
+    },
+
+    async createSeason(season) {
+      // Request
+      console.log('create season', season)
+    },
+
+    async updateSeason(season) {
+      // Request
+      console.log('update season', season)
     },
   },
 })

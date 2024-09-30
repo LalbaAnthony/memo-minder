@@ -19,7 +19,7 @@ exports.getAllEvents = async (req, res) => {
         if (!sort) {
             sort = [
                 { order: 'DESC', orderBy: 'date' },
-                { order: 'ASC', orderBy: 'title' },
+                { order: 'ASC', orderBy: 'createdAt' },
             ];
         }
 

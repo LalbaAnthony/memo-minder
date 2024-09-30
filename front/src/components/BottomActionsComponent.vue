@@ -6,20 +6,20 @@
       <TransitionChild as="div" enter="transition ease-out duration-100 transform" enter-from="opacity-0 scale-95"
         enter-to="opacity-100 scale-100" leave="transition ease-in duration-100 transform"
         leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95"
-        class="flex items-center justify-center cursor-pointer bg-dark-gray text-white rounded-2xl p-2 hover:scale-105 transition-transform duration-200 border-2 border-dark-gray">
+        class="flex items-center justify-center cursor-pointer bg-gray-dark text-white rounded-2xl p-2 hover:scale-105 transition-transform duration-200 border-2 border-gray-dark">
         <ChevronUpIcon class="size-6" />
       </TransitionChild>
     </TransitionRoot>
 
     <!-- Adjustments button -->
     <!-- <div v-if="props.adjustmentsButton && route.name.includes('list')" @click="toggleAdjustments()"
-      class="flex items-center justify-center cursor-pointer bg-dark-gray text-white rounded-2xl p-2 hover:scale-105 transition-transform duration-200 border-2 border-dark-gray">
+      class="flex items-center justify-center cursor-pointer bg-gray-dark text-white rounded-2xl p-2 hover:scale-105 transition-transform duration-200 border-2 border-gray-dark">
       <AdjustmentsHorizontalIcon class="size-10" />
     </div> -->
 
     <!-- Add button -->
     <router-link v-if="props.addButton && route.name.includes('list')" :to="`${route.path}/add`"
-      class="flex items-center justify-center cursor-pointer bg-primary text-white rounded-2xl p-2 hover:scale-105 transition-transform duration-200 border-2 border-dark-gray">
+      class="flex items-center justify-center cursor-pointer bg-primary text-white rounded-2xl p-2 hover:scale-105 transition-transform duration-200 border-2 border-gray-dark">
       <PlusIcon class="size-10" />
     </router-link>
 
@@ -71,7 +71,6 @@ function goTop() {
 
 // Enable go top button when scrolling
 window.addEventListener('scroll', debounce(() => {
-  console.log(window.scrollY)
   enableGoTop.value = window.scrollY > 100
 }, 100))
 

@@ -33,7 +33,7 @@
           <p class="my-2">
             <span class="text-md">"</span> {{ quoteStore.quote.data.quote }} <span class="text-md">"</span>
           </p>
-          <p class="text-right text-light-gray">{{ quoteStore.quote.data.author }}</p>
+          <p class="text-right text-gray-light">{{ quoteStore.quote.data.author }}</p>
         </div>
       </section>
     </div>
@@ -113,7 +113,7 @@ async function loadEvents() {
       orderBy: route.query.sort?.split('-')[0] || null,
       order: route.query.sort?.split('-')[1] || null
     }] : [
-      { order: 'ASC', orderBy: 'title' },
+      { order: 'ASC', orderBy: 'createdAt' },
     ]
   })
 }

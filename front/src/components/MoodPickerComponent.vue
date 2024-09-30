@@ -2,7 +2,7 @@
   <Menu as="div" class="relative inline-block text-left">
     <div>
       <button
-        class="inline-flex w-full justify-center items-center rounded-lg px-4 py-2 text-md font-medium text-light bg-dark-gray"
+        class="inline-flex w-full justify-center items-center rounded-lg px-4 py-2 text-md font-medium text-light bg-gray-dark"
         :style="mood && props.enableColor ? `background-color: ${mood?.color} !important;` : ''" @click.stop="show = !show">
         {{ mood?.name || 'Mood' }}
         <ChevronDownIcon
@@ -17,9 +17,9 @@
         leave="transition ease-in duration-75 transform" leave-from="opacity-100 scale-100"
         leave-to="opacity-0 scale-95"
         class="origin-top-right absolute mt-2 w-48 rounded-lg bg-gray z-10 overflow-auto py-2">
-        <div class="flex flex-col gap-2 p-4">
+        <div class="flex flex-col gap-2 px-4 py-2">
           <button v-for="mood in moodStore.moods.data" :key="mood.moodId"
-            class="flex items-center justify-between rounded-md w-full px-2 py-1 text-light hover:bg-light-gray"
+            class="flex items-center justify-between rounded-md w-full px-2 py-1 text-light hover:bg-gray-light"
             @click="setMood(mood.moodId)">
             <span>{{ mood.name }}</span>
           </button>

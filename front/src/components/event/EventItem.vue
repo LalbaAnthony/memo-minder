@@ -1,9 +1,9 @@
 <template>
-  <div class="flex flex-col cursor-pointer border-2 border-gray rounded-[8px] bg-light-dark h-full">
+  <div class="flex flex-col cursor-pointer border-2 border-gray rounded-[8px] bg-dark-light h-full">
     <router-link class="flex-1 p-5" :to="{ path: `/event/${props?.event?.eventId}` }">
       <div class="flex flex-col justify-center items-center w-full my-2">
         <h1 class="text-2xl font-bold">{{ props?.event?.title }}</h1>
-        <p class="text-sm text-light-gray">the {{ dateToNiceDate(props?.event?.date) }} {{ props?.event?.location ? `at
+        <p class="text-sm text-gray-light">the {{ dateToNiceDate(props?.event?.date) }} {{ props?.event?.location ? `at
           ${props?.event?.location}` : '' }}</p>
       </div>
       <div class="my-4">
@@ -16,10 +16,10 @@
       </div>
     </router-link>
     <div class="grid grid-cols-2 divide-x-2 divide-gray cursor-pointer">
-      <div class="flex justify-center items-center p-2 bg-light-gray rounded-bl-[6px]" @click="deleteEvent()">
+      <div class="flex justify-center items-center p-2 bg-gray-light rounded-bl-[6px]" @click="deleteEvent()">
         <TrashIcon class="size-6" />
       </div>
-      <router-link class="flex justify-center items-center p-2 bg-light-gray rounded-br-[6px]"
+      <router-link class="flex justify-center items-center p-2 bg-gray-light rounded-br-[6px]"
         :to="{ path: `/event/${props?.event?.eventId}` }">
         <PencilSquareIcon class="size-6" />
       </router-link>

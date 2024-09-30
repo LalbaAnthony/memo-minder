@@ -5,11 +5,11 @@
 
     <component :is="tabs[type].component" @set-auth-type="(type) => setAuthType(type)">
       <div class="flex flex-row-reverse align-items-center justify-between m-4">
-        <button v-if="type === 'login' || type === 'register'" class="text-light hover:text-light-gray cursor-pointer"
+        <button v-if="type === 'login' || type === 'register'" class="text-light transition-colors duration-200 hover:text-gray-light cursor-pointer"
           @click="setAuthType('forgotPassword')">Forgot password ?</button>
-        <button v-if="type === 'forgotPassword'" class="text-light hover:text-light-gray cursor-pointer"
+        <button v-if="type === 'forgotPassword'" class="text-light transition-colors duration-200 hover:text-gray-light cursor-pointer"
           @click="setAuthType('login')">Back</button>
-        <button v-if="type === 'resetPassword'" class="text-light hover:text-light-gray cursor-pointer"
+        <button v-if="type === 'resetPassword'" class="text-light transition-colors duration-200 hover:text-gray-light cursor-pointer"
           @click="setAuthType('forgotPassword')">Back</button>
       </div>
     </component>

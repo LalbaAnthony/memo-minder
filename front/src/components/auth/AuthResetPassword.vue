@@ -1,17 +1,17 @@
 <template>
     <div>
         <div class="flex flex-col items-center justify-center space-y-4 mt-4 mx-4">
-            <input v-model="code" id="code" type="text" class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light"
+            <input v-model="code" id="code" type="text" class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light"
                 placeholder="Code" />
             <input v-model="password" id="password" type="password"
-                class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Password" />
+                class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light" placeholder="Password" />
             <input v-model="confirmPassword" id="confirmPassword" type="password"
-                class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Confirm password" />
+                class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light" placeholder="Confirm password" />
             <PasswordStrength :password="password || confirmPassword || ''" />
         </div>
         <slot />
         <div class="flex flex-col md:flex-row-reverse items-center justify-center md:justify-around gap-4 mt-8 md:m-6">
-            <button class="bg-light-dark text-light p-2 rounded-lg cursor-pointer hover:bg-light-dark"
+            <button class="bg-dark-light text-light p-2 rounded-lg cursor-pointer transition-colors duration-200 hover:bg-dark-light"
                 @click="handleResetPassword()">
                 <span class="mx-2 my-0.5">Send</span>
             </button>
