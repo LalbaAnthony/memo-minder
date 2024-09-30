@@ -42,7 +42,6 @@ export const useQuoteStore = defineStore('quote', {
 
       // New fetch every 12 hours
       if (!this.lastFetch || (nowDate - lastFetch) > 43200000) {
-        console.log('New fetch')
         await this.fetchQuote()
       }
     },

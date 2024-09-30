@@ -18,6 +18,10 @@ export const useEventStore = defineStore('event', {
   }),
 
   actions: {
+    clearEvent() {
+      this.event.data = {}
+    },
+
     async fetchEvent(eventId) {
       // Loading
       this.event.loading = true

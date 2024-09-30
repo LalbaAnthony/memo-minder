@@ -14,7 +14,7 @@ exports.getAllPeople = async (req, res) => {
         // Sort
         if (!sort) {
             sort = [
-                { order: 'ASC', orderBy: 'name' },
+                { order: 'ASC', orderBy: 'createdAt' },
             ];
         }
 

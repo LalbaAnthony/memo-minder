@@ -19,77 +19,67 @@ const props = defineProps({
 })
 
 const lifeExpectancy = ref(80)
+const age = computed(() => ageFromDate(props.birthdate))
+const remainingYears = computed(() => lifeExpectancy.value - age.value)
 
 const nbOfPet = computed(() => {
   const every = 15
-  const remainingYears = lifeExpectancy.value - ageFromDate(props.birthdate)
-  return roundNb((remainingYears / every), 0)
+  return roundNb((remainingYears.value / every), 0)
 })
 
 const presidentialElections = computed(() => {
   const every = 5
-  const remainingYears = lifeExpectancy.value - ageFromDate(props.birthdate)
-  return roundNb((remainingYears / every), 0)
+  return roundNb((remainingYears.value / every), 0)
 })
 
 const trips = computed(() => {
   const every = 2
-  const remainingYears = lifeExpectancy.value - ageFromDate(props.birthdate)
-  return roundNb((remainingYears / every), 0)
+  return roundNb((remainingYears.value / every), 0)
 })
 
 const firstDrinkOfYear = computed(() => {
   const every = 1
-  const remainingYears = lifeExpectancy.value - ageFromDate(props.birthdate)
-  return roundNb((remainingYears / every), 0)
+  return roundNb((remainingYears.value / every), 0)
 })
 
 const nbOfWorldCup = computed(() => {
   const every = 4
-  const remainingYears = lifeExpectancy.value - ageFromDate(props.birthdate)
-  return roundNb((remainingYears / every), 0)
+  return roundNb((remainingYears.value / every), 0)
 })
 
 const solarEclipse = computed(() => {
   const every = 18
-  const remainingYears = lifeExpectancy.value - ageFromDate(props.birthdate)
-  return roundNb((remainingYears / every), 0)
+  return roundNb((remainingYears.value / every), 0)
 })
 
 const masterAnInstrument = computed(() => {
   const every = 10
-  const remainingYears = lifeExpectancy.value - ageFromDate(props.birthdate)
-  return roundNb((remainingYears / every), 0)
+  return roundNb((remainingYears.value / every), 0)
 })
 
 const learnALanguage = computed(() => {
   const every = 5
-  const remainingYears = lifeExpectancy.value - ageFromDate(props.birthdate)
-  return roundNb((remainingYears / every), 0)
+  return roundNb((remainingYears.value / every), 0)
 })
 
 const readABook = computed(() => {
   const every = 0.5
-  const remainingYears = lifeExpectancy.value - ageFromDate(props.birthdate)
-  return roundNb((remainingYears / every), 0)
+  return roundNb((remainingYears.value / every), 0)
 })
 
 const watchASerie = computed(() => {
   const every = 0.2
-  const remainingYears = lifeExpectancy.value - ageFromDate(props.birthdate)
-  return roundNb((remainingYears / every), 0)
+  return roundNb((remainingYears.value / every), 0)
 })
 
 const nbOfRoadTrips = computed(() => {
   const every = 1.2
-  const remainingYears = 80 - ageFromDate(props.birthdate)
-  return roundNb((remainingYears / every), 0)
+  return roundNb((remainingYears.value / every), 0)
 })
 
 const nbOfHikes = computed(() => {
   const every = 0.7
-  const remainingYears = 80 - ageFromDate(props.birthdate)
-  return roundNb((remainingYears / every), 0)
+  return roundNb((remainingYears.value / every), 0)
 })
 
 // Life stats

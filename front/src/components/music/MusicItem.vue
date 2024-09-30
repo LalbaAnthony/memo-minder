@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row justify-between border-2 border-gray rounded-[8px] bg-light-dark h-full">
+  <div class="flex flex-row justify-between border-2 border-gray rounded-[8px] bg-dark-light h-full">
     <!-- Card -->
     <div
       :class="['flex-1 flex justify-between rounded-l-[6px] p-5 cursor-pointer transition-colors duration-200', `${platform}-item`]"
@@ -27,14 +27,14 @@
       <!-- Infos -->
       <div class="flex flex-col justify-center items-start">
         <h1 class="text-2xl font-bold">{{ props?.music?.title }}</h1>
-        <p class="text-light-gray">{{ props?.music?.artist }} - {{ getYearFromDate(props?.music?.releaseDate) }}</p>
+        <p class="text-gray-light">{{ props?.music?.artist }} - {{ getYearFromDate(props?.music?.releaseDate) }}</p>
       </div>
       <!-- None -->
       <div>
       </div>
     </div>
     <!-- Button -->
-    <div class="flex justify-center items-center p-2 bg-light-gray cursor-pointer rounded-r-[6px]"
+    <div class="flex justify-center items-center p-4 bg-gray-light cursor-pointer rounded-r-[6px]"
       @click="deleteMusic()">
       <TrashIcon class="size-6" />
     </div>

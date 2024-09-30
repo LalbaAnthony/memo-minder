@@ -15,7 +15,7 @@ exports.getAllMusics = async (req, res) => {
         if (!sort) {
             sort = [
                 { order: 'DESC', orderBy: 'releaseDate' },
-                { order: 'ASC', orderBy: 'title' },
+                { order: 'ASC', orderBy: 'createdAt' },
             ];
         }
 

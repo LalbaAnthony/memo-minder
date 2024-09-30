@@ -2,7 +2,7 @@
   <Menu as="div" class="relative inline-block text-left">
     <div>
       <button
-        class="inline-flex w-full items-center justify-center rounded-md px-4 py-2 text-md font-medium text-light hover:bg-dark-gray"
+        class="inline-flex w-full items-center justify-center rounded-md px-4 py-2 text-md font-medium text-light transition-colors duration-200 hover:bg-gray-dark"
         @click.stop="showDropdown = !showDropdown">
         {{ props.title }}
         <ChevronDownIcon

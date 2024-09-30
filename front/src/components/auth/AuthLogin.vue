@@ -2,17 +2,17 @@
     <div>
         <div class="flex flex-col items-center justify-center space-y-4 mt-4 mx-4">
             <input v-model="email" id="email" type="email"
-                class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Email" />
+                class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light" placeholder="Email" />
             <input v-model="password" id="password" type="password"
-                class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light" placeholder="Password" />
+                class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light" placeholder="Password" />
         </div>
         <slot />
         <div class="flex flex-col md:flex-row-reverse items-center justify-center md:justify-around gap-4 mt-8 md:m-6">
-            <button class="bg-light-dark text-light p-2 rounded-lg cursor-pointer hover:bg-dark-gray" @click="handleLogin()">
+            <button class="bg-dark-light text-light p-2 rounded-lg cursor-pointer hover:bg-gray-dark transition-colors duration-200" @click="handleLogin()">
                 <span class="mx-2 my-0.5">Login</span>
             </button>
             <hr class="block md:hidden w-1/3" />
-            <button class="text-light p-2 rounded-lg cursor-pointer hover:bg-light-dark" @click="emit('setAuthType', 'register')">
+            <button class="text-light p-2 rounded-lg cursor-pointer hover:bg-dark-light transition-colors duration-200" @click="emit('setAuthType', 'register')">
                 <span class="mx-2 my-0.5">Register</span>
             </button>
         </div>

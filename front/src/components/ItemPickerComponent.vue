@@ -11,13 +11,13 @@
           <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0 scale-95"
             enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100"
             leave-to="opacity-0 scale-95">
-            <DialogPanel class="w-full max-w-md transform overflow-hidden rounded-2xl bg-light-dark p-6 transition-all">
+            <DialogPanel class="w-full max-w-md transform overflow-hidden rounded-2xl bg-dark-light p-6 transition-all">
 
               <div class="flex items-center justify-between gap-3">
-                <MagnifyingGlassIcon class="size-10 text-light-gray hidden sm:block" />
-                <input v-model="search" id="search" type="text" class="w-full p-2 rounded-lg bg-dark-gray text-light"
+                <MagnifyingGlassIcon class="size-10 text-gray-light hidden sm:block" />
+                <input v-model="search" id="search" type="text" class="w-full p-2 rounded-lg bg-gray-dark text-light"
                   placeholder="Search..." />
-                <XMarkIcon class="size-10 text-light-gray cursor-pointer" @click.stop="emit('close', true)" />
+                <XMarkIcon class="size-10 text-gray-light cursor-pointer" @click.stop="emit('close', true)" />
               </div>
 
               <!-- Results -->

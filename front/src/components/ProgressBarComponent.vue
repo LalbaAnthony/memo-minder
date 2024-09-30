@@ -1,7 +1,7 @@
 <template>
-  <div class="overflow-hidden h-7 my-2 flex rounded-lg bg-dark-gray">
+  <div class="overflow-hidden h-7 my-2 flex rounded-lg bg-gray-dark">
     <div :style="`width: ${props.value}%`"
-      :class="['flex flex-col text-left text-dark-gray justify-center pl-3', props.value > 0 ? 'bg-primary' : '']">
+      :class="['flex flex-col text-left text-gray-dark justify-center pl-3', props.value > 0 ? 'bg-primary' : '']">
       <div v-if="props.value > 15"> {{ roundNb(props.value, 0) }} %</div>
     </div>
   </div>

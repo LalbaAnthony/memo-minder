@@ -3,7 +3,7 @@
     <!-- Search bar -->
     <div class="py-2 px-4">
       <form action="" @submit.prevent="loadSearch()">
-        <input v-model="search" id="search" type="search" class="w-full px-4 p-2 rounded-lg bg-dark-gray text-light"
+        <input v-model="search" id="search" type="search" class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light"
           placeholder="Search">
       </form>
     </div>
@@ -15,7 +15,7 @@
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
           <router-link :to="{ path: `${'seasons'}/add`, query: { title: toAddString } }"
-            class="flex justify-center items-center bg-light-dark text-light p-2 rounded-lg cursor-pointer hover:bg-dark-gray">
+            class="flex justify-center items-center bg-dark-light text-light p-2 rounded-lg cursor-pointer hover:bg-gray-dark">
             <PlusIcon class="size-6 text-primary mr-3" />
             <FilmIcon class="size-6 text-light" />
             <span class="ml-3 mt-0.5">Add as a seaon</span>
@@ -27,7 +27,7 @@
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
           <router-link :to="{ path: `${'events'}/add`, query: { title: toAddString } }"
-            class="flex justify-center items-center bg-light-dark text-light p-2 rounded-lg cursor-pointer hover:bg-dark-gray">
+            class="flex justify-center items-center bg-dark-light text-light p-2 rounded-lg cursor-pointer hover:bg-gray-dark">
             <PlusIcon class="size-6 text-primary mr-3" />
             <CalendarDaysIcon class="size-6 text-light" />
             <span class="ml-3 mt-0.5">Add as an event</span>
@@ -39,7 +39,7 @@
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
           <router-link :to="{ path: `${'people'}/add`, query: { name: search } }"
-            class="flex justify-center items-center bg-light-dark text-light p-2 rounded-lg cursor-pointer hover:bg-dark-gray">
+            class="flex justify-center items-center bg-dark-light text-light p-2 rounded-lg cursor-pointer hover:bg-gray-dark">
             <PlusIcon class="size-6 text-primary mr-3" />
             <UsersIcon class="size-6 text-light" />
             <span class="ml-3 mt-0.5">Add as a person</span>
@@ -51,7 +51,7 @@
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
           <router-link :to="{ path: `${'musics'}/add`, query: { title: toAddString } }"
-            class="flex justify-center items-center bg-light-dark text-light p-2 rounded-lg cursor-pointer hover:bg-dark-gray">
+            class="flex justify-center items-center bg-dark-light text-light p-2 rounded-lg cursor-pointer hover:bg-gray-dark">
             <PlusIcon class="size-6 text-primary mr-3" />
             <MusicalNoteIcon class="size-6 text-light" />
             <span class="ml-3 mt-0.5">Add as a music</span>
@@ -62,7 +62,7 @@
 
     <!-- Nb of results -->
     <div v-if="results.length > 0">
-      <p class="text-center text-light-gray text-sm p-4 pt-8">
+      <p class="text-center text-gray-light text-sm p-4 pt-8">
         {{ results.length }} {{ results.length > 1 ? 'results' : 'result' }}
       </p>
     </div>

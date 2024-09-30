@@ -35,13 +35,13 @@ async function loadSeasons() {
       orderBy: route.query.sort?.split('-')[0] || null,
       order: route.query.sort?.split('-')[1] || null
     }] : [
-      { order: 'ASC', orderBy: 'title' },
+      { order: 'ASC', orderBy: 'createdAt' },
     ]
   })
 }
 
 // Fetch seasons on mount
-if (!seasonStore.seasons.data.length) loadSeasons()
+if (!seasonStore.seasons.data || seasonStore.seasons.data.length === 0) loadSeasons()
 
 // Watch route for changes
 watch(() => route.query, loadSeasons)

@@ -50,7 +50,7 @@ const routes = [
   {
     path: '/seasons/add',
     name: 'seasons.add',
-    component: () => import('../pages/season/SeasonAddPage.vue'),
+    component: () => import('../pages/season/SeasonPage.vue'),
     meta: {
       title: 'Add a season',
       private: true,
@@ -90,7 +90,7 @@ const routes = [
   {
     path: '/events/add',
     name: 'events.add',
-    component: () => import('../pages/event/EventAddPage.vue'),
+    component: () => import('../pages/event/EventPage.vue'),
     meta: {
       title: 'Add an event',
       private: true,
@@ -130,7 +130,7 @@ const routes = [
   {
     path: '/people/add',
     name: 'people.add',
-    component: () => import('../pages/person/PersonAddPage.vue'),
+    component: () => import('../pages/person/PersonPage.vue'),
     meta: {
       title: 'Add a person',
       private: true,
@@ -170,7 +170,7 @@ const routes = [
   {
     path: '/musics/add',
     name: 'musics.add',
-    component: () => import('../pages/music/MusicAddPage.vue'),
+    component: () => import('../pages/music/MusicPage.vue'),
     meta: {
       title: 'Add a music',
       private: true,

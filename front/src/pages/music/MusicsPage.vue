@@ -34,9 +34,9 @@ async function loadMusics() {
     sort: route.query.sort ? [{
       orderBy: route.query.sort?.split('-')[0] || null,
       order: route.query.sort?.split('-')[1] || null
-    }] : [
-      { order: 'ASC', orderBy: 'title' },
-    ]
+    }] : [{
+      order: 'ASC', orderBy: 'title'
+    }]
   })
 }
 
