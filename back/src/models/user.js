@@ -29,7 +29,7 @@ const User = sequelize.define('User', {
     homePageEnableStats: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: false,
+        defaultValue: true,
     },
     homePageEnableQuote: {
         type: DataTypes.BOOLEAN,
@@ -39,7 +39,7 @@ const User = sequelize.define('User', {
     homePageEnableLasts: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: false,
+        defaultValue: true,
     },
     connectionToken: {
         type: DataTypes.STRING,

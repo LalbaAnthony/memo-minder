@@ -21,7 +21,8 @@
           <label for="language">Language</label>
           <select v-model="authStore.user.language" id="language" class="px-4 p-2 rounded-lg bg-gray-dark text-light">
             <option value="" disabled>Language</option>
-            <option v-for="(value, key) in languages" :key="key" :value="key" :selected="key === authStore.user.language">
+            <option v-for="(value, key) in languages" :key="key" :value="key"
+              :selected="key === authStore.user.language">
               {{ value }}</option>
           </select>
         </div>
@@ -49,13 +50,14 @@
         </div>
       </div>
     </section>
+    <hr>
     <section>
       <h2 class="text-xl font-bold my-4">Security</h2>
       <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 m-4">
         <div class="flex flex-col gap-2">
           <label for="password">Password</label>
-          <input id="password" type="password" class="px-4 p-2 rounded-lg bg-gray-dark text-light" placeholder="Password"
-            disabled />
+          <input id="password" type="password" class="px-4 p-2 rounded-lg bg-gray-dark text-light"
+            placeholder="Password" disabled />
         </div>
         <div class="flex flex-col gap-2">
           <label for="new-password">New password</label>
@@ -118,6 +120,6 @@ const handleSave = debounce(() => {
 }, 3000)
 
 // Save user infos when user changes them
-watch(() => authStore.user, handleSave)
+watch(() => authStore.user, handleSave, { deep: true })
 
 </script>
