@@ -29,6 +29,27 @@
     </section>
     <hr>
     <section>
+      <h2 class="text-xl font-bold my-4">Parameters</h2>
+      <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 m-4">
+        <div class="flex flex-row gap-2">
+          <input v-model="authStore.user.homePageEnableSpents" name="homePageEnableSpents" type="checkbox" />
+          <label for="homePageEnableSpents">Enable life spents on homepage</label>
+        </div>
+        <div class="flex flex-row gap-2">
+          <input v-model="authStore.user.homePageEnableStats" name="homePageEnableStats" type="checkbox" />
+          <label for="homePageEnableStats">Enable stats on homepage</label>
+        </div>
+        <div class="flex flex-row gap-2">
+          <input v-model="authStore.user.homePageEnableQuote" name="homePageEnableQuote" type="checkbox" />
+          <label for="homePageEnableQuote">Enable quote on homepage</label>
+        </div>
+        <div class="flex flex-row gap-2">
+          <input v-model="authStore.user.homePageEnableLasts" name="homePageEnableLasts" type="checkbox" />
+          <label for="homePageEnableLasts">Enable lasts elements added on homepage</label>
+        </div>
+      </div>
+    </section>
+    <section>
       <h2 class="text-xl font-bold my-4">Security</h2>
       <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 m-4">
         <div class="flex flex-col gap-2">
@@ -97,9 +118,6 @@ const handleSave = debounce(() => {
 }, 3000)
 
 // Save user infos when user changes them
-watch(() => authStore.user.email, handleSave)
-watch(() => authStore.user.username, handleSave)
-watch(() => authStore.user.birthdate, handleSave)
-watch(() => authStore.user.language, handleSave)
+watch(() => authStore.user, handleSave)
 
 </script>
