@@ -75,7 +75,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, onBeforeUnmount } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import debounce from 'lodash/debounce'
 import DatePicker from '@/components/DatePickerComponent.vue'
@@ -118,6 +118,10 @@ const handleSave = debounce(() => {
   }
 
 }, 3000)
+
+onBeforeUnmount(() => {
+  handleSave
+});
 
 // Save user infos when user changes them
 watch(() => authStore.user, handleSave, { deep: true })

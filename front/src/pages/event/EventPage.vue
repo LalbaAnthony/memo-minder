@@ -98,7 +98,7 @@ import { MapPinIcon } from '@heroicons/vue/24/solid'
 import { useRoute, useRouter } from 'vue-router'
 import { useEventStore } from '@/stores/event'
 import { dateToNiceDate } from '@/helpers/helpers.js'
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, onBeforeUnmount } from 'vue'
 import debounce from 'lodash/debounce'
 
 const route = useRoute()
@@ -158,7 +158,12 @@ const types = computed(() => {
 })
 
 // Fetch event on mount
-loadEvent()
+if (route.params.eventId) loadEvent()
+
+onBeforeUnmount(() => {
+  if (route.params.eventId) eventStore.updateEvent(eventStore.event.data)
+});
+
 
 watch(() => route.params.eventId, () => {
   loadEvent()

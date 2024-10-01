@@ -71,7 +71,7 @@ export const useAuthStore = defineStore('auth',
             return false;
           }
 
-          notify('Your informations have been updated', 'success');
+          // notify('Your informations have been updated', 'success');
 
           return true;
         }).catch(error => {
