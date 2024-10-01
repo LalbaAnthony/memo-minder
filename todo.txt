@@ -7,9 +7,7 @@ Back:
 Front:
     - [ ] Make integration from something like https://flowbite.com/blocks/application/shells/
     - [ ] Adapter page de détail pour event, faire titre éditable + conditions
-    - [ ] Seasn store en partant de event store + verif que tout fonctionne dans la liste des seasons etc
     - [ ] Maj account params + mdp oublié
-    - [ ] Refaire date picker C4EST DE LA MERDE
     - [ ] Faire récuperation de caque item le plus récent
     - [ ] Mettre tout les store en perssistant pour pour etre en offline
     - [ ] Faire systeme de stockage des données en local, puis d'envoie au serveur
