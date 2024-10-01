@@ -152,14 +152,14 @@ exports.userInfos = async (req, res) => {
 
 exports.userUpdate = async (req, res) => {
     const userId = req.params.id
-    const { username, birthdate, email, language } = req.body;
+    const { username, birthdate, email, language, homePageEnableSpents, homePageEnableStats, homePageEnableQuote, homePageEnableLasts} = req.body;
     try {
         // Check if the user exists
         const user = await User.findByPk(userId);
         if (!user) return res.status(404).json(formatRes('error', null, 'User not found'));
 
         // Update the user
-        const resp = await user.update({ username, birthdate, email, language });
+        const resp = await user.update({ username, birthdate, email, language, homePageEnableSpents, homePageEnableStats, homePageEnableQuote, homePageEnableLasts });
         if (!resp) return res.status(404).json(formatRes('error', null, 'Error updating user'));
 
         // Remove sensitive data from the response

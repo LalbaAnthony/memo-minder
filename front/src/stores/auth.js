@@ -60,7 +60,11 @@ export const useAuthStore = defineStore('auth',
 
       async updateUserInfos() {
 
-        await put(`user-update/${this.user.userId}`, this.user).then(resp => {
+        const userPayload = this.user
+        delete userPayload.connectionToken
+        delete userPayload.password
+
+        await put(`user-update/${this.user.userId}`, userPayload).then(resp => {
 
           if (resp.status === 'error') {
             notify(resp.message, 'error');
