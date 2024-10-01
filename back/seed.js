@@ -97,6 +97,10 @@ const seedData = async () => {
                 password: 'password',
                 language: 'en',
                 hasValidatedEmail: true,
+                homePageEnableSpents: true,
+                homePageEnableStats: true,
+                homePageEnableQuote: true,
+                homePageEnableLasts: true,
             },
         ];
 

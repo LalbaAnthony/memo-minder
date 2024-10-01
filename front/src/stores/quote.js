@@ -29,6 +29,11 @@ export const useQuoteStore = defineStore('quote', {
       const resp = await api.get('/quote')
       this.quote.data = resp.data || {};
 
+      // If quote.data.quote contains a ", ', or ”, remove it
+      if (this.quote.data.quote) {
+        this.quote.data.quote = this.quote.data.quote.replace(/["'“”]/g, '')
+      }
+
       // Last fetch
       this.lastFetch = new Date()
 
