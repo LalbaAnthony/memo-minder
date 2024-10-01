@@ -23,18 +23,28 @@ export const usePersonStore = defineStore('person', {
     },
 
     async fetchPerson(personId) {
+      personId = parseInt(personId)
+      
       // Loading
       this.person.loading = true
 
-      // Data
-      this.person.data = {}
+      // If person is already loaded, we don't make the request
+      if (this.person.data.personId !== personId) {
+        // Before making the request, we check if the element is already in local
+        const person = this.people.data.find(person => person.personId === personId)
+        if (person) {
+          this.person.data = person
+        } else {
+          const params = {
+            userId: authStore.user.userId,
+          }
 
-      const params = {
-        userId: authStore.user.userId,
+          this.clearPerson()
+          
+          const resp = await get(`person/${personId}`, params);
+          this.person.data = resp.data || {};
+        }
       }
-
-      const resp = await get(`person/${personId}`, params);
-      this.person.data = resp.data || {};
 
       // Loading
       this.person.loading = false
@@ -73,17 +83,17 @@ export const usePersonStore = defineStore('person', {
       this.people.data.splice(this.people.data.findIndex(person => person.personId === personId), 1)
 
       // Request
-      console.log('delete personId', personId)
+      // console.log('delete personId', personId)
     },
 
     async createPerson(person) {
       // Request
-      console.log('create person', person)
+      // console.log('create person', person)
     },
 
     async updatePerson(person) {
       // Request
-      console.log('update person', person)
+      // console.log('update person', person)
     },
   },
 })

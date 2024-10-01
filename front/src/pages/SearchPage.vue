@@ -90,12 +90,16 @@ import { MusicalNoteIcon } from '@heroicons/vue/24/solid'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { useEventStore } from '@/stores/event'
 import { useMusicStore } from '@/stores/music'
+import { usePersonStore } from '@/stores/person'
+import { useSeasonStore } from '@/stores/season'
 
 const route = useRoute()
 const router = useRouter()
 
 const eventStore = useEventStore()
 const musicStore = useMusicStore()
+const personStore = usePersonStore()
+const seasonStore = useSeasonStore()
 
 const addButtons = ref({
   season: { show: false },
@@ -103,18 +107,82 @@ const addButtons = ref({
   person: { show: false },
   music: { show: false }
 })
-const search = ref(route.query.search)
+const search = ref(route.query.search || '')
 const results = ref([])
 
-const toAddString = computed(() => { // same as search but with first letter in uppercase and 'add' removed
-  return search.value.replace('add', '').replace('Add', '').trim()
-    .replace(/^\w/, (c) => c.toUpperCase())
+const toAddString = computed(() => {
+  let string = search.value
+
+  string = string.trim()
+  string = string.toLocaleLowerCase()
+  string = string.replace('add', '')
+  string = string.replace('season', '')
+  string = string.replace('event', '')
+  string = string.replace('person', '')
+  string = string.replace('music', '')
+  string = string.replace(/^\w/, (c) => c.toUpperCase())
+
+  return string
 });
 
 const loadSearch = debounce(async () => {
   if (!search.value) return
 
   results.value = []
+
+  let promises = []
+
+  // Events
+  promises.push(function () {
+    return eventStore.fetchEvents({ search: search.value }).then(() => {
+      results.value.push(...eventStore.events.data.map((event) => ({
+        title: event.title,
+        type: 'event',
+        action: () => router.push(`/event/${event.eventId}`)
+      })))
+    })
+  })
+
+  // People
+  promises.push(function () {
+    return personStore.fetchPeople({ search: search.value }).then(() => {
+      results.value.push(...personStore.people.data.map((person) => ({
+        title: person.name,
+        type: 'person',
+        action: () => router.push(`/person/${person.personId}`)
+      })))
+    })
+  })
+
+  // Musics
+  promises.push(function () {
+    return musicStore.fetchMusics({ search: search.value }).then(() => {
+      results.value.push(...musicStore.musics.data.map((music) => ({
+        title: music.title,
+        type: 'music',
+        action: () => router.push(`/music/${music.musicId}`)
+      })))
+    })
+  })
+
+  // Seasons
+  promises.push(function () {
+    return seasonStore.fetchSeasons({ search: search.value }).then(() => {
+      results.value.push(...seasonStore.seasons.data.map((season) => ({
+        title: season.title,
+        type: 'season',
+        action: () => router.push(`/season/${season.seasonId}`)
+      })))
+    })
+  })
+
+  await Promise.all(promises.map(p => p()))
+
+  // Trigger add buttons
+  if (results.value.length === 0 || search.value.toLowerCase().includes('season')) addButtons.value.season.show = true
+  if (results.value.length === 0 || search.value.toLowerCase().includes('event')) addButtons.value.event.show = true
+  if (results.value.length === 0 || search.value.toLowerCase().includes('person')) addButtons.value.person.show = true
+  if (results.value.length === 0 || search.value.toLowerCase().includes('music')) addButtons.value.music.show = true
 
   // Pages
   router.options.routes.forEach((route) => {
@@ -138,35 +206,6 @@ const loadSearch = debounce(async () => {
     }
   })
 
-  // Events
-  await eventStore.fetchEvents({ search: search.value }).then(() => {
-    results.value.push(...eventStore.events.data.map((event) => ({
-      title: event.title,
-      type: 'event',
-      action: () => router.push(`/event/${event.eventId}`)
-    })))
-  })
-
-  // People
-  // ...
-
-  // Musics
-  await musicStore.fetchMusics({ search: search.value }).then(() => {
-    results.value.push(...musicStore.musics.data.map((music) => ({
-      title: music.title,
-      type: 'music',
-      action: () => router.push(`/music/${music.musicId}`)
-    })))
-  })
-
-  // Seasons
-  // ...
-
-  // Trigger add buttons
-  if (results.value.length === 0 || search.value.toLowerCase().includes('season')) addButtons.value.season.show = true
-  if (results.value.length === 0 || search.value.toLowerCase().includes('event')) addButtons.value.event.show = true
-  if (results.value.length === 0 || search.value.toLowerCase().includes('person')) addButtons.value.person.show = true
-  if (results.value.length === 0 || search.value.toLowerCase().includes('music')) addButtons.value.music.show = true
 }, 1000)
 
 onMounted(() => {

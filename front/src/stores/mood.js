@@ -14,15 +14,29 @@ export const useMoodStore = defineStore('mood', {
   }),
 
   actions: {
+    clearMood() {
+      this.mood.data = {}
+    },
+
     async fetchMood(moodId) {
+      moodId = parseInt(moodId)
+      
       // Loading
       this.mood.loading = true
 
-      // Data
-      this.mood.data = {}
-
-      const resp = await get(`mood/${moodId}`);
-      this.mood.data = resp.data || {};
+      // If mood is already loaded, we don't make the request
+      if (this.mood.data.moodId !== moodId) {
+        // Before making the request, we check if the element is already in local
+        const mood = this.moods.data.find(mood => mood.moodId === moodId)
+        if (mood) {
+          this.mood.data = mood
+        } else {
+          this.clearMood()
+          
+          const resp = await get(`mood/${moodId}`);
+          this.mood.data = resp.data || {};
+        }
+      }
 
       // Loading
       this.mood.loading = false

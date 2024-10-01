@@ -73,7 +73,7 @@ a {
 
 input:focus,
 textarea:focus {
-  outline: var(--light) auto 1px;
+  outline: none;
 }
 
 textarea:disabled,

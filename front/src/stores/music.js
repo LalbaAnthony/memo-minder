@@ -23,18 +23,28 @@ export const useMusicStore = defineStore('music', {
     },
 
     async fetchMusic(musicId) {
+      musicId = parseInt(musicId)
+      
       // Loading
       this.music.loading = true
 
-      // Data
-      this.music.data = {}
+      // If music is already loaded, we don't make the request
+      if (this.music.data.musicId !== musicId) {
+        // Before making the request, we check if the element is already in local
+        const music = this.musics.data.find(music => music.musicId === musicId)
+        if (music) {
+          this.music.data = music
+        } else {
+          const params = {
+            userId: authStore.user.userId,
+          }
 
-      const params = {
-        userId: authStore.user.userId,
+          this.clearMusic()
+          
+          const resp = await get(`music/${musicId}`, params);
+          this.music.data = resp.data || {};
+        }
       }
-
-      const resp = await get(`music/${musicId}`, params);
-      this.music.data = resp.data || {};
 
       // Loading
       this.music.loading = false
@@ -73,17 +83,17 @@ export const useMusicStore = defineStore('music', {
       this.musics.data.splice(this.musics.data.findIndex(music => music.musicId === musicId), 1)
 
       // Request
-      console.log('delete musicId', musicId)
+      // console.log('delete musicId', musicId)
     },
 
     async createMusic(music) {
       // Request
-      console.log('create music', music)
+      // console.log('create music', music)
     },
 
     async updateMusic(music) {
       // Request
-      console.log('update music', music)
+      // console.log('update music', music)
     },
   },
 })
