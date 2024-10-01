@@ -80,7 +80,7 @@
       </section>
     </div>
 
-    <ItemPicker :show="showItemPicker" :types="types" @close="showItemPicker = false"
+    <ItemPicker :show="showItemPicker" :types="availablesTypes" @close="showItemPicker = false"
       @selected="(object) => { addItem(object) }" />
     <BottomActions />
   </div>
@@ -147,14 +147,14 @@ function addItem(object) {
   }
 }
 
-const types = computed(() => {
-  let t = []
+const availablesTypes = computed(() => {
+  let types = []
 
-  if (!eventStore.event.data.season) t.push('season')
-  if (!eventStore.event.data.music) t.push('music')
-  if (!eventStore.event.data.person) t.push('person')
+  if (!eventStore.event.data.season) types.push('season')
+  if (!eventStore.event.data.music) types.push('music')
+  if (!eventStore.event.data.person) types.push('person')
 
-  return t
+  return types
 })
 
 // Fetch event on mount
