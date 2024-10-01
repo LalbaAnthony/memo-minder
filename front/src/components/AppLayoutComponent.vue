@@ -37,7 +37,7 @@
         <!-- Search -->
         <div class="py-2 px-4">
           <form action="" @submit.prevent="triggerSearch()">
-            <input v-model="search" id="search" type="search" class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light"
+            <input v-model="search" id="layoutSearch" type="search" class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light"
               placeholder="Search" />
           </form>
         </div>
@@ -171,7 +171,7 @@ function toggleSidebar() {
 function focusSearchBar() {
   revealSidebar()
   setTimeout(() => {
-    const input = document.getElementById('search')
+    const input = document.getElementById('layoutSearch')
     input.focus()
   }, 200) // wait for sidebar to be visible
 }

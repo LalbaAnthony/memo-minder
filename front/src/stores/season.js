@@ -23,18 +23,28 @@ export const useSeasonStore = defineStore('season', {
     },
 
     async fetchSeason(seasonId) {
+      seasonId = parseInt(seasonId)
+      
       // Loading
       this.season.loading = true
 
-      // Data
-      this.season.data = {}
+      // If season is already loaded, we don't make the request
+      if (this.season.data.seasonId !== seasonId) {
+        // Before making the request, we check if the element is already in local
+        const season = this.seasons.data.find(season => season.seasonId === seasonId)
+        if (season) {
+          this.season.data = season
+        } else {
+          const params = {
+            userId: authStore.user.userId,
+          }
 
-      const params = {
-        userId: authStore.user.userId,
+          this.clearSeason()
+          
+          const resp = await get(`season/${seasonId}`, params);
+          this.season.data = resp.data || {};
+        }
       }
-
-      const resp = await get(`season/${seasonId}`, params);
-      this.season.data = resp.data || {};
 
       // Loading
       this.season.loading = false
@@ -73,17 +83,17 @@ export const useSeasonStore = defineStore('season', {
       this.seasons.data.splice(this.seasons.data.findIndex(season => season.seasonId === seasonId), 1)
 
       // Request
-      console.log('delete seasonId', seasonId)
+      // console.log('delete seasonId', seasonId)
     },
 
     async createSeason(season) {
       // Request
-      console.log('create season', season)
+      // console.log('create season', season)
     },
 
     async updateSeason(season) {
       // Request
-      console.log('update season', season)
+      // console.log('update season', season)
     },
   },
 })

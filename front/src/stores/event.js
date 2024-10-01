@@ -23,18 +23,28 @@ export const useEventStore = defineStore('event', {
     },
 
     async fetchEvent(eventId) {
+      eventId = parseInt(eventId)
+      
       // Loading
       this.event.loading = true
 
-      // Data
-      this.event.data = {}
+      // If event is already loaded, we don't make the request
+      if (this.event.data.eventId !== eventId) {
+        // Before making the request, we check if the element is already in local
+        const event = this.events.data.find(event => event.eventId === eventId)
+        if (event) {
+          this.event.data = event
+        } else {
+          const params = {
+            userId: authStore.user.userId,
+          }
 
-      const params = {
-        userId: authStore.user.userId,
+          this.clearEvent()
+          
+          const resp = await get(`event/${eventId}`, params);
+          this.event.data = resp.data || {};
+        }
       }
-
-      const resp = await get(`event/${eventId}`, params);
-      this.event.data = resp.data || {};
 
       // Loading
       this.event.loading = false
@@ -73,17 +83,17 @@ export const useEventStore = defineStore('event', {
       this.events.data.splice(this.events.data.findIndex(event => event.eventId === eventId), 1)
 
       // Request
-      console.log('delete eventId', eventId)
+      // console.log('delete eventId', eventId)
     },
 
     async createEvent(event) {
       // Request
-      console.log('create event', event)
+      // console.log('create event', event)
     },
 
     async updateEvent(event) {
       // Request
-      console.log('update event', event)
+      // console.log('update event', event)
     },
   },
 })

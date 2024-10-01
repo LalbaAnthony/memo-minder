@@ -32,6 +32,21 @@
                   </Grid>
                 </TransitionChild>
               </TransitionRoot>
+
+              <!-- Add buttons -->
+              <div v-if="search.length > 0 && results.length === 0 && !searching" class="mt-8">
+                <span class="text-gray-light">Haven't found what your looking for ?</span>
+                <div class="flex flex-row flex-wrap flexitems-center gap-2 mt-2">
+                  <Pill text="Add a person" type="person" clickable
+                    @click="router.push({ path: '/person/add', query: { name: search } }); emit('close', true)" />
+                  <Pill text="Add an event" type="event" clickable
+                    @click="router.push({ path: '/event/add', query: { title: search } }); emit('close', true)" />
+                  <Pill text="Add a music" type="music" clickable
+                    @click="router.push({ path: '/music/add', query: { title: search } }); emit('close', true)" />
+                  <Pill text="Add a season" type="season" clickable
+                    @click="router.push({ path: '/season/add', query: { title: search } }); emit('close', true)" />
+                </div>
+              </div>
             </DialogPanel>
           </TransitionChild>
         </div>
@@ -51,11 +66,16 @@ import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { XMarkIcon } from '@heroicons/vue/24/solid'
 import Grid from '@/components/GridComponent.vue'
 import Result from '@/components/ResultItem.vue'
+import Pill from '@/components/PillComponent.vue'
 import { watch, ref, computed } from 'vue'
 import debounce from 'lodash/debounce'
 import { useEventStore } from '@/stores/event'
 import { useMusicStore } from '@/stores/music'
 import { usePersonStore } from '@/stores/person'
+import { useSeasonStore } from '@/stores/season'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const props = defineProps({
   show: {
@@ -70,38 +90,45 @@ const props = defineProps({
 })
 
 const search = ref('')
+const searching = ref(false)
 
 const eventStore = useEventStore()
 const musicStore = useMusicStore()
 const personStore = usePersonStore()
+const seasonStore = useSeasonStore()
 
 const emit = defineEmits(['selected', 'close'])
 
 const loadSearch = debounce(async () => {
   if (!search.value) return
 
+  searching.value = true
+
+  let promises = []
+
   // Events
   if (props.types && props.types.includes('event')) {
-    await eventStore.fetchEvents({ search: search.value })
-    console.log(eventStore.events.data)
+    promises.push(eventStore.fetchEvents({ search: search.value }))
   }
 
   // People
   if (props.types && props.types.includes('person')) {
-    await personStore.fetchPeople({ search: search.value })
-    console.log(personStore.musics.data)
+    promises.push(personStore.fetchPeople({ search: search.value }))
   }
-  
 
   // Musics
   if (props.types && props.types.includes('music')) {
-    await musicStore.fetchMusics({ search: search.value })
-    console.log(musicStore.musics.data)
+    promises.push(musicStore.fetchMusics({ search: search.value }))
   }
 
   // Seasons
-  // ...
+  if (props.types && props.types.includes('season')) {
+    promises.push(seasonStore.fetchSeasons({ search: search.value }))
+  }
 
+  await Promise.all(promises)
+
+  searching.value = false
 }, 1000)
 
 const results = computed(() => {
@@ -135,7 +162,13 @@ const results = computed(() => {
   }
 
   // Seasons
-  // ...
+  if (props.types && props.types.includes('season')) {
+    res.push(...seasonStore.seasons.data.map((season) => ({
+      title: season.title,
+      type: 'season',
+      action: () => { emit('selected', { type: 'season', data: season }), emit('close', true) }
+    })))
+  }
 
   return res
 })

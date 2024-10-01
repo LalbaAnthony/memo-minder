@@ -2,15 +2,13 @@
   <div>
     <Loader v-if="eventStore.event?.loading" />
     <div v-else>
-
       <!-- Title and date section -->
       <section>
         <div v-if="eventStore.event?.data?.updatedAt">
           <span class="text-gray">Updated the {{ dateToNiceDate(eventStore.event?.data?.updatedAt) }}</span>
         </div>
         <div class="flex items-center justify-between gap-2 flex-wrap">
-          <input v-model="confirmPassword" type="text"
-            class="px-4 p-2 rounded-lg bg-dark text-light text-2xl hover:border-none focus:border-none"
+          <input v-model="eventStore.event.data.title" type="text" class="rounded-lg bg-dark text-light text-2xl"
             placeholder="Event title" />
           <div>
             <DatePicker :value="eventStore.event?.data?.date" @update="(v) => { eventStore.event.data.date = v }" />
@@ -62,24 +60,27 @@
 
       <!-- Actions section -->
       <section>
-        <!-- Either the event is new or it's an existing one -->
-        <div :class="['gap-4 flex items-center ', route.params?.eventId ? 'justify-start' : 'justify-end']">
-          <!-- If it's an old event, show the delete button -->
-          <button v-if="route.params.eventId"
+        <div v-if="route.params.eventId" class="gap-4 flex items-center justify-between">
+          <button
             class="text-light p-2 rounded-lg cursor-pointer bg-danger hover:bg-danger-dark transition-colors duration-200"
             @click="eventStore.deleteEvent(eventStore.event.data.eventId)">
             <span class="mx-2 my-0.5">Delete</span>
           </button>
-          <!-- If it's a new event, don't forget to save it! -->
-          <button v-else
+          <button
+            class="text-light p-2 rounded-lg cursor-pointer bg-primary hover:bg-primary-dark transition-colors duration-200"
+            @click="eventStore.updateEvent(eventStore.event.data)">
+            <span class="mx-4 my-0.5">Update</span>
+          </button>
+        </div>
+        <div v-else class="gap-4 flex items-center justify-end">
+          <button
             class="text-light p-2 rounded-lg cursor-pointer bg-primary hover:bg-primary-dark transition-colors duration-200"
             @click="eventStore.createEvent(eventStore.event.data)">
-            <span class="mx-4 my-0.5">Add</span>
+            <span class="mx-4 my-0.5">Create</span>
           </button>
         </div>
       </section>
     </div>
-
     <ItemPicker :show="showItemPicker" :types="availablesTypes" @close="showItemPicker = false"
       @selected="(object) => { addItem(object) }" />
     <BottomActions />
@@ -107,12 +108,13 @@ const eventStore = useEventStore()
 
 const showItemPicker = ref(false)
 
-function loadEvent() {
-  if (!route.params.eventId) return
-  if (eventStore?.event?.data && eventStore.event.data.eventId == route.params.eventId) return
-  eventStore.fetchEvent(route.params.eventId).then(() => {
-    if (eventStore.event.data.title) route.meta.title = eventStore.event.data.title
-  })
+function loadOrClearEvent() {
+  if (route.params.eventId) {
+    eventStore.fetchEvent(route.params.eventId)
+  } else {
+    eventStore.clearEvent()
+    if (route.query.title) eventStore.event.data.title = route.query.title // From the search page
+  }
 }
 
 function deleteSeason() {
@@ -157,8 +159,7 @@ const availablesTypes = computed(() => {
   return types
 })
 
-// Fetch event on mount
-if (route.params.eventId) loadEvent()
+loadOrClearEvent()
 
 onBeforeUnmount(() => {
   if (route.params.eventId) eventStore.updateEvent(eventStore.event.data)
@@ -166,7 +167,7 @@ onBeforeUnmount(() => {
 
 
 watch(() => route.params.eventId, () => {
-  loadEvent()
+  loadOrClearEvent()
 })
 
 watch(() => eventStore.event.data,
