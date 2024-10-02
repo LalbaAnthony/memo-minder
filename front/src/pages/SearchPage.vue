@@ -134,7 +134,7 @@ const loadSearch = debounce(async () => {
 
   // Events
   promises.push(function () {
-    return eventStore.fetchEvents({ search: search.value }).then(() => {
+    return eventStore.fetchEvents({ search: search.value, perPage: 2 }).then(() => {
       results.value.push(...eventStore.events.data.map((event) => ({
         title: event.title,
         type: 'event',
@@ -145,7 +145,7 @@ const loadSearch = debounce(async () => {
 
   // People
   promises.push(function () {
-    return personStore.fetchPeople({ search: search.value }).then(() => {
+    return personStore.fetchPeople({ search: search.value, perPage: 2 }).then(() => {
       results.value.push(...personStore.people.data.map((person) => ({
         title: person.name,
         type: 'person',
@@ -156,7 +156,7 @@ const loadSearch = debounce(async () => {
 
   // Musics
   promises.push(function () {
-    return musicStore.fetchMusics({ search: search.value }).then(() => {
+    return musicStore.fetchMusics({ search: search.value, perPage: 2 }).then(() => {
       results.value.push(...musicStore.musics.data.map((music) => ({
         title: music.title,
         type: 'music',
@@ -167,7 +167,7 @@ const loadSearch = debounce(async () => {
 
   // Seasons
   promises.push(function () {
-    return seasonStore.fetchSeasons({ search: search.value }).then(() => {
+    return seasonStore.fetchSeasons({ search: search.value, perPage: 2 }).then(() => {
       results.value.push(...seasonStore.seasons.data.map((season) => ({
         title: season.title,
         type: 'season',
