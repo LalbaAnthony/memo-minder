@@ -133,6 +133,38 @@ const seedData = async () => {
                 releaseDate: '1988-07-07',
                 streamingLink: 'https://www.youtube.com/watch?v=k7_hwgD1ugg'
             },
+            {
+                musicId: 3,
+                userId: 1,
+                title: 'Dance Monkey',
+                artist: 'Tones and I',
+                releaseDate: '2019-05-10',
+                streamingLink: 'https://www.youtube.com/watch?v=q0hyYWKXF0Q'
+            }, 
+            {
+                musicId: 4,
+                userId: 1,
+                title: 'The Trooper',
+                artist: 'Iron Maiden',
+                releaseDate: '1983-06-20',
+                streamingLink: 'https://www.youtube.com/watch?v=2G5rfPISIwo'
+            },
+            {
+                musicId: 5,
+                userId: 1,
+                title: 'The Unforgiven',
+                artist: 'Metallica',
+                releaseDate: '1991-08-21',
+                streamingLink: 'https://www.youtube.com/watch?v=Ckom3gf57Yw'
+            },
+            {
+                musicId: 6,
+                userId: 1,
+                title: 'Enter Sandman',
+                artist: 'Metallica',
+                releaseDate: '1991-07-29',
+                streamingLink: 'https://www.youtube.com/watch?v=CD-E-LDc384'
+            }
         ];
 
         try {

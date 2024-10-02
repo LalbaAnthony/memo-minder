@@ -108,22 +108,22 @@ const loadSearch = debounce(async () => {
 
   // Events
   if (props.types && props.types.includes('event')) {
-    promises.push(eventStore.fetchEvents({ search: search.value }))
+    promises.push(eventStore.fetchEvents({ search: search.value, perPage: 2 }))
   }
 
   // People
   if (props.types && props.types.includes('person')) {
-    promises.push(personStore.fetchPeople({ search: search.value }))
+    promises.push(personStore.fetchPeople({ search: search.value, perPage: 2 }))
   }
 
   // Musics
   if (props.types && props.types.includes('music')) {
-    promises.push(musicStore.fetchMusics({ search: search.value }))
+    promises.push(musicStore.fetchMusics({ search: search.value, perPage: 2 }))
   }
 
   // Seasons
   if (props.types && props.types.includes('season')) {
-    promises.push(seasonStore.fetchSeasons({ search: search.value }))
+    promises.push(seasonStore.fetchSeasons({ search: search.value, perPage: 2 }))
   }
 
   await Promise.all(promises)

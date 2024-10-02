@@ -41,7 +41,7 @@ async function loadEvents() {
 }
 
 // Fetch events on mount
-if (!eventStore.events.data || eventStore.events.data.length === 0) loadEvents()
+loadEvents()
 
 // Watch route for changes
 watch(() => route.query, loadEvents)

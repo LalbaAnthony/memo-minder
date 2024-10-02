@@ -7,6 +7,7 @@ Back:
 Front:
     - [ ] Make integration from something like https://flowbite.com/blocks/application/shells/
     - [ ] Adapter page de détail pour event, faire titre éditable + conditions
+    - [ ] Item picker : ne plus utiliser les stores et prendre les items directement comme dans la search page ?
     - [ ] Maj account params + mdp oublié
     - [ ] Faire récuperation de caque item le plus récent
     - [ ] Mettre tout les store en perssistant pour pour etre en offline
