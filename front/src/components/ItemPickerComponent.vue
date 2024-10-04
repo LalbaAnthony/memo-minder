@@ -25,7 +25,7 @@
                 <TransitionChild enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
                   enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
                   leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-                  <Grid :items="results">
+                  <Grid :items="results" :max-height="isMobile() ? window.innerHeight - 200 : 0" clickables>
                     <template #item="{ item }">
                       <Result :item="item" icon="plus" />
                     </template>
@@ -67,6 +67,7 @@ import { XMarkIcon } from '@heroicons/vue/24/solid'
 import Grid from '@/components/GridComponent.vue'
 import Result from '@/components/ResultItem.vue'
 import Pill from '@/components/PillComponent.vue'
+import { isMobile } from '@/helpers/helpers'
 import { watch, ref } from 'vue'
 import debounce from 'lodash/debounce'
 import { useEventStore } from '@/stores/event'
@@ -94,7 +95,7 @@ const musicStore = useMusicStore()
 const personStore = usePersonStore()
 const seasonStore = useSeasonStore()
 
-const PER_PAGE = 3
+const PER_PAGE = 10
 
 const search = ref('')
 const results = ref([])
@@ -103,6 +104,8 @@ const emit = defineEmits(['selected', 'close'])
 
 const loadSearch = debounce(async () => {
   if (!search.value) return
+
+  results.value = []
 
   let promises = []
 

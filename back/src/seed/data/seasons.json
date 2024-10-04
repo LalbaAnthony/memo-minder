@@ -1,0 +1,14 @@
+[
+    {
+        "seasonId": 1,
+        "userId": 1,
+        "personId": 1,
+        "musicId": 1,
+        "moodId": 1,
+        "title": "Summer 2022",
+        "color": "#FF0000",
+        "description": "The best season of the year",
+        "dateStart": "2022-06-21",
+        "dateEnd": "2022-09-23"
+    }
+]

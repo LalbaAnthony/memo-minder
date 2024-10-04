@@ -1,0 +1,47 @@
+[
+    {
+        "moodId": 1,
+        "name": "Joy",
+        "color": "#ECA608"
+    },
+    {
+        "moodId": 2,
+        "name": "Anger",
+        "color": "#A00F05"
+    },
+    {
+        "moodId": 3,
+        "name": "Sadness",
+        "color": "#1D4396"
+    },
+    {
+        "moodId": 4,
+        "name": "Ennui",
+        "color": "#413BB5"
+    },
+    {
+        "moodId": 5,
+        "name": "Disgust",
+        "color": "#3E992C"
+    },
+    {
+        "moodId": 6,
+        "name": "Fear",
+        "color": "#612D91"
+    },
+    {
+        "moodId": 7,
+        "name": "Anxiety",
+        "color": "#DB6415"
+    },
+    {
+        "moodId": 8,
+        "name": "Envy",
+        "color": "#0F9D91"
+    },
+    {
+        "moodId": 9,
+        "name": "Embarassment",
+        "color": "#D53893"
+    }
+]

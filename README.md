@@ -33,5 +33,5 @@ cd front/ && npm i && npm run dev
 Load test data:
 
 ```bash
-cd back/ && node seed.js
+cd back/src/seed && node seed.js
 ```

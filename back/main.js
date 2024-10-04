@@ -1,10 +1,15 @@
+// Import modules
 const express = require('express');
 const favicon = require('serve-favicon')
 const path = require('path');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const cors = require('cors');
+
+// Import config
 const sequelize = require('./src/config/database');
+
+// Importing routes
 const routes = require('./src/routes');
 
 // Importing helpers
