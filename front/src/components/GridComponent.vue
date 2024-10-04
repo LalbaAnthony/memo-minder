@@ -1,7 +1,9 @@
 <template>
-  <div v-if="props?.items && props?.items.length > 0" class="grid my-2">
+  <div v-if="props?.items && props?.items.length > 0"
+    :class="['grid my-2', props.maxHeight > 1 ? 'overflow-y-scroll' : '']"
+    :style="{ maxHeight: props.maxHeight > 1 ? `${props.maxHeight}px` : 'auto' }">
     <div v-for="(item, index) in props.items" :key="index"
-      :class="[props.clickables ? 'hover:scale-105 transition-transform ease-in-out transform duration-200 cursor-pointer' : '']">
+      :class="[props.clickables && !isMobile() ? 'hover:scale-105 transition-transform ease-in-out transform duration-200 cursor-pointer' : '']">
       <slot name="item" :item="item"></slot>
     </div>
   </div>
@@ -10,6 +12,7 @@
 
 <script setup>
 import NoItem from '@/components/NoItemComponent.vue'
+import { isMobile } from '@/helpers/helpers';
 
 const props = defineProps({
   items: {
@@ -20,6 +23,11 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: true,
+  },
+  maxHeight: {
+    type: Number,
+    required: false,
+    default: 0,
   },
 })
 </script>

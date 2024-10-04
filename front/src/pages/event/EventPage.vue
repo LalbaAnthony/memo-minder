@@ -51,9 +51,9 @@
             @click="router.push(`/person/${eventStore.event?.data?.personId}`)" />
           <div
             v-if="!eventStore.event?.data?.season || !eventStore.event?.data?.music || !eventStore.event?.data?.person"
-            class="flex items-center justify-center rounded-full px-16 py-0.5 border-dashed border-2 cursor-pointer border-gray-light hover:border-light transition-all transition-200"
+            class="flex items-center justify-center rounded-full px-16 py-0.5 border-dashed border-2 cursor-pointer border-gray hover:border-gray-light transition-all transition-200"
             @click="showItemPicker = true">
-            <PlusIcon class="size-6 text-light" />
+            <PlusIcon class="size-6 text-gray-light" />
           </div>
         </div>
       </section>
