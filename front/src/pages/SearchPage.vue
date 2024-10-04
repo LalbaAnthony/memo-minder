@@ -101,14 +101,17 @@ const musicStore = useMusicStore()
 const personStore = usePersonStore()
 const seasonStore = useSeasonStore()
 
+const PER_PAGE = 2
+
+const search = ref(route.query.search || '')
+const results = ref([])
+
 const addButtons = ref({
   season: { show: false },
   event: { show: false },
   person: { show: false },
   music: { show: false }
 })
-const search = ref(route.query.search || '')
-const results = ref([])
 
 const toAddString = computed(() => {
   let string = search.value
@@ -133,8 +136,8 @@ const loadSearch = debounce(async () => {
   let promises = []
 
   // Events
-  promises.push(function () {
-    return eventStore.fetchEvents({ search: search.value, perPage: 2 }).then(() => {
+  promises.push(async function () {
+    return eventStore.fetchEvents({ search: search.value, perPage: PER_PAGE }).then(() => {
       results.value.push(...eventStore.events.data.map((event) => ({
         title: event.title,
         type: 'event',
@@ -144,8 +147,8 @@ const loadSearch = debounce(async () => {
   })
 
   // People
-  promises.push(function () {
-    return personStore.fetchPeople({ search: search.value, perPage: 2 }).then(() => {
+  promises.push(async function () {
+    return personStore.fetchPeople({ search: search.value, perPage: PER_PAGE }).then(() => {
       results.value.push(...personStore.people.data.map((person) => ({
         title: person.name,
         type: 'person',
@@ -155,8 +158,8 @@ const loadSearch = debounce(async () => {
   })
 
   // Musics
-  promises.push(function () {
-    return musicStore.fetchMusics({ search: search.value, perPage: 2 }).then(() => {
+  promises.push(async function () {
+    return musicStore.fetchMusics({ search: search.value, perPage: PER_PAGE }).then(() => {
       results.value.push(...musicStore.musics.data.map((music) => ({
         title: music.title,
         type: 'music',
@@ -166,8 +169,8 @@ const loadSearch = debounce(async () => {
   })
 
   // Seasons
-  promises.push(function () {
-    return seasonStore.fetchSeasons({ search: search.value, perPage: 2 }).then(() => {
+  promises.push(async function () {
+    return seasonStore.fetchSeasons({ search: search.value, perPage: PER_PAGE }).then(() => {
       results.value.push(...seasonStore.seasons.data.map((season) => ({
         title: season.title,
         type: 'season',
@@ -213,7 +216,7 @@ onMounted(() => {
     const input = document.getElementById('search')
     input.focus()
   }, 200)
-  loadSearch()
+  if (route.query.search) loadSearch()
 })
 
 // Watch search for changes

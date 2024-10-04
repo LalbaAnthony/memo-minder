@@ -34,7 +34,7 @@
               </TransitionRoot>
 
               <!-- Add buttons -->
-              <div v-if="search.length > 0 && results.length === 0 && !searching" class="mt-8">
+              <div v-if="search.length > 0 && results.length === 0" class="mt-8">
                 <span class="text-gray-light">Haven't found what your looking for ?</span>
                 <div class="flex flex-row flex-wrap flexitems-center gap-2 mt-2">
                   <Pill v-if="props.types && props.types.includes('event')" text="Add an event" type="event" clickable
@@ -67,7 +67,7 @@ import { XMarkIcon } from '@heroicons/vue/24/solid'
 import Grid from '@/components/GridComponent.vue'
 import Result from '@/components/ResultItem.vue'
 import Pill from '@/components/PillComponent.vue'
-import { watch, ref, computed } from 'vue'
+import { watch, ref } from 'vue'
 import debounce from 'lodash/debounce'
 import { useEventStore } from '@/stores/event'
 import { useMusicStore } from '@/stores/music'
@@ -89,89 +89,78 @@ const props = defineProps({
   }
 })
 
-const search = ref('')
-const searching = ref(false)
-
 const eventStore = useEventStore()
 const musicStore = useMusicStore()
 const personStore = usePersonStore()
 const seasonStore = useSeasonStore()
+
+const PER_PAGE = 3
+
+const search = ref('')
+const results = ref([])
 
 const emit = defineEmits(['selected', 'close'])
 
 const loadSearch = debounce(async () => {
   if (!search.value) return
 
-  searching.value = true
-
   let promises = []
 
   // Events
   if (props.types && props.types.includes('event')) {
-    promises.push(eventStore.fetchEvents({ search: search.value, perPage: 2 }))
+    promises.push(async function () {
+      return eventStore.fetchEvents({ search: search.value, perPage: PER_PAGE }).then(() => {
+        results.value.push(...eventStore.events.data.map((event) => ({
+          title: event.title,
+          type: 'event',
+          action: () => { emit('selected', { type: 'event', data: event }), emit('close', true) }
+        })))
+      })
+    })
   }
 
   // People
   if (props.types && props.types.includes('person')) {
-    promises.push(personStore.fetchPeople({ search: search.value, perPage: 2 }))
+    promises.push(async function () {
+      return personStore.fetchPeople({ search: search.value, perPage: PER_PAGE }).then(() => {
+        results.value.push(...personStore.people.data.map((person) => ({
+          title: person.name,
+          type: 'person',
+          action: () => { emit('selected', { type: 'person', data: person }), emit('close', true) }
+        })))
+      })
+    })
   }
 
   // Musics
   if (props.types && props.types.includes('music')) {
-    promises.push(musicStore.fetchMusics({ search: search.value, perPage: 2 }))
+    promises.push(async function () {
+      return musicStore.fetchMusics({ search: search.value, perPage: PER_PAGE }).then(() => {
+        results.value.push(...musicStore.musics.data.map((music) => ({
+          title: music.title,
+          type: 'music',
+          action: () => { emit('selected', { type: 'music', data: music }), emit('close', true) }
+        })))
+      })
+    })
   }
 
   // Seasons
   if (props.types && props.types.includes('season')) {
-    promises.push(seasonStore.fetchSeasons({ search: search.value, perPage: 2 }))
+    promises.push(async function () {
+      return seasonStore.fetchSeasons({ search: search.value, perPage: PER_PAGE }).then(() => {
+        results.value.push(...seasonStore.seasons.data.map((season) => ({
+          title: season.title,
+          type: 'season',
+          action: () => { emit('selected', { type: 'season', data: season }), emit('close', true) }
+        })))
+      })
+    })
   }
 
-  await Promise.all(promises)
+  await Promise.all(promises.map(p => p()))
 
-  searching.value = false
 }, 1000)
-
-const results = computed(() => {
-  let res = []
-
-  // Events
-  if (props.types && props.types.includes('event')) {
-    res.push(...eventStore.events.data.map((event) => ({
-      title: event.title,
-      type: 'event',
-      action: () => { emit('selected', { type: 'event', data: event }), emit('close', true) }
-    })))
-  }
-
-  // People
-  if (props.types && props.types.includes('person')) {
-    res.push(...personStore.people.data.map((person) => ({
-      title: person.name,
-      type: 'person',
-      action: () => { emit('selected', { type: 'person', data: person }), emit('close', true) }
-    })))
-  }
-
-  // Musics
-  if (props.types && props.types.includes('music')) {
-    res.push(...musicStore.musics.data.map((music) => ({
-      title: music.title,
-      type: 'music',
-      action: () => { emit('selected', { type: 'music', data: music }), emit('close', true) }
-    })))
-  }
-
-  // Seasons
-  if (props.types && props.types.includes('season')) {
-    res.push(...seasonStore.seasons.data.map((season) => ({
-      title: season.title,
-      type: 'season',
-      action: () => { emit('selected', { type: 'season', data: season }), emit('close', true) }
-    })))
-  }
-
-  return res
-})
 
 
 // Watch search for changes
