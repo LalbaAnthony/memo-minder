@@ -5,10 +5,6 @@ Back:
     - [ ] Create and implement email systeme with back/src/helpers/email.js
 
 Front:
-    - [ ] Make integration from something like https://flowbite.com/blocks/application/shells/
-    - [ ] Adapter page de détail pour event, faire titre éditable + conditions
-    - [ ] Item picker : ne plus utiliser les stores et prendre les items directement comme dans la search page ?
-    - [ ] Item picker : faire scroll bar
     - [ ] Item picker : chg style des boutons ajouter
     - [ ] Item picker : Bug de saut de ligne quand fetch des trucs
     - [ ] Maj account params + mdp oublié
@@ -16,9 +12,11 @@ Front:
     - [ ] Mettre tout les store en perssistant pour pour etre en offline
     - [ ] Faire systeme de stockage des données en local, puis d'envoie au serveur
     - [ ] Faire scroll infini pr tout les type de contenu (ou pagination)
+    - [ ] Make integration from something like https://flowbite.com/blocks/application/shells/
     - [ ] Faire PWA
 
 
 Ideas:
+    - [ ] Issue seed
     - [ ] Pouvoir parametrer la home page
     - [ ] Fonction de Rappels de Souvenirs (what happened a year ago, ...)
