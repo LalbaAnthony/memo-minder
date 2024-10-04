@@ -40,6 +40,9 @@ const seedData = async () => {
         for (const user of sampleUsers) user.password = await bcrypt.hash(user.password, 10);
         await User.bulkCreate(sampleUsers);
 
+        console.log('edeadeeeee');
+        console.log(await User.findAll());
+
         // Sample data for Mood table
         const sampleMoods = require('./data/moods.json');
         await Mood.bulkCreate(sampleMoods);

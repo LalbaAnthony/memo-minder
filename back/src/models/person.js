@@ -15,7 +15,7 @@ const Person = sequelize.define('Person', {
             model: 'User',
             key: 'userId'
         },
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE',
     },
     name: {
         type: DataTypes.STRING,
