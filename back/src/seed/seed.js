@@ -81,7 +81,6 @@ const checkData = async () => {
             logConsole('Sample data verified');
         }
     } catch (error) {
-        logConsole('❌ Error fetching data ❌');
         logConsole(error, 'error');
     }
 };
