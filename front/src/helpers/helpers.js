@@ -67,13 +67,13 @@ export function randomInt(min = 1, max = 100) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-export function missingElementsPassword(password) {
-    let missingElement = [];
-    if (password.length <= 10) missingElement.push('10 characters')
-    if (!password.match(/[a-z]/)) missingElement.push('one lowercase letter')
-    if (!password.match(/[A-Z]/)) missingElement.push('one uppercase letter')
-    if (!password.match(/[0-9]/)) missingElement.push('one number')
-    if (!password.match(/[^a-zA-Z\d]/)) missingElement.push('one special character')
+export function missingsElementsPassword(password) {
+    let missingsElements = [];
+    if (password.length <= 10) missingsElements.push('10 characters')
+    if (!password.match(/[a-z]/)) missingsElements.push('1 lowercase letter')
+    if (!password.match(/[A-Z]/)) missingsElements.push('1 uppercase letter')
+    if (!password.match(/[0-9]/)) missingsElements.push('1 number')
+    if (!password.match(/[^a-zA-Z\d]/)) missingsElements.push('1 special character')
 
-    return missingElement;
+    return missingsElements;
 }

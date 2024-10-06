@@ -81,7 +81,7 @@ exports.createMusic = async (req, res) => {
         const music = await Music.create({ userId, title, artist, releaseDate, streamingLink });
         if (!music) return res.status(404).json(formatRes('error', null, 'Error creating music'));
 
-        return res.status(201).json(formatRes('success', music))
+        return res.status(201).json(formatRes('success', null, 'Music created'))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
     }
@@ -103,7 +103,7 @@ exports.updateMusic = async (req, res) => {
         const resp = await music.update({ userId, title, artist, releaseDate, streamingLink });
         if (!resp) return res.status(404).json(formatRes('error', null, 'Error updating music'));
 
-        return res.status(201).json(formatRes('success', music))
+        return res.status(201).json(formatRes('success', null, 'Music updated'))
 
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))

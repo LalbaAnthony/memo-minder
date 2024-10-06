@@ -23,7 +23,7 @@
 import { ref } from 'vue'
 import { notify } from '@/helpers/notif.js'
 import PasswordStrength from '@/components/PasswordStrengthComponent.vue'
-import { missingElementsPassword } from '@/helpers/helpers.js'
+import { missingsElementsPassword } from '@/helpers/helpers.js'
 import { useAuthStore } from '@/stores/auth'
 
 const authStore = useAuthStore()
@@ -38,7 +38,7 @@ function valid() {
     if (password.value.length === 0) return "Please enter your password"
     if (confirmPassword.value.length === 0) return "Please enter your password"
     if (password.value !== confirmPassword.value) return 'Passwords do not match'
-    if (missingElementsPassword(password.value).length > 0) return `Password must at least contain: ${missingElementsPassword(password.value).join(', ')}`
+    if (missingsElementsPassword(password.value).length > 0) return `Password must at least contain: ${missingsElementsPassword(password.value).join(', ')}`
     return false
 }
 

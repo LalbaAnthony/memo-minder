@@ -12,6 +12,10 @@
         <Event :event="item" />
       </template>
     </Grid>
+
+    <Pagination :total="eventStore.events.pagination.total" :page="eventStore.events.pagination.page"
+      :perPage="eventStore.events.pagination.perPage" @update-page="(page) => eventStore.changePage(page)" />
+
     <BottomActions />
   </div>
 </template>
@@ -22,6 +26,7 @@ import Grid from '@/components/GridComponent.vue'
 import Event from '@/components/event/EventItem.vue'
 import Loader from '@/components/LoaderComponent.vue'
 import BottomActions from '@/components/BottomActionsComponent.vue'
+import Pagination from '@/components/PaginationComponent.vue'
 import { useRoute } from 'vue-router'
 import { useEventStore } from '@/stores/event'
 import { watch } from 'vue'

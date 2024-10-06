@@ -24,7 +24,7 @@ export const useEventStore = defineStore('event', {
 
     async fetchEvent(eventId) {
       eventId = parseInt(eventId)
-      
+
       // Loading
       this.event.loading = true
 
@@ -40,7 +40,7 @@ export const useEventStore = defineStore('event', {
           }
 
           this.clearEvent()
-          
+
           const resp = await get(`event/${eventId}`, params);
           this.event.data = resp.data || {};
         }
@@ -89,17 +89,31 @@ export const useEventStore = defineStore('event', {
       this.events.data.splice(this.events.data.findIndex(event => event.eventId === eventId), 1)
 
       // Request
-      // console.log('delete eventId', eventId)
+      await del(`event/${eventId}`);
     },
 
     async createEvent(event) {
-      // Request
-      // console.log('create event', event)
+        
+        // Loading
+        this.event.loading = true
+        
+        // Request
+        await post('events', event);
+  
+        // Loading
+        this.event.loading
     },
 
     async updateEvent(event) {
+      
+      // Loading
+      this.event.loading = true
+      
       // Request
-      // console.log('update event', event)
+      await put(`event/${this.event.data.eventId}`, event);
+
+      // Loading
+      this.event.loading = false
     },
   },
 })

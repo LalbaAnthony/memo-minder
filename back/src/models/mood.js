@@ -9,7 +9,7 @@ const Mood = sequelize.define('Mood', {
         primaryKey: true,
     },
     name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(50),
         allowNull: false,
     },
     color: {

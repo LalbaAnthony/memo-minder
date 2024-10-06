@@ -19,11 +19,11 @@ const Music = sequelize.define('Music', {
         onUpdate: 'CASCADE'
     },
     title: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(200),
         allowNull: false,
     },
     artist: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(100),
         allowNull: true,
     },
     releaseDate: {
@@ -31,7 +31,7 @@ const Music = sequelize.define('Music', {
         allowNull: true,
     },
     streamingLink: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(1000),
         allowNull: true,
     },
     updatedAt: {

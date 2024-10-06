@@ -24,7 +24,7 @@ export const usePersonStore = defineStore('person', {
 
     async fetchPerson(personId) {
       personId = parseInt(personId)
-      
+
       // Loading
       this.person.loading = true
 
@@ -40,7 +40,7 @@ export const usePersonStore = defineStore('person', {
           }
 
           this.clearPerson()
-          
+
           const resp = await get(`person/${personId}`, params);
           this.person.data = resp.data || {};
         }
@@ -89,17 +89,31 @@ export const usePersonStore = defineStore('person', {
       this.people.data.splice(this.people.data.findIndex(person => person.personId === personId), 1)
 
       // Request
-      // console.log('delete personId', personId)
+      await del(`person/${personId}`);
     },
 
     async createPerson(person) {
-      // Request
-      // console.log('create person', person)
+        
+        // Loading
+        this.person.loading = true
+        
+        // Request
+        await post('people', person);
+  
+        // Loading
+        this.person.loading
     },
 
     async updatePerson(person) {
+      
+      // Loading
+      this.person.loading = true
+      
       // Request
-      // console.log('update person', person)
+      await put(`person/${this.person.data.personId}`, person);
+
+      // Loading
+      this.person.loading = false
     },
   },
 })

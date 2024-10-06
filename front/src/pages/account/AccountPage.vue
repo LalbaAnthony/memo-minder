@@ -75,7 +75,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onBeforeUnmount } from 'vue'
+import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import debounce from 'lodash/debounce'
 import DatePicker from '@/components/DatePickerComponent.vue'
@@ -84,8 +84,6 @@ import { isValidDate } from '@/helpers/helpers.js'
 import { notify } from '@/helpers/notif.js'
 
 const authStore = useAuthStore()
-
-authStore.fetchUserInfos()
 
 const languages = ref({
   en: 'English',
@@ -118,6 +116,10 @@ const handleSave = debounce(() => {
   }
 
 }, 3000)
+
+onMounted(() => {
+  authStore.fetchUserInfos()
+})
 
 onBeforeUnmount(() => {
   handleSave

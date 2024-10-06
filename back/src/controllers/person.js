@@ -77,7 +77,7 @@ exports.createPerson = async (req, res) => {
         const person = await Person.create({ personId, userId, name, description });
         if (!person) return res.status(404).json(formatRes('error', null, 'Error creating person'));
 
-        return res.status(201).json(formatRes('success', person))
+        return res.status(201).json(formatRes('success', null, 'Person created'))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
     }
@@ -99,7 +99,7 @@ exports.updatePerson = async (req, res) => {
         const resp = await person.update({ personId, userId, name, description });
         if (!resp) return res.status(404).json(formatRes('error', null, 'Error updating person'));
 
-        return res.status(201).json(formatRes('success', person))
+        return res.status(201).json(formatRes('success', null, 'Person updated'))
 
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))

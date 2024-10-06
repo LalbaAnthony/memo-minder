@@ -4,7 +4,7 @@
     <router-link class="flex-1 p-5" :to="{ path: `/season/${props?.season?.seasonId}` }">
       <div class="flex flex-col justify-center items-center w-full my-2">
         <h1 class="text-2xl font-bold">{{ props?.season?.title }}</h1>
-        <p class="text-sm text-gray-light">on 05/03/2023</p>
+        <p class="text-sm text-gray-light">on {{ dateToNiceDate(props?.season?.createdAt) }}</p>
       </div>
       <div class="my-4">
         <div class="flex justify-start flex-wrap items-center w-full m-2 gap-2">
@@ -12,7 +12,7 @@
           <Pill v-if="props?.season?.music" :text="props?.season?.music?.title" type="music" />
           <Pill v-if="props?.season?.person" :text="props?.season?.person?.name" type="person" />
         </div>
-        <p class="m-2 my-4">{{ threeDotString('Lorem adipisicing elit mollitia') }}</p>
+        <p class="m-2 my-4">{{ threeDotString(props?.season?.description) }}</p>
       </div>
     </router-link>
     <div class="grid grid-cols-2 divide-x-2 divide-gray cursor-pointer">
@@ -32,6 +32,7 @@ import Pill from '@/components/PillComponent.vue'
 import { TrashIcon } from '@heroicons/vue/24/solid'
 import { PencilSquareIcon } from '@heroicons/vue/24/solid'
 import { threeDotString } from '@/helpers/helpers'
+import { dateToNiceDate } from '@/helpers/helpers.js'
 import { useSeasonStore } from '@/stores/season'
 
 const seasonStore = useSeasonStore()

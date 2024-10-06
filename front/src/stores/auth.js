@@ -80,14 +80,17 @@ export const useAuthStore = defineStore('auth',
       },
 
       async verifyEmail(email, token) {
+        // TODO: WIP
         console.log('verifyEmail', email, token);
       },
 
       async forgotPassword(email) {
+        // TODO: WIP
         console.log('forgotPassword', email);
       },
 
       async resetPassword(code, newPassword, email = this.fogotPasswordEmail) {
+        // TODO: WIP
         console.log('resetPassword', code, newPassword, email);
       },
 
