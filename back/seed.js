@@ -2,18 +2,18 @@
 const bcrypt = require('bcrypt');
 
 // Import config
-const sequelize = require('../config/database');
+const sequelize = require('./src/config/database');
 
 // Importing models
-const Season = require('../models/season');
-const Mood = require('../models/mood');
-const Music = require('../models/music');
-const Person = require('../models/person');
-const Event = require('../models/event');
-const User = require('../models/user');
+const Season = require('./src/models/season');
+const Mood = require('./src/models/mood');
+const Music = require('./src/models/music');
+const Person = require('./src/models/person');
+const Event = require('./src/models/event');
+const User = require('./src/models/user');
 
 // Importing helpers
-const logConsole = require('../helpers/logConsole')
+const logConsole = require('./src/helpers/logConsole')
 
 // ? This script is meant to be run only once, to seed the database with sample data just for test purposes. It will drop all existing tables and recreate them, then insert the sample data.
 
@@ -36,7 +36,7 @@ const seedData = async () => {
         await sequelize.sync({ force: true });
 
         // Sample data for User table, with crypted passwords
-        const sampleUsers = require('./data/users.json');
+        const sampleUsers = require('./src/seed_data/users.json');
         for (const user of sampleUsers) user.password = await bcrypt.hash(user.password, 10);
         await User.bulkCreate(sampleUsers);
 
@@ -44,23 +44,23 @@ const seedData = async () => {
         console.log(await User.findAll());
 
         // Sample data for Mood table
-        const sampleMoods = require('./data/moods.json');
+        const sampleMoods = require('./src/seed_data/moods.json');
         await Mood.bulkCreate(sampleMoods);
 
         // Sample data for Music table
-        const sampleMusics = require('./data/musics.json');
+        const sampleMusics = require('./src/seed_data/musics.json');
         await Music.bulkCreate(sampleMusics);
 
         // Sample data for Person table
-        const samplePeople = require('./data/people.json');
+        const samplePeople = require('./src/seed_data/people.json');
         await Person.bulkCreate(samplePeople);
 
         // Sample data for Season table
-        const sampleSeasons = require('./data/seasons.json');
+        const sampleSeasons = require('./src/seed_data/seasons.json');
         await Season.bulkCreate(sampleSeasons);
 
         // Sample data for Event table
-        const sampleEvents = require('./data/events.json');
+        const sampleEvents = require('./src/seed_data/events.json');
         await Event.bulkCreate(sampleEvents);
 
         logConsole('Sample data inserted');
