@@ -23,15 +23,14 @@ export const useAuthStore = defineStore('auth',
 
         await post('validate-token', { userId: this.user.userId, token: this.user.connectionToken || this.token }).then(resp => {
 
-          if (resp.status === 'error') {
+          if (resp.status && resp.status === 'success') {
+            return true;
+          } else if (resp.status === 'success') {
             this.logout()
             notify(resp.message, 'error');
             return false;
-          } else if (resp.status === 'success') {
-            return true;
           }
         }).catch(error => {
-          this.logout()
           notify(`An error occured: ${error}`, 'error');
           return false;
         });
@@ -133,7 +132,6 @@ export const useAuthStore = defineStore('auth',
 
           return true;
         }).catch(error => {
-          this.logout()
           notify(`An error occured: ${error}`, 'error');
           return false;
         });
