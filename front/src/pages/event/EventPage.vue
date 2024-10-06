@@ -63,19 +63,19 @@
         <div v-if="route.params.eventId" class="gap-4 flex items-center justify-between">
           <button
             class="text-light p-2 rounded-lg cursor-pointer bg-danger hover:bg-danger-dark transition-colors duration-200"
-            @click="eventStore.deleteEvent(eventStore.event.data.eventId)">
+            @click="manualDeletion()">
             <span class="mx-2 my-0.5">Delete</span>
           </button>
           <button
             class="text-light p-2 rounded-lg cursor-pointer bg-primary hover:bg-primary-dark transition-colors duration-200"
-            @click="eventStore.updateEvent(eventStore.event.data); debouncedUpdate.cancel()">
+            @click="manualUpdate()">
             <span class="mx-4 my-0.5">Update</span>
           </button>
         </div>
         <div v-else class="gap-4 flex items-center justify-end">
           <button
             class="text-light p-2 rounded-lg cursor-pointer bg-primary hover:bg-primary-dark transition-colors duration-200"
-            @click="eventStore.createEvent(eventStore.event.data)">
+            @click="manualCreation()">
             <span class="mx-4 my-0.5">Create</span>
           </button>
         </div>
@@ -98,6 +98,7 @@ import { PlusIcon } from '@heroicons/vue/24/solid'
 import { MapPinIcon } from '@heroicons/vue/24/solid'
 import { useRoute, useRouter } from 'vue-router'
 import { useEventStore } from '@/stores/event'
+import { notify } from '@/helpers/notif.js'
 import { dateToNiceDate } from '@/helpers/helpers.js'
 import { computed, ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import debounce from 'lodash/debounce'
@@ -107,6 +108,7 @@ const router = useRouter()
 const eventStore = useEventStore()
 
 const showItemPicker = ref(false)
+const isInitialLoad = ref(true)
 
 function loadOrInitEvent() {
   if (route.params.eventId) {
@@ -115,6 +117,7 @@ function loadOrInitEvent() {
     eventStore.initEvent()
     if (route.query.title) eventStore.event.data.title = route.query.title // From the search page
   }
+  isInitialLoad.value = false
 }
 
 function deleteSeason() {
@@ -149,6 +152,38 @@ function addItem(object) {
   }
 }
 
+function valid() {
+  if (!eventStore.event.data.userId) return 'User is required, please reload the page'
+  if (!eventStore.event.data.title) return 'Title is required'
+  return false
+}
+
+function manualDeletion() {
+  eventStore.deleteEvent(eventStore.event.data.eventId)
+  router.push('/events')
+}
+
+function manualCreation() {
+  const error = valid()
+  if (error) {
+    notify(error, 'error')
+  } else {
+    eventStore.createEvent(eventStore.event.data)
+  }
+}
+
+function manualUpdate() {
+  debouncedUpdate.cancel()
+
+  const error = valid()
+  if (error) {
+    notify(error, 'error')
+  } else {
+    eventStore.updateEvent(eventStore.season.data)
+    router.push('/events')
+  }
+}
+
 const availablesTypes = computed(() => {
   let types = []
 
@@ -160,7 +195,12 @@ const availablesTypes = computed(() => {
 })
 
 const debouncedUpdate = debounce(() => {
-  if (route.params.eventId) eventStore.updateEvent(eventStore.event.data)
+  if (route.params.eventId) {
+    const error = valid()
+    if (!error) {
+      eventStore.updateEvent(eventStore.event.data)
+    }
+  }
 }, 3000)
 
 onMounted(() => {
@@ -176,7 +216,11 @@ watch(() => route.params.eventId, () => {
 })
 
 watch(() => eventStore.event.data,
-  debouncedUpdate
-  , { deep: true })
+  () => {
+    if (isInitialLoad.value) return // Skip the debounce on initial load
+    debouncedUpdate();
+  },
+  { deep: true }
+);
 
 </script>

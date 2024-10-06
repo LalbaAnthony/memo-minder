@@ -12,16 +12,20 @@
             placeholder="Season title" />
         </div>
       </section>
-      
+
       <!-- Dates section -->
       <section>
         <div class="flex flex-wrap items-center justify-start gap-4">
-          <span>From</span>
-          <DatePicker class="max-w-48" :value="seasonStore.season?.data?.dateStart"
-            @update="(v) => { seasonStore.season.data.dateStart = v }" />
-          <span>To</span>
-          <DatePicker class="max-w-48" :value="seasonStore.season?.data?.dateEnd"
-            @update="(v) => { seasonStore.season.data.dateEnd = v }" />
+          <div class="flex items-center gap-2">
+            <span>From</span>
+            <DatePicker class="max-w-48" :value="seasonStore.season?.data?.dateStart"
+              @update="(v) => { seasonStore.season.data.dateStart = v }" />
+          </div>
+          <div class="flex items-center gap-2">
+            <span>To</span>
+            <DatePicker class="max-w-48" :value="seasonStore.season?.data?.dateEnd"
+              @update="(v) => { seasonStore.season.data.dateEnd = v }" />
+          </div>
         </div>
       </section>
 
@@ -65,19 +69,19 @@
         <div v-if="route.params.seasonId" class="gap-4 flex items-center justify-between">
           <button
             class="text-light p-2 rounded-lg cursor-pointer bg-danger hover:bg-danger-dark transition-colors duration-200"
-            @click="seasonStore.deleteSeason(seasonStore.season.data.seasonId)">
+            @click="manualDeletion()">
             <span class="mx-2 my-0.5">Delete</span>
           </button>
           <button
             class="text-light p-2 rounded-lg cursor-pointer bg-primary hover:bg-primary-dark transition-colors duration-200"
-            @click="seasonStore.updateSeason(seasonStore.season.data); debouncedUpdate.cancel()">
+            @click="manualUpdate()">
             <span class="mx-4 my-0.5">Update</span>
           </button>
         </div>
         <div v-else class="gap-4 flex items-center justify-end">
           <button
             class="text-light p-2 rounded-lg cursor-pointer bg-primary hover:bg-primary-dark transition-colors duration-200"
-            @click="seasonStore.createSeason(seasonStore.season.data)">
+            @click="manualCreation()">
             <span class="mx-4 my-0.5">Create</span>
           </button>
         </div>
@@ -99,6 +103,7 @@ import BottomActions from '@/components/BottomActionsComponent.vue'
 import { PlusIcon } from '@heroicons/vue/24/solid'
 import { useRoute, useRouter } from 'vue-router'
 import { useSeasonStore } from '@/stores/season'
+import { notify } from '@/helpers/notif.js'
 import { dateToNiceDate } from '@/helpers/helpers.js'
 import { computed, ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import debounce from 'lodash/debounce'
@@ -108,6 +113,7 @@ const router = useRouter()
 const seasonStore = useSeasonStore()
 
 const showItemPicker = ref(false)
+const isInitialLoad = ref(true)
 
 function loadOrInitSeason() {
   if (route.params.seasonId) {
@@ -116,6 +122,7 @@ function loadOrInitSeason() {
     seasonStore.initSeason()
     if (route.query.title) seasonStore.season.data.title = route.query.title // From the search page
   }
+  isInitialLoad.value = false
 }
 
 function deleteMusic() {
@@ -138,6 +145,40 @@ function addItem(object) {
   }
 }
 
+function valid() {
+  if (!seasonStore.season.data.userId) return 'User is required, please reload the page'
+  if (!seasonStore.season.data.title) return 'Title is required'
+  if (!seasonStore.season.data.color) return 'Color is required'
+  if (!seasonStore.season.data.dateStart) return 'Date start is required'
+  return false
+}
+
+function manualDeletion() {
+  seasonStore.deleteSeason(seasonStore.season.data.seasonId)
+  router.push('/events')
+}
+
+function manualCreation() {
+  const error = valid()
+  if (error) {
+    notify(error, 'error')
+  } else {
+    seasonStore.createSeason(seasonStore.season.data)
+  }
+}
+
+function manualUpdate() {
+  debouncedUpdate.cancel()
+
+  const error = valid()
+  if (error) {
+    notify(error, 'error')
+  } else {
+    seasonStore.updateSeason(seasonStore.season.data)
+    router.push('/seasons')
+  }
+}
+
 const availablesTypes = computed(() => {
   let types = []
 
@@ -148,7 +189,12 @@ const availablesTypes = computed(() => {
 })
 
 const debouncedUpdate = debounce(() => {
-  if (route.params.seasonId) seasonStore.updateSeason(seasonStore.season.data)
+  if (route.params.seasonId) {
+    const error = valid()
+    if (!error) {
+      seasonStore.updateSeason(seasonStore.season.data)
+    }
+  }
 }, 3000)
 
 onMounted(() => {
@@ -164,7 +210,10 @@ watch(() => route.params.seasonId, () => {
 })
 
 watch(() => seasonStore.season.data,
-  debouncedUpdate
-  , { deep: true })
-
+  () => {
+    if (isInitialLoad.value) return // Skip the debounce on initial load
+    debouncedUpdate();
+  },
+  { deep: true }
+);
 </script>

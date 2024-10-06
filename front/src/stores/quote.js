@@ -16,6 +16,7 @@ export const useQuoteStore = defineStore('quote', {
       data: {},
     },
     lastFetch: null,
+    quoteLifeTime: 1000 * 60 * 60 * 24, // 24 hours
   }),
 
   actions: {
@@ -45,8 +46,7 @@ export const useQuoteStore = defineStore('quote', {
       const nowDate = new Date()
       const lastFetch = this.lastFetch ? new Date(this.lastFetch) : null
 
-      // New fetch every 12 hours
-      if (!this.lastFetch || (nowDate - lastFetch) > 43200000) {
+      if (!this.lastFetch || (nowDate - lastFetch) > this.quoteLifeTime) {
         await this.fetchQuote()
       }
     },
