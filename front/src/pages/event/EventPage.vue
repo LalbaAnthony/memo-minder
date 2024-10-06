@@ -108,11 +108,11 @@ const eventStore = useEventStore()
 
 const showItemPicker = ref(false)
 
-function loadOrClearEvent() {
+function loadOrInitEvent() {
   if (route.params.eventId) {
     eventStore.fetchEvent(route.params.eventId)
   } else {
-    eventStore.clearEvent()
+    eventStore.initEvent()
     if (route.query.title) eventStore.event.data.title = route.query.title // From the search page
   }
 }
@@ -164,7 +164,7 @@ const debouncedUpdate = debounce(() => {
 }, 3000)
 
 onMounted(() => {
-  loadOrClearEvent()
+  loadOrInitEvent()
 })
 
 onBeforeUnmount(() => {
@@ -172,7 +172,7 @@ onBeforeUnmount(() => {
 });
 
 watch(() => route.params.eventId, () => {
-  loadOrClearEvent()
+  loadOrInitEvent()
 })
 
 watch(() => eventStore.event.data,

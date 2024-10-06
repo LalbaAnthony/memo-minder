@@ -83,6 +83,11 @@ export const useEventStore = defineStore('event', {
       if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
     },
 
+    initEvent() {
+      this.event.data.date = new Date().toISOString()
+      this.event.data.userId = authStore.user.userId
+    },
+
     async deleteEvent(eventId) {
 
       // Remove in local

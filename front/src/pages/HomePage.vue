@@ -46,6 +46,7 @@ import Spents from '@/components/homepage/SpentsComponent.vue'
 import { useAuthStore } from '@/stores/auth'
 import { useEventStore } from '@/stores/event'
 import { useQuoteStore } from '@/stores/quote'
+import { onMounted } from 'vue'
 
 const authStore = useAuthStore()
 const quoteStore = useQuoteStore()
@@ -59,7 +60,11 @@ async function loadEvents() {
 }
 
 // Fetch data on mount
-if (authStore?.user?.homePageEnableLasts && (!eventStore.events.data || eventStore.events.data.length === 0)) loadEvents()
-if (authStore?.user?.homePageEnableQuote) quoteStore.fetchQuoteIfTooOld()
+onMounted(() => {
+  loadEvents()
+  if (authStore?.user?.homePageEnableLasts) loadEvents()
+  if (authStore?.user?.homePageEnableQuote) quoteStore.fetchQuoteIfTooOld()
+})
+
 
 </script>

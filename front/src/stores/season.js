@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { get, post, put, del } from '@/helpers/api';
+import { randomColor } from '@/helpers/helpers.js'
 import { useAuthStore } from '@/stores/auth'
 
 const authStore = useAuthStore()
@@ -81,6 +82,13 @@ export const useSeasonStore = defineStore('season', {
       this.season.pagination.page = page
       this.fetchSeason()
       if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+
+    initSeason() {
+      this.season.data.color = randomColor()
+      this.season.data.dateEnd = new Date().toISOString()
+      this.season.data.dateStart = new Date().toISOString()
+      this.season.data.userId = authStore.user.userId
     },
 
     async deleteSeason(seasonId) {

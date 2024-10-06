@@ -15,7 +15,7 @@ const Season = sequelize.define('Season', {
             model: 'User',
             key: 'userId'
         },
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE', 
         onUpdate: 'CASCADE'
     },
     musicId: {
@@ -25,6 +25,8 @@ const Season = sequelize.define('Season', {
             key: 'musicId'
         },
         allowNull: true,
+        onDelete: 'SET NULL',  
+        onUpdate: 'CASCADE'
     },
     moodId: {
         type: DataTypes.INTEGER,
@@ -33,6 +35,8 @@ const Season = sequelize.define('Season', {
             key: 'moodId'
         },
         allowNull: true,
+        onDelete: 'SET NULL',  
+        onUpdate: 'CASCADE'
     },
     personId: {
         type: DataTypes.INTEGER,
@@ -41,6 +45,8 @@ const Season = sequelize.define('Season', {
             key: 'personId'
         },
         allowNull: true,
+        onDelete: 'SET NULL',  
+        onUpdate: 'CASCADE'
     },
     title: {
         type: DataTypes.STRING(50),

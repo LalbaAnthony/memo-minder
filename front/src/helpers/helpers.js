@@ -49,6 +49,10 @@ export function isValidDate(date) {
         (new Date(date) !== "Invalid Date");
 }
 
+export function isValidColor(color) {
+    return (color.length === 7 && color[0] === '#' && color.match(/^[0-9A-Fa-f]+$/))
+}
+
 export function roundNb(nb, precision = 2) {
     return nb.toFixed(precision);
 }
@@ -65,6 +69,10 @@ export function dateToNiceDate(date) {
 
 export function randomInt(min = 1, max = 100) {
     return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+export function randomColor() {
+    return '#' + Math.floor(Math.random() * 16777215).toString(16);
 }
 
 export function missingsElementsPassword(password) {
