@@ -15,7 +15,7 @@ const Music = sequelize.define('Music', {
             model: 'User',
             key: 'userId'
         },
-        onDelete: 'SET NULL',
+        onDelete: 'CASCADE', 
         onUpdate: 'CASCADE'
     },
     title: {

@@ -29,7 +29,7 @@ import Pagination from '@/components/PaginationComponent.vue'
 
 import { useRoute } from 'vue-router'
 import { useSeasonStore } from '@/stores/season'
-import { watch } from 'vue'
+import { onMounted, watch } from 'vue'
 
 const route = useRoute()
 const seasonStore = useSeasonStore()
@@ -46,7 +46,9 @@ async function loadSeasons() {
 }
 
 // Fetch seasons on mount
-if (!seasonStore.seasons.data || seasonStore.seasons.data.length === 0) loadSeasons()
+onMounted(() => {
+  loadSeasons()
+})
 
 // Watch route for changes
 watch(() => route.query, loadSeasons)

@@ -5,9 +5,10 @@ Back:
     - [ ] Create and implement email systeme with back/src/helpers/email.js
 
 Front:
-    - [ ] Faire inté de toutes les pages WIP
-    - [ ] Handle SQLITE_CONSTRAINT: FOREIGN KEY constraint failed a la suppression d'un item enfant
     - [ ] Faire listes differentses dans les stores pour chaque usage ?
+    - [ ] Faire inté de toutes les pages WIP
+    - [ ] Warning champs oublié sur les CRUDs
+    - [ ] Bug bouton delete item des personnes et des music
     - [ ] Make integration from something like https://flowbite.com/blocks/application/shells/
     - [ ] Maj account params + mdp oublié
     - [ ] Mettre tout les store en perssistant pour pour etre en offline + gestion des erreurs Axios

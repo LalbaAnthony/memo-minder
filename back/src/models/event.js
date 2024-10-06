@@ -15,7 +15,7 @@ const Event = sequelize.define('Event', {
             model: 'User',
             key: 'userId'
         },
-        onDelete: 'SET NULL',  
+        onDelete: 'CASCADE', 
         onUpdate: 'CASCADE'
     },
     musicId: {
@@ -25,6 +25,8 @@ const Event = sequelize.define('Event', {
             key: 'musicId'
         },
         allowNull: true,
+        onDelete: 'SET NULL',  
+        onUpdate: 'CASCADE'
     },
     moodId: {
         type: DataTypes.INTEGER,
@@ -33,6 +35,8 @@ const Event = sequelize.define('Event', {
             key: 'moodId'
         },
         allowNull: true,
+        onDelete: 'SET NULL',  
+        onUpdate: 'CASCADE'
     },
     seasonId: {
         type: DataTypes.INTEGER,
@@ -41,6 +45,8 @@ const Event = sequelize.define('Event', {
             key: 'seasonId'
         },
         allowNull: true,
+        onDelete: 'SET NULL',  
+        onUpdate: 'CASCADE'
     },
     personId: {
         type: DataTypes.INTEGER,
@@ -49,6 +55,8 @@ const Event = sequelize.define('Event', {
             key: 'personId'
         },
         allowNull: true,
+        onDelete: 'SET NULL',  
+        onUpdate: 'CASCADE'
     },
     title: {
         type: DataTypes.STRING(100),
