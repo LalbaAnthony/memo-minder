@@ -46,9 +46,6 @@ import Spents from '@/components/homepage/SpentsComponent.vue'
 import { useAuthStore } from '@/stores/auth'
 import { useEventStore } from '@/stores/event'
 import { useQuoteStore } from '@/stores/quote'
-import { useRoute } from 'vue-router'
-
-const route = useRoute()
 
 const authStore = useAuthStore()
 const quoteStore = useQuoteStore()
@@ -56,12 +53,8 @@ const eventStore = useEventStore()
 
 async function loadEvents() {
   eventStore.fetchEvents({
-    sort: route.query.sort ? [{
-      orderBy: route.query.sort?.split('-')[0] || null,
-      order: route.query.sort?.split('-')[1] || null
-    }] : [
-      { order: 'ASC', orderBy: 'createdAt' },
-    ]
+    sort: [{ order: 'ASC', orderBy: 'createdAt' }],
+    perPage: 3
   })
 }
 

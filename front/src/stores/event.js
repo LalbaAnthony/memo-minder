@@ -77,6 +77,12 @@ export const useEventStore = defineStore('event', {
       this.events.loading = false
     },
 
+    changePage(page, scroll = true) {
+      this.events.pagination.page = page
+      this.fetchEvents()
+      if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+
     async deleteEvent(eventId) {
 
       // Remove in local

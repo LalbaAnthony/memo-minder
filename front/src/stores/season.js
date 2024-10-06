@@ -77,6 +77,12 @@ export const useSeasonStore = defineStore('season', {
       this.seasons.loading = false
     },
 
+    changePage(page, scroll = true) {
+      this.season.pagination.page = page
+      this.fetchSeason()
+      if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+
     async deleteSeason(seasonId) {
 
       // Remove in local

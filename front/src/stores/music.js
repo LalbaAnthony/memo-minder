@@ -77,6 +77,12 @@ export const useMusicStore = defineStore('music', {
       this.musics.loading = false
     },
 
+    changePage(page, scroll = true) {
+      this.musics.pagination.page = page
+      this.fetchMusics()
+      if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+
     async deleteMusic(musicId) {
 
       // Remove in local
