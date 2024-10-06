@@ -12,6 +12,9 @@
         <Season :season="item" />
       </template>
     </Grid>
+    <Pagination :total="seasonStore.seasons.pagination.total" :page="seasonStore.seasons.pagination.page"
+      :perPage="seasonStore.seasons.pagination.perPage" @update-page="(page) => seasonStore.changePage(page)" />
+
     <BottomActions />
   </div>
 </template>
@@ -22,6 +25,8 @@ import Grid from '@/components/GridComponent.vue'
 import Season from '@/components/season/SeasonItem.vue'
 import Loader from '@/components/LoaderComponent.vue'
 import BottomActions from '@/components/BottomActionsComponent.vue'
+import Pagination from '@/components/PaginationComponent.vue'
+
 import { useRoute } from 'vue-router'
 import { useSeasonStore } from '@/stores/season'
 import { watch } from 'vue'

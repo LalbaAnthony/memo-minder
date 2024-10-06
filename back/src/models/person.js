@@ -19,11 +19,11 @@ const Person = sequelize.define('Person', {
         onUpdate: 'CASCADE'
     },
     name: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(50),
         allowNull: false,
     },
     description: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(1000),
         allowNull: true,
     },
     updatedAt: {

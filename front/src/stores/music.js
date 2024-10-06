@@ -24,7 +24,7 @@ export const useMusicStore = defineStore('music', {
 
     async fetchMusic(musicId) {
       musicId = parseInt(musicId)
-      
+
       // Loading
       this.music.loading = true
 
@@ -40,7 +40,7 @@ export const useMusicStore = defineStore('music', {
           }
 
           this.clearMusic()
-          
+
           const resp = await get(`music/${musicId}`, params);
           this.music.data = resp.data || {};
         }
@@ -89,17 +89,31 @@ export const useMusicStore = defineStore('music', {
       this.musics.data.splice(this.musics.data.findIndex(music => music.musicId === musicId), 1)
 
       // Request
-      // console.log('delete musicId', musicId)
+      await del(`music/${musicId}`);
     },
 
     async createMusic(music) {
-      // Request
-      // console.log('create music', music)
+        
+        // Loading
+        this.music.loading = true
+        
+        // Request
+        await post('musics', music);
+  
+        // Loading
+        this.music.loading
     },
 
     async updateMusic(music) {
+      
+      // Loading
+      this.music.loading = true
+      
       // Request
-      // console.log('update music', music)
+      await put(`music/${this.music.data.musicId}`, music);
+
+      // Loading
+      this.music.loading = false
     },
   },
 })

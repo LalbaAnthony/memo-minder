@@ -72,9 +72,11 @@ const props = defineProps({
 .number {
   cursor: pointer;
   transition: color 0.3s;
+  color: var(--gray-light);
 }
 
 .number.active {
-  color: var(--primary);
+  color: var(--light);
 }
+
 </style>

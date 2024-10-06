@@ -157,7 +157,7 @@ exports.createEvent = async (req, res) => {
         const event = await Event.create({ musicId, userId, seasonId, title, description, date, location });
         if (!event) return res.status(404).json(formatRes('error', null, 'Error creating event'));
 
-        return res.status(201).json(formatRes('success', event))
+        return res.status(201).json(formatRes('success', null, 'Event created'))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
     }
@@ -203,7 +203,7 @@ exports.updateEvent = async (req, res) => {
         const resp = await event.update({ musicId, userId, seasonId, title, description, date, location });
         if (!resp) return res.status(404).json(formatRes('error', null, 'Error updating event'));
 
-        return res.status(201).json(formatRes('success', event))
+        return res.status(201).json(formatRes('success', null, 'Event updated'))
 
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))

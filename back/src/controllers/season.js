@@ -137,7 +137,7 @@ exports.createSeason = async (req, res) => {
         const season = await Season.create({ musicId, userId, seasonId, title, description, date });
         if (!season) return res.status(404).json(formatRes('error', null, 'Error creating season'));
 
-        return res.status(201).json(formatRes('success', season))
+        return res.status(201).json(formatRes('success', null, 'Season created'))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
     }
@@ -177,7 +177,7 @@ exports.updateSeason = async (req, res) => {
         const resp = await season.update({ musicId, userId, seasonId, title, description, date });
         if (!resp) return res.status(404).json(formatRes('error', null, 'Error updating season'));
 
-        return res.status(201).json(formatRes('success', season))
+        return res.status(201).json(formatRes('success', 'Season updated'))
 
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))

@@ -5,15 +5,14 @@ Back:
     - [ ] Create and implement email systeme with back/src/helpers/email.js
 
 Front:
-    - [ ] Faire pagination / scroll infini et les mettres dans event
-    - [ ] Faire listes differentses dans les stores pour chaque usage ?
     - [ ] Faire inté de toutes les pages WIP
+    - [ ] Handle SQLITE_CONSTRAINT: FOREIGN KEY constraint failed a la suppression d'un item enfant
+    - [ ] Faire listes differentses dans les stores pour chaque usage ?
     - [ ] Make integration from something like https://flowbite.com/blocks/application/shells/
-    - [ ] Faire CRUD pour tout les items
     - [ ] Maj account params + mdp oublié
     - [ ] Mettre tout les store en perssistant pour pour etre en offline + gestion des erreurs Axios
+    - [ ] Vérifier la présence de TODO dans le code
     - [ ] Faire PWA
-
 
 Ideas:
     - [ ] Pouvoir parametrer la home page

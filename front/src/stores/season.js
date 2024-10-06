@@ -24,7 +24,7 @@ export const useSeasonStore = defineStore('season', {
 
     async fetchSeason(seasonId) {
       seasonId = parseInt(seasonId)
-      
+
       // Loading
       this.season.loading = true
 
@@ -40,7 +40,7 @@ export const useSeasonStore = defineStore('season', {
           }
 
           this.clearSeason()
-          
+
           const resp = await get(`season/${seasonId}`, params);
           this.season.data = resp.data || {};
         }
@@ -89,17 +89,31 @@ export const useSeasonStore = defineStore('season', {
       this.seasons.data.splice(this.seasons.data.findIndex(season => season.seasonId === seasonId), 1)
 
       // Request
-      // console.log('delete seasonId', seasonId)
+      await del(`season/${seasonId}`);
     },
 
     async createSeason(season) {
-      // Request
-      // console.log('create season', season)
+        
+        // Loading
+        this.season.loading = true
+        
+        // Request
+        await post('seasons', season);
+  
+        // Loading
+        this.season.loading
     },
 
     async updateSeason(season) {
+      
+      // Loading
+      this.season.loading = true
+      
       // Request
-      // console.log('update season', season)
+      await put(`season/${this.season.data.seasonId}`, season);
+
+      // Loading
+      this.season.loading = false
     },
   },
 })

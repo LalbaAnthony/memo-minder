@@ -51,11 +51,11 @@ const Event = sequelize.define('Event', {
         allowNull: true,
     },
     title: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(100),
         allowNull: false,
     },
     description: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(1000),
         allowNull: true,
     },
     date: {
@@ -63,7 +63,7 @@ const Event = sequelize.define('Event', {
         allowNull: false,
     },
     location: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(500),
         allowNull: true,
     },
     updatedAt: {

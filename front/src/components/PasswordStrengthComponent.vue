@@ -13,7 +13,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { missingElementsPassword } from '@/helpers/helpers.js'
+import { missingsElementsPassword } from '@/helpers/helpers.js'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 
 const props = defineProps({
@@ -24,7 +24,7 @@ const props = defineProps({
 })
 
 const percentage = computed(() => {
-  const p = Math.abs(missingElementsPassword(props.password).length - 5) * 20
+  const p = Math.abs(missingsElementsPassword(props.password).length - 5) * 20
   return props.password ? p : 0
 })
 

@@ -68,7 +68,7 @@
           </button>
           <button
             class="text-light p-2 rounded-lg cursor-pointer bg-primary hover:bg-primary-dark transition-colors duration-200"
-            @click="eventStore.updateEvent(eventStore.event.data)">
+            @click="eventStore.updateEvent(eventStore.event.data); debouncedUpdate.cancel()">
             <span class="mx-4 my-0.5">Update</span>
           </button>
         </div>
@@ -99,7 +99,7 @@ import { MapPinIcon } from '@heroicons/vue/24/solid'
 import { useRoute, useRouter } from 'vue-router'
 import { useEventStore } from '@/stores/event'
 import { dateToNiceDate } from '@/helpers/helpers.js'
-import { computed, ref, watch, onBeforeUnmount } from 'vue'
+import { computed, ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import debounce from 'lodash/debounce'
 
 const route = useRoute()
@@ -159,21 +159,24 @@ const availablesTypes = computed(() => {
   return types
 })
 
-loadOrClearEvent()
+const debouncedUpdate = debounce(() => {
+  if (route.params.eventId) eventStore.updateEvent(eventStore.event.data)
+}, 3000)
+
+onMounted(() => {
+  loadOrClearEvent()
+})
 
 onBeforeUnmount(() => {
   if (route.params.eventId) eventStore.updateEvent(eventStore.event.data)
 });
-
 
 watch(() => route.params.eventId, () => {
   loadOrClearEvent()
 })
 
 watch(() => eventStore.event.data,
-  debounce(() => {
-    if (route.params.eventId) eventStore.updateEvent(eventStore.event.data)
-  }, 3000)
+  debouncedUpdate
   , { deep: true })
 
 </script>
