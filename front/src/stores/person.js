@@ -77,6 +77,12 @@ export const usePersonStore = defineStore('person', {
       this.people.loading = false
     },
 
+    changePage(page, scroll = true) {
+      this.people.pagination.page = page
+      this.fetchPeople()
+      if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+
     async deletePerson(personId) {
 
       // Remove in local

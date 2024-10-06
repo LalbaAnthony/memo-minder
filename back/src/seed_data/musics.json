@@ -118,5 +118,37 @@
         "artist": "AC/DC",
         "releaseDate": "1980-07-25",
         "streamingLink": "https://www.youtube.com/watch?v=pAgnJDJN4VA"
+    },
+    {
+        "musicId": 16,
+        "userId": 1,
+        "title": "Thunderstruck",
+        "artist": "AC/DC",
+        "releaseDate": "1990-09-10",
+        "streamingLink": "https://www.youtube.com/watch?v=v2AC41dglnM"
+    },
+    {
+        "musicId": 17,
+        "userId": 1,
+        "title": "Highway to Hell",
+        "artist": "AC/DC",
+        "releaseDate": "1979-07-27",
+        "streamingLink": "https://www.youtube.com/watch?v=l482T0yNkeo"
+    },
+    {
+        "musicId": 18,
+        "userId": 1,
+        "title": "Stairway to Heaven",
+        "artist": "Led Zeppelin",
+        "releaseDate": "1971-11-08",
+        "streamingLink": "https://www.youtube.com/watch?v=xbhCPt6PZIU"
+    },
+    {
+        "musicId": 19,
+        "userId": 1,
+        "title": "Whole Lotta Love",
+        "artist": "Led Zeppelin",
+        "releaseDate": "1969-10-22",
+        "streamingLink": "https://www.youtube.com/watch?v=HQmmM_qwG4k"
     }
 ]
