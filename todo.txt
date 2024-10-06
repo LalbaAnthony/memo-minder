@@ -17,6 +17,5 @@ Front:
 
 
 Ideas:
-    - [ ] Issue seed: on devrait pouvoir ajouter des musiques qui ne sont relié à aucun item mais ce n'est pas le cas => Resoudre et merge musics.json et more_musics.json
     - [ ] Pouvoir parametrer la home page
     - [ ] Fonction de Rappels de Souvenirs (what happened a year ago, ...)
