@@ -85,6 +85,7 @@ export const useSeasonStore = defineStore('season', {
     },
 
     initSeason() {
+      this.clearSeason()
       this.season.data.color = randomColor()
       this.season.data.dateEnd = new Date().toISOString()
       this.season.data.dateStart = new Date().toISOString()
@@ -92,7 +93,6 @@ export const useSeasonStore = defineStore('season', {
     },
 
     async deleteSeason(seasonId) {
-
       // Remove in local
       this.seasons.data.splice(this.seasons.data.findIndex(season => season.seasonId === seasonId), 1)
 
@@ -101,19 +101,17 @@ export const useSeasonStore = defineStore('season', {
     },
 
     async createSeason(season) {
-        
-        // Loading
+      // Loading
         this.season.loading = true
         
         // Request
         await post('seasons', season);
   
         // Loading
-        this.season.loading
+        this.season.loading = false
     },
 
     async updateSeason(season) {
-      
       // Loading
       this.season.loading = true
       

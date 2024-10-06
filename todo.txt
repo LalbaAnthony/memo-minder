@@ -1,20 +1,17 @@
-Misc:
-    - [ ] Finir tout par couche
-
 Back:
-    - [ ] Create and implement email systeme with back/src/helpers/email.js
+    - Create and implement email systeme with back/src/helpers/email.js
 
 Front:
-    - [ ] Faire listes differentses dans les stores pour chaque usage ?
-    - [ ] Faire inté de toutes les pages WIP
-    - [ ] Warning champs oublié sur les CRUDs
-    - [ ] Bug bouton delete item des personnes et des music
-    - [ ] Make integration from something like https://flowbite.com/blocks/application/shells/
-    - [ ] Maj account params + mdp oublié
-    - [ ] Mettre tout les store en perssistant pour pour etre en offline + gestion des erreurs Axios
-    - [ ] Vérifier la présence de TODO dans le code
-    - [ ] Faire PWA
+    - Bug bouton delete item des personnes et des music
+    - Faire listes differentses dans les stores pour chaque usage ?
+    - Faire page de détail pour les personnes et les musiques
+    - Faire inté de toutes les pages WIP
+    - Make integration from something like https://flowbite.com/blocks/application/shells/
+    - Maj account params + mdp oublié + delete account
+    - Mettre tout les store en perssistant pour pour etre en offline + gestion des erreurs Axios
+    - Vérifier la présence de TODO dans le code
+    - Ajouter langue francaise
+    - Faire PWA
 
 Ideas:
-    - [ ] Pouvoir parametrer la home page
-    - [ ] Fonction de Rappels de Souvenirs (what happened a year ago, ...)
+    - Fonction de Rappels de Souvenirs (what happened a year ago, ...)

@@ -84,7 +84,6 @@ export const useMusicStore = defineStore('music', {
     },
 
     async deleteMusic(musicId) {
-
       // Remove in local
       this.musics.data.splice(this.musics.data.findIndex(music => music.musicId === musicId), 1)
 
@@ -93,19 +92,17 @@ export const useMusicStore = defineStore('music', {
     },
 
     async createMusic(music) {
-        
-        // Loading
+      // Loading
         this.music.loading = true
         
         // Request
         await post('musics', music);
   
         // Loading
-        this.music.loading
+        this.music.loading = false
     },
 
     async updateMusic(music) {
-      
       // Loading
       this.music.loading = true
       

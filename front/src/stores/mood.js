@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { get } from '@/helpers/api';
 
 export const useMoodStore = defineStore('mood', {
+  persist: true,
   state: () => ({
     moods: {
       loading: true,
@@ -20,7 +21,7 @@ export const useMoodStore = defineStore('mood', {
 
     async fetchMood(moodId) {
       moodId = parseInt(moodId)
-      
+
       // Loading
       this.mood.loading = true
 
@@ -32,7 +33,7 @@ export const useMoodStore = defineStore('mood', {
           this.mood.data = mood
         } else {
           this.clearMood()
-          
+
           const resp = await get(`mood/${moodId}`);
           this.mood.data = resp.data || {};
         }

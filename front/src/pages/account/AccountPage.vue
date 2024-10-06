@@ -71,6 +71,23 @@
         </div>
       </div>
     </section>
+    <hr>
+    <section>
+      <h2 class="text-xl font-bold my-4">Data</h2>
+      <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 m-4">
+
+        <button
+          class="text-light p-2 rounded-lg cursor-pointer bg-danger hover:bg-danger-dark transition-colors duration-200"
+          @click="clearLocalData()">
+          <span class="mx-2 my-0.5">Delete all local data</span>
+        </button>
+        <button
+          class="text-light p-2 rounded-lg cursor-pointer bg-danger-dark hover:bg-danger-dark transition-colors duration-200"
+          @click="deleteAccount()">
+          <span class="mx-2 my-0.5">Delete my account</span>
+        </button>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -88,6 +105,24 @@ const authStore = useAuthStore()
 const languages = ref({
   en: 'English',
 })
+
+function clearLocalData() {
+  if (confirm("Are you sure you want to delete all local data? You may lose unsaved data.")) {
+    localStorage.clear()
+    sessionStorage.clear()
+    window.location.reload()
+  }
+}
+
+function deleteAccount() {
+  if (confirm("Are you sure you want to delete your account? You may lose all your data.")) {
+    if (prompt("Please type your email to confirm.") === authStore.user.email) {
+      if (confirm("Are you really sure? This action is irreversible.")) {
+        authStore.deleteAccount()
+      }
+    }
+  }
+}
 
 function valid() {
   // return false // ? uncomment this line to enable form validation

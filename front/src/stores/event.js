@@ -84,12 +84,12 @@ export const useEventStore = defineStore('event', {
     },
 
     initEvent() {
+      this.clearEvent()
       this.event.data.date = new Date().toISOString()
       this.event.data.userId = authStore.user.userId
     },
 
     async deleteEvent(eventId) {
-
       // Remove in local
       this.events.data.splice(this.events.data.findIndex(event => event.eventId === eventId), 1)
 
@@ -98,19 +98,17 @@ export const useEventStore = defineStore('event', {
     },
 
     async createEvent(event) {
-        
-        // Loading
+      // Loading
         this.event.loading = true
         
         // Request
         await post('events', event);
   
         // Loading
-        this.event.loading
+        this.event.loading = false
     },
 
     async updateEvent(event) {
-      
       // Loading
       this.event.loading = true
       

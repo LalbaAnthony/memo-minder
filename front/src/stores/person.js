@@ -84,7 +84,6 @@ export const usePersonStore = defineStore('person', {
     },
 
     async deletePerson(personId) {
-
       // Remove in local
       this.people.data.splice(this.people.data.findIndex(person => person.personId === personId), 1)
 
@@ -93,19 +92,17 @@ export const usePersonStore = defineStore('person', {
     },
 
     async createPerson(person) {
-        
-        // Loading
+      // Loading
         this.person.loading = true
         
         // Request
         await post('people', person);
   
         // Loading
-        this.person.loading
+        this.person.loading = false
     },
 
     async updatePerson(person) {
-      
       // Loading
       this.person.loading = true
       
