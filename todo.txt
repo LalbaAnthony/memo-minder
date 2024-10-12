@@ -2,11 +2,12 @@ Back:
     - Create and implement email systeme with back/src/helpers/email.js
 
 Front:
-    - Bug bouton delete item des personnes et des music
+    - Bug inté bouton delete item des personnes et des music
     - Faire listes differentses dans les stores pour chaque usage ?
     - Faire page de détail pour les personnes et les musiques
     - Faire inté de toutes les pages WIP
     - Make integration from something like https://flowbite.com/blocks/application/shells/
+    - Bug middleware de auth en back => Fait planter le back + Faire 
     - Maj account params + mdp oublié + delete account
     - Mettre tout les store en perssistant pour pour etre en offline + gestion des erreurs Axios
     - Vérifier la présence de TODO dans le code
