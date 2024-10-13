@@ -21,10 +21,10 @@ export const useAuthStore = defineStore('auth', {
       }
 
       await post('validate-token', { userId: this.user.userId, token: this.user.connectionToken || this.token }).then(resp => {
-
+        console.log('validateToken', resp);
         if (resp.status && resp.status === 'success') {
           return true;
-        } else if (resp.status === 'success') {
+        } else if (resp.status === 'error') {
           this.logout()
           notify(resp.message, 'error');
           return false;
