@@ -64,7 +64,7 @@ exports.getAllSeasons = async (req, res) => {
             }
         }
 
-        return res.status(201).json(formatRes('success', seasons, null, pagination));
+        return res.status(200).json(formatRes('success', seasons, null, pagination));
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message));
     }
@@ -99,7 +99,7 @@ exports.getSeasonById = async (req, res) => {
             if (mood) season.dataValues.mood = mood.dataValues;
         }
 
-        return res.status(201).json(formatRes('success', season))
+        return res.status(200).json(formatRes('success', season))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
     }
@@ -135,7 +135,7 @@ exports.createSeason = async (req, res) => {
         }
 
         const season = await Season.create({userId, musicId, moodId, personId, title, color, description, dateStart, dateEnd});
-        if (!season) return res.status(404).json(formatRes('error', null, 'Error creating season'));
+        if (!season) return res.status(500).json(formatRes('error', null, 'Error creating season'));
 
         return res.status(201).json(formatRes('success', null, 'Season created'))
     } catch (error) {
@@ -175,7 +175,7 @@ exports.updateSeason = async (req, res) => {
         }
 
         const resp = await season.update({userId, musicId, moodId, personId, title, color, description, dateStart, dateEnd});
-        if (!resp) return res.status(404).json(formatRes('error', null, 'Error updating season'));
+        if (!resp) return res.status(500).json(formatRes('error', null, 'Error updating season'));
 
         return res.status(201).json(formatRes('success', 'Season updated'))
 
@@ -194,7 +194,7 @@ exports.deleteSeason = async (req, res) => {
         const resp = await season.destroy();
         if (!resp) return res.status(404).json(formatRes('error', null, 'Error deleting season'));
 
-        return res.status(201).json(formatRes('success', null, 'Season deleted'))
+        return res.status(200).json(formatRes('success', null, 'Season deleted'))
 
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))

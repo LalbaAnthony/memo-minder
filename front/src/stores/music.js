@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
-import { get, post, put, del } from '@/helpers/api';
+import { get, post, put, del } from '@/helpers/api'
 import { useAuthStore } from '@/stores/auth'
+import { notify } from '@/helpers/notif.js'
 
 const authStore = useAuthStore()
 
@@ -41,8 +42,8 @@ export const useMusicStore = defineStore('music', {
 
           this.clearMusic()
 
-          const resp = await get(`music/${musicId}`, params);
-          this.music.data = resp.data || {};
+          const resp = await get(`music/${musicId}`, params)
+          this.music.data = resp.data.data || {}
         }
       }
 
@@ -69,9 +70,9 @@ export const useMusicStore = defineStore('music', {
 
       Object.assign(params, givenParams)
 
-      const resp = await get('musics', params);
-      this.musics.data = resp.data || [];
-      this.musics.pagination = resp.pagination || { page: 1, perPage: 10, total: 1 };
+      const resp = await get('musics', params)
+      this.musics.data = resp.data.data || []
+      this.musics.pagination = resp.pagination || { page: 1, perPage: 10, total: 1 }
 
       // Loading
       this.musics.loading = false
@@ -80,7 +81,7 @@ export const useMusicStore = defineStore('music', {
     changePage(page, scroll = true) {
       this.musics.pagination.page = page
       this.fetchMusics()
-      if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' })
     },
 
     async deleteMusic(musicId) {
@@ -88,29 +89,53 @@ export const useMusicStore = defineStore('music', {
       this.musics.data.splice(this.musics.data.findIndex(music => music.musicId === musicId), 1)
 
       // Request
-      await del(`music/${musicId}`);
+      const resp = await del(`music/${musicId}`)
+
+      if (resp.status !== 200) {
+        notify(resp.data.message, 'error')
+        return false
+      }
+
+      return true
     },
 
     async createMusic(music) {
       // Loading
-        this.music.loading = true
-        
-        // Request
-        await post('musics', music);
-  
-        // Loading
-        this.music.loading = false
+      this.music.loading = true
+
+      // Request
+      const resp = await post('musics', music)
+
+      if (resp.status !== 201) {
+        notify(resp.data.message, 'error')
+        return false
+      }
+
+      // Append in local
+      this.musics.data.unshift(resp.data.data)
+
+      // Loading
+      this.music.loading = false
+
+      return true
     },
 
     async updateMusic(music) {
       // Loading
       this.music.loading = true
-      
+
       // Request
-      await put(`music/${this.music.data.musicId}`, music);
+      const resp = await put(`music/${music.musicId}`, music)
+
+      if (resp.status !== 201) {
+        notify(resp.data.message, 'error')
+        return false
+      }
 
       // Loading
       this.music.loading = false
+
+      return true
     },
   },
 })

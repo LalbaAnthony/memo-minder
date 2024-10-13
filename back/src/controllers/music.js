@@ -43,7 +43,7 @@ exports.getAllMusics = async (req, res) => {
 
         const musics = await Music.findAll({ where, order, offset, limit: pagination.perPage });
 
-        return res.status(201).json(formatRes('success', musics, null, pagination));
+        return res.status(200).json(formatRes('success', musics, null, pagination));
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message));
     }
@@ -60,7 +60,7 @@ exports.getMusicById = async (req, res) => {
         const music = await Music.findByPk(parseInt(req.params.id));
         if (!music) return res.status(404).json(formatRes('error', null, 'No music found with this id'));
 
-        return res.status(201).json(formatRes('success', music))
+        return res.status(200).json(formatRes('success', music))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
     }
@@ -79,7 +79,7 @@ exports.createMusic = async (req, res) => {
         if (!user) return res.status(404).json(formatRes('error', null, 'No user found with this id'));
 
         const music = await Music.create({ userId, title, artist, releaseDate, streamingLink });
-        if (!music) return res.status(404).json(formatRes('error', null, 'Error creating music'));
+        if (!music) return res.status(500).json(formatRes('error', null, 'Error creating music'));
 
         return res.status(201).json(formatRes('success', null, 'Music created'))
     } catch (error) {
@@ -101,7 +101,7 @@ exports.updateMusic = async (req, res) => {
         if (!user) return res.status(404).json(formatRes('error', null, 'No user found with this id'));
 
         const resp = await music.update({ userId, title, artist, releaseDate, streamingLink });
-        if (!resp) return res.status(404).json(formatRes('error', null, 'Error updating music'));
+        if (!resp) return res.status(500).json(formatRes('error', null, 'Error updating music'));
 
         return res.status(201).json(formatRes('success', null, 'Music updated'))
 
@@ -120,7 +120,7 @@ exports.deleteMusic = async (req, res) => {
         const resp = await music.destroy();
         if (!resp) return res.status(404).json(formatRes('error', null, 'Error deleting music'));
 
-        return res.status(201).json(formatRes('success', null, 'Music deleted'))
+        return res.status(200).json(formatRes('success', null, 'Music deleted'))
 
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))

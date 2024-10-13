@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
-import { get, post, put, del } from '@/helpers/api';
+import { get, post, put, del } from '@/helpers/api'
 import { randomColor } from '@/helpers/helpers.js'
 import { useAuthStore } from '@/stores/auth'
+import { notify } from '@/helpers/notif.js'
 
 const authStore = useAuthStore()
 
@@ -42,8 +43,8 @@ export const useSeasonStore = defineStore('season', {
 
           this.clearSeason()
 
-          const resp = await get(`season/${seasonId}`, params);
-          this.season.data = resp.data || {};
+          const resp = await get(`season/${seasonId}`, params)
+          this.season.data = resp.data.data || {}
         }
       }
 
@@ -70,9 +71,9 @@ export const useSeasonStore = defineStore('season', {
 
       Object.assign(params, givenParams)
 
-      const resp = await get('seasons', params);
-      this.seasons.data = resp.data || [];
-      this.seasons.pagination = resp.pagination || { page: 1, perPage: 10, total: 1 };
+      const resp = await get('seasons', params)
+      this.seasons.data = resp.data.data || []
+      this.seasons.pagination = resp.pagination || { page: 1, perPage: 10, total: 1 }
 
       // Loading
       this.seasons.loading = false
@@ -81,7 +82,7 @@ export const useSeasonStore = defineStore('season', {
     changePage(page, scroll = true) {
       this.season.pagination.page = page
       this.fetchSeason()
-      if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' })
     },
 
     initSeason() {
@@ -97,29 +98,53 @@ export const useSeasonStore = defineStore('season', {
       this.seasons.data.splice(this.seasons.data.findIndex(season => season.seasonId === seasonId), 1)
 
       // Request
-      await del(`season/${seasonId}`);
+      const resp = await del(`season/${seasonId}`)
+
+      if (resp.status !== 200) {
+        notify(resp.data.message, 'error')
+        return false
+      }
+
+      return true
     },
 
     async createSeason(season) {
       // Loading
-        this.season.loading = true
-        
-        // Request
-        await post('seasons', season);
-  
-        // Loading
-        this.season.loading = false
+      this.season.loading = true
+
+      // Request
+      const resp = await post('seasons', season)
+
+      if (resp.status !== 201) {
+        notify(resp.data.message, 'error')
+        return false
+      }
+
+      // Append in local
+      this.seasons.data.unshift(resp.data.data)
+
+      // Loading
+      this.season.loading = false
+
+      return true
     },
 
     async updateSeason(season) {
       // Loading
       this.season.loading = true
-      
+
       // Request
-      await put(`season/${this.season.data.seasonId}`, season);
+      const resp = await put(`season/${season.seasonId}`, season)
+
+      if (resp.status !== 201) {
+        notify(resp.data.message, 'error')
+        return false
+      }
 
       // Loading
       this.season.loading = false
+
+      return true
     },
   },
 })

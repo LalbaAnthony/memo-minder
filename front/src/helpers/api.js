@@ -28,7 +28,10 @@ export async function get(endpoint, params = {}) {
 
   const response = await api.get(`${endpoint}`, { params })
 
-  return response.data
+  return {
+    data: response.data,
+    status: response.status,
+  }
 }
 
 export async function post(endpoint, data = {}) {
@@ -39,7 +42,10 @@ export async function post(endpoint, data = {}) {
 
   const response = await api.post(`${endpoint}`, data)
 
-  return response.data
+  return {
+    data: response.data,
+    status: response.status,
+  }
 }
 
 export async function put(endpoint, data = {}) {
@@ -50,7 +56,10 @@ export async function put(endpoint, data = {}) {
 
   const response = await api.put(`${endpoint}`, data)
 
-  return response.data
+  return {
+    data: response.data,
+    status: response.status,
+  }
 }
 
 export async function del(endpoint, data = {}) {
@@ -61,7 +70,10 @@ export async function del(endpoint, data = {}) {
 
   const response = await api.delete(`${endpoint}`, { data })
 
-  return response.data
+  return {
+    data: response.data,
+    status: response.status,
+  }
 }
 
 

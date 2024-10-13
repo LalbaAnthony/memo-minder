@@ -40,7 +40,7 @@ exports.getAllPeople = async (req, res) => {
 
         const people = await Person.findAll({ where, order, offset, limit: pagination.perPage });
 
-        return res.status(201).json(formatRes('success', people, null, pagination));
+        return res.status(200).json(formatRes('success', people, null, pagination));
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message));
     }
@@ -57,7 +57,7 @@ exports.getPersonById = async (req, res) => {
         const person = await Person.findByPk(parseInt(req.params.id));
         if (!person) return res.status(404).json(formatRes('error', null, 'No person found with this id'));
 
-        return res.status(201).json(formatRes('success', person))
+        return res.status(200).json(formatRes('success', person))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
     }
@@ -75,7 +75,7 @@ exports.createPerson = async (req, res) => {
         if (!user) return res.status(404).json(formatRes('error', null, 'No user found with this id'));
 
         const person = await Person.create({ personId, userId, name, description });
-        if (!person) return res.status(404).json(formatRes('error', null, 'Error creating person'));
+        if (!person) return res.status(500).json(formatRes('error', null, 'Error creating person'));
 
         return res.status(201).json(formatRes('success', null, 'Person created'))
     } catch (error) {
@@ -97,7 +97,7 @@ exports.updatePerson = async (req, res) => {
         if (!user) return res.status(404).json(formatRes('error', null, 'No user found with this id'));
 
         const resp = await person.update({ personId, userId, name, description });
-        if (!resp) return res.status(404).json(formatRes('error', null, 'Error updating person'));
+        if (!resp) return res.status(500).json(formatRes('error', null, 'Error updating person'));
 
         return res.status(201).json(formatRes('success', null, 'Person updated'))
 
@@ -116,7 +116,7 @@ exports.deletePerson = async (req, res) => {
         const resp = await person.destroy();
         if (!resp) return res.status(404).json(formatRes('error', null, 'Error deleting person'));
 
-        return res.status(201).json(formatRes('success', null, 'Person deleted'))
+        return res.status(200).json(formatRes('success', null, 'Person deleted'))
 
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))

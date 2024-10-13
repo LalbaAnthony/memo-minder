@@ -28,7 +28,7 @@ export const useQuoteStore = defineStore('quote', {
       this.quote.data = {}
 
       const resp = await api.get('/quote')
-      this.quote.data = resp.data || {};
+      this.quote.data = resp.data || {}
 
       // If quote.data.quote contains a ", ', or ”, remove it
       if (this.quote.data.quote) {

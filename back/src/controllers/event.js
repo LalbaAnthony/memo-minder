@@ -72,7 +72,7 @@ exports.getAllEvents = async (req, res) => {
             }
         }
 
-        return res.status(201).json(formatRes('success', events, null, pagination));
+        return res.status(200).json(formatRes('success', events, null, pagination));
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message));
     }
@@ -113,7 +113,7 @@ exports.getEventById = async (req, res) => {
             if (season) event.dataValues.season = season.dataValues;
         }
 
-        return res.status(201).json(formatRes('success', event))
+        return res.status(200).json(formatRes('success', event))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
     }
@@ -155,7 +155,7 @@ exports.createEvent = async (req, res) => {
         }
 
         const event = await Event.create({ musicId, userId, seasonId, title, description, date, location });
-        if (!event) return res.status(404).json(formatRes('error', null, 'Error creating event'));
+        if (!event) return res.status(500).json(formatRes('error', null, 'Error creating event'));
 
         return res.status(201).json(formatRes('success', null, 'Event created'))
     } catch (error) {
@@ -201,7 +201,7 @@ exports.updateEvent = async (req, res) => {
         }
 
         const resp = await event.update({ musicId, userId, seasonId, title, description, date, location });
-        if (!resp) return res.status(404).json(formatRes('error', null, 'Error updating event'));
+        if (!resp) return res.status(500).json(formatRes('error', null, 'Error updating event'));
 
         return res.status(201).json(formatRes('success', null, 'Event updated'))
 
@@ -220,7 +220,7 @@ exports.deleteEvent = async (req, res) => {
         const resp = await event.destroy();
         if (!resp) return res.status(404).json(formatRes('error', null, 'Error deleting event'));
 
-        return res.status(201).json(formatRes('success', null, 'Event deleted'))
+        return res.status(200).json(formatRes('success', null, 'Event deleted'))
 
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))

@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
-import { get, post, put, del } from '@/helpers/api';
+import { get, post, put, del } from '@/helpers/api'
 import { useAuthStore } from '@/stores/auth'
+import { notify } from '@/helpers/notif.js'
 
 const authStore = useAuthStore()
 
@@ -41,8 +42,8 @@ export const usePersonStore = defineStore('person', {
 
           this.clearPerson()
 
-          const resp = await get(`person/${personId}`, params);
-          this.person.data = resp.data || {};
+          const resp = await get(`person/${personId}`, params)
+          this.person.data = resp.data.data || {}
         }
       }
 
@@ -69,9 +70,9 @@ export const usePersonStore = defineStore('person', {
 
       Object.assign(params, givenParams)
 
-      const resp = await get('people', params);
-      this.people.data = resp.data || [];
-      this.people.pagination = resp.pagination || { page: 1, perPage: 10, total: 1 };
+      const resp = await get('people', params)
+      this.people.data = resp.data.data || []
+      this.people.pagination = resp.pagination || { page: 1, perPage: 10, total: 1 }
 
       // Loading
       this.people.loading = false
@@ -80,7 +81,7 @@ export const usePersonStore = defineStore('person', {
     changePage(page, scroll = true) {
       this.people.pagination.page = page
       this.fetchPeople()
-      if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' })
     },
 
     async deletePerson(personId) {
@@ -88,29 +89,53 @@ export const usePersonStore = defineStore('person', {
       this.people.data.splice(this.people.data.findIndex(person => person.personId === personId), 1)
 
       // Request
-      await del(`person/${personId}`);
+      const resp = await del(`person/${personId}`)
+
+      if (resp.status !== 200) {
+        notify(resp.data.message, 'error')
+        return false
+      }
+
+      return true
     },
 
     async createPerson(person) {
       // Loading
-        this.person.loading = true
-        
-        // Request
-        await post('people', person);
-  
-        // Loading
-        this.person.loading = false
+      this.person.loading = true
+
+      // Request
+      const resp = await post('people', person)
+
+      if (resp.status !== 201) {
+        notify(resp.data.message, 'error')
+        return false
+      }
+
+      // Append in local
+      this.people.data.unshift(resp.data.data)
+
+      // Loading
+      this.person.loading = false
+
+      return true
     },
 
     async updatePerson(person) {
       // Loading
       this.person.loading = true
-      
+
       // Request
-      await put(`person/${this.person.data.personId}`, person);
+      const resp = await put(`person/${person.personId}`, person)
+
+      if (resp.status !== 201) {
+        notify(resp.data.message, 'error')
+        return false
+      }
 
       // Loading
       this.person.loading = false
+
+      return true
     },
   },
 })
