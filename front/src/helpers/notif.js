@@ -4,6 +4,7 @@ import { isMobile } from '@/helpers/helpers.js'
 const toast = useToast();
 
 export function notify(message, type = 'info') {
+    // ? type can either be 'info', 'success', 'error' or 'warning'
     toast[type](message, {
         position: isMobile() ? 'top-right' : 'bottom-right',
         timeout: 4000,
