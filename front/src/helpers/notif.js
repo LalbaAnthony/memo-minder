@@ -20,6 +20,6 @@ export function notify(message, type = 'info') {
     });
 }
 
-export function clearNotify() {
+export function clearNotifications() {
     toast.clear();
 }

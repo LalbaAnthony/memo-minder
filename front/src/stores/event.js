@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
-import { get, post, put, del } from '@/helpers/api';
+import { get, post, put, del } from '@/helpers/api'
 import { useAuthStore } from '@/stores/auth'
+import { notify } from '@/helpers/notif.js'
 
 const authStore = useAuthStore()
 
@@ -41,8 +42,8 @@ export const useEventStore = defineStore('event', {
 
           this.clearEvent()
 
-          const resp = await get(`event/${eventId}`, params);
-          this.event.data = resp.data || {};
+          const resp = await get(`event/${eventId}`, params)
+          this.event.data = resp.data.data || {}
         }
       }
 
@@ -69,9 +70,9 @@ export const useEventStore = defineStore('event', {
 
       Object.assign(params, givenParams)
 
-      const resp = await get('events', params);
-      this.events.data = resp.data || [];
-      this.events.pagination = resp.pagination || { page: 1, perPage: 10, total: 1 };
+      const resp = await get('events', params)
+      this.events.data = resp.data.data || []
+      this.events.pagination = resp.pagination || { page: 1, perPage: 10, total: 1 }
 
       // Loading
       this.events.loading = false
@@ -80,7 +81,7 @@ export const useEventStore = defineStore('event', {
     changePage(page, scroll = true) {
       this.events.pagination.page = page
       this.fetchEvents()
-      if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' })
     },
 
     initEvent() {
@@ -94,29 +95,53 @@ export const useEventStore = defineStore('event', {
       this.events.data.splice(this.events.data.findIndex(event => event.eventId === eventId), 1)
 
       // Request
-      await del(`event/${eventId}`);
+      const resp = await del(`event/${eventId}`)
+
+      if (resp.status !== 200) {
+        notify(resp.data.message, 'error')
+        return false
+      }
+
+      return true
     },
 
     async createEvent(event) {
       // Loading
-        this.event.loading = true
-        
-        // Request
-        await post('events', event);
-  
-        // Loading
-        this.event.loading = false
+      this.event.loading = true
+
+      // Request
+      const resp = await post('events', event)
+
+      if (resp.status !== 201) {
+        notify(resp.data.message, 'error')
+        return false
+      }
+
+      // Append in local
+      this.events.data.unshift(resp.data.data)
+
+      // Loading
+      this.event.loading = false
+
+      return true
     },
 
     async updateEvent(event) {
       // Loading
       this.event.loading = true
-      
+
       // Request
-      await put(`event/${this.event.data.eventId}`, event);
+      const resp = await put(`event/${event.eventId}`, event)
+
+      if (resp.status !== 201) {
+        notify(resp.data.message, 'error')
+        return false
+      }
 
       // Loading
       this.event.loading = false
+
+      return true
     },
   },
 })

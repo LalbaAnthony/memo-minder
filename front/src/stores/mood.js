@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { get } from '@/helpers/api';
+import { get } from '@/helpers/api'
 
 export const useMoodStore = defineStore('mood', {
   persist: true,
@@ -34,8 +34,8 @@ export const useMoodStore = defineStore('mood', {
         } else {
           this.clearMood()
 
-          const resp = await get(`mood/${moodId}`);
-          this.mood.data = resp.data || {};
+          const resp = await get(`mood/${moodId}`)
+          this.mood.data = resp.data.data || {}
         }
       }
 
@@ -57,8 +57,8 @@ export const useMoodStore = defineStore('mood', {
 
       Object.assign(params, givenParams)
 
-      const resp = await get('moods', params);
-      this.moods.data = resp.data || [];
+      const resp = await get('moods', params)
+      this.moods.data = resp.data.data || []
 
       // Loading
       this.moods.loading = false

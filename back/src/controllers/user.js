@@ -14,7 +14,7 @@ exports.register = async (req, res) => {
 
         // Check if the email is already used
         const user = await User.findOne({ where: { email } });
-        if (user) return res.status(404).json(formatRes('error', null, 'Email already used'));
+        if (user) return res.status(400).json(formatRes('error', null, 'Email already used'));
 
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -24,7 +24,7 @@ exports.register = async (req, res) => {
     const newUser = await User.create({ username, birthdate, email, password: hashedPassword, language: language || 'en' });
         if (!newUser) return res.status(500).json(formatRes('error', null, 'Error while creating the account'));
 
-        return res.status(201).json(formatRes('success', newUser, 'Account created successfully'))
+        return res.status(200).json(formatRes('success', newUser, 'Account created successfully'))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
     }
@@ -45,7 +45,7 @@ exports.login = async (req, res) => {
         if (!isPasswordValid) return res.status(404).json(formatRes('error', null, 'Invalid password'))
 
         // Generate a token
-        const token = jwt.sign({ userId: user.userId }, process.env.BACK_SECRET_KEY, { expiresIn: '24h' });
+        const token = jwt.sign({ userId: user.userId }, process.env.BACK_SECRET_KEY, { expiresIn: '72h' });
         user.connectionToken = token;
         user.lastLogin = new Date().toISOString();
         await user.save();
@@ -58,7 +58,7 @@ exports.login = async (req, res) => {
         // Format the date
         user.dataValues.birthdate = isoDateToDate(user.dataValues.birthdate)
 
-        return res.status(201).json(formatRes('success', user, 'Logged in successfully'))
+        return res.status(200).json(formatRes('success', user, 'Logged in successfully'))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
     }
@@ -79,7 +79,7 @@ exports.verifyEmail = async (req, res) => {
         user.validateEmailToken = null;
         await user.save();
 
-        return res.status(201).json(formatRes('success', null, 'Email verified successfully'))
+        return res.status(200).json(formatRes('success', null, 'Email verified successfully'))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
     }
@@ -102,7 +102,7 @@ exports.forgotPassword = async (req, res) => {
 
         // TODO: Send an email with the reset code
 
-        return res.status(201).json(formatRes('success', null, 'Reset code sent to your email'))
+        return res.status(200).json(formatRes('success', null, 'Reset code sent to your email'))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
     }
@@ -116,14 +116,14 @@ exports.resetPassword = async (req, res) => {
 
         // Check if the user exists
         const user = await User.findOne({ where: { email, resetPasswordCode: resetCode } });
-        if (!user) return res.status(404).json(formatRes('error', null, 'Invalid email or reset code'));
+        if (!user) return res.status(400).json(formatRes('error', null, 'Invalid email or reset code'));
 
         // Reset the password
         user.password = await bcrypt.hash(newPassword, 10);
         user.resetPasswordCode = null;
         await user.save();
 
-        return res.status(201).json(formatRes('success', null, 'Password reset successfully'))
+        return res.status(200).json(formatRes('success', null, 'Password reset successfully'))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
     }
@@ -144,7 +144,7 @@ exports.userInfos = async (req, res) => {
         // Format the date
         user.dataValues.birthdate = isoDateToDate(user.dataValues.birthdate)
 
-        return res.status(201).json(formatRes('success', user, ))
+        return res.status(200).json(formatRes('success', user, ))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
     }
@@ -160,7 +160,7 @@ exports.userUpdate = async (req, res) => {
 
         // Update the user
         const resp = await user.update({ username, birthdate, email, language, homePageEnableSpents, homePageEnableStats, homePageEnableQuote, homePageEnableLasts });
-        if (!resp) return res.status(404).json(formatRes('error', null, 'Error updating user'));
+        if (!resp) return res.status(500).json(formatRes('error', null, 'Error updating user'));
 
         // Remove sensitive data from the response
         delete user.dataValues.password;
@@ -189,7 +189,7 @@ exports.validateToken = async (req, res) => {
             if (err) return res.sendStatus(403).json(formatRes('error', null, 'Error while verifiying the token'));
         });
 
-        return res.status(201).json(formatRes('success', null, 'Token is valid'))
+        return res.status(200).json(formatRes('success', null, 'Token is valid'))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, 'Token is invalid'))
     }
