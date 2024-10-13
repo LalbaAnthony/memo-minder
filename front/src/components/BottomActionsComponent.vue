@@ -17,6 +17,12 @@
       <AdjustmentsHorizontalIcon class="size-10" />
     </div>
 
+    <!-- Search button -->
+    <router-link v-if="props.searchButton  && route.name.includes('list')" to="/search"
+    class="flex items-center justify-center cursor-pointer bg-gray-dark text-white rounded-xl p-2 hover:scale-105 transition-transform duration-200 border-2 border-gray-dark">
+    <MagnifyingGlassIcon class="size-10" />
+    </router-link>
+
     <!-- Add button -->
     <router-link v-if="props.addButton && route.name.includes('list')" :to="`${route.path}/add`"
       class="flex items-center justify-center cursor-pointer bg-primary text-white rounded-xl p-2 hover:scale-105 transition-transform duration-200 border-2 border-gray-dark">
@@ -30,6 +36,7 @@
 import { ChevronUpIcon } from '@heroicons/vue/24/solid'
 import { PlusIcon } from '@heroicons/vue/24/solid'
 import { AdjustmentsHorizontalIcon } from '@heroicons/vue/24/solid'
+import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { isMobile } from '@/helpers/helpers.js'
 import { useRoute, } from 'vue-router'
 import debounce from 'lodash/debounce'
@@ -50,6 +57,11 @@ const props = defineProps({
     default: false,
   },
   addButton: {
+    type: Boolean,
+    required: false,
+    default: true,
+  },
+  searchButton: {
     type: Boolean,
     required: false,
     default: true,

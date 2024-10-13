@@ -1,7 +1,9 @@
 <template>
   <div>
     <section v-if="authStore?.user?.homePageEnableSpents">
-      <Spents :birthdate="authStore.user.birthdate" />
+      <div class="my-4">
+        <Spents :birthdate="authStore.user.birthdate" />
+      </div>
     </section>
 
     <div class="md:grid md:grid-cols-2 md:gap-4">
@@ -16,20 +18,20 @@
         <h2 class="text-xl font-bold">Quote</h2>
         <div class="my-4">
           <p class="my-2">
-            <span class="text-md">"</span> {{ quoteStore.quote.data.quote }} <span class="text-md">"</span>
+            <span class="text-lg">"</span>{{ quoteStore.quote.data.quote }}<span class="text-lg">"</span>
           </p>
           <p class="text-right text-gray-light">{{ quoteStore.quote.data.author }}</p>
         </div>
       </section>
     </div>
 
-    <section v-if="authStore?.user?.homePageEnableLasts">
-      <h2 class="text-xl font-bold">Lasts events added</h2>
+    <section v-if="authStore?.user?.homePageEnableLasts && seasonStore?.seasons?.data?.length > 0">
+      <h2 class="text-xl font-bold">Lasts seasons added</h2>
       <div class="my-4">
-        <Loader v-if="eventStore.events.loading" />
-        <Grid v-else :items="eventStore.events.data">
+        <Loader v-if="seasonStore.seasons.loading" />
+        <Grid v-else :items="seasonStore.seasons.data">
           <template #item="{ item }">
-            <Event :event="item" />
+            <Season :season="item" />
           </template>
         </Grid>
       </div>
@@ -39,21 +41,21 @@
 
 <script setup>
 import Grid from '@/components/GridComponent.vue'
-import Event from '@/components/event/EventItem.vue'
+import Season from '@/components/season/SeasonItem.vue'
 import Loader from '@/components/LoaderComponent.vue'
 import Stats from '@/components/homepage/StatsComponent.vue'
 import Spents from '@/components/homepage/SpentsComponent.vue'
 import { useAuthStore } from '@/stores/auth'
-import { useEventStore } from '@/stores/event'
+import { useSeasonStore } from '@/stores/season'
 import { useQuoteStore } from '@/stores/quote'
 import { onMounted } from 'vue'
 
 const authStore = useAuthStore()
 const quoteStore = useQuoteStore()
-const eventStore = useEventStore()
+const seasonStore = useSeasonStore()
 
-async function loadEvents() {
-  eventStore.fetchEvents({
+async function loadSeasons() {
+  seasonStore.fetchSeasons({
     sort: [{ order: 'ASC', orderBy: 'createdAt' }],
     perPage: 3
   })
@@ -61,8 +63,7 @@ async function loadEvents() {
 
 // Fetch data on mount
 onMounted(() => {
-  loadEvents()
-  if (authStore?.user?.homePageEnableLasts) loadEvents()
+  if (authStore?.user?.homePageEnableLasts) loadSeasons()
   if (authStore?.user?.homePageEnableQuote) quoteStore.fetchQuoteIfTooOld()
 })
 

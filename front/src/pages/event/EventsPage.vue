@@ -29,7 +29,7 @@ import BottomActions from '@/components/BottomActionsComponent.vue'
 import Pagination from '@/components/PaginationComponent.vue'
 import { useRoute } from 'vue-router'
 import { useEventStore } from '@/stores/event'
-import { watch } from 'vue'
+import { watch, onMounted } from 'vue'
 
 const route = useRoute()
 const eventStore = useEventStore()
@@ -46,7 +46,9 @@ async function loadEvents() {
 }
 
 // Fetch events on mount
-loadEvents()
+onMounted(() => {
+  loadEvents()
+})
 
 // Watch route for changes
 watch(() => route.query, loadEvents)
