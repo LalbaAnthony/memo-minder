@@ -15,7 +15,7 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async validateToken() {
 
-      if (!this.authenticated) {
+      if (!this.authenticated || !(this.user.connectionToken || this.token)) {
         this.logout()
         return false
       }

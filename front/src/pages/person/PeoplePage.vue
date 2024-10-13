@@ -29,7 +29,7 @@ import BottomActions from '@/components/BottomActionsComponent.vue'
 import Pagination from '@/components/PaginationComponent.vue'
 import { useRoute } from 'vue-router'
 import { usePersonStore } from '@/stores/person'
-import { watch } from 'vue'
+import { watch, onMounted } from 'vue'
 
 const route = useRoute()
 const personStore = usePersonStore()
@@ -46,7 +46,9 @@ async function loadPeople() {
 }
 
 // Fetch people on mount
-if (!personStore.people.data.length) loadPeople()
+onMounted(() => {
+  loadPeople()
+})
 
 // Watch route for changes
 watch(() => route.query, loadPeople)

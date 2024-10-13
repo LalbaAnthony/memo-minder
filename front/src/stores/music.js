@@ -132,6 +132,10 @@ export const useMusicStore = defineStore('music', {
         return false
       }
 
+      // Update in local list
+      const index = this.musics.data.findIndex(m => m.musicId === music.musicId)
+      this.musics.data.splice(index, 1, resp.data.data)
+
       // Loading
       this.music.loading = false
 

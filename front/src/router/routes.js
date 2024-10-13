@@ -18,7 +18,7 @@ const routes = [
     component: () => import('../pages/InfosPage.vue'),
     meta: {
       title: 'Infos',
-      private: true,
+      private: false,
       displayInSearch: true,
       tags: ['infos', 'about', 'contact'],
     },

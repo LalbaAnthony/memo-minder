@@ -29,7 +29,7 @@ import BottomActions from '@/components/BottomActionsComponent.vue'
 import Pagination from '@/components/PaginationComponent.vue'
 import { useRoute } from 'vue-router'
 import { useMusicStore } from '@/stores/music'
-import { watch } from 'vue'
+import { watch, onMounted } from 'vue'
 
 const route = useRoute()
 const musicStore = useMusicStore()
@@ -46,7 +46,9 @@ async function loadMusics() {
 }
 
 // Fetch musics on mount
-if (!musicStore.musics.data.length) loadMusics()
+onMounted(() => {
+  loadMusics()
+})
 
 // Watch route for changes
 watch(() => route.query, loadMusics)

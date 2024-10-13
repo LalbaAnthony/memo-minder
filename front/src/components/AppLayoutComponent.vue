@@ -3,10 +3,18 @@
     <!-- Mobile bottom menu -->
     <nav v-if="isMobile()"
       class="fixed bottom-0 left-0 z-20 w-full flex justify-around items-center bg-dark-light border-t border-gray p-4 gap-3">
-      <Bars3Icon class="size-10 text-gray-light rounded-lg p-1 cursor-pointer" @click.stop="toggleSidebar()" />
-      <FilmIcon class="size-10 text-gray-light rounded-lg p-1 cursor-pointer" @click.stop="goTo('/seasons')" />
-      <MagnifyingGlassIcon class="size-10 text-gray-light rounded-full p-1 cursor-pointer"
-        @click.stop="focusSearchBar" />
+      <div class="flex flex-col items-center" @click.stop="toggleSidebar()">
+        <Bars3Icon class="size-10 text-gray-light rounded-lg p-1 cursor-pointer" />
+        <span class="text-sm text-gray font-semibold">More</span>
+      </div>
+      <router-link class="flex flex-col items-center" to="/">
+        <HomeIcon class="size-10 text-gray-light rounded-lg p-1 cursor-pointer" />
+        <span class="text-sm text-gray font-semibold">Home</span>
+      </router-link>
+      <router-link class="flex flex-col items-center" to="/search">
+        <MagnifyingGlassIcon class="size-10 text-gray-light rounded-full p-1 cursor-pointer" />
+        <span class="text-sm text-gray font-semibold">Search</span>
+      </router-link>
     </nav>
 
     <!-- Desktop header -->
@@ -35,19 +43,19 @@
         </div>
 
         <!-- Search -->
-        <div class="py-2 px-4">
+        <div v-if="!isMobile()" class="py-2 px-4">
           <form action="" @submit.prevent="triggerSearch()">
-            <input v-model="search" id="layoutSearch" type="search" class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light"
-              placeholder="Search" />
+            <input v-model="search" id="layoutSearch" type="search"
+              class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light" placeholder="Search" />
           </form>
         </div>
 
         <!-- Navigation -->
         <nav class="py-2 px-4 flex flex-col gap-4">
-          <router-link to="/"
+          <router-link v-if="!isMobile()" to="/"
             :class="[route.name.includes('home') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer text-light rounded-lg hover:bg-gray-dark p-2']"
             @click.stop="hideSidebar()">
-            <ListBulletIcon class="size-6 text-gray-light" />
+            <HomeIcon class="size-6 text-gray-light" />
             <span class="ml-3 mt-0.5">Home</span>
           </router-link>
           <router-link to="/infos"
@@ -89,7 +97,7 @@
             <span class="ml-3 mt-0.5">Account</span>
           </router-link>
           <div class="flex items-center cursor-pointer text-danger-light rounded-lg hover:bg-gray p-2"
-            @click.stop="logout()">
+            @click.stop="authStore.logout()">
             <ArrowLeftEndOnRectangleIcon class="size-6 text-danger" />
             <span class="ml-3 mt-0.5">Log out</span>
           </div>
@@ -107,7 +115,7 @@ import { isMobile } from '@/helpers/helpers.js'
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { Bars3Icon } from '@heroicons/vue/24/solid'
 import { XMarkIcon } from '@heroicons/vue/24/solid'
-import { ListBulletIcon } from '@heroicons/vue/24/solid'
+import { HomeIcon } from '@heroicons/vue/24/solid'
 import { InformationCircleIcon } from '@heroicons/vue/24/solid'
 import { FilmIcon } from '@heroicons/vue/24/solid'
 import { CalendarDaysIcon } from '@heroicons/vue/24/solid'
@@ -185,15 +193,6 @@ function triggerSearch() {
     hideSidebar()
     router.push({ path: '/search', query })
   }
-}
-
-function goTo(path = '/') {
-  router.push(path)
-}
-
-function logout() {
-  hideSidebar()
-  authStore.logout()
 }
 
 // Add shortcuts

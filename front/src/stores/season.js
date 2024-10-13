@@ -141,6 +141,10 @@ export const useSeasonStore = defineStore('season', {
         return false
       }
 
+      // Update in local list
+      const index = this.seasons.data.findIndex(season => season.seasonId === season.seasonId)
+      this.seasons.data.splice(index, 1, resp.data.data)
+
       // Loading
       this.season.loading = false
 

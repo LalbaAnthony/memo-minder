@@ -68,7 +68,7 @@
     </div>
 
     <!-- Results -->
-    <Grid :items="results">
+    <Grid v-if="search" :items="results">
       <template #item="{ item }">
         <Result :item="item" />
       </template>
