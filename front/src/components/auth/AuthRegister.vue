@@ -41,9 +41,10 @@ import { ref } from 'vue'
 import { notify } from '@/helpers/notif.js'
 import DatePicker from '@/components/DatePickerComponent.vue'
 import PasswordStrength from '@/components/PasswordStrengthComponent.vue'
-import { isValidEmail } from '@/helpers/helpers.js'
-import { isValidDate } from '@/helpers/helpers.js'
-import { missingsElementsPassword } from '@/helpers/helpers.js'
+import { isValidEmail } from '@/helpers/functions.js'
+import { isValidDate } from '@/helpers/functions.js'
+import { languages } from '@/lang/languages.js'
+import { missingsElementsPassword } from '@/helpers/functions.js'
 import { useAuthStore } from '@/stores/auth'
 
 const emit = defineEmits(['setAuthType'])
@@ -53,20 +54,16 @@ const authStore = useAuthStore()
 const username = ref('')
 const birthdate = ref('2000-01-01T00:00:00.000Z')
 const email = ref('')
-const language = ref('en')
+const language = ref('en-US')
 const password = ref('')
 const confirmPassword = ref('')
 const acceptTerms = ref(false)
-
-const languages = ref({
-    en: 'English',
-})
 
 function valid() {
     // return false // ? uncomment this line to enable form validation
     if (username.value.length === 0) return "Please enter your username"
     if (birthdate.value.length === 0) return "Please enter your birthdate"
-    if (isValidDate(birthdate.value)) return "Please enter a valid birthdate"
+    if (!isValidDate(birthdate.value)) return "Please enter a valid birthdate"
     if (language.value.length === 0) return "Please select your language"
     if (email.value.length === 0) return "Please enter your email"
     if (!isValidEmail(email.value)) return "Please enter a valid email"

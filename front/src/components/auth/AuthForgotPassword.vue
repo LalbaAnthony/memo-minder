@@ -17,7 +17,7 @@
 
 <script setup>
 import { notify } from '@/helpers/notif.js'
-import { isValidEmail } from '@/helpers/helpers.js'
+import { isValidEmail } from '@/helpers/functions.js'
 import { useAuthStore } from '@/stores/auth'
 
 const emit = defineEmits(['setAuthType'])

@@ -1,9 +1,5 @@
 export function isMobile() {
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        return true
-    } else {
-        return false
-    }
+    return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
 }
 
 export function threeDotString(str, maxLen = 100) {
@@ -46,8 +42,7 @@ export function isValidEmail(email) {
 }
 
 export function isValidDate(date) {
-    return !isNaN(new Date(date)) &&
-        (new Date(date) !== "Invalid Date");
+    return !isNaN(new Date(date)) && (new Date(date) !== "Invalid Date");
 }
 
 export function isValidColor(color) {

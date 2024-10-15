@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { get, post, put, del } from '@/helpers/api'
-import { randomColor } from '@/helpers/helpers.js'
+import { randomColor } from '@/helpers/functions.js'
 import { useAuthStore } from '@/stores/auth'
 import { notify } from '@/helpers/notif.js'
 

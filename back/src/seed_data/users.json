@@ -5,7 +5,7 @@
         "birthdate": "1990-01-01",
         "email": "j.doe@test.com",
         "password": "password",
-        "language": "en",
+        "language": "en-US",
         "hasValidatedEmail": true,
         "homePageEnableSpents": true,
         "homePageEnableStats": true,

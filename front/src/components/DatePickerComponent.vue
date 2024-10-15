@@ -8,7 +8,7 @@
 // ? Component made to handle date inputs as 2024-06-27T14:02:29.928Z
 
 import { ref, watch } from 'vue'
-import { isValidDate } from "@/helpers/helpers.js"
+import { isValidDate } from "@/helpers/functions.js"
 
 const props = defineProps({
   value: {

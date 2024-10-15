@@ -7,12 +7,12 @@
       <slot name="item" :item="item"></slot>
     </div>
   </div>
-  <NoItem v-else />
+  <NoItem v-else-if="props.enableNoItem" />
 </template>
 
 <script setup>
 import NoItem from '@/components/NoItemComponent.vue'
-import { isMobile } from '@/helpers/helpers';
+import { isMobile } from '@/helpers/functions';
 
 const props = defineProps({
   items: {
@@ -20,6 +20,11 @@ const props = defineProps({
     required: false,
   },
   clickables: {
+    type: Boolean,
+    required: false,
+    default: true,
+  },
+  enableNoItem: {
     type: Boolean,
     required: false,
     default: true,

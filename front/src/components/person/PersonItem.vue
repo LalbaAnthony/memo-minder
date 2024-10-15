@@ -23,7 +23,7 @@
 <script setup>
 import { usePersonStore } from '@/stores/person'
 import { TrashIcon } from '@heroicons/vue/24/solid'
-import { threeDotString } from '@/helpers/helpers'
+import { threeDotString } from '@/helpers/functions'
 
 const personStore = usePersonStore()
 
