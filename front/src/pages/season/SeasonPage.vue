@@ -104,7 +104,7 @@ import { PlusIcon } from '@heroicons/vue/24/solid'
 import { useRoute, useRouter } from 'vue-router'
 import { useSeasonStore } from '@/stores/season'
 import { notify } from '@/helpers/notif.js'
-import { dateToNiceDate } from '@/helpers/helpers.js'
+import { dateToNiceDate } from '@/helpers/functions.js'
 import { computed, ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import debounce from 'lodash/debounce'
 

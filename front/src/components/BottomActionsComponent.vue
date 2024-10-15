@@ -1,5 +1,5 @@
 <template>
-  <div :class="['fixed right-0 z-20 flex flex-col justify-end gap-2 p-3', isMobile() ? 'bottom-20' : 'bottom-0']">
+  <div :class="['fixed right-0 z-20 flex flex-col justify-end gap-2 p-3', isMobile() ? 'bottom-24' : 'bottom-0']">
     <!-- Scroll to top -->
     <TransitionRoot :show="props.goTopButton && route.name.includes('list') && isMobile() && enableGoTop"
       @click="goTop()">
@@ -37,7 +37,7 @@ import { ChevronUpIcon } from '@heroicons/vue/24/solid'
 import { PlusIcon } from '@heroicons/vue/24/solid'
 import { AdjustmentsHorizontalIcon } from '@heroicons/vue/24/solid'
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
-import { isMobile } from '@/helpers/helpers.js'
+import { isMobile } from '@/helpers/functions.js'
 import { useRoute, } from 'vue-router'
 import debounce from 'lodash/debounce'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'

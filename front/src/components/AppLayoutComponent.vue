@@ -111,7 +111,7 @@
 </template>
 
 <script setup>
-import { isMobile } from '@/helpers/helpers.js'
+import { isMobile } from '@/helpers/functions.js'
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { Bars3Icon } from '@heroicons/vue/24/solid'
 import { XMarkIcon } from '@heroicons/vue/24/solid'

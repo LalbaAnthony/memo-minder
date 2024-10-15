@@ -92,19 +92,16 @@
 </template>
 
 <script setup>
-import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
+import { watch, onBeforeUnmount, onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import debounce from 'lodash/debounce'
 import DatePicker from '@/components/DatePickerComponent.vue'
-import { isValidEmail } from '@/helpers/helpers.js'
-import { isValidDate } from '@/helpers/helpers.js'
+import { isValidEmail } from '@/helpers/functions.js'
+import { isValidDate } from '@/helpers/functions.js'
 import { notify } from '@/helpers/notif.js'
+import { languages } from '@/lang/languages.js'
 
 const authStore = useAuthStore()
-
-const languages = ref({
-  en: 'English',
-})
 
 function clearLocalData() {
   if (confirm("Are you sure you want to delete all local data? You may lose unsaved data.")) {

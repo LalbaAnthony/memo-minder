@@ -23,7 +23,7 @@
 import { ref } from 'vue'
 import { notify } from '@/helpers/notif.js'
 import PasswordStrength from '@/components/PasswordStrengthComponent.vue'
-import { missingsElementsPassword } from '@/helpers/helpers.js'
+import { missingsElementsPassword } from '@/helpers/functions.js'
 import { useAuthStore } from '@/stores/auth'
 
 const authStore = useAuthStore()

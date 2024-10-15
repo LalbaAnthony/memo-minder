@@ -61,7 +61,7 @@ const User = sequelize.define('User', {
     language: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: 'en',
+        defaultValue: 'en-US',
     },
     password: {
         type: DataTypes.STRING,

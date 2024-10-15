@@ -61,14 +61,14 @@
     </div>
 
     <!-- Nb of results -->
-    <div v-if="results.length > 0">
+    <div v-if="search && results.length > 0">
       <p class="text-center text-gray-light text-sm p-4 pt-8">
         {{ results.length }} {{ results.length > 1 ? 'results' : 'result' }}
       </p>
     </div>
 
     <!-- Results -->
-    <Grid v-if="search" :items="results">
+    <Grid v-if="search" :items="results" :enable-no-item="!searching">
       <template #item="{ item }">
         <Result :item="item" />
       </template>
@@ -103,6 +103,7 @@ const seasonStore = useSeasonStore()
 
 const PER_PAGE = 2
 
+const searching = ref(false)
 const search = ref(route.query.search || '')
 const results = ref([])
 
@@ -130,6 +131,8 @@ const toAddString = computed(() => {
 
 const loadSearch = debounce(async () => {
   if (!search.value) return
+
+  searching.value = true
 
   results.value = []
 
@@ -209,6 +212,7 @@ const loadSearch = debounce(async () => {
     }
   })
 
+  searching.value = false
 }, 1000)
 
 onMounted(() => {

@@ -13,7 +13,7 @@
 import { onMounted } from 'vue'
 import AppLayout from '@/components/AppLayoutComponent.vue'
 import Footer from '@/components/FooterComponent.vue'
-import { isMobile } from '@/helpers/helpers.js'
+import { isMobile } from '@/helpers/functions.js'
 import { RouterView, useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 

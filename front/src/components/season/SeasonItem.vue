@@ -31,8 +31,8 @@
 import Pill from '@/components/PillComponent.vue'
 import { TrashIcon } from '@heroicons/vue/24/solid'
 import { PencilSquareIcon } from '@heroicons/vue/24/solid'
-import { threeDotString } from '@/helpers/helpers'
-import { dateToNiceDate } from '@/helpers/helpers.js'
+import { threeDotString } from '@/helpers/functions'
+import { dateToNiceDate } from '@/helpers/functions.js'
 import { useSeasonStore } from '@/stores/season'
 
 const seasonStore = useSeasonStore()
