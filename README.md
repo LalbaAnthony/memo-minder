@@ -3,6 +3,7 @@
 ## Technos
 
 - Node.js
+- Express
 - Vue.js
 - Tailwind
 - Headless UI
