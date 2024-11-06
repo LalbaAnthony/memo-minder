@@ -1,6 +1,6 @@
 module.exports = (msg) => {
 
-    const LOG_PATH = 'logs/log.log';    
+    const LOG_PATH = 'logs/logs.log';   
 
     if (!msg) return;
 
