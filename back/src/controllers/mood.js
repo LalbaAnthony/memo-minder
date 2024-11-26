@@ -1,25 +1,25 @@
-const formatRes = require('../helpers/formatRes')
+const frmtr = require('../helpers/frmtr')
 
 const Mood = require('../models/mood');
 
 exports.getAllMoods = async (req, res) => {
     try {
         const moods = await Mood.findAll();
-        return res.status(200).json(formatRes('success', moods))
+        res.status(200).json(frmtr('success', moods))
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 };
 
 exports.getMoodById = async (req, res) => {
     try {
         // Check if mood exists
-        if (!req.params.id) return res.status(400).json(formatRes('error', null, 'No id provided'));
+        if (!req.params.id) res.status(400).json(frmtr('error', null, 'No id provided'));
         const mood = await Mood.findByPk(parseInt(req.params.id));
-        if (!mood) return res.status(404).json(formatRes('error', null, 'No mood found with this id'));
+        if (!mood) res.status(404).json(frmtr('error', null, 'No mood found with this id'));
 
-        return res.status(200).json(formatRes('success', mood))
+        res.status(200).json(frmtr('success', mood))
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 };

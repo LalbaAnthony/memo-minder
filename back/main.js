@@ -13,7 +13,7 @@ const sequelize = require('./src/config/database');
 const routes = require('./src/routes');
 
 // Importing helpers
-const formatRes = require('./src/helpers/formatRes')
+const frmtr = require('./src/helpers/frmtr')
 const logFile = require('./src/helpers/logFile')
 const logConsole = require('./src/helpers/logConsole')
 
@@ -46,7 +46,7 @@ app.use('/api', routes);
 
 // If nothing found above, return 404
 app.use(({ res }) => {
-    return res.status(404).json(formatRes('error', null, 'Nothing found here!'))
+    return res.status(404).json(frmtr('error', null, 'Nothing found here!'))
 })
 
 // Synchronisation de la base de données et démarrage du serveur

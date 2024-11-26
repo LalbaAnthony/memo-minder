@@ -1,4 +1,4 @@
-const formatRes = require('../helpers/formatRes')
+const frmtr = require('../helpers/frmtr')
 
 const { Op } = require('sequelize');
 
@@ -12,7 +12,7 @@ exports.getAllSeasons = async (req, res) => {
     let { userId, sort, page, perPage, search } = req.query;
     try {
         // Check if userId is provided
-        if (!userId) res.status(400).json(formatRes('error', null, 'Missing fields: userId'));
+        if (!userId) res.status(400).json(frmtr('error', null, 'Missing fields: userId'));
 
         // Sort
         if (!sort) {
@@ -64,9 +64,9 @@ exports.getAllSeasons = async (req, res) => {
             }
         }
 
-        res.status(200).json(formatRes('success', seasons, null, pagination));
+        res.status(200).json(frmtr('success', seasons, null, pagination));
     } catch (error) {
-        res.status(500).json(formatRes('error', null, error.message));
+        res.status(500).json(frmtr('error', null, error.message));
     }
 };
 
@@ -74,12 +74,12 @@ exports.getSeasonById = async (req, res) => {
     const { userId } = req.query;
     try {
         // Check if all fields are provided
-        if (!userId) res.status(400).json(formatRes('error', null, 'Missing fields: userId'));
+        if (!userId) res.status(400).json(frmtr('error', null, 'Missing fields: userId'));
 
         // Get the season and check if it exists
-        if (!req.params.id) res.status(400).json(formatRes('error', null, 'No id provided'));
+        if (!req.params.id) res.status(400).json(frmtr('error', null, 'No id provided'));
         const season = await Season.findByPk(parseInt(req.params.id));
-        if (!season) res.status(404).json(formatRes('error', null, 'No season found with this id'));
+        if (!season) res.status(404).json(frmtr('error', null, 'No season found with this id'));
 
         // Add music to the season
         if (season.musicId) {
@@ -99,9 +99,9 @@ exports.getSeasonById = async (req, res) => {
             if (mood) season.dataValues.mood = mood.dataValues;
         }
 
-        res.status(200).json(formatRes('success', season))
+        res.status(200).json(frmtr('success', season))
     } catch (error) {
-        res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 };
 
@@ -109,37 +109,37 @@ exports.createSeason = async (req, res) => {
     const { userId, musicId, moodId, personId, title, color, description, dateStart, dateEnd} = req.body;
     try {
         // Check if all fields are provided
-        if (!userId || !title || !color || !dateStart) res.status(400).json(formatRes('error', null, 'Missing fields: userId, title, color, dateStart'));
+        if (!userId || !title || !color || !dateStart) res.status(400).json(frmtr('error', null, 'Missing fields: userId, title, color, dateStart'));
 
         // Check if userId exists
-        if (!userId) res.status(400).json(formatRes('error', null, 'Missing fields: userId'));
+        if (!userId) res.status(400).json(frmtr('error', null, 'Missing fields: userId'));
         const user = await User.findByPk(parseInt(userId));
-        if (!user) res.status(404).json(formatRes('error', null, 'No user found with this id'));
+        if (!user) res.status(404).json(frmtr('error', null, 'No user found with this id'));
 
         if (musicId) {
             // Check if musicId exists
             const music = await Music.findByPk(parseInt(musicId));
-            if (!music) res.status(404).json(formatRes('error', null, 'No music found with this id'));
+            if (!music) res.status(404).json(frmtr('error', null, 'No music found with this id'));
         }
 
         if (personId) {
             // Check if personId exists
             const person = await Person.findByPk(parseInt(personId));
-            if (!person) res.status(404).json(formatRes('error', null, 'No person found with this id'));
+            if (!person) res.status(404).json(frmtr('error', null, 'No person found with this id'));
         }
 
         if (moodId) {
             // Check if moodId exists
             const mood = await Mood.findByPk(parseInt(moodId));
-            if (!mood) res.status(404).json(formatRes('error', null, 'No mood found with this id'));
+            if (!mood) res.status(404).json(frmtr('error', null, 'No mood found with this id'));
         }
 
         const season = await Season.create({userId, musicId, moodId, personId, title, color, description, dateStart, dateEnd});
-        if (!season) res.status(500).json(formatRes('error', null, 'Error creating season'));
+        if (!season) res.status(500).json(frmtr('error', null, 'Error creating season'));
 
-        res.status(201).json(formatRes('success', null, 'Season created'))
+        res.status(201).json(frmtr('success', null, 'Season created'))
     } catch (error) {
-        res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 };
 
@@ -147,56 +147,56 @@ exports.updateSeason = async (req, res) => {
     const { userId, musicId, moodId, personId, title, color, description, dateStart, dateEnd} = req.body;
     try {
         // Get the season and check if it exists
-        if (!req.params.id) res.status(400).json(formatRes('error', null, 'No id provided'));
+        if (!req.params.id) res.status(400).json(frmtr('error', null, 'No id provided'));
         const season = await Season.findByPk(parseInt(req.params.id));
-        if (!season) res.status(404).json(formatRes('error', null, 'No season found with this id'));
+        if (!season) res.status(404).json(frmtr('error', null, 'No season found with this id'));
 
         // Check if userId exists
-        if (!userId) res.status(400).json(formatRes('error', null, 'Missing fields: userId'));
+        if (!userId) res.status(400).json(frmtr('error', null, 'Missing fields: userId'));
         const user = await User.findByPk(parseInt(userId));
-        if (!user) res.status(404).json(formatRes('error', null, 'No user found with this id'));
+        if (!user) res.status(404).json(frmtr('error', null, 'No user found with this id'));
 
         if (musicId) {
             // Check if musicId exists
             const music = await Music.findByPk(parseInt(musicId));
-            if (!music) res.status(404).json(formatRes('error', null, 'No music found with this id'));
+            if (!music) res.status(404).json(frmtr('error', null, 'No music found with this id'));
         }
 
         if (personId) {
             // Check if personId exists
             const person = await Person.findByPk(parseInt(personId));
-            if (!person) res.status(404).json(formatRes('error', null, 'No person found with this id'));
+            if (!person) res.status(404).json(frmtr('error', null, 'No person found with this id'));
         }
 
         if (moodId) {
             // Check if moodId exists
             const mood = await Mood.findByPk(parseInt(moodId));
-            if (!mood) res.status(404).json(formatRes('error', null, 'No mood found with this id'));
+            if (!mood) res.status(404).json(frmtr('error', null, 'No mood found with this id'));
         }
 
         const resp = await season.update({userId, musicId, moodId, personId, title, color, description, dateStart, dateEnd});
-        if (!resp) res.status(500).json(formatRes('error', null, 'Error updating season'));
+        if (!resp) res.status(500).json(frmtr('error', null, 'Error updating season'));
 
-        res.status(201).json(formatRes('success', 'Season updated'))
+        res.status(201).json(frmtr('success', 'Season updated'))
 
     } catch (error) {
-        res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 };
 
 exports.deleteSeason = async (req, res) => {
     try {
         // Get the season and check if it exists
-        if (!req.params.id) res.status(400).json(formatRes('error', null, 'No id provided'));
+        if (!req.params.id) res.status(400).json(frmtr('error', null, 'No id provided'));
         const season = await Season.findByPk(parseInt(req.params.id));
-        if (!season) res.status(404).json(formatRes('error', null, 'No season found with this id'));
+        if (!season) res.status(404).json(frmtr('error', null, 'No season found with this id'));
 
         const resp = await season.destroy();
-        if (!resp) res.status(404).json(formatRes('error', null, 'Error deleting season'));
+        if (!resp) res.status(404).json(frmtr('error', null, 'Error deleting season'));
 
-        res.status(200).json(formatRes('success', null, 'Season deleted'))
+        res.status(200).json(frmtr('success', null, 'Season deleted'))
 
     } catch (error) {
-        res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 }

@@ -1,4 +1,4 @@
-const formatRes = require('../helpers/formatRes')
+const frmtr = require('../helpers/frmtr')
 
 const { Op } = require('sequelize');
 
@@ -13,7 +13,7 @@ exports.getAllEvents = async (req, res) => {
     let { userId, sort, page, perPage, search } = req.query;
     try {
         // Check if userId is provided
-        if (!userId) return res.status(400).json(formatRes('error', null, 'Missing fields: userId'));
+        if (!userId) res.status(400).json(frmtr('error', null, 'Missing fields: userId'));
 
         // Sort
         if (!sort) {
@@ -72,9 +72,9 @@ exports.getAllEvents = async (req, res) => {
             }
         }
 
-        return res.status(200).json(formatRes('success', events, null, pagination));
+        res.status(200).json(frmtr('success', events, null, pagination));
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message));
+        res.status(500).json(frmtr('error', null, error.message));
     }
 };
 
@@ -82,12 +82,12 @@ exports.getEventById = async (req, res) => {
     const { userId } = req.query;
     try {
         // Check if all fields are provided
-        if (!userId) return res.status(400).json(formatRes('error', null, 'Missing fields: userId'));
+        if (!userId) res.status(400).json(frmtr('error', null, 'Missing fields: userId'));
 
         // Get the event and check if it exists
-        if (!req.params.id) return res.status(400).json(formatRes('error', null, 'No id provided'));
+        if (!req.params.id) res.status(400).json(frmtr('error', null, 'No id provided'));
         const event = await Event.findByPk(parseInt(req.params.id));
-        if (!event) return res.status(404).json(formatRes('error', null, 'No event found with this id'));
+        if (!event) res.status(404).json(frmtr('error', null, 'No event found with this id'));
 
         // Add music to the event
         if (event.musicId) {
@@ -113,9 +113,9 @@ exports.getEventById = async (req, res) => {
             if (season) event.dataValues.season = season.dataValues;
         }
 
-        return res.status(200).json(formatRes('success', event))
+        res.status(200).json(frmtr('success', event))
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 };
 
@@ -123,43 +123,43 @@ exports.createEvent = async (req, res) => {
     const { musicId, personId, moodId, userId, seasonId, title, description, date, location } = req.body;
     try {
         // Check if all fields are provided
-        if (!userId || !title || !description || !date || !location) return res.status(400).json(formatRes('error', null, 'Missing fields: musicId, moodId, userId, title, description, date, location'));
+        if (!userId || !title || !description || !date || !location) res.status(400).json(frmtr('error', null, 'Missing fields: musicId, moodId, userId, title, description, date, location'));
 
         // Check if userId exists
-        if (!userId) return res.status(400).json(formatRes('error', null, 'Missing fields: userId'));
+        if (!userId) res.status(400).json(frmtr('error', null, 'Missing fields: userId'));
         const user = await User.findByPk(parseInt(userId));
-        if (!user) return res.status(404).json(formatRes('error', null, 'No user found with this id'));
+        if (!user) res.status(404).json(frmtr('error', null, 'No user found with this id'));
 
         if (musicId) {
             // Check if musicId exists
             const music = await Music.findByPk(parseInt(musicId));
-            if (!music) return res.status(404).json(formatRes('error', null, 'No music found with this id'));
+            if (!music) res.status(404).json(frmtr('error', null, 'No music found with this id'));
         }
 
         if (personId) {
             // Check if personId exists
             const person = await Person.findByPk(parseInt(personId));
-            if (!person) return res.status(404).json(formatRes('error', null, 'No person found with this id'));
+            if (!person) res.status(404).json(frmtr('error', null, 'No person found with this id'));
         }
 
         if (moodId) {
             // Check if moodId exists
             const mood = await Mood.findByPk(parseInt(moodId));
-            if (!mood) return res.status(404).json(formatRes('error', null, 'No mood found with this id'));
+            if (!mood) res.status(404).json(frmtr('error', null, 'No mood found with this id'));
         }
 
         if (seasonId) {
             // Check if seasonId exists
             const season = await Season.findByPk(parseInt(seasonId));
-            if (!season) return res.status(404).json(formatRes('error', null, 'No season found with this id'));
+            if (!season) res.status(404).json(frmtr('error', null, 'No season found with this id'));
         }
 
         const event = await Event.create({ musicId, userId, seasonId, title, description, date, location });
-        if (!event) return res.status(500).json(formatRes('error', null, 'Error creating event'));
+        if (!event) res.status(500).json(frmtr('error', null, 'Error creating event'));
 
-        return res.status(201).json(formatRes('success', null, 'Event created'))
+        res.status(201).json(frmtr('success', null, 'Event created'))
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 };
 
@@ -167,62 +167,62 @@ exports.updateEvent = async (req, res) => {
     const { musicId, personId, moodId, userId, seasonId, title, description, date, location } = req.body;
     try {
         // Get the event and check if it exists
-        if (!req.params.id) return res.status(400).json(formatRes('error', null, 'No id provided'));
+        if (!req.params.id) res.status(400).json(frmtr('error', null, 'No id provided'));
         const event = await Event.findByPk(parseInt(req.params.id));
-        if (!event) return res.status(404).json(formatRes('error', null, 'No event found with this id'));
+        if (!event) res.status(404).json(frmtr('error', null, 'No event found with this id'));
 
         // Check if userId exists
-        if (!userId) return res.status(400).json(formatRes('error', null, 'Missing fields: userId'));
+        if (!userId) res.status(400).json(frmtr('error', null, 'Missing fields: userId'));
         const user = await User.findByPk(parseInt(userId));
-        if (!user) return res.status(404).json(formatRes('error', null, 'No user found with this id'));
+        if (!user) res.status(404).json(frmtr('error', null, 'No user found with this id'));
 
         if (musicId) {
             // Check if musicId exists
             const music = await Music.findByPk(parseInt(musicId));
-            if (!music) return res.status(404).json(formatRes('error', null, 'No music found with this id'));
+            if (!music) res.status(404).json(frmtr('error', null, 'No music found with this id'));
         }
 
         if (personId) {
             // Check if personId exists
             const person = await Person.findByPk(parseInt(personId));
-            if (!person) return res.status(404).json(formatRes('error', null, 'No person found with this id'));
+            if (!person) res.status(404).json(frmtr('error', null, 'No person found with this id'));
         }
 
         if (moodId) {
             // Check if moodId exists
             const mood = await Mood.findByPk(parseInt(moodId));
-            if (!mood) return res.status(404).json(formatRes('error', null, 'No mood found with this id'));
+            if (!mood) res.status(404).json(frmtr('error', null, 'No mood found with this id'));
         }
 
         if (seasonId) {
             // Check if seasonId exists
             const season = await Season.findByPk(parseInt(seasonId));
-            if (!season) return res.status(404).json(formatRes('error', null, 'No season found with this id'));
+            if (!season) res.status(404).json(frmtr('error', null, 'No season found with this id'));
         }
 
         const resp = await event.update({ musicId, userId, seasonId, title, description, date, location });
-        if (!resp) return res.status(500).json(formatRes('error', null, 'Error updating event'));
+        if (!resp) res.status(500).json(frmtr('error', null, 'Error updating event'));
 
-        return res.status(201).json(formatRes('success', null, 'Event updated'))
+        res.status(201).json(frmtr('success', null, 'Event updated'))
 
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 };
 
 exports.deleteEvent = async (req, res) => {
     try {
         // Get the event and check if it exists
-        if (!req.params.id) return res.status(400).json(formatRes('error', null, 'No id provided'));
+        if (!req.params.id) res.status(400).json(frmtr('error', null, 'No id provided'));
         const event = await Event.findByPk(parseInt(req.params.id));
-        if (!event) return res.status(404).json(formatRes('error', null, 'No event found with this id'));
+        if (!event) res.status(404).json(frmtr('error', null, 'No event found with this id'));
 
         const resp = await event.destroy();
-        if (!resp) return res.status(404).json(formatRes('error', null, 'Error deleting event'));
+        if (!resp) res.status(404).json(frmtr('error', null, 'Error deleting event'));
 
-        return res.status(200).json(formatRes('success', null, 'Event deleted'))
+        res.status(200).json(frmtr('success', null, 'Event deleted'))
 
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 }
