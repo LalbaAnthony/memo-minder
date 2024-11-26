@@ -1,4 +1,4 @@
-const formatRes = require('../helpers/formatRes')
+const frmtr = require('../helpers/frmtr')
 
 const { Op } = require('sequelize');
 
@@ -9,7 +9,7 @@ exports.getAllPeople = async (req, res) => {
     let { userId, sort, page, perPage, search } = req.query;
     try {
         // Check if userId is provided
-        if (!userId) return res.status(400).json(formatRes('error', null, 'Missing fields: userId'));
+        if (!userId) res.status(400).json(frmtr('error', null, 'Missing fields: userId'));
 
         // Sort
         if (!sort) {
@@ -40,9 +40,9 @@ exports.getAllPeople = async (req, res) => {
 
         const people = await Person.findAll({ where, order, offset, limit: pagination.perPage });
 
-        return res.status(200).json(formatRes('success', people, null, pagination));
+        res.status(200).json(frmtr('success', people, null, pagination));
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message));
+        res.status(500).json(frmtr('error', null, error.message));
     }
 };
 
@@ -50,16 +50,16 @@ exports.getPersonById = async (req, res) => {
     const { userId } = req.query;
     try {
         // Check if all fields are provided
-        if (!userId) return res.status(400).json(formatRes('error', null, 'Missing fields: userId'));
+        if (!userId) res.status(400).json(frmtr('error', null, 'Missing fields: userId'));
 
         // Get the person and check if it exists
-        if (!req.params.id) return res.status(400).json(formatRes('error', null, 'No id provided'));
+        if (!req.params.id) res.status(400).json(frmtr('error', null, 'No id provided'));
         const person = await Person.findByPk(parseInt(req.params.id));
-        if (!person) return res.status(404).json(formatRes('error', null, 'No person found with this id'));
+        if (!person) res.status(404).json(frmtr('error', null, 'No person found with this id'));
 
-        return res.status(200).json(formatRes('success', person))
+        res.status(200).json(frmtr('success', person))
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 };
 
@@ -67,19 +67,19 @@ exports.createPerson = async (req, res) => {
     const { userId, name, description } = req.body;
     try {
         // Check if all fields are provided
-        if (!userId || !name || !description) return res.status(400).json(formatRes('error', null, 'Missing fields: userId, name, description'));
+        if (!userId || !name || !description) res.status(400).json(frmtr('error', null, 'Missing fields: userId, name, description'));
 
         // Check if userId exists
-        if (!userId) return res.status(400).json(formatRes('error', null, 'Missing fields: userId'));
+        if (!userId) res.status(400).json(frmtr('error', null, 'Missing fields: userId'));
         const user = await User.findByPk(parseInt(userId));
-        if (!user) return res.status(404).json(formatRes('error', null, 'No user found with this id'));
+        if (!user) res.status(404).json(frmtr('error', null, 'No user found with this id'));
 
         const person = await Person.create({ personId, userId, name, description });
-        if (!person) return res.status(500).json(formatRes('error', null, 'Error creating person'));
+        if (!person) res.status(500).json(frmtr('error', null, 'Error creating person'));
 
-        return res.status(201).json(formatRes('success', null, 'Person created'))
+        res.status(201).json(frmtr('success', null, 'Person created'))
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 };
 
@@ -87,38 +87,38 @@ exports.updatePerson = async (req, res) => {
     const { userId, name, description } = req.body;
     try {
         // Get the person and check if it exists
-        if (!req.params.id) return res.status(400).json(formatRes('error', null, 'No id provided'));
+        if (!req.params.id) res.status(400).json(frmtr('error', null, 'No id provided'));
         const person = await Person.findByPk(parseInt(req.params.id));
-        if (!person) return res.status(404).json(formatRes('error', null, 'No person found with this id'));
+        if (!person) res.status(404).json(frmtr('error', null, 'No person found with this id'));
 
         // Check if userId exists
-        if (!userId) return res.status(400).json(formatRes('error', null, 'Missing fields: userId'));
+        if (!userId) res.status(400).json(frmtr('error', null, 'Missing fields: userId'));
         const user = await User.findByPk(parseInt(userId));
-        if (!user) return res.status(404).json(formatRes('error', null, 'No user found with this id'));
+        if (!user) res.status(404).json(frmtr('error', null, 'No user found with this id'));
 
         const resp = await person.update({ personId, userId, name, description });
-        if (!resp) return res.status(500).json(formatRes('error', null, 'Error updating person'));
+        if (!resp) res.status(500).json(frmtr('error', null, 'Error updating person'));
 
-        return res.status(201).json(formatRes('success', null, 'Person updated'))
+        res.status(201).json(frmtr('success', null, 'Person updated'))
 
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 };
 
 exports.deletePerson = async (req, res) => {
     try {
         // Get the person and check if it exists
-        if (!req.params.id) return res.status(400).json(formatRes('error', null, 'No id provided'));
+        if (!req.params.id) res.status(400).json(frmtr('error', null, 'No id provided'));
         const person = await Person.findByPk(parseInt(req.params.id));
-        if (!person) return res.status(404).json(formatRes('error', null, 'No person found with this id'));
+        if (!person) res.status(404).json(frmtr('error', null, 'No person found with this id'));
 
         const resp = await person.destroy();
-        if (!resp) return res.status(404).json(formatRes('error', null, 'Error deleting person'));
+        if (!resp) res.status(404).json(frmtr('error', null, 'Error deleting person'));
 
-        return res.status(200).json(formatRes('success', null, 'Person deleted'))
+        res.status(200).json(frmtr('success', null, 'Person deleted'))
 
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 }

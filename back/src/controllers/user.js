@@ -1,4 +1,4 @@
-const formatRes = require('../helpers/formatRes')
+const frmtr = require('../helpers/frmtr')
 const generateCode = require('../helpers/generateCode')
 const isoDateToDate = require('../helpers/isoDateToDate')
 const bcrypt = require('bcrypt');
@@ -10,11 +10,11 @@ exports.register = async (req, res) => {
     const { username, birthdate, email, password, language } = req.body;
     try {
         // Check if all fields are provided
-        if (!username || !birthdate || !email || !password) return res.status(400).json(formatRes('error', null, 'Missing fields, must have: username, birthdate, email, password'));
+        if (!username || !birthdate || !email || !password) res.status(400).json(frmtr('error', null, 'Missing fields, must have: username, birthdate, email, password'));
 
         // Check if the email is already used
         const user = await User.findOne({ where: { email } });
-        if (user) return res.status(400).json(formatRes('error', null, 'Email already used'));
+        if (user) res.status(400).json(frmtr('error', null, 'Email already used'));
 
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -22,11 +22,11 @@ exports.register = async (req, res) => {
         // Create the user
         const { username, birthdate, email, password, language } = req.body;
         const newUser = await User.create({ username, birthdate, email, password: hashedPassword, language });
-        if (!newUser) return res.status(500).json(formatRes('error', null, 'Error while creating the account'));
+        if (!newUser) res.status(500).json(frmtr('error', null, 'Error while creating the account'));
 
-        return res.status(200).json(formatRes('success', newUser, 'Account created successfully'))
+        res.status(200).json(frmtr('success', newUser, 'Account created successfully'))
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 };
 
@@ -34,15 +34,15 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
     try {
         // Check if all fields are provided
-        if (!email || !password) return res.status(400).json(formatRes('error', null, 'Missing fields: email, password'));
+        if (!email || !password) res.status(400).json(frmtr('error', null, 'Missing fields: email, password'));
 
         // Check if the user exists
         const user = await User.findOne({ where: { email } });
-        if (!user) return res.status(404).json(formatRes('error', null, 'No user found with this email'))
+        if (!user) res.status(404).json(frmtr('error', null, 'No user found with this email'))
 
         // Check if the password is valid
         const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) return res.status(404).json(formatRes('error', null, 'Invalid password'))
+        if (!isPasswordValid) res.status(404).json(frmtr('error', null, 'Invalid password'))
 
         // Generate a token
         const token = jwt.sign({ userId: user.userId }, process.env.BACK_SECRET_KEY, { expiresIn: '72h' });
@@ -58,9 +58,9 @@ exports.login = async (req, res) => {
         // Format the date
         user.dataValues.birthdate = isoDateToDate(user.dataValues.birthdate)
 
-        return res.status(200).json(formatRes('success', user, 'Logged in successfully'))
+        res.status(200).json(frmtr('success', user, 'Logged in successfully'))
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 };
 
@@ -68,20 +68,20 @@ exports.verifyEmail = async (req, res) => {
     const { email, token } = req.body;
     try {
         // Check if all fields are provided
-        if (!email || !token) return res.status(400).json(formatRes('error', null, 'Missing fields: email, token'));
+        if (!email || !token) res.status(400).json(frmtr('error', null, 'Missing fields: email, token'));
 
         // Check if the user exists
         const user = await User.findOne({ where: { email, validateEmailToken: token } });
-        if (!user) return res.status(404).json(formatRes('error', null, 'Invalid email or token'));
+        if (!user) res.status(404).json(frmtr('error', null, 'Invalid email or token'));
 
         // Validate the email and remove the token
         user.hasValidatedEmail = true;
         user.validateEmailToken = null;
         await user.save();
 
-        return res.status(200).json(formatRes('success', null, 'Email verified successfully'))
+        res.status(200).json(frmtr('success', null, 'Email verified successfully'))
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 };
 
@@ -89,11 +89,11 @@ exports.forgotPassword = async (req, res) => {
     const { email } = req.body;
     try {
         // Check if all fields are provided
-        if (!email) return res.status(400).json(formatRes('error', null, 'Missing fields: email'));
+        if (!email) res.status(400).json(frmtr('error', null, 'Missing fields: email'));
 
         // Check if the user exists
         const user = await User.findOne({ where: { email } });
-        if (!user) return res.status(404).json(formatRes('error', null, 'No user found with this email'));
+        if (!user) res.status(404).json(frmtr('error', null, 'No user found with this email'));
 
         // Generate a reset code and save it to the user
         const resetCode = generateCode();
@@ -102,9 +102,9 @@ exports.forgotPassword = async (req, res) => {
 
         // TODO: Send an email with the reset code
 
-        return res.status(200).json(formatRes('success', null, 'Reset code sent to your email'))
+        res.status(200).json(frmtr('success', null, 'Reset code sent to your email'))
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 };
 
@@ -112,20 +112,20 @@ exports.resetPassword = async (req, res) => {
     const { email, resetCode, newPassword } = req.body;
     try {
         // Check if all fields are provided
-        if (!email || !resetCode || !newPassword) return res.status(404).json(formatRes('error', null, 'Missing fields: email, resetCode, newPassword'));
+        if (!email || !resetCode || !newPassword) res.status(404).json(frmtr('error', null, 'Missing fields: email, resetCode, newPassword'));
 
         // Check if the user exists
         const user = await User.findOne({ where: { email, resetPasswordCode: resetCode } });
-        if (!user) return res.status(400).json(formatRes('error', null, 'Invalid email or reset code'));
+        if (!user) res.status(400).json(frmtr('error', null, 'Invalid email or reset code'));
 
         // Reset the password
         user.password = await bcrypt.hash(newPassword, 10);
         user.resetPasswordCode = null;
         await user.save();
 
-        return res.status(200).json(formatRes('success', null, 'Password reset successfully'))
+        res.status(200).json(frmtr('success', null, 'Password reset successfully'))
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 };
 
@@ -134,7 +134,7 @@ exports.userInfos = async (req, res) => {
     try {
         // Check if the user exists
         const user = await User.findByPk(userId);
-        if (!user) return res.status(404).json(formatRes('error', null, 'User not found'));
+        if (!user) res.status(404).json(frmtr('error', null, 'User not found'));
 
         // Remove sensitive data from the response
         delete user.dataValues.password;
@@ -144,9 +144,9 @@ exports.userInfos = async (req, res) => {
         // Format the date
         user.dataValues.birthdate = isoDateToDate(user.dataValues.birthdate)
 
-        return res.status(200).json(formatRes('success', user,))
+        res.status(200).json(frmtr('success', user,))
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 };
 
@@ -156,19 +156,19 @@ exports.userUpdate = async (req, res) => {
     try {
         // Check if the user exists
         const user = await User.findByPk(userId);
-        if (!user) return res.status(404).json(formatRes('error', null, 'User not found'));
+        if (!user) res.status(404).json(frmtr('error', null, 'User not found'));
 
         // Update the user
         const resp = await user.update({ username, birthdate, email, language, homePageEnableSpents, homePageEnableStats, homePageEnableQuote, homePageEnableLasts });
-        if (!resp) return res.status(500).json(formatRes('error', null, 'Error updating user'));
+        if (!resp) res.status(500).json(frmtr('error', null, 'Error updating user'));
 
         // Remove sensitive data from the response
         delete user.dataValues.password;
         delete user.dataValues.validateEmailToken
         delete user.dataValues.resetPasswordCode
 
-        return res.status(201).json(formatRes('success', user,))
+        res.status(201).json(frmtr('success', user,))
     } catch (error) {
-        return res.status(500).json(formatRes('error', null, error.message))
+        res.status(500).json(frmtr('error', null, error.message))
     }
 };

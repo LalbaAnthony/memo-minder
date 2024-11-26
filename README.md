@@ -10,17 +10,17 @@
 
 ## Quick Start
 
-0. CONFIG
+### Config
 
 Create a `.env` file in the project directory. Use the `.env.example` file as a template.
 
-1. BACKEND
+### Backend
 
 ```bash
 cd back/ && npm i && npm run dev
 ```
 
-1. FRONTEND
+### Frontend
 
 ```bash
 cd front/ && npm i && npm run dev
@@ -29,7 +29,11 @@ cd front/ && npm i && npm run dev
 ## Development
 
 Seed test data:
-
 ```bash
 cd back/ && node seed.js
+```
+
+Tests (backend):
+```bash
+cd back/ && npm run test
 ```
