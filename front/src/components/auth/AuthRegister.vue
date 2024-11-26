@@ -38,7 +38,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { notify } from '@/helpers/notif.js'
+import { notif } from '@/helpers/notif.js'
 import DatePicker from '@/components/DatePickerComponent.vue'
 import PasswordStrength from '@/components/PasswordStrengthComponent.vue'
 import { isValidEmail } from '@/helpers/functions.js'
@@ -84,7 +84,7 @@ async function handleRegister() {
 
     const error = valid()
     if (error) {
-        notify(error, 'error')
+        notif.notify(error, 'error')
     } else {
         authStore.register({
             username: username.value,

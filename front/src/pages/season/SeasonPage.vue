@@ -103,7 +103,7 @@ import BottomActions from '@/components/BottomActionsComponent.vue'
 import { PlusIcon } from '@heroicons/vue/24/solid'
 import { useRoute, useRouter } from 'vue-router'
 import { useSeasonStore } from '@/stores/season'
-import { notify } from '@/helpers/notif.js'
+import { notif } from '@/helpers/notif.js'
 import { dateToNiceDate } from '@/helpers/functions.js'
 import { computed, ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import debounce from 'lodash/debounce'
@@ -161,7 +161,7 @@ function manualDeletion() {
 function manualCreation() {
   const error = valid()
   if (error) {
-    notify(error, 'error')
+    notif.notify(error, 'error')
   } else {
     seasonStore.createSeason(seasonStore.season.data)
   }
@@ -172,7 +172,7 @@ function manualUpdate() {
 
   const error = valid()
   if (error) {
-    notify(error, 'error')
+    notif.notify(error, 'error')
   } else {
     seasonStore.updateSeason(seasonStore.season.data)
     router.push('/seasons')

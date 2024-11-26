@@ -52,9 +52,9 @@ app.use(({ res }) => {
 // Synchronisation de la base de données et démarrage du serveur
 sequelize.sync()
     .then(() => {
-        logConsole('Database & tables created!');
+        logConsole('Database & tables created!', 'success');
         app.listen(process.env.BACK_API_PORT, () => {
-            logConsole(`Listening on http://localhost:${process.env.BACK_API_PORT}/`);
+            logConsole(`Listening on http://localhost:${process.env.BACK_API_PORT}/`, 'info');
         });
     })
     .catch(err => {

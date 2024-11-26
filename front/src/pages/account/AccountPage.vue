@@ -98,7 +98,7 @@ import debounce from 'lodash/debounce'
 import DatePicker from '@/components/DatePickerComponent.vue'
 import { isValidEmail } from '@/helpers/functions.js'
 import { isValidDate } from '@/helpers/functions.js'
-import { notify } from '@/helpers/notif.js'
+import { notif } from '@/helpers/notif.js'
 import { languages } from '@/lang/languages.js'
 
 const authStore = useAuthStore()
@@ -142,7 +142,7 @@ const handleSave = debounce(() => {
 
   const error = valid()
   if (error) {
-    notify(error, 'error')
+    notif.notify(error, 'error')
   } else {
     authStore.updateUserInfos()
   }

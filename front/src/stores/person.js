@@ -1,16 +1,18 @@
 import { defineStore } from 'pinia'
-import { get, post, put, del } from '@/helpers/api'
+import { api } from '@/helpers/api'
 import { useAuthStore } from '@/stores/auth'
-import { notify } from '@/helpers/notif.js'
+import { notif } from '@/helpers/notif.js'
 
 const authStore = useAuthStore()
+
+const defaultPagination = { page: 1, perPage: 10, total: 1 }
 
 export const usePersonStore = defineStore('person', {
   state: () => ({
     people: {
       loading: true,
       data: [],
-      pagination: { page: 1, perPage: 10, total: 1 },
+      pagination: defaultPagination,
     },
     person: {
       loading: false,
@@ -42,7 +44,7 @@ export const usePersonStore = defineStore('person', {
 
           this.clearPerson()
 
-          const resp = await get(`person/${personId}`, params)
+          const resp = await api.get(`person/${personId}`, params)
           this.person.data = resp.data.data || {}
         }
       }
@@ -61,8 +63,8 @@ export const usePersonStore = defineStore('person', {
       // Request
       const params = {
         userId: authStore.user.userId,
-        page: this.people.pagination.page || 1,
-        perPage: this.people.pagination.perPage || 10,
+        page: this.people.pagination.page || defaultPagination.page,
+        perPage: this.people.pagination.perPage || defaultPagination.perPage,
         sort: [
           { order: 'DESC', orderBy: 'createdAt' },
         ],
@@ -70,9 +72,9 @@ export const usePersonStore = defineStore('person', {
 
       Object.assign(params, givenParams)
 
-      const resp = await get('people', params)
+      const resp = await api.get('people', params)
       this.people.data = resp.data.data || []
-      this.people.pagination = resp.pagination || { page: 1, perPage: 10, total: 1 }
+      this.people.pagination = resp.pagination || defaultPagination
 
       // Loading
       this.people.loading = false
@@ -89,10 +91,10 @@ export const usePersonStore = defineStore('person', {
       this.people.data.splice(this.people.data.findIndex(person => person.personId === personId), 1)
 
       // Request
-      const resp = await del(`person/${personId}`)
+      const resp = await api.del(`person/${personId}`)
 
       if (resp.status !== 200) {
-        notify(resp.data.message, 'error')
+        notif.notify(resp.data.message, 'error')
         return false
       }
 
@@ -104,10 +106,10 @@ export const usePersonStore = defineStore('person', {
       this.person.loading = true
 
       // Request
-      const resp = await post('people', person)
+      const resp = await api.post('people', person)
 
       if (resp.status !== 201) {
-        notify(resp.data.message, 'error')
+        notif.notify(resp.data.message, 'error')
         return false
       }
 
@@ -125,10 +127,10 @@ export const usePersonStore = defineStore('person', {
       this.person.loading = true
 
       // Request
-      const resp = await put(`person/${person.personId}`, person)
+      const resp = await api.put(`person/${person.personId}`, person)
 
       if (resp.status !== 201) {
-        notify(resp.data.message, 'error')
+        notif.notify(resp.data.message, 'error')
         return false
       }
 

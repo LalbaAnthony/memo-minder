@@ -1,9 +1,9 @@
-import { useToast } from 'vue-toastification'; 
+import { useToast } from 'vue-toastification';
 import { isMobile } from '@/helpers/functions.js'
 
 const toast = useToast();
 
-export function notify(message, type = 'info') {
+function notify(message, type = 'info') {
     // ? type can either be 'info', 'success', 'error' or 'warning'
     toast[type](message, {
         position: isMobile() ? 'top-right' : 'bottom-right',
@@ -20,6 +20,11 @@ export function notify(message, type = 'info') {
     });
 }
 
-export function clearNotifications() {
+function clear() {
     toast.clear();
+}
+
+export const notif = {
+    notify,
+    clear
 }

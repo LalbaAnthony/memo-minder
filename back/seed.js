@@ -60,9 +60,9 @@ const seedData = async () => {
         const sampleEvents = require('./src/seed_data/events.json');
         await Event.bulkCreate(sampleEvents);
 
-        logConsole('Sample data inserted');
+        logConsole('Sample data inserted', 'success');
     } catch (error) {
-        logConsole('❌ Error seeding data ❌');
+        logConsole('Error seeding data', 'error');
         logConsole(error, 'error');
         throw error;
     }
@@ -73,9 +73,9 @@ const checkData = async () => {
         // Verify that the data has been inserted with a SELECT query
         const events = await Event.findAll();
         if (events.length === 0) {
-            console.error('No events found in the database');
+            console.error('No events found in the database', 'error');
         } else {
-            logConsole('Sample data verified');
+            logConsole('Sample data verified', 'success');
         }
     } catch (error) {
         logConsole(error, 'error');
@@ -86,10 +86,10 @@ const checkData = async () => {
     try {
         await seedData();
         await checkData();
-        logConsole('✅ Data seeding completed ✅');
+        logConsole('Data seeding completed', 'success');
         process.exit(0); // Terminate the script
     } catch (error) {
-        logConsole('❌ Error running the script ❌');
+        logConsole('Error running the script', 'error');
         logConsole(error, 'error');
         process.exit(1); // Terminate the script with an error
     } finally {

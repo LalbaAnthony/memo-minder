@@ -1,16 +1,18 @@
 import { defineStore } from 'pinia'
-import { get, post, put, del } from '@/helpers/api'
+import { api } from '@/helpers/api'
 import { useAuthStore } from '@/stores/auth'
-import { notify } from '@/helpers/notif.js'
+import { notif } from '@/helpers/notif.js'
 
 const authStore = useAuthStore()
+
+const defaultPagination = { page: 1, perPage: 10, total: 1 }
 
 export const useMusicStore = defineStore('music', {
   state: () => ({
     musics: {
       loading: true,
       data: [],
-      pagination: { page: 1, perPage: 10, total: 1 },
+      pagination: defaultPagination
     },
     music: {
       loading: false,
@@ -42,7 +44,7 @@ export const useMusicStore = defineStore('music', {
 
           this.clearMusic()
 
-          const resp = await get(`music/${musicId}`, params)
+          const resp = await api.get(`music/${musicId}`, params)
           this.music.data = resp.data.data || {}
         }
       }
@@ -61,8 +63,8 @@ export const useMusicStore = defineStore('music', {
       // Request
       const params = {
         userId: authStore.user.userId,
-        page: this.musics.pagination.page || 1,
-        perPage: this.musics.pagination.perPage || 10,
+        page: this.musics.pagination.page || defaultPagination.page,
+        perPage: this.musics.pagination.perPage || defaultPagination.perPage,
         sort: [
           { order: 'DESC', orderBy: 'createdAt' },
         ],
@@ -70,9 +72,9 @@ export const useMusicStore = defineStore('music', {
 
       Object.assign(params, givenParams)
 
-      const resp = await get('musics', params)
+      const resp = await api.get('musics', params)
       this.musics.data = resp.data.data || []
-      this.musics.pagination = resp.pagination || { page: 1, perPage: 10, total: 1 }
+      this.musics.pagination = resp.pagination || defaultPagination
 
       // Loading
       this.musics.loading = false
@@ -89,10 +91,10 @@ export const useMusicStore = defineStore('music', {
       this.musics.data.splice(this.musics.data.findIndex(music => music.musicId === musicId), 1)
 
       // Request
-      const resp = await del(`music/${musicId}`)
+      const resp = await api.del(`music/${musicId}`)
 
       if (resp.status !== 200) {
-        notify(resp.data.message, 'error')
+        notif.notify(resp.data.message, 'error')
         return false
       }
 
@@ -104,10 +106,10 @@ export const useMusicStore = defineStore('music', {
       this.music.loading = true
 
       // Request
-      const resp = await post('musics', music)
+      const resp = await api.post('musics', music)
 
       if (resp.status !== 201) {
-        notify(resp.data.message, 'error')
+        notif.notify(resp.data.message, 'error')
         return false
       }
 
@@ -125,10 +127,10 @@ export const useMusicStore = defineStore('music', {
       this.music.loading = true
 
       // Request
-      const resp = await put(`music/${music.musicId}`, music)
+      const resp = await api.put(`music/${music.musicId}`, music)
 
       if (resp.status !== 201) {
-        notify(resp.data.message, 'error')
+        notif.notify(resp.data.message, 'error')
         return false
       }
 

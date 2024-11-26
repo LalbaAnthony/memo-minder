@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { notify } from '@/helpers/notif.js'
+import { notif } from '@/helpers/notif.js'
 import { isValidEmail } from '@/helpers/functions.js'
 import { useAuthStore } from '@/stores/auth'
 
@@ -37,7 +37,7 @@ async function handleForgotPassword() {
 
     const error = valid()
     if (error) {
-        notify(error, 'error')
+        notif.notify(error, 'error')
     } else {
         authStore.forgotPassword(authStore.fogotPasswordEmail)
         emit('setAuthType', 'resetPassword')
