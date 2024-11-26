@@ -21,8 +21,10 @@ module.exports = (subject = '', text = '', to = '', from = process.env.BACK_MAIL
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             logConsole(`An error occurred: ${error}`, 'error');
+            return false;
         } else {
-            logConsole('Email sent: ' + info.response, 'info');
+            logFile('Email sent: ' + info.response, 'info');
+            return true;
         }
     });
 }

@@ -73,7 +73,7 @@ const checkData = async () => {
         // Verify that the data has been inserted with a SELECT query
         const events = await Event.findAll();
         if (events.length === 0) {
-            console.error('No events found in the database', 'error');
+            logConsole('No events found in the database', 'error');
         } else {
             logConsole('Sample data verified', 'success');
         }

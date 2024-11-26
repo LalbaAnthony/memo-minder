@@ -31,4 +31,7 @@ export default defineConfig({
       VITE_FRONT_URL: process.env.VITE_FRONT_URL,
     }
   },
+  server: {
+    port: process.env.VITE_APP_PORT
+  },
 })
