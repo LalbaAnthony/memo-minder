@@ -24,7 +24,7 @@ const app = express()
 
 // CORS middleware
 app.use(cors({
-    origin: process.env.VITE_APP_URL,
+    origin: process.env.VITE_FRONT_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
@@ -53,8 +53,8 @@ app.use(({ res }) => {
 sequelize.sync()
     .then(() => {
         logConsole('Database & tables created!', 'success');
-        app.listen(process.env.BACK_API_PORT, () => {
-            logConsole(`Listening on http://localhost:${process.env.BACK_API_PORT}/`, 'info');
+        app.listen(process.env.BACK_PORT, () => {
+            logConsole(`Listening on http://localhost:${process.env.BACK_PORT}/`, 'info');
         })
         logConsole('Server started!', 'success');
     })

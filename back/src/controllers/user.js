@@ -45,7 +45,7 @@ exports.login = async (req, res) => {
         if (!isPasswordValid) res.status(404).json(frmtr('error', null, 'Invalid password'))
 
         // Generate a token
-        const token = jwt.sign({ userId: user.userId }, process.env.BACK_SECRET_KEY, { expiresIn: process.env.BACK_TOKEN_EXPIRES_IN });
+        const token = jwt.sign({ userId: user.userId }, process.env.BACK_TOKEN_SECRET_KEY, { expiresIn: process.env.BACK_TOKEN_EXPIRES_IN });
         user.connectionToken = token;
         user.lastLogin = new Date().toISOString();
         await user.save();
