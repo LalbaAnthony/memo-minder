@@ -44,7 +44,7 @@ watch(() => date.value, (newValue, oldValue) => {
     emit('update', dateToSend)
   } else {
     date.value = oldValue
-    // console.error('Invalid date')
+    console.error('Invalid date')
   }
 })
 

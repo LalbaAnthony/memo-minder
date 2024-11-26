@@ -5,11 +5,17 @@ const User = require('../models/user');
 module.exports = async (req, res, next) => {
     const authHeader = req.headers['authorization'];
 
-    if (!authHeader) res.status(401).json(frmtr('error', null, 'No header provided'));
+    if (!authHeader) {
+        res.status(401).json(frmtr('error', null, 'No header provided'));
+        return;
+    }
 
     const token = authHeader.split(' ')[1] || authHeader || null; // authHeader as 'Bearer <token>'
 
-    if (!token) res.status(401).json(frmtr('error', null, 'No token provided'));
+    if (!token) {
+        res.status(401).json(frmtr('error', null, 'No token provided'));
+        return;
+    }
 
     try {
         const decoded = jwt.verify(token, process.env.BACK_SECRET_KEY);

@@ -10,8 +10,6 @@ module.exports = (msg) => {
     const log = `${date.toISOString()} | ${msg}\n`;
 
     fs.appendFile(LOG_PATH, log, (err) => {
-        if (err) {
-            console.error(err);
-        }
+        if (err) console.error(err);
     });
 }

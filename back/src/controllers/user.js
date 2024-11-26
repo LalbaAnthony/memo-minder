@@ -1,6 +1,6 @@
 const frmtr = require('../helpers/frmtr')
 const generateCode = require('../helpers/generateCode')
-const isoDateToDate = require('../helpers/isoDateToDate')
+const shortenIsoDate = require('../helpers/shortenIsoDate')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -45,7 +45,7 @@ exports.login = async (req, res) => {
         if (!isPasswordValid) res.status(404).json(frmtr('error', null, 'Invalid password'))
 
         // Generate a token
-        const token = jwt.sign({ userId: user.userId }, process.env.BACK_SECRET_KEY, { expiresIn: '72h' });
+        const token = jwt.sign({ userId: user.userId }, process.env.BACK_SECRET_KEY, { expiresIn: process.env.BACK_TOKEN_EXPIRES_IN });
         user.connectionToken = token;
         user.lastLogin = new Date().toISOString();
         await user.save();
@@ -56,7 +56,7 @@ exports.login = async (req, res) => {
         delete user.dataValues.resetPasswordCode
 
         // Format the date
-        user.dataValues.birthdate = isoDateToDate(user.dataValues.birthdate)
+        user.dataValues.birthdate = shortenIsoDate(user.dataValues.birthdate)
 
         res.status(200).json(frmtr('success', user, 'Logged in successfully'))
     } catch (error) {
@@ -142,7 +142,7 @@ exports.userInfos = async (req, res) => {
         delete user.dataValues.resetPasswordCode
 
         // Format the date
-        user.dataValues.birthdate = isoDateToDate(user.dataValues.birthdate)
+        user.dataValues.birthdate = shortenIsoDate(user.dataValues.birthdate)
 
         res.status(200).json(frmtr('success', user,))
     } catch (error) {
