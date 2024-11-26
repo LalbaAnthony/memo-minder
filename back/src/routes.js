@@ -45,7 +45,6 @@ router.delete('/season/:id', checkToken, seasonController.deleteSeason);
 // User
 router.post('/register', userController.register);
 router.post('/login', userController.login);
-router.post('/validate-token', userController.validateToken);
 router.post('/verify-email', userController.verifyEmail);
 router.get('/forgot-password', checkToken, userController.forgotPassword);
 router.post('/reset-password', userController.resetPassword);

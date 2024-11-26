@@ -98,7 +98,7 @@ import { PlusIcon } from '@heroicons/vue/24/solid'
 import { MapPinIcon } from '@heroicons/vue/24/solid'
 import { useRoute, useRouter } from 'vue-router'
 import { useEventStore } from '@/stores/event'
-import { notify } from '@/helpers/notif.js'
+import { notif } from '@/helpers/notif.js'
 import { dateToNiceDate } from '@/helpers/functions.js'
 import { computed, ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import debounce from 'lodash/debounce'
@@ -166,7 +166,7 @@ function manualDeletion() {
 function manualCreation() {
   const error = valid()
   if (error) {
-    notify(error, 'error')
+    notif.notify(error, 'error')
   } else {
     eventStore.createEvent(eventStore.event.data)
   }
@@ -177,7 +177,7 @@ function manualUpdate() {
 
   const error = valid()
   if (error) {
-    notify(error, 'error')
+    notif.notify(error, 'error')
   } else {
     eventStore.updateEvent(eventStore.season.data)
     router.push('/events')

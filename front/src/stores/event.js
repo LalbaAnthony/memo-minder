@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia'
-import { get, post, put, del } from '@/helpers/api'
+import { api } from '@/helpers/api'
 import { useAuthStore } from '@/stores/auth'
-import { notify } from '@/helpers/notif.js'
+import { notif } from '@/helpers/notif.js'
 
 const authStore = useAuthStore()
+
+const defaultPagination = { page: 1, perPage: 10, total: 1 }
 
 export const useEventStore = defineStore('event', {
   state: () => ({
@@ -42,7 +44,7 @@ export const useEventStore = defineStore('event', {
 
           this.clearEvent()
 
-          const resp = await get(`event/${eventId}`, params)
+          const resp = await api.get(`event/${eventId}`, params)
           this.event.data = resp.data.data || {}
         }
       }
@@ -61,8 +63,8 @@ export const useEventStore = defineStore('event', {
       // Request
       const params = {
         userId: authStore.user.userId,
-        page: this.events.pagination.page || 1,
-        perPage: this.events.pagination.perPage || 10,
+        page: this.events.pagination.page || defaultPagination.page,
+        perPage: this.events.pagination.perPage || defaultPagination.perPage,
         sort: [
           { order: 'DESC', orderBy: 'createdAt' },
         ],
@@ -70,9 +72,9 @@ export const useEventStore = defineStore('event', {
 
       Object.assign(params, givenParams)
 
-      const resp = await get('events', params)
+      const resp = await api.get('events', params)
       this.events.data = resp.data.data || []
-      this.events.pagination = resp.pagination || { page: 1, perPage: 10, total: 1 }
+      this.events.pagination = resp.pagination || defaultPagination
 
       // Loading
       this.events.loading = false
@@ -95,10 +97,10 @@ export const useEventStore = defineStore('event', {
       this.events.data.splice(this.events.data.findIndex(event => event.eventId === eventId), 1)
 
       // Request
-      const resp = await del(`event/${eventId}`)
+      const resp = await api.del(`event/${eventId}`)
 
       if (resp.status !== 200) {
-        notify(resp.data.message, 'error')
+        notif.notify(resp.data.message, 'error')
         return false
       }
 
@@ -110,10 +112,10 @@ export const useEventStore = defineStore('event', {
       this.event.loading = true
 
       // Request
-      const resp = await post('events', event)
+      const resp = await api.post('events', event)
 
       if (resp.status !== 201) {
-        notify(resp.data.message, 'error')
+        notif.notify(resp.data.message, 'error')
         return false
       }
 
@@ -131,10 +133,10 @@ export const useEventStore = defineStore('event', {
       this.event.loading = true
 
       // Request
-      const resp = await put(`event/${event.eventId}`, event)
+      const resp = await api.put(`event/${event.eventId}`, event)
 
       if (resp.status !== 201) {
-        notify(resp.data.message, 'error')
+        notif.notify(resp.data.message, 'error')
         return false
       }
 

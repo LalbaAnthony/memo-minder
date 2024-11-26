@@ -20,8 +20,8 @@ exports.register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create the user
-    const { username, birthdate, email, password, language } = req.body;
-    const newUser = await User.create({ username, birthdate, email, password: hashedPassword, language });
+        const { username, birthdate, email, password, language } = req.body;
+        const newUser = await User.create({ username, birthdate, email, password: hashedPassword, language });
         if (!newUser) return res.status(500).json(formatRes('error', null, 'Error while creating the account'));
 
         return res.status(200).json(formatRes('success', newUser, 'Account created successfully'))
@@ -144,7 +144,7 @@ exports.userInfos = async (req, res) => {
         // Format the date
         user.dataValues.birthdate = isoDateToDate(user.dataValues.birthdate)
 
-        return res.status(200).json(formatRes('success', user, ))
+        return res.status(200).json(formatRes('success', user,))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
     }
@@ -152,7 +152,7 @@ exports.userInfos = async (req, res) => {
 
 exports.userUpdate = async (req, res) => {
     const userId = req.params.id
-    const { username, birthdate, email, language, homePageEnableSpents, homePageEnableStats, homePageEnableQuote, homePageEnableLasts} = req.body;
+    const { username, birthdate, email, language, homePageEnableSpents, homePageEnableStats, homePageEnableQuote, homePageEnableLasts } = req.body;
     try {
         // Check if the user exists
         const user = await User.findByPk(userId);
@@ -167,30 +167,8 @@ exports.userUpdate = async (req, res) => {
         delete user.dataValues.validateEmailToken
         delete user.dataValues.resetPasswordCode
 
-        return res.status(201).json(formatRes('success', user, ))
+        return res.status(201).json(formatRes('success', user,))
     } catch (error) {
         return res.status(500).json(formatRes('error', null, error.message))
-    }
-};
-
-exports.validateToken = async (req, res) => {
-    const { userId, token } = req.body;
-    try {
-        // Check if all fields are provided
-        if (!userId) return res.status(400).json(formatRes('error', null, 'Missing fields: userId'));
-        if (!token) return res.status(400).json(formatRes('error', null, 'Missing fields: token'));
-
-        // Check if the user exists
-        const user = await User.findByPk(userId);
-        if (!user) return res.status(404).json(formatRes('error', null, 'User not found'));
-
-        // Check if the token is valid
-        jwt.verify(token, process.env.BACK_SECRET_KEY, (err, user) => {
-            if (err) return res.sendStatus(403).json(formatRes('error', null, 'Error while verifiying the token'));
-        });
-
-        return res.status(200).json(formatRes('success', null, 'Token is valid'))
-    } catch (error) {
-        return res.status(500).json(formatRes('error', null, 'Token is invalid'))
     }
 };

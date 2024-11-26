@@ -23,7 +23,7 @@ export default defineConfig({
   },
   define: {
     'process.env': {
-      VITE_SITE_NAME: process.env.VITE_SITE_NAME,
+      VITE_APP_NAME: process.env.VITE_APP_NAME,
       VITE_COMPANY_NAME: process.env.VITE_COMPANY_NAME,
       VITE_AUTHOR_NAME: process.env.VITE_AUTHOR_NAME,
       VITE_APP_VERSION: process.env.VITE_APP_VERSION,

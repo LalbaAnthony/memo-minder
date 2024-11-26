@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
-import { notify, clearNotifications } from '@/helpers/notif.js'
+import { notif } from '@/helpers/notif.js'
 import router from '@/router'
-import { get, post, put } from '@/helpers/api'
+import { api } from '@/helpers/api'
 
 export const useAuthStore = defineStore('auth', {
   persist: true,
@@ -13,32 +13,12 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   actions: {
-    async validateToken() {
-
-      if (!this.authenticated || !(this.user.connectionToken || this.token)) {
-        this.logout()
-        return false
-      }
-
-      await post('validate-token', { userId: this.user.userId, token: this.user.connectionToken || this.token }).then(resp => {
-        if (resp.status === 200) {
-          return true
-        } else {
-          this.logout()
-          return false
-        }
-      }).catch(error => {
-        notify(`An error occured: ${error}`, 'error')
-        return false
-      })
-    },
-
     async fetchUserInfos() {
 
-      await get(`user-infos/${this.user.userId}`).then(resp => {
+      await api.get(`user-infos/${this.user.userId}`).then(resp => {
 
         if (resp.status !== 200) {
-          notify(resp.data.message, 'error')
+          notif.notify(resp.data.message, 'error')
           return false
         }
 
@@ -49,7 +29,7 @@ export const useAuthStore = defineStore('auth', {
         return true
       }).catch(error => {
         this.logout()
-        notify(`An error occured: ${error}`, 'error')
+        notif.notify(`An error occured: ${error}`, 'error')
         return false
       })
     },
@@ -60,18 +40,18 @@ export const useAuthStore = defineStore('auth', {
       delete userPayload.connectionToken
       delete userPayload.password
 
-      await put(`user-update/${this.user.userId}`, userPayload).then(resp => {
+      await api.put(`user-update/${this.user.userId}`, userPayload).then(resp => {
 
         if (resp.status === 'error') {
-          notify(resp.data.message, 'error')
+          notif.notify(resp.data.message, 'error')
           return false
         }
 
-        // notify('Your informations have been updated', 'success')
+        // notif.notify('Your informations have been updated', 'success')
 
         return true
       }).catch(error => {
-        notify(`An error occured: ${error}`, 'error')
+        notif.notify(`An error occured: ${error}`, 'error')
         return false
       })
     },
@@ -100,18 +80,18 @@ export const useAuthStore = defineStore('auth', {
 
       this.logout()
 
-      await post('register', user).then(resp => {
+      await api.post('register', user).then(resp => {
 
         if (resp.status !== 201) {
-          notify(resp.data.message, 'error')
+          notif.notify(resp.data.message, 'error')
           return false
         }
 
-        notify(`You have been registered`, 'success')
+        notif.notify(`You have been registered`, 'success')
 
         return true
       }).catch(error => {
-        notify(`An error occured: ${error}`, 'error')
+        notif.notify(`An error occured: ${error}`, 'error')
         return false
       })
 
@@ -122,10 +102,10 @@ export const useAuthStore = defineStore('auth', {
 
     async login(email, password, redirect = '/') {
 
-      await post('login', { email, password }).then(resp => {
+      await api.post('login', { email, password }).then(resp => {
 
         if (resp.status !== 200) {
-          notify(resp.data.message, 'error')
+          notif.notify(resp.data.message, 'error')
           return false
         }
 
@@ -133,11 +113,11 @@ export const useAuthStore = defineStore('auth', {
         this.token = resp.data.data.connectionToken
         this.authenticated = true
 
-        notify('You have been logged in', 'success')
+        notif.notify('You have been logged in', 'success')
 
         return true
       }).catch(error => {
-        notify(`An error occured: ${error}`, 'error')
+        notif.notify(`An error occured: ${error}`, 'error')
         return false
       })
 
@@ -155,8 +135,8 @@ export const useAuthStore = defineStore('auth', {
       if (redirect) {
         router.push(redirect)
       }
-      clearNotifications()
-      notify('You have been logged out', 'info')
+      notif.clear()
+      notif.notify('You have been logged out', 'info')
     },
   },
 },

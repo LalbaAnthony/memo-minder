@@ -1,7 +1,7 @@
 <template>
   <div>
     <section>
-      <p>{{ VITE_SITE_NAME }} is a unique web application crafted with Vue.js and Node.js, designed to capture and preserve
+      <p>{{ VITE_APP_NAME }} is a unique web application crafted with Vue.js and Node.js, designed to capture and preserve
         life's memorable moments in a delightful and secure way. With a focus on encapsulating memories into four
         distinct
         seasons - Spring, Summer, Autumn, and Winter - the app offers users a nostalgic journey through their past
@@ -41,7 +41,7 @@
     </section>
 
     <section>
-      <h2 class="text-xl font-bold text-light my-4">Why {{ VITE_SITE_NAME }}?</h2>
+      <h2 class="text-xl font-bold text-light my-4">Why {{ VITE_APP_NAME }}?</h2>
       <ul class="list-disc list-inside">
         <li>Nostalgic Reflection: Rediscover the magic of past moments by immersing yourself in a chronological journey
           through the seasons of your life.</li>
@@ -55,5 +55,5 @@
 </template>
 
 <script setup>
-import { VITE_SITE_NAME } from '@/config';
+import { VITE_APP_NAME } from '@/config';
 </script>

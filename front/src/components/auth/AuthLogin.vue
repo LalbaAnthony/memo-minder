@@ -21,7 +21,7 @@
 
 <script setup>
 import { ref } from "vue"
-import { notify } from '@/helpers/notif.js'
+import { notif } from '@/helpers/notif.js'
 import { isValidEmail } from '@/helpers/functions.js'
 import { useAuthStore } from '@/stores/auth'
 
@@ -47,7 +47,7 @@ async function handleLogin() {
 
     const error = valid()
     if (error) {
-        notify(error, 'error')
+        notif.notify(error, 'error')
     } else {
         authStore.login(email.value, password.value)
         email.value = ''

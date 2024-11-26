@@ -1,17 +1,19 @@
 import { defineStore } from 'pinia'
-import { get, post, put, del } from '@/helpers/api'
+import { api } from '@/helpers/api'
 import { randomColor } from '@/helpers/functions.js'
 import { useAuthStore } from '@/stores/auth'
-import { notify } from '@/helpers/notif.js'
+import { notif } from '@/helpers/notif.js'
 
 const authStore = useAuthStore()
+
+const defaultPagination = { page: 1, perPage: 10, total: 1 }
 
 export const useSeasonStore = defineStore('season', {
   state: () => ({
     seasons: {
       loading: true,
       data: [],
-      pagination: { page: 1, perPage: 10, total: 1 },
+      pagination: defaultPagination,
     },
     season: {
       loading: false,
@@ -43,7 +45,7 @@ export const useSeasonStore = defineStore('season', {
 
           this.clearSeason()
 
-          const resp = await get(`season/${seasonId}`, params)
+          const resp = await api.get(`season/${seasonId}`, params)
           this.season.data = resp.data.data || {}
         }
       }
@@ -62,8 +64,8 @@ export const useSeasonStore = defineStore('season', {
       // Request
       const params = {
         userId: authStore.user.userId,
-        page: this.seasons.pagination.page || 1,
-        perPage: this.seasons.pagination.perPage || 10,
+        page: this.seasons.pagination.page || defaultPagination.page,
+        perPage: this.seasons.pagination.perPage || defaultPagination.perPage,
         sort: [
           { order: 'DESC', orderBy: 'createdAt' },
         ],
@@ -71,9 +73,9 @@ export const useSeasonStore = defineStore('season', {
 
       Object.assign(params, givenParams)
 
-      const resp = await get('seasons', params)
+      const resp = await api.get('seasons', params)
       this.seasons.data = resp.data.data || []
-      this.seasons.pagination = resp.pagination || { page: 1, perPage: 10, total: 1 }
+      this.seasons.pagination = resp.pagination || defaultPagination
 
       // Loading
       this.seasons.loading = false
@@ -98,10 +100,10 @@ export const useSeasonStore = defineStore('season', {
       this.seasons.data.splice(this.seasons.data.findIndex(season => season.seasonId === seasonId), 1)
 
       // Request
-      const resp = await del(`season/${seasonId}`)
+      const resp = await api.del(`season/${seasonId}`)
 
       if (resp.status !== 200) {
-        notify(resp.data.message, 'error')
+        notif.notify(resp.data.message, 'error')
         return false
       }
 
@@ -113,10 +115,10 @@ export const useSeasonStore = defineStore('season', {
       this.season.loading = true
 
       // Request
-      const resp = await post('seasons', season)
+      const resp = await api.post('seasons', season)
 
       if (resp.status !== 201) {
-        notify(resp.data.message, 'error')
+        notif.notify(resp.data.message, 'error')
         return false
       }
 
@@ -134,10 +136,10 @@ export const useSeasonStore = defineStore('season', {
       this.season.loading = true
 
       // Request
-      const resp = await put(`season/${season.seasonId}`, season)
+      const resp = await api.put(`season/${season.seasonId}`, season)
 
       if (resp.status !== 201) {
-        notify(resp.data.message, 'error')
+        notif.notify(resp.data.message, 'error')
         return false
       }
 

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
-const api = axios.create({
+const axiosApi = axios.create({
   baseURL: 'https://quotes-api-self.vercel.app/',
   headers: {
     'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ export const useQuoteStore = defineStore('quote', {
       // Data
       this.quote.data = {}
 
-      const resp = await api.get('/quote')
+      const resp = await axiosApi.get('/quote')
       this.quote.data = resp.data || {}
 
       // If quote.data.quote contains a ", ', or ”, remove it

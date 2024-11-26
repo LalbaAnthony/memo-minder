@@ -22,7 +22,7 @@ module.exports = (subject = '', text = '', to = '', from = process.env.BACK_MAIL
         if (error) {
             logConsole(`An error occurred: ${error}`, 'error');
         } else {
-            logConsole('Email sent: ' + info.response);
+            logConsole('Email sent: ' + info.response, 'info');
         }
     });
 }
