@@ -11,10 +11,9 @@ Front:
     - Faire inté de toutes les pages WIP
     - Make integration from something like https://flowbite.com/blocks/application/shells/
     - Maj account params + mdp oublié + delete account
-    - Mettre tout les store en perssistant pour pour etre en offline + gestion des erreurs Axios
+    - Mettre tout les store en perssistant pour pour etre en offline (?) + gestion des erreurs Axios
     - Vérifier la présence de TODO dans le code
     - Ajouter langue francaise
-    - Faire PWA
 
 Ideas:
     - Fonction de Rappels de Souvenirs (what happened a year ago, ...)
