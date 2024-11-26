@@ -1,4 +1,4 @@
-module.exports = (subject = '', text = '', to = '', from = process.env.BACK_MAIL_FROM) => {
+module.exports = (subject = '', text = '', to = '', from = process.env.BACK_EMAIL_FROM) => {
     if (!subject || !text || !to || !from) return;
 
     const nodemailer = require('nodemailer');
