@@ -1,4 +1,6 @@
 Back:
+    - Faire services
+    - Respecter normes de nomages dossier comme MMM
     - Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)
     - Create and implement email systeme with back/src/helpers/email.js
 
