@@ -22,3 +22,7 @@ Ideas:
 
 Devops:
     - Github actions
+
+
+Bonus:
+    - Import my own data 
