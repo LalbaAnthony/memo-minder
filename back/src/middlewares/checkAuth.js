@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const frmtr = require('../helpers/frmtr');
-const User = require('../models/user');
 
 module.exports = async (req, res, next) => {
     const authHeader = req.headers['authorization'];
@@ -22,6 +21,6 @@ module.exports = async (req, res, next) => {
         req.user = decoded;
         next();
     } catch (err) {
-        res.status(403).json(frmtr('error', null, 'Invalid or expired token'));
+        res.status(401).json(frmtr('error', null, 'Invalid or expired token'));
     }
 };

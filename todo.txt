@@ -6,7 +6,6 @@ Back:
     - Create and implement email systeme with back/src/helpers/email.js
 
 Front:
-    - Déconnexion si token expiré
     - Placer les balises <meta> avec du JS
     - Bug inté bouton delete item des personnes et des music
     - Faire listes differentses dans les stores pour chaque usage ?
