@@ -5,7 +5,7 @@ const personController = require('./controllers/person');
 const seasonController = require('./controllers/season');
 const userController = require('./controllers/user');
 
-const checkToken = require('./middleware/checkToken');
+const checkToken = require('./middlewares/checkAuth');
 
 const express = require('express');
 const router = express.Router();
