@@ -68,8 +68,8 @@
     <ItemPicker :show="showItemPicker" :types="availablesTypes" @close="showItemPicker = false"
       @selected="(object) => { addItem(object) }" />
 
-    <BottomActions :createButton="!route.params.seasonId" :updateButton="route.params.seasonId"
-      :deleteButton="route.params.seasonId" @triggerCreate="manualCreation" @triggerUpdate="manualUpdate"
+    <BottomActions :createButton="!route.params.seasonId" :updateButton="!!route.params.seasonId"
+      :deleteButton="!!route.params.seasonId" @triggerCreate="manualCreation" @triggerUpdate="manualUpdate"
       @triggerDelete="manualDeletion" />
   </div>
 </template>

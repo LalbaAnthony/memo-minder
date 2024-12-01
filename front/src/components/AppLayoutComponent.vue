@@ -46,7 +46,7 @@
         <div v-if="!isMobile()" class="py-2 px-4">
           <form action="" @submit.prevent="triggerSearch()">
             <input v-model="search" id="layoutSearch" type="search"
-              class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light" placeholder="Search" />
+              class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light" placeholder="Search">
           </form>
         </div>
 
@@ -115,15 +115,15 @@ import { isMobile } from '@/helpers/functions.js'
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { Bars3Icon } from '@heroicons/vue/24/solid'
 import { XMarkIcon } from '@heroicons/vue/24/solid'
-import { HomeIcon } from '@heroicons/vue/24/solid'
-import { InformationCircleIcon } from '@heroicons/vue/24/solid'
+import { HomeIcon } from '@heroicons/vue/24/outline'
+import { InformationCircleIcon } from '@heroicons/vue/24/outline'
 import { FilmIcon } from '@heroicons/vue/24/solid'
 import { CalendarDaysIcon } from '@heroicons/vue/24/solid'
 import { UsersIcon } from '@heroicons/vue/24/solid'
 import { MusicalNoteIcon } from '@heroicons/vue/24/solid'
-import { UserCircleIcon } from '@heroicons/vue/24/solid'
-import { ArrowLeftEndOnRectangleIcon } from '@heroicons/vue/24/solid'
-import { ref } from 'vue'
+import { UserCircleIcon } from '@heroicons/vue/24/outline'
+import { ArrowLeftEndOnRectangleIcon } from '@heroicons/vue/24/outline'
+import { onMounted, ref } from 'vue'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { useRoute, useRouter } from 'vue-router'
 import vClickOutside from '@/directives/clickOutside.js'
@@ -194,15 +194,34 @@ function triggerSearch() {
   }
 }
 
-// Add shortcuts
-if (!isMobile()) {
-  window.addEventListener('keydown', (e) => {
-    // ctrl + F short to focus search
-    if (e.ctrlKey && e.key === 'f') {
-      e.preventDefault()
-      focusSearchBar()
-    }
-  })
-}
+onMounted(() => {
+  // Add shortcuts
+  if (!isMobile()) {
 
+    // ctrl + K to focus search
+    window.addEventListener('keydown', (e) => {
+      // ctrl + F short to focus search
+      if (e.ctrlKey && e.key === 'k') {
+        e.preventDefault()
+        focusSearchBar()
+      }
+    })
+
+    // esc to hide sidebar
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        hideSidebar()
+      }
+    })
+
+    // ctrl + shift + S to show sidebar
+    window.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key === 's') {
+        e.preventDefault()
+        revealSidebar()
+      }
+    })
+  }
+})
 </script>

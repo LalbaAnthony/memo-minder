@@ -10,10 +10,10 @@
       </div>
     </div>
     <div class="grid grid-rows-2 divide-y-2 divide-gray cursor-pointer">
-      <div class="flex justify-center items-center p-3 bg-gray-light rounded-tr-[6px]" @click="deletePerson()">
+      <div class="flex justify-center items-center p-3 bg-gray-dark rounded-tr-[6px]" @click="deletePerson()">
         <TrashIcon class="size-6" />
       </div>
-      <div class="flex justify-center items-center p-3 bg-gray-light rounded-br-[6px]" @click="goToPerson()">
+      <div class="flex justify-center items-center p-3 bg-gray-dark rounded-br-[6px]" @click="goToPerson()">
         <PencilSquareIcon class="size-6" />
       </div>
     </div>
@@ -22,9 +22,9 @@
 
 <script setup>
 import { usePersonStore } from '@/stores/person'
-import { TrashIcon } from '@heroicons/vue/24/solid'
+import { TrashIcon } from '@heroicons/vue/24/outline'
 import { threeDotString } from '@/helpers/functions'
-import { PencilSquareIcon } from '@heroicons/vue/24/solid'
+import { PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()

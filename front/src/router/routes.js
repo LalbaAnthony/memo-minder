@@ -220,9 +220,18 @@ const routes = [
   },
   // ==================== CATCH ====================
   {
+    path: '/error-server',
+    name: 'error.server',
+    component: () => import('../pages/error/ErrorServerPage.vue'),
+    meta: {
+      title: 'Error',
+      displayInSearch: false,
+    },
+  },
+  {
     path: '/:catchAll(.*)*',
-    name: 'Error',
-    component: () => import('../pages/error/ErrorPage.vue'),
+    name: 'error.routing',
+    component: () => import('../pages/error/ErrorRoutingPage.vue'),
     meta: {
       title: 'Error',
       displayInSearch: false,

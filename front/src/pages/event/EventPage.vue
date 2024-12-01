@@ -62,8 +62,8 @@
     <ItemPicker :show="showItemPicker" :types="availablesTypes" @close="showItemPicker = false"
       @selected="(object) => { addItem(object) }" />
 
-    <BottomActions :createButton="!route.params.eventId" :updateButton="route.params.eventId"
-      :deleteButton="route.params.eventId" @triggerCreate="manualCreation" @triggerUpdate="manualUpdate"
+    <BottomActions :createButton="!route.params.eventId" :updateButton="!!route.params.eventId"
+      :deleteButton="!!route.params.eventId" @triggerCreate="manualCreation" @triggerUpdate="manualUpdate"
       @triggerDelete="manualDeletion" />
   </div>
 </template>
@@ -136,6 +136,7 @@ function addItem(object) {
 function valid() {
   if (!eventStore.event.data.userId) return 'User is required, please reload the page'
   if (!eventStore.event.data.title) return 'Title is required'
+  if (!eventStore.event.data.date) return 'Date is required'
   return false
 }
 
@@ -161,7 +162,7 @@ function manualUpdate() {
   if (error) {
     notif.notify(error, 'error')
   } else {
-    eventStore.updateEvent(eventStore.season.data)
+    eventStore.updateEvent(eventStore.event.data)
   }
 }
 

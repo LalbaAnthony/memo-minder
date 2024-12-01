@@ -20,8 +20,8 @@
       </section>
     </div>
 
-    <BottomActions :createButton="!route.params.personId" :updateButton="route.params.personId"
-      :deleteButton="route.params.personId" @triggerCreate="manualCreation" @triggerUpdate="manualUpdate"
+    <BottomActions :createButton="!route.params.personId" :updateButton="!!route.params.personId"
+      :deleteButton="!!route.params.personId" @triggerCreate="manualCreation" @triggerUpdate="manualUpdate"
       @triggerDelete="manualDeletion" />
   </div>
 </template>

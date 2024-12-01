@@ -6,7 +6,7 @@
       </div>
     </section>
 
-    <div class="md:grid md:grid-cols-2 md:gap-4">
+    <div class="md:grid md:grid-cols-2 md:gap-6">
       <section v-if="authStore?.user?.homePageEnableStats && authStore?.user?.birthdate">
         <h2 class="text-xl font-bold">Stats</h2>
         <div class="my-4">
@@ -25,45 +25,67 @@
       </section>
     </div>
 
-    <section v-if="authStore?.user?.homePageEnableLasts && seasonStore?.seasons?.data?.length > 0">
-      <h2 class="text-xl font-bold">Lasts seasons added</h2>
-      <div class="my-4">
-        <Loader v-if="seasonStore.seasons.loading" />
-        <Grid v-else :items="seasonStore.seasons.data">
-          <template #item="{ item }">
-            <Season :season="item" />
-          </template>
-        </Grid>
-      </div>
-    </section>
+    <div class="md:grid md:grid-cols-2 md:gap-6">
+      <section v-if="authStore?.user?.homePageEnableLasts && seasonStore?.seasons?.data?.length > 0">
+        <h2 class="text-xl font-bold">Lasts seasons added</h2>
+        <div class="my-4">
+          <Loader v-if="seasonStore.seasons.loading" />
+          <Grid v-else :items="seasonStore.seasons.data">
+            <template #item="{ item }">
+              <Season :season="item" />
+            </template>
+          </Grid>
+        </div>
+      </section>
+
+      <section v-if="authStore?.user?.homePageEnableLasts && eventStore?.events?.data?.length > 0">
+        <h2 class="text-xl font-bold">Lasts events added</h2>
+        <div class="my-4">
+          <Loader v-if="eventStore.events.loading" />
+          <Grid v-else :items="eventStore.events.data">
+            <template #item="{ item }">
+              <Event :event="item" />
+            </template>
+          </Grid>
+        </div>
+      </section>
+    </div>
+
+    <BottomActions />
   </div>
 </template>
 
 <script setup>
 import Grid from '@/components/GridComponent.vue'
 import Season from '@/components/season/SeasonItem.vue'
+import Event from '@/components/event/EventItem.vue'
 import Loader from '@/components/LoaderComponent.vue'
 import Stats from '@/components/homepage/StatsComponent.vue'
 import Spents from '@/components/homepage/SpentsComponent.vue'
+import BottomActions from '@/components/BottomActionsComponent.vue'
 import { useAuthStore } from '@/stores/auth'
 import { useSeasonStore } from '@/stores/season'
+import { useEventStore } from '@/stores/event'
 import { useQuoteStore } from '@/stores/quote'
 import { onMounted } from 'vue'
 
 const authStore = useAuthStore()
 const quoteStore = useQuoteStore()
 const seasonStore = useSeasonStore()
-
-async function loadSeasons() {
-  seasonStore.fetchSeasons({
-    sort: [{ order: 'ASC', orderBy: 'createdAt' }],
-    perPage: 3
-  })
-}
+const eventStore = useEventStore()
 
 // Fetch data on mount
 onMounted(() => {
-  if (authStore?.user?.homePageEnableLasts) loadSeasons()
+  if (authStore?.user?.homePageEnableLasts) {
+    seasonStore.fetchSeasons({
+      sort: [{ order: 'DESC', orderBy: 'createdAt' }],
+      perPage: 4
+    })
+    eventStore.fetchEvents({
+      sort: [{ order: 'DESC', orderBy: 'createdAt' }],
+      perPage: 4
+    })
+  }
   if (authStore?.user?.homePageEnableQuote) quoteStore.fetchQuoteIfTooOld()
 })
 

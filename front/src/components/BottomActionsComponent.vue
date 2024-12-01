@@ -48,7 +48,7 @@
 import { ChevronUpIcon } from '@heroicons/vue/24/solid'
 import { PlusIcon } from '@heroicons/vue/24/solid'
 import { CheckIcon } from '@heroicons/vue/24/solid'
-import { TrashIcon } from '@heroicons/vue/24/solid'
+import { TrashIcon } from '@heroicons/vue/24/outline'
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { isMobile } from '@/helpers/functions.js'
 import { useRoute, } from 'vue-router'

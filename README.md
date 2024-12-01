@@ -30,7 +30,7 @@ cd front/ && npm i && npm run dev
 
 Seed test data:
 ```bash
-cd back/ && node seed.js
+cd back/ && npm run seed
 ```
 
 Tests (backend):
