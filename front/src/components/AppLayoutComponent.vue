@@ -78,7 +78,7 @@
             <span class="ml-3 mt-0.5">Events</span>
           </router-link>
           <router-link to="/people"
-            :class="[route.name.includes('person') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer text-light rounded-lg hover:bg-gray-dark p-2']"
+            :class="[route.name.includes('people') || route.name.includes('person') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer text-light rounded-lg hover:bg-gray-dark p-2']"
             @click.stop="hideSidebar()">
             <UsersIcon class="size-6 text-gray-light" />
             <span class="ml-3 mt-0.5">People</span>
