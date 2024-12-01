@@ -74,7 +74,7 @@ exports.createPerson = async (req, res) => {
         const user = await User.findByPk(parseInt(userId));
         if (!user) res.status(404).json(frmtr('error', null, 'No user found with this id'));
 
-        const person = await Person.create({ personId, userId, name, description });
+        const person = await Person.create({ userId, name, description });
         if (!person) res.status(500).json(frmtr('error', null, 'Error creating person'));
 
         res.status(201).json(frmtr('success', null, 'Person created'))
@@ -96,7 +96,7 @@ exports.updatePerson = async (req, res) => {
         const user = await User.findByPk(parseInt(userId));
         if (!user) res.status(404).json(frmtr('error', null, 'No user found with this id'));
 
-        const resp = await person.update({ personId, userId, name, description });
+        const resp = await person.update({ userId, name, description });
         if (!resp) res.status(500).json(frmtr('error', null, 'Error updating person'));
 
         res.status(201).json(frmtr('success', null, 'Person updated'))
