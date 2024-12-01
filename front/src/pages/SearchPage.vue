@@ -14,7 +14,7 @@
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <router-link :to="{ path: `${'seasons'}/add`, query: { title: toAddString } }"
+          <router-link :to="{ path: 'seasons/add', query: { title: toAddString } }"
             class="flex justify-center items-center bg-dark-light text-light p-2 rounded-lg cursor-pointer hover:bg-gray-dark">
             <PlusIcon class="size-6 text-primary mr-3" />
             <FilmIcon class="size-6 text-light" />
@@ -26,7 +26,7 @@
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <router-link :to="{ path: `${'events'}/add`, query: { title: toAddString } }"
+          <router-link :to="{ path: 'events/add', query: { title: toAddString } }"
             class="flex justify-center items-center bg-dark-light text-light p-2 rounded-lg cursor-pointer hover:bg-gray-dark">
             <PlusIcon class="size-6 text-primary mr-3" />
             <CalendarDaysIcon class="size-6 text-light" />
@@ -38,7 +38,7 @@
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <router-link :to="{ path: `${'people'}/add`, query: { name: search } }"
+          <router-link :to="{ path: 'people/add', query: { name: search } }"
             class="flex justify-center items-center bg-dark-light text-light p-2 rounded-lg cursor-pointer hover:bg-gray-dark">
             <PlusIcon class="size-6 text-primary mr-3" />
             <UsersIcon class="size-6 text-light" />
@@ -50,7 +50,7 @@
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <router-link :to="{ path: `${'musics'}/add`, query: { title: toAddString } }"
+          <router-link :to="{ path: 'musics/add', query: { title: toAddString } }"
             class="flex justify-center items-center bg-dark-light text-light p-2 rounded-lg cursor-pointer hover:bg-gray-dark">
             <PlusIcon class="size-6 text-primary mr-3" />
             <MusicalNoteIcon class="size-6 text-light" />
@@ -182,7 +182,9 @@ const loadSearch = debounce(async () => {
     })
   })
 
-  await Promise.all(promises.map(p => p()))
+  await Promise.all(promises.map(p => p())).then(() => {
+    searching.value = false
+  })
 
   // Trigger add buttons
   if (results.value.length === 0 || search.value.toLowerCase().includes('season')) addButtons.value.season.show = true
@@ -211,8 +213,6 @@ const loadSearch = debounce(async () => {
       })
     }
   })
-
-  searching.value = false
 }, 1000)
 
 onMounted(() => {

@@ -12,9 +12,11 @@ const sequelize = require('./src/config/database');
 // Importing routes
 const routes = require('./src/routes');
 
+// Importing middlewares
+const logging = require('./src/middlewares/logging')
+
 // Importing helpers
 const frmtr = require('./src/helpers/frmtr')
-const logFile = require('./src/helpers/logFile')
 const logConsole = require('./src/helpers/logConsole')
 
 // Load .env file
@@ -29,11 +31,8 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Log middlewaren
-app.use((req, res, next) => {
-    logFile(`ADDRESS: ${req.socket.remoteAddress}, URL: ${req.url}, METHOD: ${req.method}, RESPONSE: ${res.statusCode}`)
-    next()
-})
+// Log middleware
+app.use(logging);
 
 // Favicon middleware
 app.use(favicon(__dirname + '/public/favicon.ico'))
@@ -42,7 +41,8 @@ app.use(favicon(__dirname + '/public/favicon.ico'))
 app.use(bodyParser.json());
 
 // Routes
-app.use('/api', routes);
+BASE_PATH = '/api'
+app.use(BASE_PATH, routes);
 
 // If nothing found above, return 404
 app.use(({ res }) => {

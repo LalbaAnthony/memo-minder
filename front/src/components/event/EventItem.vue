@@ -16,24 +16,26 @@
       </div>
     </router-link>
     <div class="grid grid-cols-2 divide-x-2 divide-gray cursor-pointer">
-      <div class="flex justify-center items-center p-2 bg-gray-light rounded-bl-[6px]" @click="deleteEvent()">
+      <div class="flex justify-center items-center p-2 bg-gray-dark rounded-bl-[6px]" @click="deleteEvent()">
         <TrashIcon class="size-6" />
       </div>
-      <router-link class="flex justify-center items-center p-2 bg-gray-light rounded-br-[6px]"
-        :to="{ path: `/event/${props?.event?.eventId}` }">
+      <div class="flex justify-center items-center p-2 bg-gray-dark rounded-br-[6px]" @click="goToEvent()">
         <PencilSquareIcon class="size-6" />
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import Pill from '@/components/PillComponent.vue'
-import { TrashIcon } from '@heroicons/vue/24/solid'
-import { PencilSquareIcon } from '@heroicons/vue/24/solid'
+import { TrashIcon } from '@heroicons/vue/24/outline'
+import { PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { threeDotString } from '@/helpers/functions'
 import { dateToNiceDate } from '@/helpers/functions'
 import { useEventStore } from '@/stores/event'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const eventStore = useEventStore()
 
@@ -46,6 +48,10 @@ const props = defineProps({
 
 function deleteEvent() {
   if (confirm('Are you sure you want to delete this event?')) eventStore.deleteEvent(props.event.eventId)
+}
+
+function goToEvent() {
+  router.push(`/event/${props.event.eventId}`)
 }
 
 </script>

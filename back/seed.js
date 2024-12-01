@@ -36,28 +36,28 @@ const seedData = async () => {
         await sequelize.sync({ force: true });
 
         // Sample data for User table, with crypted passwords
-        const sampleUsers = require('./src/seed_data/users.json');
+        const sampleUsers = require('./src/seeds/users.json');
         for (const user of sampleUsers) user.password = await bcrypt.hash(user.password, 10);
         await User.bulkCreate(sampleUsers);
 
         // Sample data for Mood table
-        const sampleMoods = require('./src/seed_data/moods.json');
+        const sampleMoods = require('./src/seeds/moods.json');
         await Mood.bulkCreate(sampleMoods);
 
         // Sample data for Music table
-        const sampleMusics = require('./src/seed_data/musics.json');
+        const sampleMusics = require('./src/seeds/musics.json');
         await Music.bulkCreate(sampleMusics);
 
         // Sample data for Person table
-        const samplePeople = require('./src/seed_data/people.json');
+        const samplePeople = require('./src/seeds/people.json');
         await Person.bulkCreate(samplePeople);
 
         // Sample data for Season table
-        const sampleSeasons = require('./src/seed_data/seasons.json');
+        const sampleSeasons = require('./src/seeds/seasons.json');
         await Season.bulkCreate(sampleSeasons);
 
         // Sample data for Event table
-        const sampleEvents = require('./src/seed_data/events.json');
+        const sampleEvents = require('./src/seeds/events.json');
         await Event.bulkCreate(sampleEvents);
 
         logConsole('Sample data inserted', 'success');

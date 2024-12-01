@@ -1,24 +1,19 @@
 Back:
     - Faire services
-    - Respecter normes de nomages dossier comme MMM
+    - personId se met pas à jour dans event details page
+	- Faire tests unitaires de services
+    - Respecter normes de nomages fichiers comme MMM
     - Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)
     - Create and implement email systeme with back/src/helpers/email.js
 
 Front:
-    - Déconnexion si token expiré
-    - Placer les balises <meta> avec du JS
-    - Bug inté bouton delete item des personnes et des music
     - Faire listes differentses dans les stores pour chaque usage ?
-    - Faire page de détail pour les personnes et les musiques
-    - Faire inté de toutes les pages WIP
-    - Make integration from something like https://flowbite.com/blocks/application/shells/
     - Maj account params + mdp oublié + delete account
-    - Mettre tout les store en perssistant pour pour etre en offline (?) + gestion des erreurs Axios
     - Vérifier la présence de TODO dans le code
     - Ajouter langue francaise
 
-Ideas:
-    - Fonction de Rappels de Souvenirs (what happened a year ago, ...)
-
 Devops:
     - Github actions
+
+Bonus:
+    - Import my own data 
