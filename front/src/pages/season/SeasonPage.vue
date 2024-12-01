@@ -63,33 +63,14 @@
           </div>
         </div>
       </section>
-
-      <!-- Actions section -->
-      <section>
-        <div v-if="route.params.seasonId" class="gap-4 flex items-center justify-between">
-          <button
-            class="text-light p-2 rounded-lg cursor-pointer bg-danger hover:bg-danger-dark transition-colors duration-200"
-            @click="manualDeletion()">
-            <span class="mx-2 my-0.5">Delete</span>
-          </button>
-          <button
-            class="text-light p-2 rounded-lg cursor-pointer bg-primary hover:bg-primary-dark transition-colors duration-200"
-            @click="manualUpdate()">
-            <span class="mx-4 my-0.5">Update</span>
-          </button>
-        </div>
-        <div v-else class="gap-4 flex items-center justify-end">
-          <button
-            class="text-light p-2 rounded-lg cursor-pointer bg-primary hover:bg-primary-dark transition-colors duration-200"
-            @click="manualCreation()">
-            <span class="mx-4 my-0.5">Create</span>
-          </button>
-        </div>
-      </section>
     </div>
+
     <ItemPicker :show="showItemPicker" :types="availablesTypes" @close="showItemPicker = false"
       @selected="(object) => { addItem(object) }" />
-    <BottomActions />
+
+    <BottomActions :createButton="!route.params.seasonId" :updateButton="!!route.params.seasonId"
+      :deleteButton="!!route.params.seasonId" @triggerCreate="manualCreation" @triggerUpdate="manualUpdate"
+      @triggerDelete="manualDeletion" />
   </div>
 </template>
 
@@ -164,6 +145,7 @@ function manualCreation() {
     notif.notify(error, 'error')
   } else {
     seasonStore.createSeason(seasonStore.season.data)
+    router.push('/seasons')
   }
 }
 
@@ -175,7 +157,6 @@ function manualUpdate() {
     notif.notify(error, 'error')
   } else {
     seasonStore.updateSeason(seasonStore.season.data)
-    router.push('/seasons')
   }
 }
 

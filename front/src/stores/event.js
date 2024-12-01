@@ -141,7 +141,7 @@ export const useEventStore = defineStore('event', {
       }
 
       // Update in local list
-      const index = this.events.data.findIndex(item => item.eventId === event.eventId)
+      const index = this.events.data.findIndex(item => item?.eventId && (item.eventId === event.eventId))
       this.events.data.splice(index, 1, resp.data.data)
 
       // Loading

@@ -4,7 +4,7 @@
     <main>
       <RouterView />
     </main>
-    <Footer />
+    <Footer v-if="route.name === 'home'" />
     <div v-if="isMobile()" class="h-24"></div>
   </div>
 </template>

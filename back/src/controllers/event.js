@@ -123,7 +123,7 @@ exports.createEvent = async (req, res) => {
     const { musicId, personId, moodId, userId, seasonId, title, description, date, location } = req.body;
     try {
         // Check if all fields are provided
-        if (!userId || !title || !description || !date || !location) res.status(400).json(frmtr('error', null, 'Missing fields: musicId, moodId, userId, title, description, date, location'));
+        if (!userId || !title || !date) res.status(400).json(frmtr('error', null, 'Missing fields: userId, title, date'));
 
         // Check if userId exists
         if (!userId) res.status(400).json(frmtr('error', null, 'Missing fields: userId'));

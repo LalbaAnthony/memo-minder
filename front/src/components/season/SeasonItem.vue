@@ -16,24 +16,26 @@
       </div>
     </router-link>
     <div class="grid grid-cols-2 divide-x-2 divide-gray cursor-pointer">
-      <div class="flex justify-center items-center p-2 bg-gray-light rounded-bl-[6px]" @click="deleteSeason()">
+      <div class="flex justify-center items-center p-2 bg-gray-dark rounded-bl-[6px]" @click="deleteSeason()">
         <TrashIcon class="size-6" />
       </div>
-      <router-link class="flex justify-center items-center p-2 bg-gray-light rounded-br-[6px]"
-        :to="{ path: `/season/${props?.season?.seasonId}` }">
+      <div class="flex justify-center items-center p-2 bg-gray-dark rounded-br-[6px]" @click="goToSeason()">
         <PencilSquareIcon class="size-6" />
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import Pill from '@/components/PillComponent.vue'
-import { TrashIcon } from '@heroicons/vue/24/solid'
-import { PencilSquareIcon } from '@heroicons/vue/24/solid'
+import { TrashIcon } from '@heroicons/vue/24/outline'
+import { PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { threeDotString } from '@/helpers/functions'
 import { dateToNiceDate } from '@/helpers/functions.js'
 import { useSeasonStore } from '@/stores/season'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const seasonStore = useSeasonStore()
 
@@ -47,5 +49,9 @@ const props = defineProps({
 function deleteSeason() {
   if (confirm('Are you sure you want to delete this season?'))
     seasonStore.deleteSeason(props.season.seasonId)
+}
+
+function goToSeason() {
+  router.push(`/season/${props.season.seasonId}`)
 }
 </script>

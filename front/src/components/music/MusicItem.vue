@@ -1,10 +1,8 @@
 <template>
   <div class="flex flex-row justify-between border-2 border-gray rounded-[8px] bg-dark-light h-full">
-    <!-- Card -->
     <div
       :class="['flex-1 flex justify-between rounded-l-[6px] p-5 cursor-pointer transition-colors duration-200', `${platform}-item`]"
       @click="openLink()">
-      <!-- Logo -->
       <div :class="`flex items-center justify-center gap-4 p-2 pr-4 ${platform}-logo`">
         <svg v-if="platform === 'spotify'" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
           viewBox="0 0 16 16">
@@ -29,21 +27,23 @@
             fill="currentColor"></path>
         </svg>
       </div>
-      <!-- Infos -->
       <div class="flex flex-col justify-center items-start">
         <h1 class="text-2xl font-bold">{{ props?.music?.title }}</h1>
         <p class="text-gray-light">{{ props?.music?.artist }} - {{ getYearFromDate(props?.music?.releaseDate) }}</p>
       </div>
-      <!-- None -->
       <div>
         &nbsp;
       </div>
     </div>
-    <!-- Button -->
-    <div class="flex justify-center items-center p-4 bg-gray-light cursor-pointer rounded-r-[6px]"
-      @click="deleteMusic()">
-      <TrashIcon class="size-6" />
+    <div class="grid grid-rows-2 divide-y-2 divide-gray cursor-pointer">
+      <div class="flex justify-center items-center p-3 bg-gray-dark rounded-tr-[6px]" @click="deleteMusic()">
+        <TrashIcon class="size-6" />
+      </div>
+      <div class="flex justify-center items-center p-3 bg-gray-dark rounded-br-[6px]" @click="goToMusic()">
+        <PencilSquareIcon class="size-6" />
+      </div>
     </div>
+
   </div>
 </template>
 
@@ -51,7 +51,11 @@
 import { getYearFromDate } from '@/helpers/functions.js'
 import { computed } from 'vue'
 import { useMusicStore } from '@/stores/music'
-import { TrashIcon } from '@heroicons/vue/24/solid'
+import { TrashIcon } from '@heroicons/vue/24/outline'
+import { PencilSquareIcon } from '@heroicons/vue/24/outline'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const musicStore = useMusicStore()
 
@@ -76,6 +80,10 @@ function openLink() {
 
 function deleteMusic() {
   if (confirm('Are you sure you want to delete this music?')) musicStore.deleteMusic(props.music.musicId)
+}
+
+function goToMusic() {
+  router.push(`/music/${props.music.musicId}`)
 }
 
 </script>
