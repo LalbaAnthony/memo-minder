@@ -57,33 +57,14 @@
           </div>
         </div>
       </section>
-
-      <!-- Actions section -->
-      <section>
-        <div v-if="route.params.eventId" class="gap-4 flex items-center justify-between">
-          <button
-            class="text-light p-2 rounded-lg cursor-pointer bg-danger hover:bg-danger-dark transition-colors duration-200"
-            @click="manualDeletion()">
-            <span class="mx-2 my-0.5">Delete</span>
-          </button>
-          <button
-            class="text-light p-2 rounded-lg cursor-pointer bg-primary hover:bg-primary-dark transition-colors duration-200"
-            @click="manualUpdate()">
-            <span class="mx-4 my-0.5">Update</span>
-          </button>
-        </div>
-        <div v-else class="gap-4 flex items-center justify-end">
-          <button
-            class="text-light p-2 rounded-lg cursor-pointer bg-primary hover:bg-primary-dark transition-colors duration-200"
-            @click="manualCreation()">
-            <span class="mx-4 my-0.5">Create</span>
-          </button>
-        </div>
-      </section>
     </div>
+
     <ItemPicker :show="showItemPicker" :types="availablesTypes" @close="showItemPicker = false"
       @selected="(object) => { addItem(object) }" />
-    <BottomActions />
+
+    <BottomActions :createButton="!route.params.eventId" :updateButton="route.params.eventId"
+      :deleteButton="route.params.eventId" @triggerCreate="manualCreation" @triggerUpdate="manualUpdate"
+      @triggerDelete="manualDeletion" />
   </div>
 </template>
 
@@ -169,6 +150,7 @@ function manualCreation() {
     notif.notify(error, 'error')
   } else {
     eventStore.createEvent(eventStore.event.data)
+    router.push('/events')
   }
 }
 
@@ -180,7 +162,6 @@ function manualUpdate() {
     notif.notify(error, 'error')
   } else {
     eventStore.updateEvent(eventStore.season.data)
-    router.push('/events')
   }
 }
 

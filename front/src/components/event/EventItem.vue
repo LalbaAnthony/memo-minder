@@ -19,10 +19,9 @@
       <div class="flex justify-center items-center p-2 bg-gray-light rounded-bl-[6px]" @click="deleteEvent()">
         <TrashIcon class="size-6" />
       </div>
-      <router-link class="flex justify-center items-center p-2 bg-gray-light rounded-br-[6px]"
-        :to="{ path: `/event/${props?.event?.eventId}` }">
+      <div class="flex justify-center items-center p-2 bg-gray-light rounded-br-[6px]" @click="goToEvent()">
         <PencilSquareIcon class="size-6" />
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -34,6 +33,9 @@ import { PencilSquareIcon } from '@heroicons/vue/24/solid'
 import { threeDotString } from '@/helpers/functions'
 import { dateToNiceDate } from '@/helpers/functions'
 import { useEventStore } from '@/stores/event'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const eventStore = useEventStore()
 
@@ -46,6 +48,10 @@ const props = defineProps({
 
 function deleteEvent() {
   if (confirm('Are you sure you want to delete this event?')) eventStore.deleteEvent(props.event.eventId)
+}
+
+function goToEvent() {
+  router.push(`/event/${props.event.eventId}`)
 }
 
 </script>

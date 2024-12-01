@@ -6,27 +6,39 @@
       <TransitionChild as="div" enter="transition ease-out duration-100 transform" enter-from="opacity-0 scale-95"
         enter-to="opacity-100 scale-100" leave="transition ease-in duration-100 transform"
         leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95"
-        class="flex items-center justify-center cursor-pointer bg-gray-dark text-white rounded-xl p-2 hover:scale-105 transition-transform duration-200 border-2 border-gray-dark">
+        class="flex items-center justify-center cursor-pointer text-gray-light bg-dark-light shadow-lg rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
         <ChevronUpIcon class="size-6" />
       </TransitionChild>
     </TransitionRoot>
 
-    <!-- Adjustments button -->
-    <div v-if="props.adjustmentsButton && route.name.includes('list')" @click="triggerAdjustments()"
-      class="flex items-center justify-center cursor-pointer bg-gray-dark text-white rounded-xl p-2 hover:scale-105 transition-transform duration-200 border-2 border-gray-dark">
-      <AdjustmentsHorizontalIcon class="size-10" />
+    <!-- Create button -->
+    <div v-if="props.createButton && route.name.includes('add')" @click="triggerCreate()"
+      class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-lg rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
+      <CheckIcon class="size-9" />
+    </div>
+
+    <!-- Update button -->
+    <div v-if="props.updateButton && route.name.includes('details')" @click="TriggerUpdate()"
+      class="flex items-center justify-center cursor-pointer text-success-light bg-dark-light shadow-lg rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
+      <CheckIcon class="size-9" />
+    </div>
+
+    <!-- Delete button -->
+    <div v-if="props.deleteButton && route.name.includes('details')" @click="triggerDelete()"
+      class="flex items-center justify-center cursor-pointer text-danger bg-dark-light shadow-lg rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
+      <TrashIcon class="size-8" />
     </div>
 
     <!-- Search button -->
-    <router-link v-if="props.searchButton  && route.name.includes('list')" to="/search"
-    class="flex items-center justify-center cursor-pointer bg-gray-dark text-white rounded-xl p-2 hover:scale-105 transition-transform duration-200 border-2 border-gray-dark">
-    <MagnifyingGlassIcon class="size-10" />
+    <router-link v-if="props.searchButton && route.name.includes('list')" to="/search"
+      class="flex items-center justify-center cursor-pointer text-gray-light bg-dark-light shadow-lg rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
+      <MagnifyingGlassIcon class="size-9" />
     </router-link>
 
     <!-- Add button -->
     <router-link v-if="props.addButton && route.name.includes('list')" :to="`${route.path}/add`"
-      class="flex items-center justify-center cursor-pointer bg-primary text-white rounded-xl p-2 hover:scale-105 transition-transform duration-200 border-2 border-gray-dark">
-      <PlusIcon class="size-10" />
+      class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-lg rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
+      <PlusIcon class="size-9" />
     </router-link>
 
   </div>
@@ -35,7 +47,8 @@
 <script setup>
 import { ChevronUpIcon } from '@heroicons/vue/24/solid'
 import { PlusIcon } from '@heroicons/vue/24/solid'
-import { AdjustmentsHorizontalIcon } from '@heroicons/vue/24/solid'
+import { CheckIcon } from '@heroicons/vue/24/solid'
+import { TrashIcon } from '@heroicons/vue/24/solid'
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { isMobile } from '@/helpers/functions.js'
 import { useRoute, } from 'vue-router'
@@ -51,10 +64,20 @@ const props = defineProps({
     required: false,
     default: true,
   },
-  adjustmentsButton: {
+  createButton: {
     type: Boolean,
     required: false,
-    default: false,
+    default: true,
+  },
+  updateButton: {
+    type: Boolean,
+    required: false,
+    default: true,
+  },
+  deleteButton: {
+    type: Boolean,
+    required: false,
+    default: true,
   },
   addButton: {
     type: Boolean,
@@ -79,8 +102,16 @@ function goTop() {
   })
 }
 
-function triggerAdjustments() {
-  emit('triggerAdjustments', true)
+function triggerCreate() {
+  emit('triggerCreate', true)
+}
+
+function TriggerUpdate() {
+  emit('triggerUpdate', true)
+}
+
+function triggerDelete() {
+  emit('triggerDelete', true)
 }
 
 // Enable go top button when scrolling

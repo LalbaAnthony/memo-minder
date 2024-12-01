@@ -47,7 +47,7 @@
 }
 
 main {
-  min-height: 100vh;
+  min-height: calc(100vh + 100px); /* 200px is approximately the height of the footer + menu*/
 }
 
 section {

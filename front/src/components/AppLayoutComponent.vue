@@ -138,41 +138,40 @@ const authStore = useAuthStore()
 const showSidebar = ref(false)
 const search = ref('')
 
-function blurApp() {
-  const BLUR = '2px'
-  const main = document.querySelector('main')
-  const header = document.querySelector('header')
-  const nav = document.querySelector('nav')
-  if (main) main.style.filter = `blur(${BLUR})`
-  if (header) header.style.filter = `blur(${BLUR})`
-  if (nav) nav.style.filter = `blur(${BLUR})`
-}
+// function blurApp() {
+//   const BLUR = '2px'
+//   const main = document.querySelector('main')
+//   const header = document.querySelector('header')
+//   const nav = document.querySelector('nav')
+//   if (main) main.style.filter = `blur(${BLUR})`
+//   if (header) header.style.filter = `blur(${BLUR})`
+//   if (nav) nav.style.filter = `blur(${BLUR})`
+// }
 
-function unblurApp() {
-  const main = document.querySelector('main')
-  const header = document.querySelector('header')
-  const nav = document.querySelector('nav')
-  if (main) main.style.filter = 'none'
-  if (header) header.style.filter = 'none'
-  if (nav) nav.style.filter = 'none'
-}
+// function unblurApp() {
+//   const main = document.querySelector('main')
+//   const header = document.querySelector('header')
+//   const nav = document.querySelector('nav')
+//   if (main) main.style.filter = 'none'
+//   if (header) header.style.filter = 'none'
+//   if (nav) nav.style.filter = 'none'
+// }
 
 function hideSidebar() {
   showSidebar.value = false
-  unblurApp()
+  // unblurApp()
 }
 
 function revealSidebar() {
   showSidebar.value = true
-  if (isMobile()) blurApp()
+  // if (isMobile()) blurApp()
 }
 
 function toggleSidebar() {
-  showSidebar.value = !showSidebar.value
   if (showSidebar.value) {
-    if (isMobile()) blurApp()
+    hideSidebar()
   } else {
-    unblurApp()
+    revealSidebar()
   }
 }
 
