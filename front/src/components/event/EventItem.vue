@@ -16,10 +16,10 @@
       </div>
     </router-link>
     <div class="grid grid-cols-2 divide-x-2 divide-gray cursor-pointer">
-      <div class="flex justify-center items-center p-2 bg-gray-light rounded-bl-[6px]" @click="deleteEvent()">
+      <div class="flex justify-center items-center p-2 bg-gray-dark rounded-bl-[6px]" @click="deleteEvent()">
         <TrashIcon class="size-6" />
       </div>
-      <div class="flex justify-center items-center p-2 bg-gray-light rounded-br-[6px]" @click="goToEvent()">
+      <div class="flex justify-center items-center p-2 bg-gray-dark rounded-br-[6px]" @click="goToEvent()">
         <PencilSquareIcon class="size-6" />
       </div>
     </div>
@@ -28,8 +28,8 @@
 
 <script setup>
 import Pill from '@/components/PillComponent.vue'
-import { TrashIcon } from '@heroicons/vue/24/solid'
-import { PencilSquareIcon } from '@heroicons/vue/24/solid'
+import { TrashIcon } from '@heroicons/vue/24/outline'
+import { PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { threeDotString } from '@/helpers/functions'
 import { dateToNiceDate } from '@/helpers/functions'
 import { useEventStore } from '@/stores/event'

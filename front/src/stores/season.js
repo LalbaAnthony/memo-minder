@@ -144,7 +144,7 @@ export const useSeasonStore = defineStore('season', {
       }
 
       // Update in local list
-      const index = this.seasons.data.findIndex(season => season.seasonId === season.seasonId)
+      const index = this.seasons.data.findIndex(item => item?.seasonId && (item.seasonId === season.seasonId))
       this.seasons.data.splice(index, 1, resp.data.data)
 
       // Loading

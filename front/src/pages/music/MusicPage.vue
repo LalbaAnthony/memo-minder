@@ -44,8 +44,8 @@
       </section>
     </div>
 
-    <BottomActions :createButton="!route.params.musicId" :updateButton="route.params.musicId"
-      :deleteButton="route.params.musicId" @triggerCreate="manualCreation" @triggerUpdate="manualUpdate"
+    <BottomActions :createButton="!route.params.musicId" :updateButton="!!route.params.musicId"
+      :deleteButton="!!route.params.musicId" @triggerCreate="manualCreation" @triggerUpdate="manualUpdate"
       @triggerDelete="manualDeletion" />
   </div>
 </template>

@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { VITE_BACK_API_URL } from '@/config';
 import { useAuthStore } from '@/stores/auth'
+import { useRouter } from 'vue-router'
+
 
 const axiosApi = axios.create({
   baseURL: VITE_BACK_API_URL,
@@ -24,7 +26,7 @@ axiosApi.interceptors.request.use((config) => {
   return config;
 });
 
-async function checkAuth(status) {
+function checkAuth(status) {
   if (status === 401) {
     useAuthStore().logout()
     return false
@@ -33,68 +35,87 @@ async function checkAuth(status) {
   return true
 }
 
-
 async function get(endpoint, params = {}) {
-
   if (!endpoint) throw new Error('Please provide an endpoint for the API call')
   if (typeof endpoint !== 'string') throw new Error('Endpoint must be a string')
   if (typeof params !== 'object') throw new Error('Params must be an object')
 
-  const response = await axiosApi.get(`${endpoint}`, { params })
+  const router = useRouter();
+  try {
+    const response = await axiosApi.get(endpoint, { params })
 
-  if (!checkAuth(response.status)) return
+    if (!checkAuth(response.status)) return
 
-  return {
-    data: response.data,
-    status: response.status,
+    return {
+      data: response.data,
+      status: response.status,
+    }
+  } catch (error) {
+    console.error('Error during API call using api.js:', error.stack)
+    router.push({ path: '/error-server' });
   }
 }
 
 async function post(endpoint, data = {}) {
-
   if (!endpoint) throw new Error('Please provide an endpoint for the API call')
   if (typeof endpoint !== 'string') throw new Error('Endpoint must be a string')
   if (typeof data !== 'object') throw new Error('Data must be an object')
 
-  const response = await axiosApi.post(`${endpoint}`, data)
+  const router = useRouter();
+  try {
+    const response = await axiosApi.post(endpoint, data)
 
-  if (!checkAuth(response.status)) return
+    if (!checkAuth(response.status)) return
 
-  return {
-    data: response.data,
-    status: response.status,
+    return {
+      data: response.data,
+      status: response.status,
+    }
+  } catch (error) {
+    console.error('Error during API call using api.js:', error.stack)
+    router.push({ path: '/error-server' });
   }
 }
 
 async function put(endpoint, data = {}) {
-
   if (!endpoint) throw new Error('Please provide an endpoint for the API call')
   if (typeof endpoint !== 'string') throw new Error('Endpoint must be a string')
   if (typeof data !== 'object') throw new Error('Data must be an object')
 
-  const response = await axiosApi.put(`${endpoint}`, data)
+  const router = useRouter();
+  try {
+    const response = await axiosApi.put(endpoint, data)
 
-  if (!checkAuth(response.status)) return
+    if (!checkAuth(response.status)) return
 
-  return {
-    data: response.data,
-    status: response.status,
+    return {
+      data: response.data,
+      status: response.status,
+    }
+  } catch (error) {
+    console.error('Error during API call using api.js:', error.stack)
+    router.push({ path: '/error-server' });
   }
 }
 
 async function del(endpoint, data = {}) {
-
   if (!endpoint) throw new Error('Please provide an endpoint for the API call')
   if (typeof endpoint !== 'string') throw new Error('Endpoint must be a string')
   if (typeof data !== 'object') throw new Error('Data must be an object')
 
-  const response = await axiosApi.delete(`${endpoint}`, { data })
+  const router = useRouter();
+  try {
+    const response = await axiosApi.delete(endpoint, { data })
 
-  if (!checkAuth(response.status)) return
+    if (!checkAuth(response.status)) return
 
-  return {
-    data: response.data,
-    status: response.status,
+    return {
+      data: response.data,
+      status: response.status,
+    }
+  } catch (error) {
+    console.error('Error during API call using api.js:', error.stack)
+    router.push({ path: '/error-server' });
   }
 }
 

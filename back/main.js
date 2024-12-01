@@ -17,7 +17,6 @@ const logging = require('./src/middlewares/logging')
 
 // Importing helpers
 const frmtr = require('./src/helpers/frmtr')
-const logFile = require('./src/helpers/logFile')
 const logConsole = require('./src/helpers/logConsole')
 
 // Load .env file
