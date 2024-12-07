@@ -7,7 +7,7 @@ Back:
     - Create and implement email systeme with back/src/helpers/email.js
 
 Front:
-- 
+    - Gerer le fait que le compte nexiste pas
     - Faire listes differentes dans les stores pour chaque usage ?
     - Maj account params + mdp oublié + delete account
     - Vérifier la présence de TODO et de WIP dans le code

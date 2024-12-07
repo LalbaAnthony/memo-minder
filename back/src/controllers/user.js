@@ -38,7 +38,7 @@ exports.login = async (req, res) => {
 
         // Check if the user exists
         const user = await User.findOne({ where: { email } });
-        if (!user) res.status(404).json(frmtr('error', null, 'No user found with this email'))
+        if (!user) res.status(204).json(frmtr('error', null, 'No user found with this email'))
 
         // Check if the password is valid
         const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -60,7 +60,7 @@ exports.login = async (req, res) => {
 
         res.status(200).json(frmtr('success', user, 'Logged in successfully'))
     } catch (error) {
-        res.status(500).json(frmtr('error', null, error.message))
+        // res.status(500).json(frmtr('error', null, error.message))
     }
 };
 
