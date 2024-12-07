@@ -16,7 +16,7 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
   if (to.meta.private === true) {
     if (!authStore.authenticated || !(authStore.user.connectionToken || authStore.token)) {
-      authStore.logout()
+      authStore.logout(false)
       return false
     }
   }
@@ -27,10 +27,6 @@ router.beforeEach((to, from, next) => {
   }
 
   next();
-});
-
-router.afterEach(() => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 export default router

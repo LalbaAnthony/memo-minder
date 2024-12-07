@@ -2,6 +2,11 @@ const jwt = require('jsonwebtoken');
 const frmtr = require('../helpers/frmtr');
 
 module.exports = async (req, res, next) => {
+    if (process.env.BACK_BYPASS_AUTH == 'true') {
+        next();
+        return;
+    }
+
     const authHeader = req.headers['authorization'];
 
     if (!authHeader) {
@@ -22,5 +27,6 @@ module.exports = async (req, res, next) => {
         next();
     } catch (err) {
         res.status(401).json(frmtr('error', null, 'Invalid or expired token'));
+        return;
     }
 };
