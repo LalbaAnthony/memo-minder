@@ -104,10 +104,10 @@ import { languages } from '@/lang/languages.js'
 const authStore = useAuthStore()
 
 function clearLocalData() {
-  if (confirm("Are you sure you want to delete all local data? You may lose unsaved data.")) {
+  if (confirm("Are you sure you want to delete all local data? You will lose unsaved data and will be disconnected.")) {
     localStorage.clear()
     sessionStorage.clear()
-    window.location.reload()
+    authStore.logout()
   }
 }
 
@@ -117,6 +117,8 @@ function deleteAccount() {
       if (confirm("Are you really sure? This action is irreversible.")) {
         authStore.deleteAccount()
       }
+    } else {
+      alert("Emails does not match", 'error')
     }
   }
 }

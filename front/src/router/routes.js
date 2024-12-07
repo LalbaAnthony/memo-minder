@@ -23,6 +23,18 @@ const routes = [
       tags: ['infos', 'about', 'contact'],
     },
   },
+  // ==================== INFOS ====================
+  {
+    path: '/terms-and-conditions',
+    name: 'terms-and-conditions',
+    component: () => import('../pages/TermsAndConditionsPage.vue'),
+    meta: {
+      title: 'Terms and conditions',
+      private: false,
+      displayInSearch: false,
+      tags: ['terms', 'conditions', 'legal'],
+    },
+  },
   // ==================== SEARCH ====================
   {
     path: '/search',

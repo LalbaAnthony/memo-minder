@@ -7,9 +7,10 @@ Back:
     - Create and implement email systeme with back/src/helpers/email.js
 
 Front:
-    - Faire listes differentses dans les stores pour chaque usage ?
+- 
+    - Faire listes differentes dans les stores pour chaque usage ?
     - Maj account params + mdp oublié + delete account
-    - Vérifier la présence de TODO dans le code
+    - Vérifier la présence de TODO et de WIP dans le code
     - Ajouter langue francaise
 
 Devops:
