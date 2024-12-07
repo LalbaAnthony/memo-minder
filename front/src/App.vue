@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AppLayout v-if="route.name !== 'auth'" />
+    <AppLayout v-if="authStore.authenticated" />
     <main>
       <RouterView />
     </main>

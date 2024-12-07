@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="flex flex-col items-center justify-center space-y-4 mt-4 mx-4">
-            <input v-model="username" id="username" type="text" class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light"
-                placeholder="Username" />
+            <input v-model="username" id="username" type="text"
+                class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light" placeholder="Username" />
             <input v-model="email" id="email" type="email" class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light"
                 placeholder="Email" />
             <select v-model="language" id="language" class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light">
@@ -10,7 +10,7 @@
                 <option v-for="(value, key) in languages" :key="key" :value="key">{{ value }}</option>
             </select>
             <DatePicker :value="birthdate" @update="(v) => { birthdate = v }" />
-            <hr class="w-full" />            
+            <hr class="w-full" />
             <input v-model="password" id="password" type="password"
                 class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light" placeholder="Password" />
             <input v-model="confirmPassword" id="confirmPassword" type="password"
@@ -18,12 +18,15 @@
             <PasswordStrength :password="password || confirmPassword || ''" />
             <label class="flex flex-start space-x-2">
                 <input v-model="acceptTerms" id="acceptTerms" type="checkbox" />
-                <span class="text-light">I accept the terms and conditions</span>
+                <span class="text-light">I accept the <router-link to="/terms-and-conditions" class="text-light text-primary">terms
+                        and
+                        conditions</router-link></span>
             </label>
         </div>
         <slot />
         <div class="flex flex-col md:flex-row-reverse items-center justify-center md:justify-around gap-4 mt-8 md:m-6">
-            <button class="bg-dark-light text-light p-2 rounded-lg cursor-pointer transition-colors duration-200 hover:bg-dark-light"
+            <button
+                class="bg-dark-light text-light p-2 rounded-lg cursor-pointer transition-colors duration-200 hover:bg-dark-light"
                 @click="handleRegister()">
                 <span class="mx-2 my-0.5">Register</span>
             </button>

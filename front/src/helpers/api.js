@@ -26,7 +26,7 @@ axiosApi.interceptors.request.use((config) => {
   return config;
 });
 
-function checkAuth(status) {
+function isStatusOk(status) {
   if (status === 401) {
     useAuthStore().logout()
     return false
@@ -44,7 +44,7 @@ async function get(endpoint, params = {}) {
   try {
     const response = await axiosApi.get(endpoint, { params })
 
-    if (!checkAuth(response.status)) return
+    if (!isStatusOk(response.status)) return
 
     return {
       data: response.data,
@@ -65,7 +65,7 @@ async function post(endpoint, data = {}) {
   try {
     const response = await axiosApi.post(endpoint, data)
 
-    if (!checkAuth(response.status)) return
+    if (!isStatusOk(response.status)) return
 
     return {
       data: response.data,
@@ -86,7 +86,7 @@ async function put(endpoint, data = {}) {
   try {
     const response = await axiosApi.put(endpoint, data)
 
-    if (!checkAuth(response.status)) return
+    if (!isStatusOk(response.status)) return
 
     return {
       data: response.data,
@@ -107,7 +107,7 @@ async function del(endpoint, data = {}) {
   try {
     const response = await axiosApi.delete(endpoint, { data })
 
-    if (!checkAuth(response.status)) return
+    if (!isStatusOk(response.status)) return
 
     return {
       data: response.data,

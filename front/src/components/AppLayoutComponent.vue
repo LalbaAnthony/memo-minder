@@ -2,17 +2,17 @@
   <div>
     <!-- Mobile bottom menu -->
     <nav v-if="isMobile()"
-      class="fixed bottom-0 left-0 z-20 w-full flex justify-around items-center bg-dark-light border-t border-gray p-4 gap-3">
+      class="fixed bottom-0 left-0 z-20 w-full flex justify-around items-center bg-dark-light border-t border-gray p-3 gap-3">
       <div class="flex flex-col items-center" @click.stop="toggleSidebar()">
-        <Bars3Icon class="size-10 text-gray-light rounded-lg p-1 cursor-pointer" />
+        <Bars3Icon class="size-8 text-gray-light rounded-lg p-1 cursor-pointer" />
         <span class="text-sm text-gray font-semibold">More</span>
       </div>
       <router-link class="flex flex-col items-center" to="/">
-        <HomeIcon class="size-10 text-gray-light rounded-lg p-1 cursor-pointer" />
+        <HomeIcon class="size-8 text-gray-light rounded-lg p-1 cursor-pointer" />
         <span class="text-sm text-gray font-semibold">Home</span>
       </router-link>
       <router-link class="flex flex-col items-center" to="/search">
-        <MagnifyingGlassIcon class="size-10 text-gray-light rounded-full p-1 cursor-pointer" />
+        <MagnifyingGlassIcon class="size-8 text-gray-light rounded-full p-1 cursor-pointer" />
         <span class="text-sm text-gray font-semibold">Search</span>
       </router-link>
     </nav>
