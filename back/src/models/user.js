@@ -41,10 +41,6 @@ const User = sequelize.define('User', {
         allowNull: false,
         defaultValue: true,
     },
-    connectionToken: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
     validateEmailToken: {
         type: DataTypes.STRING,
         allowNull: true,
