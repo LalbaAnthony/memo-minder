@@ -32,7 +32,7 @@ app.use(cors({
 }));
 
 // Log middleware
-app.use(logging);   s
+app.use(logging);
 
 // Favicon middleware
 app.use(favicon(__dirname + '/public/favicon.ico'))
