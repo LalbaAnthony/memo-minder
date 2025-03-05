@@ -54,6 +54,9 @@ exports.login = async (req, res) => {
         delete user.dataValues.validateEmailToken
         delete user.dataValues.resetPasswordCode
 
+        // Add the token to the response
+        user.dataValues.connectionToken = token
+
         // Format the date
         user.dataValues.birthdate = shortenIsoDate(user.dataValues.birthdate)
 
