@@ -217,6 +217,7 @@ onMounted(() => {
 
     // ctrl + shift + S to show sidebar
     window.addEventListener('keydown', (e) => {
+      // TODO: Fix this shortcut
       if (e.ctrlKey && e.shiftKey && e.key === 's') {
         e.preventDefault()
         revealSidebar()
