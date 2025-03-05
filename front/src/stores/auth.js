@@ -23,8 +23,6 @@ export const useAuthStore = defineStore('auth', {
         }
 
         this.user = resp.data.data
-        this.token = resp.data.data.connectionToken
-        this.authenticated = true
 
         return true
       }).catch(error => {
