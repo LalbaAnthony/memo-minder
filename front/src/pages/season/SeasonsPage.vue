@@ -15,7 +15,7 @@
     <Pagination :total="seasonStore.seasons.pagination.total" :page="seasonStore.seasons.pagination.page"
       :perPage="seasonStore.seasons.pagination.perPage" @update-page="(page) => seasonStore.changePage(page)" />
 
-    <BottomActions @trigger-adjustments="console.log('trigger adjustments')" />
+    <BottomActions />
   </div>
 </template>
 

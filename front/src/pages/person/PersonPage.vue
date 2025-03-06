@@ -59,7 +59,7 @@ function valid() {
 }
 
 function manualDeletion() {
-  personStore.deletePerson(personStore.person.data.personId)
+  personStore.deletePerson(personStore.person.data.personId, true)
   router.push('/people')
 }
 
@@ -68,19 +68,20 @@ function manualCreation() {
   if (error) {
     notif.notify(error, 'error')
   } else {
-    personStore.createPerson(personStore.person.data)
+    personStore.createPerson(personStore.person.data, true)
     router.push('/people')
   }
 }
 
 function manualUpdate() {
   debouncedUpdate.cancel()
-
+  
   const error = valid()
   if (error) {
     notif.notify(error, 'error')
   } else {
-    personStore.updatePerson(personStore.person.data)
+    personStore.updatePerson(personStore.person.data, true)
+    router.push('/people')
   }
 }
 

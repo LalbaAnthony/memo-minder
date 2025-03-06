@@ -141,7 +141,7 @@ function valid() {
 }
 
 function manualDeletion() {
-  eventStore.deleteEvent(eventStore.event.data.eventId)
+  eventStore.deleteEvent(eventStore.event.data.eventId, true)
   router.push('/events')
 }
 
@@ -150,7 +150,7 @@ function manualCreation() {
   if (error) {
     notif.notify(error, 'error')
   } else {
-    eventStore.createEvent(eventStore.event.data)
+    eventStore.createEvent(eventStore.event.data, true)
     router.push('/events')
   }
 }
@@ -162,7 +162,8 @@ function manualUpdate() {
   if (error) {
     notif.notify(error, 'error')
   } else {
-    eventStore.updateEvent(eventStore.event.data)
+    eventStore.updateEvent(eventStore.event.data, true)
+    router.push('/events')
   }
 }
 

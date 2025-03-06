@@ -95,7 +95,7 @@ export const useSeasonStore = defineStore('season', {
       this.season.data.userId = authStore.user.userId
     },
 
-    async deleteSeason(seasonId) {
+    async deleteSeason(seasonId, notify = true) {
       // Remove in local
       this.seasons.data.splice(this.seasons.data.findIndex(season => season.seasonId === seasonId), 1)
 
@@ -105,12 +105,14 @@ export const useSeasonStore = defineStore('season', {
       if (resp.status !== 200) {
         notif.notify(resp.data.message, 'error')
         return false
+      } else if (notify) {
+        notif.notify('Season deleted', 'success')
       }
 
       return true
     },
 
-    async createSeason(season) {
+    async createSeason(season, notify = false) {
       // Loading
       this.season.loading = true
 
@@ -120,6 +122,8 @@ export const useSeasonStore = defineStore('season', {
       if (resp.status !== 201) {
         notif.notify(resp.data.message, 'error')
         return false
+      } else if (notify) {
+        notif.notify('Season created', 'success')
       }
 
       // Append in local
@@ -131,7 +135,7 @@ export const useSeasonStore = defineStore('season', {
       return true
     },
 
-    async updateSeason(season) {
+    async updateSeason(season, notify = false) {
       // Loading
       this.season.loading = true
 
@@ -141,6 +145,8 @@ export const useSeasonStore = defineStore('season', {
       if (resp.status !== 201) {
         notif.notify(resp.data.message, 'error')
         return false
+      } else if (notify) {
+        notif.notify('Season updated', 'success')
       }
 
       // Update in local list
