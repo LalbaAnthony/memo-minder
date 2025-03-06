@@ -1,6 +1,11 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
+const Music = require('../models/musicModel');
+const Person = require('../models/personModel');
+const Mood = require('../models/moodModel');
+const User = require('../models/userModel');
+
 const Season = sequelize.define('Season', {
     seasonId: {
         type: DataTypes.INTEGER,
@@ -85,5 +90,10 @@ const Season = sequelize.define('Season', {
     createdAt: 'createdAt',
     tableName: 'season',
 });
+
+Season.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+Season.belongsTo(Music, { foreignKey: 'musicId', as: 'music' });
+Season.belongsTo(Mood, { foreignKey: 'moodId', as: 'mood' });
+Season.belongsTo(Person, { foreignKey: 'personId', as: 'person' });
 
 module.exports = Season;

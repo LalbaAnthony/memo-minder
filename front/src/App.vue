@@ -2,6 +2,7 @@
   <div>
     <AppLayout v-if="authStore.authenticated" />
     <main>
+      <GoBackAction />
       <RouterView />
     </main>
     <Footer v-if="route.name === 'home'" />
@@ -12,6 +13,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import AppLayout from '@/components/AppLayoutComponent.vue'
+import GoBackAction from '@/components/GoBackActionComponent.vue'
 import Footer from '@/components/FooterComponent.vue'
 import { isMobile } from '@/helpers/functions.js'
 import { RouterView, useRoute } from 'vue-router'

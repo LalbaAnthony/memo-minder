@@ -1,6 +1,12 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
+const Music = require('../models/musicModel');
+const Person = require('../models/personModel');
+const Mood = require('../models/moodModel');
+const Season = require('../models/seasonModel');
+const User = require('../models/userModel');
+
 const Event = sequelize.define('Event', {
     eventId: {
         type: DataTypes.INTEGER,
@@ -15,7 +21,7 @@ const Event = sequelize.define('Event', {
             model: 'User',
             key: 'userId'
         },
-        onDelete: 'CASCADE', 
+        onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
     },
     musicId: {
@@ -25,7 +31,7 @@ const Event = sequelize.define('Event', {
             key: 'musicId'
         },
         allowNull: true,
-        onDelete: 'SET NULL',  
+        onDelete: 'SET NULL',
         onUpdate: 'CASCADE'
     },
     moodId: {
@@ -35,7 +41,7 @@ const Event = sequelize.define('Event', {
             key: 'moodId'
         },
         allowNull: true,
-        onDelete: 'SET NULL',  
+        onDelete: 'SET NULL',
         onUpdate: 'CASCADE'
     },
     seasonId: {
@@ -45,7 +51,7 @@ const Event = sequelize.define('Event', {
             key: 'seasonId'
         },
         allowNull: true,
-        onDelete: 'SET NULL',  
+        onDelete: 'SET NULL',
         onUpdate: 'CASCADE'
     },
     personId: {
@@ -55,7 +61,7 @@ const Event = sequelize.define('Event', {
             key: 'personId'
         },
         allowNull: true,
-        onDelete: 'SET NULL',  
+        onDelete: 'SET NULL',
         onUpdate: 'CASCADE'
     },
     title: {
@@ -90,5 +96,11 @@ const Event = sequelize.define('Event', {
     createdAt: 'createdAt',
     tableName: 'event',
 });
+
+Event.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+Event.belongsTo(Music, { foreignKey: 'musicId', as: 'music' });
+Event.belongsTo(Person, { foreignKey: 'personId', as: 'person' });
+Event.belongsTo(Mood, { foreignKey: 'moodId', as: 'mood' });
+Event.belongsTo(Season, { foreignKey: 'seasonId', as: 'season' });
 
 module.exports = Event;
