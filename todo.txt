@@ -1,13 +1,17 @@
 Back:
-    - Faire services
+    - Improve missing field error by making a return statement after response
+    - Use laravel technique to lighten the code
     - personId se met pas à jour dans event details page
-	- Faire tests unitaires de services
+	- Faire plus tests unitaires
     - Respecter normes de nomages fichiers comme MMM
     - Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)
     - Create and implement email systeme with back/src/helpers/email.js
 
 Front:
     - Ajout rapide d'event 
+    6 Uniformise check btn color onj save/update
+    - Make notifs for required fields on front
+    - Check front required fields fit the back required fields
     - Gerer le fait que le compte nexiste pas
     - Faire listes differentes dans les stores pour chaque usage ?
     - Maj account params + mdp oublié + delete account
