@@ -25,6 +25,18 @@
       </section>
     </div>
 
+    <section v-if="authStore?.user?.homePageEnableLasts && eventStore?.events?.data?.length > 0">
+        <h2 class="text-xl font-bold">Lasts events added</h2>
+        <div class="my-4">
+          <Loader v-if="eventStore.events.loading" />
+          <Grid v-else :items="eventStore.events.data">
+            <template #item="{ item }">
+              <Event :event="item" />
+            </template>
+          </Grid>
+        </div>
+      </section>
+
     <div class="md:grid md:grid-cols-2 md:gap-6">
       <section v-if="authStore?.user?.homePageEnableLasts && seasonStore?.seasons?.data?.length > 0">
         <h2 class="text-xl font-bold">Lasts seasons added</h2>
@@ -33,18 +45,6 @@
           <Grid v-else :items="seasonStore.seasons.data">
             <template #item="{ item }">
               <Season :season="item" />
-            </template>
-          </Grid>
-        </div>
-      </section>
-
-      <section v-if="authStore?.user?.homePageEnableLasts && eventStore?.events?.data?.length > 0">
-        <h2 class="text-xl font-bold">Lasts events added</h2>
-        <div class="my-4">
-          <Loader v-if="eventStore.events.loading" />
-          <Grid v-else :items="eventStore.events.data">
-            <template #item="{ item }">
-              <Event :event="item" />
             </template>
           </Grid>
         </div>
@@ -77,11 +77,11 @@ const eventStore = useEventStore()
 // Fetch data on mount
 onMounted(() => {
   if (authStore?.user?.homePageEnableLasts) {
-    seasonStore.fetchSeasons({
+    eventStore.fetchEvents({
       sort: [{ order: 'DESC', orderBy: 'createdAt' }],
       perPage: 4
     })
-    eventStore.fetchEvents({
+    seasonStore.fetchSeasons({
       sort: [{ order: 'DESC', orderBy: 'createdAt' }],
       perPage: 4
     })
