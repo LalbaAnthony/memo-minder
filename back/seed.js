@@ -5,12 +5,12 @@ const bcrypt = require('bcrypt');
 const sequelize = require('./src/config/database');
 
 // Importing models
-const Season = require('./src/models/season');
-const Mood = require('./src/models/mood');
-const Music = require('./src/models/music');
-const Person = require('./src/models/person');
-const Event = require('./src/models/event');
-const User = require('./src/models/user');
+const Season = require('./src/models/seasonModel');
+const Mood = require('./src/models/moodModel');
+const Music = require('./src/models/musicModel');
+const Person = require('./src/models/personModel');
+const Event = require('./src/models/eventModel');
+const User = require('./src/models/userModel');
 
 // Importing helpers
 const logConsole = require('./src/helpers/logConsole')

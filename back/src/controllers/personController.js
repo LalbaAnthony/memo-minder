@@ -2,8 +2,8 @@ const frmtr = require('../helpers/frmtr')
 
 const { Op } = require('sequelize');
 
-const Person = require('../models/person');
-const User = require('../models/user');
+const Person = require('../models/personModel');
+const User = require('../models/userModel');
 
 exports.getAllPeople = async (req, res) => {
     let { userId, sort, page, perPage, search } = req.query;

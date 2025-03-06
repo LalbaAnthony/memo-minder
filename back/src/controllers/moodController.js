@@ -1,6 +1,6 @@
 const frmtr = require('../helpers/frmtr')
 
-const Mood = require('../models/mood');
+const Mood = require('../models/moodModel');
 
 exports.getAllMoods = async (req, res) => {
     try {

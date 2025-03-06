@@ -1,9 +1,9 @@
-const eventController = require('./controllers/event');
-const moodController = require('./controllers/mood');
-const musicController = require('./controllers/music');
-const personController = require('./controllers/person');
-const seasonController = require('./controllers/season');
-const userController = require('./controllers/user');
+const eventController = require('./controllers/eventController');
+const moodController = require('./controllers/moodController');
+const musicController = require('./controllers/musicController');
+const personController = require('./controllers/personController');
+const seasonController = require('./controllers/seasonController');
+const userController = require('./controllers/userController');
 
 const checkToken = require('./middlewares/checkAuth');
 

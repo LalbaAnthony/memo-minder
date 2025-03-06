@@ -2,12 +2,12 @@ const frmtr = require('../helpers/frmtr')
 
 const { Op } = require('sequelize');
 
-const Event = require('../models/event');
-const Season = require('../models/season');
-const Music = require('../models/music');
-const Person = require('../models/person');
-const Mood = require('../models/mood');
-const User = require('../models/user');
+const Event = require('../models/eventModel');
+const Season = require('../models/seasonModel');
+const Music = require('../models/musicModel');
+const Person = require('../models/personModel');
+const Mood = require('../models/moodModel');
+const User = require('../models/userModel');
 
 exports.getAllEvents = async (req, res) => {
     let { userId, sort, page, perPage, search } = req.query;

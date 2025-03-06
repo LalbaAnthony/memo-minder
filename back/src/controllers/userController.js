@@ -4,7 +4,7 @@ const shortenIsoDate = require('../helpers/shortenIsoDate')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const User = require('../models/user');
+const User = require('../models/userModel');
 
 exports.register = async (req, res) => {
     const { username, birthdate, email, password, language } = req.body;
@@ -20,7 +20,6 @@ exports.register = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create the user
-        const { username, birthdate, email, password, language } = req.body;
         const newUser = await User.create({ username, birthdate, email, password: hashedPassword, language });
         if (!newUser) res.status(500).json(frmtr('error', null, 'Error while creating the account'));
 
