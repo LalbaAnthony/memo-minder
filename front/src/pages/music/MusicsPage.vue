@@ -12,6 +12,7 @@
         <Music :music="item" />
       </template>
     </Grid>
+
     <Pagination :total="musicStore.musics.pagination.total" :page="musicStore.musics.pagination.page"
       :perPage="musicStore.musics.pagination.perPage"
       @update-page="(page) => musicStore.changePage(page)" />

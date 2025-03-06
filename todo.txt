@@ -6,8 +6,8 @@ Back:
     - Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Front:
-    - Ajout rapide d'event 
-    - Load mor einstead of inifinte scroll
+    - Make a type picker from add button on home page which redirect to the right page
+    - Load more instead of inifinte scroll
     - Make notifs for required fields on front
     - Check front required fields fit the back required fields
     - Gerer le fait que le compte nexiste pas au login

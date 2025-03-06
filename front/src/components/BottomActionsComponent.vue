@@ -30,11 +30,16 @@
     </div>
 
     <!-- Add button -->
+    <div v-if="props.addButton && route.name === 'home'" @click="triggerAddTypePicker()"
+      class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-lg rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
+      <PlusIcon class="size-9" />
+    </div>
+
+    <!-- Add button -->
     <router-link v-if="props.addButton && route.name.includes('list')" :to="`${route.path}/add`"
       class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-lg rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
       <PlusIcon class="size-9" />
     </router-link>
-
   </div>
 </template>
 
@@ -86,7 +91,7 @@ const props = defineProps({
 
 const enableGoTop = ref(false)
 
-const emit = defineEmits(['triggerCreate', 'triggerUpdate', 'triggerDelete'])
+const emit = defineEmits(['triggerCreate', 'triggerUpdate', 'triggerDelete', 'triggerAddTypePicker'])
 
 function goTop() {
   window.scrollTo({
@@ -105,6 +110,10 @@ function triggerUpdate() {
 
 function triggerDelete() {
   emit('triggerDelete', true)
+}
+
+function triggerAddTypePicker() {
+  emit('triggerAddTypePicker', true)
 }
 
 // Enable go top button when scrolling

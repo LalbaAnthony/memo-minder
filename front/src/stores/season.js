@@ -75,7 +75,7 @@ export const useSeasonStore = defineStore('season', {
 
       const resp = await api.get('seasons', params)
       this.seasons.data = resp.data.data || []
-      this.seasons.pagination = resp.pagination || defaultPagination
+      this.seasons.pagination = resp.data.pagination || defaultPagination
 
       // Loading
       this.seasons.loading = false

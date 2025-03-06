@@ -51,7 +51,7 @@
       </section>
     </div>
 
-    <BottomActions />
+    <BottomActions @trigger-add-type-picker="console.log('TODO: make a type picker which redirect to the right page')" />
   </div>
 </template>
 
