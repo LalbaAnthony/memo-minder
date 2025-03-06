@@ -26,16 +26,16 @@
     </div>
 
     <section v-if="authStore?.user?.homePageEnableLasts && eventStore?.events?.data?.length > 0">
-        <h2 class="text-xl font-bold">Lasts events added</h2>
-        <div class="my-4">
-          <Loader v-if="eventStore.events.loading" />
-          <Grid v-else :items="eventStore.events.data">
-            <template #item="{ item }">
-              <Event :event="item" />
-            </template>
-          </Grid>
-        </div>
-      </section>
+      <h2 class="text-xl font-bold">Lasts events added</h2>
+      <div class="my-4">
+        <Loader v-if="eventStore.events.loading" />
+        <Grid v-else :items="eventStore.events.data">
+          <template #item="{ item }">
+            <Event :event="item" />
+          </template>
+        </Grid>
+      </div>
+    </section>
 
     <div class="md:grid md:grid-cols-2 md:gap-6">
       <section v-if="authStore?.user?.homePageEnableLasts && seasonStore?.seasons?.data?.length > 0">

@@ -9,53 +9,37 @@
     </div>
 
     <!-- Add buttons -->
-    <div class="py-2 px-4 btn-grid">
+    <div class="flex flex-row flex-wrap flexitems-center gap-2 mt-2 mx-4">
       <TransitionRoot :show="addButtons.season.show">
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <router-link :to="{ path: 'seasons/add', query: { title: toAddString } }"
-            class="flex justify-center items-center bg-dark-light text-light p-2 rounded-lg cursor-pointer hover:bg-gray-dark">
-            <PlusIcon class="size-6 text-primary mr-3" />
-            <FilmIcon class="size-6 text-light" />
-            <span class="ml-3 mt-0.5">Add as a seaon</span>
-          </router-link>
+          <Pill text="Add a as season" type="season" clickable
+            @click="router.push({ path: '/seasons/add', query: { title: toAddString } })" />
         </TransitionChild>
       </TransitionRoot>
       <TransitionRoot :show="addButtons.event.show">
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <router-link :to="{ path: 'events/add', query: { title: toAddString } }"
-            class="flex justify-center items-center bg-dark-light text-light p-2 rounded-lg cursor-pointer hover:bg-gray-dark">
-            <PlusIcon class="size-6 text-primary mr-3" />
-            <CalendarDaysIcon class="size-6 text-light" />
-            <span class="ml-3 mt-0.5">Add as an event</span>
-          </router-link>
+          <Pill text="Add  as an event" type="event" clickable
+            @click="router.push({ path: '/events/add', query: { title: toAddString } })" />
         </TransitionChild>
       </TransitionRoot>
       <TransitionRoot :show="addButtons.person.show">
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <router-link :to="{ path: 'people/add', query: { name: search } }"
-            class="flex justify-center items-center bg-dark-light text-light p-2 rounded-lg cursor-pointer hover:bg-gray-dark">
-            <PlusIcon class="size-6 text-primary mr-3" />
-            <UsersIcon class="size-6 text-light" />
-            <span class="ml-3 mt-0.5">Add as a person</span>
-          </router-link>
+          <Pill text="Add as a person" type="person" clickable
+            @click="router.push({ path: '/people/add', query: { name: toAddString } })" />
         </TransitionChild>
       </TransitionRoot>
       <TransitionRoot :show="addButtons.music.show">
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <router-link :to="{ path: 'musics/add', query: { title: toAddString } }"
-            class="flex justify-center items-center bg-dark-light text-light p-2 rounded-lg cursor-pointer hover:bg-gray-dark">
-            <PlusIcon class="size-6 text-primary mr-3" />
-            <MusicalNoteIcon class="size-6 text-light" />
-            <span class="ml-3 mt-0.5">Add as a music</span>
-          </router-link>
+          <Pill text="Add as a music" type="music" clickable
+            @click="router.push({ path: '/musics/add', query: { title: toAddString } })" />
         </TransitionChild>
       </TransitionRoot>
     </div>
@@ -82,11 +66,8 @@ import debounce from 'lodash/debounce'
 import { useRoute, useRouter } from 'vue-router'
 import Grid from '@/components/GridComponent.vue'
 import Result from '@/components/ResultItem.vue'
+import Pill from '@/components/PillComponent.vue'
 import { PlusIcon } from '@heroicons/vue/24/solid'
-import { FilmIcon } from '@heroicons/vue/24/solid'
-import { CalendarDaysIcon } from '@heroicons/vue/24/solid'
-import { UsersIcon } from '@heroicons/vue/24/solid'
-import { MusicalNoteIcon } from '@heroicons/vue/24/solid'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { useEventStore } from '@/stores/event'
 import { useMusicStore } from '@/stores/music'
@@ -227,11 +208,3 @@ onMounted(() => {
 watch(() => search.value, loadSearch)
 
 </script>
-
-<style scoped>
-.btn-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-gap: 1rem;
-}
-</style>
