@@ -71,7 +71,10 @@ exports.createMusic = async (req, res) => {
     try {
         // Check if all fields are provided
 
-        if (!userId || !title || !artist || !releaseDate || !streamingLink) res.status(400).json(frmtr('error', null, 'Missing fields: userId, title, artist, releaseDate, streamingLink'));
+        if (!userId || !title || !artist || !releaseDate || !streamingLink) {
+            res.status(400).json(frmtr('error', null, 'Missing fields: userId, title, artist, releaseDate, streamingLink'));
+            return
+        }
 
         // Check if userId exists
         if (!userId) res.status(400).json(frmtr('error', null, 'Missing fields: userId'));
