@@ -31,7 +31,7 @@
       <section>
         <div class="flex flex-wrap items-center justify-start gap-4">
           <div class="flex items-center gap-2">
-            <span>Date:</span>
+            <span>Release date:</span>
             <DatePicker class="max-w-48" :value="musicStore.music?.data?.releaseDate"
               @update="(v) => { musicStore.music.data.releaseDate = v }" />
           </div>
