@@ -18,8 +18,8 @@ const props = defineProps({
   }
 })
 
-const lifeExpectancy = ref(80)
-const age = computed(() => ageFromDate(props.birthdate))
+const lifeExpectancy = ref(82)
+const age = computed(() => ageFromDate(props?.birthdate || '2000-01-01'))
 const remainingYears = computed(() => lifeExpectancy.value - age.value)
 
 const nbOfPet = computed(() => {
