@@ -6,8 +6,11 @@ const Season = require('../models/seasonModel');
 
 const baseController = require('./baseController');
 
+const searchFields = ['title', 'description', 'location'];
+const requiredFields = ['userId', 'title', 'date'];
+
 exports.getAllEvents = baseController.getAll(Event, {
-    searchFields: ['title', 'description', 'location'],
+    searchFields,
     defaultSort: [
         { order: 'DESC', orderBy: 'date' },
         { order: 'ASC', orderBy: 'createdAt' },
@@ -29,8 +32,12 @@ exports.getEventById = baseController.getById(Event, {
     ]
 });
 
-exports.createEvent = baseController.create(Event);
+exports.createEvent = baseController.create(Event, {
+    requiredFields,
+});
 
-exports.updateEvent = baseController.update(Event);
+exports.updateEvent = baseController.update(Event, {
+    requiredFields,
+});
 
 exports.deleteEvent = baseController.remove(Event);

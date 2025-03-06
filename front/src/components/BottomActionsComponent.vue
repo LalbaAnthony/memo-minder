@@ -86,6 +86,8 @@ const props = defineProps({
 
 const enableGoTop = ref(false)
 
+const emit = defineEmits(['triggerCreate', 'triggerUpdate', 'triggerDelete'])
+
 function goTop() {
   window.scrollTo({
     top: 0,
