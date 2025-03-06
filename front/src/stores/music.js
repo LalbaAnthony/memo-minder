@@ -86,6 +86,11 @@ export const useMusicStore = defineStore('music', {
       if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' })
     },
 
+    initMusic() {
+      this.clearMusic()
+      this.music.data.userId = authStore.user.userId
+    },
+
     async deleteMusic(musicId) {
       // Remove in local
       this.musics.data.splice(this.musics.data.findIndex(music => music.musicId === musicId), 1)
