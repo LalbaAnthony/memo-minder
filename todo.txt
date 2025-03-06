@@ -13,6 +13,7 @@ Front:
     - Faire listes differentes dans les stores pour chaque usage ?
     - Maj account params + mdp oublié + delete account
     - Vérifier la présence de TODO et de WIP dans le code
+    - Being able to easily import a music from spotify API 
     - Ajouter langue francaise
 
 Devops:
