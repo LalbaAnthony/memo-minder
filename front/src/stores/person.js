@@ -74,7 +74,7 @@ export const usePersonStore = defineStore('person', {
 
       const resp = await api.get('people', params)
       this.people.data = resp.data.data || []
-      this.people.pagination = resp.pagination || defaultPagination
+      this.people.pagination = resp.data.pagination || defaultPagination
 
       // Loading
       this.people.loading = false

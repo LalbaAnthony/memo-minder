@@ -74,7 +74,7 @@ export const useMusicStore = defineStore('music', {
 
       const resp = await api.get('musics', params)
       this.musics.data = resp.data.data || []
-      this.musics.pagination = resp.pagination || defaultPagination
+      this.musics.pagination = resp.data.pagination || defaultPagination
 
       // Loading
       this.musics.loading = false

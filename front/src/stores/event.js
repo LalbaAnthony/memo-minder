@@ -74,7 +74,7 @@ export const useEventStore = defineStore('event', {
 
       const resp = await api.get('events', params)
       this.events.data = resp.data.data || []
-      this.events.pagination = resp.pagination || defaultPagination
+      this.events.pagination = resp.data.pagination || defaultPagination
 
       // Loading
       this.events.loading = false
