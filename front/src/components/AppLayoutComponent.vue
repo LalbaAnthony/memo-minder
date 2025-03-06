@@ -198,26 +198,20 @@ onMounted(() => {
   // Add shortcuts
   if (!isMobile()) {
 
-    // ctrl + K to focus search
     window.addEventListener('keydown', (e) => {
-      // ctrl + F short to focus search
+      // Ctrl + K to focus search
       if (e.ctrlKey && e.key === 'k') {
         e.preventDefault()
         focusSearchBar()
       }
-    })
 
-    // esc to hide sidebar
-    window.addEventListener('keydown', (e) => {
+      // Esc to hide sidebar
       if (e.key === 'Escape') {
         e.preventDefault()
         hideSidebar()
       }
-    })
 
-    // ctrl + shift + S to show sidebar
-    window.addEventListener('keydown', (e) => {
-      // TODO: Fix this shortcut
+      // Ctrl + Shift + S to show sidebar
       if (e.ctrlKey && e.shiftKey && e.key === 's') {
         e.preventDefault()
         revealSidebar()

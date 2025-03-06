@@ -5,8 +5,11 @@ const Mood = require('../models/moodModel');
 
 const baseController = require('./baseController');
 
+const searchFields = ['title', 'description'];
+const requiredFields = ['userId', 'title', 'color', 'dateStart'];
+
 exports.getAllSeasons = baseController.getAll(Season, {
-    searchFields: ['title', 'description', 'location'],
+    searchFields,
     defaultSort: [
         { order: 'DESC', orderBy: 'date' },
         { order: 'ASC', orderBy: 'createdAt' },
@@ -26,8 +29,12 @@ exports.getSeasonById = baseController.getById(Season, {
     ]
 });
 
-exports.createSeason = baseController.create(Season);
+exports.createSeason = baseController.create(Season, {
+    requiredFields,
+});
 
-exports.updateSeason = baseController.update(Season);
+exports.updateSeason = baseController.update(Season, {
+    requiredFields,
+});
 
 exports.deleteSeason = baseController.remove(Season);

@@ -3,7 +3,7 @@ const Person = require('../models/personModel');
 const baseController = require('./baseController');
 
 const searchFields = ['name', 'description'];
-const requiredFields = ['name'];
+const requiredFields = ['userId', 'name'];
 
 exports.getAllPeople = baseController.getAll(Person, {
     searchFields,
