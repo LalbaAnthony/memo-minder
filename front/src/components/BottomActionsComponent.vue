@@ -18,7 +18,7 @@
     </div>
 
     <!-- Update button -->
-    <div v-if="props.updateButton && route.name.includes('details')" @click="TriggerUpdate()"
+    <div v-if="props.updateButton && route.name.includes('details')" @click="triggerUpdate()"
       class="flex items-center justify-center cursor-pointer text-success-light bg-dark-light shadow-lg rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
       <CheckIcon class="size-9" />
     </div>
@@ -28,12 +28,6 @@
       class="flex items-center justify-center cursor-pointer text-danger bg-dark-light shadow-lg rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
       <TrashIcon class="size-8" />
     </div>
-
-    <!-- Search button -->
-    <router-link v-if="props.searchButton && route.name.includes('list')" to="/search"
-      class="flex items-center justify-center cursor-pointer text-gray-light bg-dark-light shadow-lg rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
-      <MagnifyingGlassIcon class="size-9" />
-    </router-link>
 
     <!-- Add button -->
     <router-link v-if="props.addButton && route.name.includes('list')" :to="`${route.path}/add`"
@@ -49,7 +43,6 @@ import { ChevronUpIcon } from '@heroicons/vue/24/solid'
 import { PlusIcon } from '@heroicons/vue/24/solid'
 import { CheckIcon } from '@heroicons/vue/24/solid'
 import { TrashIcon } from '@heroicons/vue/24/outline'
-import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { isMobile } from '@/helpers/functions.js'
 import { useRoute, } from 'vue-router'
 import debounce from 'lodash/debounce'
@@ -106,7 +99,7 @@ function triggerCreate() {
   emit('triggerCreate', true)
 }
 
-function TriggerUpdate() {
+function triggerUpdate() {
   emit('triggerUpdate', true)
 }
 

@@ -1,6 +1,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
+const User = require('../models/userModel');
+
 const Person = sequelize.define('Person', {
     personId: {
         type: DataTypes.INTEGER,
@@ -42,5 +44,7 @@ const Person = sequelize.define('Person', {
     createdAt: 'createdAt',
     tableName: 'person',
 });
+
+Person.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 
 module.exports = Person;

@@ -7,9 +7,10 @@ Back:
 
 Front:
     - Ajout rapide d'event 
+    - Load mor einstead of inifinte scroll
     - Make notifs for required fields on front
     - Check front required fields fit the back required fields
-    - Gerer le fait que le compte nexiste pas
+    - Gerer le fait que le compte nexiste pas au login
     - Faire listes differentes dans les stores pour chaque usage ?
     - Maj account params + mdp oublié + delete account
     - Vérifier la présence de TODO et de WIP dans le code
