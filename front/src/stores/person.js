@@ -86,6 +86,11 @@ export const usePersonStore = defineStore('person', {
       if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' })
     },
 
+    initPerson() {
+      this.clearPerson()
+      this.person.data.userId = authStore.user.userId
+    },
+
     async deletePerson(personId) {
       // Remove in local
       this.people.data.splice(this.people.data.findIndex(person => person.personId === personId), 1)

@@ -1,15 +1,12 @@
 Back:
     - Improve missing field error by making a return statement after response
-    - Use laravel technique to lighten the code
+    - Use laravel technique to lighten the code like https://chatgpt.com/share/67c98298-bd1c-8008-a01a-7c05e0b535e9
     - personId se met pas à jour dans event details page
-	- Faire plus tests unitaires
-    - Respecter normes de nomages fichiers comme MMM
     - Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)
-    - Create and implement email systeme with back/src/helpers/email.js
+    - Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Front:
     - Ajout rapide d'event 
-    6 Uniformise check btn color onj save/update
     - Make notifs for required fields on front
     - Check front required fields fit the back required fields
     - Gerer le fait que le compte nexiste pas
