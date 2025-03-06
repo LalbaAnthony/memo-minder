@@ -47,8 +47,7 @@ const props = defineProps({
 })
 
 function deleteSeason() {
-  if (confirm('Are you sure you want to delete this season?'))
-    seasonStore.deleteSeason(props.season.seasonId)
+  if (confirm('Are you sure you want to delete this season?')) seasonStore.deleteSeason(props.season.seasonId, true)
 }
 
 function goToSeason() {

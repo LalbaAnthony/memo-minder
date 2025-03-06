@@ -91,7 +91,7 @@ export const usePersonStore = defineStore('person', {
       this.person.data.userId = authStore.user.userId
     },
 
-    async deletePerson(personId) {
+    async deletePerson(personId, notify = false) {
       // Remove in local
       this.people.data.splice(this.people.data.findIndex(person => person.personId === personId), 1)
 
@@ -101,12 +101,14 @@ export const usePersonStore = defineStore('person', {
       if (resp.status !== 200) {
         notif.notify(resp.data.message, 'error')
         return false
+      } else if (notify) {
+        notif.notify('Person deleted', 'success')
       }
 
       return true
     },
 
-    async createPerson(person) {
+    async createPerson(person, notify = false) {
       // Loading
       this.person.loading = true
 
@@ -116,6 +118,8 @@ export const usePersonStore = defineStore('person', {
       if (resp.status !== 201) {
         notif.notify(resp.data.message, 'error')
         return false
+      } else if (notify) {
+        notif.notify('Person created', 'success')
       }
 
       // Append in local
@@ -127,7 +131,7 @@ export const usePersonStore = defineStore('person', {
       return true
     },
 
-    async updatePerson(person) {
+    async updatePerson(person, notify = false) {
       // Loading
       this.person.loading = true
 
@@ -137,6 +141,8 @@ export const usePersonStore = defineStore('person', {
       if (resp.status !== 201) {
         notif.notify(resp.data.message, 'error')
         return false
+      } else if (notify) {
+        notif.notify('Person updated', 'success')
       }
 
       // Update in local list

@@ -91,7 +91,7 @@ export const useMusicStore = defineStore('music', {
       this.music.data.userId = authStore.user.userId
     },
 
-    async deleteMusic(musicId) {
+    async deleteMusic(musicId, notify = false) {
       // Remove in local
       this.musics.data.splice(this.musics.data.findIndex(music => music.musicId === musicId), 1)
 
@@ -101,12 +101,14 @@ export const useMusicStore = defineStore('music', {
       if (resp.status !== 200) {
         notif.notify(resp.data.message, 'error')
         return false
+      } else if (notify) {
+        notif.notify('Music deleted', 'success')
       }
 
       return true
     },
 
-    async createMusic(music) {
+    async createMusic(music, notify = false) {
       // Loading
       this.music.loading = true
 
@@ -116,6 +118,8 @@ export const useMusicStore = defineStore('music', {
       if (resp.status !== 201) {
         notif.notify(resp.data.message, 'error')
         return false
+      } else if (notify) {
+        notif.notify('Music created', 'success')
       }
 
       // Append in local
@@ -127,7 +131,7 @@ export const useMusicStore = defineStore('music', {
       return true
     },
 
-    async updateMusic(music) {
+    async updateMusic(music, notify = false) {
       // Loading
       this.music.loading = true
 
@@ -137,6 +141,8 @@ export const useMusicStore = defineStore('music', {
       if (resp.status !== 201) {
         notif.notify(resp.data.message, 'error')
         return false
+      } else if (notify) {
+        notif.notify('Music updated', 'success')
       }
 
       // Update in local list

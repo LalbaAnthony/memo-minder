@@ -135,7 +135,7 @@ function valid() {
 }
 
 function manualDeletion() {
-  seasonStore.deleteSeason(seasonStore.season.data.seasonId)
+  seasonStore.deleteSeason(seasonStore.season.data.seasonId, true)
   router.push('/events')
 }
 
@@ -144,7 +144,7 @@ function manualCreation() {
   if (error) {
     notif.notify(error, 'error')
   } else {
-    seasonStore.createSeason(seasonStore.season.data)
+    seasonStore.createSeason(seasonStore.season.data, true)
     router.push('/seasons')
   }
 }
@@ -156,7 +156,8 @@ function manualUpdate() {
   if (error) {
     notif.notify(error, 'error')
   } else {
-    seasonStore.updateSeason(seasonStore.season.data)
+    seasonStore.updateSeason(seasonStore.season.data, true)
+    router.push('/seasons')
   }
 }
 

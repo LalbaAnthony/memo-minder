@@ -92,7 +92,7 @@ export const useEventStore = defineStore('event', {
       this.event.data.userId = authStore.user.userId
     },
 
-    async deleteEvent(eventId) {
+    async deleteEvent(eventId, notify = false) {
       // Remove in local
       this.events.data.splice(this.events.data.findIndex(event => event.eventId === eventId), 1)
 
@@ -102,12 +102,14 @@ export const useEventStore = defineStore('event', {
       if (resp.status !== 200) {
         notif.notify(resp.data.message, 'error')
         return false
+      } else if (notify) {
+        notif.notify('Event deleted', 'success')
       }
 
       return true
     },
 
-    async createEvent(event) {
+    async createEvent(event, notify = false) {
       // Loading
       this.event.loading = true
 
@@ -117,6 +119,8 @@ export const useEventStore = defineStore('event', {
       if (resp.status !== 201) {
         notif.notify(resp.data.message, 'error')
         return false
+      } else if (notify) {
+        notif.notify('Event created', 'success')
       }
 
       // Append in local
@@ -128,7 +132,7 @@ export const useEventStore = defineStore('event', {
       return true
     },
 
-    async updateEvent(event) {
+    async updateEvent(event, notify = false) {
       // Loading
       this.event.loading = true
 
@@ -138,6 +142,8 @@ export const useEventStore = defineStore('event', {
       if (resp.status !== 201) {
         notif.notify(resp.data.message, 'error')
         return false
+      } else if (notify) {
+        notif.notify('Event updated', 'success')
       }
 
       // Update in local list

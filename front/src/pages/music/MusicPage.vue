@@ -97,7 +97,7 @@ function valid() {
 }
 
 function manualDeletion() {
-  musicStore.deleteMusic(musicStore.music.data.musicId)
+  musicStore.deleteMusic(musicStore.music.data.musicId, true)
   router.push('/musics')
 }
 
@@ -106,19 +106,20 @@ function manualCreation() {
   if (error) {
     notif.notify(error, 'error')
   } else {
-    musicStore.createMusic(musicStore.music.data)
+    musicStore.createMusic(musicStore.music.data, true)
     router.push('/musics')
   }
 }
 
 function manualUpdate() {
   debouncedUpdate.cancel()
-
+  
   const error = valid()
   if (error) {
     notif.notify(error, 'error')
   } else {
-    musicStore.updateMusic(musicStore.music.data)
+    musicStore.updateMusic(musicStore.music.data, true)
+    router.push('/musics')
   }
 }
 

@@ -39,7 +39,7 @@ const props = defineProps({
 })
 
 function deletePerson() {
-  if (confirm('Are you sure you want to delete this person?')) personStore.deletePerson(props.person.personId)
+  if (confirm('Are you sure you want to delete this person?')) personStore.deletePerson(props.person.personId, true)
 }
 
 function goToPerson() {

@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 const frmtr = require('../helpers/frmtr');
 
 module.exports = async (req, res, next) => {
-    console.log(process.env.BACK_BYPASS_AUTH);
     if (process.env.BACK_BYPASS_AUTH == 'true') {
         next();
         return;
