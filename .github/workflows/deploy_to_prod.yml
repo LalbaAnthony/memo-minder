@@ -29,14 +29,23 @@ jobs:
         run: |
           npm install
 
-      - name: Transfer Files
+      - name: Transfer Front Files
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.PROD_SERVER_IP }}
           username: ${{ secrets.PROD_SERVER_USER }}
           key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
-          source: "*"
-          target: "/var/www/html/memo-minder"
+          source: "./front/dist/*"
+          target: "/var/www/html/memo-minder/front"*
+
+      - name: Transfer Back Files
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.PROD_SERVER_IP }}
+          username: ${{ secrets.PROD_SERVER_USER }}
+          key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
+          source: "./back/*"
+          target: "/var/www/html/memo-minder/back"
 
       - name: Restart Services on Server
         uses: appleboy/ssh-action@v1.0.3
