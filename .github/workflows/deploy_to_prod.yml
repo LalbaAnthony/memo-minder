@@ -51,7 +51,7 @@ jobs:
 
       - name: Transfert Frontend files
         run: |
-          rsync -avz --delete front/ ${{ secrets.PROD_SERVER_USER }}@${{ secrets.PROD_SERVER_IP }}:/var/www/html/memo-minder/front
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no" front/ ${{ secrets.PROD_SERVER_USER }}@${{ secrets.PROD_SERVER_IP }}:/var/www/html/memo-minder/front
 
       # - name: Transfert Backend files
       #   uses: appleboy/scp-action@v0.1.4
@@ -66,7 +66,7 @@ jobs:
 
       - name: Transfert Backend files
         run: |
-          rsync -avz --delete back/ ${{ secrets.PROD_SERVER_USER }}@${{ secrets.PROD_SERVER_IP }}:/var/www/html/memo-minder/back
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no" back/ ${{ secrets.PROD_SERVER_USER }}@${{ secrets.PROD_SERVER_IP }}:/var/www/html/memo-minder/back
 
       - name: Restart Services on Server
         uses: appleboy/ssh-action@v1.0.3
