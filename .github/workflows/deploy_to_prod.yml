@@ -29,25 +29,14 @@ jobs:
         run: |
           npm install
 
-      - name: Transfer Frontend Files
+      - name: Transfer Files
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.PROD_SERVER_IP }}
           username: ${{ secrets.PROD_SERVER_USER }}
           key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
-          source: "front/build"
-          target: "/var/www/html/memo-minder/front"
-          port: 22
-
-      - name: Transfer Backend Files
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.PROD_SERVER_IP }}
-          username: ${{ secrets.PROD_SERVER_USER }}
-          key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
-          source: "back"
-          target: "/var/www/html/memo-minder/back"
-          port: 22
+          source: "*"
+          target: "/var/www/html/memo-minder"
 
       - name: Restart Services on Server
         uses: appleboy/ssh-action@v1.0.3
@@ -59,6 +48,6 @@ jobs:
             cd /var/www/html/memo-minder/back
             npm install
 
-            pm2 start main.js --name memo-backend || pm2 restart memo-backend
+            pm2 start main.js --name memo-minder-backend || pm2 restart memo-minder-backend
 
             sudo systemctl restart apache2
