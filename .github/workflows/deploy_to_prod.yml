@@ -10,74 +10,52 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Check out your repo
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # 2) Set up Node
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      # 3) Build the frontend (Vue)
       - name: Build Frontend
         working-directory: ./front
         run: |
           npm install
           npm run build
 
-      # 4) Build the backend (Express)
       - name: Build Backend
         working-directory: ./back
         run: |
           npm install
 
-      # 5) Clean up existing frontend on server
-      - name: Clean up Frontend on Server
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.PROD_SERVER_IP }}
-          username: ${{ secrets.PROD_SERVER_USER }}
-          key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
-          script: |
-            sudo rm -rf /var/www/html/memo-minder/front
-            mkdir -p /var/www/html/memo-minder/front
-
-      # 6) Transfer new frontend to server
-      - name: Transfer Frontend
+      - name: Transfer Files
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.PROD_SERVER_IP }}
           username: ${{ secrets.PROD_SERVER_USER }}
           key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
-          # Copy *contents* of 'front/' into /front (no extra nesting).
-          source: "front/*"
-          target: "/var/www/html/memo-minder/front"
+          source: "*"
+          target: "/var/www/html/memo-minder"
 
-      # 7) Clean up existing backend on server
-      - name: Clean up Backend on Server
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.PROD_SERVER_IP }}
-          username: ${{ secrets.PROD_SERVER_USER }}
-          key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
-          script: |
-            sudo rm -rf /var/www/html/memo-minder/back
-            mkdir -p /var/www/html/memo-minder/back
+      # - name: Transfer Frontend
+      #   uses: appleboy/scp-action@v0.1.4
+      #   with:
+      #     host: ${{ secrets.PROD_SERVER_IP }}
+      #     username: ${{ secrets.PROD_SERVER_USER }}
+      #     key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
+      #     source: "front/*"
+      #     target: "/var/www/html/memo-minder/front"
 
-      # 8) Transfer new backend to server
-      - name: Transfer Backend
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.PROD_SERVER_IP }}
-          username: ${{ secrets.PROD_SERVER_USER }}
-          key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
-          # Copy *contents* of 'back/' into /back (no extra nesting).
-          source: "back/*"
-          target: "/var/www/html/memo-minder/back"
+      # - name: Transfer Backend
+      #   uses: appleboy/scp-action@v0.1.4
+      #   with:
+      #     host: ${{ secrets.PROD_SERVER_IP }}
+      #     username: ${{ secrets.PROD_SERVER_USER }}
+      #     key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
+      #     source: "back/*"
+      #     target: "/var/www/html/memo-minder/back"
 
-      # 9) Restart Services (Node via PM2 + Apache)
       - name: Restart Services on Server
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -85,13 +63,9 @@ jobs:
           username: ${{ secrets.PROD_SERVER_USER }}
           key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
           script: |
-            # Ensure backend deps installed
             cd /var/www/html/memo-minder/back
             npm install
 
-            # Start or restart the backend with PM2
-            # If your main file is index.js, change below to index.js
             pm2 start main.js --name memo-backend || pm2 restart memo-backend
 
-            # Restart Apache
             sudo systemctl restart apache2
