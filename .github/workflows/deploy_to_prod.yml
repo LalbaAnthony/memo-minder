@@ -39,14 +39,14 @@ jobs:
             rm -rf /var/www/html/memo-minder/front/*
 
       - name: Transfer Front Files
-        working-directory: front/dist
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.PROD_SERVER_IP }}
           username: ${{ secrets.PROD_SERVER_USER }}
           key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
-          source: "*"
+          source: "front/dist/*"
           target: "/var/www/html/memo-minder/front"
+          strip_components: 2 # Removes the 'front/dist' portion and only transfers its contents
 
       - name: Transfer Back Files
         uses: appleboy/scp-action@v0.1.4
