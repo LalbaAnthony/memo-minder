@@ -38,25 +38,27 @@ jobs:
           script: |
             rm -rf /var/www/html/memo-minder/front/*
 
-      - name: Transfer Front Files
+      - name: Transfert Frontend files
         uses: appleboy/scp-action@v0.1.4
-        working-directory: ./front
         with:
           host: ${{ secrets.PROD_SERVER_IP }}
           username: ${{ secrets.PROD_SERVER_USER }}
           key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
-          source: "dist"
-          target: "/var/www/html/memo-minder/front"
+          method: rsync
+          source: 'front/*'
+          target: '/var/www/html/memo-minder/front'
+          args: '--delete'
 
-      - name: Transfer Back Files
+      - name: Transfert Backend files
         uses: appleboy/scp-action@v0.1.4
-        working-directory: ./back
         with:
           host: ${{ secrets.PROD_SERVER_IP }}
           username: ${{ secrets.PROD_SERVER_USER }}
           key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
-          source: "."
-          target: "/var/www/html/memo-minder/back"
+          method: rsync
+          source: 'back/*'
+          target: '/var/www/html/memo-minder/back'
+          args: '--delete'
 
       - name: Restart Services on Server
         uses: appleboy/ssh-action@v1.0.3
