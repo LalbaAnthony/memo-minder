@@ -38,35 +38,23 @@ jobs:
           script: |
             rm -rf /var/www/html/memo-minder/front/*
 
-      # - name: Transfert Frontend files
-      #   uses: appleboy/scp-action@v0.1.4
-      #   with:
-      #     host: ${{ secrets.PROD_SERVER_IP }}
-      #     username: ${{ secrets.PROD_SERVER_USER }}
-      #     key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
-      #     method: rsync
-      #     source: 'front/*'
-      #     target: '/var/www/html/memo-minder/front'
-      #     args: '--delete'
+      - name: Transfer Front Files
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.PROD_SERVER_IP }}
+          username: ${{ secrets.PROD_SERVER_USER }}
+          key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
+          source: "front/dist/*"
+          target: "/var/www/html/memo-minder/front"
 
-      - name: Transfert Frontend files
-        run: |
-          rsync -avz -e "ssh -o StrictHostKeyChecking=no" front/ ${{ secrets.PROD_SERVER_USER }}@${{ secrets.PROD_SERVER_IP }}:/var/www/html/memo-minder/front
-
-      # - name: Transfert Backend files
-      #   uses: appleboy/scp-action@v0.1.4
-      #   with:
-      #     host: ${{ secrets.PROD_SERVER_IP }}
-      #     username: ${{ secrets.PROD_SERVER_USER }}
-      #     key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
-      #     method: rsync
-      #     source: 'back/*'
-      #     target: '/var/www/html/memo-minder/back'
-      #     args: '--delete'
-
-      - name: Transfert Backend files
-        run: |
-          rsync -avz -e "ssh -o StrictHostKeyChecking=no" back/ ${{ secrets.PROD_SERVER_USER }}@${{ secrets.PROD_SERVER_IP }}:/var/www/html/memo-minder/back
+      - name: Transfer Back Files
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.PROD_SERVER_IP }}
+          username: ${{ secrets.PROD_SERVER_USER }}
+          key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
+          source: "back/*"
+          target: "/var/www/html/memo-minder/back"
 
       - name: Restart Services on Server
         uses: appleboy/ssh-action@v1.0.3
