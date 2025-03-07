@@ -16,7 +16,9 @@ Front:
     - Make terms-and-conditions page with link in the footer and in the infos page
 
 Devops:
-    - Github actions
+    - Deploy on prod
+    - Add unit test
+    - Make sure DB isnt empty on prod since the pipe remove the back folder
 
 Bonus:
     - Traiter TODO du code
