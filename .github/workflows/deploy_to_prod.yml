@@ -38,27 +38,35 @@ jobs:
           script: |
             rm -rf /var/www/html/memo-minder/front/*
 
+      # - name: Transfert Frontend files
+      #   uses: appleboy/scp-action@v0.1.4
+      #   with:
+      #     host: ${{ secrets.PROD_SERVER_IP }}
+      #     username: ${{ secrets.PROD_SERVER_USER }}
+      #     key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
+      #     method: rsync
+      #     source: 'front/*'
+      #     target: '/var/www/html/memo-minder/front'
+      #     args: '--delete'
+
       - name: Transfert Frontend files
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.PROD_SERVER_IP }}
-          username: ${{ secrets.PROD_SERVER_USER }}
-          key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
-          method: rsync
-          source: 'front/*'
-          target: '/var/www/html/memo-minder/front'
-          args: '--delete'
+        run: |
+          rsync -avz --delete front/ ${{ secrets.PROD_SERVER_USER }}@${{ secrets.PROD_SERVER_IP }}:/var/www/html/memo-minder/front
+
+      # - name: Transfert Backend files
+      #   uses: appleboy/scp-action@v0.1.4
+      #   with:
+      #     host: ${{ secrets.PROD_SERVER_IP }}
+      #     username: ${{ secrets.PROD_SERVER_USER }}
+      #     key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
+      #     method: rsync
+      #     source: 'back/*'
+      #     target: '/var/www/html/memo-minder/back'
+      #     args: '--delete'
 
       - name: Transfert Backend files
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.PROD_SERVER_IP }}
-          username: ${{ secrets.PROD_SERVER_USER }}
-          key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
-          method: rsync
-          source: 'back/*'
-          target: '/var/www/html/memo-minder/back'
-          args: '--delete'
+        run: |
+          rsync -avz --delete front/ ${{ secrets.PROD_SERVER_USER }}@${{ secrets.PROD_SERVER_IP }}:/var/www/html/memo-minder/front
 
       - name: Restart Services on Server
         uses: appleboy/ssh-action@v1.0.3
