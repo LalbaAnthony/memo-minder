@@ -1,4 +1,5 @@
 Back:
+    - Ensure auth is secured
     - Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)
     - Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
@@ -16,6 +17,7 @@ Front:
     - Make terms-and-conditions page with link in the footer and in the infos page
 
 Devops:
+    - Check CORS + that 
     - Deploy on prod
     - Add unit test
     - Make sure DB isnt empty on prod since the pipe remove the back folder
