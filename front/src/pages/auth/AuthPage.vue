@@ -45,7 +45,7 @@ const tabs = ref({
 })
 
 function setAuthType(type) {
-  this.type = type
+  this.type.value = type
 }
 
 </script>
