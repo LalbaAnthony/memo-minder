@@ -29,32 +29,25 @@ jobs:
         run: |
           npm install
 
-      - name: Transfer Files
+      - name: Transfer Frontend Files
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.PROD_SERVER_IP }}
           username: ${{ secrets.PROD_SERVER_USER }}
           key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
-          source: "*"
-          target: "/var/www/html/memo-minder"
+          source: "front/build"
+          target: "/var/www/html/memo-minder/front"
+          port: 22
 
-      # - name: Transfer Frontend
-      #   uses: appleboy/scp-action@v0.1.4
-      #   with:
-      #     host: ${{ secrets.PROD_SERVER_IP }}
-      #     username: ${{ secrets.PROD_SERVER_USER }}
-      #     key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
-      #     source: "front/*"
-      #     target: "/var/www/html/memo-minder/front"
-
-      # - name: Transfer Backend
-      #   uses: appleboy/scp-action@v0.1.4
-      #   with:
-      #     host: ${{ secrets.PROD_SERVER_IP }}
-      #     username: ${{ secrets.PROD_SERVER_USER }}
-      #     key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
-      #     source: "back/*"
-      #     target: "/var/www/html/memo-minder/back"
+      - name: Transfer Backend Files
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.PROD_SERVER_IP }}
+          username: ${{ secrets.PROD_SERVER_USER }}
+          key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
+          source: "back"
+          target: "/var/www/html/memo-minder/back"
+          port: 22
 
       - name: Restart Services on Server
         uses: appleboy/ssh-action@v1.0.3
