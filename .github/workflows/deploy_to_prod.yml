@@ -29,6 +29,16 @@ jobs:
         run: |
           npm install
 
+      - name: Clean up Frontend on Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.PROD_SERVER_IP }}
+          username: ${{ secrets.PROD_SERVER_USER }}
+          key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
+          script: |
+            sudo rm -rf /var/www/html/memo-minder/front
+            mkdir -p /var/www/html/memo-minder/front
+
       - name: Transfer Frontend to Server
         uses: appleboy/scp-action@v0.1.4
         with:
@@ -37,6 +47,16 @@ jobs:
           key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
           source: "front/dist/*"
           target: "/var/www/html/memo-minder/front"
+
+      - name: Clean up Backend on Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.PROD_SERVER_IP }}
+          username: ${{ secrets.PROD_SERVER_USER }}
+          key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
+          script: |
+            sudo rm -rf /var/www/html/memo-minder/back
+            mkdir -p /var/www/html/memo-minder/back
 
       - name: Transfer Backend to Server
         uses: appleboy/scp-action@v0.1.4
@@ -54,10 +74,10 @@ jobs:
           username: ${{ secrets.PROD_SERVER_USER }}
           key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
           script: |
-            # Change to backend directory and install/update dependencies
             cd /var/www/html/memo-minder/back
             npm install
-            # Restart the backend using PM2
-            pm2 restart all || pm2 start index.js --name memo-backend
-            # Restart Apache to load new vhost config and serve updated files
+
+            #     (Change index.js to your actual entry file if different)
+            pm2 start index.js --name memo-backend || pm2 restart memo-backend
+
             sudo systemctl restart apache2
