@@ -1,0 +1,63 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Build Frontend
+        working-directory: ./front
+        run: |
+          npm install
+          npm run build
+
+      - name: Build Backend
+        working-directory: ./back
+        run: |
+          npm install
+
+      - name: Transfer Frontend to Server
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.PROD_SERVER_IP }}
+          username: ${{ secrets.PROD_SERVER_USER }}
+          key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
+          source: "front/dist/*"
+          target: "/var/www/html/memo-minder/front"
+
+      - name: Transfer Backend to Server
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.PROD_SERVER_IP }}
+          username: ${{ secrets.PROD_SERVER_USER }}
+          key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
+          source: "back/*"
+          target: "/var/www/html/memo-minder/back"
+
+      - name: Restart Services on Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.PROD_SERVER_IP }}
+          username: ${{ secrets.PROD_SERVER_USER }}
+          key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
+          script: |
+            # Change to backend directory and install/update dependencies
+            cd /var/www/html/memo-minder/back
+            npm install
+            # Restart the backend using PM2
+            pm2 restart all || pm2 start index.js --name memo-backend
+            # Restart Apache to load new vhost config and serve updated files
+            sudo systemctl restart apache2

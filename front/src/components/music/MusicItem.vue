@@ -29,16 +29,16 @@
             fill="currentColor"></path>
         </svg>
         <svg v-else-if="platform === 'default'" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-          viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-          stroke-linejoin="round">
-          <path d="M9 18V5l12-2v13" />
-          <circle cx="6" cy="18" r="3" />
-          <circle cx="18" cy="16" r="3" />
+          fill="currentColor" viewBox="0 0 16 16">
+          <path
+            d="M6 13c0 1.105-1.12 2-2.5 2S1 14.105 1 13s1.12-2 2.5-2 2.5.896 2.5 2m9-2c0 1.105-1.12 2-2.5 2s-2.5-.895-2.5-2 1.12-2 2.5-2 2.5.895 2.5 2" />
+          <path fill-rule="evenodd" d="M14 11V2h1v9zM6 3v10H5V3z" />
+          <path d="M5 2.905a1 1 0 0 1 .9-.995l8-.8a1 1 0 0 1 1.1.995V3L5 4z" />
         </svg>
       </div>
       <div class="flex flex-col justify-center items-start">
         <h1 class="text-2xl font-bold">{{ props?.music?.title }}</h1>
-        <p class="text-gray-light">{{ props?.music?.artist }} - {{ getYearFromDate(props?.music?.releaseDate) }}</p>
+        <p class="text-gray-light">{{ props?.music?.artist }} {{props?.music?.artist && props?.music?.releaseDate ? '-' : ''}} {{ getYearFromDate(props?.music?.releaseDate) }}</p>
       </div>
       <div>
         &nbsp;
@@ -78,7 +78,7 @@ const props = defineProps({
 const platform = computed(() => {
   if (props?.music?.streamingLink?.includes('spotify')) return 'spotify'
   if (props?.music?.streamingLink?.includes('apple')) return 'apple'
-  if (props?.music?.streamingLink?.includes('youtube')) return 'youtube'
+  if (props?.music?.streamingLink?.includes('youtu')) return 'youtube'
   if (props?.music?.streamingLink?.includes('deezer')) return 'deezer'
   return 'default'
 })
