@@ -17,6 +17,7 @@ Front:
     - Make terms-and-conditions page with link in the footer and in the infos page
 
 Devops:
+    - Remove cache from back and front
     - Check CORS + that 
     - Deploy on prod
     - Add unit test
