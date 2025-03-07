@@ -19,7 +19,7 @@ Front:
 
 Devops:
     - Remove cache from back and front
-    - Check CORS + that 
+    - Check CORS + that env variables arer set in front
     - Deploy on prod
     - Add unit test
     - Make sure DB isnt empty on prod since the pipe remove the back folder
