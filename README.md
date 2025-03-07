@@ -40,11 +40,14 @@ cd back/ && npm run test
 
 ## 🚢 Deployment
 
+### Secrets
+
 Those secrets are required in the deployment environment:
 - `PROD_SERVER_IP`: The server IP address
 - `PROD_SERVER_USER`: The server user
-- `PROD_SERVER_PRIVATE_KEY`: The private key to connect to the server
+- `PROD_SERVER_PRIVATE_KEY`: The private key to connect to the server (use `cat ~/.ssh/id_rsa` on local machine to get it)
 
+### Environment
 
 PM2 is used to manage the Node.js process. Make sure to install it on the server.
 
@@ -55,3 +58,8 @@ sudo apt install npm
 # Install PM2
 npm i -g pm2
 ```
+### Web server
+
+Apache is used to serve the frontend. Make sure to install it on the server.
+
+Use the `prod-apache.conf` file to configure the virtual host.
