@@ -1,6 +1,6 @@
 # 💌 - Memo Minder
 
-## Technos
+## 📖 Technos
 
 - Node.js
 - Express
@@ -8,7 +8,7 @@
 - Tailwind
 - Headless UI
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Config
 
@@ -26,14 +26,32 @@ cd back/ && npm i && npm run dev
 cd front/ && npm i && npm run dev
 ```
 
-## Development
+### Seed data
 
 Seed test data:
 ```bash
 cd back/ && npm run seed
 ```
 
-Tests (backend):
+### Tests
 ```bash
 cd back/ && npm run test
+```
+
+## 🚢 Deployment
+
+Those secrets are required in the deployment environment:
+- `PROD_SERVER_IP`: The server IP address
+- `PROD_SERVER_USER`: The server user
+- `PROD_SERVER_PRIVATE_KEY`: The private key to connect to the server
+
+
+PM2 is used to manage the Node.js process. Make sure to install it on the server.
+
+```bash
+# Install NPM
+sudo apt install npm
+
+# Install PM2
+npm i -g pm2
 ```
