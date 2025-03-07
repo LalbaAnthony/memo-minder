@@ -1,7 +1,8 @@
 <template>
   <!-- Go back button -->
-  <div v-if="route?.name?.includes('details')" @click="goBack()"
-    class="flex items-center justify-start cursor-pointer text-gray-light">
+  <div
+    v-if="route?.name && (route.name.includes('details') || route.name.includes('add')) || route.name === 'infos' || route.name === 'terms-and-conditions'"
+    @click="goBack()" class="flex items-center justify-start cursor-pointer text-gray-light">
     <ChevronLeftIcon class="size-6" />
   </div>
 </template>

@@ -130,7 +130,7 @@ function valid() {
   if (!seasonStore.season.data.userId) return 'User is required, please reload the page'
   if (!seasonStore.season.data.title) return 'Title is required'
   if (!seasonStore.season.data.color) return 'Color is required'
-  if (!seasonStore.season.data.dateStart) return 'Date start is required'
+  if (!seasonStore.season.data.dateStart) return 'Start date is required'
   return false
 }
 
