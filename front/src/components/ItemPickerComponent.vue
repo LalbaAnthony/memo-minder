@@ -38,12 +38,16 @@
                 <span class="text-gray-light">Haven't found what your looking for ?</span>
                 <div class="flex flex-row flex-wrap flexitems-center gap-2 mt-2">
                   <Pill v-if="props.types && props.types.includes('season')" text="Add a season" type="season" clickable
+                    addable
                     @click="router.push({ path: '/seasons/add', query: { title: search } }); emit('close', true)" />
                   <Pill v-if="props.types && props.types.includes('event')" text="Add an event" type="event" clickable
+                    addable
                     @click="router.push({ path: '/events/add', query: { title: search } }); emit('close', true)" />
                   <Pill v-if="props.types && props.types.includes('person')" text="Add a person" type="person" clickable
+                    addable
                     @click="router.push({ path: '/people/add', query: { name: search } }); emit('close', true)" />
                   <Pill v-if="props.types && props.types.includes('music')" text="Add a music" type="music" clickable
+                    addable
                     @click="router.push({ path: '/musics/add', query: { title: search } }); emit('close', true)" />
                 </div>
               </div>
@@ -104,7 +108,7 @@ const results = ref([])
 const emit = defineEmits(['selected', 'close'])
 
 const gridMaxHeight = computed(() => {
-    return isMobile() ? window.innerHeight - 400 : 0
+  return isMobile() ? window.innerHeight - 400 : 0
 })
 
 const loadSearch = debounce(async () => {

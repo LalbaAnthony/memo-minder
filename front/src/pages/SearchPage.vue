@@ -9,12 +9,12 @@
     </div>
 
     <!-- Add buttons -->
-    <div class="flex flex-row flex-wrap flexitems-center gap-2 mt-2 mx-4">
+    <div class="flex flex-row flex-wrap flexitems-center justify-center gap-2 mt-2 mx-4">
       <TransitionRoot :show="addButtons.season.show">
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <Pill text="Add a as season" type="season" clickable
+          <Pill text="Add a as season" type="season" addable clickable
             @click="router.push({ path: '/seasons/add', query: { title: toAddString } })" />
         </TransitionChild>
       </TransitionRoot>
@@ -22,7 +22,7 @@
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <Pill text="Add  as an event" type="event" clickable
+          <Pill text="Add  as an event" type="event" addable clickable
             @click="router.push({ path: '/events/add', query: { title: toAddString } })" />
         </TransitionChild>
       </TransitionRoot>
@@ -30,7 +30,7 @@
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <Pill text="Add as a person" type="person" clickable
+          <Pill text="Add as a person" type="person" addable clickable
             @click="router.push({ path: '/people/add', query: { name: toAddString } })" />
         </TransitionChild>
       </TransitionRoot>
@@ -38,7 +38,7 @@
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <Pill text="Add as a music" type="music" clickable
+          <Pill text="Add as a music" type="music" addable clickable
             @click="router.push({ path: '/musics/add', query: { title: toAddString } })" />
         </TransitionChild>
       </TransitionRoot>

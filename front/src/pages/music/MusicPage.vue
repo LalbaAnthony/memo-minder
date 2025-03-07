@@ -92,6 +92,7 @@ function copyToClipboard(text) {
 }
 
 function valid() {
+  if (!musicStore.music.data.userId) return 'User is required, please reload the page'
   if (!musicStore.music.data.title) return 'Title is required'
   return false
 }

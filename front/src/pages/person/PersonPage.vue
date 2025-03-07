@@ -54,6 +54,7 @@ function loadOrInitPerson() {
 }
 
 function valid() {
+  if (!personStore.person.data.userId) return 'User is required, please reload the page'
   if (!personStore.person.data.name) return 'Name is required'
   return false
 }

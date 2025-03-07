@@ -5,6 +5,7 @@
     <UserIcon v-if="props.type === 'person'" class="size-6 text-primary-light" />
     <MusicalNoteIcon v-if="props.type === 'music'" class="size-6 text-primary-light" />
     <span class="text-sm text-light">{{ props.text }}</span>
+    <PlusIcon  v-if="props.addable" class="size-6 text-gray-light hover:text-light cursor-pointer" @click.stop="$emit('add', true)" />
     <XMarkIcon v-if="props.deleteable" class="size-6 text-gray-light hover:text-light cursor-pointer" @click.stop="$emit('delete', true)" />
   </div>
 </template>
@@ -13,6 +14,7 @@
 import { FilmIcon } from '@heroicons/vue/24/solid'
 import { CalendarDaysIcon } from '@heroicons/vue/24/solid'
 import { UserIcon } from '@heroicons/vue/24/solid'
+import { PlusIcon } from '@heroicons/vue/24/solid'
 import { MusicalNoteIcon } from '@heroicons/vue/24/solid'
 import { XMarkIcon } from '@heroicons/vue/24/solid'
 
@@ -28,6 +30,11 @@ const props = defineProps({
     required: false,
   },
   deleteable: {
+    type: Boolean,
+    default: false,
+    required: false,
+  },
+  addable: {
     type: Boolean,
     default: false,
     required: false,

@@ -23,6 +23,7 @@ const props = defineProps({
   }
 })
 
+// ? Format date to be displayed, date as 2024-06-27T14:02:29.928Z
 const date = ref(formatDate(new Date(props.value)))
 
 const emit = defineEmits(['update'])
@@ -36,10 +37,11 @@ function formatDate(string) {
 }
 
 watch(() => date.value, (newValue, oldValue) => {
-  if (isValidDate(newValue) && newValue.length === 10) {
+  console.log('date', newValue, oldValue)
+  if (isValidDate(newValue)) {
     date.value = newValue
 
-    // ? return date as 2024-06-27T14:02:29.928Z
+    // ? Return date as 2024-06-27T14:02:29.928Z
     const dateToSend = new Date(date.value).toISOString()
     emit('update', dateToSend)
   } else {
