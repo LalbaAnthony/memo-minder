@@ -29,6 +29,15 @@ jobs:
         run: |
           npm install
 
+      - name: Remove Front Files
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.PROD_SERVER_IP }}
+          username: ${{ secrets.PROD_SERVER_USER }}
+          key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
+          script: |
+            rm -rf /var/www/html/memo-minder/front/*
+
       - name: Transfer Front Files
         uses: appleboy/scp-action@v0.1.4
         with:
