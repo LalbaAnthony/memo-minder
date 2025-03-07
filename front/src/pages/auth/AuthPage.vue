@@ -44,8 +44,10 @@ const tabs = ref({
   }
 })
 
-function setAuthType(type) {
-  this.type.value = type
+function setAuthType(t = 'login') {
+  if (tabs.value[type]) {
+    type.value = t
+  }
 }
 
 </script>
