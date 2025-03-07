@@ -62,4 +62,4 @@ npm i -g pm2
 
 Apache is used to serve the frontend. Make sure to install it on the server.
 
-Use the `prod-apache.conf` file to configure the virtual host.
+Use the `apache.prod.conf` file to configure the virtual host.
