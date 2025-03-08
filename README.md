@@ -49,6 +49,8 @@ Those secrets are required in the deployment environment:
 
 ### Environment
 
+`.env` file must be created in the project directory. Use the `.env.prod` file as a template.
+
 PM2 is used to manage the Node.js process. Make sure to install it on the server.
 
 ```bash
