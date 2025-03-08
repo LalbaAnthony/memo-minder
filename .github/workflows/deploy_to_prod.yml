@@ -19,7 +19,7 @@ jobs:
           node-version: 18
 
       - name: Create Frontend .env File
-        run: echo "${{ secrets.VITE_APP_ENV_VARS }}" > front/.env
+        run: echo "${{ secrets.PROD_VITE_APP_ENV_VARS }}" > front/.env
 
       - name: Install and Build Frontend
         working-directory: ./front
