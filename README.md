@@ -46,7 +46,7 @@ Those secrets are required in the deployment environment:
 - `PROD_SERVER_IP`: The server IP address
 - `PROD_SERVER_USER`: The server user
 - `PROD_SERVER_PRIVATE_KEY`: The private key to connect to the server (can use `cat ~/.ssh/id_rsa` on local machine to get it)
-- `VITE_APP_ENV_VARS`: The environment variables for the frontend (a copy of the front part of `.env` file)
+- `PROD_VITE_APP_ENV_VARS`: The environment variables for the frontend (a copy of the front part of `.env` file)
 
 ### Environment
 
