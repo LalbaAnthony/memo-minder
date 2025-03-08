@@ -19,7 +19,7 @@ jobs:
           node-version: 18
 
       - name: Create Frontend .env File
-        woarking-directory: ./front
+        working-directory: ./front
         run: |
           echo "${{ secrets.PROD_VITE_APP_ENV_VARS }}" > .env
           tail .env
