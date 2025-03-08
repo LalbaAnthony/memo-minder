@@ -21,8 +21,8 @@ jobs:
       - name: Create Frontend .env File
         woarking-directory: ./front
         run: |
-        echo "${{ secrets.PROD_VITE_APP_ENV_VARS }}" > .env
-        tail .env
+          echo "${{ secrets.PROD_VITE_APP_ENV_VARS }}" > .env
+          tail .env
 
       - name: Install and Build Frontend
         working-directory: ./front
