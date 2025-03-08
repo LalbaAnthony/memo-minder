@@ -60,6 +60,9 @@ sudo apt install npm
 # Install PM2
 npm i -g pm2
 ```
+
+Use `pm2 restart <ID> --update-env` to restart the server with the new environment variables.
+
 ### Web server
 
 Apache is used to serve the frontend. Make sure to install it on the server.
