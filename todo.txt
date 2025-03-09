@@ -10,7 +10,6 @@ Back:
 Front:
     - Utiliser app et noter Problemes
     - Faire en sorte que cliquer en dehors de la navigation du menu ne fasse que fermer le menu
-    - Resolve zoom issues on mobile
     - Fix too many scroll available on most pages (min height ?)
     - Make a type picker from add button on home page which redirect to the right page
     - Load more instead of inifinte scroll
