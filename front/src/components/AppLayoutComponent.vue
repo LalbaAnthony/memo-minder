@@ -10,12 +10,12 @@
       <router-link to="/"
         :class="[route.name === 'home' && !showSidebar ? 'bg-gray-dark' : '', 'flex flex-col items-center text-light transition-colors duration-200 ease-in-out rounded-lg p-2']">
         <HomeIcon class="size-8 text-gray-light rounded-full p-1 cursor-pointer" />
-        <span class="text-xs text-gray font-semibold">Home</span>
+        <span :class="[route.name === 'home' && !showSidebar ? 'text-gray-light': 'text-gray', 'text-xs font-semibold']">Home</span>
       </router-link>
       <router-link to="/search"
         :class="[route.name === 'search' && !showSidebar ? 'bg-gray-dark' : '', 'flex flex-col items-center text-light transition-colors duration-200 ease-in-out rounded-lg p-2']">
         <MagnifyingGlassIcon class="size-8 text-gray-light rounded-full p-1 cursor-pointer" />
-        <span class="text-xs text-gray font-semibold">Search</span>
+        <span :class="[route.name === 'search' && !showSidebar ? 'text-gray-light': 'text-gray', 'text-xs font-semibold']">Search</span>
       </router-link>
     </nav>
 
