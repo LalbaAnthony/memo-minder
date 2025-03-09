@@ -92,7 +92,6 @@ input[type="search"]::-webkit-search-cancel-button {
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(90%);
   /* Change the color of the calendar icon to white */
-  width: 1rem;
 }
 
 input[type="color"] {

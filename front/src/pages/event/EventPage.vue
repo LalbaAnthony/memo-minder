@@ -8,7 +8,7 @@
           <span class="text-gray">Updated the {{ dateToNiceDate(eventStore.event?.data?.updatedAt) }}</span>
         </div>
         <div class="flex items-center justify-between gap-2 flex-wrap">
-          <input v-model="eventStore.event.data.title" type="text" class="rounded-lg bg-dark text-light text-2xl"
+          <input v-model="eventStore.event.data.title" type="text" class="rounded-lg bg-dark text-light text-2xl w-full"
             placeholder="Event title" />
           <div>
             <DatePicker :value="eventStore.event?.data?.date" @update="(v) => { eventStore.event.data.date = v }" />
