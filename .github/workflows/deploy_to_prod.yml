@@ -18,18 +18,30 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install and Build Frontend
+      # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+      # FRONTEND
+      # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+      - name: Set up Environment Variables
+        run: |
+          echo "VITE_APP_SHORT_NAME=${{ secrets.PROD_VITE_APP_SHORT_NAME }}" >> .env
+          echo "VITE_APP_NAME=${{ secrets.PROD_VITE_APP_NAME }}" >> .env
+          echo "VITE_APP_COMPANY_NAME=${{ secrets.PROD_VITE_APP_COMPANY_NAME }}" >> .env
+          echo "VITE_APP_AUTHOR_NAME=${{ secrets.PROD_VITE_APP_AUTHOR_NAME }}" >> .env
+          echo "VITE_APP_VERSION=${{ secrets.PROD_VITE_APP_VERSION }}" >> .env
+          echo "VITE_APP_DESCRIPTION=${{ secrets.PROD_VITE_APP_DESCRIPTION }}" >> .env
+          echo "VITE_APP_COLOR=${{ secrets.PROD_VITE_APP_COLOR }}" >> .env
+          echo "VITE_PORT=${{ secrets.PROD_VITE_PORT }}" >> .env
+          echo "VITE_FRONT_URL=${{ secrets.PROD_VITE_FRONT_URL }}" >> .env
+          echo "VITE_BACK_API_URL=${{ secrets.PROD_VITE_BACK_API_URL }}" >> .env
+
+      - name: Install and Build frontend
         working-directory: ./front
         run: |
           npm install
           npm run build
 
-      - name: Install Backend
-        working-directory: ./back
-        run: |
-          npm install
-
-      - name: Remove Front Files
+      - name: Remove Front files on remote
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.PROD_SERVER_IP }}
@@ -38,7 +50,7 @@ jobs:
           script: |
             rm -rf /var/www/html/memo-minder/front/*
 
-      - name: Transfer Front Files
+      - name: Transfer Front files
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.PROD_SERVER_IP }}
@@ -47,6 +59,10 @@ jobs:
           source: "front/dist/*"
           target: "/var/www/html/memo-minder/front"
           strip_components: 2 # Removes the 'front/dist' portion and only transfers its contents
+
+      # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+      # BACKEND
+      # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
       - name: Transfer Back Files
         uses: appleboy/scp-action@v0.1.4
@@ -58,7 +74,7 @@ jobs:
           target: "/var/www/html/memo-minder/back"
           strip_components: 1 # Removes the 'back' portion and only transfers its contents
 
-      - name: Restart Services on Server
+      - name: Install Backend Dependencies and Restart node server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.PROD_SERVER_IP }}
@@ -72,4 +88,17 @@ jobs:
 
             pm2 start main.js --name memo-minder-backend || pm2 restart memo-minder-backend
 
+            sudo systemctl restart apache2
+
+      # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+      # APACHE
+      # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+      - name: Restart Apache server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.PROD_SERVER_IP }}
+          username: ${{ secrets.PROD_SERVER_USER }}
+          key: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
+          script: |
             sudo systemctl restart apache2
