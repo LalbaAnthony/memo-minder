@@ -6,7 +6,7 @@ import { notif } from '@/helpers/notif.js'
 
 const authStore = useAuthStore()
 
-const defaultPagination = { page: 1, perPage: 10, total: 1 }
+const defaultPagination = { page: 1, perPage: 25, total: 1 }
 
 export const useSeasonStore = defineStore('season', {
   state: () => ({

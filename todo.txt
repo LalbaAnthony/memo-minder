@@ -8,7 +8,9 @@ Back:
     - Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Front:
+    - Date chevron icon issue
     - Utiliser app et noter Problemes
+    - Find a way to explicitly set the color under mobile home button
     - Faire en sorte que cliquer en dehors de la navigation du menu ne fasse que fermer le menu
     - Fix too many scroll available on most pages (min height ?)
     - Make a type picker from add button on home page which redirect to the right page
