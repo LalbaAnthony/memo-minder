@@ -4,6 +4,7 @@ Back:
     - Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Front:
+    - Add indiateur de page couratne sur le menu du bas mobile
     - Resolve zoom issues on mobile
     - Fix too many scroll available on most pages (min height ?)
     - Make a type picker from add button on home page which redirect to the right page
