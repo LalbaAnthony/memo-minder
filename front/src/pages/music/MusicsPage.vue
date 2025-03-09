@@ -48,6 +48,7 @@ async function loadMusics() {
 
 // Fetch musics on mount
 onMounted(() => {
+  musicStore.resetPagination()
   loadMusics()
 })
 

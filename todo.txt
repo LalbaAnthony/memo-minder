@@ -1,9 +1,14 @@
+Global:
+    - Utiliser app et noter Problemes
+    - Traiter TODO du code
+
 Back:
     - Ensure auth is secured
     - Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)
     - Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Front:
+    - Utiliser app et noter Problemes
     - Faire en sorte que cliquer en dehors de la navigation du menu ne fasse que fermer le menu
     - Resolve zoom issues on mobile
     - Fix too many scroll available on most pages (min height ?)
@@ -23,9 +28,6 @@ Front:
 Devops:
     - Add unit test
     - Make sure DB isnt empty on prod since the pipe remove the back folder
-
-Bonus:
-    - Traiter TODO du code
 
 Bonus:
     - Import my own data

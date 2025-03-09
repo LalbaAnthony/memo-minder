@@ -47,6 +47,7 @@ async function loadSeasons() {
 
 // Fetch seasons on mount
 onMounted(() => {
+  seasonStore.resetPagination()
   loadSeasons()
 })
 

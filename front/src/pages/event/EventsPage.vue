@@ -47,6 +47,7 @@ async function loadEvents() {
 
 // Fetch events on mount
 onMounted(() => {
+  eventStore.resetPagination()
   loadEvents()
 })
 

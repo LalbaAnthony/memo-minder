@@ -25,6 +25,10 @@ export const useEventStore = defineStore('event', {
       this.event.data = {}
     },
 
+    resetPagination() {
+      this.events.pagination = defaultPagination
+    },
+
     async fetchEvent(eventId) {
       eventId = parseInt(eventId)
 
