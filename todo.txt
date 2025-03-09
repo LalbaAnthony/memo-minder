@@ -4,6 +4,7 @@ Back:
     - Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Front:
+    - Resolve zoom issues on mobile
     - Fix too many scroll available on most pages (min height ?)
     - Make a type picker from add button on home page which redirect to the right page
     - Load more instead of inifinte scroll
@@ -18,9 +19,6 @@ Front:
     - Make terms-and-conditions page with link in the footer and in the infos page
 
 Devops:
-    - Remove cache from back and front
-    - Check CORS + that env variables arer set in front (WITH SEVERT THAT CONTAIN ALL .ENV COPY)
-    - Deploy on prod
     - Add unit test
     - Make sure DB isnt empty on prod since the pipe remove the back folder
 
