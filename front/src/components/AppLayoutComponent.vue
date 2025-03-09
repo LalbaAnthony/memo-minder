@@ -2,18 +2,20 @@
   <div>
     <!-- Mobile bottom menu -->
     <nav v-if="isMobile()"
-      class="fixed bottom-0 left-0 z-20 w-full flex justify-around items-center bg-dark-light border-t border-gray p-3 gap-3">
-      <div class="flex flex-col items-center" @click.stop="toggleSidebar()">
-        <Bars3Icon class="size-8 text-gray-light rounded-lg p-1 cursor-pointer" />
-        <span class="text-sm text-gray font-semibold">More</span>
+      class="fixed bottom-0 left-0 z-20 w-full flex justify-around items-center bg-dark-light border-t border-gray py-2 px-6 sm:px-32 gap-3">
+      <div class="flex flex-col items-center text-light transition-colors duration-200 ease-in-out rounded-lg p-2" @click.stop="toggleSidebar()">
+        <Bars3Icon class="size-8 text-gray-light rounded-full p-1 cursor-pointer" />
+        <span class="text-xs text-gray font-semibold">More</span>
       </div>
-      <router-link class="flex flex-col items-center" to="/">
-        <HomeIcon class="size-8 text-gray-light rounded-lg p-1 cursor-pointer" />
-        <span class="text-sm text-gray font-semibold">Home</span>
+      <router-link to="/"
+        :class="[route.name === 'home' && !showSidebar ? 'bg-gray-dark' : '', 'flex flex-col items-center text-light transition-colors duration-200 ease-in-out rounded-lg p-2']">
+        <HomeIcon class="size-8 text-gray-light rounded-full p-1 cursor-pointer" />
+        <span class="text-xs text-gray font-semibold">Home</span>
       </router-link>
-      <router-link class="flex flex-col items-center" to="/search">
+      <router-link to="/search"
+        :class="[route.name === 'search' && !showSidebar ? 'bg-gray-dark' : '', 'flex flex-col items-center text-light transition-colors duration-200 ease-in-out rounded-lg p-2']">
         <MagnifyingGlassIcon class="size-8 text-gray-light rounded-full p-1 cursor-pointer" />
-        <span class="text-sm text-gray font-semibold">Search</span>
+        <span class="text-xs text-gray font-semibold">Search</span>
       </router-link>
     </nav>
 
@@ -130,7 +132,6 @@ import vClickOutside from '@/directives/clickOutside.js'
 import { useAuthStore } from '@/stores/auth'
 import { VITE_APP_VERSION } from '@/config';
 
-
 const route = useRoute()
 const router = useRouter()
 const authStore = useAuthStore()
@@ -138,33 +139,33 @@ const authStore = useAuthStore()
 const showSidebar = ref(false)
 const search = ref('')
 
-// function blurApp() {
-//   const BLUR = '2px'
-//   const main = document.querySelector('main')
-//   const header = document.querySelector('header')
-//   const nav = document.querySelector('nav')
-//   if (main) main.style.filter = `blur(${BLUR})`
-//   if (header) header.style.filter = `blur(${BLUR})`
-//   if (nav) nav.style.filter = `blur(${BLUR})`
-// }
+function blurApp() {
+  const BLUR = '1px'
+  const main = document.querySelector('main')
+  const header = document.querySelector('header')
+  const nav = document.querySelector('nav')
+  if (main) main.style.filter = `blur(${BLUR})`
+  if (header) header.style.filter = `blur(${BLUR})`
+  if (nav) nav.style.filter = `blur(${BLUR})`
+}
 
-// function unblurApp() {
-//   const main = document.querySelector('main')
-//   const header = document.querySelector('header')
-//   const nav = document.querySelector('nav')
-//   if (main) main.style.filter = 'none'
-//   if (header) header.style.filter = 'none'
-//   if (nav) nav.style.filter = 'none'
-// }
+function unblurApp() {
+  const main = document.querySelector('main')
+  const header = document.querySelector('header')
+  const nav = document.querySelector('nav')
+  if (main) main.style.filter = 'none'
+  if (header) header.style.filter = 'none'
+  if (nav) nav.style.filter = 'none'
+}
 
 function hideSidebar() {
   showSidebar.value = false
-  // unblurApp()
+  unblurApp()
 }
 
 function revealSidebar() {
   showSidebar.value = true
-  // if (isMobile()) blurApp()
+  if (isMobile()) blurApp()
 }
 
 function toggleSidebar() {
