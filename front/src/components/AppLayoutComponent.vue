@@ -1,26 +1,7 @@
 <template>
   <div>
-    <!-- Mobile bottom menu -->
-    <nav v-if="isMobile()"
-      class="fixed bottom-0 left-0 z-20 w-full flex justify-around items-center bg-dark-light border-t border-gray py-2 px-6 sm:px-32 gap-3">
-      <div class="flex flex-col items-center text-light transition-colors duration-200 ease-in-out rounded-lg p-2" @click.stop="toggleSidebar()">
-        <Bars3Icon class="size-8 text-gray-light rounded-full p-1 cursor-pointer" />
-        <span class="text-xs text-gray font-semibold">More</span>
-      </div>
-      <router-link to="/"
-        :class="[route.name === 'home' && !showSidebar ? 'bg-gray-dark' : '', 'flex flex-col items-center text-light transition-colors duration-200 ease-in-out rounded-lg p-2']">
-        <HomeIcon class="size-8 text-gray-light rounded-full p-1 cursor-pointer" />
-        <span :class="[route.name === 'home' && !showSidebar ? 'text-gray-light': 'text-gray', 'text-xs font-semibold']">Home</span>
-      </router-link>
-      <router-link to="/search"
-        :class="[route.name === 'search' && !showSidebar ? 'bg-gray-dark' : '', 'flex flex-col items-center text-light transition-colors duration-200 ease-in-out rounded-lg p-2']">
-        <MagnifyingGlassIcon class="size-8 text-gray-light rounded-full p-1 cursor-pointer" />
-        <span :class="[route.name === 'search' && !showSidebar ? 'text-gray-light': 'text-gray', 'text-xs font-semibold']">Search</span>
-      </router-link>
-    </nav>
-
     <!-- Desktop header -->
-    <header v-else class="flex justify-between items-center bg-dark-light border-b border-gray p-4 gap-3">
+    <header v-if="!isMobile()" class="flex justify-between items-center bg-dark-light border-b border-gray p-4 gap-3">
       <Bars3Icon class="size-10 text-gray-light rounded-lg p-1 cursor-pointer" @click.stop="toggleSidebar()" />
       <router-link :to="route.path">
         <h1 class="text-2xl font-bold text-light">
@@ -109,6 +90,28 @@
         </div>
       </TransitionChild>
     </TransitionRoot>
+
+    <!-- Mobile bottom menu -->
+    <nav v-if="isMobile()"
+      class="fixed bottom-0 left-0 z-20 w-full flex justify-around items-center bg-dark-light border-t border-gray py-2 px-6 sm:px-32 gap-3">
+      <div class="flex flex-col items-center text-light transition-colors duration-200 ease-in-out rounded-lg p-2"
+        @click.stop="toggleSidebar()">
+        <Bars3Icon class="size-8 text-gray-light rounded-full p-1 cursor-pointer" />
+        <span class="text-xs text-gray font-semibold">More</span>
+      </div>
+      <router-link to="/"
+        :class="[route.name === 'home' && !showSidebar ? 'bg-gray-dark' : '', 'flex flex-col items-center text-light transition-colors duration-200 ease-in-out rounded-lg p-2']">
+        <HomeIcon class="size-8 text-gray-light rounded-full p-1 cursor-pointer" />
+        <span
+          :class="[route.name === 'home' && !showSidebar ? 'text-gray-light' : 'text-gray', 'text-xs font-semibold']">Home</span>
+      </router-link>
+      <router-link to="/search"
+        :class="[route.name === 'search' && !showSidebar ? 'bg-gray-dark' : '', 'flex flex-col items-center text-light transition-colors duration-200 ease-in-out rounded-lg p-2']">
+        <MagnifyingGlassIcon class="size-8 text-gray-light rounded-full p-1 cursor-pointer" />
+        <span
+          :class="[route.name === 'search' && !showSidebar ? 'text-gray-light' : 'text-gray', 'text-xs font-semibold']">Search</span>
+      </router-link>
+    </nav>
   </div>
 </template>
 
