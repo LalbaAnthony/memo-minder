@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot appear :show="props.show" as="template">
-    <Dialog as="div" @close="emit('close', true)" class="relative z-10">
+    <Dialog as="div" @close="emit('close', true)" class="relative z-20">
       <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0" enter-to="opacity-100"
         leave="duration-200 ease-in" leave-from="opacity-100" leave-to="opacity-0">
         <div class="fixed inset-0 opacity-90 bg-dark" />

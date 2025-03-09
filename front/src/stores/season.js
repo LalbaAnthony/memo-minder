@@ -26,6 +26,10 @@ export const useSeasonStore = defineStore('season', {
       this.season.data = {}
     },
 
+    resetPagination() {
+      this.seasons.pagination = defaultPagination
+    },
+
     async fetchSeason(seasonId) {
       seasonId = parseInt(seasonId)
 

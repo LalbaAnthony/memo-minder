@@ -25,6 +25,10 @@ export const usePersonStore = defineStore('person', {
       this.person.data = {}
     },
 
+    resetPagination() {
+      this.people.pagination = defaultPagination
+    },
+
     async fetchPerson(personId) {
       personId = parseInt(personId)
 

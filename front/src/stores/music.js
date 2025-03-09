@@ -25,6 +25,10 @@ export const useMusicStore = defineStore('music', {
       this.music.data = {}
     },
 
+    resetPagination() {
+      this.musics.pagination = defaultPagination
+    },
+
     async fetchMusic(musicId) {
       musicId = parseInt(musicId)
 

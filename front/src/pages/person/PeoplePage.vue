@@ -47,6 +47,7 @@ async function loadPeople() {
 
 // Fetch people on mount
 onMounted(() => {
+  personStore.resetPagination()
   loadPeople()
 })
 
