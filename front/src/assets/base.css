@@ -68,7 +68,7 @@
 }
 
 body {
-    min-height: 100vh;
+    min-height: calc(100vh - 100px); /* 100px is approx. the height of the footer */
     transition: color 0.5s, background-color 0.5s;
     line-height: 1.6;
     font-family: "Poppins", "Roboto", sans-serif;
