@@ -46,10 +46,6 @@
   }
 }
 
-main {
-  min-height: calc(100vh + 100px); /* 100px for the footer and bottom buttons */
-}
-
 section {
   padding: 1rem 0rem;
   margin: 1rem 0rem;

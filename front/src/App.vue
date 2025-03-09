@@ -2,7 +2,8 @@
   <div>
     <AppLayout v-if="authStore.authenticated" />
     <main>
-      <GoBackAction />
+      <GoBackAction
+        v-if="route?.name && (route.name.includes('details') || route.name.includes('add')) || route.name === 'infos' || route.name === 'terms-and-conditions'" />
       <RouterView />
     </main>
     <Footer v-if="route.name === 'home'" />
