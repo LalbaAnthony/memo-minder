@@ -17,7 +17,8 @@ Front:
     - Vérifier la présence de TODO et de WIP dans le code
     - Being able to easily import a music from spotify API 
     - Ajouter langue francaise
-    - Make terms-and-conditions page with link in the footer and in the infos page
+    - Fill infos page
+    - Fill terms-and-conditions page and add link in the footer and in the infos page
 
 Devops:
     - Add unit test
