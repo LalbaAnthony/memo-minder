@@ -15,7 +15,7 @@ function notify(message, type = 'info') {
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        draggablePercent: 0.6,
+        draggablePercent: 0.3,
         showCloseButtonOnHover: false,
         hideProgressBar: true,
         closeButton: 'button',
