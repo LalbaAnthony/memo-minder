@@ -8,7 +8,7 @@
           <span class="text-gray">Updated the {{ dateToNiceDate(personStore.person?.data?.updatedAt) }}</span>
         </div>
         <div class="flex items-center justify-between gap-2 flex-wrap">
-          <input v-model="personStore.person.data.name" type="text" class="rounded-lg bg-dark text-light text-2xl"
+          <input v-model="personStore.person.data.name" type="text" class="rounded-lg bg-dark text-light text-2xl w-full"
             placeholder="Person name" />
         </div>
       </section>
