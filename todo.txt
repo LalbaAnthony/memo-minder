@@ -9,8 +9,7 @@ Back:
     - Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Front:
-    - mettre transition sur bottom action de scroll
-    - refacto des pages erreurs (reword + style + add icons/smileys)
+    - Mettre transition sur bottom action de scroll
     - Date chevron icon issue
     - Utiliser app et noter Problemes
     - Find a way to explicitly set the color under mobile home button
