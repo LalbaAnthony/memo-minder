@@ -18,7 +18,8 @@
             <PasswordStrength :password="password || confirmPassword || ''" />
             <label class="flex flex-start space-x-2">
                 <input v-model="acceptTerms" id="acceptTerms" type="checkbox" />
-                <span class="text-light">I accept the <router-link to="/terms-and-conditions" class="text-light text-primary">terms
+                <span class="text-light">I accept the <router-link to="/terms-and-conditions"
+                        class="text-light text-primary">terms
                         and
                         conditions</router-link></span>
             </label>

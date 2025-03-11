@@ -1,7 +1,7 @@
 <template>
   <!-- Go back button -->
   <div class="flex items-center justify-start cursor-pointer text-gray-light" @click="goBack()">
-    <ChevronLeftIcon class="size-6" />
+    <ChevronLeftIcon class="size-7" />
   </div>
 </template>
 

@@ -13,7 +13,7 @@
 
 <script setup>
 import { onMounted } from 'vue'
-import AppLayout from '@/components/AppLayoutComponent.vue'
+import AppLayout from '@/layouts/AppLayout.vue'
 import GoBackAction from '@/components/GoBackActionComponent.vue'
 import Footer from '@/components/FooterComponent.vue'
 import { isMobile } from '@/helpers/functions.js'

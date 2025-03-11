@@ -96,18 +96,18 @@
       class="fixed bottom-0 left-0 z-20 w-full flex justify-around items-center bg-dark-light border-t border-gray py-2 px-6 sm:px-32 gap-3">
       <div class="flex flex-col items-center text-light transition-colors duration-200 ease-in-out rounded-lg p-2"
         @click.stop="toggleSidebar()">
-        <Bars3Icon class="size-8 text-gray-light rounded-full p-1 cursor-pointer" />
+        <Bars3Icon class="size-9 text-gray-light rounded-full p-1 cursor-pointer" />
         <span class="text-xs text-gray font-semibold">More</span>
       </div>
       <router-link to="/"
         :class="[route.name === 'home' && !showSidebar ? 'bg-gray-dark' : '', 'flex flex-col items-center text-light transition-colors duration-200 ease-in-out rounded-lg p-2']">
-        <HomeIcon class="size-8 text-gray-light rounded-full p-1 cursor-pointer" />
+        <HomeIcon class="size-9 text-gray-light rounded-full p-1 cursor-pointer" />
         <span
           :class="[route.name === 'home' && !showSidebar ? 'text-gray-light' : 'text-gray', 'text-xs font-semibold']">Home</span>
       </router-link>
       <router-link to="/search"
         :class="[route.name === 'search' && !showSidebar ? 'bg-gray-dark' : '', 'flex flex-col items-center text-light transition-colors duration-200 ease-in-out rounded-lg p-2']">
-        <MagnifyingGlassIcon class="size-8 text-gray-light rounded-full p-1 cursor-pointer" />
+        <MagnifyingGlassIcon class="size-9 text-gray-light rounded-full p-1 cursor-pointer" />
         <span
           :class="[route.name === 'search' && !showSidebar ? 'text-gray-light' : 'text-gray', 'text-xs font-semibold']">Search</span>
       </router-link>
