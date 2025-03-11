@@ -1,7 +1,7 @@
 Global:
     - Utiliser app et noter Problèmes
     - Faire en sorte qu'on puisse relier les items dans les deux sens (pas que depuis le maitre)
-    - Traiter TODO du code
+    - Vérifier la présence de TODO et de WIP dans le code
 
 Back:
     - Ensure auth is secured
@@ -14,10 +14,8 @@ Front:
     - Find a way to explicitly set the color under mobile home button
     - Faire en sorte que cliquer en dehors de la navigation du menu ne fasse que fermer le menu
     - Load more instead of inifinte scroll
-    - Gerer le fait que le compte nexiste pas au login
     - Faire listes differentes dans les stores pour chaque usage ?
     - Maj account params + mdp oublié + delete account
-    - Vérifier la présence de TODO et de WIP dans le code
     - Being able to easily import a music from spotify API 
     - Ajouter langue francaise
     - Fill infos page

@@ -59,6 +59,7 @@ export default defineConfig({
       VITE_APP_VERSION: process.env.VITE_APP_VERSION,
       VITE_BACKEND_API_URL: process.env.VITE_BACKEND_API_URL,
       VITE_FRONT_URL: process.env.VITE_FRONT_URL,
+      VITE_GIT_REPO: process.env.VITE_GIT_REPO,
     }
   },
   server: {
