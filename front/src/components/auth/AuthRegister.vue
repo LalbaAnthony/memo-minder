@@ -80,16 +80,15 @@ function valid() {
 }
 
 async function handleRegister() {
-    username.value = username.value.trim()
-    email.value = email.value.trim()
-    birthdate.value = birthdate.value.trim()
-    password.value = password.value.trim()
-    confirmPassword.value = confirmPassword.value.trim()
-
     const error = valid()
     if (error) {
         notif.notify(error, 'error')
     } else {
+        username.value = username.value.trim()
+        email.value = email.value.trim()
+        birthdate.value = birthdate.value.trim()
+        password.value = password.value.trim()
+        confirmPassword.value = confirmPassword.value.trim()
         authStore.register({
             username: username.value,
             email: email.value,
