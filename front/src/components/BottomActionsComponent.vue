@@ -13,20 +13,20 @@
 
     <!-- Create button -->
     <div v-if="props.createButton && route.name.includes('add')" @click="triggerCreate()"
-      class="flex items-center justify-center cursor-pointer text-success-light bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
+      class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
       <CheckIcon class="size-11" />
     </div>
 
     <!-- Update button -->
     <div v-if="props.updateButton && route.name.includes('details')" @click="triggerUpdate()"
-      class="flex items-center justify-center cursor-pointer text-success-light bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
+      class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
       <CheckIcon class="size-11" />
     </div>
 
     <!-- Delete button -->
     <div v-if="props.deleteButton && route.name.includes('details')" @click="triggerDelete()"
       class="flex items-center justify-center cursor-pointer text-danger bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
-      <TrashIcon class="size-8" />
+      <TrashIcon class="size-11" />
     </div>
 
     <!-- Add button -->
