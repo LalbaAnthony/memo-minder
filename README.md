@@ -1,12 +1,12 @@
-# 💌 - Memo Minder
+# 📝 - Memo Minder
 
 ## 📖 Technos
 
-- Node.js
-- Express
-- Vue.js
-- Tailwind
-- Headless UI
+- [Node.js](https://nodejs.org/en/)
+- [Express](https://expressjs.com/)
+- [Vue.js](https://vuejs.org/)
+- [Tailwind](https://tailwindcss.com/)
+- [Headless UI](https://headlessui.dev/)
 
 ## 🚀 Quick Start
 
