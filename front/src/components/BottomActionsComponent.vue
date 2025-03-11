@@ -3,9 +3,9 @@
     <!-- Scroll to top -->
     <TransitionRoot :show="props.goTopButton && route.name.includes('list') && isMobile() && enableGoTop"
       @click="goTop()">
-      <TransitionChild as="div" enter="transition ease-out duration-100 transform" enter-from="opacity-0 scale-95"
-        enter-to="opacity-100 scale-100" leave="transition ease-in duration-100 transform"
-        leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95"
+      <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0"
+        enter-to="opacity-100" leave="transition ease-in-out duration-300 transform" leave-from=" opacity-100"
+        leave-to="opacity-0"
         class="flex items-center justify-center cursor-pointer text-gray-light bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
         <ChevronUpIcon class="size-6" />
       </TransitionChild>
@@ -29,14 +29,8 @@
       <TrashIcon class="size-8" />
     </div>
 
-    <!-- Specific add button -->
-    <router-link v-if="props.addButton && route.name.includes('list')" :to="`${route.path}/add`"
-      class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
-      <PlusIcon class="size-11" />
-    </router-link>
-
-    <!-- Global add button -->
-    <div v-if="props.addButton && route.name === 'home'">
+    <!-- Add button -->
+    <div v-if="props.addButton && (route.name === 'home' || route.name.includes('list'))">
       <TransitionRoot :show="showAddSelector">
         <!-- Hide at click outside -->
         <TransitionChild v-click-outside="() => showAddSelector = false" as="div"
