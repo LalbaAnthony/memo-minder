@@ -14,19 +14,19 @@
     <!-- Create button -->
     <div v-if="props.createButton && route.name.includes('add')" @click="triggerCreate()"
       class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
-      <CheckIcon class="size-11" />
+      <CheckIcon class="size-10" />
     </div>
 
     <!-- Update button -->
     <div v-if="props.updateButton && route.name.includes('details')" @click="triggerUpdate()"
       class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
-      <CheckIcon class="size-11" />
+      <CheckIcon class="size-10" />
     </div>
 
     <!-- Delete button -->
     <div v-if="props.deleteButton && route.name.includes('details')" @click="triggerDelete()"
       class="flex items-center justify-center cursor-pointer text-danger bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
-      <TrashIcon class="size-11" />
+      <TrashIcon class="size-10" />
     </div>
 
     <!-- Add button -->
@@ -55,7 +55,7 @@
       <div
         :class="[showAddSelector ? 'rounded-b-2xl' : 'rounded-2xl', 'flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-xl p-2 transition-all duration-200 delay-100']"
         @click.stop="showAddSelector = !showAddSelector">
-        <PlusIcon class="size-11" />
+        <PlusIcon class="size-10" />
       </div>
     </div>
   </div>
