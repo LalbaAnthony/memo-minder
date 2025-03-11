@@ -41,14 +41,12 @@ function valid() {
 }
 
 async function handleLogin() {
-
-    email.value = email.value.trim()
-    password.value = password.value.trim()
-
     const error = valid()
     if (error) {
         notif.notify(error, 'error')
     } else {
+        email.value = email.value.trim()
+        password.value = password.value.trim()
         authStore.login(email.value, password.value)
         email.value = ''
         password.value = ''

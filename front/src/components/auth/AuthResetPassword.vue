@@ -47,6 +47,8 @@ async function handleResetPassword() {
     if (error) {
         notif.notify(error, 'error')
     } else {
+        code.value = code.value.trim()
+        password.value = password.value.trim()
         authStore.resetPassword(code.value, password.value)
         code.value = ''
         password.value = ''

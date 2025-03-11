@@ -26,19 +26,17 @@ const authStore = useAuthStore()
 
 function valid() {
     // return false // ? uncomment this line to skip form validation
-    if (authStore.fogotPasswordEmail.length === 0) return "Please enter your email"
+    if (!authStore.fogotPasswordEmail) return "Please enter your email"
     if (!isValidEmail(authStore.fogotPasswordEmail)) return "Please enter a valid email"
     return false
 }
 
 async function handleForgotPassword() {
-
-    authStore.fogotPasswordEmail = authStore.fogotPasswordEmail.trim()
-
     const error = valid()
     if (error) {
         notif.notify(error, 'error')
     } else {
+        authStore.fogotPasswordEmail = authStore.fogotPasswordEmail.trim()
         authStore.forgotPassword(authStore.fogotPasswordEmail)
         emit('setAuthType', 'resetPassword')
         authStore.fogotPasswordEmail = ''
