@@ -61,7 +61,6 @@ import { dateToNiceDate } from '@/helpers/functions.js'
 import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import { LinkIcon } from '@heroicons/vue/24/solid'
 import { ClipboardIcon } from '@heroicons/vue/24/solid'
-
 import debounce from 'lodash/debounce'
 
 const route = useRoute()
