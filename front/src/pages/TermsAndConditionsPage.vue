@@ -87,6 +87,9 @@
       </p>
     </section>
 
+    <section>
+      <p>Last updated: March 2025</p>
+    </section>
   </div>
 </template>
 
