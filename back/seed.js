@@ -71,9 +71,9 @@ const seedData = async () => {
 const checkData = async () => {
     try {
         // Verify that the data has been inserted with a SELECT query
-        const events = await Event.findAll();
-        if (events.length === 0) {
-            logConsole('No events found in the database', 'error');
+        const moods = await Mood.findAll();
+        if (moods.length === 0) {
+            logConsole('No moods found in the database', 'error');
         } else {
             logConsole('Sample data verified', 'success');
         }

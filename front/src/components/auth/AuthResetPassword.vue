@@ -28,7 +28,20 @@
 <script setup>
 import PasswordStrength from '@/components/PasswordStrengthComponent.vue'
 import { useAuthStore } from '@/stores/auth'
+import { onMounted } from 'vue'
+import { isMobile } from '@/helpers/functions.js'
 
 const authStore = useAuthStore()
 
+onMounted(() => {
+    // Add shortcuts
+    if (!isMobile()) {
+        window.addEventListener('keydown', (e) => {
+            // Enter to trigger main action
+            if (e.key === 'Enter') {
+                authStore.resetPassword()
+            }
+        })
+    }
+})
 </script>
