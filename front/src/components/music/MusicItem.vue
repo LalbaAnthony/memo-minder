@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-row justify-between border-2 border-gray rounded-[8px] bg-dark-light h-full">
     <div
-      :class="['flex-1 flex justify-between rounded-l-[6px] p-5 cursor-pointer transition-colors duration-200', props?.music?.streamingLink ? `${platform}-item` : '']"
+      :class="['flex-1 flex justify-left rounded-l-[6px] p-5 cursor-pointer transition-colors duration-200', props?.music?.streamingLink ? `${platform}-item` : '']"
       @click="openLink()">
       <div
-        :class="['flex items-center justify-center gap-4 p-2 pr-4', props?.music?.streamingLink ? `${platform}-logo` : '']">
+        :class="['flex items-center justify-center gap-4 p-2 pr-6', props?.music?.streamingLink ? `${platform}-logo` : '']">
         <svg v-if="platform === 'spotify'" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
           viewBox="0 0 16 16">
           <path
