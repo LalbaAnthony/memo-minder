@@ -10,7 +10,7 @@ Back:
     - Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Front:
-    - Clicquer sur terms and conditions reset the register form
+    - Clicquer sur terms and conditions reset the register form: rework auth forms so its save fields
     - Trop de scroll quand barre de recherche item picker est vide
     - Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ?)
     - Utiliser app et noter Problemes
