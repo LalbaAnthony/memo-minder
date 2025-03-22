@@ -1,16 +1,14 @@
 <template>
   <div class="rounded-lg border border-gray p-4 max-w-md mx-auto mt-8">
-
-    <h2 class="text-center text-light text-2xl font-semibold mt-4 mb-8">{{ tabs[type].title }}</h2>
-
-    <component :is="tabs[type].component" @set-auth-type="(type) => changeTab(type)">
+    <h2 class="text-center text-light text-2xl font-semibold mt-4 mb-8">{{ tabs[authStore.tab].title }}</h2>
+    <component :is="tabs[authStore.tab].component">
       <div class="flex flex-row-reverse align-items-center justify-between m-4">
-        <button v-if="type === 'login' || type === 'register'" class="text-light transition-colors duration-200 hover:text-gray-light cursor-pointer"
-          @click="changeTab('forgotPassword')">Forgot password ?</button>
-        <button v-if="type === 'forgotPassword'" class="text-light transition-colors duration-200 hover:text-gray-light cursor-pointer"
-          @click="changeTab('login')">Back</button>
-        <button v-if="type === 'resetPassword'" class="text-light transition-colors duration-200 hover:text-gray-light cursor-pointer"
-          @click="changeTab('forgotPassword')">Back</button>
+        <button v-if="authStore.tab === 'login' || authStore.tab === 'register'" class="text-light transition-colors duration-200 hover:text-gray-light cursor-pointer"
+          @click="authStore.tab = 'forgotPassword'">Forgot password ?</button>
+        <button v-if="authStore.tab === 'forgotPassword'" class="text-light transition-colors duration-200 hover:text-gray-light cursor-pointer"
+          @click="authStore.tab = 'login'">Back</button>
+        <button v-if="authStore.tab === 'resetPassword'" class="text-light transition-colors duration-200 hover:text-gray-light cursor-pointer"
+          @click="authStore.tab = 'forgotPassword'">Back</button>
       </div>
     </component>
   </div>
@@ -22,8 +20,9 @@ import AuthRegister from '@/components/auth/AuthRegister.vue'
 import AuthForgotPassword from '@/components/auth/AuthForgotPassword.vue'
 import AuthResetPassword from '@/components/auth/AuthResetPassword.vue'
 import { ref, shallowRef } from 'vue'
+import { useAuthStore } from '@/stores/auth'
 
-const type = ref('login') // 'login' or 'register' or 'forgotPassword' or 'resetPassword'
+const authStore = useAuthStore()
 
 const tabs = ref({
   login: {
@@ -43,11 +42,5 @@ const tabs = ref({
     component: shallowRef(AuthResetPassword),
   }
 })
-
-function changeTab(t = 'login') {
-  if (tabs.value[t]) {
-    type.value = t
-  }
-}
 
 </script>

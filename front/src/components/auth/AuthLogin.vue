@@ -12,7 +12,7 @@
                 <span class="mx-2 my-0.5">Login</span>
             </button>
             <hr class="block md:hidden w-1/3" />
-            <button class="text-light p-2 rounded-lg cursor-pointer hover:bg-dark-light transition-colors duration-200" @click="emit('setAuthType', 'register')">
+            <button class="text-light p-2 rounded-lg cursor-pointer hover:bg-dark-light transition-colors duration-200" @click="authStore.tab = 'register'">
                 <span class="mx-2 my-0.5">Register</span>
             </button>
         </div>
@@ -24,8 +24,6 @@ import { ref } from "vue"
 import { notif } from '@/helpers/notif.js'
 import { isValidEmail } from '@/helpers/functions.js'
 import { useAuthStore } from '@/stores/auth'
-
-const emit = defineEmits(['setAuthType'])
 
 const authStore = useAuthStore()
 

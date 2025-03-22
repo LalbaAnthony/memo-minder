@@ -33,7 +33,7 @@
             </button>
             <hr class="block md:hidden w-1/3" />
             <button class="text-light p-2 rounded-lg cursor-pointer transition-colors duration-200 hover:bg-gray-dark"
-                @click="emit('setAuthType', 'login')">
+                @click="authStore.tab = 'login'">
                 <span class="mx-2 my-0.5">Login</span>
             </button>
         </div>
@@ -50,8 +50,6 @@ import { isValidDate } from '@/helpers/functions.js'
 import { languages } from '@/lang/languages.js'
 import { missingsElementsPassword } from '@/helpers/functions.js'
 import { useAuthStore } from '@/stores/auth'
-
-const emit = defineEmits(['setAuthType'])
 
 const authStore = useAuthStore()
 

@@ -20,8 +20,6 @@ import { notif } from '@/helpers/notif.js'
 import { isValidEmail } from '@/helpers/functions.js'
 import { useAuthStore } from '@/stores/auth'
 
-const emit = defineEmits(['setAuthType'])
-
 const authStore = useAuthStore()
 
 function valid() {
@@ -38,7 +36,7 @@ async function handleForgotPassword() {
     } else {
         authStore.fogotPasswordEmail = authStore.fogotPasswordEmail.trim()
         authStore.forgotPassword(authStore.fogotPasswordEmail)
-        emit('setAuthType', 'resetPassword')
+        authStore.tab = 'resetPassword'
         authStore.fogotPasswordEmail = ''
     }
 }
