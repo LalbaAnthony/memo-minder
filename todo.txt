@@ -10,16 +10,13 @@ Back:
     - Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Front:
-    - Clicquer sur terms and conditions reset the register form: rework auth forms so its save fields
     - Trop de scroll quand barre de recherche item picker est vide
     - Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ?)
     - Utiliser app et noter Problemes
-    - Faire en sorte que cliquer en dehors de la navigation du menu ne fasse que fermer le menu
     - Inifinte scroll
     - Faire listes differentes dans les stores pour chaque usage ?
     - Maj account params + mdp oublié + delete account
     - Ajouter langue francaise
-    - Check que couleur est logo menu android et comparer avec CSS
     - Fill infos page
     - Fill terms-and-conditions page and add link in the footer and in the infos page
 
