@@ -150,5 +150,133 @@
         "artist": "Led Zeppelin",
         "releaseDate": "1969-10-22",
         "streamingLink": "https://www.youtube.com/watch?v=HQmmM_qwG4k"
+    },
+    {
+        "musicId": 20,
+        "userId": 1,
+        "title": "Sweet Child O' Mine",
+        "artist": "Guns N' Roses",
+        "releaseDate": "1987-08-17",
+        "streamingLink": "https://www.youtube.com/watch?v=1w7OgIMMRc4"
+    },
+    {
+        "musicId": 21,
+        "userId": 1,
+        "title": "Billie Jean",
+        "artist": "Michael Jackson",
+        "releaseDate": "1983-01-02",
+        "streamingLink": "https://www.youtube.com/watch?v=Zi_XLOBDo_Y"
+    },
+    {
+        "musicId": 22,
+        "userId": 1,
+        "title": "Imagine",
+        "artist": "John Lennon",
+        "releaseDate": "1971-10-11",
+        "streamingLink": "https://www.youtube.com/watch?v=YkgkThdzX-8"
+    },
+    {
+        "musicId": 23,
+        "userId": 1,
+        "title": "Hey Jude",
+        "artist": "The Beatles",
+        "releaseDate": "1968-08-26",
+        "streamingLink": "https://www.youtube.com/watch?v=A_MjCqQoLLA"
+    },
+    {
+        "musicId": 24,
+        "userId": 1,
+        "title": "Paint It Black",
+        "artist": "The Rolling Stones",
+        "releaseDate": "1966-05-07",
+        "streamingLink": "https://www.youtube.com/watch?v=O4irXQhgMqg"
+    },
+    {
+        "musicId": 25,
+        "userId": 1,
+        "title": "Wonderwall",
+        "artist": "Oasis",
+        "releaseDate": "1995-10-02",
+        "streamingLink": "https://www.youtube.com/watch?v=bx1Bh8ZvH84"
+    },
+    {
+        "musicId": 26,
+        "userId": 1,
+        "title": "Radioactive",
+        "artist": "Imagine Dragons",
+        "releaseDate": "2012-10-29",
+        "streamingLink": "https://www.youtube.com/watch?v=ktvTqknDobU"
+    },
+    {
+        "musicId": 27,
+        "userId": 1,
+        "title": "Take On Me",
+        "artist": "A-ha",
+        "releaseDate": "1985-10-19",
+        "streamingLink": "https://www.youtube.com/watch?v=djV11Xbc914"
+    },
+    {
+        "musicId": 28,
+        "userId": 1,
+        "title": "Somebody That I Used to Know",
+        "artist": "Gotye",
+        "releaseDate": "2011-07-05",
+        "streamingLink": "https://www.youtube.com/watch?v=8UVNT4wvIGY"
+    },
+    {
+        "musicId": 29,
+        "userId": 1,
+        "title": "Counting Stars",
+        "artist": "OneRepublic",
+        "releaseDate": "2013-06-14",
+        "streamingLink": "https://www.youtube.com/watch?v=hT_nvWreIhg"
+    },
+    {
+        "musicId": 30,
+        "userId": 1,
+        "title": "We Will Rock You",
+        "artist": "Queen",
+        "releaseDate": "1977-10-07",
+        "streamingLink": "https://www.youtube.com/watch?v=-tJYN-eG1zk"
+    },
+    {
+        "musicId": 31,
+        "userId": 1,
+        "title": "I Will Always Love You",
+        "artist": "Whitney Houston",
+        "releaseDate": "1992-11-03",
+        "streamingLink": "https://www.youtube.com/watch?v=3JWTaaS7LdU"
+    },
+    {
+        "musicId": 32,
+        "userId": 1,
+        "title": "Toxic",
+        "artist": "Britney Spears",
+        "releaseDate": "2004-01-13",
+        "streamingLink": "https://www.youtube.com/watch?v=LOZuxwVk7TU"
+    },
+    {
+        "musicId": 33,
+        "userId": 1,
+        "title": "Uptown Funk",
+        "artist": "Mark Ronson ft. Bruno Mars",
+        "releaseDate": "2014-11-10",
+        "streamingLink": "https://www.youtube.com/watch?v=OPf0YbXqDm0"
+    },
+    {
+        "musicId": 34,
+        "userId": 1,
+        "title": "Someone Like You",
+        "artist": "Adele",
+        "releaseDate": "2011-01-24",
+        "streamingLink": "https://www.youtube.com/watch?v=hLQl3WQQoQ0"
+    },
+    {
+        "musicId": 35,
+        "userId": 1,
+        "title": "Superstition",
+        "artist": "Stevie Wonder",
+        "releaseDate": "1972-10-24",
+        "streamingLink": "https://www.youtube.com/watch?v=0CFuCYNx-1g"
     }
 ]
