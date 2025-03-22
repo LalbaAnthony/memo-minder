@@ -1,8 +1,8 @@
 Global:
     - Utiliser app et noter Problèmes
     - Faire en sorte qu'on puisse relier les items dans les deux sens (pas que depuis le maitre)
-    - Vérifier la présence de TODO et de WIP dans le code
     - Faire du many to many partout
+    - Vérifier la présence de TODO et de WIP dans le code
 
 Back:
     - Ensure auth is secured
@@ -10,7 +10,6 @@ Back:
     - Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Front:
-    - A l'ouverture d'un item, il y a une actualisation et ça devrait pas
     - Trop de scroll quand barre de recherche item picker est vide
     - Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ?)
     - Check the primary color saturation VS icon

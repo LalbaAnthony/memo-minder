@@ -89,7 +89,7 @@ const router = useRouter()
 const eventStore = useEventStore()
 
 const showItemPicker = ref(false)
-const isInitialLoad = ref(true)
+const watched = ref(0)
 
 function loadOrInitEvent() {
   if (route.params.eventId) {
@@ -98,7 +98,7 @@ function loadOrInitEvent() {
     eventStore.initEvent()
     if (route.query.title) eventStore.event.data.title = route.query.title // From the search page
   }
-  isInitialLoad.value = false
+  watched.value = 0
 }
 
 function deleteSeason() {
@@ -184,7 +184,7 @@ const debouncedUpdate = debounce(() => {
       eventStore.updateEvent(eventStore.event.data)
     }
   }
-}, 3000)
+}, 10000)
 
 onMounted(() => {
   loadOrInitEvent()
@@ -200,7 +200,8 @@ watch(() => route.params.eventId, () => {
 
 watch(() => eventStore.event.data,
   () => {
-    if (isInitialLoad.value) return // Skip the debounce on initial load
+    watched.value += 1
+    if (watched.value <= 2) return // Skip the debounce on initial load
     debouncedUpdate();
   },
   { deep: true }

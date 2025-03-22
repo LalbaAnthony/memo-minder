@@ -1,5 +1,5 @@
 <template>
-  <div :class="['fixed right-0 z-20 flex flex-col justify-end gap-2 p-3', isMobile() ? 'bottom-20' : 'bottom-0']">
+  <div :class="['fixed z-20 flex flex-col justify-end gap-2 p-3', isMobile() ? 'bottom-24 right-4' : 'bottom-0 right-0']">
     <!-- Scroll to top -->
     <TransitionRoot :show="props.goTopButton && route.name.includes('list') && isMobile() && enableGoTop"
       @click="goTop()">

@@ -94,7 +94,7 @@ const router = useRouter()
 const seasonStore = useSeasonStore()
 
 const showItemPicker = ref(false)
-const isInitialLoad = ref(true)
+const watched = ref(0)
 
 function loadOrInitSeason() {
   if (route.params.seasonId) {
@@ -103,7 +103,7 @@ function loadOrInitSeason() {
     seasonStore.initSeason()
     if (route.query.title) seasonStore.season.data.title = route.query.title // From the search page
   }
-  isInitialLoad.value = false
+  watched.value = 0
 }
 
 function deleteMusic() {
@@ -177,7 +177,7 @@ const debouncedUpdate = debounce(() => {
       seasonStore.updateSeason(seasonStore.season.data)
     }
   }
-}, 3000)
+}, 10000)
 
 onMounted(() => {
   loadOrInitSeason()
@@ -193,7 +193,8 @@ watch(() => route.params.seasonId, () => {
 
 watch(() => seasonStore.season.data,
   () => {
-    if (isInitialLoad.value) return // Skip the debounce on initial load
+    watched.value += 1
+    if (watched.value <= 2) return // Skip the debounce on initial load
     debouncedUpdate();
   },
   { deep: true }

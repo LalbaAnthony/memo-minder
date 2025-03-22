@@ -67,7 +67,7 @@ const route = useRoute()
 const router = useRouter()
 const musicStore = useMusicStore()
 
-const isInitialLoad = ref(true)
+const watched = ref(0)
 
 function loadOrInitMusic() {
   if (route.params.musicId) {
@@ -76,7 +76,7 @@ function loadOrInitMusic() {
     musicStore.initMusic()
     if (route.query.title) musicStore.music.data.title = route.query.title // From the search page
   }
-  isInitialLoad.value = false
+  watched.value = 0
 }
 
 function onpenStreamingLink() {
@@ -130,7 +130,7 @@ const debouncedUpdate = debounce(() => {
       musicStore.updateMusic(musicStore.music.data)
     }
   }
-}, 3000)
+}, 10000)
 
 onMounted(() => {
   loadOrInitMusic()
@@ -146,7 +146,8 @@ watch(() => route.params.musicId, () => {
 
 watch(() => musicStore.music.data,
   () => {
-    if (isInitialLoad.value) return // Skip the debounce on initial load
+    watched.value += 1
+    if (watched.value <= 2) return // Skip the debounce on initial load
     debouncedUpdate();
   },
   { deep: true }
