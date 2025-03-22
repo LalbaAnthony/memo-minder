@@ -41,7 +41,7 @@ const route = useRoute()
 const router = useRouter()
 const personStore = usePersonStore()
 
-const isInitialLoad = ref(true)
+const watched = ref(0)
 
 function loadOrInitPerson() {
   if (route.params.personId) {
@@ -50,7 +50,7 @@ function loadOrInitPerson() {
     personStore.initPerson()
     if (route.query.name) personStore.person.data.name = route.query.name // From the search page
   }
-  isInitialLoad.value = false
+  watched.value = 0
 }
 
 function valid() {
@@ -93,7 +93,7 @@ const debouncedUpdate = debounce(() => {
       personStore.updatePerson(personStore.person.data)
     }
   }
-}, 3000)
+}, 10000)
 
 onMounted(() => {
   loadOrInitPerson()
@@ -109,7 +109,8 @@ watch(() => route.params.personId, () => {
 
 watch(() => personStore.person.data,
   () => {
-    if (isInitialLoad.value) return // Skip the debounce on initial load
+    watched.value += 1
+    if (watched.value <= 2) return // Skip the debounce on initial load
     debouncedUpdate();
   },
   { deep: true }
