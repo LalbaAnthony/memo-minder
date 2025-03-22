@@ -23,7 +23,7 @@ exports.register = async (req, res) => {
         const newUser = await User.create({ username, birthdate, email, password: hashedPassword, language });
         if (!newUser) return res.status(500).json(frmtr('error', null, 'Error while creating the account'));
 
-        return res.status(200).json(frmtr('success', newUser, 'Account created successfully'))
+        return res.status(201).json(frmtr('success', null, 'Account created successfully'))
     } catch (error) {
         return res.status(500).json(frmtr('error', null, error.message))
     }

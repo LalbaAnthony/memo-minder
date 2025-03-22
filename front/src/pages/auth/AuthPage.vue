@@ -1,16 +1,8 @@
 <template>
   <div class="rounded-lg border border-gray p-4 max-w-md mx-auto mt-8">
-    <h2 class="text-center text-light text-2xl font-semibold mt-4 mb-8">{{ tabs[authStore.tab].title }}</h2>
-    <component :is="tabs[authStore.tab].component">
-      <div class="flex flex-row-reverse align-items-center justify-between m-4">
-        <button v-if="authStore.tab === 'login' || authStore.tab === 'register'" class="text-light transition-colors duration-200 hover:text-gray-light cursor-pointer"
-          @click="authStore.tab = 'forgotPassword'">Forgot password ?</button>
-        <button v-if="authStore.tab === 'forgotPassword'" class="text-light transition-colors duration-200 hover:text-gray-light cursor-pointer"
-          @click="authStore.tab = 'login'">Back</button>
-        <button v-if="authStore.tab === 'resetPassword'" class="text-light transition-colors duration-200 hover:text-gray-light cursor-pointer"
-          @click="authStore.tab = 'forgotPassword'">Back</button>
-      </div>
-    </component>
+    <h2 class="text-center text-light text-2xl font-semibold mt-4 mb-8">{{ tabs[authStore.authentication.tab].title }}
+    </h2>
+    <component :is="tabs[authStore.authentication.tab].component" />
   </div>
 </template>
 
