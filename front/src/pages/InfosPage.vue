@@ -12,4 +12,5 @@
 
 <script setup>
 import { VITE_APP_NAME, VITE_GIT_REPO } from '@/config';
+
 </script>
