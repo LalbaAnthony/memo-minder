@@ -2,18 +2,83 @@ import { defineStore } from 'pinia'
 import { notif } from '@/helpers/notif.js'
 import router from '@/router'
 import { api } from '@/helpers/api'
+import { isValidEmail } from '@/helpers/functions.js'
+import { isValidDate } from '@/helpers/functions.js'
+import { missingsElementsPassword } from '@/helpers/functions.js'
 
 export const useAuthStore = defineStore('auth', {
   persist: true,
   state: () => ({
-    tab: 'login',
+    authentication: {
+      tab: 'login',
+      tabs: {
+        login: {
+          fields: {
+            email: '',
+            password: ''
+          },
+          default: {
+            email: '',
+            password: ''
+          }
+        },
+        register: {
+          fields: {
+            username: '',
+            birthdate: '2000-01-01T00:00:00.000Z',
+            email: '',
+            language: 'en-US',
+            password: '',
+            confirmPassword: '',
+            acceptTerms: false,
+          },
+          default: {
+            username: '',
+            birthdate: '2000-01-01T00:00:00.000Z',
+            email: '',
+            language: 'en-US',
+            password: '',
+            confirmPassword: '',
+            acceptTerms: false,
+          }
+        },
+        forgotPassword: {
+          fields: {
+            email: ''
+          },
+          default: {
+            email: ''
+          }
+        },
+        resetPassword: {
+          fields: {
+            code: null,
+            password: '',
+            confirmPassword: '',
+          },
+          default: {
+            code: null,
+            password: '',
+            confirmPassword: '',
+          }
+        }
+      }
+    },
     authenticated: false,
     token: null,
     user: {},
-    fogotPasswordEmail: '',
   }),
 
   actions: {
+    setAuthenticationTab(t = 'login') {
+      this.authentication.tab = t
+    },
+
+    clearTabFields(tab) {
+      const defaults = this.authentication.tabs[tab].default
+      this.authentication.tabs[tab].fields = { ...defaults }
+    },
+
     async fetchUserInfos() {
 
       await api.get(`user-infos/${this.user.userId}`).then(resp => {
@@ -59,14 +124,47 @@ export const useAuthStore = defineStore('auth', {
       console.log('verifyEmail', email, token)
     },
 
-    async forgotPassword(email) {
+    async forgotPassword() {
+      const email = this.authentication.tabs.forgotPassword.fields.email.trim() || null
+
+      let error = null
+
+      if (!error && !email) error = "Please enter your email"
+      if (!error && !isValidEmail(email)) error = "Please enter a valid email"
+
+      if (error) {
+        notif.notify(error, 'error')
+        return false
+      }
+
+      this.clearTabFields('forgotPassword')
+
       // TODO: WIP
       console.log('forgotPassword', email)
     },
 
-    async resetPassword(code, newPassword, email = this.fogotPasswordEmail) {
+    async resetPassword() {
+      const code = this.authentication.tabs.resetPassword.fields.code || null
+      const password = this.authentication.tabs.resetPassword.fields.password.trim() || null
+      const confirmPassword = this.authentication.tabs.resetPassword.fields.confirmPassword.trim() || null
+
+      let error = null
+
+      if (!error && !code) error = "Please enter your code"
+      if (!error && !password) error = "Please enter your password"
+      if (!error && !confirmPassword) error = "Please enter your password"
+      if (!error && password !== confirmPassword) error = 'Passwords do not match'
+      if (!error && missingsElementsPassword(password).length > 0) error = `Password must at least contain: ${missingsElementsPassword(password).join(', ')}`
+
+      if (error) {
+        notif.notify(error, 'error')
+        return false
+      }
+
+      this.clearTabFields('resetPassword')
+
       // TODO: WIP
-      console.log('resetPassword', code, newPassword, email)
+      console.log('reset password', code, password, confirmPassword)
     },
 
     async deleteAccount() {
@@ -87,9 +185,44 @@ export const useAuthStore = defineStore('auth', {
       })
     },
 
-    async register(user, redirect = '/auth') {
+    async register() {
 
       this.logout(false)
+
+      const username = this.authentication.tabs.register.fields.username.trim() || null
+      const birthdate = this.authentication.tabs.register.fields.birthdate || null
+      const email = this.authentication.tabs.register.fields.email.trim() || null
+      const language = this.authentication.tabs.register.fields.language || null
+      const password = this.authentication.tabs.register.fields.password.trim() || null
+      const confirmPassword = this.authentication.tabs.register.fields.confirmPassword.trim() || null
+      const acceptTerms = this.authentication.tabs.register.fields.acceptTerms || null
+
+      let error = null
+
+      if (!error && (!username || username.length === 0)) error = "Please enter your username"
+      if (!error && (!birthdate || birthdate.length === 0)) error = "Please enter your birthdate"
+      if (!error && !isValidDate(birthdate)) error = "Please enter a valid birthdate"
+      if (!error && (!language || language.length === 0)) error = "Please select your language"
+      if (!error && (!email || email.length === 0)) error = "Please enter your email"
+      if (!error && !isValidEmail(email)) error = "Please enter a valid email"
+      if (!error && (!password || password.length === 0)) error = "Please enter your password"
+      if (!error && (!confirmPassword || confirmPassword.length === 0)) error = "Please enter your password"
+      if (!error && password !== confirmPassword) error = 'Passwords do not match'
+      if (!error && missingsElementsPassword(password).length > 0) error = `Password must at least contain: ${missingsElementsPassword(password).join(', ')}`
+      if (!error && !acceptTerms) error = 'Please accept the terms and conditions'
+
+      if (error) {
+        notif.notify(error, 'error')
+        return false
+      }
+
+      const user = {
+        username,
+        email,
+        birthdate,
+        language,
+        password,
+      }
 
       await api.post('register', user).then(resp => {
 
@@ -100,18 +233,32 @@ export const useAuthStore = defineStore('auth', {
 
         notif.notify(`You have been registered`, 'success')
 
+        this.clearTabFields('register')
+
+        this.setAuthenticationTab('login')
+
         return true
       }).catch(error => {
         notif.notify(`An error occured: ${error}`, 'error')
         return false
       })
-
-      if (redirect) {
-        router.push(redirect)
-      }
     },
 
-    async login(email, password, redirect = '/') {
+    async login(redirect = '/') {
+
+      const email = this.authentication.tabs.login.fields.email.trim() || null
+      const password = this.authentication.tabs.login.fields.password.trim() || null
+
+      let error = null
+
+      if (!error && (!password || password.length === 0)) error = "Please enter your password"
+      if (!error && email && email.length === 0) error = "Please enter your email"
+      if (!error && !isValidEmail(email)) error = "Please enter a valid email"
+
+      if (error) {
+        notif.notify(error, 'error')
+        return false
+      }
 
       await api.post('login', { email, password }).then(resp => {
 
@@ -125,6 +272,8 @@ export const useAuthStore = defineStore('auth', {
         this.authenticated = true
 
         notif.notify('You have been logged in', 'success')
+
+        this.clearTabFields('login')
 
         return true
       }).catch(error => {
