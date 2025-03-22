@@ -6,7 +6,7 @@ export default {
         binding.value();
       }
     };
-    // Attach in capture phase (third argument true)
+
     document.body.addEventListener('click', el.clickOutsideEvent, true);
   },
   unmounted(el) {
