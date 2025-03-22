@@ -10,11 +10,9 @@ Back:
     - Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Front:
+    - Check que couleur est logo menu android et comparer avec CSS
     - Trop de scroll quand barre de recherche item picker est vide
     - Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ?)
-    - Check the primary color saturation VS icon
-    - Use primary color for almost every bottom actions buttons as add, delete, save, ...
-    - Date chevron icon  (check Shadow DOM in Chrome)
     - Utiliser app et noter Problemes
     - Find a way to explicitly set the color under mobile home button
     - Faire en sorte que cliquer en dehors de la navigation du menu ne fasse que fermer le menu

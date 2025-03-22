@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col cursor-pointer border-2 border-gray rounded-[8px] bg-dark-light h-full">
     <div class="h-6 w-full rounded-t-[6px]" :style="`background-color: ${props?.season?.color};`"></div>
-    <router-link class="flex-1 p-5" :to="{ path: `/season/${props?.season?.seasonId}` }">
+    <div class="flex-1 p-5" @click="goToSeason()">
       <div class="flex flex-col justify-center items-center w-full my-2">
         <h1 class="text-2xl font-bold">{{ props?.season?.title }}</h1>
         <p class="text-sm text-gray-light">on {{ dateToNiceDate(props?.season?.createdAt) }}</p>
@@ -14,7 +14,7 @@
         </div>
         <p class="m-2 my-4">{{ threeDotString(props?.season?.description) }}</p>
       </div>
-    </router-link>
+    </div>
     <div class="grid grid-cols-2 divide-x-2 divide-gray cursor-pointer">
       <div class="flex justify-center items-center p-2 bg-gray-dark rounded-bl-[6px]" @click="deleteSeason()">
         <TrashIcon class="size-6" />
