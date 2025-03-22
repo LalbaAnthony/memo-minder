@@ -38,51 +38,51 @@
           <router-link v-if="!isMobile()" to="/"
             :class="[route.name.includes('home') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer text-light rounded-lg hover:bg-gray-dark p-2']"
             @click.stop="hideSidebar()">
-            <HomeIcon class="size-6 text-gray-light" />
-            <span class="ml-3 mt-0.5">Home</span>
+            <HomeIcon class="size-8 text-gray-light" />
+            <span class="ml-3 mt-0.5 text-lg">Home</span>
           </router-link>
           <router-link to="/infos"
             :class="[route.name.includes('infos') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer text-light rounded-lg hover:bg-gray-dark p-2']"
             @click.stop="hideSidebar()">
-            <InformationCircleIcon class="size-6 text-gray-light" />
-            <span class="ml-3 mt-0.5">Infos</span>
+            <InformationCircleIcon class="size-8 text-gray-light" />
+            <span class="ml-3 mt-0.5 text-lg">Infos</span>
           </router-link>
           <hr>
           <router-link to="/seasons"
             :class="[route.name.includes('season') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer text-light rounded-lg hover:bg-gray-dark p-2']"
             @click.stop="hideSidebar()">
-            <FilmIcon class="size-6 text-gray-light" />
-            <span class="ml-3 mt-0.5">Seasons</span>
+            <FilmIcon class="size-8 text-gray-light" />
+            <span class="ml-3 mt-0.5 text-lg">Seasons</span>
           </router-link>
           <router-link to="/events"
             :class="[route.name.includes('event') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer text-light rounded-lg hover:bg-gray-dark p-2']"
             @click.stop="hideSidebar()">
-            <CalendarDaysIcon class="size-6 text-gray-light" />
-            <span class="ml-3 mt-0.5">Events</span>
+            <CalendarDaysIcon class="size-8 text-gray-light" />
+            <span class="ml-3 mt-0.5 text-lg">Events</span>
           </router-link>
           <router-link to="/people"
             :class="[route.name.includes('people') || route.name.includes('person') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer text-light rounded-lg hover:bg-gray-dark p-2']"
             @click.stop="hideSidebar()">
-            <UsersIcon class="size-6 text-gray-light" />
-            <span class="ml-3 mt-0.5">People</span>
+            <UsersIcon class="size-8 text-gray-light" />
+            <span class="ml-3 mt-0.5 text-lg">People</span>
           </router-link>
           <router-link to="/musics"
             :class="[route.name.includes('music') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer text-light rounded-lg hover:bg-gray-dark p-2']"
             @click.stop="hideSidebar()">
-            <MusicalNoteIcon class="size-6 text-gray-light" />
-            <span class="ml-3 mt-0.5">Musics</span>
+            <MusicalNoteIcon class="size-8 text-gray-light" />
+            <span class="ml-3 mt-0.5 text-lg">Musics</span>
           </router-link>
           <hr>
           <router-link to="/account"
             :class="[route.name.includes('account') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer text-light rounded-lg hover:bg-gray-dark p-2']"
             @click.stop="hideSidebar()">
-            <UserCircleIcon class="size-6 text-gray-light" />
-            <span class="ml-3 mt-0.5">Account</span>
+            <UserCircleIcon class="size-8 text-gray-light" />
+            <span class="ml-3 mt-0.5 text-lg">Account</span>
           </router-link>
           <div class="flex items-center cursor-pointer text-danger-light rounded-lg hover:bg-gray p-2"
             @click.stop="authStore.logout()">
-            <ArrowLeftEndOnRectangleIcon class="size-6 text-danger" />
-            <span class="ml-3 mt-0.5">Log out</span>
+            <ArrowLeftEndOnRectangleIcon class="size-8 text-danger" />
+            <span class="ml-3 mt-0.5 text-lg">Log out</span>
           </div>
         </nav>
         <div class="text-gray-light mb-2 mr-4 absolute bottom-0 right-0">

@@ -7,9 +7,9 @@
     <Dropdown title="Sort" side="right">
       <div class="space-y-2">
         <button v-if="props.enableDefault" @click="resetSort"
-          class="w-full text-left text-light transition-colors duration-200 hover:bg-gray-light px-4 py-2 rounded-md">Default</button>
+          class="w-full text-left text-light transition-colors duration-200 hover:bg-gray px-4 py-2 rounded-md">Default</button>
         <button v-for="item in props.sortItems" :key="item.value" @click="toggleSort(item.value)"
-          class="w-full text-left text-light transition-colors duration-200 hover:bg-gray-light px-4 py-2 rounded-md">{{ item.label }}</button>
+          class="w-full text-left text-light transition-colors duration-200 hover:bg-gray px-4 py-2 rounded-md">{{ item.label }}</button>
       </div>
     </Dropdown>
   </div>
