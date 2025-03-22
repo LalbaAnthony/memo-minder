@@ -13,13 +13,13 @@
 
     <!-- Create button -->
     <div v-if="props.createButton && route.name.includes('add')" @click="triggerCreate()"
-      class="flex items-center justify-center cursor-pointer text-dark-light bg-primary shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
+      class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
       <CheckIcon class="size-10" />
     </div>
 
     <!-- Update button -->
     <div v-if="props.updateButton && route.name.includes('details')" @click="triggerUpdate()"
-      class="flex items-center justify-center cursor-pointer text-dark-light bg-primary shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
+      class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
       <CheckIcon class="size-10" />
     </div>
 
@@ -41,16 +41,16 @@
           leave-from="translate-y-0 opacity-100" leave-to="opacity-0 translate-y-1/4"
           class="origin-top flex flex-col items-center justify-center gap-1 bg-gray-dark rounded-2xl px-1 py-2 z-10">
           <router-link to="/seasons/add" class="p-2 rounded-xl hover:bg-gray">
-            <FilmIcon class="size-8 text-gray-light" />
+            <FilmIcon class="size-8 text-light" />
           </router-link>
           <router-link to="/events/add" class="p-2 rounded-xl hover:bg-gray">
-            <CalendarDaysIcon class="size-8 text-gray-light" />
+            <CalendarDaysIcon class="size-8 text-light" />
           </router-link>
           <router-link to="/people/add" class="p-2 rounded-xl hover:bg-gray">
-            <UserIcon class="size-8 text-gray-light" />
+            <UserIcon class="size-8 text-light" />
           </router-link>
           <router-link to="/musics/add" class="p-2 rounded-xl hover:bg-gray">
-            <MusicalNoteIcon class="size-8 text-gray-light" />
+            <MusicalNoteIcon class="size-8 text-light" />
           </router-link>
         </TransitionChild>
       </TransitionRoot>

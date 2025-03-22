@@ -36,53 +36,52 @@
         <!-- Navigation -->
         <nav class="py-2 px-4 flex flex-col gap-4">
           <router-link v-if="!isMobile()" to="/"
-            :class="[route.name.includes('home') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer text-light rounded-lg hover:bg-gray-dark p-2']"
+            :class="[route.name.includes('home') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer rounded-lg hover:bg-gray-dark p-2']"
             @click.stop="hideSidebar()">
             <HomeIcon class="size-8 text-gray-light" />
-            <span class="ml-3 mt-0.5 text-lg">Home</span>
+            <span class="ml-3 mt-0.5 text-md text-light">Home</span>
           </router-link>
           <router-link to="/infos"
-            :class="[route.name.includes('infos') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer text-light rounded-lg hover:bg-gray-dark p-2']"
+            :class="[route.name.includes('infos') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer rounded-lg hover:bg-gray-dark p-2']"
             @click.stop="hideSidebar()">
             <InformationCircleIcon class="size-8 text-gray-light" />
-            <span class="ml-3 mt-0.5 text-lg">Infos</span>
+            <span class="ml-3 mt-0.5 text-md text-light">Infos</span>
           </router-link>
           <hr>
           <router-link to="/seasons"
-            :class="[route.name.includes('season') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer text-light rounded-lg hover:bg-gray-dark p-2']"
+            :class="[route.name.includes('season') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer rounded-lg hover:bg-gray-dark p-2']"
             @click.stop="hideSidebar()">
             <FilmIcon class="size-8 text-gray-light" />
-            <span class="ml-3 mt-0.5 text-lg">Seasons</span>
+            <span class="ml-3 mt-0.5 text-md text-light">Seasons</span>
           </router-link>
           <router-link to="/events"
-            :class="[route.name.includes('event') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer text-light rounded-lg hover:bg-gray-dark p-2']"
+            :class="[route.name.includes('event') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer rounded-lg hover:bg-gray-dark p-2']"
             @click.stop="hideSidebar()">
             <CalendarDaysIcon class="size-8 text-gray-light" />
-            <span class="ml-3 mt-0.5 text-lg">Events</span>
+            <span class="ml-3 mt-0.5 text-md text-light">Events</span>
           </router-link>
           <router-link to="/people"
-            :class="[route.name.includes('people') || route.name.includes('person') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer text-light rounded-lg hover:bg-gray-dark p-2']"
+            :class="[route.name.includes('people') || route.name.includes('person') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer rounded-lg hover:bg-gray-dark p-2']"
             @click.stop="hideSidebar()">
             <UsersIcon class="size-8 text-gray-light" />
-            <span class="ml-3 mt-0.5 text-lg">People</span>
+            <span class="ml-3 mt-0.5 text-md text-light">People</span>
           </router-link>
           <router-link to="/musics"
-            :class="[route.name.includes('music') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer text-light rounded-lg hover:bg-gray-dark p-2']"
+            :class="[route.name.includes('music') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer rounded-lg hover:bg-gray-dark p-2']"
             @click.stop="hideSidebar()">
             <MusicalNoteIcon class="size-8 text-gray-light" />
-            <span class="ml-3 mt-0.5 text-lg">Musics</span>
+            <span class="ml-3 mt-0.5 text-md text-light">Musics</span>
           </router-link>
           <hr>
           <router-link to="/account"
-            :class="[route.name.includes('account') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer text-light rounded-lg hover:bg-gray-dark p-2']"
+            :class="[route.name.includes('account') ? 'bg-gray-dark' : '', 'flex items-center cursor-pointer rounded-lg hover:bg-gray-dark p-2']"
             @click.stop="hideSidebar()">
             <UserCircleIcon class="size-8 text-gray-light" />
-            <span class="ml-3 mt-0.5 text-lg">Account</span>
+            <span class="ml-3 mt-0.5 text-md text-light">Account</span>
           </router-link>
-          <div class="flex items-center cursor-pointer text-danger-light rounded-lg hover:bg-gray p-2"
-            @click.stop="authStore.logout()">
+          <div class="flex items-center cursor-pointer rounded-lg hover:bg-gray p-2" @click.stop="authStore.logout()">
             <ArrowLeftEndOnRectangleIcon class="size-8 text-danger" />
-            <span class="ml-3 mt-0.5 text-lg">Log out</span>
+            <span class="ml-3 mt-0.5 text-md text-danger-light">Log out</span>
           </div>
         </nav>
         <div class="text-gray-light mb-2 mr-4 absolute bottom-0 right-0">
@@ -94,7 +93,8 @@
     <!-- Mobile bottom menu -->
     <nav v-if="isMobile()"
       class="fixed bottom-0 left-0 z-20 w-full flex justify-around items-center bg-dark-light border-t border-gray py-2 px-6 sm:px-32 gap-3">
-      <div class="flex flex-col items-center text-light transition-colors duration-200 ease-in-out rounded-lg px-2.5 py-1"
+      <div
+        class="flex flex-col items-center text-light transition-colors duration-200 ease-in-out rounded-lg px-2.5 py-1"
         @click.stop="toggleSidebar()">
         <Bars3Icon class="size-9 text-gray-light rounded-full p-1 cursor-pointer" />
         <span class="text-xs text-gray font-semibold">More</span>
