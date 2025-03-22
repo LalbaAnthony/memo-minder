@@ -6,6 +6,7 @@ import { api } from '@/helpers/api'
 export const useAuthStore = defineStore('auth', {
   persist: true,
   state: () => ({
+    tab: 'login',
     authenticated: false,
     token: null,
     user: {},
