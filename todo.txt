@@ -22,7 +22,7 @@ Front:
 
 Devops:
     - Add unit test
-    - Make sure DB isnt empty on prod since the pipe remove the back folder
+    - Make sure DB isnt empty on prod since the pipe remove the back folder: use https://chatgpt.com/share/67dfcc33-e8bc-8008-b9ca-39b3b008ca32
 
 Bonus:
     - Import my own data
