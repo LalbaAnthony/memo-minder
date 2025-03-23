@@ -32,12 +32,13 @@
           <span class="text-gray">Suggesteds:</span>
           <div class="flex items-center gap-4">
             <div v-for="suggestedSeason in suggestedSeasons" :key="suggestedSeason.title"
-              class="flex items-center gap-2 cursor-pointer hover:text-gray-light transition-all transition-200" @click="() => {
+              class="flex items-center gap-2 cursor-pointer" @click="() => {
                 seasonStore.season.data.title = suggestedSeason.title
                 seasonStore.season.data.dateStart = suggestedSeason.dateStart
                 seasonStore.season.data.dateEnd = suggestedSeason.dateEnd
               }">
-              <span class="text-gray">{{ suggestedSeason.title }}</span>
+              <span class="text-gray hover:text-gray-light transition-all transition-200">{{ suggestedSeason.title
+                }}</span>
             </div>
           </div>
         </div>
