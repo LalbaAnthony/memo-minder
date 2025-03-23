@@ -4,12 +4,12 @@
     <div v-else>
       <!-- Title and date section -->
       <section>
-        <div v-if="seasonStore.season?.data?.updatedAt">
+        <div v-if="seasonStore.season?.data?.updatedAt" class="mb-4">
           <span class="text-gray">Updated the {{ dateToNiceDate(seasonStore.season?.data?.updatedAt) }}</span>
         </div>
         <div class="flex items-center justify-between gap-2 flex-wrap">
-          <input v-model="seasonStore.season.data.title" type="text" class="rounded-lg bg-dark text-light text-2xl w-full"
-            placeholder="Season title" />
+          <input v-model="seasonStore.season.data.title" type="text"
+            class="rounded-lg bg-dark text-light text-2xl w-full" placeholder="Season title" />
         </div>
       </section>
 
@@ -25,6 +25,20 @@
             <span>To</span>
             <DatePicker class="max-w-48" :value="seasonStore.season?.data?.dateEnd"
               @update="(v) => { seasonStore.season.data.dateEnd = v }" />
+          </div>
+        </div>
+        <!-- Suggested seasons -->
+        <div v-if="route?.params?.seasonId" class="flex flex-wrap items-center justify-start gap-4 mt-4">
+          <span class="text-gray">Suggesteds:</span>
+          <div class="flex items-center gap-4">
+            <div v-for="suggestedSeason in suggestedSeasons" :key="suggestedSeason.title"
+              class="flex items-center gap-2 cursor-pointer hover:text-gray-light transition-all transition-200" @click="() => {
+                seasonStore.season.data.title = suggestedSeason.title
+                seasonStore.season.data.dateStart = suggestedSeason.dateStart
+                seasonStore.season.data.dateEnd = suggestedSeason.dateEnd
+              }">
+              <span class="text-gray">{{ suggestedSeason.title }}</span>
+            </div>
           </div>
         </div>
       </section>
@@ -95,6 +109,46 @@ const seasonStore = useSeasonStore()
 
 const showItemPicker = ref(false)
 const watched = ref(0)
+
+function getSeasons(year = new Date().getFullYear()) {
+  return [
+    {
+      title: `Winter ${year}`,
+      dateStart: `${year - 1}-12-21`,
+      dateEnd: `${year}-03-20`
+    },
+    {
+      title: `Spring ${year}`,
+      dateStart: `${year}-03-21`,
+      dateEnd: `${year}-06-20`
+    },
+    {
+      title: `Summer ${year}`,
+      dateStart: `${year}-06-21`,
+      dateEnd: `${year}-09-20`
+    },
+    {
+      title: `Fall ${year}`,
+      dateStart: `${year}-09-21`,
+      dateEnd: `${year}-12-20`
+    }
+  ];
+}
+
+function getSurroundingSeasons(currentDate = new Date()) {
+  const year = currentDate.getFullYear();
+  const seasons = [...getSeasons(year - 1), ...getSeasons(year), ...getSeasons(year + 1)];
+
+  const currentSeasonIndex = seasons.findIndex(season => {
+    const start = new Date(season.dateStart);
+    const end = new Date(season.dateEnd);
+    return currentDate >= start && currentDate <= end;
+  });
+
+  if (currentSeasonIndex === -1) return [];
+
+  return seasons.slice(Math.max(0, currentSeasonIndex - 2), currentSeasonIndex + 3);
+}
 
 function loadOrInitSeason() {
   if (route.params.seasonId) {
@@ -168,6 +222,10 @@ const availablesTypes = computed(() => {
   if (!seasonStore.season.data.person) types.push('person')
 
   return types
+})
+
+const suggestedSeasons = computed(() => {
+  return getSurroundingSeasons(new Date())
 })
 
 const debouncedUpdate = debounce(() => {

@@ -4,7 +4,7 @@
     <div v-else>
       <!-- Title and date section -->
       <section>
-        <div v-if="musicStore.music?.data?.updatedAt">
+        <div v-if="musicStore.music?.data?.updatedAt" class="mb-4">
           <span class="text-gray">Updated the {{ dateToNiceDate(musicStore.music?.data?.updatedAt) }}</span>
         </div>
         <div class="flex items-center justify-between gap-2 flex-wrap">
@@ -20,7 +20,8 @@
             :class="['size-6 text-gray', musicStore.music?.data?.streamingLink ? 'hover:text-gray-light cursor-pointer' : '']"
             @click="onpenStreamingLink()" />
           <input v-model="musicStore.music.data.streamingLink" id="streamingLink"
-            class="w-full sm:w-2/3 md:w-1/2 p-2 rounded-lg bg-gray-dark text-light" placeholder="https://open.spotify.com/track/..." />
+            class="w-full sm:w-2/3 md:w-1/2 p-2 rounded-lg bg-gray-dark text-light"
+            placeholder="https://open.spotify.com/track/..." />
           <ClipboardIcon
             :class="['size-6 text-gray', musicStore.music?.data?.streamingLink ? 'hover:text-gray-light cursor-pointer' : '']"
             @click="copyToClipboard(musicStore.music?.data?.streamingLink)" />
@@ -30,12 +31,12 @@
       <!-- Date & Artist section -->
       <section>
         <div class="flex flex-wrap items-center justify-start gap-4">
-          <div class="flex items-center gap-2">
+          <div class="w-full flex items-center gap-2">
             <span>Release date:</span>
             <DatePicker class="max-w-48" :value="musicStore.music?.data?.releaseDate"
               @update="(v) => { musicStore.music.data.releaseDate = v }" />
           </div>
-          <div class="flex items-center gap-2">
+          <div class="w-full flex items-center gap-2">
             <span>Artist:</span>
             <input v-model="musicStore.music.data.artist" id="artist"
               class="w-full p-2 rounded-lg bg-gray-dark text-light" placeholder="..." />
@@ -113,7 +114,7 @@ function manualCreation() {
 
 function manualUpdate() {
   debouncedUpdate.cancel()
-  
+
   const error = valid()
   if (error) {
     notif.notify(error, 'error')

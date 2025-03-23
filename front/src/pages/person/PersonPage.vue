@@ -4,12 +4,12 @@
     <div v-else>
       <!-- Name and date section -->
       <section>
-        <div v-if="personStore.person?.data?.updatedAt">
+        <div v-if="personStore.person?.data?.updatedAt" class="mb-4">
           <span class="text-gray">Updated the {{ dateToNiceDate(personStore.person?.data?.updatedAt) }}</span>
         </div>
         <div class="flex items-center justify-between gap-2 flex-wrap">
-          <input v-model="personStore.person.data.name" type="text" class="rounded-lg bg-dark text-light text-2xl w-full"
-            placeholder="Person name" />
+          <input v-model="personStore.person.data.name" type="text"
+            class="rounded-lg bg-dark text-light text-2xl w-full" placeholder="Person name" />
         </div>
       </section>
 
@@ -76,7 +76,7 @@ function manualCreation() {
 
 function manualUpdate() {
   debouncedUpdate.cancel()
-  
+
   const error = valid()
   if (error) {
     notif.notify(error, 'error')

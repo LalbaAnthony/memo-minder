@@ -10,6 +10,8 @@ Back:
     - Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Front:
+    - Refondre les inputs + labels dans chaque items
+    - Présélection de saison (hiver, été, ...): autos et de Titre et range de date
     - Trop de scroll quand barre de recherche item picker est vide
     - Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ?)
     - Utiliser app et noter Problemes
