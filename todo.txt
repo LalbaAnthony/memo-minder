@@ -10,6 +10,7 @@ Back:
     - Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Front:
+    - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
     - Refondre les inputs + labels dans chaque items
     - Présélection de saison (hiver, été, ...): autos et de Titre et range de date
     - Trop de scroll quand barre de recherche item picker est vide
