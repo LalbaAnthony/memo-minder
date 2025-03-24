@@ -1,14 +1,11 @@
 <template>
-  <input v-model="date" id="datepicker" type="date" class="w-full px-4 py-2 rounded-lg bg-gray-dark text-light"
-    :placeholder="props.placeholder" />
+  <VueDatePicker v-model="date"></VueDatePicker>
 </template>
 
 <script setup>
-
-// ? Component made to handle date inputs as 2024-06-27T14:02:29.928Z
-
-import { ref, watch } from 'vue'
-import { isValidDate } from "@/helpers/functions.js"
+import { ref } from 'vue';
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 const props = defineProps({
   value: {
@@ -16,38 +13,7 @@ const props = defineProps({
     required: false,
     default: new Date().toISOString()
   },
-  placeholder: {
-    type: String,
-    default: 'Date',
-    required: false
-  }
 })
 
-// ? Format date to be displayed, date as 2024-06-27T14:02:29.928Z
-const date = ref(formatDate(new Date(props.value)))
-
-const emit = defineEmits(['update'])
-
-function formatDate(string) {
-  const date = new Date(string);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}
-
-watch(() => date.value, (newValue, oldValue) => {
-  console.log('date', newValue, oldValue)
-  if (isValidDate(newValue)) {
-    date.value = newValue
-
-    // ? Return date as 2024-06-27T14:02:29.928Z
-    const dateToSend = new Date(date.value).toISOString()
-    emit('update', dateToSend)
-  } else {
-    date.value = oldValue
-    console.error('Invalid date')
-  }
-})
-
+const date = ref(props.value)
 </script>
