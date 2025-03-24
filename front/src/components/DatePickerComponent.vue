@@ -61,7 +61,7 @@ watch(() => date.value, (newValue, oldValue) => {
   --dp-primary-color: var(--primary);
   --dp-primary-disabled-color: var(--primary-light);
   --dp-primary-text-color: var(--light);
-  --dp-secondary-color: #a9a9a9;
+  --dp-secondary-color: #878787;
   --dp-border-color: var(--gray-light);
   --dp-menu-border-color: var(--gray);
   --dp-border-color-hover: var(--gray-dark);
