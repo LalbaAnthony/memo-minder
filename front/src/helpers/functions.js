@@ -58,8 +58,8 @@ export function getYearFromDate(date) {
     return "";
 }
 
-export function dateToNiceDate(date) {
-    if (date) return new Date(date).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+export function dateToNiceDate(date, local = 'en-US') {
+    if (date) return new Date(date).toLocaleDateString(local, { year: 'numeric', month: 'long', day: 'numeric' });
     return "";
 }
 
