@@ -11,8 +11,7 @@ Back:
 
 Front:
     - Dates
-        - Use https://vue3datepicker.com/ ? 
-        - Issue chevron on mobile 
+        - Add button 'today' in date picker
         - Présélection de saison (hiver, été, ...): autos et de Titre et range de date
     - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
     - Refondre les inputs + labels dans chaque items
