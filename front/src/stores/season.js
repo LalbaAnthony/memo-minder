@@ -94,8 +94,8 @@ export const useSeasonStore = defineStore('season', {
     initSeason() {
       this.clearSeason()
       this.season.data.color = randomColor()
-      this.season.data.dateEnd = new Date().toISOString()
-      this.season.data.dateStart = new Date().toISOString()
+      this.season.data.dateEnd = new Date().toISOString().split('T')[0]
+      this.season.data.dateStart = new Date().toISOString().split('T')[0]
       this.season.data.userId = authStore.user.userId
     },
 

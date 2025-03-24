@@ -18,12 +18,12 @@ const Mood = sequelize.define('Mood', {
         defaultValue: '#000000',
     },
     updatedAt: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
     createdAt: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },

@@ -1,6 +1,5 @@
 const frmtr = require('../helpers/frmtr')
 const generateCode = require('../helpers/generateCode')
-const shortenIsoDate = require('../helpers/shortenIsoDate')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -55,9 +54,6 @@ exports.login = async (req, res) => {
 
         // Add the token to the response
         user.dataValues.connectionToken = token
-
-        // Format the date
-        user.dataValues.birthdate = shortenIsoDate(user.dataValues.birthdate)
 
         return res.status(200).json(frmtr('success', user, 'Logged in successfully'))
     } catch (error) {
@@ -141,9 +137,6 @@ exports.userInfos = async (req, res) => {
         delete user.dataValues.password;
         delete user.dataValues.validateEmailToken
         delete user.dataValues.resetPasswordCode
-
-        // Format the date
-        user.dataValues.birthdate = shortenIsoDate(user.dataValues.birthdate)
 
         return res.status(200).json(frmtr('success', user,))
     } catch (error) {
