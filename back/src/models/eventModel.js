@@ -73,7 +73,7 @@ const Event = sequelize.define('Event', {
         allowNull: true,
     },
     date: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
     },
     location: {
@@ -81,12 +81,12 @@ const Event = sequelize.define('Event', {
         allowNull: true,
     },
     updatedAt: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
     createdAt: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },

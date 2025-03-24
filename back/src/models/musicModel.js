@@ -29,7 +29,7 @@ const Music = sequelize.define('Music', {
         allowNull: true,
     },
     releaseDate: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: true,
     },
     streamingLink: {
@@ -37,12 +37,12 @@ const Music = sequelize.define('Music', {
         allowNull: true,
     },
     updatedAt: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
     createdAt: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },

@@ -92,7 +92,7 @@ export const useEventStore = defineStore('event', {
 
     initEvent() {
       this.clearEvent()
-      this.event.data.date = new Date().toISOString()
+      this.event.data.date = new Date().toISOString().split('T')[0]
       this.event.data.userId = authStore.user.userId
     },
 

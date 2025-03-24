@@ -38,7 +38,7 @@
                 seasonStore.season.data.dateEnd = suggestedSeason.dateEnd
               }">
               <span class="text-gray hover:text-gray-light transition-all transition-200">{{ suggestedSeason.title
-                }}</span>
+              }}</span>
             </div>
           </div>
         </div>
