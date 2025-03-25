@@ -31,12 +31,12 @@
       <!-- Date & Artist section -->
       <section>
         <div class="flex flex-wrap items-center justify-start gap-4">
-          <div class="w-full flex items-center gap-2">
+          <div class="w-full flex flex-wrap items-center gap-2">
             <span class="text-lg font-medium text-gray-light">Release date :</span>
-            <DatePicker class="max-w-48" :value="musicStore.music?.data?.releaseDate"
+            <DatePicker :value="musicStore.music?.data?.releaseDate"
               @update="(v) => { musicStore.music.data.releaseDate = v }" />
           </div>
-          <div class="w-full flex items-center gap-2">
+          <div class="w-full flex flex-wrap items-center gap-2">
             <span class="text-lg font-medium text-gray-light">Artist :</span>
             <input v-model="musicStore.music.data.artist" id="artist"
               class="p-2 rounded-lg bg-gray-dark text-light" placeholder="..." />

@@ -18,17 +18,17 @@
         <div class="flex flex-wrap items-center justify-start gap-4">
           <div class="flex items-center gap-2">
             <span class="text-lg font-medium text-gray-light">From</span>
-            <DatePicker class="max-w-48" :value="seasonStore.season?.data?.dateStart"
+            <DatePicker :value="seasonStore.season?.data?.dateStart"
               @update="(v) => { seasonStore.season.data.dateStart = v }" />
           </div>
           <div class="flex items-center gap-2">
             <span class="text-lg font-medium text-gray-light">To</span>
-            <DatePicker class="max-w-48" :value="seasonStore.season?.data?.dateEnd"
+            <DatePicker :value="seasonStore.season?.data?.dateEnd"
               @update="(v) => { seasonStore.season.data.dateEnd = v }" />
           </div>
         </div>
         <!-- Suggested seasons -->
-        <div v-if="route?.params?.seasonId" class="flex flex-wrap items-center justify-start gap-x-4 gap-y-1 mt-2">
+        <div v-if="!route?.params?.seasonId" class="flex flex-wrap items-center justify-start gap-x-4 gap-y-1 mt-2">
           <span class="text-gray">Suggesteds:</span>
           <div class="flex items-center gap-4">
             <div v-for="suggestedSeason in suggestedSeasons" :key="suggestedSeason.title"

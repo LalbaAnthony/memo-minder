@@ -1,6 +1,6 @@
 <template>
-  <VueDatePicker ref="datePicker" v-model="date" dark :enableTimePicker="false" :format="dateToNiceDate"
-    :preview-format="() => { return '' }">
+  <VueDatePicker class="max-w-[20rem]" ref="datePicker" v-model="date" dark :enableTimePicker="false"
+    :format="dateToNiceDate" :preview-format="() => { return '' }">
     <template #menu-header>
       <div class="p-2 flex justify-between items-center">
         <div>
@@ -129,6 +129,7 @@ watch(date, (newValue, oldValue) => {
   border-radius: 0.5rem;
 }
 
+.dp__arrow_bottom,
 .dp__arrow_top {
   display: none;
 }
