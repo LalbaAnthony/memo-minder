@@ -17,18 +17,18 @@
       <section>
         <div class="flex flex-wrap items-center justify-start gap-4">
           <div class="flex items-center gap-2">
-            <span>From</span>
+            <span class="text-lg font-medium text-gray-light">From</span>
             <DatePicker class="max-w-48" :value="seasonStore.season?.data?.dateStart"
               @update="(v) => { seasonStore.season.data.dateStart = v }" />
           </div>
           <div class="flex items-center gap-2">
-            <span>To</span>
+            <span class="text-lg font-medium text-gray-light">To</span>
             <DatePicker class="max-w-48" :value="seasonStore.season?.data?.dateEnd"
               @update="(v) => { seasonStore.season.data.dateEnd = v }" />
           </div>
         </div>
         <!-- Suggested seasons -->
-        <div v-if="route?.params?.seasonId" class="flex flex-wrap items-center justify-start gap-4 mt-4">
+        <div v-if="route?.params?.seasonId" class="flex flex-wrap items-center justify-start gap-x-4 gap-y-1 mt-2">
           <span class="text-gray">Suggesteds:</span>
           <div class="flex items-center gap-4">
             <div v-for="suggestedSeason in suggestedSeasons" :key="suggestedSeason.title"
@@ -47,7 +47,7 @@
       <!-- Color section -->
       <section>
         <div class="flex items-center justify-start gap-4">
-          <span>Color:</span>
+          <span class="text-lg font-medium text-gray-light">Color :</span>
           <input v-model="seasonStore.season.data.color" type="color" />
         </div>
       </section>
@@ -136,19 +136,18 @@ function getSeasons(year = new Date().getFullYear()) {
   ];
 }
 
-function getSurroundingSeasons(currentDate = new Date()) {
+function getSurroundingSeasons(currentDate = new Date(), range = 1) {
   const year = currentDate.getFullYear();
   const seasons = [...getSeasons(year - 1), ...getSeasons(year), ...getSeasons(year + 1)];
-
-  const currentSeasonIndex = seasons.findIndex(season => {
+  
+  const currentSeason = seasons.find(season => {
     const start = new Date(season.dateStart);
     const end = new Date(season.dateEnd);
     return currentDate >= start && currentDate <= end;
   });
 
-  if (currentSeasonIndex === -1) return [];
-
-  return seasons.slice(Math.max(0, currentSeasonIndex - 2), currentSeasonIndex + 3);
+  const currentIndex = seasons.indexOf(currentSeason);
+  return seasons.slice(currentIndex - range, currentIndex + range + 1);
 }
 
 function loadOrInitSeason() {
