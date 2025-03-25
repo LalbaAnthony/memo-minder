@@ -14,7 +14,6 @@
 
     <!-- Sidebar -->
     <TransitionRoot :show="showSidebar">
-      <!-- Hide at click outside -->
       <TransitionChild v-click-outside="() => hideSidebar()" as="aside"
         enter="transition ease-in-out duration-300 transform" enter-from="-translate-x-full" enter-to="translate-x-0"
         leave="transition ease-in-out duration-300 transform" leave-from="translate-x-0" leave-to="-translate-x-full"

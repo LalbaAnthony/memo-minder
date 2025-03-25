@@ -23,7 +23,7 @@
             <option value="" disabled>Language</option>
             <option v-for="(value, key) in languages" :key="key" :value="key"
               :selected="key === authStore.user.language">
-              {{ value }}</option>
+              {{ value?.label }}</option>
           </select>
         </div>
       </div>

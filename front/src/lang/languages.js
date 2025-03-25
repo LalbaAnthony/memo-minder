@@ -1,4 +1,10 @@
 export const languages = {
-    'en-US': 'English (US)',
-    'en-GB': 'English (UK)'
+    'en-US': {
+        code: 'en-US',
+        label: 'English (US)'
+    },
+    'en-GB': {
+        code: 'en-GB',
+        label: 'English (UK)'
+    }
 }
