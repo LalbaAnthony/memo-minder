@@ -1,4 +1,5 @@
 Global:
+- [ ] Transférer todo MM dans un tableau MD et les prioriser etc
 - [ ] Utiliser app et noter Problèmes
 - [ ] Faire en sorte qu'on puisse relier les items dans les deux sens (pas que depuis le maitre)
 - [ ] Faire du many to many partout
@@ -10,6 +11,7 @@ Back:
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Front:
+- [ ] Utiliser langue pour afficher de date sur MM
 - [ ] loading isn't centered on Y axis + no loading in search and item picker
 - [ ] make add button if no data on home page/lists
 - [ ] https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
