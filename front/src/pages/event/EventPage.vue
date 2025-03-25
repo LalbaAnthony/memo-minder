@@ -16,9 +16,9 @@
       <!-- Date section -->
       <section>
         <div class="flex flex-wrap items-center justify-start gap-4">
-          <div class="w-full flex items-center gap-2">
+          <div class="w-full flex flex-wrap items-center gap-2">
             <span class="text-lg font-medium text-gray-light">Date :</span>
-            <DatePicker class="max-w-48" :value="eventStore.event?.data?.date"
+            <DatePicker :value="eventStore.event?.data?.date"
               @update="(v) => { eventStore.event.data.date = v }" />
           </div>
         </div>
