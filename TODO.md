@@ -1,34 +1,30 @@
-Global:
-- [ ] Transférer todo MM dans un tableau MD et les prioriser etc
-- [ ] Utiliser app et noter Problèmes
-- [ ] Faire en sorte qu'on puisse relier les items dans les deux sens (pas que depuis le maitre)
-- [ ] Faire du many to many partout
-- [ ] Vérifier la présence de TODO et de WIP dans le code
-
-Back:
-- [ ] Ensure auth is secured
-- [ ] Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)
-- [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
-
-Front:
-- [ ] Utiliser langue pour afficher de date sur MM
-- [ ] loading isn't centered on Y axis + no loading in search and item picker
-- [ ] make add button if no data on home page/lists
-- [ ] https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
-- [ ] Refondre les inputs + labels dans chaque items
-- [ ] Trop de scroll quand barre de recherche item picker est vide
-- [ ] Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ? `toAddSeason: {}` ?)
 - [ ] Utiliser app et noter Problemes
-- [ ] Inifinte scroll
-- [ ] Faire listes differentes dans les stores pour chaque usage ?
-- [ ] Maj account params + mdp oublié + delete account
-- [ ] Ajouter langue francaise
-- [ ] Fill infos page
-- [ ] Fill terms-and-conditions page and add link in the footer and in the infos page
+- [ ] Transférer todo MM dans un tableau MD et les prioriser etc
+- [ ] Vérifier la présence de TODO et de WIP dans le code
+- [ ] Import my own data
 
-Devops:
-- [ ] Add unit test
+Must:
+- [ ] Ensure auth is secured
+- [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
+- [ ] Maj account params + mdp oublié + delete account
 - [ ] Make sure DB isnt empty on prod since the pipe remove the back folder: use https://chatgpt.com/share/67dfcc33-e8bc-8008-b9ca-39b3b008ca32
 
-Bonus:
-- [ ] Import my own data
+Important:
+- [ ] loading isn't centered on Y axis + no loading in search and item picker
+- [ ] Faire en sorte qu'on puisse relier les items dans les deux sens (pas que depuis le maitre)
+- [ ] Faire du many to many partout
+
+Medium:
+- [ ] Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)
+- [ ] make add button if no data on home page/lists
+- [ ] Fill infos page
+- [ ] Add unit test
+
+Low:
+- [ ] https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
+- [ ] Trop de scroll quand barre de recherche item picker est vide
+- [ ] Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ? `toAddSeason: {}` ?)
+- [ ] Inifinte scroll
+- [ ] Faire listes differentes dans les stores pour chaque usage ?
+- [ ] Ajouter langue francaise
+- [ ] Fill terms-and-conditions page and add in the infos page

@@ -1,3 +1,5 @@
+import { useAuthStore } from '@/stores/auth'
+
 export function isMobile() {
     return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
 }
@@ -58,8 +60,10 @@ export function getYearFromDate(date) {
     return "";
 }
 
-export function dateToNiceDate(date, local = 'en-US') {
-    if (date) return new Date(date).toLocaleDateString(local, { year: 'numeric', month: 'long', day: 'numeric' });
+export function dateToNiceDate(date, language = 'en-US', options = { year: 'numeric', month: 'long', day: 'numeric' }) {
+    const authStore = useAuthStore()
+    const local = authStore?.user?.language || language || 'en-US'
+    if (date) return new Date(date).toLocaleDateString(local, options);
     return "";
 }
 
