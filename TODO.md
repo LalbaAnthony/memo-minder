@@ -1,13 +1,12 @@
 - [ ] Utiliser app et noter Problemes
-- [ ] Transférer todo MM dans un tableau MD et les prioriser etc
 - [ ] Vérifier la présence de TODO et de WIP dans le code
 - [ ] Import my own data
 
 Must:
+- [ ] Make sure DB isnt empty on prod since the pipe remove the back folder: use https://chatgpt.com/share/67dfcc33-e8bc-8008-b9ca-39b3b008ca32
 - [ ] Ensure auth is secured
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 - [ ] Maj account params + mdp oublié + delete account
-- [ ] Make sure DB isnt empty on prod since the pipe remove the back folder: use https://chatgpt.com/share/67dfcc33-e8bc-8008-b9ca-39b3b008ca32
 
 Important:
 - [ ] loading isn't centered on Y axis + no loading in search and item picker
