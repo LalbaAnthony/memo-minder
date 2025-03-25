@@ -1,19 +1,18 @@
 <template>
   <VueDatePicker v-model="date" dark :enableTimePicker="false" :format="dateToNiceDate"
-    :preview-format="() => { return ''}">
+    :preview-format="() => { return '' }">
     <template v-if="props?.title" #menu-header>
-      <div class="date-picker-header">My custom header</div>
+      <div class="date-picker-header">{{ props?.title }}</div>
     </template>
   </VueDatePicker>
 </template>
 
 <script setup>
 import { ref, watch } from 'vue';
-import { isValidDate } from "@/helpers/functions.js"
-import { dateToNiceDate } from "@/helpers/functions.js"
+import { isValidDate, dateToNiceDate } from "@/helpers/functions.js";
 import { defineProps, defineEmits } from 'vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
+import '@vuepic/vue-datepicker/dist/main.css';
 
 const props = defineProps({
   title: {
@@ -23,24 +22,29 @@ const props = defineProps({
   value: {
     type: String,
     required: false,
-    default: new Date().toISOString().split('T')[0]
+    default: new Date().toISOString().split('T')[0],
   },
-})
+});
 
-const date = ref(props.value)
+const date = ref(props.value);
+const emit = defineEmits(['update']);
 
-const emit = defineEmits(['update'])
-
-watch(() => date.value, (newValue, oldValue) => {
-  if (isValidDate(newValue)) {
-    date.value = newValue
-    emit('update', new Date(date.value).toISOString().split('T')[0])
-  } else {
-    date.value = oldValue
-    console.error('Invalid date')
+// Watch for changes in props.value and update date
+watch(() => props.value, (newValue) => {
+  if (newValue !== date.value) {
+    date.value = newValue;
   }
-})
+});
 
+// Watch for changes in date and emit updates
+watch(date, (newValue, oldValue) => {
+  if (isValidDate(newValue)) {
+    emit('update', new Date(newValue).toISOString().split('T')[0]);
+  } else {
+    date.value = oldValue;
+    console.error('Invalid date');
+  }
+});
 </script>
 
 <style scoped>
