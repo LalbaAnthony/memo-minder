@@ -22,7 +22,7 @@
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-          <Pill text="Add  as an event" type="event" addable clickable
+          <Pill text="Add as an event" type="event" addable clickable
             @click="router.push({ path: '/events/add', query: { title: toAddString } })" />
         </TransitionChild>
       </TransitionRoot>

@@ -53,7 +53,7 @@ const routes = [
     name: 'seasons.list',
     component: () => import('../pages/season/SeasonsPage.vue'),
     meta: {
-      title: 'Seasons',
+      title: 'All Seasons',
       private: true,
       displayInSearch: true,
       tags: ['seasons', 'years', 'periods'],
@@ -93,7 +93,7 @@ const routes = [
     name: 'events.list',
     component: () => import('../pages/event/EventsPage.vue'),
     meta: {
-      title: 'Events',
+      title: 'All Events',
       private: true,
       displayInSearch: true,
       tags: ['events', 'happenings', 'occurrences'],
@@ -133,7 +133,7 @@ const routes = [
     name: 'people.list',
     component: () => import('../pages/person/PeoplePage.vue'),
     meta: {
-      title: 'People',
+      title: 'All People',
       private: true,
       displayInSearch: true,
       tags: ['people', 'persons', 'humans'],
@@ -173,7 +173,7 @@ const routes = [
     name: 'musics.list',
     component: () => import('../pages/music/MusicsPage.vue'),
     meta: {
-      title: 'Musics',
+      title: 'All Musics',
       private: true,
       displayInSearch: true,
       tags: ['musics', 'songs', 'tunes'],

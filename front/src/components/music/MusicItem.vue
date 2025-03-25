@@ -38,7 +38,8 @@
       </div>
       <div class="flex flex-col justify-center items-start">
         <h1 class="text-2xl font-bold">{{ props?.music?.title }}</h1>
-        <p class="text-gray-light">{{ props?.music?.artist }} {{props?.music?.artist && props?.music?.releaseDate ? '-' : ''}} {{ getYearFromDate(props?.music?.releaseDate) }}</p>
+        <p class="text-gray-light">{{ props?.music?.artist }} {{ props?.music?.artist && props?.music?.releaseDate ? '-'
+          : '' }} {{ getYearFromDate(props?.music?.releaseDate) }}</p>
       </div>
       <div>
         &nbsp;
@@ -98,32 +99,56 @@ function goToMusic() {
 </script>
 
 <style scoped>
+/* ================ SPOTIFY ================ */
+
 div.spotify-item:hover {
   background-color: #080808;
+}
+
+div.spotify-item:hover * {
+  color: #FFFFFF;
 }
 
 div.spotify-item:hover .spotify-logo {
   color: #1DD05D;
 }
 
+/* ================ APPLE ================ */
+
 div.apple-item:hover {
   background-color: #FB3D55;
+}
+
+div.apple-item:hover * {
+  color: #FFFFFF;
 }
 
 div.apple-item:hover .apple-logo {
   color: #FFFFFF;
 }
 
+/* ================ YOUTUBE ================ */
+
 div.youtube-item:hover {
   background-color: #FF0808;
+}
+
+div.youtube-item:hover * {
+  color: #FFFFFF;
 }
 
 div.youtube-item:hover .youtube-logo {
   color: #FFFFFF;
 }
 
+/* ================ DEEZER ================ */
+
 div.deezer-item:hover {
   background-color: #080808;
+}
+
+div.deezer-item:hover * {
+  color: #FFFFFF;
 }
 
 div.deezer-item:hover .deezer-logo {
@@ -132,6 +157,12 @@ div.deezer-item:hover .deezer-logo {
 
 div.default-item:hover {
   background-color: var(--gray-dark);
+}
+
+/* ================ DEFAULT ================ */
+
+div.default-item:hover * {
+  color: var(--light);
 }
 
 div.default-item:hover .default-logo {

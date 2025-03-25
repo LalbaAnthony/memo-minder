@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
-const axiosApi = axios.create({
+const quotesApi = axios.create({
   baseURL: 'https://quotes-api-self.vercel.app/',
   headers: {
     'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ export const useQuoteStore = defineStore('quote', {
       data: {},
     },
     lastFetch: null,
-    quoteLifeTime: 1000 * 60 * 60 * 24, // 24 hours
+    lifeTime: 1000 * 60 * 60 * 24, // 24 hours
   }),
 
   actions: {
@@ -27,7 +27,7 @@ export const useQuoteStore = defineStore('quote', {
       // Data
       this.quote.data = {}
 
-      const resp = await axiosApi.get('/quote')
+      const resp = await quotesApi.get('/quote')
       this.quote.data = resp.data || {}
 
       // If quote.data.quote contains a ", ', or ”, remove it
@@ -46,7 +46,7 @@ export const useQuoteStore = defineStore('quote', {
       const nowDate = new Date()
       const lastFetch = this.lastFetch ? new Date(this.lastFetch) : null
 
-      if (!this.lastFetch || (nowDate - lastFetch) > this.quoteLifeTime) {
+      if (!this.lastFetch || ((nowDate - lastFetch) > this.lifeTime) || !this.quote?.data?.quote) {
         await this.fetchQuote()
       }
     },
