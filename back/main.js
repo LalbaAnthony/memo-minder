@@ -6,9 +6,6 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const cors = require('cors');
 
-// Import config
-const sequelize = require('./src/config/database');
-
 // Importing routes
 const routes = require('./src/routes');
 
@@ -21,6 +18,9 @@ const logConsole = require('./src/helpers/logConsole')
 
 // Load .env file
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
+// Import DB instance
+const sequelize = process.env.NODE_ENV === 'production' ? require('./src/config/database_production') : require('./src/config/database_development');
 
 const app = express()
 
