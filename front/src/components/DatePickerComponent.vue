@@ -1,8 +1,13 @@
 <template>
-  <VueDatePicker v-model="date" dark :enableTimePicker="false" :format="dateToNiceDate"
+  <VueDatePicker ref="datePicker" v-model="date" dark :enableTimePicker="false" :format="dateToNiceDate"
     :preview-format="() => { return '' }">
-    <template v-if="props?.title" #menu-header>
-      <div class="date-picker-header">{{ props?.title }}</div>
+    <template #menu-header>
+      <div class="p-2 flex justify-between items-center">
+        <div>
+          <button type="button" class="dp__action_buttons dp__action_button date-picker-today-button"
+            @click="setToday">Pick today</button>
+        </div>
+      </div>
     </template>
   </VueDatePicker>
 </template>
@@ -27,7 +32,18 @@ const props = defineProps({
 });
 
 const date = ref(props.value);
+const datePicker = ref(null);
 const emit = defineEmits(['update']);
+
+// Function to set today's date
+const setToday = () => {
+  date.value = new Date().toISOString().split('T')[0];
+
+  // Close the date picker popup
+  if (datePicker.value) {
+    datePicker.value.closeMenu();
+  }
+};
 
 // Watch for changes in props.value and update date
 watch(() => props.value, (newValue) => {
@@ -45,12 +61,19 @@ watch(date, (newValue, oldValue) => {
     console.error('Invalid date');
   }
 });
+
 </script>
 
 <style scoped>
-.date-picker-header {
-  padding: 10px;
-  text-align: center;
+.date-picker-today-button {
+  background: var(--gray);
+  color: var(--dp-primary-text-color);
+  padding: 17px auto 17px auto;
+  transition: background 0.3s;
+}
+
+.date-picker-today-button:hover {
+  background: var(--gray-light);
 }
 </style>
 
@@ -59,7 +82,7 @@ watch(date, (newValue, oldValue) => {
   font-family: "Poppins", "Roboto", sans-serif;
   --dp-background-color: var(--gray);
   --dp-text-color: var(--light);
-  --dp-hover-color: var(--gray);
+  --dp-hover-color: var(--gray-light);
   --dp-hover-text-color: var(--light);
   --dp-hover-icon-color: var(--gray--light);
   --dp-primary-color: var(--primary);

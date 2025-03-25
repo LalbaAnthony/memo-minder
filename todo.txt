@@ -13,7 +13,6 @@ Front:
     - loading isn't centered on Y axis
     - make add button if no data on home page/lists
     - Dates
-        - Si pas de date, date picker prend 1970
         - Add button 'today' in date picker
         - Présélection de saison (hiver, été, ...): autos et de Titre et range de date
     - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
