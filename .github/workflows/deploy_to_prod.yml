@@ -89,8 +89,6 @@ jobs:
             cd /var/www/html/memo-minder/back
             npm install
 
-            npm run seed
-
             pm2 start main.js --name memo-minder-backend || pm2 restart memo-minder-backend
 
       # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

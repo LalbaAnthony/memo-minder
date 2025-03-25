@@ -1,5 +1,5 @@
 <template>
-  <Menu as="div" class="relative inline-block text-left">
+  <Menu v-if="moodStore?.moods?.data" as="div" class="relative inline-block text-left">
     <div>
       <button
         class="inline-flex w-full justify-center items-center rounded-lg px-4 py-2 text-md font-medium text-light bg-gray-dark"
@@ -11,7 +11,6 @@
       </button>
     </div>
     <TransitionRoot :show="show">
-      <!-- Hide at click outside -->
       <TransitionChild v-click-outside="() => show = false" as="div" enter="transition ease-out duration-100 transform"
         enter-from="opacity-0 scale-95" enter-to="opacity-100 scale-100"
         leave="transition ease-in duration-75 transform" leave-from="opacity-100 scale-100"

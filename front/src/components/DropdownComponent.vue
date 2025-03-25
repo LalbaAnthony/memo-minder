@@ -11,7 +11,6 @@
       </button>
     </div>
     <TransitionRoot :show="showDropdown">
-      <!-- Hide at click outside -->
       <TransitionChild v-click-outside="() => showDropdown = false" as="div"
         enter="transition ease-out duration-100 transform" enter-from="opacity-0 scale-95"
         enter-to="opacity-100 scale-100" leave="transition ease-in duration-75 transform"

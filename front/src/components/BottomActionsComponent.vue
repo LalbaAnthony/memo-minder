@@ -34,7 +34,6 @@
     <div v-if="props.addButton && (route.name === 'home' || route.name.includes('list'))"
       :class="[showAddSelector ? 'bg-gray-dark' : '', 'rounded-2xl']">
       <TransitionRoot :show="showAddSelector">
-        <!-- Hide at click outside -->
         <TransitionChild v-click-outside="() => showAddSelector = false" as="div"
           enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 translate-y-1/4"
           enter-to="translate-y-0 opacity-100" leave="transition ease-in-out duration-300 transform"

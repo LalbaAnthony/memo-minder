@@ -8,7 +8,7 @@
             <select v-model="authStore.authentication.tabs.register.fields.language" id="language"
                 class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light">
                 <option value="" disabled selected>Language</option>
-                <option v-for="(value, key) in languages" :key="key" :value="key">{{ value }}</option>
+                <option v-for="(value, key) in languages" :key="key" :value="key">{{ value?.label }}</option>
             </select>
             <DatePicker :value="authStore.authentication.tabs.register.fields.birthdate"
                 @update="(v) => { authStore.authentication.tabs.register.fields.birthdate = v }" />
