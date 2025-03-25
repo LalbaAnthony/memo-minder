@@ -1,9 +1,9 @@
 <template>
   <div>
-    <AppLayout v-if="authStore.authenticated" />
+    <AppLayout v-if="authStore?.authenticated" />
     <main :class="[isMobile() && route?.name && route.name.includes('details') ? 'min-h-screen' : '']">
       <GoBackAction
-        v-if="route?.name && (route.name.includes('details') || route.name.includes('add')) || route.name === 'infos' || route.name === 'terms-and-conditions'" />
+        v-if="route?.name && (route.name.includes('details') || route.name.includes('add')) || route.name === 'infos' || route.name == 'account' ||route.name === 'terms-and-conditions'" />
       <RouterView />
     </main>
     <Footer v-if="route.name === 'home'" />

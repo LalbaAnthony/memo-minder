@@ -10,7 +10,7 @@ Back:
     - Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Front:
-    - loading isn't centered on Y axis
+    - loading isn't centered on Y axis + no loading in search and item picker
     - make add button if no data on home page/lists
     - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
     - Refondre les inputs + labels dans chaque items
