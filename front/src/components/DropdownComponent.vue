@@ -7,7 +7,7 @@
         {{ props.title }}
         <ChevronDownIcon
           :class="['ml-2 size-7 text-light transform transition-transform duration-200', showDropdown ? 'rotate-180' : '']"
-          aria-hidden="true" />
+          :aria-hidden="show || 'true'" />
       </button>
     </div>
     <TransitionRoot :show="showDropdown">
