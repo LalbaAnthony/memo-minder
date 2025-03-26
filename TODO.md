@@ -9,6 +9,7 @@ Must:
 - [ ] Maj account params + mdp oublié + delete account
 
 Important:
+- [ ] Améliorer les flex wrap en Les mettant en quinconce (justify-evenly?)
 - [ ] loading isn't centered on Y axis + no loading in search and item picker
 - [ ] Faire en sorte qu'on puisse relier les items dans les deux sens (pas que depuis le maitre)
 - [ ] Faire du many to many partout
