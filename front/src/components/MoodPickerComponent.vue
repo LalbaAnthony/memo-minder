@@ -7,7 +7,7 @@
         {{ mood?.name || 'Mood' }}
         <ChevronDownIcon
           :class="['ml-2 h-5 w-5 text-light transform transition-transform duration-200', show ? 'rotate-180' : '']"
-          aria-hidden="true" />
+          :aria-hidden="show || 'true'" />
       </button>
     </div>
     <TransitionRoot :show="show">
