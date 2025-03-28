@@ -67,3 +67,11 @@ npm i -g pm2
 Apache is used to serve the frontend. Make sure to install it on the server.
 
 Use the `apache.prod.conf` file to configure the virtual host.
+
+
+### Database
+
+MySQL is used to store the data. Make sure to install it on the server.
+
+Use the `mysql.prod.sql` file to configure the database.
+
