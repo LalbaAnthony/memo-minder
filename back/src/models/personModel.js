@@ -14,7 +14,7 @@ const Person = sequelize.define('Person', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'User',
+            model: User,
             key: 'userId'
         },
         onDelete: 'CASCADE', 
