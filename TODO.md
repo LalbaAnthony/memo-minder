@@ -10,10 +10,15 @@ Must:
 - [ ] Maj account params + mdp oublié + delete account
 
 Important:
+- [ ] Add a confirm on delete button on detail page 
 - [ ] Améliorer les flex wrap en Les mettant en quinconce (justify-evenly?)
 - [ ] loading isn't centered on Y axis + no loading in search and item picker
 - [ ] Faire en sorte qu'on puisse relier les items dans les deux sens (pas que depuis le maitre)
 - [ ] Faire du many to many partout
+- [ ] Logo des item music de la mauvaise couleur au survol
+- [ ] Pas assez de bottom margin dans le corps des page de modif: superposition buttons
+- [ ] Add save btn on account page
+- [ ] Default value of date picker is set to 1970
 
 Medium:
 - [ ] Bug: si date de naissance en 1910,stats sont cassés
@@ -22,6 +27,7 @@ Medium:
 - [ ] make add button if no data on home page/lists
 - [ ] Fill infos page
 - [ ] Add unit test
+- [ ] Set a limit to number of notification En même temps (auto clear si > 5 (?)) 
 
 Low:
 - [ ] https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
