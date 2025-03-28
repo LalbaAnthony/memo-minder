@@ -20,7 +20,7 @@ const logConsole = require('./src/helpers/logConsole')
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 // Import DB instance
-const sequelize = process.env.NODE_ENV === 'production' ? require('./src/config/database_production') : require('./src/config/database_development');
+const sequelize = process.env.NODE_ENV === 'production' ? require('./src/config/database_production') : require('./src/config/database');
 
 const app = express()
 
