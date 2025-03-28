@@ -12,7 +12,7 @@ const sequelizeDevelopment = new Sequelize({
 });
 
 const sequelizeProduction = new Sequelize(process.env.BACK_DATABASE_NAME, process.env.BACK_DATABASE_USERNAME, process.env.BACK_DATABASE_PASSWORD, {
-    host: 'localhost',
+    host: '127.0.0.1',
     dialect: 'mysql',
     port: 3306,
     logging: logConsole('Database connection established!', 'info')
