@@ -7,7 +7,7 @@ module.exports = (subject = '', text = '', to = '', from = process.env.BACK_EMAI
         service: 'gmail',
         auth: {
             user: process.env.BACK_EMAIL_USER,
-            pass: process.env.BACK_EMAIL_PASS,
+            pass: process.env.BACK_EMAIL_PASSWORD,
         },
     });
 
