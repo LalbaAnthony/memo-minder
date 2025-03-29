@@ -10,8 +10,8 @@ Must:
 - [ ] Maj account params + mdp oublié + delete account
 
 Important:
-- [ ] Add a confirm on delete button on detail page 
-- [ ] Améliorer les flex wrap en Les mettant en quinconce (justify-evenly?)
+- [x] Add a confirm on delete button on detail page 
+- [ ] Add loader on search page and item picker
 - [ ] loading isn't centered on Y axis + no loading in search and item picker
 - [ ] Faire en sorte qu'on puisse relier les items dans les deux sens (pas que depuis le maitre)
 - [ ] Faire du many to many partout

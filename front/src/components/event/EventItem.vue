@@ -47,7 +47,7 @@ const props = defineProps({
 })
 
 function deleteEvent() {
-  if (confirm('Are you sure you want to delete this event?')) eventStore.deleteEvent(props.event.eventId, true)
+    if (confirm('Are you sure you want to delete this event?')) eventStore.deleteEvent(props.event.eventId, true)
 }
 
 function goToEvent() {

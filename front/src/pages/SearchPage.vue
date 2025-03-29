@@ -9,8 +9,8 @@
     </div>
 
     <!-- Add buttons -->
-    <div class="flex flex-row flex-wrap flexitems-center justify-center gap-2 mt-2 mx-4">
-      <TransitionRoot :show="addButtons.season.show">
+    <div class="flex flex-wrap items-center justify-center gap-2 mt-2 mx-4">
+      <TransitionRoot :show="addButtons.season.show" class="w-4/5 sm:w-auto">
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
@@ -18,7 +18,7 @@
             @click="router.push({ path: '/seasons/add', query: { title: toAddString } })" />
         </TransitionChild>
       </TransitionRoot>
-      <TransitionRoot :show="addButtons.event.show">
+      <TransitionRoot :show="addButtons.event.show" class="w-4/5 sm:w-auto">
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
@@ -26,7 +26,7 @@
             @click="router.push({ path: '/events/add', query: { title: toAddString } })" />
         </TransitionChild>
       </TransitionRoot>
-      <TransitionRoot :show="addButtons.person.show">
+      <TransitionRoot :show="addButtons.person.show" class="w-4/5 sm:w-auto">
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
@@ -34,7 +34,7 @@
             @click="router.push({ path: '/people/add', query: { name: toAddString } })" />
         </TransitionChild>
       </TransitionRoot>
-      <TransitionRoot :show="addButtons.music.show">
+      <TransitionRoot :show="addButtons.music.show" class="w-4/5 sm:w-auto">
         <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
           enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
           leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
