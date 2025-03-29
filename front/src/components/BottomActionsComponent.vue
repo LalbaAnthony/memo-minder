@@ -136,7 +136,7 @@ function triggerUpdate() {
 }
 
 function triggerDelete() {
-  emit('triggerDelete', true)
+  if (confirm('Are you sure you want to delete this item?')) emit('triggerDelete', true)
 }
 
 // Enable go top button when scrolling

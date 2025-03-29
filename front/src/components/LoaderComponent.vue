@@ -1,5 +1,5 @@
 <template>
-  <div v-if="props.enabled" class="flex items-center justify-center h-96">
+  <div v-if="props.enabled" class="flex items-center justify-center h-80">
     <span class="loader"></span>
   </div>
 </template>
