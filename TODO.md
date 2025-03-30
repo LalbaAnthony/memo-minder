@@ -34,6 +34,7 @@ Low:
 - [ ] Trop de scroll quand barre de recherche item picker est vide
 - [ ] Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ? `toAddSeason: {}` ?)
 - [ ] Inifinte scroll
+- [ ] Faire en sorte qu'elle soit utilisable sans connection (store en persistant, ...)
 - [ ] Faire listes differentes dans les stores pour chaque usage ?
 - [ ] Ajouter langue francaise
 - [ ] Fill terms-and-conditions page and add in the infos page
