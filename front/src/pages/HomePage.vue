@@ -1,10 +1,10 @@
 <template>
   <div>
-    <section v-if="authStore?.user?.homePageEnableSpents">
+    <!-- <section v-if="authStore?.user?.homePageEnableSpents"> -->
       <div class="my-4">
         <Spents :birthdate="authStore.user.birthdate" />
       </div>
-    </section>
+    <!-- </section> -->
 
     <div class="md:grid md:grid-cols-2 md:gap-6">
       <section v-if="authStore?.user?.homePageEnableStats && authStore?.user?.birthdate">

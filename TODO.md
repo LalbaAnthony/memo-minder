@@ -4,11 +4,13 @@
 
 Must:
 - [x] Make sure DB isnt empty on prod since the pipe remove the back folder: use https://chatgpt.com/share/67dfcc33-e8bc-8008-b9ca-39b3b008ca32
-- [ ] Display version in front from package.json
+- [x] Display version in front from package.json
 - [ ] Ensure auth is secured
 - [ ] A la sauvegarde d'un element, ses données dans la liste disparaissent 
+- [ ] Parmas arnt saved on account page
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 - [ ] Maj account params + mdp oublié + delete account
+- [x] Fill terms-and-conditions page and add in the infos page
 
 Important:
 - [x] Add a confirm on delete button on detail page 
@@ -16,14 +18,14 @@ Important:
 - [ ] loading isn't centered on Y axis + no loading in search and item picker
 - [ ] Faire en sorte qu'on puisse relier les items dans les deux sens (pas que depuis le maitre)
 - [ ] Faire du many to many partout
-- [ ] Logo des item music de la mauvaise couleur au survol
+- [x] Logo des item music de la mauvaise couleur au survol
 - [x] Pas assez de bottom margin dans le corps des page de modif: superposition buttons
 - [x] Add save btn on account page
 - [ ] Default value of date picker is set to 1970
 
 Medium:
 - [ ] Use https://headlessui.com/v1/vue/listboxfor dropdown used as selects
-- [ ] Bug: si date de naissance en 1910,stats sont cassés
+- [x] Bug: si date de naissance en 1910,stats sont cassés
 - [x] Rework animation add button
 - [ ] Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)
 - [ ] make add button if no data on home page/lists
@@ -39,4 +41,3 @@ Low:
 - [ ] Faire en sorte qu'elle soit utilisable sans connection (store en persistant, ...)
 - [ ] Faire listes differentes dans les stores pour chaque usage ?
 - [ ] Ajouter langue francaise
-- [ ] Fill terms-and-conditions page and add in the infos page
