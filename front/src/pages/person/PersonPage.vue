@@ -34,7 +34,6 @@ import { usePersonStore } from '@/stores/person'
 import { notif } from '@/helpers/notif.js'
 import { dateToNiceDate } from '@/helpers/functions.js'
 import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
-
 import debounce from 'lodash/debounce'
 
 const route = useRoute()

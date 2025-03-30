@@ -10,7 +10,7 @@
                 <option value="" disabled selected>Language</option>
                 <option v-for="(value, key) in languages" :key="key" :value="key">{{ value?.label }}</option>
             </select>
-            <DatePicker :value="authStore.authentication.tabs.register.fields.birthdate"
+            <DatePicker :actions="{}" :value="authStore.authentication.tabs.register.fields.birthdate"
                 @update="(v) => { authStore.authentication.tabs.register.fields.birthdate = v }" />
             <hr class="w-full" />
             <input v-model="authStore.authentication.tabs.register.fields.password" id="password" type="password"

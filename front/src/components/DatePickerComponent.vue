@@ -1,11 +1,11 @@
 <template>
   <VueDatePicker class="max-w-[20rem]" ref="datePicker" v-model="date" dark :enableTimePicker="false"
     :format="dateToNiceDate" :preview-format="() => { return '' }">
-    <template #menu-header>
-      <div class="p-2 flex justify-between items-center">
+    <template #menu-header v-if="props.actions && Object.keys(props.actions).length > 0">
+      <div class="px-2 pt-2 flex justify-between items-center">
         <div>
-          <button type="button" class="dp__action_buttons dp__action_button date-picker-today-button"
-            @click="setToday">Pick today</button>
+          <button v-if="props.actions?.setToday" type="button"
+            class="dp__action_buttons dp__action_button date-picker-today-button" @click="setToday">Pick today</button>
         </div>
       </div>
     </template>
@@ -15,7 +15,6 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { isValidDate, dateToNiceDate } from "@/helpers/functions.js";
-import { defineProps, defineEmits } from 'vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
@@ -23,6 +22,15 @@ const props = defineProps({
   title: {
     type: String,
     required: false,
+  },
+  actions: {
+    type: Object,
+    required: false,
+    default: () => {
+      return {
+        setToday: true,
+      };
+    },
   },
   value: {
     type: String,
@@ -47,6 +55,7 @@ const setToday = () => {
 
 // Watch for changes in props.value and update date
 watch(() => props.value, (newValue) => {
+  if (newValue == '1970-01-01') newValue = '';
   if (newValue !== date.value) {
     date.value = newValue;
   }
@@ -54,11 +63,11 @@ watch(() => props.value, (newValue) => {
 
 // Watch for changes in date and emit updates
 watch(date, (newValue, oldValue) => {
+  if (newValue == '1970-01-01') newValue = '';
   if (isValidDate(newValue)) {
     emit('update', new Date(newValue).toISOString().split('T')[0]);
   } else {
     date.value = oldValue;
-    console.error('Invalid date');
   }
 });
 

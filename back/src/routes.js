@@ -48,8 +48,8 @@ router.post('/login', userController.login);
 router.post('/verify-email', userController.verifyEmail);
 router.get('/forgot-password', checkToken, userController.forgotPassword);
 router.post('/reset-password', userController.resetPassword);
-router.get('/user-infos/:id', checkToken, userController.userInfos);
-router.put('/user-update/:id', checkToken, userController.userUpdate);
-router.delete('/user-delete/:id', checkToken, userController.userDelete);
+router.get('/user/:id', checkToken, userController.userInfos);
+router.put('/user/:id', checkToken, userController.userUpdate);
+router.delete('/user/:id', checkToken, userController.userDelete);
 
 module.exports = router;
