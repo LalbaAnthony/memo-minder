@@ -91,10 +91,13 @@
     <section>
       <p>Last updated: March 2025</p>
     </section>
+
+    <Footer />
   </div>
 </template>
 
 <script setup>
 import TopActions from '@/components/TopActionsComponent.vue'
+import Footer from '@/components/FooterComponent.vue'
 import { VITE_APP_NAME, VITE_GIT_REPO } from '@/config';
 </script>

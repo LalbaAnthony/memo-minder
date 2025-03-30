@@ -38,7 +38,8 @@
       </div>
       <div class="flex flex-col justify-center items-start">
         <h1 class="text-2xl font-bold">{{ props?.music?.title }}</h1>
-        <p class="text-gray-light">{{ props?.music?.artist }} {{ props?.music?.artist && props?.music?.releaseDate ? '-'
+        <p :class="['text-gray-light', props?.music?.streamingLink ? `${platform}-artist` : '']">{{ props?.music?.artist }} {{ props?.music?.artist &&
+          props?.music?.releaseDate ? '-'
           : '' }} {{ getYearFromDate(props?.music?.releaseDate) }}</p>
       </div>
       <div>
@@ -105,7 +106,7 @@ div.spotify-item:hover {
   background-color: #080808;
 }
 
-div.spotify-item:hover * {
+div.spotify-item:hover .spotify-artist {
   color: #FFFFFF;
 }
 
@@ -119,7 +120,7 @@ div.apple-item:hover {
   background-color: #FB3D55;
 }
 
-div.apple-item:hover * {
+div.apple-item:hover .apple-artist {
   color: #FFFFFF;
 }
 
@@ -133,7 +134,7 @@ div.youtube-item:hover {
   background-color: #FF0808;
 }
 
-div.youtube-item:hover * {
+div.youtube-item:hover .youtube-artist {
   color: #FFFFFF;
 }
 
@@ -147,7 +148,7 @@ div.deezer-item:hover {
   background-color: #080808;
 }
 
-div.deezer-item:hover * {
+div.deezer-item:hover .deezer-artist {
   color: #FFFFFF;
 }
 
@@ -161,7 +162,7 @@ div.default-item:hover {
 
 /* ================ DEFAULT ================ */
 
-div.default-item:hover * {
+div.default-item:hover .default-artist {
   color: var(--light);
 }
 

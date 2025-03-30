@@ -31,10 +31,13 @@ const props = defineProps({
     }
 })
 
+const age = computed(() => ageFromDate(props?.birthdate || '2000-01-01'))
+
 const childhoodPercentage = computed(() => {
     const yearStart = 0
     const yearEnd = 18
-    const percent = ((ageFromDate(props.birthdate) - yearStart) / yearEnd) * 100
+    if (age.value >= yearEnd) return 100 
+    const percent = ((age.value - yearStart) / yearEnd) * 100
     if (percent < 0) return 0
     if (percent > 100) return 100
     return percent
@@ -43,7 +46,8 @@ const childhoodPercentage = computed(() => {
 const adulthoodPercentage = computed(() => {
     const yearStart = 18
     const yearEnd = 64
-    const percent = ((ageFromDate(props.birthdate) - yearStart) / yearEnd) * 100
+    if (age.value >= yearEnd) return 100 
+    const percent = ((age.value - yearStart) / yearEnd) * 100
     if (percent < 0) return 0
     if (percent > 100) return 100
     return percent
@@ -52,7 +56,8 @@ const adulthoodPercentage = computed(() => {
 const oldhoodPercentage = computed(() => {
     const yearStart = 64
     const yearEnd = 80
-    const percent = ((ageFromDate(props.birthdate) - yearStart) / yearEnd) * 100
+    if (age.value >= yearEnd) return 100 
+    const percent = ((age.value - yearStart) / yearEnd) * 100
     if (percent < 0) return 0
     if (percent > 100) return 100
     return percent
@@ -61,7 +66,8 @@ const oldhoodPercentage = computed(() => {
 const lifeTimePercentage = computed(() => {
     const yearStart = 0
     const yearEnd = 80
-    const percent = ((ageFromDate(props.birthdate) - yearStart) / yearEnd) * 100
+    if (age.value >= yearEnd) return 100 
+    const percent = ((age.value - yearStart) / yearEnd) * 100
     if (percent < 0) return 0
     if (percent > 100) return 100
     return percent
