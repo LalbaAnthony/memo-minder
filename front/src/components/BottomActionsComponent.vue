@@ -19,7 +19,7 @@
     </div>
 
     <!-- Update button -->
-    <div v-if="props.updateButton && route.name.includes('details')" @click="triggerUpdate()"
+    <div v-if="props.updateButton && (route.name.includes('details') || route.name === 'account')" @click="triggerUpdate()"
       class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
       <CheckIcon class="size-10" />
     </div>

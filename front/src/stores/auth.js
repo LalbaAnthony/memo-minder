@@ -81,7 +81,7 @@ export const useAuthStore = defineStore('auth', {
 
     async fetchUserInfos() {
 
-      await api.get(`user-infos/${this.user.userId}`).then(resp => {
+      await api.get(`user/${this.user.userId}`).then(resp => {
 
         if (resp.status !== 200) {
           notif.notify(resp.data.message, 'error')
@@ -97,20 +97,47 @@ export const useAuthStore = defineStore('auth', {
       })
     },
 
-    async updateUserInfos() {
+    async updateUser(notify = false) {
 
-      const userPayload = this.user
-      delete userPayload.connectionToken
-      delete userPayload.password
+      const username = this.user.username.trim() || null
+      const birthdate = this.user.birthdate || null
+      const email = this.user.email.trim() || null
+      const language = this.user.language || null
 
-      await api.put(`user-update/${this.user.userId}`, userPayload).then(resp => {
+      let error = null
+
+      if (!error && (!username || username.length === 0)) error = "Please enter your username"
+      if (!error && (!birthdate || birthdate.length === 0)) error = "Please enter your birthdate"
+      if (!error && !isValidDate(birthdate)) error = "Please enter a valid birthdate"
+      if (!error && (!language || language.length === 0)) error = "Please select your language"
+      if (!error && (!email || email.length === 0)) error = "Please enter your email"
+      if (!error && !isValidEmail(email)) error = "Please enter a valid email"
+
+      if (error) {
+        notif.notify(error, 'error')
+        return false
+      }
+
+      const user = {
+        username,
+        email,
+        birthdate,
+        language,
+      }
+
+      await api.put(`user/${this.user.userId}`, user).then(resp => {
 
         if (resp.status === 'error') {
           notif.notify(resp.data.message, 'error')
           return false
         }
 
-        // notif.notify('Your informations have been updated', 'success')
+        if (resp.status !== 201) {
+          notif.notify(resp.data.message, 'error')
+          return false
+        } else if (notify) {
+          notif.notify('Your informations have been updated', 'success')
+        }
 
         return true
       }).catch(error => {
@@ -169,7 +196,7 @@ export const useAuthStore = defineStore('auth', {
 
     async deleteAccount() {
 
-      await api.del(`user-delete/${this.user.userId}`).then(resp => {
+      await api.del(`user/${this.user.userId}`).then(resp => {
 
         if (resp.status !== 200) {
           notif.notify(resp.data.message, 'error')

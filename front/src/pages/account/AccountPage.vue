@@ -15,7 +15,7 @@
         </div>
         <div class="flex flex-col gap-2">
           <label for="birthdate">Birthdate</label>
-          <DatePicker :value="authStore.user.birthdate" @update="(v) => { authStore.user.birthdate = v }" />
+          <DatePicker :actions="{}" :value="authStore.user.birthdate" @update="(v) => { authStore.user.birthdate = v }" />
         </div>
         <div class="flex flex-col gap-2">
           <label for="language">Language</label>
@@ -88,20 +88,24 @@
         </button>
       </div>
     </section>
+
+    <BottomActions @triggerUpdate="manualUpdate" />
   </div>
 </template>
 
 <script setup>
-import { watch, onBeforeUnmount, onMounted } from 'vue'
+import { watch, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import debounce from 'lodash/debounce'
+import BottomActions from '@/components/BottomActionsComponent.vue'
 import DatePicker from '@/components/DatePickerComponent.vue'
-import { isValidEmail } from '@/helpers/functions.js'
-import { isValidDate } from '@/helpers/functions.js'
-import { notif } from '@/helpers/notif.js'
+import { useRouter } from 'vue-router'
 import { languages } from '@/lang/languages.js'
 
 const authStore = useAuthStore()
+const router = useRouter()
+
+const watched = ref(0)
 
 function clearLocalData() {
   if (confirm("Are you sure you want to delete all local data? You will lose unsaved data and will be disconnected.")) {
@@ -123,43 +127,31 @@ function deleteAccount() {
   }
 }
 
-function valid() {
-  // return false // ? uncomment this line to enable form validation
-  if (authStore.user.username.length === 0) return "Username is required"
-  if (authStore.user.birthdate.length === 0) return "Birthdate is required"
-  if (authStore.user.language.length === 0) return "Language is required"
-  if (authStore.user.email.length === 0) return "Email is required"
-  if (!isValidEmail(authStore.user.email)) return "Please enter a valid email"
-  if (!isValidDate(authStore.user.birthdate)) return "Please enter a valid birthdate"
-  return false
+function manualUpdate() {
+  debouncedUpdate.cancel()
+  authStore.updateUser(authStore.user, true)
+  router.push('/')
 }
 
-// Save user infos with a debounce of 1 second, to avoid too many requests
-const handleSave = debounce(() => {
-
-  authStore.user.username = authStore.user.username.trim()
-  authStore.user.birthdate = authStore.user.birthdate.trim()
-  authStore.user.language = authStore.user.language.trim()
-  authStore.user.email = authStore.user.email.trim()
-
-  const error = valid()
-  if (error) {
-    notif.notify(error, 'error')
-  } else {
-    authStore.updateUserInfos()
-  }
-
-}, 3000)
+const debouncedUpdate = debounce(() => {
+  authStore.updateUser()
+}, 10000)
 
 onMounted(() => {
   authStore.fetchUserInfos()
 })
 
 onBeforeUnmount(() => {
-  handleSave
+  debouncedUpdate
 });
 
-// Save user infos when user changes them
-watch(() => authStore.user, handleSave, { deep: true })
+watch(() => authStore.user,
+  () => {
+    watched.value += 1
+    if (watched.value <= 2) return // Skip the debounce on initial load
+    debouncedUpdate();
+  },
+  { deep: true }
+);
 
 </script>

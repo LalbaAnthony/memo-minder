@@ -17,7 +17,7 @@ Important:
 - [ ] Faire du many to many partout
 - [ ] Logo des item music de la mauvaise couleur au survol
 - [ ] Pas assez de bottom margin dans le corps des page de modif: superposition buttons
-- [ ] Add save btn on account page
+- [x] Add save btn on account page
 - [ ] Default value of date picker is set to 1970
 
 Medium:
