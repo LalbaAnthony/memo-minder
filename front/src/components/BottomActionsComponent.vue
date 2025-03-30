@@ -2,43 +2,41 @@
   <div
     :class="['fixed z-20 flex flex-col justify-end gap-2 p-3', isMobile() ? 'bottom-20 right-0' : 'bottom-0 right-0']">
     <!-- Scroll to top -->
-    <TransitionRoot :show="isMobile() && props.goTopButton && enableGoTop"
-      @click="goTop()">
+    <TransitionRoot :show="isMobile() && props.goTopButton && enableGoTop" @click="goTop()">
       <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0"
         enter-to="opacity-100" leave="transition ease-in-out duration-300 transform" leave-from=" opacity-100"
         leave-to="opacity-0"
-        class="flex items-center justify-center cursor-pointer text-gray-light bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
+        class="flex items-center justify-center cursor-pointer text-gray-light bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-300">
         <ChevronUpIcon class="size-6" />
       </TransitionChild>
     </TransitionRoot>
 
     <!-- Create button -->
     <div v-if="props.createButton" @click="triggerCreate()"
-      class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
+      class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-300">
       <CheckIcon class="size-10" />
     </div>
 
     <!-- Update button -->
     <div v-if="props.updateButton" @click="triggerUpdate()"
-      class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
+      class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-300">
       <CheckIcon class="size-10" />
     </div>
 
     <!-- Delete button -->
     <div v-if="props.deleteButton" @click="triggerDelete()"
-      class="flex items-center justify-center cursor-pointer text-danger bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
+      class="flex items-center justify-center cursor-pointer text-danger bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-300">
       <TrashIcon class="size-10" />
     </div>
 
     <!-- Add button -->
     <div v-if="props.addButton"
-      :class="[showAddSelector ? 'bg-gray-dark' : '', 'rounded-2xl']">
-      <TransitionRoot :show="showAddSelector">
-        <TransitionChild v-click-outside="() => showAddSelector = false" as="div"
-          enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 translate-y-1/4"
-          enter-to="translate-y-0 opacity-100" leave="transition ease-in-out duration-300 transform"
-          leave-from="translate-y-0 opacity-100" leave-to="opacity-0 translate-y-1/4"
-          class="origin-top flex flex-col items-center justify-center gap-1 bg-gray-dark rounded-2xl px-1 py-2">
+      :class="[showAddSelector ? 'bg-gray-dark' : '', 'rounded-2xl ease-in-out duration-300 transition-all']">
+      <TransitionRoot style="z-index: 10" :show="showAddSelector">
+        <TransitionChild v-click-outside="() => showAddSelector = false" as="div" style="z-index: 10"
+          enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 " enter-to="opacity-100"
+          leave="transition ease-in-out duration-300 transform" leave-from="opacity-100" leave-to="opacity-0 "
+          class="z-10 origin-top flex flex-col items-center justify-center gap-1 bg-gray-dark rounded-2xl px-1 py-2">
           <router-link to="/seasons/add" class="p-2 rounded-xl hover:bg-gray">
             <FilmIcon class="size-8 text-light" />
           </router-link>
@@ -54,7 +52,7 @@
         </TransitionChild>
       </TransitionRoot>
       <div
-        :class="['rounded-2xl', 'flex items-center justify-center cursor-pointer text-dark-light bg-primary shadow-xl p-2 transition-all duration-200 delay-100']"
+        :class="['rounded-2xl', 'z-20 flex items-center justify-center cursor-pointer text-dark-light bg-primary shadow-xl p-2 transition-all duration-300 delay-100']"
         @click.stop="showAddSelector = !showAddSelector">
         <PlusIcon class="size-10" />
       </div>

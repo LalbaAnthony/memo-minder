@@ -13,6 +13,10 @@ const __dirname = path.dirname(__filename);
 // Load .env file
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
+// Get the version from package.json
+const version = require('./package.json').version || '0.0.0';
+process.env.VITE_APP_VERSION = version;
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -56,13 +60,13 @@ export default defineConfig({
       VITE_APP_NAME: process.env.VITE_APP_NAME,
       VITE_APP_COMPANY_NAME: process.env.VITE_APP_COMPANY_NAME,
       VITE_APP_AUTHOR_NAME: process.env.VITE_APP_AUTHOR_NAME,
-      VITE_APP_VERSION: process.env.VITE_APP_VERSION,
       VITE_BACKEND_API_URL: process.env.VITE_BACKEND_API_URL,
       VITE_FRONT_URL: process.env.VITE_FRONT_URL,
       VITE_GIT_REPO: process.env.VITE_GIT_REPO,
+      VITE_APP_VERSION: process.env.VITE_APP_VERSION,
     }
   },
   server: {
-    port: process.env.VITE_PORT
+    port: process.env.VITE_PORT || 5173,
   },
 })
