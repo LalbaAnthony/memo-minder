@@ -31,7 +31,6 @@ jobs:
           echo "VITE_APP_NAME=${{ secrets.PROD_VITE_APP_NAME }}" >> .env
           echo "VITE_APP_COMPANY_NAME=${{ secrets.PROD_VITE_APP_COMPANY_NAME }}" >> .env
           echo "VITE_APP_AUTHOR_NAME=${{ secrets.PROD_VITE_APP_AUTHOR_NAME }}" >> .env
-          echo "VITE_APP_VERSION=${{ secrets.PROD_VITE_APP_VERSION }}" >> .env
           echo "VITE_APP_DESCRIPTION=${{ secrets.PROD_VITE_APP_DESCRIPTION }}" >> .env
           echo "VITE_APP_THEME_COLOR=${{ secrets.PROD_VITE_APP_THEME_COLOR }}" >> .env
           echo "VITE_APP_BG_COLOR=${{ secrets.PROD_VITE_APP_BG_COLOR }}" >> .env
