@@ -1,5 +1,7 @@
 <template>
   <div>
+    <TopActions :goBackButton="true" />
+
     <Loader v-if="seasonStore.season?.loading" />
     <div v-else>
       <!-- Title and date section -->
@@ -95,6 +97,7 @@ import ItemPicker from '@/components/ItemPickerComponent.vue'
 import Loader from '@/components/LoaderComponent.vue'
 import MoodPicker from '@/components/MoodPickerComponent.vue'
 import Pill from '@/components/PillComponent.vue'
+import TopActions from '@/components/TopActionsComponent.vue'
 import BottomActions from '@/components/BottomActionsComponent.vue'
 import { PlusIcon } from '@heroicons/vue/24/solid'
 import { useRoute, useRouter } from 'vue-router'

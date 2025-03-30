@@ -1,5 +1,7 @@
 <template>
   <div>
+    <TopActions :goBackButton="true" />
+
     <Loader v-if="musicStore.music?.loading" />
     <div v-else>
       <!-- Title and date section -->
@@ -38,8 +40,8 @@
           </div>
           <div class="w-full flex flex-wrap items-center gap-2">
             <span class="text-lg font-medium text-gray-light">Artist :</span>
-            <input v-model="musicStore.music.data.artist" id="artist"
-              class="p-2 rounded-lg bg-gray-dark text-light" placeholder="..." />
+            <input v-model="musicStore.music.data.artist" id="artist" class="p-2 rounded-lg bg-gray-dark text-light"
+              placeholder="..." />
           </div>
         </div>
       </section>
@@ -54,6 +56,7 @@
 <script setup>
 import Loader from '@/components/LoaderComponent.vue'
 import DatePicker from '@/components/DatePickerComponent.vue'
+import TopActions from '@/components/TopActionsComponent.vue'
 import BottomActions from '@/components/BottomActionsComponent.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useMusicStore } from '@/stores/music'

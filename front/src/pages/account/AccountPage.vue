@@ -1,5 +1,7 @@
 <template>
   <div>
+    <TopActions :goBackButton="true" />
+
     <section>
       <h2 class="text-xl font-bold my-4">Global</h2>
       <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 m-4">
@@ -15,7 +17,8 @@
         </div>
         <div class="flex flex-col gap-2">
           <label for="birthdate">Birthdate</label>
-          <DatePicker :actions="{}" :value="authStore.user.birthdate" @update="(v) => { authStore.user.birthdate = v }" />
+          <DatePicker :actions="{}" :value="authStore.user.birthdate"
+            @update="(v) => { authStore.user.birthdate = v }" />
         </div>
         <div class="flex flex-col gap-2">
           <label for="language">Language</label>
@@ -89,7 +92,7 @@
       </div>
     </section>
 
-    <BottomActions @triggerUpdate="manualUpdate" />
+    <BottomActions :goTopButton="true" :updateButton="true" @triggerUpdate="manualUpdate" />
   </div>
 </template>
 
@@ -98,6 +101,7 @@ import { watch, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import debounce from 'lodash/debounce'
 import BottomActions from '@/components/BottomActionsComponent.vue'
+import TopActions from '@/components/TopActionsComponent.vue'
 import DatePicker from '@/components/DatePickerComponent.vue'
 import { useRouter } from 'vue-router'
 import { languages } from '@/lang/languages.js'

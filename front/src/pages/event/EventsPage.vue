@@ -16,7 +16,7 @@
     <Pagination :total="eventStore.events.pagination.total" :page="eventStore.events.pagination.page"
       :perPage="eventStore.events.pagination.perPage" @update-page="(page) => eventStore.changePage(page)" />
 
-    <BottomActions />
+    <BottomActions :addButton="true" :goTopButton="true" />
   </div>
 </template>
 

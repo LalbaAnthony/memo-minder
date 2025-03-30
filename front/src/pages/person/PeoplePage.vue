@@ -16,7 +16,7 @@
       :perPage="personStore.people.pagination.perPage"
       @update-page="(page) => personStore.changePage(page)" />
       
-    <BottomActions />
+    <BottomActions :addButton="true" :goTopButton="true" />
   </div>
 </template>
 

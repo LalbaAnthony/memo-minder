@@ -2,7 +2,7 @@
   <div
     :class="['fixed z-20 flex flex-col justify-end gap-2 p-3', isMobile() ? 'bottom-20 right-0' : 'bottom-0 right-0']">
     <!-- Scroll to top -->
-    <TransitionRoot :show="props.goTopButton && route.name.includes('list') && isMobile() && enableGoTop"
+    <TransitionRoot :show="isMobile() && props.goTopButton && enableGoTop"
       @click="goTop()">
       <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0"
         enter-to="opacity-100" leave="transition ease-in-out duration-300 transform" leave-from=" opacity-100"
@@ -13,25 +13,25 @@
     </TransitionRoot>
 
     <!-- Create button -->
-    <div v-if="props.createButton && route.name.includes('add')" @click="triggerCreate()"
+    <div v-if="props.createButton" @click="triggerCreate()"
       class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
       <CheckIcon class="size-10" />
     </div>
 
     <!-- Update button -->
-    <div v-if="props.updateButton && (route.name.includes('details') || route.name === 'account')" @click="triggerUpdate()"
+    <div v-if="props.updateButton" @click="triggerUpdate()"
       class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
       <CheckIcon class="size-10" />
     </div>
 
     <!-- Delete button -->
-    <div v-if="props.deleteButton && route.name.includes('details')" @click="triggerDelete()"
+    <div v-if="props.deleteButton" @click="triggerDelete()"
       class="flex items-center justify-center cursor-pointer text-danger bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-200">
       <TrashIcon class="size-10" />
     </div>
 
     <!-- Add button -->
-    <div v-if="props.addButton && (route.name === 'home' || route.name.includes('list'))"
+    <div v-if="props.addButton"
       :class="[showAddSelector ? 'bg-gray-dark' : '', 'rounded-2xl']">
       <TransitionRoot :show="showAddSelector">
         <TransitionChild v-click-outside="() => showAddSelector = false" as="div"
@@ -72,44 +72,37 @@ import { CalendarDaysIcon } from '@heroicons/vue/24/solid'
 import { UserIcon } from '@heroicons/vue/24/solid'
 import { MusicalNoteIcon } from '@heroicons/vue/24/solid'
 import { isMobile } from '@/helpers/functions.js'
-import { useRoute, } from 'vue-router'
 import debounce from 'lodash/debounce'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { ref } from 'vue'
 import vClickOutside from '@/directives/clickOutside.js'
 
-const route = useRoute()
 
 const props = defineProps({
   goTopButton: {
     type: Boolean,
     required: false,
-    default: true,
+    default: false,
   },
   createButton: {
     type: Boolean,
     required: false,
-    default: true,
+    default: false,
   },
   updateButton: {
     type: Boolean,
     required: false,
-    default: true,
+    default: false,
   },
   deleteButton: {
     type: Boolean,
     required: false,
-    default: true,
+    default: false,
   },
   addButton: {
     type: Boolean,
     required: false,
-    default: true,
-  },
-  searchButton: {
-    type: Boolean,
-    required: false,
-    default: true,
+    default: false,
   },
 })
 

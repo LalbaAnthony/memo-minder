@@ -55,8 +55,9 @@ const routes = [
     meta: {
       title: 'All Seasons',
       private: true,
-      displayInSearch: true,
+      displayInSearch: true,      
       tags: ['seasons', 'years', 'periods'],
+      mobileMainClass: 'pb-36',
     },
   },
   {
@@ -68,6 +69,7 @@ const routes = [
       private: true,
       displayInSearch: true,
       tags: ['seasons', 'years', 'periods', 'add'],
+      mobileMainClass: 'pb-48',
     },
   },
   {
@@ -83,6 +85,7 @@ const routes = [
           private: true,
           displayInSearch: false,
           tags: ['seasons', 'years', 'periods', 'details'],
+          mobileMainClass: 'pb-48',
         },
       },
     ],
@@ -95,8 +98,9 @@ const routes = [
     meta: {
       title: 'All Events',
       private: true,
-      displayInSearch: true,
+      displayInSearch: true,      
       tags: ['events', 'happenings', 'occurrences'],
+      mobileMainClass: 'pb-36',
     },
   },
   {
@@ -108,6 +112,7 @@ const routes = [
       private: true,
       displayInSearch: true,
       tags: ['events', 'happenings', 'occurrences', 'add'],
+      mobileMainClass: 'pb-48',
     },
   },
   {
@@ -123,6 +128,7 @@ const routes = [
           private: true,
           displayInSearch: false,
           tags: ['events', 'happenings', 'occurrences', 'details'],
+          mobileMainClass: 'pb-48',
         },
       },
     ],
@@ -135,8 +141,9 @@ const routes = [
     meta: {
       title: 'All People',
       private: true,
-      displayInSearch: true,
+      displayInSearch: true,      
       tags: ['people', 'persons', 'humans'],
+      mobileMainClass: 'pb-36',
     },
   },
   {
@@ -148,6 +155,7 @@ const routes = [
       private: true,
       displayInSearch: true,
       tags: ['people', 'persons', 'humans', 'add'],
+      mobileMainClass: 'pb-48',
     },
   },
   {
@@ -163,6 +171,7 @@ const routes = [
           private: true,
           displayInSearch: false,
           tags: ['people', 'persons', 'humans', 'details'],
+          mobileMainClass: 'pb-48',
         },
       },
     ],
@@ -175,8 +184,9 @@ const routes = [
     meta: {
       title: 'All Musics',
       private: true,
-      displayInSearch: true,
+      displayInSearch: true,      
       tags: ['musics', 'songs', 'tunes'],
+      mobileMainClass: 'pb-36',
     },
   },
   {
@@ -188,6 +198,7 @@ const routes = [
       private: true,
       displayInSearch: true,
       tags: ['musics', 'songs', 'tunes', 'add'],
+      mobileMainClass: 'pb-48',
     },
   },
   {
@@ -203,6 +214,7 @@ const routes = [
           private: true,
           displayInSearch: false,
           tags: ['musics', 'songs', 'tunes', 'details'],
+          mobileMainClass: 'pb-48',
         },
       },
     ],

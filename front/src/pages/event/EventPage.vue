@@ -1,5 +1,7 @@
 <template>
   <div>
+    <TopActions :goBackButton="true" />
+
     <Loader v-if="eventStore.event?.loading" />
     <div v-else>
       <!-- Title and date section -->
@@ -85,6 +87,7 @@ import Pill from '@/components/PillComponent.vue'
 import BottomActions from '@/components/BottomActionsComponent.vue'
 import { PlusIcon } from '@heroicons/vue/24/solid'
 import { MapPinIcon } from '@heroicons/vue/24/solid'
+import TopActions from '@/components/TopActionsComponent.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useEventStore } from '@/stores/event'
 import { notif } from '@/helpers/notif.js'

@@ -50,12 +50,15 @@
       </section>
     </div>
 
-    <BottomActions />
+    <Footer />
+    
+    <BottomActions :addButton="true" />
   </div>
 </template>
 
 <script setup>
 import Grid from '@/components/GridComponent.vue'
+import Footer from '@/components/FooterComponent.vue'
 import Season from '@/components/season/SeasonItem.vue'
 import Event from '@/components/event/EventItem.vue'
 import Loader from '@/components/LoaderComponent.vue'
