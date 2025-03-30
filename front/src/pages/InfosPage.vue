@@ -1,5 +1,6 @@
 <template>
   <div>
+    <TopActions :goBackButton="true" />
     <section>
       <h1 class="text-2xl font-bold mb-4">Open source</h1>
       <p>
@@ -11,6 +12,7 @@
 </template>
 
 <script setup>
+import TopActions from '@/components/TopActionsComponent.vue'
 import { VITE_APP_NAME, VITE_GIT_REPO } from '@/config';
 
 </script>

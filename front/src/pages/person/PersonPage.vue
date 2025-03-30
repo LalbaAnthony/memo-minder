@@ -1,5 +1,7 @@
 <template>
   <div>
+    <TopActions :goBackButton="true" />
+
     <Loader v-if="personStore.person?.loading" />
     <div v-else>
       <!-- Name and date section -->
@@ -28,6 +30,7 @@
 
 <script setup>
 import Loader from '@/components/LoaderComponent.vue'
+import TopActions from '@/components/TopActionsComponent.vue'
 import BottomActions from '@/components/BottomActionsComponent.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { usePersonStore } from '@/stores/person'

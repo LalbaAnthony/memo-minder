@@ -1,5 +1,7 @@
 <template>
   <div>
+    <TopActions :goBackButton="true" />
+
     <section>
       <h1 class="text-2xl font-bold mb-4">1. Acceptance of Terms</h1>
       <p>
@@ -70,12 +72,11 @@
       </p>
     </section>
 
-
     <section>
       <h1 class="text-2xl font-bold mb-4">9. Contact</h1>
       <p>
         For questions regarding these Terms, check <a :href="VITE_GIT_REPO" target="_blank"
-        class="text-light text-primary">the GitHub repository</a>.
+          class="text-light text-primary">the GitHub repository</a>.
       </p>
     </section>
 
@@ -94,5 +95,6 @@
 </template>
 
 <script setup>
+import TopActions from '@/components/TopActionsComponent.vue'
 import { VITE_APP_NAME, VITE_GIT_REPO } from '@/config';
 </script>
