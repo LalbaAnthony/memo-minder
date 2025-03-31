@@ -135,11 +135,6 @@ export const useAuthStore = defineStore('auth', {
 
       await api.put(`user/${this.user.userId}`, user).then(resp => {
 
-        if (resp.status === 'error') {
-          notif.notify(resp.data.message, 'error')
-          return false
-        }
-
         if (resp.status !== 201) {
           notif.notify(resp.data.message, 'error')
           return false
@@ -154,9 +149,32 @@ export const useAuthStore = defineStore('auth', {
       })
     },
 
-    async verifyEmail(email, token) {
-      // TODO: WIP
-      console.log('verifyEmail', email, token)
+    async verifyEmail(email, token, notify = true) {
+      let error = null
+
+      if (!error && (!token || token.length === 0)) error = "No token provided"
+      if (!error && (!email || email.length === 0)) error = "No email provided"
+      if (!error && !isValidEmail(email)) error = "The email is not valid"
+
+      if (error) {
+        notif.notify(error, 'error')
+        return false
+      }
+
+      await api.post(`verify-email`, { email, token, }).then(resp => {
+
+        if (resp.status !== 200) {
+          notif.notify(resp.data.message, 'error')
+          return false
+        } else if (notify) {
+          notif.notify('Your informations have been updated', 'success')
+        }
+
+        return true
+      }).catch(error => {
+        notif.notify(`An error occured: ${error}`, 'error')
+        return false
+      })
     },
 
     async forgotPassword() {
