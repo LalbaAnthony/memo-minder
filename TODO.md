@@ -25,6 +25,7 @@ Important:
 - [ ] Default value of date picker is set to 1970
 
 Medium:
+- [ ] Footer s'affiche pas sur homepage mobile
 - [ ] Use https://headlessui.com/v1/vue/listboxfor dropdown used as selects
 - [x] Bug: si date de naissance en 1910,stats sont cassés
 - [x] Rework animation add button
