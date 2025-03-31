@@ -12,7 +12,7 @@
 
 <script setup>
 import NoItem from '@/components/NoItemComponent.vue'
-import { isMobile } from '@/helpers/functions';
+import { isMobile } from '@/helpers/helpers';
 
 const props = defineProps({
   items: {

@@ -57,7 +57,7 @@
       <!-- Description & Mood section -->
       <section>
         <div class="flex items-center justify-start pb-4">
-          <MoodPicker :value="seasonStore.season.data.moodId" @update="(v) => { seasonStore.season.data.mood = v }" />
+          <MoodPicker :value="seasonStore.season.data.moodId" @update="(v) => { seasonStore.season.data.moodId = v }" />
         </div>
         <textarea v-model="seasonStore.season.data.description" class="w-full p-2 rounded-lg bg-gray-dark text-light"
           rows="10" placeholder="..."> </textarea>
@@ -103,7 +103,7 @@ import { PlusIcon } from '@heroicons/vue/24/solid'
 import { useRoute, useRouter } from 'vue-router'
 import { useSeasonStore } from '@/stores/season'
 import { notif } from '@/helpers/notif.js'
-import { dateToNiceDate } from '@/helpers/functions.js'
+import { dateToNiceDate } from '@/helpers/helpers.js'
 import { computed, ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import debounce from 'lodash/debounce'
 

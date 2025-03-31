@@ -14,7 +14,7 @@
 
 <script setup>
 import { ref, watch } from 'vue';
-import { isValidDate, dateToNiceDate } from "@/helpers/functions.js";
+import { isValidDate, dateToNiceDate } from "@/helpers/helpers.js";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 

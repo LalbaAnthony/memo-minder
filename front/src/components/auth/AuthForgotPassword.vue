@@ -21,7 +21,7 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth'
 import { onMounted } from 'vue'
-import { isMobile } from '@/helpers/functions.js'
+import { isMobile } from '@/helpers/helpers.js'
 
 const authStore = useAuthStore()
 

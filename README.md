@@ -1,5 +1,7 @@
 # 📝 - Memo Minder
 
+This web app have been inspired by [this youtube video](https://www.youtube.com/watch?v=UzPWp7g3jBg).
+
 ## 📖 Technos
 
 - [Node.js](https://nodejs.org/en/)
@@ -74,4 +76,3 @@ Use the `apache.prod.conf` file to configure the virtual host.
 MySQL is used to store the data. Make sure to install it on the server.
 
 Use the `mysql.prod.sql` file to configure the database.
-

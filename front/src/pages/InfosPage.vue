@@ -9,6 +9,13 @@
       </p>
     </section>
     <section>
+      <h1 class="text-2xl font-bold mb-4">Origin</h1>
+      <p>
+        This web app have been inspired by <a href="https://www.youtube.com/watch?v=UzPWp7g3jBg" target="_blank"
+          class="text-light text-primary">this youtube video</a>.
+      </p>
+    </section>
+    <section>
       <h1 class="text-2xl font-bold mb-4">Open source</h1>
       <p>
         {{ VITE_APP_NAME }} is an open source project available in <a :href="VITE_GIT_REPO" target="_blank"
@@ -23,7 +30,7 @@
       </p>
     </section>
 
-    <Footer />    
+    <Footer />
   </div>
 </template>
 
