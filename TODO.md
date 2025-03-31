@@ -6,7 +6,7 @@ Must:
 - [x] Make sure DB isnt empty on prod since the pipe remove the back folder: use https://chatgpt.com/share/67dfcc33-e8bc-8008-b9ca-39b3b008ca32
 - [x] Display version in front from package.json
 - [ ] Ensure auth is secured
-- [ ] Maj account params + mdp oublié + delete account
+- [ ] Mdp oublié + delete account
 - [ ] A la sauvegarde d'un element, ses données dans la liste disparaissent 
 - [x] Mood de event se save pas 
 - [x] Params are'nt saved on account page
@@ -22,7 +22,7 @@ Important:
 - [x] Logo des item music de la mauvaise couleur au survol
 - [x] Pas assez de bottom margin dans le corps des page de modif: superposition buttons
 - [x] Add save btn on account page
-- [ ] Default value of date picker is set to 1970
+- [x] Default value of date picker is set to 1970
 
 Medium:
 - [ ] Footer s'affiche pas sur homepage mobile
