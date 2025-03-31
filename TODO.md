@@ -8,7 +8,7 @@ Must:
 - [ ] Ensure auth is secured
 - [ ] Maj account params + mdp oublié + delete account
 - [ ] A la sauvegarde d'un element, ses données dans la liste disparaissent 
-- [ ] Mood de event se save pas 
+- [x] Mood de event se save pas 
 - [x] Params are'nt saved on account page
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 - [x] Fill terms-and-conditions page and add in the infos page
