@@ -40,7 +40,7 @@
       <!-- Description & Mood section -->
       <section>
         <div class="flex items-center justify-start pb-4">
-          <MoodPicker :value="eventStore.event.data.moodId" @update="(v) => { eventStore.event.data.mood = v }" />
+          <MoodPicker :value="eventStore.event.data.moodId" @update="(v) => { eventStore.event.data.moodId = v }" />
         </div>
         <textarea v-model="eventStore.event.data.description" class="w-full p-2 rounded-lg bg-gray-dark text-light"
           rows="10" placeholder="..."> </textarea>
@@ -91,7 +91,7 @@ import TopActions from '@/components/TopActionsComponent.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useEventStore } from '@/stores/event'
 import { notif } from '@/helpers/notif.js'
-import { dateToNiceDate } from '@/helpers/functions.js'
+import { dateToNiceDate } from '@/helpers/helpers.js'
 import { computed, ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import debounce from 'lodash/debounce'
 

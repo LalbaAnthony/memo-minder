@@ -1,5 +1,5 @@
 import { useToast } from 'vue-toastification';
-import { isMobile } from '@/helpers/functions.js';
+import { isMobile } from '@/helpers/helpers.js';
 
 const toast = useToast();
 

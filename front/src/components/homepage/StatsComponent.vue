@@ -8,8 +8,8 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { ageFromDate } from "@/helpers/functions.js"
-import { roundNb } from "@/helpers/functions.js"
+import { ageFromDate } from "@/helpers/helpers.js"
+import { roundNb } from "@/helpers/helpers.js"
 
 const props = defineProps({
   birthdate: {

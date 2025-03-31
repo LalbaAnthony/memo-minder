@@ -2,9 +2,9 @@ import { defineStore } from 'pinia'
 import { notif } from '@/helpers/notif.js'
 import router from '@/router'
 import { api } from '@/helpers/api'
-import { isValidEmail } from '@/helpers/functions.js'
-import { isValidDate } from '@/helpers/functions.js'
-import { missingsElementsPassword } from '@/helpers/functions.js'
+import { isValidEmail } from '@/helpers/helpers.js'
+import { isValidDate } from '@/helpers/helpers.js'
+import { missingsElementsPassword } from '@/helpers/helpers.js'
 
 export const useAuthStore = defineStore('auth', {
   persist: true,
@@ -103,6 +103,10 @@ export const useAuthStore = defineStore('auth', {
       const birthdate = this.user.birthdate || null
       const email = this.user.email.trim() || null
       const language = this.user.language || null
+      const homePageEnableSpents = this.user.homePageEnableSpents || false
+      const homePageEnableStats = this.user.homePageEnableStats || false
+      const homePageEnableQuote = this.user.homePageEnableQuote || false
+      const homePageEnableLasts = this.user.homePageEnableLasts || false
 
       let error = null
 
@@ -123,6 +127,10 @@ export const useAuthStore = defineStore('auth', {
         email,
         birthdate,
         language,
+        homePageEnableSpents,
+        homePageEnableStats,
+        homePageEnableQuote,
+        homePageEnableLasts,
       }
 
       await api.put(`user/${this.user.userId}`, user).then(resp => {

@@ -21,7 +21,7 @@ import { FilmIcon } from '@heroicons/vue/24/solid'
 import { CalendarDaysIcon } from '@heroicons/vue/24/solid'
 import { UserIcon } from '@heroicons/vue/24/solid'
 import { MusicalNoteIcon } from '@heroicons/vue/24/solid'
-import { randomInt } from '@/helpers/functions.js'
+import { randomInt } from '@/helpers/helpers.js'
 import { PlusIcon } from '@heroicons/vue/24/solid'
 import { ArrowLongRightIcon } from '@heroicons/vue/24/solid'
 

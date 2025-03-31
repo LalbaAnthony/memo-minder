@@ -35,7 +35,7 @@ import BottomActions from '@/components/BottomActionsComponent.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { usePersonStore } from '@/stores/person'
 import { notif } from '@/helpers/notif.js'
-import { dateToNiceDate } from '@/helpers/functions.js'
+import { dateToNiceDate } from '@/helpers/helpers.js'
 import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import debounce from 'lodash/debounce'
 

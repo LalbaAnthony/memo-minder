@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { roundNb } from '@/helpers/functions.js'
+import { roundNb } from '@/helpers/helpers.js'
 
 const props = defineProps({
   value: {
