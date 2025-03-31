@@ -72,7 +72,7 @@ onMounted(() => {
 })
 
 watch(() => moodId.value, () => {
-  emit('update', moodId.value)
+  emit('update', moodId.value || null)
 })
 
 </script>

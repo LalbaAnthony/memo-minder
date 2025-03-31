@@ -14,7 +14,7 @@
 
 <script setup>
 import { ref, watch } from 'vue';
-import { isValidDate, dateToNiceDate } from "@/helpers/helpers.js";
+import { dateToNiceDate } from "@/helpers/helpers.js";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
@@ -53,22 +53,10 @@ const setToday = () => {
   }
 };
 
-// Watch for changes in props.value and update date
-watch(() => props.value, (newValue) => {
-  if (newValue == '1970-01-01') newValue = '';
-  if (newValue !== date.value) {
-    date.value = newValue;
-  }
-});
-
 // Watch for changes in date and emit updates
-watch(date, (newValue, oldValue) => {
-  if (newValue == '1970-01-01') newValue = '';
-  if (isValidDate(newValue)) {
-    emit('update', new Date(newValue).toISOString().split('T')[0]);
-  } else {
-    date.value = oldValue;
-  }
+watch(date, (value) => {
+  if (value == '1970-01-01') value = null;
+  emit('update', value ? new Date(value).toISOString().split('T')[0] : null);
 });
 
 </script>

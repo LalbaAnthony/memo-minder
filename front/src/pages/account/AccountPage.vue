@@ -120,7 +120,7 @@ function clearLocalData() {
 }
 
 function deleteAccount() {
-  if (confirm("Are you sure you want to delete your account? You may lose all your data.")) {
+  if (confirm("Are you sure you want to delete your account? You will lose all your data.")) {
     if (prompt("Please type your email to confirm.") === authStore.user.email) {
       if (confirm("Are you really sure? This action is irreversible.")) {
         authStore.deleteAccount()
