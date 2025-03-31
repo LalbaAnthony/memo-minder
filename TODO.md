@@ -5,6 +5,7 @@
 Must:
 - [x] Make sure DB isnt empty on prod since the pipe remove the back folder: use https://chatgpt.com/share/67dfcc33-e8bc-8008-b9ca-39b3b008ca32
 - [x] Display version in front from package.json
+- [ ] Check validation on account page, some required field can be blank on update 
 - [ ] Ensure auth is secured
 - [ ] Faire test auth de bout en bout en jouant au débile
 - [ ] Mdp oublié + forgot password + reset password
