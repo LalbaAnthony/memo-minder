@@ -16,7 +16,6 @@ Important:
 - [ ] Faire du many to many partout
 
 Medium:
-- [ ] Footer s'affiche pas sur homepage mobile
 - [ ] Use https://headlessui.com/v1/vue/listboxfor dropdown used as selects
 - [ ] Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)
 - [ ] make add button if no data on home page/lists

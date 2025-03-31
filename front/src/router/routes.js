@@ -9,6 +9,7 @@ const routes = [
       private: true,
       displayInSearch: true,
       tags: ['home', 'welcome', 'index'],
+      mobileMainClass: 'pb-24',
     },
   },
   // ==================== INFOS ====================
@@ -21,9 +22,10 @@ const routes = [
       private: false,
       displayInSearch: true,
       tags: ['infos', 'about', 'contact'],
+      mobileMainClass: 'pb-24',
     },
   },
-  // ==================== INFOS ====================
+  // ==================== TERMS ====================
   {
     path: '/terms-and-conditions',
     name: 'terms-and-conditions',
@@ -33,6 +35,7 @@ const routes = [
       private: false,
       displayInSearch: false,
       tags: ['terms', 'conditions', 'legal'],
+      mobileMainClass: 'pb-24',
     },
   },
   // ==================== SEARCH ====================
