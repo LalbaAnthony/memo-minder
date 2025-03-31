@@ -51,7 +51,7 @@
     </div>
 
     <Footer />
-
+    
     <BottomActions :addButton="true" />
   </div>
 </template>
@@ -81,14 +81,13 @@ onMounted(() => {
   if (authStore?.user?.homePageEnableLasts) {
     eventStore.fetchEvents({
       sort: [{ order: 'DESC', orderBy: 'createdAt' }],
-      perPage: 3
+      perPage: 4
     })
     seasonStore.fetchSeasons({
       sort: [{ order: 'DESC', orderBy: 'createdAt' }],
-      perPage: 3
+      perPage: 4
     })
   }
-
   if (authStore?.user?.homePageEnableQuote) quoteStore.fetchQuoteIfTooOld()
 })
 
