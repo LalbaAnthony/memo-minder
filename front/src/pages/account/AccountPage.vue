@@ -134,7 +134,6 @@ function deleteAccount() {
 function manualUpdate() {
   debouncedUpdate.cancel()
   authStore.updateUser(authStore.user, true)
-  router.push('/')
 }
 
 const debouncedUpdate = debounce(() => {

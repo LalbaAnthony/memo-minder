@@ -97,7 +97,7 @@ export const useAuthStore = defineStore('auth', {
       })
     },
 
-    async updateUser(notify = false) {
+    async updateUser(redirect = '/', notify = false) {
 
       const username = this.user.username.trim() || null
       const birthdate = this.user.birthdate || null
@@ -140,6 +140,10 @@ export const useAuthStore = defineStore('auth', {
           return false
         } else if (notify) {
           notif.notify('Your informations have been updated', 'success')
+        }
+
+        if (redirect) {
+          router.push(redirect)
         }
 
         return true
