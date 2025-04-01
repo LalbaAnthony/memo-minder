@@ -11,6 +11,7 @@ Must:
 
 Important:
 - [ ] Add loader on search page and item picker
+- [ ] Rework label + fields on details pages
 - [ ] loading isn't centered on Y axis + no loading in search and item picker
 - [ ] Faire en sorte qu'on puisse relier les items dans les deux sens (pas que depuis le maitre)
 - [ ] Faire du many to many partout
