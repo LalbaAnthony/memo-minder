@@ -51,10 +51,10 @@
 <script setup>
 import DatePicker from '@/components/DatePickerComponent.vue'
 import PasswordStrength from '@/components/PasswordStrengthComponent.vue'
-import { languages } from '@/helpers/languages.js'
+import { languages } from '@/composables/languages.js'
 import { useAuthStore } from '@/stores/auth'
 import { onMounted } from 'vue'
-import { isMobile } from '@/helpers/helpers.js'
+import { isMobile } from '@/composables/helpers.js'
 
 const authStore = useAuthStore()
 

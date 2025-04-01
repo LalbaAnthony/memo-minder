@@ -59,7 +59,7 @@
 </template>
 
 <script setup>
-import { getYearFromDate } from '@/helpers/helpers.js'
+import { getYearFromDate } from '@/composables/helpers.js'
 import { computed } from 'vue'
 import { useMusicStore } from '@/stores/music'
 import { TrashIcon } from '@heroicons/vue/24/outline'

@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
-import { api } from '@/helpers/api'
-import { randomColor } from '@/helpers/helpers.js'
+import { api } from '@/composables/api'
+import { randomColor } from '@/composables/helpers.js'
 import { useAuthStore } from '@/stores/auth'
-import { notif } from '@/helpers/notif.js'
+import { notif } from '@/composables/notif.js'
 
 const authStore = useAuthStore()
 

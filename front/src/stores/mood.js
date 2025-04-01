@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { api } from '@/helpers/api'
+import { api } from '@/composables/api'
 
 export const useMoodStore = defineStore('mood', {
   persist: true,

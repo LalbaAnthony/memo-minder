@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia'
-import { notif } from '@/helpers/notif.js'
+import { notif } from '@/composables/notif.js'
 import router from '@/router'
-import { api } from '@/helpers/api'
-import { isValidEmail } from '@/helpers/helpers.js'
-import { isValidDate } from '@/helpers/helpers.js'
-import { missingsElementsPassword } from '@/helpers/helpers.js'
+import { api } from '@/composables/api'
+import { isValidEmail } from '@/composables/helpers.js'
+import { isValidDate } from '@/composables/helpers.js'
+import { missingsElementsPassword } from '@/composables/helpers.js'
 
 export const useAuthStore = defineStore('auth', {
   persist: true,

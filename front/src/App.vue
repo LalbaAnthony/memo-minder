@@ -14,7 +14,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import AppLayout from '@/layouts/AppLayout.vue'
-import { isMobile } from '@/helpers/helpers.js'
+import { isMobile } from '@/composables/helpers.js'
 import { RouterView, useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 

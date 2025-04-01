@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { roundNb } from '@/helpers/helpers.js'
+import { roundNb } from '@/composables/helpers.js'
 
 const props = defineProps({
   value: {
