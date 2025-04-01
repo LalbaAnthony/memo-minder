@@ -98,6 +98,7 @@ exports.forgotPassword = async (req, res) => {
         await user.save();
 
         // TODO: Send an email with the reset code
+        console.log(`Reset code for ${email}: ${code}`);
 
         return res.status(200).json(frmtr('success', null, 'Reset code sent to your email'))
     } catch (error) {
