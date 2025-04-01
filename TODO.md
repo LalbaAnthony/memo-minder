@@ -1,10 +1,11 @@
 - [ ] Utiliser app et noter Problemes
-- [ ] Vérifier la présence de TODO et de WIP dans le code
+- [ ] Truncate prod database from junk data before deploying for real
+- [ ] Vérifier la présence de TODO
 - [ ] Import my own data
 
 Must:
+- [ ] Check why new user cant click anywhere
 - [ ] Ensure auth is secured (can a user access another user's data ?)
-- [ ] Faire test auth de bout en bout en jouant au débile + fixs
 - [ ] A la sauvegarde d'un element, ses données dans la liste disparaissent 
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 

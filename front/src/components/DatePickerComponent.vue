@@ -1,12 +1,12 @@
 <template>
-  <VueDatePicker class="max-w-[20rem]" ref="datePicker" v-model="date" dark :enableTimePicker="false"
+  <VueDatePicker class="max-w-[24rem]" ref="datePicker" v-model="date" dark :enableTimePicker="false"
     :format="dateToNiceDate" :preview-format="() => { return '' }">
     <template #menu-header v-if="props.actions && Object.keys(props.actions).length > 0">
       <div class="px-2 pt-2 flex justify-between items-center">
         <div>
           <button v-if="props.actions?.setToday" type="button"
             class="dp__action_buttons dp__action_button date-picker-today-button" @click="setToday">Pick today</button>
-        </div>
+        </div>()
       </div>
     </template>
   </VueDatePicker>
@@ -105,6 +105,7 @@ watch(date, (value) => {
 .dp__input {
   background-color: var(--gray-dark);
   border: none;
+  border-radius: 0.5rem;
 }
 
 .dp__menu {
