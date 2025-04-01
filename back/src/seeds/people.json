@@ -4,5 +4,11 @@
         "userId": 1,
         "name": "Smith",
         "description": "This man is a legend"
+    },
+    {
+        "personId": 2,
+        "userId": 1,
+        "name": "Robert",
+        "description": "This man is a legend as well"
     }
 ]
