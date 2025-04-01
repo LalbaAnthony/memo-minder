@@ -53,6 +53,14 @@ const setToday = () => {
   }
 };
 
+// Watch for changes in props.value and update date
+watch(() => props.value, (newValue) => {
+  if (newValue == '1970-01-01') newValue = null;
+  if (newValue !== date.value) {
+    date.value = newValue;
+  }
+});
+
 // Watch for changes in date and emit updates
 watch(date, (value) => {
   if (value == '1970-01-01') value = null;
