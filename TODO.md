@@ -3,9 +3,8 @@
 - [ ] Import my own data
 
 Must:
-- [ ] Ensure auth is secured
-- [ ] Faire test auth de bout en bout en jouant au débile
-- [ ] Mdp oublié + forgot password + reset password
+- [ ] Ensure auth is secured (can a user access another user's data ?)
+- [ ] Faire test auth de bout en bout en jouant au débile + fixs
 - [ ] A la sauvegarde d'un element, ses données dans la liste disparaissent 
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 

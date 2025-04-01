@@ -97,7 +97,7 @@ export const useAuthStore = defineStore('auth', {
       })
     },
 
-    async updateUser(redirect = '/', notify = false) {
+    async updateUser(notify = false) {
 
       const username = this.user.username.trim() || null
       const birthdate = this.user.birthdate || null
@@ -142,10 +142,6 @@ export const useAuthStore = defineStore('auth', {
           notif.notify('Your informations have been updated', 'success')
         }
 
-        if (redirect) {
-          router.push(redirect)
-        }
-
         return true
       }).catch(error => {
         notif.notify(`An error occured: ${error}`, 'error')
@@ -171,7 +167,7 @@ export const useAuthStore = defineStore('auth', {
           notif.notify(resp.data.message, 'error')
           return false
         } else if (notify) {
-          notif.notify('Your informations have been updated', 'success')
+          notif.notify('Your email has been verified', 'success')
         }
 
         return true
@@ -194,23 +190,32 @@ export const useAuthStore = defineStore('auth', {
         return false
       }
 
-      this.clearTabFields('forgotPassword')
+      await api.get('forgot-password', { email }).then(resp => {
 
-      // TODO: WIP
-      console.log('forgotPassword', email)
+        if (resp.status !== 201) {
+          notif.notify(resp.data.message, 'error')
+          return false
+        }
+
+        notif.notify(`An email has been sent with a code`, 'success')
+
+        this.setAuthenticationTab('resetPassword')
+
+        return true
+      }).catch(error => {
+        notif.notify(`An error occured: ${error}`, 'error')
+        return false
+      })
     },
 
     async resetPassword() {
       const code = this.authentication.tabs.resetPassword.fields.code || null
       const password = this.authentication.tabs.resetPassword.fields.password.trim() || null
-      const confirmPassword = this.authentication.tabs.resetPassword.fields.confirmPassword.trim() || null
 
       let error = null
 
       if (!error && !code) error = "Please enter your code"
       if (!error && !password) error = "Please enter your password"
-      if (!error && !confirmPassword) error = "Please enter your password"
-      if (!error && password !== confirmPassword) error = 'Passwords do not match'
       if (!error && missingsElementsPassword(password).length > 0) error = `Password must at least contain: ${missingsElementsPassword(password).join(', ')}`
 
       if (error) {
@@ -218,10 +223,27 @@ export const useAuthStore = defineStore('auth', {
         return false
       }
 
-      this.clearTabFields('resetPassword')
+      const email = this.authentication.tabs.forgotPassword.fields.email.trim() || null
 
-      // TODO: WIP
-      console.log('reset password', code, password, confirmPassword)
+      await api.post('reset-password', { email, code, password }).then(resp => {
+
+        if (resp.status !== 200) {
+          notif.notify(resp.data.message, 'error')
+          return false
+        }
+
+        notif.notify('Your password has been reset', 'success')
+
+        this.clearTabFields('forgotPassword')
+        this.clearTabFields('resetPassword')
+
+        this.setAuthenticationTab('login')
+
+        return true
+      }).catch(error => {
+        notif.notify(`An error occured: ${error}`, 'error')
+        return false
+      });
     },
 
     async deleteAccount() {
