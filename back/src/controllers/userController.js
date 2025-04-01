@@ -101,7 +101,6 @@ exports.forgotPassword = async (req, res) => {
         if (!email) return res.status(400).json(frmtr('error', null, 'Missing fields: email'));
 
         // Check if the user exists
-        console.log(await User.findAll())
         const user = await User.findOne({ where: { email } });
         if (!user) return res.status(404).json(frmtr('error', null, 'No user found with this email'));
 
