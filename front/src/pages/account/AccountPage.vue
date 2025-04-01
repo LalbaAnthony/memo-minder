@@ -54,31 +54,10 @@
       </div>
     </section>
     <hr>
-    <section>
-      <h2 class="text-xl font-bold my-4">Security</h2>
-      <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 m-4">
-        <div class="flex flex-col gap-2">
-          <label for="password">Password</label>
-          <input id="password" type="password" class="px-4 p-2 rounded-lg bg-gray-dark text-light"
-            placeholder="Password" disabled />
-        </div>
-        <div class="flex flex-col gap-2">
-          <label for="new-password">New password</label>
-          <input id="new-password" type="password" class="px-4 p-2 rounded-lg bg-gray-dark text-light"
-            placeholder="New password" disabled />
-        </div>
-        <div class="flex flex-col gap-2">
-          <label for="confirm-password">Confirm password</label>
-          <input id="confirm-password" type="password" class="px-4 p-2 rounded-lg bg-gray-dark text-light"
-            placeholder="Confirm password" disabled />
-        </div>
-      </div>
-    </section>
     <hr>
     <section>
       <h2 class="text-xl font-bold my-4">Data</h2>
       <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 m-4">
-
         <button
           class="text-light p-2 rounded-lg cursor-pointer bg-danger hover:bg-danger-dark transition-colors duration-200"
           @click="clearLocalData()">
@@ -103,11 +82,9 @@ import debounce from 'lodash/debounce'
 import BottomActions from '@/components/BottomActionsComponent.vue'
 import TopActions from '@/components/TopActionsComponent.vue'
 import DatePicker from '@/components/DatePickerComponent.vue'
-import { useRouter } from 'vue-router'
 import { languages } from '@/composables/languages.js'
 
 const authStore = useAuthStore()
-const router = useRouter()
 
 const watched = ref(0)
 
@@ -133,7 +110,7 @@ function deleteAccount() {
 
 function manualUpdate() {
   debouncedUpdate.cancel()
-  authStore.updateUser(authStore.user, true)
+  authStore.updateUser(true)
 }
 
 const debouncedUpdate = debounce(() => {

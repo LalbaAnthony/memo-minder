@@ -93,8 +93,8 @@ exports.forgotPassword = async (req, res) => {
         if (!user) return res.status(404).json(frmtr('error', null, 'No user found with this email'));
 
         // Generate a reset code and save it to the user
-        const resetCode = generateCode();
-        user.resetPasswordCode = resetCode;
+        const code = generateCode();
+        user.resetPasswordCode = code;
         await user.save();
 
         // TODO: Send an email with the reset code
@@ -106,17 +106,17 @@ exports.forgotPassword = async (req, res) => {
 };
 
 exports.resetPassword = async (req, res) => {
-    const { email, resetCode, newPassword } = req.body;
+    const { email, code, password } = req.body;
     try {
         // Check if all fields are provided
-        if (!email || !resetCode || !newPassword) return res.status(404).json(frmtr('error', null, 'Missing fields: email, resetCode, newPassword'));
+        if (!email || !code || !password) return res.status(404).json(frmtr('error', null, 'Missing fields: email, code, password'));
 
         // Check if the user exists
-        const user = await User.findOne({ where: { email, resetPasswordCode: resetCode } });
+        const user = await User.findOne({ where: { email, resetPasswordCode: code } });
         if (!user) return res.status(400).json(frmtr('error', null, 'Invalid email or reset code'));
 
         // Reset the password
-        user.password = await bcrypt.hash(newPassword, 10);
+        user.password = await bcrypt.hash(password, 10);
         user.resetPasswordCode = null;
         await user.save();
 
