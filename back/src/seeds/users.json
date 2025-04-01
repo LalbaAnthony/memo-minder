@@ -7,9 +7,9 @@
         "password": "password",
         "language": "en-US",
         "hasValidatedEmail": true,
-        "homePageEnableSpents": false,
+        "homePageEnableSpents": true,
         "homePageEnableStats": true,
-        "homePageEnableQuote": false,
+        "homePageEnableQuote": true,
         "homePageEnableLasts": true
     }
 ]

@@ -2,6 +2,7 @@ const frmtr = require('../helpers/frmtr')
 const generateCode = require('../helpers/generateCode')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const generateToken = require('../helpers/generateToken');
 
 const User = require('../models/userModel');
 
@@ -9,7 +10,7 @@ exports.register = async (req, res) => {
     const { username, birthdate, email, password, language } = req.body;
     try {
         // Check if all fields are provided
-        if (!username || !birthdate || !email || !password) return res.status(400).json(frmtr('error', null, 'Missing fields, must have: username, birthdate, email, password'));
+        if (!username || !birthdate || !email || !password) return res.status(400).json(frmtr('error', null, 'Missing fields: username, birthdate, email, password'));
 
         // Check if the email is already used
         const user = await User.findOne({ where: { email } });
@@ -21,6 +22,14 @@ exports.register = async (req, res) => {
         // Create the user
         const newUser = await User.create({ username, birthdate, email, password: hashedPassword, language });
         if (!newUser) return res.status(500).json(frmtr('error', null, 'Error while creating the account'));
+
+        // Generate a reset code and save it to the user
+        const token = generateToken();
+        newUser.validateEmailToken = token;
+        await newUser.save();
+
+        // TODO: Send an email with the reset code
+        console.log(`Validation link for ${email}: ${process.env.VITE_FRONT_URL}/auth?email=${email}&token=${token}`);
 
         return res.status(201).json(frmtr('success', null, 'Account created successfully'))
     } catch (error) {
@@ -37,6 +46,9 @@ exports.login = async (req, res) => {
         // Check if the user exists
         const user = await User.findOne({ where: { email } });
         if (!user) return res.status(404).json(frmtr('error', null, 'No user found with this email'))
+
+        // Check if the email has been validated
+        if (!user.hasValidatedEmail) return res.status(403).json(frmtr('error', null, 'Email not validated, please check your inbox'))
 
         // Check if the password is valid
         const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -89,6 +101,7 @@ exports.forgotPassword = async (req, res) => {
         if (!email) return res.status(400).json(frmtr('error', null, 'Missing fields: email'));
 
         // Check if the user exists
+        console.log(await User.findAll())
         const user = await User.findOne({ where: { email } });
         if (!user) return res.status(404).json(frmtr('error', null, 'No user found with this email'));
 
@@ -147,14 +160,14 @@ exports.userInfos = async (req, res) => {
 
 exports.userUpdate = async (req, res) => {
     const userId = req.params.id
-    const { username, birthdate, email, language, homePageEnableSpents, homePageEnableStats, homePageEnableQuote, homePageEnableLasts } = req.body;
+    const { username, birthdate, language, homePageEnableSpents, homePageEnableStats, homePageEnableQuote, homePageEnableLasts } = req.body;
     try {
         // Check if the user exists
         const user = await User.findByPk(userId);
         if (!user) return res.status(404).json(frmtr('error', null, 'User not found'));
 
         // Update the user
-        const resp = await user.update({ username, birthdate, email, language, homePageEnableSpents, homePageEnableStats, homePageEnableQuote, homePageEnableLasts });
+        const resp = await user.update({ username, birthdate, language, homePageEnableSpents, homePageEnableStats, homePageEnableQuote, homePageEnableLasts });
         if (!resp) return res.status(500).json(frmtr('error', null, 'Error updating user'));
 
         // Remove sensitive data from the response

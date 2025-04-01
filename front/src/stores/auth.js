@@ -101,7 +101,6 @@ export const useAuthStore = defineStore('auth', {
 
       const username = this.user.username.trim() || null
       const birthdate = this.user.birthdate || null
-      const email = this.user.email.trim() || null
       const language = this.user.language || null
       const homePageEnableSpents = this.user.homePageEnableSpents || false
       const homePageEnableStats = this.user.homePageEnableStats || false
@@ -114,8 +113,6 @@ export const useAuthStore = defineStore('auth', {
       if (!error && (!birthdate || birthdate.length === 0)) error = "Please enter your birthdate"
       if (!error && !isValidDate(birthdate)) error = "Please enter a valid birthdate"
       if (!error && (!language || language.length === 0)) error = "Please select your language"
-      if (!error && (!email || email.length === 0)) error = "Please enter your email"
-      if (!error && !isValidEmail(email)) error = "Please enter a valid email"
 
       if (error) {
         notif.notify(error, 'error')
@@ -124,7 +121,6 @@ export const useAuthStore = defineStore('auth', {
 
       const user = {
         username,
-        email,
         birthdate,
         language,
         homePageEnableSpents,
@@ -190,9 +186,9 @@ export const useAuthStore = defineStore('auth', {
         return false
       }
 
-      await api.get('forgot-password', { email }).then(resp => {
+      await api.post('forgot-password', { email }).then(resp => {
 
-        if (resp.status !== 201) {
+        if (resp.status !== 200) {
           notif.notify(resp.data.message, 'error')
           return false
         }

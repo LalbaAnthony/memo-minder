@@ -1,5 +1,4 @@
 import { useToast } from 'vue-toastification';
-import { isMobile } from '@/composables/helpers.js';
 
 const toast = useToast();
 
@@ -21,7 +20,7 @@ function notify(message, type = 'info') {
     activeNotifications++;
 
     const toastId = toast[type](message, {
-        position: isMobile() ? 'top-right' : 'bottom-right',
+        position: 'top-right',
         timeout: 4000,
         closeOnClick: true,
         pauseOnHover: true,

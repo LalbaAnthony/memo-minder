@@ -5,13 +5,15 @@
                 class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light" placeholder="Username" />
             <input v-model="authStore.authentication.tabs.register.fields.email" id="email" type="email"
                 class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light" placeholder="Email" />
-            <select v-model="authStore.authentication.tabs.register.fields.language" id="language"
-                class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light">
-                <option value="" disabled selected>Language</option>
-                <option v-for="(value, key) in languages" :key="key" :value="key">{{ value?.label }}</option>
-            </select>
-            <DatePicker :actions="{}" :value="authStore.authentication.tabs.register.fields.birthdate"
-                @update="(v) => { authStore.authentication.tabs.register.fields.birthdate = v }" />
+            <div class="flex flex-col sm:flex-row-reverse justify-between gap-4 w-full">
+                <select v-model="authStore.authentication.tabs.register.fields.language" id="language"
+                    class="sm:w-48 w-full px-4 p-2 rounded-lg bg-gray-dark text-light">
+                    <option value="" disabled selected>Language</option>
+                    <option v-for="(value, key) in languages" :key="key" :value="key">{{ value?.label }}</option>
+                </select>
+                <DatePicker :actions="{}" :value="authStore.authentication.tabs.register.fields.birthdate"
+                    @update="(v) => { authStore.authentication.tabs.register.fields.birthdate = v }" />
+            </div>
             <hr class="w-full" />
             <input v-model="authStore.authentication.tabs.register.fields.password" id="password" type="password"
                 class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light" placeholder="Password" />
