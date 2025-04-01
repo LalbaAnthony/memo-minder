@@ -30,8 +30,8 @@
 import Pill from '@/components/PillComponent.vue'
 import { TrashIcon } from '@heroicons/vue/24/outline'
 import { PencilSquareIcon } from '@heroicons/vue/24/outline'
-import { threeDotString } from '@/helpers/helpers'
-import { dateToNiceDate } from '@/helpers/helpers'
+import { threeDotString } from '@/composables/helpers'
+import { dateToNiceDate } from '@/composables/helpers'
 import { useEventStore } from '@/stores/event'
 import { useRouter } from 'vue-router'
 

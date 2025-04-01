@@ -23,7 +23,7 @@
 <script setup>
 import { usePersonStore } from '@/stores/person'
 import { TrashIcon } from '@heroicons/vue/24/outline'
-import { threeDotString } from '@/helpers/helpers'
+import { threeDotString } from '@/composables/helpers'
 import { PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'
 

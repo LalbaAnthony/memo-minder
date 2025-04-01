@@ -104,7 +104,7 @@ import BottomActions from '@/components/BottomActionsComponent.vue'
 import TopActions from '@/components/TopActionsComponent.vue'
 import DatePicker from '@/components/DatePickerComponent.vue'
 import { useRouter } from 'vue-router'
-import { languages } from '@/helpers/languages.js'
+import { languages } from '@/composables/languages.js'
 
 const authStore = useAuthStore()
 const router = useRouter()

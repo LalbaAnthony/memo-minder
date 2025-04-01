@@ -29,7 +29,7 @@
 import PasswordStrength from '@/components/PasswordStrengthComponent.vue'
 import { useAuthStore } from '@/stores/auth'
 import { onMounted } from 'vue'
-import { isMobile } from '@/helpers/helpers.js'
+import { isMobile } from '@/composables/helpers.js'
 
 const authStore = useAuthStore()
 
