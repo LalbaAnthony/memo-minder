@@ -17,7 +17,7 @@
 
       <!-- Stream link section -->
       <section>
-        <div class="flex items-center justify-center gap-2">
+        <div class="flex items-center justify-center gap-2 bg-dark-light p-4 rounded-lg">
           <LinkIcon
             :class="['size-6 text-gray', musicStore.music?.data?.streamingLink ? 'hover:text-gray-light cursor-pointer' : '']"
             @click="onpenStreamingLink()" />
@@ -32,16 +32,14 @@
 
       <!-- Date & Artist section -->
       <section>
-        <div class="flex flex-wrap items-center justify-start gap-4">
-          <div class="w-full flex flex-wrap items-center gap-2">
-            <span class="text-lg font-medium text-gray-light">Release date :</span>
-            <DatePicker :value="musicStore.music?.data?.releaseDate"
+        <div class="flex flex-col gap-4 sm:gap-1 bg-dark-light p-4 rounded-lg">
+          <div class="flex flex-col sm:flex-row items-center justify-start gap-x-4 gap-y-2">
+            <span class="text-lg font-medium text-gray-light">on</span>
+            <DatePicker class="max-w-[15rem]" :value="musicStore.music?.data?.releaseDate"
               @update="(v) => { musicStore.music.data.releaseDate = v }" />
-          </div>
-          <div class="w-full flex flex-wrap items-center gap-2">
-            <span class="text-lg font-medium text-gray-light">Artist :</span>
-            <input v-model="musicStore.music.data.artist" id="artist" class="p-2 rounded-lg bg-gray-dark text-light"
-              placeholder="..." />
+            <span class="text-lg font-medium text-gray-light">by</span>
+            <input v-model="musicStore.music.data.artist" id="artist"
+              class="max-w-[15rem] p-2 rounded-lg bg-gray-dark text-light" placeholder="..." />
           </div>
         </div>
       </section>

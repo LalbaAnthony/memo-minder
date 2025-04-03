@@ -4,13 +4,15 @@
     <div class="flex-1 p-5" @click="goToSeason()">
       <div class="flex flex-col justify-center items-center w-full my-2">
         <h1 class="text-2xl font-bold">{{ props?.season?.title }}</h1>
-        <p class="text-sm text-gray-light">on {{ dateToNiceDate(props?.season?.createdAt) }}</p>
+        <p class="text-sm text-gray-light">{{ dateToNiceDate(props?.season?.dateStart) }} {{ props?.season?.dateStart &&
+          props?.season?.dateEnd ? 'to' : ''}} {{ dateToNiceDate(props?.season?.dateEnd) }}</p>
       </div>
       <div class="my-4">
         <div class="flex justify-start flex-wrap items-center w-full m-2 gap-2">
           <Pill v-if="props?.season?.season" :text="props?.season?.season?.title" type="season" />
           <Pill v-if="props?.season?.music" :text="props?.season?.music?.title" type="music" />
           <Pill v-if="props?.season?.person" :text="props?.season?.person?.name" type="person" />
+          <Pill v-if="props?.season?.mood" :text="props?.season?.mood?.name" type="mood" />
         </div>
         <p class="m-2 my-4">{{ threeDotString(props?.season?.description) }}</p>
       </div>

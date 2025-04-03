@@ -17,28 +17,20 @@
 
       <!-- Dates section -->
       <section>
-        <div class="flex flex-wrap items-center justify-start gap-4">
-          <div class="flex items-center gap-2">
-            <span class="text-lg font-medium text-gray-light">From</span>
-            <DatePicker :value="seasonStore.season?.data?.dateStart"
+        <div class="flex flex-col gap-4 sm:gap-1 bg-dark-light p-4 rounded-lg">
+          <div class="flex flex-col sm:flex-row items-center justify-start gap-x-4 gap-y-2">
+            <DatePicker class="max-w-[15rem]" :value="seasonStore.season?.data?.dateStart"
               @update="(v) => { seasonStore.season.data.dateStart = v }" />
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="text-lg font-medium text-gray-light">To</span>
-            <DatePicker :value="seasonStore.season?.data?.dateEnd"
+            <span class="text-lg font-medium text-gray-light">to</span>
+            <DatePicker class="max-w-[15rem]" :value="seasonStore.season?.data?.dateEnd"
               @update="(v) => { seasonStore.season.data.dateEnd = v }" />
           </div>
-        </div>
-        <!-- Suggested seasons -->
-        <div v-if="!route?.params?.seasonId" class="flex flex-wrap items-center justify-start gap-x-4 gap-y-1 mt-2">
-          <span class="text-gray">Suggesteds:</span>
-          <div class="flex items-center gap-4">
-            <div v-for="suggestedSeason in suggestedSeasons" :key="suggestedSeason.title"
-              class="flex items-center gap-2 cursor-pointer" @click="() => {
-                seasonStore.season.data.title = suggestedSeason.title
-                seasonStore.season.data.dateStart = suggestedSeason.dateStart
-                seasonStore.season.data.dateEnd = suggestedSeason.dateEnd
-              }">
+          <div v-if="!route?.params?.seasonId" class="flex items-center justify-start gap-x-4 gap-y-1 mt-2">
+            <div v-for="suggestedSeason in suggestedSeasons" :key="suggestedSeason.title" class="cursor-pointer" @click="() => {
+              seasonStore.season.data.title = suggestedSeason.title
+              seasonStore.season.data.dateStart = suggestedSeason.dateStart
+              seasonStore.season.data.dateEnd = suggestedSeason.dateEnd
+            }">
               <span class="text-gray hover:text-gray-light transition-all transition-200">{{ suggestedSeason.title
               }}</span>
             </div>
@@ -46,19 +38,20 @@
         </div>
       </section>
 
-      <!-- Color section -->
+      <!-- Color & Mood section -->
       <section>
-        <div class="flex items-center justify-start gap-4">
-          <span class="text-lg font-medium text-gray-light">Color :</span>
-          <input v-model="seasonStore.season.data.color" type="color" />
+        <div class="flex flex-row justify-around gap-4 bg-dark-light p-4 rounded-lg">
+          <MoodPicker class="max-w-[7rem]" :value="seasonStore.season.data.moodId"
+            @update="(v) => { seasonStore.season.data.moodId = v }" />
+          <div class="flex items-center justify-start gap-4">
+            <span class="text-lg font-medium text-gray-light">Color :</span>
+            <input v-model="seasonStore.season.data.color" type="color" />
+          </div>
         </div>
       </section>
 
-      <!-- Description & Mood section -->
+      <!-- Description -->
       <section>
-        <div class="flex items-center justify-start pb-4">
-          <MoodPicker :value="seasonStore.season.data.moodId" @update="(v) => { seasonStore.season.data.moodId = v }" />
-        </div>
         <textarea v-model="seasonStore.season.data.description" class="w-full p-2 rounded-lg bg-gray-dark text-light"
           rows="10" placeholder="..."> </textarea>
       </section>
@@ -142,7 +135,7 @@ function getSeasons(year = new Date().getFullYear()) {
 function getSurroundingSeasons(currentDate = new Date(), range = 1) {
   const year = currentDate.getFullYear();
   const seasons = [...getSeasons(year - 1), ...getSeasons(year), ...getSeasons(year + 1)];
-  
+
   const currentSeason = seasons.find(season => {
     const start = new Date(season.dateStart);
     const end = new Date(season.dateEnd);
