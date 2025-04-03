@@ -75,6 +75,11 @@ export function randomColor() {
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
 }
 
+export function randomInArray(array) {
+    if (array.length === 0) return null;
+    return array[Math.floor(Math.random() * array.length)];
+}
+
 export function missingsElementsPassword(password) {
     let missingsElements = [];
     if (password.length <= 10) missingsElements.push('10 characters')

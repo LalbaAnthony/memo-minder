@@ -45,7 +45,7 @@
       <!-- Description & Mood section -->
       <section>
         <textarea v-model="eventStore.event.data.description" class="w-full p-2 rounded-lg bg-gray-dark text-light"
-          rows="10" placeholder="..."> </textarea>
+          rows="10" :placeholder="randomInArray(inspirations)"></textarea>
       </section>
 
       <!-- Pills section -->
@@ -94,6 +94,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { useEventStore } from '@/stores/event'
 import { notif } from '@/composables/notif.js'
 import { dateToNiceDate } from '@/composables/helpers.js'
+import { randomInArray } from '@/composables/helpers.js'
+import { inspirations } from '@/composables/inspirations.js'
 import { computed, ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import debounce from 'lodash/debounce'
 
