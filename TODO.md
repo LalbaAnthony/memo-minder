@@ -17,6 +17,7 @@ Important:
 - [ ] Faire du many to many partout
 
 Medium:
+- [ ] Remove lodash and create a vustom debounce function instead ?
 - [ ] Rename "origin" section in infos page to "Credits"
 - [ ] Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)
 - [ ] make add button if no data on home page/lists
