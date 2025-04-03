@@ -37,7 +37,7 @@
       <!-- Color & Mood section -->
       <section>
         <div class="flex flex-row justify-around gap-4 bg-dark-light p-4 rounded-lg">
-          <MoodPicker class="max-w-[7rem]" :value="eventStore.event.data.moodId"
+          <MoodPicker class="max-w-[9rem]" :value="eventStore.event.data.moodId"
             @update="(v) => { eventStore.event.data.moodId = v }" />
         </div>
       </section>
