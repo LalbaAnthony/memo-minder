@@ -1,6 +1,7 @@
 <template>
   <div
     :class="['flex justify-between items-center gap-2 rounded-full px-3 py-1 bg-gray', props.clickable ? 'cursor-pointer' : '']">
+    <HeartIcon v-if="props.type === 'mood'" class="size-6 text-primary-light" />
     <FilmIcon v-if="props.type === 'season'" class="size-6 text-primary-light" />
     <CalendarDaysIcon v-if="props.type === 'event'" class="size-6 text-primary-light" />
     <UserIcon v-if="props.type === 'person'" class="size-6 text-primary-light" />
@@ -15,6 +16,7 @@
 
 <script setup>
 import { FilmIcon } from '@heroicons/vue/24/solid'
+import { HeartIcon } from '@heroicons/vue/24/solid'
 import { CalendarDaysIcon } from '@heroicons/vue/24/solid'
 import { UserIcon } from '@heroicons/vue/24/solid'
 import { PlusIcon } from '@heroicons/vue/24/solid'

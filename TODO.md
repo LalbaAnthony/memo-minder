@@ -21,6 +21,7 @@ Medium:
 - [ ] Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)
 - [ ] make add button if no data on home page/lists
 - [ ] Add unit test
+- [ ] Placeholder aléatoire pour les descrs des event/seasons/people
 
 Low:
 - [ ] https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color

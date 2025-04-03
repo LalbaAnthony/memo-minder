@@ -15,33 +15,35 @@
         </div>
       </section>
 
-      <!-- Date section -->
+      <!-- Date & Location section -->
       <section>
-        <div class="flex flex-wrap items-center justify-start gap-4">
-          <div class="w-full flex flex-wrap items-center gap-2">
-            <span class="text-lg font-medium text-gray-light">Date :</span>
-            <DatePicker :value="eventStore.event?.data?.date"
+        <div class="flex flex-col gap-4 sm:gap-1 bg-dark-light p-4 rounded-lg">
+          <div class="flex flex-col sm:flex-row items-center justify-start gap-x-4 gap-y-2">
+            <span class="text-lg font-medium text-gray-light">on</span>
+            <DatePicker class="max-w-[15rem]" :value="eventStore.event?.data?.date"
               @update="(v) => { eventStore.event.data.date = v }" />
+            <span class="text-lg font-medium text-gray-light">at</span>
+            <div class="flex items-center justify-center gap-2">
+              <MapPinIcon
+                :class="['size-6 text-gray', eventStore.event?.data?.location ? 'hover:text-gray-light cursor-pointer' : '']"
+                @click="openMaps()" />
+              <input v-model="eventStore.event.data.location" id="location"
+                class="p-2 rounded-lg bg-gray-dark text-light" placeholder="Location" />
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- Location section -->
+      <!-- Color & Mood section -->
       <section>
-        <div class="flex items-center justify-center gap-2">
-          <MapPinIcon
-            :class="['size-6 text-gray', eventStore.event?.data?.location ? 'hover:text-gray-light cursor-pointer' : '']"
-            @click="openMaps()" />
-          <input v-model="eventStore.event.data.location" id="location"
-            class="w-full sm:w-2/3 md:w-1/2 p-2 rounded-lg bg-gray-dark text-light" placeholder="Location" />
+        <div class="flex flex-row justify-around gap-4 bg-dark-light p-4 rounded-lg">
+          <MoodPicker class="max-w-[7rem]" :value="eventStore.event.data.moodId"
+            @update="(v) => { eventStore.event.data.moodId = v }" />
         </div>
       </section>
 
       <!-- Description & Mood section -->
       <section>
-        <div class="flex items-center justify-start pb-4">
-          <MoodPicker :value="eventStore.event.data.moodId" @update="(v) => { eventStore.event.data.moodId = v }" />
-        </div>
         <textarea v-model="eventStore.event.data.description" class="w-full p-2 rounded-lg bg-gray-dark text-light"
           rows="10" placeholder="..."> </textarea>
       </section>
