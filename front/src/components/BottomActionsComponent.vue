@@ -38,16 +38,16 @@
           leave="transition ease-in-out duration-300 transform" leave-from="opacity-100" leave-to="opacity-0 "
           class="z-10 origin-top flex flex-col items-center justify-center gap-1 bg-gray-dark rounded-2xl px-1 py-2">
           <router-link to="/seasons/add" class="p-2 rounded-xl hover:bg-gray">
-            <FilmIcon class="size-8 text-light" />
+            <FilmIcon class="size-8 text-gray-light" />
           </router-link>
           <router-link to="/events/add" class="p-2 rounded-xl hover:bg-gray">
-            <CalendarDaysIcon class="size-8 text-light" />
+            <CalendarDaysIcon class="size-8 text-gray-light" />
           </router-link>
           <router-link to="/people/add" class="p-2 rounded-xl hover:bg-gray">
-            <UserIcon class="size-8 text-light" />
+            <UserIcon class="size-8 text-gray-light" />
           </router-link>
           <router-link to="/musics/add" class="p-2 rounded-xl hover:bg-gray">
-            <MusicalNoteIcon class="size-8 text-light" />
+            <MusicalNoteIcon class="size-8 text-gray-light" />
           </router-link>
         </TransitionChild>
       </TransitionRoot>
