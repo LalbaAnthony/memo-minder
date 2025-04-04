@@ -11,13 +11,13 @@
         </div>
         <div class="flex items-center justify-between gap-2 flex-wrap">
           <input v-model="personStore.person.data.name" type="text"
-            class="rounded-lg bg-dark text-light text-2xl w-full" placeholder="Person name" />
+            class="rounded-lg bg-dark placeholder-gray text-light text-2xl w-full" placeholder="Person name" />
         </div>
       </section>
 
       <!-- Description & Mood section -->
       <section>
-        <textarea v-model="personStore.person.data.description" class="w-full p-2 rounded-lg bg-gray-dark text-light"
+        <textarea v-model="personStore.person.data.description" class="w-full p-2 rounded-lg bg-gray-dark placeholder-gray text-light"
           rows="10" placeholder="..."> </textarea>
       </section>
     </div>

@@ -2,11 +2,13 @@
   <Menu v-if="moodStore?.moods?.data" as="div" class="relative inline-block text-left">
     <div>
       <button
-        class="inline-flex w-full justify-center items-center rounded-lg px-4 py-2 text-md font-medium text-light bg-gray-dark"
-        :style="mood && props.enableColor ? `background-color: ${mood?.color} !important;` : ''" @click.stop="show = !show">
-        {{ mood?.name || 'Mood' }}
+        class="inline-flex w-full gap-2 justify-center items-center rounded-lg px-4 py-2 text-md font-medium text-light bg-gray-dark"
+        :style="mood && props.enableColor ? `background-color: ${mood?.color} !important;` : ''"
+        @click.stop="show = !show">
+        <HeartIcon :class="['size-6 transition-color duration-500', mood?.name ? 'text-primary' : 'text-gray']" />
+        <span>{{ mood?.name || 'Mood' }}</span>
         <ChevronDownIcon
-          :class="['ml-2 h-5 w-5 text-light transform transition-transform duration-200', show ? 'rotate-180' : '']"
+          :class="['size-5 text-light transform transition-transform duration-200', show ? 'rotate-180' : '']"
           :aria-hidden="show || 'true'" />
       </button>
     </div>
@@ -32,7 +34,8 @@
 import { onMounted, ref, watch } from 'vue'
 import { Menu, TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/24/solid'
-import vClickOutside from '@/directives/clickOutside.js'
+import { HeartIcon } from '@heroicons/vue/24/solid'
+import vClickOutside from '@/composables/clickOutside.js'
 import { useMoodStore } from '@/stores/mood'
 
 const props = defineProps({
