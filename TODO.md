@@ -28,6 +28,7 @@ Medium:
 Low:
 - [ ] https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
 - [ ] Trop de scroll quand barre de recherche item picker est vide
+- [ ] Hraminiser longueur et choix des mots dans les liens de /infos
 - [ ] Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ? `toAddSeason: {}` ?)
 - [ ] Inifinte scroll
 - [ ] Faire en sorte qu'elle soit utilisable sans connection (store en persistant, ...)
