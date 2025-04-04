@@ -54,12 +54,12 @@ body {
 
 /* Overload vue-toastification stuff */
 
-/* .Vue-Toastification__toast {
+.Vue-Toastification__toast {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2) !important;
     font-family: "Poppins", "Roboto", sans-serif !important;
     border: solid 2px transparent !important;
     border-radius: 1rem !important;
-} */
+}
 
 .Vue-Toastification__toast--info {
     background-color: var(--gray) !important;

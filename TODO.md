@@ -10,9 +10,9 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Important:
-- [ ] Faire en sorte que swipe a droite cache la nav bar du layout (faire un directive ?)
+- [x] Faire en sorte que swipe a droite cache la nav bar du layout (faire un directive ?)
 - [ ] Faire en sorte que les dates picker ne s'initalise pas toujours sur la date d'aujourd'hui (utile pour les musiques, …) + vérifier qu'il est ok avec une valeur vide et pas 1970
-- [ ] Changer ordre Pills des items / champ détail pour cohérence
+- [x] Changer ordre Pills des items / champ détail pour cohérence
 - [ ] Add loader on search page and item picker
 - [ ] Rework label + fields on details pages
 - [ ] loading isn't centered on Y axis + no loading in search and item picker

@@ -41,12 +41,12 @@
       <!-- Color & Mood section -->
       <section>
         <div class="flex flex-row justify-around gap-4 bg-dark-light p-4 rounded-lg">
-          <MoodPicker class="max-w-[9rem]" :value="seasonStore.season.data.moodId"
-            @update="(v) => { seasonStore.season.data.moodId = v }" />
           <div class="flex items-center justify-start gap-4">
             <span class="text-lg font-medium text-gray-light">Color :</span>
             <input v-model="seasonStore.season.data.color" type="color" />
           </div>
+          <MoodPicker class="max-w-[9rem]" :value="seasonStore.season.data.moodId"
+            @update="(v) => { seasonStore.season.data.moodId = v }" />
         </div>
       </section>
 
