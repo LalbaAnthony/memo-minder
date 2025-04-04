@@ -29,8 +29,7 @@
       <section v-if="authStore?.user?.homePageEnableLasts && eventStore?.events?.data?.length > 0">
         <h2 class="text-xl font-bold">Lasts events added</h2>
         <div class="my-4">
-          <Loader v-if="eventStore.events.loading" />
-          <Grid v-else :items="eventStore.events.data">
+          <Grid :items="eventStore.events.data">
             <template #item="{ item }">
               <Event :event="item" />
             </template>
@@ -40,8 +39,7 @@
       <section v-if="authStore?.user?.homePageEnableLasts && seasonStore?.seasons?.data?.length > 0">
         <h2 class="text-xl font-bold">Lasts seasons added</h2>
         <div class="my-4">
-          <Loader v-if="seasonStore.seasons.loading" />
-          <Grid v-else :items="seasonStore.seasons.data">
+          <Grid :items="seasonStore.seasons.data">
             <template #item="{ item }">
               <Season :season="item" />
             </template>
@@ -61,7 +59,6 @@ import Grid from '@/components/GridComponent.vue'
 import Footer from '@/components/FooterComponent.vue'
 import Season from '@/components/season/SeasonItem.vue'
 import Event from '@/components/event/EventItem.vue'
-import Loader from '@/components/LoaderComponent.vue'
 import Stats from '@/components/homepage/StatsComponent.vue'
 import Spents from '@/components/homepage/SpentsComponent.vue'
 import BottomActions from '@/components/BottomActionsComponent.vue'

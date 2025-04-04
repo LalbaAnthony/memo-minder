@@ -1,5 +1,9 @@
 <template>
-  <div v-if="props.enabled" class="flex items-center justify-center h-80">
+  <div :class="['flex items-center justify-center', 
+    props.type === 'absolute' ? 'absolute inset-0' :
+    props.type === 'fixe' ? 'h-80' : 
+    '']"
+  >
     <span class="loader"></span>
   </div>
 </template>
@@ -7,9 +11,10 @@
 <script setup>
 
 const props = defineProps({
-  enabled: {
-    type: Boolean,
-    default: true,
+  type: {
+    type: String,
+    possibleValues: ['absolute', 'fixe',],
+    default: 'absolute',
     required: false,
   },
 })
