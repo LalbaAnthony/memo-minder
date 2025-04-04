@@ -27,7 +27,7 @@
 import { ref } from 'vue'
 import { Menu, TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/24/solid'
-import vClickOutside from '@/directives/clickOutside.js'
+import vClickOutside from '@/composables/clickOutside.js'
 
 const props = defineProps({
   title: {

@@ -11,7 +11,7 @@
         </div>
         <div class="flex items-center justify-between gap-2 flex-wrap">
           <input v-model="seasonStore.season.data.title" type="text"
-            class="rounded-lg bg-dark text-light text-2xl w-full" placeholder="Season title" />
+            class="rounded-lg bg-dark placeholder-gray text-light text-2xl w-full" placeholder="Season title" />
         </div>
       </section>
 
@@ -41,10 +41,8 @@
       <!-- Color & Mood section -->
       <section>
         <div class="flex flex-row justify-around gap-4 bg-dark-light p-4 rounded-lg">
-          <div class="flex items-center justify-start gap-4">
-            <span class="text-lg font-medium text-gray-light">Color :</span>
-            <input v-model="seasonStore.season.data.color" type="color" />
-          </div>
+          <ColorPicker :value="seasonStore.season?.data?.color"
+            @update="(v) => { seasonStore.season.data.color = v }" />
           <MoodPicker class="max-w-[9rem]" :value="seasonStore.season.data.moodId"
             @update="(v) => { seasonStore.season.data.moodId = v }" />
         </div>
@@ -52,8 +50,8 @@
 
       <!-- Description -->
       <section>
-        <textarea v-model="seasonStore.season.data.description" class="w-full p-2 rounded-lg bg-gray-dark text-light"
-          rows="10" :placeholder="randomInArray(inspirations)"></textarea>
+        <textarea v-model="seasonStore.season.data.description"
+          class="w-full p-2 rounded-lg bg-gray-dark placeholder-gray text-light" rows="10" placeholder="..."></textarea>
       </section>
 
       <!-- Pills section -->
@@ -86,6 +84,7 @@
 
 <script setup>
 import DatePicker from '@/components/DatePickerComponent.vue'
+import ColorPicker from '@/components/ColorPickerComponent.vue'
 import ItemPicker from '@/components/ItemPickerComponent.vue'
 import Loader from '@/components/LoaderComponent.vue'
 import MoodPicker from '@/components/MoodPickerComponent.vue'
@@ -99,8 +98,6 @@ import { notif } from '@/composables/notif.js'
 import { dateToNiceDate } from '@/composables/helpers.js'
 import { computed, ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import debounce from 'lodash/debounce'
-import { randomInArray } from '@/composables/helpers.js'
-import { inspirations } from '@/composables/inspirations.js'
 
 const route = useRoute()
 const router = useRouter()

@@ -10,7 +10,7 @@
           <span class="text-gray">Updated the {{ dateToNiceDate(eventStore.event?.data?.updatedAt) }}</span>
         </div>
         <div class="flex items-center justify-between gap-2 flex-wrap">
-          <input v-model="eventStore.event.data.title" type="text" class="rounded-lg bg-dark text-light text-2xl w-full"
+          <input v-model="eventStore.event.data.title" type="text" class="rounded-lg bg-dark placeholder-gray text-light text-2xl w-full"
             placeholder="Event title" />
         </div>
       </section>
@@ -44,8 +44,8 @@
 
       <!-- Description & Mood section -->
       <section>
-        <textarea v-model="eventStore.event.data.description" class="w-full p-2 rounded-lg bg-gray-dark text-light"
-          rows="10" :placeholder="randomInArray(inspirations)"></textarea>
+        <textarea v-model="eventStore.event.data.description" class="w-full p-2 rounded-lg bg-gray-dark placeholder-gray text-light"
+          rows="10" placeholder="..."></textarea>
       </section>
 
       <!-- Pills section -->
@@ -94,8 +94,6 @@ import { useRoute, useRouter } from 'vue-router'
 import { useEventStore } from '@/stores/event'
 import { notif } from '@/composables/notif.js'
 import { dateToNiceDate } from '@/composables/helpers.js'
-import { randomInArray } from '@/composables/helpers.js'
-import { inspirations } from '@/composables/inspirations.js'
 import { computed, ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import debounce from 'lodash/debounce'
 

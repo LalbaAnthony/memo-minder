@@ -130,7 +130,7 @@ import { ArrowLeftEndOnRectangleIcon } from '@heroicons/vue/24/outline'
 import { onMounted, ref } from 'vue'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { useRoute, useRouter } from 'vue-router'
-import vClickOutside from '@/directives/clickOutside.js'
+import vClickOutside from '@/composables/clickOutside.js'
 import { useAuthStore } from '@/stores/auth'
 import { VITE_APP_VERSION } from '@/config';
 import { useSwipe } from '@/composables/useSwipe';
