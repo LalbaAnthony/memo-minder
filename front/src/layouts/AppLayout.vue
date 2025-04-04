@@ -133,6 +133,7 @@ import { useRoute, useRouter } from 'vue-router'
 import vClickOutside from '@/directives/clickOutside.js'
 import { useAuthStore } from '@/stores/auth'
 import { VITE_APP_VERSION } from '@/config';
+import { useSwipe } from '@/composables/useSwipe';
 
 const route = useRoute()
 const router = useRouter()
@@ -197,10 +198,18 @@ function triggerSearch() {
   }
 }
 
+useSwipe((direction) => {
+  if (!isMobile()) return
+  if (direction === 'left') {
+    hideSidebar()
+  } else if (direction === 'right') {
+    revealSidebar()
+  }
+});
+
 onMounted(() => {
   // Add shortcuts
   if (!isMobile()) {
-
     window.addEventListener('keydown', (e) => {
       // Ctrl + K to focus search
       if (e.ctrlKey && e.key === 'k') {

@@ -72,7 +72,7 @@ import { MusicalNoteIcon } from '@heroicons/vue/24/solid'
 import { isMobile } from '@/composables/helpers.js'
 import debounce from 'lodash/debounce'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import vClickOutside from '@/directives/clickOutside.js'
 
 
@@ -130,13 +130,15 @@ function triggerDelete() {
   if (confirm('Are you sure you want to delete this item?')) emit('triggerDelete', true)
 }
 
-// Enable go top button when scrolling
-window.addEventListener('scroll', debounce(() => {
-  const scrollPosition = window.innerHeight + window.scrollY;
-  const pageHeight = document.documentElement.scrollHeight;
-  const scrolledOverHalf = scrollPosition > pageHeight * 0.5
+onMounted(() => {
+  // Enable go top button when scrolling
+  window.addEventListener('scroll', debounce(() => {
+    const scrollPosition = window.innerHeight + window.scrollY;
+    const pageHeight = document.documentElement.scrollHeight;
+    const scrolledOverHalf = scrollPosition > pageHeight * 0.5
 
-  enableGoTop.value = scrolledOverHalf && window.scrollY > 100
-}, 100))
+    enableGoTop.value = scrolledOverHalf && window.scrollY > 100
+  }, 100))
+})
 
 </script>
