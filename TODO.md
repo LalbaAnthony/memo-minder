@@ -11,6 +11,7 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Important:
+- [ ] Check placeholdr colors for all fields
 - [ ] Debounce update on details reload the page and so move to the top
 - [ ] Add logo to item so we can identify them easily (in background ?)
 - [ ] Faire en sorte que les dates picker ne s'initalise pas toujours sur la date d'aujourd'hui (utile pour les musiques, …) + vérifier qu'il est ok avec une valeur vide et pas 1970
