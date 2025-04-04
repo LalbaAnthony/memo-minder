@@ -25,10 +25,10 @@
             <label class="flex flex-start space-x-2">
                 <input v-model="authStore.authentication.tabs.register.fields.acceptTerms" id="acceptTerms"
                     type="checkbox" />
-                <span class="text-light">I accept the <router-link to="/terms-and-conditions"
-                        class="text-light text-primary">terms
+                <span class="text-light">I accept <router-link to="/terms-and-conditions"
+                        class="text-light text-primary">the terms
                         and
-                        conditions</router-link></span>
+                        conditions</router-link>.</span>
             </label>
         </div>
         <div class="flex flex-row-reverse align-items-center justify-between m-4">
