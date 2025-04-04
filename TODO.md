@@ -10,6 +10,8 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Important:
+- [ ] Add logo to mood picker ?
+- [ ] Add logo to item so we can identify them easily (in background ?)
 - [ ] Faire en sorte que les dates picker ne s'initalise pas toujours sur la date d'aujourd'hui (utile pour les musiques, …) + vérifier qu'il est ok avec une valeur vide et pas 1970
 - [ ] Add loader on search page and item picker
 - [ ] Rework label + fields on details pages
