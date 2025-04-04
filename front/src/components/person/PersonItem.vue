@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row justify-between border-2 border-gray rounded-[8px] bg-dark-light h-full">
+  <div class="flex flex-row justify-between border-2 border-gray rounded-[8px] bg-dark-light h-full overflow-hidden">
     <div
       class="flex-1 flex justify-between rounded-l-[6px] p-5 cursor-pointer transition-colors duration-200">
       <div class="flex flex-col justify-center items-start">

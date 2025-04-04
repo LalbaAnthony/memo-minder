@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="relative bottom-0 w-full">
     <p class="text-center text-gray-light text-sm p-4">{{ VITE_APP_NAME }} - {{ VITE_APP_VERSION }}<br>Made by
       {{ VITE_APP_AUTHOR_NAME }} with &#10084;</p>
   </footer>
