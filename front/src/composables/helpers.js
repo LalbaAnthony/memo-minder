@@ -55,6 +55,12 @@ export function roundNb(nb, precision = 2) {
     return nb.toFixed(precision);
 }
 
+export function roundNbNice(nb, precision = 2) {
+    let number = nb.toFixed(precision);
+    if (number.includes('.'))  number = number.replace(/\.?0+$/, ''); // Remove all trailing zeros
+    return number;
+}
+
 export function getYearFromDate(date) {
     if (date) return date.split("-")[0];
     return "";
