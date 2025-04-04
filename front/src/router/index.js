@@ -10,7 +10,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title ? `${to.meta.title} - ${VITE_APP_NAME}` : VITE_APP_NAME;
+  document.title = to.meta.title ? `${to.meta.title} - ${VITE_APP_NAME}` : (VITE_APP_NAME || 'App');
 
   // Check if the route is private and validate the token
   const authStore = useAuthStore()

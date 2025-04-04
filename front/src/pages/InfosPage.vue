@@ -4,8 +4,8 @@
     <section>
       <h1 class="text-2xl font-bold mb-4">Terms and conditions</h1>
       <p>
-        By using {{ VITE_APP_NAME }}, you agree to the <router-link to="/terms-and-conditions"
-          class="text-light text-primary">terms and conditions</router-link>.
+        By using {{ VITE_APP_NAME }}, you agree to <router-link to="/terms-and-conditions"
+          class="text-light text-primary">the terms and conditions</router-link>.
       </p>
     </section>
     <section>
@@ -25,8 +25,8 @@
     <section>
       <h1 class="text-2xl font-bold mb-4">Bug report</h1>
       <p>
-        If you find a bug, please report it in the <a :href="VITE_GIT_REPO + '/issues'" target="_blank"
-          class="text-light text-primary">issues</a> section.
+        If you find a bug, please report it in <a :href="VITE_GIT_REPO + '/issues'" target="_blank"
+          class="text-light text-primary">the issues section</a>.
       </p>
     </section>
 
