@@ -78,7 +78,7 @@
 <script setup>
 import { watch, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
-import debounce from 'lodash/debounce'
+import debounce from '@/composables/debounce.js'
 import BottomActions from '@/components/BottomActionsComponent.vue'
 import TopActions from '@/components/TopActionsComponent.vue'
 import DatePicker from '@/components/DatePickerComponent.vue'

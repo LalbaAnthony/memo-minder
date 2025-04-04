@@ -11,6 +11,7 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Important:
+- [ ] Debounce update on details reload the page and so move to the top
 - [ ] Add logo to item so we can identify them easily (in background ?)
 - [ ] Faire en sorte que les dates picker ne s'initalise pas toujours sur la date d'aujourd'hui (utile pour les musiques, …) + vérifier qu'il est ok avec une valeur vide et pas 1970
 - [ ] Add loader on search page and item picker
@@ -20,7 +21,6 @@ Important:
 - [ ] Faire du many to many partout
 
 Medium:
-- [ ] Remove lodash and create a custom debounce function instead ?
 - [ ] Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)
 - [ ] make add button if no data on home page/lists
 - [ ] Add unit test
