@@ -1,7 +1,7 @@
 <template>
   <div :class="['flex items-center justify-center', 
-    props.type === 'absolute' ? 'absolute inset-0' :
-    props.type === 'fixe' ? 'h-80' : 
+    props.position === 'absolute' ? 'absolute inset-0' :
+    props.position === 'static' ? 'h-80' : 
     '']"
   >
     <span class="loader"></span>
@@ -11,9 +11,9 @@
 <script setup>
 
 const props = defineProps({
-  type: {
+  position: {
     type: String,
-    possibleValues: ['absolute', 'fixe',],
+    possibleValues: ['absolute', 'static',],
     default: 'absolute',
     required: false,
   },
