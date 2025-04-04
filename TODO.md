@@ -4,6 +4,7 @@
 - [ ] Import my own data
 
 Must:
+- [ ] Gérer la taille de item picker qui fait que bouger à l'utilisation + l'adapter mobile/desktop
 - [ ] Check why new user cant click anywhere
 - [ ] Ensure auth is secured (can a user access another user's data ?)
 - [ ] A la sauvegarde d'un element, ses données dans la liste disparaissent 
@@ -11,7 +12,6 @@ Must:
 
 Important:
 - [ ] Add loader on search page and item picker
-- [ ] Trop de scroll quand barre de recherche item picker est vide
 - [ ] Faire en sorte qu'on puisse relier les items dans les deux sens (pas que depuis le maitre)
 - [ ] Faire du many to many partout
 - [ ] Use search queries in external URL as test?q=ezdedze for Spotify etc (default link ?)
