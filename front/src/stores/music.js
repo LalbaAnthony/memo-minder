@@ -136,9 +136,6 @@ export const useMusicStore = defineStore('music', {
     },
 
     async updateMusic(music, notify = false) {
-      // Loading
-      this.music.loading = true
-
       // Request
       const resp = await api.put(`music/${music.musicId}`, music)
 
@@ -152,9 +149,6 @@ export const useMusicStore = defineStore('music', {
       // Update in local list
       const index = this.musics.data.findIndex(item => item?.musicId && (item.musicId === music.musicId))
       this.musics.data.splice(index, 1, resp.data.data)
-
-      // Loading
-      this.music.loading = false
 
       return true
     },

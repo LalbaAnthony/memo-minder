@@ -136,9 +136,6 @@ export const usePersonStore = defineStore('person', {
     },
 
     async updatePerson(person, notify = false) {
-      // Loading
-      this.person.loading = true
-
       // Request
       const resp = await api.put(`person/${person.personId}`, person)
 
@@ -152,9 +149,6 @@ export const usePersonStore = defineStore('person', {
       // Update in local list
       const index = this.people.data.findIndex(item => item?.personId && (item.personId === person.personId))
       this.people.data.splice(index, 1, resp.data.data)
-
-      // Loading
-      this.person.loading = false
 
       return true
     },

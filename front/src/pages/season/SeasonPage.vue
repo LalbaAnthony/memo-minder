@@ -51,7 +51,7 @@
       <!-- Description -->
       <section>
         <textarea v-model="seasonStore.season.data.description"
-          class="w-full p-2 rounded-lg bg-gray-dark placeholder-gray text-light" rows="10" placeholder="..."></textarea>
+          class="w-full p-2 rounded-lg bg-gray-dark placeholder-gray-light text-light" rows="10" placeholder="..."></textarea>
       </section>
 
       <!-- Pills section -->
@@ -230,7 +230,7 @@ const debouncedUpdate = debounce(() => {
       seasonStore.updateSeason(seasonStore.season.data)
     }
   }
-}, 10000)
+}, 1000)
 
 onMounted(() => {
   loadOrInitSeason()

@@ -137,9 +137,6 @@ export const useEventStore = defineStore('event', {
     },
 
     async updateEvent(event, notify = false) {
-      // Loading
-      this.event.loading = true
-
       // Request
       const resp = await api.put(`event/${event.eventId}`, event)
 
@@ -153,10 +150,7 @@ export const useEventStore = defineStore('event', {
       // Update in local list
       const index = this.events.data.findIndex(item => item?.eventId && (item.eventId === event.eventId))
       this.events.data.splice(index, 1, resp.data.data)
-
-      // Loading
-      this.event.loading = false
-
+      
       return true
     },
   },

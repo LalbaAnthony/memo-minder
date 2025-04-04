@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { VITE_BACK_API_URL } from '@/config';
+import { VITE_FRONT_URL } from '@/config';
 import { useAuthStore } from '@/stores/auth'
-import { useRouter } from 'vue-router'
 
+// ? Cannot use vue router to redirect to error page because inject() can only be used inside setup() or functional components
 
 const axiosApi = axios.create({
   baseURL: VITE_BACK_API_URL,
@@ -47,7 +48,6 @@ async function get(endpoint, params = {}) {
   if (typeof endpoint !== 'string') throw new Error('Endpoint must be a string')
   if (typeof params !== 'object') throw new Error('Params must be an object')
 
-  const router = useRouter();
   try {
     const response = await axiosApi.get(endpoint, { params })
 
@@ -59,7 +59,7 @@ async function get(endpoint, params = {}) {
     }
   } catch (error) {
     console.error('Error during API call using api.js:', error.stack)
-    router.push({ path: '/error-server' });
+    window.location.href = `${VITE_FRONT_URL}/error-server`;
   }
 }
 
@@ -68,7 +68,6 @@ async function post(endpoint, data = {}) {
   if (typeof endpoint !== 'string') throw new Error('Endpoint must be a string')
   if (typeof data !== 'object') throw new Error('Data must be an object')
 
-  const router = useRouter();
   try {
     const response = await axiosApi.post(endpoint, data)
 
@@ -80,7 +79,7 @@ async function post(endpoint, data = {}) {
     }
   } catch (error) {
     console.error('Error during API call using api.js:', error.stack)
-    router.push({ path: '/error-server' });
+    window.location.href = `${VITE_FRONT_URL}/error-server`;
   }
 }
 
@@ -89,7 +88,6 @@ async function put(endpoint, data = {}) {
   if (typeof endpoint !== 'string') throw new Error('Endpoint must be a string')
   if (typeof data !== 'object') throw new Error('Data must be an object')
 
-  const router = useRouter();
   try {
     const response = await axiosApi.put(endpoint, data)
 
@@ -101,7 +99,7 @@ async function put(endpoint, data = {}) {
     }
   } catch (error) {
     console.error('Error during API call using api.js:', error.stack)
-    router.push({ path: '/error-server' });
+    window.location.href = `${VITE_FRONT_URL}/error-server`;
   }
 }
 
@@ -110,7 +108,6 @@ async function del(endpoint, data = {}) {
   if (typeof endpoint !== 'string') throw new Error('Endpoint must be a string')
   if (typeof data !== 'object') throw new Error('Data must be an object')
 
-  const router = useRouter();
   try {
     const response = await axiosApi.delete(endpoint, { data })
 
@@ -122,7 +119,7 @@ async function del(endpoint, data = {}) {
     }
   } catch (error) {
     console.error('Error during API call using api.js:', error.stack)
-    router.push({ path: '/error-server' });
+    window.location.href = `${VITE_FRONT_URL}/error-server`;
   }
 }
 

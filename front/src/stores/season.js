@@ -140,9 +140,6 @@ export const useSeasonStore = defineStore('season', {
     },
 
     async updateSeason(season, notify = false) {
-      // Loading
-      this.season.loading = true
-
       // Request
       const resp = await api.put(`season/${season.seasonId}`, season)
 
@@ -156,9 +153,6 @@ export const useSeasonStore = defineStore('season', {
       // Update in local list
       const index = this.seasons.data.findIndex(item => item?.seasonId && (item.seasonId === season.seasonId))
       this.seasons.data.splice(index, 1, resp.data.data)
-
-      // Loading
-      this.season.loading = false
 
       return true
     },

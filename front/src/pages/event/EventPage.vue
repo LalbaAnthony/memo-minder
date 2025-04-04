@@ -44,7 +44,7 @@
 
       <!-- Description & Mood section -->
       <section>
-        <textarea v-model="eventStore.event.data.description" class="w-full p-2 rounded-lg bg-gray-dark placeholder-gray text-light"
+        <textarea v-model="eventStore.event.data.description" class="w-full p-2 rounded-lg bg-gray-dark placeholder-gray-light text-light"
           rows="10" placeholder="..."></textarea>
       </section>
 

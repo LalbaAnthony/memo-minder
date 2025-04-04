@@ -11,13 +11,9 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Important:
-- [ ] Check placeholdr colors for all fields
-- [ ] Debounce update on details reload the page and so move to the top
-- [ ] Add logo to item so we can identify them easily (in background ?)
+- [ ] Make footer (sticky ?) at bottom
 - [ ] Faire en sorte que les dates picker ne s'initalise pas toujours sur la date d'aujourd'hui (utile pour les musiques, …) + vérifier qu'il est ok avec une valeur vide et pas 1970
 - [ ] Add loader on search page and item picker
-- [ ] Rework label + fields on details pages
-- [ ] loading isn't centered on Y axis + no loading in search and item picker
 - [ ] Faire en sorte qu'on puisse relier les items dans les deux sens (pas que depuis le maitre)
 - [ ] Faire du many to many partout
 
