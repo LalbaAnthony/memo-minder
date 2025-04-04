@@ -9,9 +9,9 @@
       </p>
     </section>
     <section>
-      <h1 class="text-2xl font-bold mb-4">Origin</h1>
+      <h1 class="text-2xl font-bold mb-4">Credits</h1>
       <p>
-        This web app have been inspired by <a href="https://www.youtube.com/watch?v=UzPWp7g3jBg" target="_blank"
+        This web app have been inspired by <a href="https://www.youtube.com/watch?v=X7ZxomW71Vs" target="_blank"
           class="text-light text-primary">this youtube video</a>.
       </p>
     </section>
