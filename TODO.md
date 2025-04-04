@@ -5,6 +5,7 @@
 
 Must:
 - [ ] Check why new user cant click anywhere
+- [ ] Chg space between section in details pages
 - [ ] Ensure auth is secured (can a user access another user's data ?)
 - [ ] A la sauvegarde d'un element, ses données dans la liste disparaissent 
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
@@ -19,7 +20,7 @@ Important:
 - [ ] Faire du many to many partout
 
 Medium:
-- [ ] Remove lodash and create a vustom debounce function instead ?
+- [ ] Remove lodash and create a custom debounce function instead ?
 - [ ] Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)
 - [ ] make add button if no data on home page/lists
 - [ ] Add unit test
