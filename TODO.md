@@ -4,6 +4,7 @@
 - [ ] Import my own data
 
 Must:
+- [ ] Find the right url to put in the info page
 - [ ] Check why new user cant click anywhere
 - [ ] Ensure auth is secured (can a user access another user's data ?)
 - [ ] A la sauvegarde d'un element, ses données dans la liste disparaissent 
@@ -25,6 +26,7 @@ Medium:
 - [ ] Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)
 - [ ] make add button if no data on home page/lists
 - [ ] Add unit test
+- [ ] Use search queries in external URL as test?q=ezdedze for Spotify etc (default link ?)
 - [ ] Placeholder aléatoire pour les descrs des event/seasons/people
 
 Low:
