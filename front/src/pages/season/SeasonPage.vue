@@ -97,7 +97,7 @@ import { useSeasonStore } from '@/stores/season'
 import { notif } from '@/composables/notif.js'
 import { dateToNiceDate } from '@/composables/helpers.js'
 import { computed, ref, watch, onBeforeUnmount, onMounted } from 'vue'
-import debounce from 'lodash/debounce'
+import debounce from '@/composables/debounce.js'
 
 const route = useRoute()
 const router = useRouter()

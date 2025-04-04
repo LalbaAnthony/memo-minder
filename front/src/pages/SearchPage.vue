@@ -62,7 +62,7 @@
 
 <script setup>
 import { watch, onMounted, ref, computed } from 'vue'
-import debounce from 'lodash/debounce'
+import debounce from '@/composables/debounce.js'
 import { useRoute, useRouter } from 'vue-router'
 import Grid from '@/components/GridComponent.vue'
 import Result from '@/components/ResultItem.vue'
