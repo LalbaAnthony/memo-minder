@@ -7,7 +7,7 @@
       <slot name="item" :item="item"></slot>
     </div>
   </div>
-  <NoItem v-else-if="props.enableNoItem" />
+  <NoItem v-else-if="props.enableNoItem" :position="props.noItemPosition" />
 </template>
 
 <script setup>
@@ -28,6 +28,12 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: true,
+  },
+  noItemPosition: {
+    type: String,
+    possibleValues: ['absolute', 'static',],
+    default: 'static',
+    required: false,
   },
   maxHeight: {
     type: Number,
