@@ -1,6 +1,5 @@
 const sequelize = require('../config/database');
 
-// Models
 const models = {
   User: require("./userModel")(sequelize),
   Mood: require("./moodModel")(sequelize),
@@ -10,7 +9,6 @@ const models = {
   Event: require("./eventModel")(sequelize),
 };
 
-// Associations
 Object.keys(models).forEach((modelName) => {
   if (models[modelName].associate) {
     models[modelName].associate(models);

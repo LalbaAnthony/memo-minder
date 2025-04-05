@@ -1,4 +1,3 @@
-// Import modules
 const express = require('express');
 const favicon = require('serve-favicon')
 const path = require('path');
@@ -16,11 +15,11 @@ const logging = require('./src/middlewares/logging')
 const frmtr = require('./src/helpers/frmtr')
 const logConsole = require('./src/helpers/logConsole')
 
+// IMporting sequelize
+const { sequelize } = require('./src/models/index');
+
 // Load .env file
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
-
-// Import DB instance
-const sequelize = process.env.NODE_ENV === 'production' ? require('./src/config/database_production') : require('./src/config/database');
 
 const app = express()
 

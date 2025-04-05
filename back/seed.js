@@ -1,16 +1,6 @@
-// Import modules
 const bcrypt = require('bcrypt');
 
-// Import config
-const sequelize = require('./src/config/database');
-
-// Importing models
-const Season = require('./src/models/seasonModel');
-const Mood = require('./src/models/moodModel');
-const Music = require('./src/models/musicModel');
-const Person = require('./src/models/personModel');
-const Event = require('./src/models/eventModel');
-const User = require('./src/models/userModel');
+const { sequelize, Season, Mood, Music, Person, Event, User } = require('./src/models/index');
 
 // Importing helpers
 const logConsole = require('./src/helpers/logConsole')
