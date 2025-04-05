@@ -1,8 +1,4 @@
-const Event = require('../models/eventModel');
-const Music = require('../models/musicModel');
-const Person = require('../models/personModel');
-const Mood = require('../models/moodModel');
-const Season = require('../models/seasonModel');
+const { Event, Music, Person, Mood, Season } = require('../models/index');
 
 const baseController = require('./baseController');
 
