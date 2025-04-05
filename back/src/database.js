@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');
-const logConsole = require('../helpers/logConsole');
+const logConsole = require('./helpers/logConsole');
 const path = require('path');
 const dotenv = require('dotenv');
 
