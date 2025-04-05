@@ -1,4 +1,4 @@
-const { Music } = require('../models/index');
+const { Music } = require('../database');
 
 const baseController = require('./baseController');
 

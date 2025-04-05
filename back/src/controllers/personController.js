@@ -1,4 +1,4 @@
-const { Person } = require('../models/index');
+const { Person } = require('../database');
 
 const baseController = require('./baseController');
 
