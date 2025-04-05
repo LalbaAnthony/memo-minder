@@ -16,7 +16,7 @@ const frmtr = require('./src/helpers/frmtr')
 const logConsole = require('./src/helpers/logConsole')
 
 // IMporting sequelize
-const { sequelize } = require('./src/models/index');
+const { sequelize } = require('./src/database');
 
 // Load .env file
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
