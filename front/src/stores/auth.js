@@ -131,7 +131,7 @@ export const useAuthStore = defineStore('auth', {
 
       await api.put(`user/${this.user.userId}`, user).then(resp => {
 
-        if (resp.status !== 201) {
+        if (resp.status !== 200) {
           notif.notify(resp.data.message, 'error')
           return false
         } else if (notify) {

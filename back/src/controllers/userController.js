@@ -174,7 +174,7 @@ exports.userUpdate = async (req, res) => {
         delete user.dataValues.validateEmailToken
         delete user.dataValues.resetPasswordCode
 
-        return res.status(201).json(frmtr('success', user,))
+        return res.status(200).json(frmtr('success', user,))
     } catch (error) {
         return res.status(500).json(frmtr('error', null, error.message))
     }
