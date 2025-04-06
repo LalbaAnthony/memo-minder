@@ -51,30 +51,20 @@
       <!-- Description -->
       <section>
         <textarea v-model="seasonStore.season.data.description"
-          class="w-full p-2 rounded-lg bg-gray-dark placeholder-gray-light text-light" rows="10" placeholder="..."></textarea>
+          class="w-full p-2 rounded-lg bg-gray-dark placeholder-gray-light text-light" rows="10"
+          placeholder="..."></textarea>
       </section>
 
       <!-- Pills section -->
       <section>
         <h4 class="text-lg font-semibold text-light mb-4">Linked items</h4>
-        <div class="flex justify-start flex-wrap items-center w-full my-4 gap-4">
-          <Pill v-if="seasonStore.season?.data?.music" :text="seasonStore.season?.data?.music?.title" type="music"
-            deleteable @delete="deleteMusic()" clickable
-            @click="router.push(`/music/${seasonStore.season?.data?.musicId}`)" />
-          <Pill v-if="seasonStore.season?.data?.person" :text="seasonStore.season?.data?.person?.name" type="person"
-            deleteable @delete="deletePerson()" clickable
-            @click="router.push(`/person/${seasonStore.season?.data?.personId}`)" />
-          <div v-if="!seasonStore.season?.data?.music || !seasonStore.season?.data?.person"
-            class="flex items-center justify-center rounded-full px-16 py-0.5 border-dashed border-2 cursor-pointer border-gray hover:border-gray-light transition-all transition-200"
-            @click="showItemPicker = true">
-            <PlusIcon class="size-6 text-gray-light" />
-          </div>
-        </div>
+        <LinkedItems :item="seasonStore.season?.data" :types="['event', 'music', 'person']"
+          @show-item-picker="showItemPicker = true" @delete="(id, type) => { deleteItem(id, type) }" />
       </section>
     </div>
 
-    <ItemPicker :show="showItemPicker" :types="availablesTypes" @close="showItemPicker = false"
-      @selected="(object) => { addItem(object) }" />
+    <ItemPicker :types="['event', 'music', 'person']" :show="showItemPicker" @close="showItemPicker = false"
+      @add="(object) => { addItem(object) }" />
 
     <BottomActions :createButton="!route.params.seasonId" :updateButton="!!route.params.seasonId"
       :deleteButton="!!route.params.seasonId" @triggerCreate="manualCreation" @triggerUpdate="manualUpdate"
@@ -86,12 +76,11 @@
 import DatePicker from '@/components/DatePickerComponent.vue'
 import ColorPicker from '@/components/ColorPickerComponent.vue'
 import ItemPicker from '@/components/ItemPickerComponent.vue'
+import LinkedItems from '@/components/LinkedItemsComponent.vue'
 import Loader from '@/components/LoaderComponent.vue'
 import MoodPicker from '@/components/MoodPickerComponent.vue'
-import Pill from '@/components/PillComponent.vue'
 import TopActions from '@/components/TopActionsComponent.vue'
 import BottomActions from '@/components/BottomActionsComponent.vue'
-import { PlusIcon } from '@heroicons/vue/24/solid'
 import { useRoute, useRouter } from 'vue-router'
 import { useSeasonStore } from '@/stores/season'
 import { notif } from '@/composables/notif.js'
@@ -155,23 +144,27 @@ function loadOrInitSeason() {
   watched.value = 0
 }
 
-function deleteMusic() {
-  seasonStore.season.data.music = null
-  seasonStore.season.data.musicId = null
-}
-
-function deletePerson() {
-  seasonStore.season.data.person = null
-  seasonStore.season.data.personId = null
-}
-
 function addItem(object) {
-  if (object.type === 'music') {
-    seasonStore.season.data.music = object.data
-    seasonStore.season.data.musicId = object.data.musicId
+  if (object.type === 'season') {
+    seasonStore.season.data.seasons.push(object.data)
+  } else if (object.type === 'music') {
+    seasonStore.season.data.musics.push(object.data)
   } else if (object.type === 'person') {
-    seasonStore.season.data.person = object.data
-    seasonStore.season.data.personId = object.data.personId
+    seasonStore.season.data.people.push(object.data)
+  } else if (object.type === 'event') {
+    seasonStore.season.data.events.push(object.data)
+  }
+}
+
+function deleteItem(id, type) {
+  if (type === 'season') {
+    seasonStore.season.data.seasons = seasonStore.season.data.seasons.filter(season => season.seasonId !== id)
+  } else if (type === 'music') {
+    seasonStore.season.data.musics = seasonStore.season.data.musics.filter(music => music.musicId !== id)
+  } else if (type === 'person') {
+    seasonStore.season.data.people = seasonStore.season.data.people.filter(person => person.personId !== id)
+  } else if (type === 'event') {
+    seasonStore.season.data.events = seasonStore.season.data.events.filter(event => event.eventId !== id)
   }
 }
 
@@ -209,15 +202,6 @@ function manualUpdate() {
     router.push('/seasons')
   }
 }
-
-const availablesTypes = computed(() => {
-  let types = []
-
-  if (!seasonStore.season.data.music) types.push('music')
-  if (!seasonStore.season.data.person) types.push('person')
-
-  return types
-})
 
 const suggestedSeasons = computed(() => {
   return getSurroundingSeasons(new Date())

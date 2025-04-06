@@ -154,8 +154,6 @@ export const useSeasonStore = defineStore('season', {
         people: item?.people.map(person => person.personId) || [],
       }
 
-      console.log('season', season)
-
       // Request
       const resp = await api.put(`season/${season.seasonId}`, season)
 
