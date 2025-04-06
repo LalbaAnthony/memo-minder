@@ -69,8 +69,7 @@ const create = (Model, { requiredFields = [], toSetAssociations = [] } = {}) => 
         return res.status(500).json(frmtr('error', null, `Error creating ${Model.name}`));
 
     // If the request includes linked many-to-many associations, set them here.
-    // Example: if toSetAssociations includes "musics", then if req.body.musics is provided,
-    // we call item.setMusics(req.body.musics)
+    // ? Example: if toSetAssociations includes "musics", then if req.body.musics is provided, we call item.setMusics(req.body.musics)
     for (const assoc of toSetAssociations) {
         if (req.body[assoc] && Array.isArray(req.body[assoc])) {
             const setter = `set${capitalize(assoc)}`;
@@ -107,8 +106,7 @@ const update = (Model, { requiredFields = [], toSetAssociations = [] } = {}) => 
         return res.status(500).json(frmtr('error', null, `Error updating ${Model.name}`));
 
     // If the request includes linked many-to-many associations, set them here.
-    // Example: if toSetAssociations includes "musics", then if req.body.musics is provided,
-    // we call item.setMusics(req.body.musics)
+    // ? Example: if toSetAssociations includes "musics", then if req.body.musics is provided, we call item.setMusics(req.body.musics)
     for (const assoc of toSetAssociations) {
         if (req.body[assoc] && Array.isArray(req.body[assoc])) {
             const setter = `set${capitalize(assoc)}`;

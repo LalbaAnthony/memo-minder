@@ -112,7 +112,14 @@ export const usePersonStore = defineStore('person', {
       return true
     },
 
-    async createPerson(person, notify = false) {
+    async createPerson(item, notify = false) {
+      const person = {
+        ...item,
+        seasons: item?.seasons.map(season => season.seasonId) || [],
+        events: item?.events.map(event => event.eventId) || [],
+        musics: item?.musics.map(music => music.musicId) || [],
+      }
+
       // Loading
       this.person.loading = true
 
@@ -135,7 +142,14 @@ export const usePersonStore = defineStore('person', {
       return true
     },
 
-    async updatePerson(person, notify = false) {
+    async updatePerson(item, notify = false) {
+      const person = {
+        ...item,
+        seasons: item?.seasons.map(season => season.seasonId) || [],
+        events: item?.events.map(event => event.eventId) || [],
+        musics: item?.musics.map(music => music.musicId) || [],
+      }
+
       // Request
       const resp = await api.put(`person/${person.personId}`, person)
 

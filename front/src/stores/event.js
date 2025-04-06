@@ -113,7 +113,14 @@ export const useEventStore = defineStore('event', {
       return true
     },
 
-    async createEvent(event, notify = false) {
+    async createEvent(item, notify = false) {
+      const event = {
+        ...item,
+        musics: item?.musics.map(music => music.musicId) || [],
+        people: item?.people.map(person => person.personId) || [],
+        seasons: item?.seasons.map(season => season.seasonId) || [],
+      }
+
       // Loading
       this.event.loading = true
 
@@ -136,7 +143,13 @@ export const useEventStore = defineStore('event', {
       return true
     },
 
-    async updateEvent(event, notify = false) {
+    async updateEvent(item, notify = false) {
+      const event = {
+        ...item,
+        musics: item?.musics.map(music => music.musicId) || [],
+        people: item?.people.map(person => person.personId) || [],
+        seasons: item?.seasons.map(season => season.seasonId) || [],
+      }
 
       // Request
       const resp = await api.put(`event/${event.eventId}`, event)
@@ -151,7 +164,7 @@ export const useEventStore = defineStore('event', {
       // Update in local list
       const index = this.events.data.findIndex(item => item?.eventId && (item.eventId === event.eventId))
       this.events.data.splice(index, 1, resp.data.data)
-      
+
       return true
     },
   },
