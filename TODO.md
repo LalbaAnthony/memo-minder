@@ -5,17 +5,10 @@
 
 Must:
 - [ ] Faire du many to many partout
-  - [x] Hand pivot table in create, update
-  - [x] Update item picker component
-  - [x] Make a component linked items
-  - [ ] Regroupe ItemPicker et Linked Items
   - [ ] Faire en sorte qu'on ne puissse pas ajouter deux fois le même item dans linked items
-  - [ ] Add associtations to search
-  - [ ] Faire en sorte qu'on puisse relier les items dans les deux sens (pas que depuis le maitre)
 - [ ] Gérer la taille de item picker qui fait que bouger à l'utilisation + l'adapter mobile/desktop
 - [ ] Check why new user cant click anywhere
 - [ ] Ensure auth is secured (can a user access another user's data ?)
-- [ ] A la sauvegarde d'un element, ses données dans la liste disparaissent 
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Important:

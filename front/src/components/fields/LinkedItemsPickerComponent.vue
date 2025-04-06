@@ -1,60 +1,33 @@
 <template>
   <TransitionRoot appear :show="props.show" as="template">
     <Dialog as="div" @close="emit('closePicker', true)" class="relative z-20">
-      <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0" enter-to="opacity-100"
-        leave="duration-200 ease-in" leave-from="opacity-100" leave-to="opacity-0">
-        <div class="fixed inset-0 opacity-90 bg-dark" />
+      <TransitionChild as="template" enter="transition ease-in-out duration-200 transform" enter-from="translate-y-full"
+        enter-to="translate-y-0" leave="transition ease-in-out duration-200 transform" leave-from="translate-y-0"
+        leave-to="translate-y-full">
+        <DialogPanel class="bg-dark-light p-6 fixed inset-0">
+
+          <div class="flex items-center justify-between gap-3">
+            <MagnifyingGlassIcon class="size-10 text-gray-light hidden sm:block" />
+            <input v-model="search" id="search" type="text" class="w-full p-2 rounded-lg bg-gray-dark text-light"
+              placeholder="Search..." />
+            <XMarkIcon class="size-10 text-gray-light cursor-pointer" @click.stop="emit('closePicker', true)" />
+          </div>
+
+          <!-- Results -->
+          <TransitionRoot :show="search.length > 0" class="w-full mt-4">
+            <TransitionChild enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
+              enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
+              leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
+              <Grid :items="results" :enable-no-item="!searching" clickables :maxHeight="gridMaxHeight"
+                :noItemPosition="isMobile() ? 'static' : 'absolute'">
+                <template #item="{ item }">
+                  <Result :item="item" icon="plus" />
+                </template>
+              </Grid>
+            </TransitionChild>
+          </TransitionRoot>
+        </DialogPanel>
       </TransitionChild>
-
-      <div class="fixed inset-0 overflow-y-auto">
-        <div :class="['flex items-center justify-center p-4 text-center', isMobile() ? 'h-1/7' : 'h-2/3']">
-          <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0 scale-95"
-            enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100"
-            leave-to="opacity-0 scale-95">
-            <DialogPanel class="w-full max-w-md transform overflow-hidden rounded-2xl bg-dark-light p-6 transition-all">
-
-              <div class="flex items-center justify-between gap-3">
-                <MagnifyingGlassIcon class="size-10 text-gray-light hidden sm:block" />
-                <input v-model="search" id="search" type="text" class="w-full p-2 rounded-lg bg-gray-dark text-light"
-                  placeholder="Search..." />
-                <XMarkIcon class="size-10 text-gray-light cursor-pointer" @click.stop="emit('closePicker', true)" />
-              </div>
-
-              <!-- Results -->
-              <TransitionRoot :show="search.length > 0" class="w-full mt-8">
-                <TransitionChild enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
-                  enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
-                  leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-                  <Grid :items="results" :enable-no-item="!searching" :max-height="gridMaxHeight" clickables>
-                    <template #item="{ item }">
-                      <Result :item="item" icon="plus" />
-                    </template>
-                  </Grid>
-                </TransitionChild>
-              </TransitionRoot>
-
-              <!-- Add buttons -->
-              <div v-if="search.length > 0 && results.length === 0" class="mt-8">
-                <span class="text-gray-light">Haven't found what your looking for ?</span>
-                <div class="flex flex-row flex-wrap flexitems-center gap-2 mt-2">
-                  <Pill v-if="props.childrenTypes && props.childrenTypes.includes('season')" text="Add a season" type="season" clickable
-                    addable
-                    @click="router.push({ path: '/seasons/add', query: { title: search } }); emit('closePicker', true)" />
-                  <Pill v-if="props.childrenTypes && props.childrenTypes.includes('event')" text="Add an event" type="event" clickable
-                    addable
-                    @click="router.push({ path: '/events/add', query: { title: search } }); emit('closePicker', true)" />
-                  <Pill v-if="props.childrenTypes && props.childrenTypes.includes('person')" text="Add a person" type="person" clickable
-                    addable
-                    @click="router.push({ path: '/people/add', query: { name: search } }); emit('closePicker', true)" />
-                  <Pill v-if="props.childrenTypes && props.childrenTypes.includes('music')" text="Add a music" type="music" clickable
-                    addable
-                    @click="router.push({ path: '/musics/add', query: { title: search } }); emit('closePicker', true)" />
-                </div>
-              </div>
-            </DialogPanel>
-          </TransitionChild>
-        </div>
-      </div>
     </Dialog>
   </TransitionRoot>
 </template>
@@ -69,18 +42,14 @@ import {
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { XMarkIcon } from '@heroicons/vue/24/solid'
 import Grid from '@/components/GridComponent.vue'
-import { isMobile } from '@/composables/helpers.js'
 import Result from '@/components/ResultItem.vue'
-import Pill from '@/components/PillComponent.vue'
-import { computed, watch, ref } from 'vue'
+import { watch, ref, computed } from 'vue'
 import debounce from '@/composables/debounce.js'
 import { useEventStore } from '@/stores/event'
 import { useMusicStore } from '@/stores/music'
 import { usePersonStore } from '@/stores/person'
 import { useSeasonStore } from '@/stores/season'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
+import { isMobile } from '@/composables/helpers'
 
 const props = defineProps({
   show: {
@@ -102,7 +71,7 @@ const musicStore = useMusicStore()
 const personStore = usePersonStore()
 const seasonStore = useSeasonStore()
 
-const PER_PAGE = 5
+const PER_PAGE = 10
 
 const searching = ref(false)
 const search = ref('')
@@ -111,7 +80,10 @@ const results = ref([])
 const emit = defineEmits(['add', 'closePicker'])
 
 const gridMaxHeight = computed(() => {
-  return isMobile() ? window.innerHeight - 400 : 0
+  if (isMobile()) {
+    return window.innerHeight - 350
+  }
+  return 0
 })
 
 const loadSearch = debounce(async () => {
