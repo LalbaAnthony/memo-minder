@@ -20,8 +20,6 @@ const sequelizeProduction = new Sequelize(process.env.BACK_DATABASE_NAME, proces
 
 const sequelize = process.env.BACK_ENV === 'development'  ? sequelizeDevelopment : sequelizeProduction;
 
-console.log(process.env.BACK_ENV);
-
 const models = {
   User: require("./models/userModel")(sequelize),
   Mood: require("./models/moodModel")(sequelize),

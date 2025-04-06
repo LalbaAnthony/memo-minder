@@ -12,7 +12,7 @@ module.exports = (instance) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'User',
+                model: instance.User,
                 key: 'userId'
             },
             onDelete: 'CASCADE',
@@ -49,6 +49,7 @@ module.exports = (instance) => {
         updatedAt: 'updatedAt',
         createdAt: 'createdAt',
         tableName: 'music',
+        freezeTableName: true,
     });
     
     Music.associate = (models) => {
