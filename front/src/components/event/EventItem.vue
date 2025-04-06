@@ -9,9 +9,10 @@
       <div class="my-4">
         <div class="flex justify-start flex-wrap items-center w-full m-2 gap-2">
           <Pill v-if="props?.event?.mood" :text="props?.event?.mood?.name" type="mood" />
-          <Pill v-if="props?.event?.season" :text="props?.event?.season?.title" type="season" />
-          <Pill v-if="props?.event?.music" :text="props?.event?.music?.title" type="music" />
-          <Pill v-if="props?.event?.person" :text="props?.event?.person?.name" type="person" />
+          <Pill v-if="props?.event?.seasons?.[0]" :text="props?.event?.seasons?.[0]?.title" type="season" />
+          <Pill v-if="props?.event?.musics?.[0]" :text="props?.event?.musics?.[0]?.title" type="music" />
+          <Pill v-if="props?.event?.people?.[0]" :text="props?.event?.people?.[0]?.name" type="person" />
+          <Pill v-if="props?.event?.events?.[0]" :text="props?.event?.events?.[0]?.title" type="event" />
         </div>
         <p class="m-2 my-4">{{ threeDotString(event?.description) }}</p>
       </div>

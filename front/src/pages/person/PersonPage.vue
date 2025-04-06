@@ -17,8 +17,16 @@
 
       <!-- Description & Mood section -->
       <section>
-        <textarea v-model="personStore.person.data.description" class="w-full p-2 rounded-lg bg-gray-dark placeholder-gray-light text-light"
-          rows="10" placeholder="..."> </textarea>
+        <textarea v-model="personStore.person.data.description"
+          class="w-full p-2 rounded-lg bg-gray-dark placeholder-gray-light text-light" rows="10"
+          placeholder="..."> </textarea>
+      </section>
+
+      <!-- Pills section -->
+      <section>
+        <h4 class="text-lg font-semibold text-light mb-4">Linked items</h4>
+        <LinkedItemsWrapper :item="personStore.person.data" :parentType="'person'"
+          :childrenTypes="['season', 'music', 'event']" />
       </section>
     </div>
 
@@ -30,8 +38,9 @@
 
 <script setup>
 import Loader from '@/components/LoaderComponent.vue'
-import TopActions from '@/components/TopActionsComponent.vue'
-import BottomActions from '@/components/BottomActionsComponent.vue'
+import TopActions from '@/components/actions/TopActionsComponent.vue'
+import BottomActions from '@/components/actions/BottomActionsComponent.vue'
+import LinkedItemsWrapper from '@/components/fields/LinkedItemsWrapperComponent.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { usePersonStore } from '@/stores/person'
 import { notif } from '@/composables/notif.js'

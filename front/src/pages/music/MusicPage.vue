@@ -10,8 +10,8 @@
           <span class="text-gray">Updated the {{ dateToNiceDate(musicStore.music?.data?.updatedAt) }}</span>
         </div>
         <div class="flex items-center justify-between gap-2 flex-wrap">
-          <input v-model="musicStore.music.data.title" type="text" class="rounded-lg bg-dark placeholder-gray text-light text-2xl w-full"
-            placeholder="Music title" />
+          <input v-model="musicStore.music.data.title" type="text"
+            class="rounded-lg bg-dark placeholder-gray text-light text-2xl w-full" placeholder="Music title" />
         </div>
       </section>
 
@@ -43,6 +43,13 @@
           </div>
         </div>
       </section>
+
+      <!-- Pills section -->
+      <section>
+        <h4 class="text-lg font-semibold text-light mb-4">Linked items</h4>
+        <LinkedItemsWrapper :item="musicStore.music.data" :parentType="'music'"
+          :childrenTypes="['season', 'event', 'person']" />
+      </section>
     </div>
 
     <BottomActions :createButton="!route.params.musicId" :updateButton="!!route.params.musicId"
@@ -53,9 +60,10 @@
 
 <script setup>
 import Loader from '@/components/LoaderComponent.vue'
-import DatePicker from '@/components/DatePickerComponent.vue'
-import TopActions from '@/components/TopActionsComponent.vue'
-import BottomActions from '@/components/BottomActionsComponent.vue'
+import DatePicker from '@/components/fields/DatePickerComponent.vue'
+import TopActions from '@/components/actions/TopActionsComponent.vue'
+import BottomActions from '@/components/actions/BottomActionsComponent.vue'
+import LinkedItemsWrapper from '@/components/fields/LinkedItemsWrapperComponent.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useMusicStore } from '@/stores/music'
 import { notif } from '@/composables/notif.js'

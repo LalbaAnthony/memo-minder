@@ -79,9 +79,9 @@
 import { watch, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import debounce from '@/composables/debounce.js'
-import BottomActions from '@/components/BottomActionsComponent.vue'
-import TopActions from '@/components/TopActionsComponent.vue'
-import DatePicker from '@/components/DatePickerComponent.vue'
+import BottomActions from '@/components/actions/BottomActionsComponent.vue'
+import TopActions from '@/components/actions/TopActionsComponent.vue'
+import DatePicker from '@/components/fields/DatePickerComponent.vue'
 import { languages } from '@/composables/languages.js'
 
 const authStore = useAuthStore()

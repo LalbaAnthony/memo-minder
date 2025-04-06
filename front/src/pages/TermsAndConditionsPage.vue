@@ -97,7 +97,7 @@
 </template>
 
 <script setup>
-import TopActions from '@/components/TopActionsComponent.vue'
+import TopActions from '@/components/actions/TopActionsComponent.vue'
 import Footer from '@/components/FooterComponent.vue'
 import { VITE_APP_NAME, VITE_GIT_REPO } from '@/config';
 </script>

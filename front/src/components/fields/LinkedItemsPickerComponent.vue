@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot appear :show="props.show" as="template">
-    <Dialog as="div" @close="emit('close', true)" class="relative z-20">
+    <Dialog as="div" @close="emit('closePicker', true)" class="relative z-20">
       <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0" enter-to="opacity-100"
         leave="duration-200 ease-in" leave-from="opacity-100" leave-to="opacity-0">
         <div class="fixed inset-0 opacity-90 bg-dark" />
@@ -17,7 +17,7 @@
                 <MagnifyingGlassIcon class="size-10 text-gray-light hidden sm:block" />
                 <input v-model="search" id="search" type="text" class="w-full p-2 rounded-lg bg-gray-dark text-light"
                   placeholder="Search..." />
-                <XMarkIcon class="size-10 text-gray-light cursor-pointer" @click.stop="emit('close', true)" />
+                <XMarkIcon class="size-10 text-gray-light cursor-pointer" @click.stop="emit('closePicker', true)" />
               </div>
 
               <!-- Results -->
@@ -37,18 +37,18 @@
               <div v-if="search.length > 0 && results.length === 0" class="mt-8">
                 <span class="text-gray-light">Haven't found what your looking for ?</span>
                 <div class="flex flex-row flex-wrap flexitems-center gap-2 mt-2">
-                  <Pill v-if="props.types && props.types.includes('season')" text="Add a season" type="season" clickable
+                  <Pill v-if="props.childrenTypes && props.childrenTypes.includes('season')" text="Add a season" type="season" clickable
                     addable
-                    @click="router.push({ path: '/seasons/add', query: { title: search } }); emit('close', true)" />
-                  <Pill v-if="props.types && props.types.includes('event')" text="Add an event" type="event" clickable
+                    @click="router.push({ path: '/seasons/add', query: { title: search } }); emit('closePicker', true)" />
+                  <Pill v-if="props.childrenTypes && props.childrenTypes.includes('event')" text="Add an event" type="event" clickable
                     addable
-                    @click="router.push({ path: '/events/add', query: { title: search } }); emit('close', true)" />
-                  <Pill v-if="props.types && props.types.includes('person')" text="Add a person" type="person" clickable
+                    @click="router.push({ path: '/events/add', query: { title: search } }); emit('closePicker', true)" />
+                  <Pill v-if="props.childrenTypes && props.childrenTypes.includes('person')" text="Add a person" type="person" clickable
                     addable
-                    @click="router.push({ path: '/people/add', query: { name: search } }); emit('close', true)" />
-                  <Pill v-if="props.types && props.types.includes('music')" text="Add a music" type="music" clickable
+                    @click="router.push({ path: '/people/add', query: { name: search } }); emit('closePicker', true)" />
+                  <Pill v-if="props.childrenTypes && props.childrenTypes.includes('music')" text="Add a music" type="music" clickable
                     addable
-                    @click="router.push({ path: '/musics/add', query: { title: search } }); emit('close', true)" />
+                    @click="router.push({ path: '/musics/add', query: { title: search } }); emit('closePicker', true)" />
                 </div>
               </div>
             </DialogPanel>
@@ -88,7 +88,7 @@ const props = defineProps({
     required: false,
     default: false
   },
-  types: {
+  childrenTypes: {
     type: Array,
     required: false,
     default: () => {
@@ -108,7 +108,7 @@ const searching = ref(false)
 const search = ref('')
 const results = ref([])
 
-const emit = defineEmits(['add', 'close'])
+const emit = defineEmits(['add', 'closePicker'])
 
 const gridMaxHeight = computed(() => {
   return isMobile() ? window.innerHeight - 400 : 0
@@ -124,52 +124,52 @@ const loadSearch = debounce(async () => {
   let promises = []
 
   // Events
-  if (props.types && props.types.includes('event')) {
+  if (props.childrenTypes && props.childrenTypes.includes('event')) {
     promises.push(async function () {
       return eventStore.fetchEvents({ search: search.value, perPage: PER_PAGE }).then(() => {
         results.value.push(...eventStore.events.data.map((event) => ({
           title: event.title,
           type: 'event',
-          action: () => { emit('selected', { type: 'event', data: event }), emit('close', true) }
+          action: () => { emit('selected', { type: 'event', data: event }), emit('closePicker', true) }
         })))
       })
     })
   }
 
   // People
-  if (props.types && props.types.includes('person')) {
+  if (props.childrenTypes && props.childrenTypes.includes('person')) {
     promises.push(async function () {
       return personStore.fetchPeople({ search: search.value, perPage: PER_PAGE }).then(() => {
         results.value.push(...personStore.people.data.map((person) => ({
           title: person.name,
           type: 'person',
-          action: () => { emit('add', { type: 'person', data: person }), emit('close', true) }
+          action: () => { emit('add', { type: 'person', data: person }), emit('closePicker', true) }
         })))
       })
     })
   }
 
   // Musics
-  if (props.types && props.types.includes('music')) {
+  if (props.childrenTypes && props.childrenTypes.includes('music')) {
     promises.push(async function () {
       return musicStore.fetchMusics({ search: search.value, perPage: PER_PAGE }).then(() => {
         results.value.push(...musicStore.musics.data.map((music) => ({
           title: music.title,
           type: 'music',
-          action: () => { emit('add', { type: 'music', data: music }), emit('close', true) }
+          action: () => { emit('add', { type: 'music', data: music }), emit('closePicker', true) }
         })))
       })
     })
   }
 
   // Seasons
-  if (props.types && props.types.includes('season')) {
+  if (props.childrenTypes && props.childrenTypes.includes('season')) {
     promises.push(async function () {
       return seasonStore.fetchSeasons({ search: search.value, perPage: PER_PAGE }).then(() => {
         results.value.push(...seasonStore.seasons.data.map((season) => ({
           title: season.title,
           type: 'season',
-          action: () => { emit('add', { type: 'season', data: season }), emit('close', true) }
+          action: () => { emit('add', { type: 'season', data: season }), emit('closePicker', true) }
         })))
       })
     })

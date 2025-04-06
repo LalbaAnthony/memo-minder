@@ -51,7 +51,7 @@
 </template>
 
 <script setup>
-import DatePicker from '@/components/DatePickerComponent.vue'
+import DatePicker from '@/components/fields/DatePickerComponent.vue'
 import PasswordStrength from '@/components/PasswordStrengthComponent.vue'
 import { languages } from '@/composables/languages.js'
 import { useAuthStore } from '@/stores/auth'

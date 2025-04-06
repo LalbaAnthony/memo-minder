@@ -58,13 +58,9 @@
       <!-- Pills section -->
       <section>
         <h4 class="text-lg font-semibold text-light mb-4">Linked items</h4>
-        <LinkedItems :item="seasonStore.season?.data" :types="['event', 'music', 'person']"
-          @show-item-picker="showItemPicker = true" @delete="(id, type) => { deleteItem(id, type) }" />
+        <LinkedItemsWrapper :item="seasonStore.season.data" :parentType="'season'" :childrenTypes="['event', 'music', 'person']" />
       </section>
     </div>
-
-    <ItemPicker :types="['event', 'music', 'person']" :show="showItemPicker" @close="showItemPicker = false"
-      @add="(object) => { addItem(object) }" />
 
     <BottomActions :createButton="!route.params.seasonId" :updateButton="!!route.params.seasonId"
       :deleteButton="!!route.params.seasonId" @triggerCreate="manualCreation" @triggerUpdate="manualUpdate"
@@ -73,14 +69,13 @@
 </template>
 
 <script setup>
-import DatePicker from '@/components/DatePickerComponent.vue'
-import ColorPicker from '@/components/ColorPickerComponent.vue'
-import ItemPicker from '@/components/ItemPickerComponent.vue'
-import LinkedItems from '@/components/LinkedItemsComponent.vue'
+import DatePicker from '@/components/fields/DatePickerComponent.vue'
+import ColorPicker from '@/components/fields/ColorPickerComponent.vue'
+import LinkedItemsWrapper from '@/components/fields/LinkedItemsWrapperComponent.vue'
 import Loader from '@/components/LoaderComponent.vue'
-import MoodPicker from '@/components/MoodPickerComponent.vue'
-import TopActions from '@/components/TopActionsComponent.vue'
-import BottomActions from '@/components/BottomActionsComponent.vue'
+import MoodPicker from '@/components/fields/MoodPickerComponent.vue'
+import TopActions from '@/components/actions/TopActionsComponent.vue'
+import BottomActions from '@/components/actions/BottomActionsComponent.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useSeasonStore } from '@/stores/season'
 import { notif } from '@/composables/notif.js'
@@ -92,7 +87,6 @@ const route = useRoute()
 const router = useRouter()
 const seasonStore = useSeasonStore()
 
-const showItemPicker = ref(false)
 const watched = ref(0)
 
 function getSeasons(year = new Date().getFullYear()) {
@@ -142,30 +136,6 @@ function loadOrInitSeason() {
     if (route.query.title) seasonStore.season.data.title = route.query.title // From the search page
   }
   watched.value = 0
-}
-
-function addItem(object) {
-  if (object.type === 'season') {
-    seasonStore.season.data.seasons.push(object.data)
-  } else if (object.type === 'music') {
-    seasonStore.season.data.musics.push(object.data)
-  } else if (object.type === 'person') {
-    seasonStore.season.data.people.push(object.data)
-  } else if (object.type === 'event') {
-    seasonStore.season.data.events.push(object.data)
-  }
-}
-
-function deleteItem(id, type) {
-  if (type === 'season') {
-    seasonStore.season.data.seasons = seasonStore.season.data.seasons.filter(season => season.seasonId !== id)
-  } else if (type === 'music') {
-    seasonStore.season.data.musics = seasonStore.season.data.musics.filter(music => music.musicId !== id)
-  } else if (type === 'person') {
-    seasonStore.season.data.people = seasonStore.season.data.people.filter(person => person.personId !== id)
-  } else if (type === 'event') {
-    seasonStore.season.data.events = seasonStore.season.data.events.filter(event => event.eventId !== id)
-  }
 }
 
 function valid() {

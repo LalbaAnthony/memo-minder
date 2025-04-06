@@ -11,7 +11,7 @@
       @click="router.push(`/event/${event.eventId}`)" />
     <div
       class="flex items-center justify-center rounded-full px-16 py-0.5 border-dashed border-2 cursor-pointer border-gray hover:border-gray-light transition-all transition-200"
-      @click="emit('showItemPicker', true)">
+      @click="emit('showPicker', true)">
       <PlusIcon class="size-6 text-gray-light" />
     </div>
   </div>
@@ -29,14 +29,7 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  types: {
-    type: Array,
-    required: false,
-    default: () => {
-      return ['event', 'music', 'person', 'season']
-    }
-  }
 })
 
-const emit = defineEmits(['delete', 'showItemPicker'])
+const emit = defineEmits(['delete', 'showPicker'])
 </script>
