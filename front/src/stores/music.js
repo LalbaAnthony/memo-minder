@@ -115,9 +115,9 @@ export const useMusicStore = defineStore('music', {
     async createMusic(item, notify = false) {
       const music = {
         ...item,
-        seasons: item?.seasons.map(season => season.seasonId) || [],
-        events: item?.events.map(event => event.eventId) || [],
-        people: item?.people.map(person => person.personId) || [],
+        seasons: item?.seasons?.lenght > 0 ? item?.seasons.map(season => season.seasonId) : [],  
+        people: item?.people?.lenght > 0 ? item?.people.map(person => person.personId) : [],
+        events: item?.events?.lenght > 0 ? item?.events.map(event => event.eventId) : [],
       }
 
       // Loading
@@ -134,7 +134,11 @@ export const useMusicStore = defineStore('music', {
       }
 
       // Append in local
-      this.musics.data.unshift(resp.data.data)
+      if (resp.data?.data) {
+        this.musics.data.unshift(resp.data.data)
+      } else {
+        this.musics.data.unshift(item)
+      }
 
       // Loading
       this.music.loading = false
