@@ -117,11 +117,11 @@ export const useEventStore = defineStore('event', {
       const music = {
         ...item
       }
-      
+
       music.seasons = item?.seasons.map(season => season.seasonId) || [];
       music.people = item?.people.map(person => person.personId) || [];
       music.events = item?.events.map(event => event.eventId) || [];
-      
+
       // Loading
       this.event.loading = true
 
@@ -149,10 +149,10 @@ export const useEventStore = defineStore('event', {
     },
 
     async updateEvent(item, notify = false) {
-         const music = {
+      const music = {
         ...item
       }
-      
+
       music.seasons = item?.seasons.map(season => season.seasonId) || [];
       music.people = item?.people.map(person => person.personId) || [];
       music.events = item?.events.map(event => event.eventId) || [];
