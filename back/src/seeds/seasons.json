@@ -2,8 +2,6 @@
     {
         "seasonId": 1,
         "userId": 1,
-        "personId": 1,
-        "musicId": 1,
         "moodId": 1,
         "title": "Summer 2022",
         "color": "#FF0000",

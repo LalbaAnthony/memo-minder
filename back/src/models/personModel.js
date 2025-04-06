@@ -45,6 +45,24 @@ module.exports = (instance) => {
 
     Person.associate = (models) => {
         Person.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
+        Person.belongsToMany(models.Event, {
+            through: "eventPerson",
+            foreignKey: "personId",
+            otherKey: "eventId",
+            as: "events",
+        });
+        Person.belongsToMany(models.Season, {
+            through: "seasonPerson",
+            foreignKey: "personId",
+            otherKey: "seasonId",
+            as: "seasons",
+        });
+        Person.belongsToMany(models.Music, {
+            through: "personMusic",
+            foreignKey: "personId",
+            otherKey: "musicId",
+            as: "musics",
+        });
     };
 
     return Person;

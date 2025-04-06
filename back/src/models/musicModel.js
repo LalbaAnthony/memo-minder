@@ -59,6 +59,18 @@ module.exports = (instance) => {
             otherKey: "seasonId",
             as: "seasons",
         });
+        Music.belongsToMany(models.Event, {
+            through: "eventMusic",
+            foreignKey: "musicId",
+            otherKey: "eventId",
+            as: "events",
+        });
+        Music.belongsToMany(models.Person, {
+            through: "personMusic",
+            foreignKey: "musicId",
+            otherKey: "personId",
+            as: "people",
+        });
     };
 
     return Music;
