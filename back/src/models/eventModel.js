@@ -18,41 +18,11 @@ module.exports = (instance) => {
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
         },
-        musicId: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'Music',
-                key: 'musicId'
-            },
-            allowNull: true,
-            onDelete: 'SET NULL',
-            onUpdate: 'CASCADE'
-        },
         moodId: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'Mood',
                 key: 'moodId'
-            },
-            allowNull: true,
-            onDelete: 'SET NULL',
-            onUpdate: 'CASCADE'
-        },
-        seasonId: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'Season',
-                key: 'seasonId'
-            },
-            allowNull: true,
-            onDelete: 'SET NULL',
-            onUpdate: 'CASCADE'
-        },
-        personId: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'Person',
-                key: 'personId'
             },
             allowNull: true,
             onDelete: 'SET NULL',
@@ -92,10 +62,25 @@ module.exports = (instance) => {
     });
     Event.associate = (models) => {
         Event.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
-        Event.belongsTo(models.Music, { foreignKey: 'musicId', as: 'music' });
-        Event.belongsTo(models.Person, { foreignKey: 'personId', as: 'person' });
         Event.belongsTo(models.Mood, { foreignKey: 'moodId', as: 'mood' });
-        Event.belongsTo(models.Season, { foreignKey: 'seasonId', as: 'season' });
+        Event.belongsToMany(models.Music, {
+            through: "eventMusic",
+            foreignKey: "eventId",
+            otherKey: "musicId",
+            as: "musics",
+        });
+        Event.belongsToMany(models.Season, {
+            through: "eventSeason",
+            foreignKey: "eventId",
+            otherKey: "seasonId",
+            as: "seasons",
+        });
+        Event.belongsToMany(models.Person, {
+            through: "eventPerson",
+            foreignKey: "eventId",
+            otherKey: "personId",
+            as: "people",
+        });
     };
 
     return Event;

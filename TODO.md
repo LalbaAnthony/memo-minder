@@ -4,6 +4,12 @@
 - [ ] Import my own data
 
 Must:
+- [ ] Faire du many to many partout
+  - [ ] Hand pivot table in create, update
+  - [ ] Update item picker component
+  - [ ] Make a component linked items
+  - [ ] Add associtations to search
+  - [ ] Faire en sorte qu'on puisse relier les items dans les deux sens (pas que depuis le maitre)
 - [ ] Gérer la taille de item picker qui fait que bouger à l'utilisation + l'adapter mobile/desktop
 - [ ] Check why new user cant click anywhere
 - [ ] Ensure auth is secured (can a user access another user's data ?)
@@ -12,8 +18,6 @@ Must:
 
 Important:
 - [ ] Add loader on search page and item picker
-- [ ] Faire en sorte qu'on puisse relier les items dans les deux sens (pas que depuis le maitre)
-- [ ] Faire du many to many partout
 - [ ] Use search queries in external URL as test?q=ezdedze for Spotify etc (default link ?)
 
 Medium:

@@ -1,4 +1,4 @@
-const { Season, Music, Person, Mood } = require('../database');
+const { Season, Music, Person, Mood, Event } = require('../database');
 
 const baseController = require('./baseController');
 
@@ -12,8 +12,9 @@ exports.getAllSeasons = baseController.getAll(Season, {
         { order: 'ASC', orderBy: 'createdAt' },
     ],
     associations: [
-        { model: Music, as: 'music' },
-        { model: Person, as: 'person' },
+        { model: Music, as: 'musics' },
+        { model: Person, as: 'people' },
+        { model: Event, as: 'events' },
         { model: Mood, as: 'mood' },
     ]
 });
@@ -21,7 +22,8 @@ exports.getAllSeasons = baseController.getAll(Season, {
 exports.getSeasonById = baseController.getById(Season, {
     associations: [
         { model: Music, as: 'musics' },
-        { model: Person, as: 'person' },
+        { model: Person, as: 'people' },
+        { model: Event, as: 'events' },
         { model: Mood, as: 'mood' },
     ]
 });

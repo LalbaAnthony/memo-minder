@@ -12,19 +12,19 @@ exports.getAllEvents = baseController.getAll(Event, {
         { order: 'ASC', orderBy: 'createdAt' },
     ],
     associations: [
-        { model: Music, as: 'music' },
-        { model: Person, as: 'person' },
+        { model: Music, as: 'musics' },
+        { model: Person, as: 'people' },
+        { model: Season, as: 'seasons' },
         { model: Mood, as: 'mood' },
-        { model: Season, as: 'season' },
     ]
 });
 
 exports.getEventById = baseController.getById(Event, {
     associations: [
-        { model: Music, as: 'music' },
-        { model: Person, as: 'person' },
+        { model: Music, as: 'musics' },
+        { model: Person, as: 'people' },
+        { model: Season, as: 'seasons' },
         { model: Mood, as: 'mood' },
-        { model: Season, as: 'season' }
     ]
 });
 

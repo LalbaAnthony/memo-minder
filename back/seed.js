@@ -1,8 +1,6 @@
-const bcrypt = require('bcrypt');
-
 const { sequelize, Season, Mood, Music, Person, Event, User } = require('./src/database');
 
-// Importing helpers
+const bcrypt = require('bcrypt');
 const logConsole = require('./src/helpers/logConsole')
 
 // ? This script is meant to be run only once, to seed the database with sample data just for test purposes. It will drop all existing tables and recreate them, then insert the sample data.

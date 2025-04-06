@@ -1,4 +1,4 @@
-const { Person } = require('../database');
+const { Person, Music, Event, Season } = require('../database');
 
 const baseController = require('./baseController');
 
@@ -10,10 +10,21 @@ exports.getAllPeople = baseController.getAll(Person, {
     defaultSort: [
         { order: 'ASC', orderBy: 'name' },
         { order: 'DESC', orderBy: 'createdAt' },
+    ],
+    associations: [
+        { model: Music, as: 'musics' },
+        { model: Event, as: 'events' },
+        { model: Season, as: 'seasons' },
     ]
 });
 
-exports.getPersonById = baseController.getById(Person);
+exports.getPersonById = baseController.getById(Person, {
+    associations: [
+        { model: Music, as: 'musics' },
+        { model: Event, as: 'events' },
+        { model: Season, as: 'seasons' },
+    ]
+});
 
 exports.createPerson = baseController.create(Person, {
     requiredFields,
