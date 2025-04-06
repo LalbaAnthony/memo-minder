@@ -12,7 +12,7 @@ module.exports = (instance) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'User',
+                model: instance.User,
                 key: 'userId'
             },
             onDelete: 'CASCADE',
@@ -21,7 +21,7 @@ module.exports = (instance) => {
         moodId: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'Mood',
+                model: instance.Mood,
                 key: 'moodId'
             },
             allowNull: true,
@@ -59,7 +59,9 @@ module.exports = (instance) => {
         updatedAt: 'updatedAt',
         createdAt: 'createdAt',
         tableName: 'event',
+        freezeTableName: true,
     });
+    
     Event.associate = (models) => {
         Event.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
         Event.belongsTo(models.Mood, { foreignKey: 'moodId', as: 'mood' });

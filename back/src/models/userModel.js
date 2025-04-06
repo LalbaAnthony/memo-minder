@@ -82,6 +82,7 @@ module.exports = (instance) => {
         updatedAt: 'updatedAt',
         createdAt: 'createdAt',
         tableName: 'user',
+        freezeTableName: true,
     });
 
     return User;
