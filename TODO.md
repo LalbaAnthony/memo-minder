@@ -5,9 +5,11 @@
 
 Must:
 - [ ] Faire du many to many partout
-  - [ ] Hand pivot table in create, update
-  - [ ] Update item picker component
-  - [ ] Make a component linked items
+  - [x] Hand pivot table in create, update
+  - [x] Update item picker component
+  - [x] Make a component linked items
+  - [ ] Regroupe ItemPicker et Linked Items
+  - [ ] Faire en sorte qu'on ne puissse pas ajouter deux fois le même item dans linked items
   - [ ] Add associtations to search
   - [ ] Faire en sorte qu'on puisse relier les items dans les deux sens (pas que depuis le maitre)
 - [ ] Gérer la taille de item picker qui fait que bouger à l'utilisation + l'adapter mobile/desktop

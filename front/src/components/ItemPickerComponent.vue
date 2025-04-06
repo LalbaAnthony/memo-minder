@@ -90,7 +90,10 @@ const props = defineProps({
   },
   types: {
     type: Array,
-    required: true
+    required: false,
+    default: () => {
+      return ['event', 'music', 'person', 'season']
+    }
   }
 })
 
@@ -105,7 +108,7 @@ const searching = ref(false)
 const search = ref('')
 const results = ref([])
 
-const emit = defineEmits(['selected', 'close'])
+const emit = defineEmits(['add', 'close'])
 
 const gridMaxHeight = computed(() => {
   return isMobile() ? window.innerHeight - 400 : 0
@@ -140,7 +143,7 @@ const loadSearch = debounce(async () => {
         results.value.push(...personStore.people.data.map((person) => ({
           title: person.name,
           type: 'person',
-          action: () => { emit('selected', { type: 'person', data: person }), emit('close', true) }
+          action: () => { emit('add', { type: 'person', data: person }), emit('close', true) }
         })))
       })
     })
@@ -153,7 +156,7 @@ const loadSearch = debounce(async () => {
         results.value.push(...musicStore.musics.data.map((music) => ({
           title: music.title,
           type: 'music',
-          action: () => { emit('selected', { type: 'music', data: music }), emit('close', true) }
+          action: () => { emit('add', { type: 'music', data: music }), emit('close', true) }
         })))
       })
     })
@@ -166,7 +169,7 @@ const loadSearch = debounce(async () => {
         results.value.push(...seasonStore.seasons.data.map((season) => ({
           title: season.title,
           type: 'season',
-          action: () => { emit('selected', { type: 'season', data: season }), emit('close', true) }
+          action: () => { emit('add', { type: 'season', data: season }), emit('close', true) }
         })))
       })
     })
