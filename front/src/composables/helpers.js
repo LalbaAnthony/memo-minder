@@ -57,7 +57,7 @@ export function roundNb(nb, precision = 2) {
 
 export function roundNbNice(nb, precision = 2) {
     let number = nb.toFixed(precision);
-    if (number.includes('.'))  number = number.replace(/\.?0+$/, ''); // Remove all trailing zeros
+    if (number.includes('.')) number = number.replace(/\.?0+$/, ''); // Remove all trailing zeros
     return number;
 }
 
@@ -79,6 +79,16 @@ export function randomInt(min = 1, max = 100) {
 
 export function randomColor() {
     return '#' + Math.floor(Math.random() * 16777215).toString(16);
+}
+
+export function randomPastelColor() {
+    const r = Math.floor((Math.random() * 127) + 127); 
+    const g = Math.floor((Math.random() * 127) + 127);
+    const b = Math.floor((Math.random() * 127) + 127);
+
+    const toHex = (c) => c.toString(16).padStart(2, '0');
+
+    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
 
 export function randomInArray(array) {
