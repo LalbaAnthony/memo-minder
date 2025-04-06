@@ -1,6 +1,6 @@
 const { Music, Event, Person, Season } = require('../database');
 
-const baseController = require('./baseController');
+const baseController = require('../composables/baseController');
 
 const searchFields = ['title', 'artist', 'releaseDate', 'streamingLink'];
 const requiredFields = ['userId', 'title'];

@@ -1,4 +1,3 @@
-// controllers/baseController.js
 const { Op } = require('sequelize');
 const frmtr = require('../helpers/frmtr');
 

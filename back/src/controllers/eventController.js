@@ -1,6 +1,6 @@
 const { Event, Music, Person, Mood, Season } = require('../database');
 
-const baseController = require('./baseController');
+const baseController = require('../composables/baseController');
 
 const searchFields = ['title', 'description', 'location'];
 const requiredFields = ['userId', 'title', 'date'];
