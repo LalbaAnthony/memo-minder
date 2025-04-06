@@ -10,6 +10,7 @@ Must:
 - [ ] Ensure auth is secured (can a user access another user's data ?)
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 - [ ] Email validation not always working
+- [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 
 Important:
 - [ ] Add loader on search page and item picker
