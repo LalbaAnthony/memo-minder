@@ -230,7 +230,7 @@ const debouncedUpdate = debounce(() => {
       seasonStore.updateSeason(seasonStore.season.data)
     }
   }
-}, 1000)
+}, 10000)
 
 onMounted(() => {
   loadOrInitSeason()
