@@ -43,7 +43,7 @@
         <div class="flex flex-row justify-around gap-4 bg-dark-light p-4 rounded-lg">
           <ColorPicker :value="seasonStore.season?.data?.color"
             @update="(v) => { seasonStore.season.data.color = v }" />
-          <MoodPicker class="max-w-[9rem]" :value="seasonStore.season.data.moodId"
+          <MoodPicker :value="seasonStore.season.data.moodId"
             @update="(v) => { seasonStore.season.data.moodId = v }" />
         </div>
       </section>
