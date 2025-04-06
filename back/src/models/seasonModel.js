@@ -28,16 +28,6 @@ module.exports = (instance) => {
             onDelete: 'SET NULL',
             onUpdate: 'CASCADE'
         },
-        personId: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'Person',
-                key: 'personId'
-            },
-            allowNull: true,
-            onDelete: 'SET NULL',
-            onUpdate: 'CASCADE'
-        },
         title: {
             type: DataTypes.STRING(50),
             allowNull: false,
