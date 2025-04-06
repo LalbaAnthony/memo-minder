@@ -19,6 +19,7 @@ Important:
 Medium:
 - [ ] Faire en sorte que les dates picker ne s'initalise pas toujours sur la date d'aujourd'hui (utile pour les musiques, …) + vérifier qu'il est ok avec une valeur vide et pas 1970
 - [ ] make add button if no data on home page/lists
+- [ ] Les couleurs par default de color picker doivent être pastel
 
 Low:
 - [ ] Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)

@@ -119,9 +119,9 @@ export const useSeasonStore = defineStore('season', {
     async createSeason(item, notify = false) {
       const season = {
         ...item,
-        musics: item?.musics.map(music => music.musicId) || [],
-        events: item?.events.map(event => event.eventId) || [],
-        people: item?.people.map(person => person.personId) || [],
+        people: item?.people?.lenght > 0 ? item?.people.map(person => person.personId) : [],
+        events: item?.events?.lenght > 0 ? item?.events.map(event => event.eventId) : [],
+        musics: item?.musics?.lenght > 0 ? item?.musics.map(music => music.musicId) : [],
       }
 
       // Loading
@@ -138,7 +138,11 @@ export const useSeasonStore = defineStore('season', {
       }
 
       // Append in local
-      this.seasons.data.unshift(resp.data.data)
+      if (resp.data?.data) {
+        this.seasons.data.unshift(resp.data.data)
+      } else {
+        this.seasons.data.unshift(item)
+      }
 
       // Loading
       this.season.loading = false
@@ -149,9 +153,9 @@ export const useSeasonStore = defineStore('season', {
     async updateSeason(item, notify = false) {
       const season = {
         ...item,
-        musics: item?.musics.map(music => music.musicId) || [],
-        events: item?.events.map(event => event.eventId) || [],
-        people: item?.people.map(person => person.personId) || [],
+        people: item?.people?.lenght > 0 ? item?.people.map(person => person.personId) : [],
+        events: item?.events?.lenght > 0 ? item?.events.map(event => event.eventId) : [],
+        musics: item?.musics?.lenght > 0 ? item?.musics.map(music => music.musicId) : [],
       }
 
       // Request
