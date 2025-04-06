@@ -19,7 +19,7 @@ function notify(message, type = 'info') {
 
     activeNotifications++;
 
-    const toastId = toast[type](message, {
+    const toastId = toast?.[type](message, {
         position: 'top-right',
         timeout: 4000,
         closeOnClick: true,
