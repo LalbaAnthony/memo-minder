@@ -22,8 +22,10 @@ const route = useRoute()
 const authStore = useAuthStore()
 
 onMounted(() => {
-  if (route.query.email && route.query.token) {
-    authStore.verifyEmail(route.query.email, route.query.token)
-  }
+  setTimeout(() => { // For some reason, the authStore is not ready when the app is mounted so we wait a bit
+    if (route.query.email && route.query.token) {
+      authStore.verifyEmail(route.query.email, route.query.token)
+    }
+  }, 1000)
 });
 </script>
