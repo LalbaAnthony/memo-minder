@@ -9,6 +9,9 @@
     <Pill v-for="event in props.item?.events" :key="event.eventId" :text="event.title" type="event"
       deleteable @delete="emit('delete', event.eventId, 'event')" clickable
       @click="router.push(`/event/${event.eventId}`)" />
+    <Pill v-for="season in props.item?.seasons" :key="season.seasonId" :text="season.title" type="season"
+      deleteable @delete="emit('delete', season.seasonId, 'season')" clickable
+      @click="router.push(`/season/${season.seasonId}`)" />
     <div
       class="flex items-center justify-center rounded-full px-16 py-0.5 border-dashed border-2 cursor-pointer border-gray hover:border-gray-light transition-all transition-200"
       @click="emit('showPicker', true)">

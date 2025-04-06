@@ -6,7 +6,7 @@
 Must:
 - [ ] Lors de l'ajout d'une personne dans season, la season ne s'affiche pas dans la personne
 - [ ] Faire en sorte qu'on ne puissse pas ajouter deux fois le même item dans linked items
-- [ ] Merge codes des stores à la manière de basController ? Chg nomage pr moins explicite genre items/items? 
+- [ ] Merge codes des stores à la manière de basController ? Chg nomage pr moins explicite genre items/items? + Faire validator de données dans le stores ?
 - [ ] Check why new user cant click anywhere
 - [ ] Ensure auth is secured (can a user access another user's data ?)
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)

@@ -4,13 +4,19 @@
     <!-- <Dropdown title="Filter" side="left"></Dropdown> -->
 
     <!-- Sort -->
-    <Dropdown title="Sort" side="right">
-      <div class="space-y-2">
-        <button v-if="props.enableDefault" @click="resetSort"
-          class="w-full text-left text-light transition-colors duration-200 hover:bg-gray px-4 py-2 rounded-md">Default</button>
-        <button v-for="item in props.sortItems" :key="item.value" @click="toggleSort(item.value)"
-          class="w-full text-left text-light transition-colors duration-200 hover:bg-gray px-4 py-2 rounded-md">{{ item.label }}</button>
-      </div>
+    <Dropdown side="right">
+      <template #button>
+        <span>Sort</span>
+      </template>
+      <template #content>
+        <div class="space-y-2">
+          <button @click="resetSort"
+            class="w-full text-left text-light transition-colors duration-200 hover:bg-gray px-4 py-2 rounded-md">Default</button>
+          <button v-for="item in props.sortItems" :key="item.value" @click="toggleSort(item.value)"
+            class="w-full text-left text-light transition-colors duration-200 hover:bg-gray px-4 py-2 rounded-md">{{
+              item.label }}</button>
+        </div>
+      </template>
     </Dropdown>
   </div>
 </template>
@@ -22,11 +28,6 @@ import { useRoute, useRouter } from 'vue-router'
 const props = defineProps({
   sortItems: {
     type: Array,
-    required: false,
-  },
-  enableDefault: {
-    type: Boolean,
-    default: true,
     required: false,
   },
 })
