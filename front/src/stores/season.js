@@ -116,7 +116,14 @@ export const useSeasonStore = defineStore('season', {
       return true
     },
 
-    async createSeason(season, notify = false) {
+    async createSeason(item, notify = false) {
+      const season = {
+        ...item,
+        musics: item?.musics.map(music => music.musicId) || [],
+        events: item?.events.map(event => event.eventId) || [],
+        people: item?.people.map(person => person.personId) || [],
+      }
+
       // Loading
       this.season.loading = true
 
@@ -139,7 +146,16 @@ export const useSeasonStore = defineStore('season', {
       return true
     },
 
-    async updateSeason(season, notify = false) {
+    async updateSeason(item, notify = false) {
+      const season = {
+        ...item,
+        musics: item?.musics.map(music => music.musicId) || [],
+        events: item?.events.map(event => event.eventId) || [],
+        people: item?.people.map(person => person.personId) || [],
+      }
+
+      console.log('season', season)
+
       // Request
       const resp = await api.put(`season/${season.seasonId}`, season)
 

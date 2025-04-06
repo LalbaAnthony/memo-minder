@@ -112,7 +112,14 @@ export const useMusicStore = defineStore('music', {
       return true
     },
 
-    async createMusic(music, notify = false) {
+    async createMusic(item, notify = false) {
+      const music = {
+        ...item,
+        seasons: item?.seasons.map(season => season.seasonId) || [],
+        events: item?.events.map(event => event.eventId) || [],
+        people: item?.people.map(person => person.personId) || [],
+      }
+
       // Loading
       this.music.loading = true
 
@@ -135,7 +142,14 @@ export const useMusicStore = defineStore('music', {
       return true
     },
 
-    async updateMusic(music, notify = false) {
+    async updateMusic(item, notify = false) {
+      const music = {
+        ...item,
+        seasons: item?.seasons.map(season => season.seasonId) || [],
+        events: item?.events.map(event => event.eventId) || [],
+        people: item?.people.map(person => person.personId) || [],
+      }
+
       // Request
       const resp = await api.put(`music/${music.musicId}`, music)
 
