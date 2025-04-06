@@ -114,11 +114,12 @@ export const usePersonStore = defineStore('person', {
 
     async createPerson(item, notify = false) {
       const person = {
-        ...item,
-        events: item?.events?.lenght > 0 ? item?.events.map(event => event.eventId) : [],
-        musics: item?.musics?.lenght > 0 ? item?.musics.map(music => music.musicId) : [],
-        seasons: item?.seasons?.lenght > 0 ? item?.seasons.map(season => season.seasonId) : [],
+        ...item
       }
+      
+      person.events = item?.events.map(event => event.eventId) || [];
+      person.musics = item?.musics.map(music => music.musicId) || [];
+      person.seasons = item?.seasons.map(season => season.seasonId) || [];
 
       // Loading
       this.person.loading = true
@@ -148,11 +149,12 @@ export const usePersonStore = defineStore('person', {
 
     async updatePerson(item, notify = false) {
       const person = {
-        ...item,
-        events: item?.events?.lenght > 0 ? item?.events.map(event => event.eventId) : [],
-        musics: item?.musics?.lenght > 0 ? item?.musics.map(music => music.musicId) : [],
-        seasons: item?.seasons?.lenght > 0 ? item?.seasons.map(season => season.seasonId) : [],
+        ...item
       }
+
+      person.events = item?.events.map(event => event.eventId) || [];
+      person.musics = item?.musics.map(music => music.musicId) || [];
+      person.seasons = item?.seasons.map(season => season.seasonId) || [];
 
       // Request
       const resp = await api.put(`person/${person.personId}`, person)

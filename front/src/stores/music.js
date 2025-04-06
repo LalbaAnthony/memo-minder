@@ -114,11 +114,12 @@ export const useMusicStore = defineStore('music', {
 
     async createMusic(item, notify = false) {
       const music = {
-        ...item,
-        seasons: item?.seasons?.lenght > 0 ? item?.seasons.map(season => season.seasonId) : [],  
-        people: item?.people?.lenght > 0 ? item?.people.map(person => person.personId) : [],
-        events: item?.events?.lenght > 0 ? item?.events.map(event => event.eventId) : [],
+        ...item
       }
+
+      music.seasons = item?.seasons.map(season => season.seasonId) || [];
+      music.people = item?.people.map(person => person.personId) || [];
+      music.events = item?.events.map(event => event.eventId) || [];
 
       // Loading
       this.music.loading = true
@@ -148,11 +149,12 @@ export const useMusicStore = defineStore('music', {
 
     async updateMusic(item, notify = false) {
       const music = {
-        ...item,
-        seasons: item?.seasons.map(season => season.seasonId) || [],
-        events: item?.events.map(event => event.eventId) || [],
-        people: item?.people.map(person => person.personId) || [],
+        ...item
       }
+
+      music.seasons = item?.seasons.map(season => season.seasonId) || [];
+      music.people = item?.people.map(person => person.personId) || [];
+      music.events = item?.events.map(event => event.eventId) || [];
 
       // Request
       const resp = await api.put(`music/${music.musicId}`, music)

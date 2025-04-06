@@ -114,13 +114,14 @@ export const useEventStore = defineStore('event', {
     },
 
     async createEvent(item, notify = false) {
-      const event = {
-        ...item,
-        musics: item?.musics?.lenght > 0 ? item?.musics.map(music => music.musicId) : [],
-        people: item?.people?.lenght > 0 ? item?.people.map(person => person.personId) : [],
-        seasons: item?.seasons?.lenght > 0 ? item?.seasons.map(season => season.seasonId) : [],
+      const music = {
+        ...item
       }
-
+      
+      music.seasons = item?.seasons.map(season => season.seasonId) || [];
+      music.people = item?.people.map(person => person.personId) || [];
+      music.events = item?.events.map(event => event.eventId) || [];
+      
       // Loading
       this.event.loading = true
 
@@ -148,12 +149,13 @@ export const useEventStore = defineStore('event', {
     },
 
     async updateEvent(item, notify = false) {
-      const event = {
-        ...item,
-        musics: item?.musics?.lenght > 0 ? item?.musics.map(music => music.musicId) : [],
-        people: item?.people?.lenght > 0 ? item?.people.map(person => person.personId) : [],
-        seasons: item?.seasons?.lenght > 0 ? item?.seasons.map(season => season.seasonId) : [],
+         const music = {
+        ...item
       }
+      
+      music.seasons = item?.seasons.map(season => season.seasonId) || [];
+      music.people = item?.people.map(person => person.personId) || [];
+      music.events = item?.events.map(event => event.eventId) || [];
 
       // Request
       const resp = await api.put(`event/${event.eventId}`, event)
