@@ -161,9 +161,11 @@ export const usePersonStore = defineStore('person', {
       }
 
       // Update in local list
+      const index = this.people.data.findIndex(item => item?.personId && (item.personId === person.personId))
       if (resp.data?.data) {
-        const index = this.people.data.findIndex(item => item?.personId && (item.personId === person.personId))
         this.people.data.splice(index, 1, resp.data.data)
+      } else {
+        this.people.data.splice(index, 1, item)
       }
 
       return true
