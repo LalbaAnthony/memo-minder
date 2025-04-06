@@ -143,7 +143,7 @@ export const useSeasonStore = defineStore('season', {
       // Request
       const resp = await api.put(`season/${season.seasonId}`, season)
 
-      if (resp.status !== 201) {
+      if (resp.status !== 200) {
         notif.notify(resp.data.message, 'error')
         return false
       } else if (notify) {

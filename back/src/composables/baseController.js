@@ -1,8 +1,6 @@
 const { Op } = require('sequelize');
 const frmtr = require('../helpers/frmtr');
-
-// Helper to capitalize the first letter (for building setter method names)
-const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
+const capitalize = require('../helpers/capitalize')
 
 const getAll = (Model, { searchFields = [], defaultSort = [], associations = [] } = {}) => async (req, res) => {
     let { userId, sort, page, perPage, search } = req.query;
@@ -45,7 +43,7 @@ const getById = (Model, { associations = [] } = {}) => async (req, res) => {
         return res.status(400).json(frmtr('error', null, 'No id provided'));
 
     const item = await Model.findByPk(parseInt(req.params.id), { include: associations });
-    
+
     if (!item)
         return res.status(404).json(frmtr('error', null, `No ${Model.name} found with this id`));
 
@@ -87,7 +85,7 @@ const create = (Model, { requiredFields = [], toSetAssociations = [] } = {}) => 
     res.status(201).json(frmtr('success', null, `${Model.name} created`));
 };
 
-const update = (Model, { requiredFields = [] } = {}) => async (req, res) => {
+const update = (Model, { requiredFields = [], toSetAssociations = [] } = {}) => async (req, res) => {
     if (!req.params.id)
         return res.status(400).json(frmtr('error', null, 'No id provided'));
 
@@ -101,7 +99,6 @@ const update = (Model, { requiredFields = [] } = {}) => async (req, res) => {
 
     // Clone request body so we can remove linked associations keys
     const data = { ...req.body };
-    const toSetAssociations = Object.keys(item.getAssociations());
     toSetAssociations.forEach(assoc => delete data[assoc]);
 
     // Update the main record

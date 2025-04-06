@@ -139,7 +139,7 @@ export const usePersonStore = defineStore('person', {
       // Request
       const resp = await api.put(`person/${person.personId}`, person)
 
-      if (resp.status !== 201) {
+      if (resp.status !== 200) {
         notif.notify(resp.data.message, 'error')
         return false
       } else if (notify) {
