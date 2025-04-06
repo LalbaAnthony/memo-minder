@@ -4,6 +4,13 @@ const baseController = require('./baseController');
 
 const searchFields = ['title', 'description'];
 const requiredFields = ['userId', 'title', 'color', 'dateStart'];
+const associations = [
+    { model: Music, as: 'musics' },
+    { model: Person, as: 'people' },
+    { model: Event, as: 'events' },
+    { model: Mood, as: 'mood' },
+];
+const toSetAssociations = ['musics', 'people', 'events'];
 
 exports.getAllSeasons = baseController.getAll(Season, {
     searchFields,
@@ -11,29 +18,21 @@ exports.getAllSeasons = baseController.getAll(Season, {
         { order: 'DESC', orderBy: 'date' },
         { order: 'ASC', orderBy: 'createdAt' },
     ],
-    associations: [
-        { model: Music, as: 'musics' },
-        { model: Person, as: 'people' },
-        { model: Event, as: 'events' },
-        { model: Mood, as: 'mood' },
-    ]
+    associations,
 });
 
 exports.getSeasonById = baseController.getById(Season, {
-    associations: [
-        { model: Music, as: 'musics' },
-        { model: Person, as: 'people' },
-        { model: Event, as: 'events' },
-        { model: Mood, as: 'mood' },
-    ]
+    associations,
 });
 
 exports.createSeason = baseController.create(Season, {
     requiredFields,
+    toSetAssociations,
 });
 
 exports.updateSeason = baseController.update(Season, {
     requiredFields,
+    toSetAssociations,
 });
 
 exports.deleteSeason = baseController.remove(Season);

@@ -2,6 +2,9 @@
 const { Op } = require('sequelize');
 const frmtr = require('../helpers/frmtr');
 
+// Helper to capitalize the first letter (for building setter method names)
+const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
+
 const getAll = (Model, { searchFields = [], defaultSort = [], associations = [] } = {}) => async (req, res) => {
     let { userId, sort, page, perPage, search } = req.query;
     if (!userId)
@@ -53,14 +56,34 @@ const getById = (Model, { associations = [] } = {}) => async (req, res) => {
     res.status(200).json(frmtr('success', item));
 };
 
-const create = (Model, { requiredFields = [] } = {}) => async (req, res) => {
+const create = (Model, { requiredFields = [], toSetAssociations = [] } = {}) => async (req, res) => {
+    // Check for missing required fields
     const missingFields = requiredFields.filter(field => !req.body[field]);
     if (missingFields.length)
         return res.status(400).json(frmtr('error', null, `Missing fields: ${missingFields.join(', ')}`));
 
-    const item = await Model.create(req.body);
+    // Clone request body so we can remove linked associations keys
+    const data = { ...req.body };
+    toSetAssociations.forEach(assoc => delete data[assoc]);
+
+    // Create the main record
+    const item = await Model.create(data);
     if (!item)
         return res.status(500).json(frmtr('error', null, `Error creating ${Model.name}`));
+
+    // If the request includes linked many-to-many associations, set them here.
+    // Example: if toSetAssociations includes "musics", then if req.body.musics is provided,
+    // we call item.setMusics(req.body.musics)
+    for (const assoc of toSetAssociations) {
+        if (req.body[assoc] && Array.isArray(req.body[assoc])) {
+            const setter = `set${capitalize(assoc)}`;
+            if (typeof item[setter] === 'function') {
+                await item[setter](req.body[assoc]);
+            } else {
+                console.warn(`Association setter ${setter} not found on ${Model.name}`);
+            }
+        }
+    }
 
     res.status(201).json(frmtr('success', null, `${Model.name} created`));
 };
@@ -77,11 +100,31 @@ const update = (Model, { requiredFields = [] } = {}) => async (req, res) => {
     if (missingFields.length)
         return res.status(400).json(frmtr('error', null, `Missing fields: ${missingFields.join(', ')}`));
 
-    const resp = await item.update(req.body);
+    // Clone request body so we can remove linked associations keys
+    const data = { ...req.body };
+    const toSetAssociations = Object.keys(item.getAssociations());
+    toSetAssociations.forEach(assoc => delete data[assoc]);
+
+    // Update the main record
+    const resp = await item.update(data);
     if (!resp)
         return res.status(500).json(frmtr('error', null, `Error updating ${Model.name}`));
 
-    res.status(201).json(frmtr('success', null, `${Model.name} updated`));
+    // If the request includes linked many-to-many associations, set them here.
+    // Example: if toSetAssociations includes "musics", then if req.body.musics is provided,
+    // we call item.setMusics(req.body.musics)
+    for (const assoc of toSetAssociations) {
+        if (req.body[assoc] && Array.isArray(req.body[assoc])) {
+            const setter = `set${capitalize(assoc)}`;
+            if (typeof item[setter] === 'function') {
+                await item[setter](req.body[assoc]);
+            } else {
+                console.warn(`Association setter ${setter} not found on ${Model.name}`);
+            }
+        }
+    }
+
+    res.status(200).json(frmtr('success', null, `${Model.name} updated`));
 };
 
 const remove = (Model) => async (req, res) => {
