@@ -18,16 +18,16 @@ module.exports = (instance) => {
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
         },
-        musicId: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'Music',
-                key: 'musicId'
-            },
-            allowNull: true,
-            onDelete: 'SET NULL',
-            onUpdate: 'CASCADE'
-        },
+        // musicId: {
+        //     type: DataTypes.INTEGER,
+        //     references: {
+        //         model: 'Music',
+        //         key: 'musicId'
+        //     },
+        //     allowNull: true,
+        //     onDelete: 'SET NULL',
+        //     onUpdate: 'CASCADE'
+        // },
         moodId: {
             type: DataTypes.INTEGER,
             references: {
@@ -88,7 +88,13 @@ module.exports = (instance) => {
 
     Season.associate = (models) => {
         Season.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
-        Season.belongsTo(models.Music, { foreignKey: 'musicId', as: 'music' });
+        // Season.belongsTo(models.Music, { foreignKey: 'musicId', as: 'music' });
+        Season.belongsToMany(models.Music, {
+            through: "seasonMusic",
+            foreignKey: "seasonId",
+            otherKey: "musicId",
+            as: "musics",
+        });
         Season.belongsTo(models.Mood, { foreignKey: 'moodId', as: 'mood' });
         Season.belongsTo(models.Person, { foreignKey: 'personId', as: 'person' });
     };
