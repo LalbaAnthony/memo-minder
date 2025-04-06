@@ -4,8 +4,8 @@
 - [ ] Import my own data
 
 Must:
-- [ ] Faire du many to many partout
-  - [ ] Faire en sorte qu'on ne puissse pas ajouter deux fois le même item dans linked items
+- [ ] Lors de l'ajout d'une personne dans season, la season ne s'affiche pas dans la personne
+- [ ] Faire en sorte qu'on ne puissse pas ajouter deux fois le même item dans linked items
 - [ ] Check why new user cant click anywhere
 - [ ] Ensure auth is secured (can a user access another user's data ?)
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
