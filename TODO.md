@@ -6,10 +6,10 @@
 Must:
 - [ ] Faire du many to many partout
   - [ ] Faire en sorte qu'on ne puissse pas ajouter deux fois le même item dans linked items
-- [ ] Gérer la taille de item picker qui fait que bouger à l'utilisation + l'adapter mobile/desktop
 - [ ] Check why new user cant click anywhere
 - [ ] Ensure auth is secured (can a user access another user's data ?)
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
+- [ ] Email validation not always working
 
 Important:
 - [ ] Add loader on search page and item picker

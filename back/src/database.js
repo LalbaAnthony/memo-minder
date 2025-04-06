@@ -3,7 +3,7 @@ const logConsole = require('./helpers/logConsole');
 const path = require('path');
 const dotenv = require('dotenv');
 
-dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 const sequelizeDevelopment = new Sequelize({
     dialect: 'sqlite',
@@ -18,7 +18,9 @@ const sequelizeProduction = new Sequelize(process.env.BACK_DATABASE_NAME, proces
     logging: logConsole('Database connection established!', 'info')
 });
 
-const sequelize = process.env.BACK_ENV === 'production' ? sequelizeProduction : sequelizeDevelopment;
+const sequelize = process.env.BACK_ENV === 'development'  ? sequelizeDevelopment : sequelizeProduction;
+
+console.log(process.env.BACK_ENV);
 
 const models = {
   User: require("./models/userModel")(sequelize),

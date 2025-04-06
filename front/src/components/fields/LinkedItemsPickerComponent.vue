@@ -18,7 +18,7 @@
             <TransitionChild enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
               enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
               leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-              <Grid :items="results" :enable-no-item="!searching" clickables :maxHeight="gridMaxHeight"
+              <Grid :items="results" :enable-no-item="!searching" clickables
                 :noItemPosition="isMobile() ? 'static' : 'absolute'">
                 <template #item="{ item }">
                   <Result :item="item" icon="plus" />
@@ -43,7 +43,7 @@ import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { XMarkIcon } from '@heroicons/vue/24/solid'
 import Grid from '@/components/GridComponent.vue'
 import Result from '@/components/ResultItem.vue'
-import { watch, ref, computed } from 'vue'
+import { watch, ref } from 'vue'
 import debounce from '@/composables/debounce.js'
 import { useEventStore } from '@/stores/event'
 import { useMusicStore } from '@/stores/music'
@@ -79,13 +79,6 @@ const results = ref([])
 
 const emit = defineEmits(['add', 'closePicker'])
 
-const gridMaxHeight = computed(() => {
-  if (isMobile()) {
-    return window.innerHeight - 350
-  }
-  return 0
-})
-
 const loadSearch = debounce(async () => {
   if (!search.value) return
 
@@ -102,7 +95,7 @@ const loadSearch = debounce(async () => {
         results.value.push(...eventStore.events.data.map((event) => ({
           title: event.title,
           type: 'event',
-          action: () => { emit('selected', { type: 'event', data: event }), emit('closePicker', true) }
+          action: () => { emit('add', { type: 'event', data: event }), emit('closePicker', true) }
         })))
       })
     })
