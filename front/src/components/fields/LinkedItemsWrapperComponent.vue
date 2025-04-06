@@ -10,6 +10,7 @@
 import { ref } from 'vue'
 import LinkedItemsList from '@/components/fields/LinkedItemsListComponent.vue'
 import LinkedItemsPicker from '@/components/fields/LinkedItemsPickerComponent.vue'
+import { notif } from '@/composables/notif.js'
 import { useEventStore } from '@/stores/event'
 import { useMusicStore } from '@/stores/music'
 import { usePersonStore } from '@/stores/person'
@@ -72,6 +73,11 @@ function getChildrenPath(type) {
 }
 
 function addItem(object) {
+  if (store.value[props.parentType].data[getChildrenPath(object.type)].some(item => item[object.type + 'Id'] === object.data[object.type + 'Id'])) {
+    notif.notify('This item is already linked to this ' + props.parentType, 'error')
+    return
+  }
+
   store.value[props.parentType].data[getChildrenPath(object.type)].push(object.data)
 }
 
