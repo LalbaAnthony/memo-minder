@@ -53,6 +53,12 @@ module.exports = (instance) => {
     
     Music.associate = (models) => {
         Music.belongsTo(models.User, { foreignKey: 'userId', as: 'user' });
+        Music.belongsToMany(models.Season, {
+            through: "seasonMusic",
+            foreignKey: "musicId",
+            otherKey: "seasonId",
+            as: "seasons",
+        });
     };
 
     return Music;

@@ -12,14 +12,6 @@ const seedData = async () => {
         // Check the database connection
         await sequelize.authenticate();
 
-        // Drop database tables (disable and re-enable foreign key checks)
-        await Event.drop();
-        await Season.drop();
-        await Person.drop();
-        await Music.drop();
-        await User.drop();
-        await Mood.drop();
-
         // Synchronize the database (drop all existing tables and recreate them)
         await sequelize.sync({ force: true });
 
