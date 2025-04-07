@@ -151,7 +151,7 @@ exports.userInfos = async (req, res) => {
         delete user.dataValues.validateEmailToken
         delete user.dataValues.resetPasswordCode
 
-        return res.status(200).json(frmtr('success', user,))
+        return res.status(200).json(frmtr('success', user, 'User found successfully'))
     } catch (error) {
         return res.status(500).json(frmtr('error', null, error.message))
     }
@@ -174,7 +174,7 @@ exports.userUpdate = async (req, res) => {
         delete user.dataValues.validateEmailToken
         delete user.dataValues.resetPasswordCode
 
-        return res.status(200).json(frmtr('success', user,))
+        return res.status(200).json(frmtr('success', user, 'User updated successfully'))
     } catch (error) {
         return res.status(500).json(frmtr('error', null, error.message))
     }
