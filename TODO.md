@@ -4,6 +4,10 @@
 - [ ] Import my own data
 
 Must:
+- [ ] Mood picker change de taille en fonction de contenu
+- [ ] Rajouter un shadow sur les dropdown ?
+- [ ] Mettre alerte si changement de page sans sauvagarder ?
+- [ ] Augmenter la durée de lanimation d'apparition/disparition du item picker car on comprend pas d'ou il vient + laisser un peu de marge en haut pour comprendre que c'est un model et pas un page ? 
 - [ ] Merge codes des stores à la manière de basController ?
   - [ ] Chg nomage pr moins explicite genre items/items?
   - [ ] Faire validator de données dans le stores ?
