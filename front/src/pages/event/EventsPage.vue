@@ -6,15 +6,15 @@
       { value: 'date-asc', label: 'Date (Oldest)' },
       { value: 'date-desc', label: 'Date (Newest)' }
     ]" />
-    <Loader v-if="eventStore.events.loading" />
-    <Grid v-else :items="eventStore.events.data">
+    <Loader v-if="eventStore.items.loading" />
+    <Grid v-else :items="eventStore.items.data">
       <template #item="{ item }">
         <Event :event="item" />
       </template>
     </Grid>
 
-    <Pagination :total="eventStore.events.pagination.total" :page="eventStore.events.pagination.page"
-      :perPage="eventStore.events.pagination.perPage" @update-page="(page) => eventStore.changePage(page)" />
+    <Pagination :total="eventStore.items.pagination.total" :page="eventStore.items.pagination.page"
+      :perPage="eventStore.items.pagination.perPage" @update-page="(page) => eventStore.changePage(page)" />
 
     <BottomActions :addButton="true" :goTopButton="true" />
   </div>
@@ -35,7 +35,7 @@ const route = useRoute()
 const eventStore = useEventStore()
 
 async function loadEvents() {
-  eventStore.fetchEvents({
+  eventStore.fetchItems({
     sort: route.query.sort ? [{
       orderBy: route.query.sort?.split('-')[0] || null,
       order: route.query.sort?.split('-')[1] || null

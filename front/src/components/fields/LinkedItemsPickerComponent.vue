@@ -91,8 +91,8 @@ const loadSearch = debounce(async () => {
   // Events
   if (props.childrenTypes && props.childrenTypes.includes('event')) {
     promises.push(async function () {
-      return eventStore.fetchEvents({ search: search.value, perPage: PER_PAGE }).then(() => {
-        results.value.push(...eventStore.events.data.map((event) => ({
+      return eventStore.fetchItems({ search: search.value, perPage: PER_PAGE }).then(() => {
+        results.value.push(...eventStore.items.data.map((event) => ({
           title: event.title,
           type: 'event',
           action: () => { emit('add', { type: 'event', data: event }), emit('closePicker', true) }
@@ -104,8 +104,8 @@ const loadSearch = debounce(async () => {
   // People
   if (props.childrenTypes && props.childrenTypes.includes('person')) {
     promises.push(async function () {
-      return personStore.fetchPeople({ search: search.value, perPage: PER_PAGE }).then(() => {
-        results.value.push(...personStore.people.data.map((person) => ({
+      return personStore.fetchItems({ search: search.value, perPage: PER_PAGE }).then(() => {
+        results.value.push(...personStore.items.data.map((person) => ({
           title: person.name,
           type: 'person',
           action: () => { emit('add', { type: 'person', data: person }), emit('closePicker', true) }
@@ -117,8 +117,8 @@ const loadSearch = debounce(async () => {
   // Musics
   if (props.childrenTypes && props.childrenTypes.includes('music')) {
     promises.push(async function () {
-      return musicStore.fetchMusics({ search: search.value, perPage: PER_PAGE }).then(() => {
-        results.value.push(...musicStore.musics.data.map((music) => ({
+      return musicStore.fetchItems({ search: search.value, perPage: PER_PAGE }).then(() => {
+        results.value.push(...musicStore.items.data.map((music) => ({
           title: music.title,
           type: 'music',
           action: () => { emit('add', { type: 'music', data: music }), emit('closePicker', true) }
@@ -130,8 +130,8 @@ const loadSearch = debounce(async () => {
   // Seasons
   if (props.childrenTypes && props.childrenTypes.includes('season')) {
     promises.push(async function () {
-      return seasonStore.fetchSeasons({ search: search.value, perPage: PER_PAGE }).then(() => {
-        results.value.push(...seasonStore.seasons.data.map((season) => ({
+      return seasonStore.fetchItems({ search: search.value, perPage: PER_PAGE }).then(() => {
+        results.value.push(...seasonStore.items.data.map((season) => ({
           title: season.title,
           type: 'season',
           action: () => { emit('add', { type: 'season', data: season }), emit('closePicker', true) }

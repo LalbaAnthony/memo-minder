@@ -4,15 +4,15 @@ import { useAuthStore } from '@/stores/auth'
 import { notif } from '@/composables/notif.js'
 
 const authStore = useAuthStore()
-const defaultPagination = { page: 1, perPage: 20, total: 1 }
 
-export function createBaseStore(entityConfig) {
-    return defineStore(entityConfig.name, {
+export function createBaseStore(config) {
+    return defineStore(config.name, {
         state: () => ({
+            primaryKey: config?.primaryKey || 'id',
             items: {
                 loading: true,
                 data: [],
-                pagination: defaultPagination,
+                pagination: config.pagination,
             },
             item: {
                 loading: false,
@@ -29,11 +29,11 @@ export function createBaseStore(entityConfig) {
             clearItems() {
                 this.items.data = []
                 this.items.loading = false
-                this.items.pagination = defaultPagination
+                this.items.pagination = config.pagination
             },
 
             resetPagination() {
-                this.items.pagination = defaultPagination
+                this.items.pagination = config.pagination
             },
 
             async fetchItem(itemId) {
@@ -41,17 +41,15 @@ export function createBaseStore(entityConfig) {
 
                 this.item.loading = true
 
-                const idKey = entityConfig?.idKey || 'id'
-
                 // If the record is already loaded, we don’t fetch again.
-                if (this.item.data[idKey] !== itemId) {
-                    const found = this.items.data.find(i => i[idKey] === itemId)
+                if (this.item.data[this.primaryKey] !== itemId) {
+                    const found = this.items.data.find(i => i[this.primaryKey] === itemId)
                     if (found) {
                         this.item.data = found
                     } else {
                         const params = { userId: authStore.user.userId }
                         this.clearItem()
-                        const resp = await api.get(`${entityConfig.endpoint}/${itemId}`, params)
+                        const resp = await api.get(`${config.endpoints.one}/${itemId}`, params)
                         this.item.data = resp.data.data || {}
                     }
                 }
@@ -67,8 +65,8 @@ export function createBaseStore(entityConfig) {
 
                 const params = {
                     userId: authStore.user.userId,
-                    page: this.items.pagination.page || defaultPagination.page,
-                    perPage: this.items.pagination.perPage || defaultPagination.perPage,
+                    page: this.items.pagination.page || config.pagination.page,
+                    perPage: this.items.pagination.perPage || config.pagination.perPage,
                     sort: [
                         { order: 'DESC', orderBy: 'createdAt' },
                     ],
@@ -77,9 +75,9 @@ export function createBaseStore(entityConfig) {
                 // Merge custom parameters
                 Object.assign(params, givenParams)
 
-                const resp = await api.get(`${entityConfig.endpoint}s`, params)
+                const resp = await api.get(`${config.endpoints.all}`, params)
                 this.items.data = resp.data.data || []
-                this.items.pagination = resp.data.pagination || defaultPagination
+                this.items.pagination = resp.data.pagination || config.pagination
 
                 this.items.loading = false
             },
@@ -93,8 +91,8 @@ export function createBaseStore(entityConfig) {
             initItem() {
                 this.clearItem()
 
-                if (typeof entityConfig.initItem === 'function') {
-                    entityConfig.initItem(this.item.data)
+                if (typeof config.initItem === 'function') {
+                    config.initItem(this.item.data)
                 }
 
                 this.item.data.userId = authStore.user.userId
@@ -102,16 +100,15 @@ export function createBaseStore(entityConfig) {
 
             async deleteItem(itemId, notify = true) {
                 // Remove from local list using the id key
-                const idKey = entityConfig.idKey
-                const index = this.items.data.findIndex(i => i[idKey] === itemId)
+                const index = this.items.data.findIndex(i => i[this.primaryKey] === itemId)
                 if (index !== -1) this.items.data.splice(index, 1)
 
-                const resp = await api.del(`${entityConfig.endpoint}/${itemId}`)
+                const resp = await api.del(`${config.endpoints.delete}/${itemId}`)
                 if (resp.status !== 200) {
                     notif.notify(resp.data.message, 'error')
                     return false
                 } else if (notify) {
-                    notif.notify(`${entityConfig?.nicename || 'Item'} deleted`, 'success')
+                    notif.notify(`${config?.nicename || 'Item'} deleted`, 'success')
                 }
 
                 return true
@@ -124,17 +121,17 @@ export function createBaseStore(entityConfig) {
                 let newItem = { ...item }
 
                 // Use the mapping function to convert relationships if provided
-                if (typeof entityConfig.mapRelations === 'function') {
-                    newItem = entityConfig.mapRelations(newItem)
+                if (typeof config.mapRelations === 'function') {
+                    newItem = config.mapRelations(newItem)
                 }
 
-                const resp = await api.post(`${entityConfig.endpoint}s`, newItem)
+                const resp = await api.post(`${config.endpoints.create}`, newItem)
                 if (resp.status !== 201) {
                     notif.notify(resp.data.message, 'error')
                     this.item.loading = false
                     return false
                 } else if (notify) {
-                    notif.notify(`${entityConfig?.nicename || 'Item'} created`, 'success')
+                    notif.notify(`${config?.nicename || 'Item'} created`, 'success')
                 }
 
                 // Append the created item to the local list
@@ -155,21 +152,20 @@ export function createBaseStore(entityConfig) {
                 // Clone the item to allow modifications
                 let updatedItem = { ...item }
 
-                if (typeof entityConfig.mapRelations === 'function') {
-                    updatedItem = entityConfig.mapRelations(updatedItem)
+                if (typeof config.mapRelations === 'function') {
+                    updatedItem = config.mapRelations(updatedItem)
                 }
 
-                const idKey = entityConfig.idKey
-                const resp = await api.put(`${entityConfig.endpoint}/${item[idKey]}`, updatedItem)
+                const resp = await api.put(`${config.endpoints.update}/${item[this.primaryKey]}`, updatedItem)
                 if (resp.status !== 200) {
                     notif.notify(resp.data.message, 'error')
                     return false
                 } else if (notify) {
-                    notif.notify(`${entityConfig?.nicename || 'Item'} updated`, 'success')
+                    notif.notify(`${config?.nicename || 'Item'} updated`, 'success')
                 }
 
                 // Update the local list
-                const index = this.items.data.findIndex(i => i[idKey] === item[idKey])
+                const index = this.items.data.findIndex(i => i[this.primaryKey] === item[this.primaryKey])
                 if (resp.data?.data) {
                     this.items.data.splice(index, 1, resp.data.data)
                 } else {

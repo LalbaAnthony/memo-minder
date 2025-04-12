@@ -6,14 +6,14 @@
       { value: 'updatedAt-asc', label: 'Add date (Oldest)' },
       { value: 'updatedAt-desc', label: 'Add date (Newest)' }
     ]" />
-    <Loader v-if="personStore.people.loading" />
-    <Grid v-else :items="personStore.people.data">
+    <Loader v-if="personStore.items.loading" />
+    <Grid v-else :items="personStore.items.data">
       <template #item="{ item }">
         <Person :person="item" />
       </template>
     </Grid>
-    <Pagination :total="personStore.people.pagination.total" :page="personStore.people.pagination.page"
-      :perPage="personStore.people.pagination.perPage"
+    <Pagination :total="personStore.items.pagination.total" :page="personStore.items.pagination.page"
+      :perPage="personStore.items.pagination.perPage"
       @update-page="(page) => personStore.changePage(page)" />
       
     <BottomActions :addButton="true" :goTopButton="true" />
@@ -35,7 +35,7 @@ const route = useRoute()
 const personStore = usePersonStore()
 
 async function loadPeople() {
-  personStore.fetchPeople({
+  personStore.fetchItems({
     sort: route.query.sort ? [{
       orderBy: route.query.sort?.split('-')[0] || null,
       order: route.query.sort?.split('-')[1] || null

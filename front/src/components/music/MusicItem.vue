@@ -90,7 +90,7 @@ function openLink() {
 }
 
 function deleteMusic() {
-  if (confirm('Are you sure you want to delete this music?')) musicStore.deleteMusic(props.music.musicId, true)
+  if (confirm('Are you sure you want to delete this music?')) musicStore.deleteItem(props.music.musicId, true)
 }
 
 function goToMusic() {

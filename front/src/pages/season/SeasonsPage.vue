@@ -6,14 +6,14 @@
       { value: 'dateEnd-asc', label: 'Date (Oldest)' },
       { value: 'dateEnd-desc', label: 'Date (Newest)' }
     ]" />
-    <Loader v-if="seasonStore.seasons.loading" />
-    <Grid v-else :items="seasonStore.seasons.data">
+    <Loader v-if="seasonStore.items.loading" />
+    <Grid v-else :items="seasonStore.items.data">
       <template #item="{ item }">
         <Season :season="item" />
       </template>
     </Grid>
-    <Pagination :total="seasonStore.seasons.pagination.total" :page="seasonStore.seasons.pagination.page"
-      :perPage="seasonStore.seasons.pagination.perPage" @update-page="(page) => seasonStore.changePage(page)" />
+    <Pagination :total="seasonStore.items.pagination.total" :page="seasonStore.items.pagination.page"
+      :perPage="seasonStore.items.pagination.perPage" @update-page="(page) => seasonStore.changePage(page)" />
 
     <BottomActions :addButton="true" :goTopButton="true" />
   </div>
@@ -35,7 +35,7 @@ const route = useRoute()
 const seasonStore = useSeasonStore()
 
 async function loadSeasons() {
-  seasonStore.fetchSeasons({
+  seasonStore.fetchItems({
     sort: route.query.sort ? [{
       orderBy: route.query.sort?.split('-')[0] || null,
       order: route.query.sort?.split('-')[1] || null

@@ -73,16 +73,22 @@ function getChildrenPath(type) {
 }
 
 function addItem(object) {
-  if (store.value[props.parentType].data[getChildrenPath(object.type)].some(item => item[object.type + 'Id'] === object.data[object.type + 'Id'])) {
-    notif.notify('This item is already linked to this ' + props.parentType, 'error')
+  const path = getChildrenPath(object.type)
+  const pk = store.value.primaryKey
+
+  if (store.value.item.data[path].some(item => item[pk] === object.data[pk])) {
+    notif.notify('This item is already linked to this item', 'error')
     return
   }
-
-  store.value[props.parentType].data[getChildrenPath(object.type)].push(object.data)
+  
+  store.value.item.data[path].push(object.data)
 }
 
 function deleteItem(id, type) {
-  store.value[props.parentType].data[getChildrenPath(type)] = store.value[props.parentType].data[getChildrenPath(type)].filter(item => item[type + 'Id'] !== id)
+  const path = getChildrenPath(type)
+  const pk = store.value.primaryKey
+  
+  store.value.item.data[path] = store.value.item.data[path].filter(item => item[pk] !== id)
 }
 
 </script>

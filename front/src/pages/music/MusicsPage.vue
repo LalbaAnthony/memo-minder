@@ -6,15 +6,15 @@
       { value: 'releaseDate-asc', label: 'Date (Oldest)' },
       { value: 'releaseDate-desc', label: 'Date (Newest)' }
     ]" />
-    <Loader v-if="musicStore.musics.loading" />
-    <Grid v-else :items="musicStore.musics.data">
+    <Loader v-if="musicStore.items.loading" />
+    <Grid v-else :items="musicStore.items.data">
       <template #item="{ item }">
         <Music :music="item" />
       </template>
     </Grid>
 
-    <Pagination :total="musicStore.musics.pagination.total" :page="musicStore.musics.pagination.page"
-      :perPage="musicStore.musics.pagination.perPage" @update-page="(page) => musicStore.changePage(page)" />
+    <Pagination :total="musicStore.items.pagination.total" :page="musicStore.items.pagination.page"
+      :perPage="musicStore.items.pagination.perPage" @update-page="(page) => musicStore.changePage(page)" />
 
     <BottomActions :addButton="true" :goTopButton="true" />
   </div>
@@ -35,7 +35,7 @@ const route = useRoute()
 const musicStore = useMusicStore()
 
 async function loadMusics() {
-  musicStore.fetchMusics({
+  musicStore.fetchItems({
     sort: route.query.sort ? [{
       orderBy: route.query.sort?.split('-')[0] || null,
       order: route.query.sort?.split('-')[1] || null
