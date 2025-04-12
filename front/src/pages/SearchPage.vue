@@ -120,8 +120,8 @@ const loadSearch = debounce(async () => {
 
   // Events
   promises.push(async function () {
-    return eventStore.fetchEvents({ search: search.value, perPage: PER_PAGE }).then(() => {
-      results.value.push(...eventStore.events.data.map((event) => ({
+    return eventStore.fetchItems({ search: search.value, perPage: PER_PAGE }).then(() => {
+      results.value.push(...eventStore.items.data.map((event) => ({
         title: event.title,
         type: 'event',
         action: () => router.push(`/event/${event.eventId}`)
@@ -131,8 +131,8 @@ const loadSearch = debounce(async () => {
 
   // People
   promises.push(async function () {
-    return personStore.fetchPeople({ search: search.value, perPage: PER_PAGE }).then(() => {
-      results.value.push(...personStore.people.data.map((person) => ({
+    return personStore.fetchItems({ search: search.value, perPage: PER_PAGE }).then(() => {
+      results.value.push(...personStore.items.data.map((person) => ({
         title: person.name,
         type: 'person',
         action: () => router.push(`/person/${person.personId}`)
@@ -142,8 +142,8 @@ const loadSearch = debounce(async () => {
 
   // Musics
   promises.push(async function () {
-    return musicStore.fetchMusics({ search: search.value, perPage: PER_PAGE }).then(() => {
-      results.value.push(...musicStore.musics.data.map((music) => ({
+    return musicStore.fetchItems({ search: search.value, perPage: PER_PAGE }).then(() => {
+      results.value.push(...musicStore.items.data.map((music) => ({
         title: music.title,
         type: 'music',
         action: () => router.push(`/music/${music.musicId}`)
@@ -153,8 +153,8 @@ const loadSearch = debounce(async () => {
 
   // Seasons
   promises.push(async function () {
-    return seasonStore.fetchSeasons({ search: search.value, perPage: PER_PAGE }).then(() => {
-      results.value.push(...seasonStore.seasons.data.map((season) => ({
+    return seasonStore.fetchItems({ search: search.value, perPage: PER_PAGE }).then(() => {
+      results.value.push(...seasonStore.items.data.map((season) => ({
         title: season.title,
         type: 'season',
         action: () => router.push(`/season/${season.seasonId}`)

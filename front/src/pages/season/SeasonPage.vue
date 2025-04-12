@@ -2,15 +2,15 @@
   <div>
     <TopActions :goBackButton="true" />
 
-    <Loader v-if="seasonStore.season?.loading" />
+    <Loader v-if="seasonStore.item?.loading" />
     <div v-else>
       <!-- Title and date section -->
       <section>
-        <div v-if="seasonStore.season?.data?.updatedAt" class="mb-4">
-          <span class="text-gray">Updated the {{ dateToNiceDate(seasonStore.season?.data?.updatedAt) }}</span>
+        <div v-if="seasonStore.item?.data?.updatedAt" class="mb-4">
+          <span class="text-gray">Updated the {{ dateToNiceDate(seasonStore.item?.data?.updatedAt) }}</span>
         </div>
         <div class="flex items-center justify-between gap-2 flex-wrap">
-          <input v-model="seasonStore.season.data.title" type="text"
+          <input v-model="seasonStore.item.data.title" type="text"
             class="rounded-lg bg-dark placeholder-gray text-light text-2xl w-full" placeholder="Season title" />
         </div>
       </section>
@@ -19,17 +19,17 @@
       <section>
         <div class="flex flex-col gap-4 sm:gap-1 bg-dark-light p-4 rounded-lg">
           <div class="flex flex-col sm:flex-row items-center justify-start gap-x-4 gap-y-2">
-            <DatePicker class="max-w-[15rem]" :value="seasonStore.season?.data?.dateStart"
-              @update="(v) => { seasonStore.season.data.dateStart = v }" />
+            <DatePicker class="max-w-[15rem]" :value="seasonStore.item?.data?.dateStart"
+              @update="(v) => { seasonStore.item.data.dateStart = v }" />
             <span class="text-lg font-medium text-gray-light">to</span>
-            <DatePicker class="max-w-[15rem]" :value="seasonStore.season?.data?.dateEnd"
-              @update="(v) => { seasonStore.season.data.dateEnd = v }" />
+            <DatePicker class="max-w-[15rem]" :value="seasonStore.item?.data?.dateEnd"
+              @update="(v) => { seasonStore.item.data.dateEnd = v }" />
           </div>
           <div v-if="!route?.params?.seasonId" class="flex items-center justify-start gap-x-4 gap-y-1 mt-2">
             <div v-for="suggestedSeason in suggestedSeasons" :key="suggestedSeason.title" class="cursor-pointer" @click="() => {
-              seasonStore.season.data.title = suggestedSeason.title
-              seasonStore.season.data.dateStart = suggestedSeason.dateStart
-              seasonStore.season.data.dateEnd = suggestedSeason.dateEnd
+              seasonStore.item.data.title = suggestedSeason.title
+              seasonStore.item.data.dateStart = suggestedSeason.dateStart
+              seasonStore.item.data.dateEnd = suggestedSeason.dateEnd
             }">
               <span class="text-gray hover:text-gray-light transition-all transition-200">{{ suggestedSeason.title
               }}</span>
@@ -41,16 +41,16 @@
       <!-- Color & Mood section -->
       <section>
         <div class="flex flex-row justify-around gap-4 bg-dark-light p-4 rounded-lg">
-          <ColorPicker :value="seasonStore.season?.data?.color"
-            @update="(v) => { seasonStore.season.data.color = v }" />
-          <MoodPicker :value="seasonStore.season.data.moodId"
-            @update="(v) => { seasonStore.season.data.moodId = v }" />
+          <ColorPicker :value="seasonStore.item?.data?.color"
+            @update="(v) => { seasonStore.item.data.color = v }" />
+          <MoodPicker :value="seasonStore.item.data.moodId"
+            @update="(v) => { seasonStore.item.data.moodId = v }" />
         </div>
       </section>
 
       <!-- Description -->
       <section>
-        <textarea v-model="seasonStore.season.data.description"
+        <textarea v-model="seasonStore.item.data.description"
           class="w-full p-2 rounded-lg bg-gray-dark placeholder-gray-light text-light" rows="10"
           placeholder="..."></textarea>
       </section>
@@ -58,7 +58,7 @@
       <!-- Pills section -->
       <section>
         <h4 class="text-lg font-semibold text-light mb-4">Linked items</h4>
-        <LinkedItemsWrapper :item="seasonStore.season.data" :parentType="'season'" :childrenTypes="['event', 'music', 'person']" />
+        <LinkedItemsWrapper :item="seasonStore.item.data" :parentType="'season'" :childrenTypes="['event', 'music', 'person']" />
       </section>
     </div>
 
@@ -130,24 +130,24 @@ function getSurroundingSeasons(currentDate = new Date(), range = 1) {
 
 function loadOrInitSeason() {
   if (route.params.seasonId) {
-    seasonStore.fetchSeason(route.params.seasonId)
+    seasonStore.fetchItem(route.params.seasonId)
   } else {
-    seasonStore.initSeason()
-    if (route.query.title) seasonStore.season.data.title = route.query.title // From the search page
+    seasonStore.initItem()
+    if (route.query.title) seasonStore.item.data.title = route.query.title // From the search page
   }
   watched.value = 0
 }
 
 function valid() {
-  if (!seasonStore.season.data.userId) return 'User is required, please reload the page'
-  if (!seasonStore.season.data.title) return 'Title is required'
-  if (!seasonStore.season.data.color) return 'Color is required'
-  if (!seasonStore.season.data.dateStart) return 'Start date is required'
+  if (!seasonStore.item.data.userId) return 'User is required, please reload the page'
+  if (!seasonStore.item.data.title) return 'Title is required'
+  if (!seasonStore.item.data.color) return 'Color is required'
+  if (!seasonStore.item.data.dateStart) return 'Start date is required'
   return false
 }
 
 function manualDeletion() {
-  seasonStore.deleteSeason(seasonStore.season.data.seasonId, true)
+  seasonStore.deleteItem(seasonStore.item.data.seasonId, true)
   router.push('/events')
 }
 
@@ -156,7 +156,7 @@ function manualCreation() {
   if (error) {
     notif.notify(error, 'error')
   } else {
-    seasonStore.createSeason(seasonStore.season.data, true)
+    seasonStore.createSeason(seasonStore.item.data, true)
     router.push('/seasons')
   }
 }
@@ -168,7 +168,7 @@ function manualUpdate() {
   if (error) {
     notif.notify(error, 'error')
   } else {
-    seasonStore.updateSeason(seasonStore.season.data, true)
+    seasonStore.updateItem(seasonStore.item.data, true)
     router.push('/seasons')
   }
 }
@@ -181,7 +181,7 @@ const debouncedUpdate = debounce(() => {
   if (route.params.seasonId) {
     const error = valid()
     if (!error) {
-      seasonStore.updateSeason(seasonStore.season.data)
+      seasonStore.updateItem(seasonStore.item.data)
     }
   }
 }, 10000)
@@ -191,14 +191,14 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  if (route.params.seasonId) seasonStore.updateSeason(seasonStore.season.data)
+  if (route.params.seasonId) seasonStore.updateItem(seasonStore.item.data)
 });
 
 watch(() => route.params.seasonId, () => {
   loadOrInitSeason()
 })
 
-watch(() => seasonStore.season.data,
+watch(() => seasonStore.item.data,
   () => {
     watched.value += 1
     if (watched.value <= 2) return // Skip the debounce on initial load

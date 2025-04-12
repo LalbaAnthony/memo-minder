@@ -2,15 +2,15 @@
   <div>
     <TopActions :goBackButton="true" />
 
-    <Loader v-if="eventStore.event?.loading" />
+    <Loader v-if="eventStore.item?.loading" />
     <div v-else>
       <!-- Title and date section -->
       <section>
-        <div v-if="eventStore.event?.data?.updatedAt" class="mb-4">
-          <span class="text-gray">Updated the {{ dateToNiceDate(eventStore.event?.data?.updatedAt) }}</span>
+        <div v-if="eventStore.item?.data?.updatedAt" class="mb-4">
+          <span class="text-gray">Updated the {{ dateToNiceDate(eventStore.item?.data?.updatedAt) }}</span>
         </div>
         <div class="flex items-center justify-between gap-2 flex-wrap">
-          <input v-model="eventStore.event.data.title" type="text"
+          <input v-model="eventStore.item.data.title" type="text"
             class="rounded-lg bg-dark placeholder-gray text-light text-2xl w-full" placeholder="Event title" />
         </div>
       </section>
@@ -20,14 +20,14 @@
         <div class="flex flex-col gap-4 sm:gap-1 bg-dark-light p-4 rounded-lg">
           <div class="flex flex-col sm:flex-row items-center justify-start gap-x-4 gap-y-2">
             <span class="text-lg font-medium text-gray-light">on</span>
-            <DatePicker class="max-w-[15rem]" :value="eventStore.event?.data?.date"
-              @update="(v) => { eventStore.event.data.date = v }" />
+            <DatePicker class="max-w-[15rem]" :value="eventStore.item?.data?.date"
+              @update="(v) => { eventStore.item.data.date = v }" />
             <span class="text-lg font-medium text-gray-light">at</span>
             <div class="flex items-center justify-center gap-2">
               <MapPinIcon
-                :class="['size-6 text-gray', eventStore.event?.data?.location ? 'hover:text-gray-light cursor-pointer' : '']"
+                :class="['size-6 text-gray', eventStore.item?.data?.location ? 'hover:text-gray-light cursor-pointer' : '']"
                 @click="openMaps()" />
-              <input v-model="eventStore.event.data.location" id="location"
+              <input v-model="eventStore.item.data.location" id="location"
                 class="p-2 rounded-lg bg-gray-dark text-light" placeholder="Location" />
             </div>
           </div>
@@ -37,14 +37,14 @@
       <!-- Color & Mood section -->
       <section>
         <div class="flex flex-row justify-around gap-4 bg-dark-light p-4 rounded-lg">
-          <MoodPicker :value="eventStore.event.data.moodId"
-            @update="(v) => { eventStore.event.data.moodId = v }" />
+          <MoodPicker :value="eventStore.item.data.moodId"
+            @update="(v) => { eventStore.item.data.moodId = v }" />
         </div>
       </section>
 
       <!-- Description & Mood section -->
       <section>
-        <textarea v-model="eventStore.event.data.description"
+        <textarea v-model="eventStore.item.data.description"
           class="w-full p-2 rounded-lg bg-gray-dark placeholder-gray-light text-light" rows="10"
           placeholder="..."></textarea>
       </section>
@@ -52,7 +52,7 @@
       <!-- Pills section -->
       <section>
         <h4 class="text-lg font-semibold text-light mb-4">Linked items</h4>
-        <LinkedItemsWrapper :item="eventStore.event.data" :parentType="'event'"
+        <LinkedItemsWrapper :item="eventStore.item.data" :parentType="'event'"
           :childrenTypes="['season', 'music', 'person']" />
       </section>
     </div>
@@ -86,27 +86,27 @@ const watched = ref(0)
 
 function loadOrInitEvent() {
   if (route.params.eventId) {
-    eventStore.fetchEvent(route.params.eventId)
+    eventStore.fecthItem(route.params.eventId)
   } else {
-    eventStore.initEvent()
-    if (route.query.title) eventStore.event.data.title = route.query.title // From the search page
+    eventStore.initItem()
+    if (route.query.title) eventStore.item.data.title = route.query.title // From the search page
   }
   watched.value = 0
 }
 
 function openMaps() {
-  if (eventStore.event?.data?.location) window.open(`http://maps.google.com/?q=${eventStore.event.data.location}`)
+  if (eventStore.item?.data?.location) window.open(`http://maps.google.com/?q=${eventStore.item.data.location}`)
 }
 
 function valid() {
-  if (!eventStore.event.data.userId) return 'User is required, please reload the page'
-  if (!eventStore.event.data.title) return 'Title is required'
-  if (!eventStore.event.data.date) return 'Date is required'
+  if (!eventStore.item.data.userId) return 'User is required, please reload the page'
+  if (!eventStore.item.data.title) return 'Title is required'
+  if (!eventStore.item.data.date) return 'Date is required'
   return false
 }
 
 function manualDeletion() {
-  eventStore.deleteEvent(eventStore.event.data.eventId, true)
+  eventStore.deleteItem(eventStore.item.data.eventId, true)
   router.push('/events')
 }
 
@@ -115,7 +115,7 @@ function manualCreation() {
   if (error) {
     notif.notify(error, 'error')
   } else {
-    eventStore.createEvent(eventStore.event.data, true)
+    eventStore.createEvent(eventStore.item.data, true)
     router.push('/events')
   }
 }
@@ -127,7 +127,7 @@ function manualUpdate() {
   if (error) {
     notif.notify(error, 'error')
   } else {
-    eventStore.updateEvent(eventStore.event.data, true)
+    eventStore.updateItem(eventStore.item.data, true)
     router.push('/events')
   }
 }
@@ -136,7 +136,7 @@ const debouncedUpdate = debounce(() => {
   if (route.params.eventId) {
     const error = valid()
     if (!error) {
-      eventStore.updateEvent(eventStore.event.data)
+      eventStore.updateItem(eventStore.item.data)
     }
   }
 }, 10000)
@@ -146,14 +146,14 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-  if (route.params.eventId) eventStore.updateEvent(eventStore.event.data)
+  if (route.params.eventId) eventStore.updateItem(eventStore.item.data)
 });
 
 watch(() => route.params.eventId, () => {
   loadOrInitEvent()
 })
 
-watch(() => eventStore.event.data,
+watch(() => eventStore.item.data,
   () => {
     watched.value += 1
     if (watched.value <= 2) return // Skip the debounce on initial load

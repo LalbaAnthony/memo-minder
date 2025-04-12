@@ -1,180 +1,25 @@
-import { defineStore } from 'pinia'
-import { api } from '@/composables/api'
-import { useAuthStore } from '@/stores/auth'
-import { notif } from '@/composables/notif.js'
+import { createBaseStore } from '@/composables/baseStore.js'
 
-const authStore = useAuthStore()
-
-const defaultPagination = { page: 1, perPage: 25, total: 1 }
-
-export const usePersonStore = defineStore('person', {
-  state: () => ({
-    people: {
-      loading: true,
-      data: [],
-      pagination: defaultPagination,
-    },
-    person: {
-      loading: false,
-      data: {},
-    },
-  }),
-
-  actions: {
-    clearPerson() {
-      this.person.data = {}
-    },
-
-    resetPagination() {
-      this.people.pagination = defaultPagination
-    },
-
-    async fetchPerson(personId) {
-      personId = parseInt(personId)
-
-      // Loading
-      this.person.loading = true
-
-      // If person is already loaded, we don't make the request
-      if (this.person.data.personId !== personId) {
-        // Before making the request, we check if the element is already in local
-        const person = this.people.data.find(person => person.personId === personId)
-        if (person) {
-          this.person.data = person
-        } else {
-          const params = {
-            userId: authStore.user.userId,
-          }
-
-          this.clearPerson()
-
-          const resp = await api.get(`person/${personId}`, params)
-          this.person.data = resp.data.data || {}
-        }
-      }
-
-      // Loading
-      this.person.loading = false
-    },
-
-    async fetchPeople(givenParams = {}) {
-      // Loading
-      this.people.loading = true
-
-      // Data
-      this.people.data = []
-
-      // Request
-      const params = {
-        userId: authStore.user.userId,
-        page: this.people.pagination.page || defaultPagination.page,
-        perPage: this.people.pagination.perPage || defaultPagination.perPage,
-        sort: [
-          { order: 'DESC', orderBy: 'createdAt' },
-        ],
-      }
-
-      Object.assign(params, givenParams)
-
-      const resp = await api.get('people', params)
-      this.people.data = resp.data.data || []
-      this.people.pagination = resp.data.pagination || defaultPagination
-
-      // Loading
-      this.people.loading = false
-    },
-
-    changePage(page, scroll = true) {
-      this.people.pagination.page = page
-      this.fetchPeople()
-      if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' })
-    },
-
-    initPerson() {
-      this.clearPerson()
-      this.person.data.userId = authStore.user.userId
-    },
-
-    async deletePerson(personId, notify = false) {
-      // Remove in local
-      this.people.data.splice(this.people.data.findIndex(person => person.personId === personId), 1)
-
-      // Request
-      const resp = await api.del(`person/${personId}`)
-
-      if (resp.status !== 200) {
-        notif.notify(resp.data.message, 'error')
-        return false
-      } else if (notify) {
-        notif.notify('Person deleted', 'success')
-      }
-
-      return true
-    },
-
-    async createPerson(item, notify = false) {
-      const person = {
-        ...item
-      }
-      
-      person.events = item?.events.map(event => event.eventId) || [];
-      person.musics = item?.musics.map(music => music.musicId) || [];
-      person.seasons = item?.seasons.map(season => season.seasonId) || [];
-
-      // Loading
-      this.person.loading = true
-
-      // Request
-      const resp = await api.post('people', person)
-
-      if (resp.status !== 201) {
-        notif.notify(resp.data.message, 'error')
-        return false
-      } else if (notify) {
-        notif.notify('Person created', 'success')
-      }
-
-      // Append in local
-      if (resp.data?.data) {
-        this.people.data.unshift(resp.data.data)
-      } else {
-        this.people.data.unshift(item)
-      }
-
-      // Loading
-      this.person.loading = false
-
-      return true
-    },
-
-    async updatePerson(item, notify = false) {
-      const person = {
-        ...item
-      }
-
-      person.events = item?.events.map(event => event.eventId) || [];
-      person.musics = item?.musics.map(music => music.musicId) || [];
-      person.seasons = item?.seasons.map(season => season.seasonId) || [];
-
-      // Request
-      const resp = await api.put(`person/${person.personId}`, person)
-
-      if (resp.status !== 200) {
-        notif.notify(resp.data.message, 'error')
-        return false
-      } else if (notify) {
-        notif.notify('Person updated', 'success')
-      }
-
-      // Update in local list
-      const index = this.people.data.findIndex(item => item?.personId && (item.personId === person.personId))
-      if (resp.data?.data) {
-        this.people.data.splice(index, 1, resp.data.data)
-      } else {
-        this.people.data.splice(index, 1, item)
-      }
-
-      return true
-    },
+const config = {
+  primaryKey: 'personId',
+  name: 'person',
+  nicename: 'Person',
+  endpoints: {
+    create: 'people',
+    update: 'person',
+    delete: 'person',
+    all: 'people',
+    one: 'person',
   },
-})
+  pagination: { page: 1, perPage: 20, total: 1 },
+  mapRelations: (item) => {
+    return {
+      ...item,
+      events: item.events?.map(event => event.eventId) || [],
+      musics: item.musics?.map(music => music.musicId) || [],
+      seasons: item.seasons?.map(season => season.seasonId) || [],
+    }
+  },
+}
+
+export const usePersonStore = createBaseStore(config)

@@ -4,64 +4,22 @@ import { api } from '@/composables/api'
 export const useMoodStore = defineStore('mood', {
   persist: true,
   state: () => ({
-    moods: {
+    items: {
       loading: true,
       data: [],
-    },
-    mood: {
-      loading: false,
-      data: {},
     },
   }),
 
   actions: {
-    clearMood() {
-      this.mood.data = {}
-    },
+    async fetchItems() {
+      this.items.loading = true
 
-    async fetchMood(moodId) {
-      moodId = parseInt(moodId)
+      this.items.data = []
 
-      // Loading
-      this.mood.loading = true
+      const resp = await api.get('moods')
+      this.items.data = resp.data.data || []
 
-      // If mood is already loaded, we don't make the request
-      if (this.mood.data.moodId !== moodId) {
-        // Before making the request, we check if the element is already in local
-        const mood = this.moods.data.find(mood => mood.moodId === moodId)
-        if (mood) {
-          this.mood.data = mood
-        } else {
-          this.clearMood()
-
-          const resp = await api.get(`mood/${moodId}`)
-          this.mood.data = resp.data.data || {}
-        }
-      }
-
-      // Loading
-      this.mood.loading = false
-    },
-
-    async fetchMoods(givenParams = {}) {
-      // Loading
-      this.moods.loading = true
-
-      // Data
-      this.moods.data = []
-
-      // Request
-      const params = {
-        // ...
-      }
-
-      Object.assign(params, givenParams)
-
-      const resp = await api.get('moods', params)
-      this.moods.data = resp.data.data || []
-
-      // Loading
-      this.moods.loading = false
+      this.items.loading = false
     },
   },
 })
