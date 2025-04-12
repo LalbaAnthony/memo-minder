@@ -30,10 +30,6 @@ const props = defineProps({
     type: Number,
     required: false,
   },
-  enableColor: {
-    type: Boolean,
-    default: false,
-  },
 })
 
 const moodStore = useMoodStore()
@@ -60,6 +56,12 @@ onMounted(() => {
     setMood(moodId.value)
   }
 })
+
+watch(() => props.value, (newValue) => {
+  if (newValue !== moodId.value) {
+    moodId.value = newValue
+  }
+});
 
 watch(() => moodId.value, () => {
   emit('update', moodId.value || null)
