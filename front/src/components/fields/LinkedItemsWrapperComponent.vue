@@ -72,9 +72,24 @@ function getChildrenPath(type) {
   }
 }
 
+function getChildrenPk(type) {
+  switch (type) {
+    case 'event':
+      return 'eventId'
+    case 'music':
+      return 'musicId'
+    case 'person':
+      return 'personId'
+    case 'season':
+      return 'seasonId'
+    default:
+      throw new Error(`Unknown child type: ${type}`)
+  }
+}
+
 function addItem(object) {
   const path = getChildrenPath(object.type)
-  const pk = store.value.primaryKey
+  const pk = getChildrenPk(object.type)
 
   if (store.value.item.data[path].some(item => item[pk] === object.data[pk])) {
     notif.notify('This item is already linked to this item', 'error')
@@ -86,7 +101,7 @@ function addItem(object) {
 
 function deleteItem(id, type) {
   const path = getChildrenPath(type)
-  const pk = store.value.primaryKey
+  const pk = getChildrenPk(type)
   
   store.value.item.data[path] = store.value.item.data[path].filter(item => item[pk] !== id)
 }
