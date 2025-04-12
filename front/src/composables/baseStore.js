@@ -135,7 +135,7 @@ export function createBaseStore(config) {
                 if (resp.data?.data) {
                     this.items.data.unshift(resp.data.data)
                 } else {
-                    this.items.data.unshift(item)
+                    this.items.data.unshift(newItem)
                 }
 
                 return true
@@ -162,7 +162,7 @@ export function createBaseStore(config) {
                 if (resp.data?.data) {
                     this.items.data.splice(index, 1, resp.data.data)
                 } else {
-                    this.items.data.splice(index, 1, item)
+                    this.items.data.splice(index, 1, updatedItem)
                 }
 
                 return true
