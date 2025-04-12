@@ -17,7 +17,6 @@ Must:
 - [ ] Email validation not always working
 
 Important:
-- [ ] Add loader index index.html and remove it on App mount (https://www.instagram.com/reel/DHs5i6STCYU/)
 - [ ] Add loader on search page and item picker
 - [ ] Use search queries in external URL as test?q=ezdedze for Spotify etc (default link ?)
 
