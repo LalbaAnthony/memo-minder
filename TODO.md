@@ -7,7 +7,6 @@ Must:
 - [ ] Check why new user cant click anywhere
 - [ ] Ensure auth is secured (can a user access another user's data ?)
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
-- [ ] Email validation not always working
 
 Important:
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
