@@ -37,8 +37,7 @@
       <!-- Color & Mood section -->
       <section>
         <div class="flex flex-row justify-around gap-4 bg-dark-light p-4 rounded-lg">
-          <MoodPicker :value="eventStore.item.data.moodId"
-            @update="(v) => { eventStore.item.data.moodId = v }" />
+          <MoodPicker :value="eventStore.item.data.moodId" @update="(v) => { eventStore.item.data.moodId = v }" />
         </div>
       </section>
 
@@ -120,16 +119,17 @@ function manualCreation() {
   }
 }
 
-function manualUpdate() {
+async function manualUpdate() {
   debouncedUpdate.cancel()
 
   const error = valid()
   if (error) {
     notif.notify(error, 'error')
-  } else {
-    eventStore.updateItem(eventStore.item.data, true)
-    router.push('/events')
+    return
   }
+
+  const success = await eventStore.updateItem(eventStore.item.data, true)
+  if (success) router.push('/events')
 }
 
 const debouncedUpdate = debounce(() => {

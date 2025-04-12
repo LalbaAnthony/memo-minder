@@ -85,16 +85,17 @@ function manualCreation() {
   }
 }
 
-function manualUpdate() {
+async function manualUpdate() {
   debouncedUpdate.cancel()
 
   const error = valid()
   if (error) {
     notif.notify(error, 'error')
-  } else {
-    personStore.updateItem(personStore.item.data, true)
-    router.push('/people')
+    return
   }
+
+  const success = await personStore.updateItem(personStore.item.data, true)
+  if (success) router.push('/people')
 }
 
 const debouncedUpdate = debounce(() => {

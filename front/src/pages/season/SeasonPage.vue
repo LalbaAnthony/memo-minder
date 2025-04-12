@@ -161,16 +161,17 @@ function manualCreation() {
   }
 }
 
-function manualUpdate() {
+async function manualUpdate() {
   debouncedUpdate.cancel()
 
   const error = valid()
   if (error) {
     notif.notify(error, 'error')
-  } else {
-    seasonStore.updateItem(seasonStore.item.data, true)
-    router.push('/seasons')
+    return
   }
+
+  const success = await seasonStore.updateItem(seasonStore.item.data, true)
+  if (success) router.push('/seasons')
 }
 
 const suggestedSeasons = computed(() => {

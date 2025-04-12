@@ -115,8 +115,6 @@ export function createBaseStore(config) {
             },
 
             async createItem(item, notify = false) {
-                this.item.loading = true
-
                 // Clone the item to allow modifications
                 let newItem = { ...item }
 
@@ -128,7 +126,6 @@ export function createBaseStore(config) {
                 const resp = await api.post(`${config.endpoints.create}`, newItem)
                 if (resp.status !== 201) {
                     notif.notify(resp.data.message, 'error')
-                    this.item.loading = false
                     return false
                 } else if (notify) {
                     notif.notify(`${config?.nicename || 'Item'} created`, 'success')
@@ -141,14 +138,10 @@ export function createBaseStore(config) {
                     this.items.data.unshift(item)
                 }
 
-                this.item.loading = false
-
                 return true
             },
 
             async updateItem(item, notify = false) {
-                this.item.loading = true
-
                 // Clone the item to allow modifications
                 let updatedItem = { ...item }
 
