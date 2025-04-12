@@ -116,7 +116,7 @@ function manualCreation() {
   if (error) {
     notif.notify(error, 'error')
   } else {
-    musicStore.createMusic(musicStore.item.data, true)
+    musicStore.createItem(musicStore.item.data, true)
     router.push('/musics')
   }
 }
