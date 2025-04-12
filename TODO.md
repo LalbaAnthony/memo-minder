@@ -5,16 +5,11 @@
 
 Must:
 - [ ] Mood picker change de taille en fonction de contenu
-- [x] Rajouter un shadow sur les dropdown
 - [ ] Mettre alerte si changement de page sans sauvagarder ?
-- [x] Augmenter la durée de lanimation d'apparition/disparition du item picker car on comprend pas d'ou il vient 
-- [ ] Merge codes des stores à la manière de basController
-  - [x] Chg nomage pr moins explicite genre item/items?
-  - [x] En profiter pour rework fonction de LinkedItemsWrapperComponent qui sont incompréhensibles au possible
-  - [ ] Faire validator de données dans le stores ?
-  - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
-  - [ ] Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ? `toAddSeason: {}` ?)
-  - [ ] Faire listes differentes dans les stores pour chaque usage ?
+- [ ] Faire validator de données dans le stores ?
+- [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
+- [ ] Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ? `toAddSeason: {}` ?)
+- [ ] Faire listes differentes dans les stores pour chaque usage ?
 - [ ] Check why new user cant click anywhere
 - [ ] Rework back controller using OOP and childs/parent ?
 - [ ] Ensure auth is secured (can a user access another user's data ?)
