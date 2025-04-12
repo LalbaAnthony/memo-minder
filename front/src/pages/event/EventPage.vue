@@ -109,14 +109,15 @@ function manualDeletion() {
   router.push('/events')
 }
 
-function manualCreation() {
+async function manualCreation() {
   const error = valid()
   if (error) {
     notif.notify(error, 'error')
-  } else {
-    eventStore.createItem(eventStore.item.data, true)
-    router.push('/events')
+    return
   }
+
+  const success = await eventStore.createItem(eventStore.item.data, true)
+  if (success) router.push('/events')
 }
 
 async function manualUpdate() {

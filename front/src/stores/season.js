@@ -18,6 +18,9 @@ const config = {
     const today = new Date().toISOString().split('T')[0]
     data.dateStart = today
     data.dateEnd = today
+    data.musics = []
+    data.people = []
+    data.events = []
   },
   mapRelations: (item) => {
     return {

@@ -75,14 +75,15 @@ function manualDeletion() {
   router.push('/people')
 }
 
-function manualCreation() {
+async function manualCreation() {
   const error = valid()
   if (error) {
     notif.notify(error, 'error')
-  } else {
-    personStore.createItem(personStore.item.data, true)
-    router.push('/people')
+    return
   }
+
+  const success = await personStore.createItem(personStore.item.data, true)
+  if (success) router.push('/people')
 }
 
 async function manualUpdate() {

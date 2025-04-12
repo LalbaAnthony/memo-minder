@@ -15,13 +15,16 @@ const config = {
   initItem: (data) => {
     const today = new Date().toISOString().split('T')[0]
     data.dateStart = today
+    data.seassons = []
+    data.people = []
+    data.musics = []
   },
   mapRelations: (item) => {
     return {
       ...item,
-      seasons: item?.seasons.map(season => season.seasonId) || [],
-      people: item?.people.map(person => person.personId) || [],
-      musics: item?.musics.map(event => event.musicId) || [],
+      seasons: item.seasons?.map(season => season.seasonId) || [],
+      people: item.people?.map(person => person.personId) || [],
+      musics: item.musics?.map(event => event.musicId) || [],
     }
   },
 }

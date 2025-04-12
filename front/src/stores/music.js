@@ -12,12 +12,17 @@ const config = {
     one: 'music',
   },
   pagination: { page: 1, perPage: 20, total: 1 },
+  initItem: (data) => {
+    data.seassons = []
+    data.people = []
+    data.events = []
+  },
   mapRelations: (item) => {
     return {
       ...item,
-      seasons: item?.seasons.map(season => season.seasonId) || [],
-      people: item?.people.map(person => person.personId) || [],
-      events: item?.events.map(event => event.eventId) || [],
+      seasons: item.seasons?.map(season => season.seasonId) || [],
+      people: item.people?.map(person => person.personId) || [],
+      events: item.events?.map(event => event.eventId) || [],
     }
   },
 }

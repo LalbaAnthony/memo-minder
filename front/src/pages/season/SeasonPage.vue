@@ -151,14 +151,15 @@ function manualDeletion() {
   router.push('/events')
 }
 
-function manualCreation() {
+async function manualCreation() {
   const error = valid()
   if (error) {
     notif.notify(error, 'error')
-  } else {
-    seasonStore.createItem(seasonStore.item.data, true)
-    router.push('/seasons')
+    return
   }
+
+  const success = await seasonStore.createItem(seasonStore.item.data, true)
+  if (success) router.push('/seasons')
 }
 
 async function manualUpdate() {
