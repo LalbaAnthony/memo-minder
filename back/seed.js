@@ -3,6 +3,8 @@ const { sequelize, Season, Mood, Music, Person, Event, User } = require('./src/d
 const bcrypt = require('bcrypt');
 const logConsole = require('./src/helpers/logConsole')
 
+const ENV = 'production'
+
 // ? This script is meant to be run only once, to seed the database with sample data just for test purposes. It will drop all existing tables and recreate them, then insert the sample data.
 
 const seedData = async () => {
@@ -16,7 +18,7 @@ const seedData = async () => {
         // Sample data for User table, with crypted passwords
         const sampleUsers = require('./src/seeds/users.json');
         for (const user of sampleUsers) user.password = await bcrypt.hash(user.password, 10);
-        await User.bulkCreate(sampleUsers);
+        // if (ENV && ENV === 'development') await User.bulkCreate(sampleUsers);
 
         // Sample data for Mood table
         const sampleMoods = require('./src/seeds/moods.json');
@@ -24,19 +26,19 @@ const seedData = async () => {
 
         // Sample data for Music table
         const sampleMusics = require('./src/seeds/musics.json');
-        await Music.bulkCreate(sampleMusics);
+        // if (ENV && ENV === 'development') await Music.bulkCreate(sampleMusics);
 
         // Sample data for Person table
         const samplePeople = require('./src/seeds/people.json');
-        await Person.bulkCreate(samplePeople);
+        // if (ENV && ENV === 'development') await Person.bulkCreate(samplePeople);
 
         // Sample data for Season table
         const sampleSeasons = require('./src/seeds/seasons.json');
-        await Season.bulkCreate(sampleSeasons);
+        // if (ENV && ENV === 'development') await Season.bulkCreate(sampleSeasons);
 
         // Sample data for Event table
         const sampleEvents = require('./src/seeds/events.json');
-        await Event.bulkCreate(sampleEvents);
+        // if (ENV && ENV === 'development') await Event.bulkCreate(sampleEvents);
 
         logConsole('Sample data inserted', 'success');
     } catch (error) {
