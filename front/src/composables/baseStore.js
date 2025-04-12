@@ -1,11 +1,10 @@
-// baseStore.js
 import { defineStore } from 'pinia'
 import { api } from '@/composables/api'
 import { useAuthStore } from '@/stores/auth'
 import { notif } from '@/composables/notif.js'
 
 const authStore = useAuthStore()
-const defaultPagination = { page: 1, perPage: 25, total: 1 }
+const defaultPagination = { page: 1, perPage: 20, total: 1 }
 
 export function createBaseStore(entityConfig) {
     return defineStore(entityConfig.name, {
@@ -176,7 +175,7 @@ export function createBaseStore(entityConfig) {
                 } else {
                     this.items.data.splice(index, 1, item)
                 }
-                
+
                 return true
             },
         },
