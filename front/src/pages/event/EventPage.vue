@@ -114,7 +114,7 @@ function manualCreation() {
   if (error) {
     notif.notify(error, 'error')
   } else {
-    eventStore.createEvent(eventStore.item.data, true)
+    eventStore.createItem(eventStore.item.data, true)
     router.push('/events')
   }
 }

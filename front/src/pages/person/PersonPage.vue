@@ -80,7 +80,7 @@ function manualCreation() {
   if (error) {
     notif.notify(error, 'error')
   } else {
-    personStore.createPerson(personStore.item.data, true)
+    personStore.createItem(personStore.item.data, true)
     router.push('/people')
   }
 }

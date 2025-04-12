@@ -156,7 +156,7 @@ function manualCreation() {
   if (error) {
     notif.notify(error, 'error')
   } else {
-    seasonStore.createSeason(seasonStore.item.data, true)
+    seasonStore.createItem(seasonStore.item.data, true)
     router.push('/seasons')
   }
 }
