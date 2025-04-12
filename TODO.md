@@ -4,27 +4,24 @@
 - [ ] Import my own data
 
 Must:
-- [ ] Mood picker change de taille en fonction de contenu
-- [ ] Mettre alerte si changement de page sans sauvagarder ?
-- [ ] Faire validator de données dans le stores ?
-- [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
-- [ ] Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ? `toAddSeason: {}` ?)
-- [ ] Faire listes differentes dans les stores pour chaque usage ?
 - [ ] Check why new user cant click anywhere
-- [ ] Rework back controller using OOP and childs/parent ?
 - [ ] Ensure auth is secured (can a user access another user's data ?)
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 - [ ] Email validation not always working
 
 Important:
+- [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Add loader on search page and item picker
-- [ ] Use search queries in external URL as test?q=ezdedze for Spotify etc (default link ?)
 
 Medium:
+- [ ] Faire listes differentes dans les stores pour chaque usage (use stores ? `lasts: {}` ?)
+- [ ] Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ? `toAdd: {}` ?)
+- [ ] Faire validator de données dans les stores ?
 - [ ] Faire en sorte que les dates picker ne s'initalise pas toujours sur la date d'aujourd'hui (utile pour les musiques, …) + vérifier qu'il est ok avec une valeur vide et pas 1970
 - [ ] make add button if no data on home page/lists
 
 Low:
+- [ ] Use search queries in external URL as test?q=ezdedze for Spotify etc (default link ?)
 - [ ] Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)
 - [ ] https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
 - [ ] Inifinte scroll

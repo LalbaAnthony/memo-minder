@@ -40,7 +40,7 @@
 
       <!-- Color & Mood section -->
       <section>
-        <div class="flex flex-row justify-around gap-4 bg-dark-light p-4 rounded-lg">
+        <div class="flex flex-col sm:flex-row justify-center sm:justify-around md:justify-center gap-4 bg-dark-light p-4 rounded-lg">
           <ColorPicker :value="seasonStore.item?.data?.color"
             @update="(v) => { seasonStore.item.data.color = v }" />
           <MoodPicker :value="seasonStore.item.data.moodId"

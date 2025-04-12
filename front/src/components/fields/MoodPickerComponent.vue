@@ -2,7 +2,7 @@
 
   <Dropdown v-if="moodStore?.items?.data" side="right" button-style="bg-gray-dark" content-style="bg-gray">
     <template #button>
-      <div class="inline-flex gap-2">
+      <div class="flex justify-between gap-2">
         <HeartIcon :class="['size-7 transition-color duration-500', mood?.name ? 'text-primary' : 'text-gray']" />
         <span>{{ mood?.name || 'Mood' }}</span>
       </div>
