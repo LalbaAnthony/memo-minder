@@ -16,6 +16,7 @@ Must:
   - [ ] Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ? `toAddSeason: {}` ?)
   - [ ] Faire listes differentes dans les stores pour chaque usage ?
 - [ ] Check why new user cant click anywhere
+- [ ] Rework back controller using OOP and childs/parent ?
 - [ ] Ensure auth is secured (can a user access another user's data ?)
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 - [ ] Email validation not always working
