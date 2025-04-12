@@ -1,8 +1,8 @@
 <template>
   <TransitionRoot appear :show="props.show" as="template">
     <Dialog as="div" @close="emit('closePicker', true)" class="relative z-20">
-      <TransitionChild as="template" enter="transition ease-in-out duration-200 transform" enter-from="translate-y-full"
-        enter-to="translate-y-0" leave="transition ease-in-out duration-200 transform" leave-from="translate-y-0"
+      <TransitionChild as="template" enter="transition ease-in-out duration-300 transform" enter-from="translate-y-full"
+        enter-to="translate-y-0" leave="transition ease-in-out duration-300 transform" leave-from="translate-y-0"
         leave-to="translate-y-full">
         <DialogPanel class="bg-dark-light p-6 fixed inset-0">
 

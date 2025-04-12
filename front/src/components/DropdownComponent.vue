@@ -15,7 +15,7 @@
         enter-from="opacity-0 scale-95" enter-to="opacity-100 scale-100"
         leave="transition ease-in duration-75 transform" leave-from="opacity-100 scale-100"
         leave-to="opacity-0 scale-95"
-        :class="['origin-top-right absolute', props.side === 'right' ? 'right-0' : 'left-0', 'mt-2 w-56 rounded-lg py-4 px-3 z-10', props.contentStyle]">
+        :class="['origin-top-right absolute', props.side === 'right' ? 'right-0' : 'left-0', 'mt-2 w-56 rounded-lg py-4 px-3 z-10 shadow-xl', props.contentStyle]">
         <slot name="content"></slot>
       </TransitionChild>
     </TransitionRoot>

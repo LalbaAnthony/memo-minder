@@ -5,9 +5,9 @@
 
 Must:
 - [ ] Mood picker change de taille en fonction de contenu
-- [ ] Rajouter un shadow sur les dropdown ?
+- [x] Rajouter un shadow sur les dropdown
 - [ ] Mettre alerte si changement de page sans sauvagarder ?
-- [ ] Augmenter la durée de lanimation d'apparition/disparition du item picker car on comprend pas d'ou il vient + laisser un peu de marge en haut pour comprendre que c'est un model et pas un page ? 
+- [x] Augmenter la durée de lanimation d'apparition/disparition du item picker car on comprend pas d'ou il vient 
 - [ ] Merge codes des stores à la manière de basController ?
   - [ ] Chg nomage pr moins explicite genre items/items?
   - [ ] Faire validator de données dans le stores ?
@@ -21,6 +21,7 @@ Must:
 - [ ] Email validation not always working
 
 Important:
+- [ ] Add loader index index.html and remove it on App mount (https://www.instagram.com/reel/DHs5i6STCYU/)
 - [ ] Add loader on search page and item picker
 - [ ] Use search queries in external URL as test?q=ezdedze for Spotify etc (default link ?)
 
