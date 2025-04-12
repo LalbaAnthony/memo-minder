@@ -111,14 +111,15 @@ function manualDeletion() {
   router.push('/musics')
 }
 
-function manualCreation() {
+async function manualCreation() {
   const error = valid()
   if (error) {
     notif.notify(error, 'error')
-  } else {
-    musicStore.createItem(musicStore.item.data, true)
-    router.push('/musics')
+    return
   }
+
+  const success = await musicStore.createItem(musicStore.item.data, true)
+  if (success) router.push('/musics')
 }
 
 async function manualUpdate() {

@@ -12,6 +12,11 @@ const config = {
     one: 'person',
   },
   pagination: { page: 1, perPage: 20, total: 1 },
+  initItem: (data) => {
+    data.seassons = []
+    data.musics = []
+    data.events = []
+  },
   mapRelations: (item) => {
     return {
       ...item,
