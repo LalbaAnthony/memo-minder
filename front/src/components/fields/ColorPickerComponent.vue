@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-start gap-2 px-2 py-1 rounded-lg bg-gray-dark">
+  <div class="flex items-center justify-center gap-2 px-2 py-2 rounded-lg bg-gray-dark">
     <span class="text-light uppercase">{{ color }}</span>
     <input class="border-none rounded-lg" v-model="color" type="color" />
   </div>

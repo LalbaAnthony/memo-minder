@@ -2,7 +2,7 @@
   <Menu as="div" class="relative inline-block text-left">
     <div>
       <button
-        :class="['inline-flex w-full items-center justify-center rounded-md px-4 py-2 text-lg font-medium text-light transition-colors duration-200', props.buttonStyle]"
+        :class="['inline-flex w-full items-center justify-center rounded-lg px-4 py-2 text-lg font-medium text-light transition-colors duration-200', props.buttonStyle]"
         @click.stop="show = !show">
         <slot name="button"></slot>
         <ChevronDownIcon

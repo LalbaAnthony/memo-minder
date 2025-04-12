@@ -86,7 +86,7 @@ const watched = ref(0)
 
 function loadOrInitEvent() {
   if (route.params.eventId) {
-    eventStore.fecthItem(route.params.eventId)
+    eventStore.fetchItem(route.params.eventId)
   } else {
     eventStore.initItem()
     if (route.query.title) eventStore.item.data.title = route.query.title // From the search page
