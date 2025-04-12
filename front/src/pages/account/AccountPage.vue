@@ -83,8 +83,10 @@ import BottomActions from '@/components/actions/BottomActionsComponent.vue'
 import TopActions from '@/components/actions/TopActionsComponent.vue'
 import DatePicker from '@/components/fields/DatePickerComponent.vue'
 import { languages } from '@/composables/languages.js'
+import { useRouter } from 'vue-router'
 
 const authStore = useAuthStore()
+const router = useRouter()
 
 const watched = ref(0)
 
@@ -108,9 +110,11 @@ function deleteAccount() {
   }
 }
 
-function manualUpdate() {
+async function manualUpdate() {
   debouncedUpdate.cancel()
-  authStore.updateUser(true)
+
+  const success = await authStore.updateUser(true)
+  if (success) router.push('/')
 }
 
 const debouncedUpdate = debounce(() => {

@@ -121,16 +121,17 @@ function manualCreation() {
   }
 }
 
-function manualUpdate() {
+async function manualUpdate() {
   debouncedUpdate.cancel()
 
   const error = valid()
   if (error) {
     notif.notify(error, 'error')
-  } else {
-    musicStore.updateItem(musicStore.item.data, true)
-    router.push('/musics')
+    return
   }
+
+  const success = await musicStore.updateItem(musicStore.item.data, true)
+  if (success) router.push('/musics')
 }
 
 const debouncedUpdate = debounce(() => {
