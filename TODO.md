@@ -8,8 +8,8 @@ Must:
 - [x] Rajouter un shadow sur les dropdown
 - [ ] Mettre alerte si changement de page sans sauvagarder ?
 - [x] Augmenter la durée de lanimation d'apparition/disparition du item picker car on comprend pas d'ou il vient 
-- [ ] Merge codes des stores à la manière de basController ?
-  - [ ] Chg nomage pr moins explicite genre items/items?
+- [ ] Merge codes des stores à la manière de basController (with https://chatgpt.com/share/67fa5c50-a25c-8008-974c-51223bffbe5c) ?
+  - [ ] Chg nomage pr moins explicite genre item/items?
   - [ ] Faire validator de données dans le stores ?
   - [ ] En profiter pour rework fonction de LinkedItemsWrapperComponent qui sont incompréhensibles au possible
   - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
