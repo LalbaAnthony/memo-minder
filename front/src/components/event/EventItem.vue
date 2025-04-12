@@ -12,7 +12,6 @@
           <Pill v-if="props?.event?.seasons?.[0]" :text="props?.event?.seasons?.[0]?.title" type="season" />
           <Pill v-if="props?.event?.musics?.[0]" :text="props?.event?.musics?.[0]?.title" type="music" />
           <Pill v-if="props?.event?.people?.[0]" :text="props?.event?.people?.[0]?.name" type="person" />
-          <Pill v-if="props?.event?.events?.[0]" :text="props?.event?.events?.[0]?.title" type="event" />
         </div>
         <p class="m-2 my-4">{{ threeDotString(event?.description) }}</p>
       </div>

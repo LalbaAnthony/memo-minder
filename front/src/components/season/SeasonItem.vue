@@ -10,7 +10,6 @@
       <div class="my-4">
         <div class="flex justify-start flex-wrap items-center w-full m-2 gap-2">
           <Pill v-if="props?.season?.mood" :text="props?.season?.mood?.name" type="mood" />
-          <Pill v-if="props?.season?.seasons?.[0]" :text="props?.season?.seasons?.[0]?.title" type="season" />
           <Pill v-if="props?.season?.musics?.[0]" :text="props?.season?.musics?.[0]?.title" type="music" />
           <Pill v-if="props?.season?.people?.[0]" :text="props?.season?.people?.[0]?.name" type="person" />
           <Pill v-if="props?.season?.events?.[0]" :text="props?.season?.events?.[0]?.title" type="event" />
