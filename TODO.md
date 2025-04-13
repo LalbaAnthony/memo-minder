@@ -4,8 +4,6 @@
 - [ ] Import my own data
 
 Must:
-- [x] Mood isn't getted in season details page even if exist in dB, so it need the be replaced each time
-- [ ] Check on home load we cant click anywhere
 - [ ] When date picker has a default date, the return value is actually null so it is not saved
 - [ ] Item picker cant be scrolled
 - [ ] Ensure auth is secured (can a user access another user's data ?)
