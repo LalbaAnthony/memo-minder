@@ -40,11 +40,10 @@
 
       <!-- Color & Mood section -->
       <section>
-        <div class="flex flex-col sm:flex-row justify-center sm:justify-around md:justify-center gap-4 bg-dark-light p-4 rounded-lg">
-          <ColorPicker :value="seasonStore.item?.data?.color"
-            @update="(v) => { seasonStore.item.data.color = v }" />
-          <MoodPicker :value="seasonStore.item.data.moodId"
-            @update="(v) => { seasonStore.item.data.moodId = v }" />
+        <div
+          class="flex flex-col sm:flex-row justify-center sm:justify-around md:justify-center gap-4 bg-dark-light p-4 rounded-lg">
+          <ColorPicker :value="seasonStore.item?.data?.color" @update="(v) => { seasonStore.item.data.color = v }" />
+          <MoodPicker :value="seasonStore?.item?.data?.moodId" @update="(v) => { seasonStore.item.data.moodId = v }" />
         </div>
       </section>
 
@@ -58,7 +57,8 @@
       <!-- Pills section -->
       <section>
         <h4 class="text-lg font-semibold text-light mb-4">Linked items</h4>
-        <LinkedItemsWrapper :item="seasonStore.item.data" :parentType="'season'" :childrenTypes="['event', 'music', 'person']" />
+        <LinkedItemsWrapper :item="seasonStore.item.data" :parentType="'season'"
+          :childrenTypes="['event', 'music', 'person']" />
       </section>
     </div>
 
