@@ -10,6 +10,7 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Important:
+- [ ] Remettre pb sur page list
 - [ ] Footer is not at the bottom of pages
 - [ ] Merge manualUpdate and manualCreation on details pages
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
