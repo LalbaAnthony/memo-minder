@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 
 const quotesApi = axios.create({
-  baseURL: 'https://quotes-api-self.vercel.app/',
+  baseURL: 'https://quotes-api-self.vercel.app',
   headers: {
     'Content-Type': 'application/json',
   },

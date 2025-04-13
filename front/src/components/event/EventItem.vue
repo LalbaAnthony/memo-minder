@@ -2,7 +2,7 @@
   <div class="flex flex-col cursor-pointer border-2 border-gray rounded-[8px] bg-dark-light h-full overflow-hidden">
     <div class="flex-1 p-5" @click="goToEvent()">
       <div class="flex flex-col justify-center items-center w-full my-2">
-        <h1 class="text-2xl font-bold">{{ props?.event?.title }}</h1>
+        <h1 class="text-2xl font-bold">{{ threeDotsString(props?.event?.title) }}</h1>
         <p class="text-sm text-gray-light">the {{ dateToNiceDate(props?.event?.date) }} {{ props?.event?.location ? `at
           ${props?.event?.location}` : '' }}</p>
       </div>
@@ -13,7 +13,7 @@
           <Pill v-if="props?.event?.musics?.[0]" :text="props?.event?.musics?.[0]?.title" type="music" />
           <Pill v-if="props?.event?.people?.[0]" :text="props?.event?.people?.[0]?.name" type="person" />
         </div>
-        <p class="m-2 my-4">{{ threeDotString(event?.description) }}</p>
+        <p class="m-2 my-4">{{ threeDotsString(event?.description) }}</p>
       </div>
     </div>
     <div class="grid grid-cols-2 divide-x-2 divide-gray cursor-pointer">
@@ -31,7 +31,7 @@
 import Pill from '@/components/PillComponent.vue'
 import { TrashIcon } from '@heroicons/vue/24/outline'
 import { PencilSquareIcon } from '@heroicons/vue/24/outline'
-import { threeDotString } from '@/composables/helpers'
+import { threeDotsString } from '@/composables/helpers'
 import { dateToNiceDate } from '@/composables/helpers'
 import { useEventStore } from '@/stores/event'
 import { useRouter } from 'vue-router'

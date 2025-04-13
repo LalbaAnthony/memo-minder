@@ -4,7 +4,7 @@ export function isMobile() {
     return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
 }
 
-export function threeDotString(str, maxLen = 100) {
+export function threeDotsString(str, maxLen = 100) {
     if (!str) return "";
     if (str.length <= maxLen) return str;
     return str.slice(0, maxLen).trim() + " ...";

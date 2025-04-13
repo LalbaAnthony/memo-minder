@@ -3,8 +3,8 @@
     <div
       class="flex-1 flex justify-between rounded-l-[6px] p-5 cursor-pointer transition-colors duration-200">
       <div class="flex flex-col justify-center items-start">
-        <h1 class="text-2xl font-bold">{{ props?.person?.name }}</h1>
-        <p class="text-gray-light">{{ threeDotString(props?.person?.description) }}</p>
+        <h1 class="text-2xl font-bold">{{ threeDotsString(props?.person?.name) }}</h1>
+        <p class="text-gray-light">{{ threeDotsString(props?.person?.description) }}</p>
       </div>
       <div>
       </div>
@@ -23,7 +23,7 @@
 <script setup>
 import { usePersonStore } from '@/stores/person'
 import { TrashIcon } from '@heroicons/vue/24/outline'
-import { threeDotString } from '@/composables/helpers'
+import { threeDotsString } from '@/composables/helpers'
 import { PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'
 
