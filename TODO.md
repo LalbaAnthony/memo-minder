@@ -4,6 +4,7 @@
 - [ ] Import my own data
 
 Must:
+- [ ] Can't save items + Merge manualUpdate and manualCreation on details pages
 - [ ] Mood isn't getted in season details page even if exist in dB, so it need the be replaced each time
 - [ ] Added season appear twice in the list
 - [ ] Check on home load we cant click anywhere
@@ -15,7 +16,6 @@ Must:
 Important:
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Add loader on search page and item picker
-- [ ] Merge manualUpdate and manualCreation on details pages
 
 Medium:
 - [ ] Faire listes differentes dans les stores pour chaque usage (use stores ? `lasts: {}` ?)
