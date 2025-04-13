@@ -71,7 +71,7 @@
       </div>
     </section>
 
-    <BottomActions :goTopButton="true" :updateButton="true" @triggerUpdate="manualUpdate" />
+    <BottomActions :updateButton="true" @triggerUpdate="manualUpdate" />
   </div>
 </template>
 
