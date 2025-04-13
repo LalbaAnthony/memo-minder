@@ -10,9 +10,13 @@
     </section>
     <section>
       <h1 class="text-2xl font-bold mb-2">Credits</h1>
-      <p>
+      <p class="pb-2">
         This web app have been inspired by <a href="https://www.youtube.com/watch?v=X7ZxomW71Vs" target="_blank"
           class="text-light text-primary">this youtube video</a>.
+      </p>
+      <p>
+        This web app use <a href="https://github.com/well300/quotes-api" target="_blank"
+          class="text-light text-primary">https://github.com/well300/quotes-api</a> to fetch quotes in the home page.
       </p>
     </section>
     <section>
@@ -20,13 +24,6 @@
       <p>
         {{ VITE_APP_NAME }} is an open source project available in <a :href="VITE_GIT_REPO" target="_blank"
           class="text-light text-primary">GitHub</a>.
-      </p>
-    </section>
-    <section>
-      <h1 class="text-2xl font-bold mb-2">Quotes</h1>
-      <p>
-        This web app use <a href="https://quotes-api-self.vercel.app" target="_blank"
-          class="text-light text-primary">https://quotes-api-self.vercel.app</a> to fetch quotes in the home page.
       </p>
     </section>
     <section>
