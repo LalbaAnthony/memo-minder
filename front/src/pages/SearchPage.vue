@@ -52,7 +52,8 @@
     </div>
 
     <!-- Results -->
-    <Grid v-if="search" :items="results" :enable-no-item="!searching">
+    <Grid v-if="search" :items="results" :enable-no-item="!searching"
+      :noItemPosition="isMobile() ? 'static' : 'absolute'">
       <template #item="{ item }">
         <Result :item="item" />
       </template>
@@ -67,6 +68,7 @@ import { useRoute, useRouter } from 'vue-router'
 import Grid from '@/components/GridComponent.vue'
 import Result from '@/components/ResultItem.vue'
 import Pill from '@/components/PillComponent.vue'
+import { isMobile } from '@/composables/helpers.js'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { useEventStore } from '@/stores/event'
 import { useMusicStore } from '@/stores/music'

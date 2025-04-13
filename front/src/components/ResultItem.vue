@@ -1,5 +1,5 @@
 <template>
-  <div class="pop-animation block p-4 border-b border-gray flex items-center justify-between overflow-hidden"
+  <div class="pop-animation block p-4 border-b border-gray flex items-center gap-2 justify-between overflow-hidden"
     :style="['animation-delay: 0.' + randomInt(1, 10) / 10 + 's;']" @click="props.item.action">
     <DocumentTextIcon v-if="props.item.type === 'page'" class="size-8 text-gray-light" />
     <FilmIcon v-if="props.item.type === 'season'" class="size-8 text-gray-light" />

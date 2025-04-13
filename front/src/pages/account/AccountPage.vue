@@ -56,7 +56,7 @@
     <hr>
     <hr>
     <section>
-      <h2 class="text-xl font-bold my-4">Data</h2>
+      <h2 class="text-xl font-bold my-4">Danger zone</h2>
       <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 m-4">
         <button
           class="text-light p-2 rounded-lg cursor-pointer bg-danger hover:bg-danger-dark transition-colors duration-200"
