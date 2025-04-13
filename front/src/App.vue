@@ -2,7 +2,6 @@
   <div>
     <MainLayout v-if="authStore?.authenticated" />
     <main :class="[
-      isMobile() ? 'min-h-screen' : '',
       isMobile() && route.meta?.mobileMainClass ? route.meta?.mobileMainClass : '',
       !isMobile() && route.meta?.desktopMainClass ? route.meta?.desktopMainClass : '',
     ]">

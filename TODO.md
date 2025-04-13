@@ -10,8 +10,10 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Important:
+- [ ] Footer is not at the bottom of pages
 - [ ] Merge manualUpdate and manualCreation on details pages
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
+- [ ] Filter by date doesnt work (lasts and first added return the same)
 - [ ] Add loader on search page and item picker
 - [ ] Check theme_color and background_color warning in console on production
 

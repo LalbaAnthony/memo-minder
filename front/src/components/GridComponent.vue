@@ -32,7 +32,7 @@ const props = defineProps({
   noItemPosition: {
     type: String,
     possibleValues: ['absolute', 'static',],
-    default: 'static',
+    default: 'absolute',
     required: false,
   },
   maxHeight: {
