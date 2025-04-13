@@ -9,6 +9,7 @@ export function createBaseStore(config) {
     return defineStore(config.name, {
         state: () => ({
             primaryKey: config?.primaryKey || 'id',
+            nicename: config?.nicename || 'Item',
             items: {
                 loading: true,
                 data: [],
@@ -108,7 +109,7 @@ export function createBaseStore(config) {
                     notif.notify(resp.data.message, 'error')
                     return false
                 } else if (notify) {
-                    notif.notify(`${config?.nicename || 'Item'} deleted`, 'success')
+                    notif.notify(`${this.nicename} deleted`, 'success')
                 }
 
                 return true
@@ -128,7 +129,7 @@ export function createBaseStore(config) {
                     notif.notify(resp.data.message, 'error')
                     return false
                 } else if (notify) {
-                    notif.notify(`${config?.nicename || 'Item'} created`, 'success')
+                    notif.notify(`${this.nicename} created`, 'success')
                 }
 
                 // Append the created item to the local list
@@ -154,7 +155,7 @@ export function createBaseStore(config) {
                     notif.notify(resp.data.message, 'error')
                     return false
                 } else if (notify) {
-                    notif.notify(`${config?.nicename || 'Item'} updated`, 'success')
+                    notif.notify(`${this.nicename} updated`, 'success')
                 }
 
                 // Update the local list

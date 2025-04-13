@@ -4,9 +4,7 @@
 - [ ] Import my own data
 
 Must:
-- [ ] Can't save items + Merge manualUpdate and manualCreation on details pages
 - [ ] Mood isn't getted in season details page even if exist in dB, so it need the be replaced each time
-- [ ] Added season appear twice in the list
 - [ ] Check on home load we cant click anywhere
 - [ ] When date picker has a default date, the return value is actually null so it is not saved
 - [ ] Item picker cant be scrolled
@@ -14,8 +12,10 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Important:
+- [ ] Merge manualUpdate and manualCreation on details pages
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Add loader on search page and item picker
+- [ ] Check theme_color and background_color warning in console on production
 
 Medium:
 - [ ] Faire listes differentes dans les stores pour chaque usage (use stores ? `lasts: {}` ?)
