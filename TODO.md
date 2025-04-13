@@ -11,6 +11,7 @@ Must:
 
 Important:
 - [ ] Remettre pb sur page list
+- [ ] Lastsevents does not appears on homepage
 - [ ] Footer is not at the bottom of pages
 - [ ] Merge manualUpdate and manualCreation on details pages
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
