@@ -22,6 +22,7 @@ const routes = [
       private: false,
       displayInSearch: true,
       tags: ['infos', 'about', 'contact'],
+      mobileMainClass: 'min-h-screen pb-24'
     },
   },
   // ==================== TERMS ====================
@@ -34,6 +35,7 @@ const routes = [
       private: false,
       displayInSearch: false,
       tags: ['terms', 'conditions', 'legal'],
+      mobileMainClass: 'min-h-screen pb-24'
     },
   },
   // ==================== SEARCH ====================
@@ -56,8 +58,9 @@ const routes = [
     meta: {
       title: 'All Seasons',
       private: true,
-      displayInSearch: true,      
+      displayInSearch: true,
       tags: ['seasons', 'years', 'periods'],
+      mobileMainClass: 'min-h-screen pb-48'
     },
   },
   {
@@ -98,8 +101,9 @@ const routes = [
     meta: {
       title: 'All Events',
       private: true,
-      displayInSearch: true,      
+      displayInSearch: true,
       tags: ['events', 'happenings', 'occurrences'],
+      mobileMainClass: 'min-h-screen pb-48'
     },
   },
   {
@@ -140,8 +144,9 @@ const routes = [
     meta: {
       title: 'All People',
       private: true,
-      displayInSearch: true,      
+      displayInSearch: true,
       tags: ['people', 'persons', 'humans'],
+      mobileMainClass: 'min-h-screen pb-48'
     },
   },
   {
@@ -182,8 +187,9 @@ const routes = [
     meta: {
       title: 'All Musics',
       private: true,
-      displayInSearch: true,      
+      displayInSearch: true,
       tags: ['musics', 'songs', 'tunes'],
+      mobileMainClass: 'min-h-screen pb-48'
     },
   },
   {

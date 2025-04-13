@@ -37,7 +37,7 @@
         </svg>
       </div>
       <div class="flex flex-col justify-center items-start">
-        <h1 class="text-2xl font-bold">{{ props?.music?.title }}</h1>
+        <h1 class="text-2xl font-bold">{{ threeDotsString(props?.music?.title) }}</h1>
         <p :class="['text-gray-light', props?.music?.streamingLink ? `${platform}-artist` : '']">{{ props?.music?.artist }} {{ props?.music?.artist &&
           props?.music?.releaseDate ? '-'
           : '' }} {{ getYearFromDate(props?.music?.releaseDate) }}</p>
@@ -65,6 +65,7 @@ import { useMusicStore } from '@/stores/music'
 import { TrashIcon } from '@heroicons/vue/24/outline'
 import { PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'
+import { threeDotsString } from '@/composables/helpers'
 
 const router = useRouter()
 

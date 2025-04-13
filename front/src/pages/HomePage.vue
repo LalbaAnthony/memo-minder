@@ -26,7 +26,7 @@
     </div>
 
     <div class="md:grid md:grid-cols-2 md:gap-24">
-      <section v-if="authStore?.user?.homePageEnableLasts && eventStore?.events?.data?.length > 0">
+      <section v-if="authStore?.user?.homePageEnableLasts && eventStore?.items?.data?.length > 0">
         <h2 class="text-xl font-bold">Lasts events added</h2>
         <div class="my-4">
           <Grid :items="eventStore.items.data">

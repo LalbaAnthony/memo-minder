@@ -23,6 +23,19 @@
       </p>
     </section>
     <section>
+      <h1 class="text-2xl font-bold mb-2">Quotes</h1>
+      <p>
+        This web app use <a href="https://quotes-api-self.vercel.app" target="_blank"
+          class="text-light text-primary">https://quotes-api-self.vercel.app</a> to fetch quotes in the home page.
+      </p>
+    </section>
+    <section>
+      <h1 class="text-2xl font-bold mb-2">Version</h1>
+      <p>
+        The app is currently in version {{ VITE_APP_VERSION }}.
+      </p>
+    </section>
+    <section>
       <h1 class="text-2xl font-bold mb-2">Bug report</h1>
       <p>
         If you find a bug, please report it in <a :href="VITE_GIT_REPO + '/issues'" target="_blank"
@@ -38,5 +51,6 @@
 import TopActions from '@/components/actions/TopActionsComponent.vue'
 import Footer from '@/components/FooterComponent.vue'
 import { VITE_APP_NAME, VITE_GIT_REPO } from '@/config';
+import { VITE_APP_VERSION } from '@/config';
 
 </script>
