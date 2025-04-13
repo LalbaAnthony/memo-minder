@@ -11,6 +11,7 @@ Must:
 
 Important:
 - [ ] Remettre pb sur page list
+- [ ] Use threeDotString on Pills
 - [ ] Lastsevents does not appears on homepage
 - [ ] Footer is not at the bottom of pages
 - [ ] Merge manualUpdate and manualCreation on details pages
