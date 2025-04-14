@@ -10,6 +10,7 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Important:
+- [ ] Improve seed so it can be easily triggered in dev without being able to run in prod to avoid data loss
 - [ ] Music links
   - [ ] Find a way to retrieve Icon component in MusicItem
   - [ ] Store a default plateform in DB/account parameters as a select
