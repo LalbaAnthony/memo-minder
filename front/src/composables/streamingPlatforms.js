@@ -1,7 +1,15 @@
+import { shallowRef } from 'vue'
+import AppleIcon from '@/icons/AppleIcon.vue'
+import DeezerIcon from '@/icons/DeezerIcon.vue'
+import DefaultIcon from '@/icons/DefaultIcon.vue'
+import SpotifyIcon from '@/icons/SpotifyIcon.vue'
+import YoutubeIcon from '@/icons/YoutubeIcon.vue'
+
 export const streamingPlatforms = {
     spotify: {
         slug: 'spotify',
         label: 'Spotify',
+        icon: shallowRef(SpotifyIcon),
         regex: /(spotify)/i,
         links: {
             home: 'https://open.spotify.com',
@@ -11,6 +19,7 @@ export const streamingPlatforms = {
     apple: {
         slug: 'apple',
         label: 'Apple',
+        icon: shallowRef(AppleIcon),
         regex: /(apple)/i,
         links: {
             home: 'https://music.apple.com/',
@@ -20,6 +29,7 @@ export const streamingPlatforms = {
     youtube: {
         slug: 'youtube',
         label: 'Youtube',
+        icon: shallowRef(YoutubeIcon),
         regex: /(youtube|youtu.be)/i,
         links: {
             home: 'https://www.youtube.com/',
@@ -29,6 +39,7 @@ export const streamingPlatforms = {
     deezer: {
         slug: 'deezer',
         label: 'Deezer',
+        icon: shallowRef(DeezerIcon),
         regex: /(deezer)/i,
         links: {
             home: 'https://www.deezer.com/',
@@ -38,6 +49,7 @@ export const streamingPlatforms = {
     default: {
         slug: 'default',
         label: 'Default',
+        icon: shallowRef(DefaultIcon),
         regex: null,
         links: {
             home: null,

@@ -11,8 +11,10 @@ Must:
 
 Important:
 - [ ] Music links
+  - [ ] Find a way to retrieve Icon component in MusicItem
   - [ ] Store a default plateform in DB/account parameters as a select
-  - [ ] Use it to compute a link if no streamingLink in the music
+  - [ ] Use it to compute a link if no streamingLink in openStreamingLink
+  - [ ] Copy/reuse openStreamingLink into the music detail page
 - [ ] Merge manualUpdate and manualCreation on details pages
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Filter by date doesnt work (lasts and first added return the same)
