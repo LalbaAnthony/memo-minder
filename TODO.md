@@ -10,10 +10,12 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Important:
-- [ ] Use search queries in external URL as test?q=ezdedze (for Spotify etc) as the default link
-  - [ ] Make a select (stored as languages) ?
-  - [ ] Set it as the default link on creation
 - [ ] Test unitaires et d'intégration + ajouter à CI/CD
+- [ ] Music links
+  - [ ] Find a way to retrieve Icon component in MusicItem
+  - [ ] Store a default plateform in DB/account parameters as a select
+  - [ ] Use it to compute a link if no streamingLink in openStreamingLink
+  - [ ] Copy/reuse openStreamingLink into the music detail page
 - [ ] Merge manualUpdate and manualCreation on details pages
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Filter by date doesnt work (lasts and first added return the same)
