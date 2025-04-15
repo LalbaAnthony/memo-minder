@@ -1,12 +1,16 @@
+import { shallowRef } from 'vue'
+import AppleIcon from '@/icons/AppleIcon.vue'
+import DeezerIcon from '@/icons/DeezerIcon.vue'
+import DefaultIcon from '@/icons/DefaultIcon.vue'
+import SpotifyIcon from '@/icons/SpotifyIcon.vue'
+import YoutubeIcon from '@/icons/YoutubeIcon.vue'
+
 export const streamingPlatforms = {
     spotify: {
         slug: 'spotify',
         label: 'Spotify',
+        icon: shallowRef(SpotifyIcon),
         regex: /(spotify)/i,
-        colors: {
-            color: '#1DD05D',
-            background: '#080808',
-        },
         links: {
             home: 'https://open.spotify.com',
             search: 'https://open.spotify.com/search/',
@@ -15,11 +19,8 @@ export const streamingPlatforms = {
     apple: {
         slug: 'apple',
         label: 'Apple',
+        icon: shallowRef(AppleIcon),
         regex: /(apple)/i,
-        colors: {
-            color: '#FFFFFF',
-            background: '#FB3D55',
-        },
         links: {
             home: 'https://music.apple.com/',
             search: 'https://music.apple.com/search?term=',
@@ -28,11 +29,8 @@ export const streamingPlatforms = {
     youtube: {
         slug: 'youtube',
         label: 'Youtube',
+        icon: shallowRef(YoutubeIcon),
         regex: /(youtube|youtu.be)/i,
-        colors: {
-            color: '#FFFFFF',
-            background: '#FF0808',
-        },
         links: {
             home: 'https://www.youtube.com/',
             search: 'https://www.youtube.com/results?search_query=',
@@ -41,14 +39,21 @@ export const streamingPlatforms = {
     deezer: {
         slug: 'deezer',
         label: 'Deezer',
+        icon: shallowRef(DeezerIcon),
         regex: /(deezer)/i,
-        colors: {
-            color: '#A238FF',
-            background: '#080808',
-        },
         links: {
             home: 'https://www.deezer.com/',
             search: 'https://www.deezer.com/search/',
+        },
+    },
+    default: {
+        slug: 'default',
+        label: 'Default',
+        icon: shallowRef(DefaultIcon),
+        regex: null,
+        links: {
+            home: null,
+            search: 'https://www.google.com/search?q=',
         },
     },
 }
