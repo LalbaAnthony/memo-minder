@@ -11,6 +11,7 @@ Must:
 
 Important:
 - [ ] Improve seed so it can be easily triggered in dev without being able to run in prod to avoid data loss
+- [ ] Test unitaires et d'intégration + ajouter à CI/CD
 - [ ] Music links
   - [ ] Find a way to retrieve Icon component in MusicItem
   - [ ] Store a default plateform in DB/account parameters as a select
@@ -23,6 +24,7 @@ Important:
 - [ ] Check theme_color and background_color warning in console on production
 
 Medium:
+- [ ] Ne pas faire erreur 500 mais erreur XXX
 - [ ] Faire listes differentes dans les stores pour chaque usage (use stores ? `lasts: {}` ?)
 - [ ] Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ? `toAdd: {}` ?)
 - [ ] Faire validator de données dans les stores ?
@@ -30,7 +32,7 @@ Medium:
 - [ ] make add button if no data on home page/lists
 
 Low:
-- [ ] Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)
+- [ ] Tests de bout en bout (faire de la création d'un utilisateur à son utilisation)
 - [ ] https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
 - [ ] Inifinte scroll
 - [ ] Faire en sorte qu'elle soit utilisable sans connection (store en persistant, ...)
