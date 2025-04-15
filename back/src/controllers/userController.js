@@ -45,14 +45,14 @@ exports.login = async (req, res) => {
 
         // Check if the user exists
         const user = await User.findOne({ where: { email } });
-        if (!user) return res.status(404).json(frmtr('error', null, 'No user found with this email'))
+        if (!user) return res.status(404).json(frmtr('error', null, 'Invalid credentials'))
 
         // Check if the email has been validated
         if (!user.hasValidatedEmail) return res.status(403).json(frmtr('error', null, 'Email not validated, please check your inbox'))
 
         // Check if the password is valid
         const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) return res.status(404).json(frmtr('error', null, 'Invalid password'))
+        if (!isPasswordValid) return res.status(404).json(frmtr('error', null, 'Invalid credentials'))
 
         // Generate a token
         const token = jwt.sign({ userId: user.userId }, process.env.BACK_TOKEN_SECRET_KEY, { expiresIn: process.env.BACK_TOKEN_EXPIRES_IN });

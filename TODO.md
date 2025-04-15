@@ -11,8 +11,9 @@ Must:
 
 Important:
 - [ ] Use search queries in external URL as test?q=ezdedze (for Spotify etc) as the default link
-  - [ ] Make a select (stored as languages) ?)
+  - [ ] Make a select (stored as languages) ?
   - [ ] Set it as the default link on creation
+- [ ] Test unitaires et d'intégration + ajouter à CI/CD
 - [ ] Merge manualUpdate and manualCreation on details pages
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Filter by date doesnt work (lasts and first added return the same)
@@ -20,6 +21,7 @@ Important:
 - [ ] Check theme_color and background_color warning in console on production
 
 Medium:
+- [ ] Ne pas faire erreur 500 mais erreur XXX
 - [ ] Faire listes differentes dans les stores pour chaque usage (use stores ? `lasts: {}` ?)
 - [ ] Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ? `toAdd: {}` ?)
 - [ ] Faire validator de données dans les stores ?
@@ -27,7 +29,7 @@ Medium:
 - [ ] make add button if no data on home page/lists
 
 Low:
-- [ ] Tests unitaires et d'intégration (faire de la création d'un utilisateur à son utilisation)
+- [ ] Tests de bout en bout (faire de la création d'un utilisateur à son utilisation)
 - [ ] https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
 - [ ] Inifinte scroll
 - [ ] Faire en sorte qu'elle soit utilisable sans connection (store en persistant, ...)
