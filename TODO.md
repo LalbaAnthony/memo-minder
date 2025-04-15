@@ -10,6 +10,7 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Important:
+- [ ] Faire un endpoint /serch (pour item picker et searc page) au lieu de plusieurs appel à plusieurs endpoints
 - [ ] Improve seed so it can be easily triggered in dev without being able to run in prod to avoid data loss
 - [ ] Test unitaires et d'intégration + ajouter à CI/CD
 - [ ] Music links
@@ -35,5 +36,5 @@ Low:
 - [ ] Tests de bout en bout (faire de la création d'un utilisateur à son utilisation)
 - [ ] https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
 - [ ] Inifinte scroll
-- [ ] Faire en sorte qu'elle soit utilisable sans connection (store en persistant, ...)
+- [ ] Faire en sorte qu'elle soit utilisable sans connection (store en persistant, liste de MAJ en FIFO...)
 - [ ] Ajouter langue francaise
