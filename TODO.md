@@ -10,6 +10,7 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Important:
+- [ ] Music link can be opened even if no streamingLink + add notif if no streaming like
 - [ ] Faire un endpoint /serch (pour item picker et searc page) au lieu de plusieurs appel à plusieurs endpoints
 - [ ] Improve seed so it can be easily triggered in dev without being able to run in prod to avoid data loss
 - [ ] Test unitaires et d'intégration + ajouter à CI/CD
