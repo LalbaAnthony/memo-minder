@@ -41,6 +41,10 @@ module.exports = (instance) => {
             allowNull: false,
             defaultValue: true,
         },
+        streamingPlatform: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
         validateEmailToken: {
             type: DataTypes.STRING,
             allowNull: true,

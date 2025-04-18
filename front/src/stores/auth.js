@@ -106,6 +106,7 @@ export const useAuthStore = defineStore('auth', {
       const homePageEnableStats = this.user.homePageEnableStats || false
       const homePageEnableQuote = this.user.homePageEnableQuote || false
       const homePageEnableLasts = this.user.homePageEnableLasts || false
+      const streamingPlatform = this.user.streamingPlatform || 'youtube'
 
       let error = null
 
@@ -127,6 +128,7 @@ export const useAuthStore = defineStore('auth', {
         homePageEnableStats,
         homePageEnableQuote,
         homePageEnableLasts,
+        streamingPlatform,
       }
 
       await api.put(`user/${this.user.userId}`, user).then(resp => {

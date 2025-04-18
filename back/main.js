@@ -53,7 +53,7 @@ sequelize.sync()
     .then(() => {
         logConsole('Database & tables created!', 'success');
         app.listen(process.env.BACK_PORT, () => {
-            logConsole(`Listening on http://localhost:${process.env.BACK_PORT}/`, 'info');
+            logConsole(`Listening on http://localhost:${process.env.BACK_PORT}/ for ${process.env.VITE_FRONT_URL}`, 'info');
         })
         logConsole('Server started!', 'success');
     })

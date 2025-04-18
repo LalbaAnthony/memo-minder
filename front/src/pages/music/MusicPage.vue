@@ -20,7 +20,7 @@
         <div class="flex items-center justify-center gap-2 bg-dark-light p-4 rounded-lg">
           <LinkIcon
             :class="['size-6 text-gray', musicStore.item?.data?.streamingLink ? 'hover:text-gray-light cursor-pointer' : '']"
-            @click="onpenStreamingLink()" />
+            @click="openStreamingLink()" />
           <input v-model="musicStore.item.data.streamingLink" id="streamingLink"
             class="w-full sm:w-2/3 md:w-1/2 p-2 rounded-lg bg-gray-dark text-light"
             placeholder="https://open.spotify.com/track/..." />
@@ -89,8 +89,12 @@ function loadOrInitMusic() {
   watched.value = 0
 }
 
-function onpenStreamingLink() {
-  if (musicStore.item.data.streamingLink) window.open(musicStore.item.data.streamingLink, '_blank')
+function openStreamingLink() {
+  let url = ''
+  if (!url && musicStore.item.data?.streamingLink) url = musicStore.item.data.streamingLink
+  // TODO: Use the link.search of the streamingPlatform if it exists
+
+  if (url) window.open(url, '_blank')
 }
 
 function copyToClipboard(text) {
