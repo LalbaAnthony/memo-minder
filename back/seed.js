@@ -1,9 +1,12 @@
 const { sequelize, Season, Mood, Music, Person, Event, User } = require('./src/database');
 
 const bcrypt = require('bcrypt');
+const dotenv = require('dotenv');
+const path = require('path');
 const logConsole = require('./src/helpers/logConsole')
 
-const ENV = 'production'
+// Load .env file
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 // ? This script is meant to be run only once, to seed the database with sample data just for test purposes. It will drop all existing tables and recreate them, then insert the sample data.
 
@@ -15,32 +18,57 @@ const seedData = async () => {
         // Synchronize the database (drop all existing tables and recreate them)
         await sequelize.sync({ force: true });
 
-        // Sample data for User table, with crypted passwords
-        const sampleUsers = require('./src/seeds/users.json');
-        for (const user of sampleUsers) user.password = await bcrypt.hash(user.password, 10);
-        // if (ENV && ENV === 'development') await User.bulkCreate(sampleUsers);
-
         // Sample data for Mood table
         const sampleMoods = require('./src/seeds/moods.json');
         await Mood.bulkCreate(sampleMoods);
+        logConsole('Moods data inserted', 'success');
+
+        // Sample data for User table, with crypted passwords
+        const sampleUsers = require('./src/seeds/users.json');
+        for (const user of sampleUsers) user.password = await bcrypt.hash(user.password, 10);
+        if (process.env.BACK_ENV && process.env.BACK_ENV === 'development') {
+            await User.bulkCreate(sampleUsers);
+            logConsole('Users data inserted', 'success');
+        } else {
+            logConsole('Users data skipped due to prod env', 'success');
+        }
 
         // Sample data for Music table
         const sampleMusics = require('./src/seeds/musics.json');
-        // if (ENV && ENV === 'development') await Music.bulkCreate(sampleMusics);
+        if (process.env.BACK_ENV && process.env.BACK_ENV === 'development') {
+            await Music.bulkCreate(sampleMusics);
+            logConsole('Musics data inserted', 'success');
+        } else {
+            logConsole('Musics data skipped due to prod env', 'success');
+        }
 
         // Sample data for Person table
         const samplePeople = require('./src/seeds/people.json');
-        // if (ENV && ENV === 'development') await Person.bulkCreate(samplePeople);
+        if (process.env.BACK_ENV && process.env.BACK_ENV === 'development') {
+            await Person.bulkCreate(samplePeople);
+            logConsole('People data inserted', 'success');
+        } else {
+            logConsole('People data skipped due to prod env', 'success');
+        }
 
         // Sample data for Season table
         const sampleSeasons = require('./src/seeds/seasons.json');
-        // if (ENV && ENV === 'development') await Season.bulkCreate(sampleSeasons);
+        if (process.env.BACK_ENV && process.env.BACK_ENV === 'development') {
+            await Season.bulkCreate(sampleSeasons);
+            logConsole('Seasons data inserted', 'success');
+        } else {
+            logConsole('Seasons data skipped due to prod env', 'success');
+        }
 
         // Sample data for Event table
         const sampleEvents = require('./src/seeds/events.json');
-        // if (ENV && ENV === 'development') await Event.bulkCreate(sampleEvents);
+        if (process.env.BACK_ENV && process.env.BACK_ENV === 'development') {
+            await Event.bulkCreate(sampleEvents);
+            logConsole('Sample data inserted', 'success');
+        } else {
+            logConsole('Sample data skipped due to prod env', 'success');
+        }
 
-        logConsole('Sample data inserted', 'success');
     } catch (error) {
         logConsole('Error seeding data', 'error');
         logConsole(error, 'error');
