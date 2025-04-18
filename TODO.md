@@ -12,7 +12,6 @@ Must:
 Should:
 - [ ] Music links
   - [ ] Store a default plateform in DB/account parameters as a select
-  - [ ] Use it to compute a link if no streamingLink in openStreamingLink
   - [ ] Copy/reuse openStreamingLink into the music detail page
 - [ ] Merge manualUpdate and manualCreation on details pages
 - [ ] Faire un endpoint /serch (pour item picker et searc page) au lieu de plusieurs appel à plusieurs endpoints
