@@ -35,6 +35,11 @@ Object.keys(models).forEach((modelName) => {
   }
 });
 
+// Ensure structure of the database is up to date
+if (process.env.BACK_ENV === 'development') {
+  await sequelize.sync({ alter: true });
+}
+
 module.exports = {
   sequelize,
   ...models,
