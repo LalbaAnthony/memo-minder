@@ -159,7 +159,7 @@ exports.userInfos = async (req, res) => {
 
 exports.userUpdate = async (req, res) => {
     const userId = req.params.id
-    const { username, birthdate, language, homePageEnableSpents, homePageEnableStats, homePageEnableQuote, homePageEnableLasts,streamingPlatform } = req.body;
+    const { username, birthdate, language, homePageEnableSpents, homePageEnableStats, homePageEnableQuote, homePageEnableLasts, streamingPlatform } = req.body;
     try {
         // Check if the user exists
         const user = await User.findByPk(userId);
