@@ -29,6 +29,15 @@
               {{ value?.label }}</option>
           </select>
         </div>
+        <div class="flex flex-col gap-2">
+          <label for="streamingPlatform">Streaming</label>
+          <select v-model="authStore.user.streamingPlatform" id="streamingPlatform" class="px-4 p-2 rounded-lg bg-gray-dark text-light">
+            <option value="" disabled>Platform</option>
+            <option v-for="(value, key) in streamingPlatforms" :key="key" :value="key"
+              :selected="key === authStore.user.streamingPlatform">
+              {{ value?.label }}</option>
+          </select>
+        </div>
       </div>
     </section>
     <hr>
@@ -83,6 +92,7 @@ import BottomActions from '@/components/actions/BottomActionsComponent.vue'
 import TopActions from '@/components/actions/TopActionsComponent.vue'
 import DatePicker from '@/components/fields/DatePickerComponent.vue'
 import { languages } from '@/composables/languages.js'
+import { streamingPlatforms } from '@/composables/streamingPlatforms.js'
 import { useRouter } from 'vue-router'
 
 const authStore = useAuthStore()

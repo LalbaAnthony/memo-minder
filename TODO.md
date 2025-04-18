@@ -10,19 +10,17 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Should:
-- [ ] Music link can be opened even if no streamingLink + add notif if no streaming like
-- [ ] Faire un endpoint /serch (pour item picker et searc page) au lieu de plusieurs appel à plusieurs endpoints
-- [ ] Test unitaires et d'intégration + ajouter à CI/CD
 - [ ] Music links
-  - [ ] Find a way to retrieve Icon component in MusicItem
   - [ ] Store a default plateform in DB/account parameters as a select
   - [ ] Use it to compute a link if no streamingLink in openStreamingLink
   - [ ] Copy/reuse openStreamingLink into the music detail page
 - [ ] Merge manualUpdate and manualCreation on details pages
+- [ ] Faire un endpoint /serch (pour item picker et searc page) au lieu de plusieurs appel à plusieurs endpoints
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Filter by date doesnt work (lasts and first added return the same)
 - [ ] Add loader on search page and item picker
 - [ ] Check theme_color and background_color warning in console on production
+- [ ] Test unitaires et d'intégration des contrôleurs, modèles et routes
 
 Could:
 - [ ] Ne pas faire erreur 500 mais erreur XXX

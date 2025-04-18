@@ -6,19 +6,19 @@ const dotenv = require('dotenv');
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 const sequelizeDevelopment = new Sequelize({
-    dialect: 'sqlite',
-    storage: './database.sqlite',
-    logging: logConsole('Database connection established!', 'info')
+  dialect: 'sqlite',
+  storage: './database.sqlite',
+  logging: logConsole('Database connection established!', 'info')
 });
 
 const sequelizeProduction = new Sequelize(process.env.BACK_DATABASE_NAME, process.env.BACK_DATABASE_USERNAME, process.env.BACK_DATABASE_PASSWORD, {
-    host: '127.0.0.1',
-    dialect: 'mysql',
-    port: 3306,
-    logging: logConsole('Database connection established!', 'info')
+  host: process.env?.BACK_DATABASE_HOST || '127.0.0.1',
+  port: process.env?.BACK_DATABASE_PORT || 3306,
+  dialect: 'mysql',
+  logging: false
 });
 
-const sequelize = process.env.BACK_ENV === 'development'  ? sequelizeDevelopment : sequelizeProduction;
+const sequelize = process.env.BACK_ENV === 'development' ? sequelizeDevelopment : sequelizeProduction;
 
 const models = {
   User: require("./models/userModel")(sequelize),

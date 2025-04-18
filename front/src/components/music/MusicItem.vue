@@ -3,7 +3,7 @@
     <div class="flex-1 flex justify-left rounded-l-[6px] p-5 cursor-pointer transition-colors duration-200"
       @click="openStreamingLink()">
       <div class="flex items-center justify-center gap-4 p-2 pr-6">
-        <component v-if="streamingPlatform?.icon" :is="streamingPlatform?.icon" />
+        <component v-if="streamingPlatform?.icon" :is="streamingPlatform.icon.value" />
       </div>
       <div class="flex flex-col justify-center items-start">
         <h1 class="text-2xl font-bold">{{ threeDotsString(props?.music?.title) }}</h1>
@@ -58,15 +58,15 @@ const streamingPlatform = computed(() => {
     }
   })
 
-  return streamingPlatforms?.[found] || {}
+  return streamingPlatforms?.[found || 'default'] || {}
 })
 
 function openStreamingLink() {
   let url = ''
   if (!url && props.music?.streamingLink) url = props.music.streamingLink
-  // TODO: Use the link.search of the streamingPlatform if it exists
+  if (!url && streamingPlatform.value?.links?.search && props.music?.title) url = `${streamingPlatform.value.links.search}${props.music?.title} ${props.music?.artist}`
 
-  window.open(url, '_blank')
+  if (url) window.open(url, '_blank')
 }
 
 function deleteMusic() {
