@@ -9,10 +9,9 @@ Must:
 - [ ] Ensure auth is secured (can a user access another user's data ?)
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
-Important:
+Should:
 - [ ] Music link can be opened even if no streamingLink + add notif if no streaming like
 - [ ] Faire un endpoint /serch (pour item picker et searc page) au lieu de plusieurs appel à plusieurs endpoints
-- [ ] Improve seed so it can be easily triggered in dev without being able to run in prod to avoid data loss
 - [ ] Test unitaires et d'intégration + ajouter à CI/CD
 - [ ] Music links
   - [ ] Find a way to retrieve Icon component in MusicItem
@@ -25,7 +24,7 @@ Important:
 - [ ] Add loader on search page and item picker
 - [ ] Check theme_color and background_color warning in console on production
 
-Medium:
+Could:
 - [ ] Ne pas faire erreur 500 mais erreur XXX
 - [ ] Faire listes differentes dans les stores pour chaque usage (use stores ? `lasts: {}` ?)
 - [ ] Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ? `toAdd: {}` ?)
@@ -33,7 +32,7 @@ Medium:
 - [ ] Faire en sorte que les dates picker ne s'initalise pas toujours sur la date d'aujourd'hui (utile pour les musiques, …) + vérifier qu'il est ok avec une valeur vide et pas 1970
 - [ ] make add button if no data on home page/lists
 
-Low:
+Won't:
 - [ ] Tests de bout en bout (faire de la création d'un utilisateur à son utilisation)
 - [ ] https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
 - [ ] Inifinte scroll

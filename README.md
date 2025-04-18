@@ -45,6 +45,10 @@ cd back/ && npm run test
 
 ## 🚢 Deployment
 
+### Workflow
+
+Workflow are named as `flow_<WHAT>_<WHERE>`. So `flow_deploy_prod` will deploy the production version of the app.
+
 ### Secrets
 
 Those secrets are required in the deployment environment:
