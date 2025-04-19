@@ -4,14 +4,12 @@
 - [ ] Import my own data
 
 Must:
-- [ ] Fix wrong imports in backend (ESM/CommonJS)
 - [ ] When date picker has a default date, the return value is actually null so it is not saved
 - [ ] Item picker cant be scrolled
 - [ ] Ensure auth is secured (can a user access another user's data ?)
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Should:
-- [ ] Améliorer précision des spents, should not be updated once a year
 - [ ] Music links
   - [ ] Store a default plateform in DB/account parameters as a select
   - [ ] Copy/reuse openStreamingLink into the music detail page
@@ -25,6 +23,7 @@ Should:
 
 Could:
 - [ ] Ne pas faire erreur 500 mais erreur XXX
+- [ ] Fix wrong imports in backend (ESM/CommonJS)
 - [ ] Faire listes differentes dans les stores pour chaque usage (use stores ? `lasts: {}` ?)
 - [ ] Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ? `toAdd: {}` ?)
 - [ ] Faire validator de données dans les stores ?
@@ -36,4 +35,5 @@ Won't:
 - [ ] https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
 - [ ] Inifinte scroll
 - [ ] Faire en sorte qu'elle soit utilisable sans connection (store en persistant, liste de MAJ en FIFO...)
+- [ ] Améliorer précision des spents, should not be upddated once a year
 - [ ] Ajouter langue francaise

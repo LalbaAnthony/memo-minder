@@ -35,9 +35,11 @@ Object.keys(models).forEach((modelName) => {
   }
 });
 
-// Ensure structure of the database is up to date
+// Ensure structure of the database is up to date. Cannot be used in production since it would reset the database and have a chance to lose data.
 if (process.env.BACK_ENV === 'development') {
-  await sequelize.sync({ alter: true });
+  sequelize.sync({ alter: true })
+    .then(() => logConsole('Database synced', 'success'))
+    .catch((err) => logConsole('Error syncing database', 'error', err));
 }
 
 module.exports = {
