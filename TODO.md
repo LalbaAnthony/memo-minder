@@ -4,6 +4,7 @@
 - [ ] Import my own data
 
 Must:
+- [ ] Fix wrong imports in backend (ESM/CommonJS)
 - [ ] When date picker has a default date, the return value is actually null so it is not saved
 - [ ] Item picker cant be scrolled
 - [ ] Ensure auth is secured (can a user access another user's data ?)
