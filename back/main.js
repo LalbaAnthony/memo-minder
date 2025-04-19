@@ -26,7 +26,7 @@ const app = express()
 // CORS middleware
 app.use(cors({
     origin: process.env.VITE_FRONT_URL,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
