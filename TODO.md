@@ -11,6 +11,7 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Should:
+- [ ] Améliorer précision des spents, should not be updated once a year
 - [ ] Music links
   - [ ] Store a default plateform in DB/account parameters as a select
   - [ ] Copy/reuse openStreamingLink into the music detail page
