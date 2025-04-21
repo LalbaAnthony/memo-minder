@@ -10,9 +10,7 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
 
 Should:
-- [ ] Music links
-  - [ ] Store a default plateform in DB/account parameters as a select
-  - [ ] Copy/reuse openStreamingLink into the music detail page
+- [ ] Music links: test everuthing works fine since it has been added in a terrible way
 - [ ] Merge manualUpdate and manualCreation on details pages
 - [ ] Faire un endpoint /serch (pour item picker et searc page) au lieu de plusieurs appel à plusieurs endpoints
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
