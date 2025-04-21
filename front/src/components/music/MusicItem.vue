@@ -30,16 +30,13 @@
 
 <script setup>
 import { getYearFromDate } from '@/composables/helpers.js'
-import { computed } from 'vue'
 import { useMusicStore } from '@/stores/music'
 import { TrashIcon } from '@heroicons/vue/24/outline'
 import { PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'
 import { threeDotsString } from '@/composables/helpers'
-import { streamingPlatforms } from '@/composables/streamingPlatforms.js'
-import { useAuthStore } from '@/stores/auth'
+import { findStreamingPlatform, smartStreamingLink } from '@/composables/streamingPlatform.js'
 
-const authStore = useAuthStore()
 const router = useRouter()
 const musicStore = useMusicStore()
 
@@ -50,38 +47,10 @@ const props = defineProps({
   },
 })
 
-const streamingPlatform = computed(() => {
-  let found = null
-
-  Object.keys(streamingPlatforms).forEach((key) => {
-    const regex = streamingPlatforms[key].regex
-    if (props?.music?.streamingLink?.match(regex)) {
-      found = key
-    }
-  })
-
-  return streamingPlatforms?.[found || 'default'] || {}
-})
+const streamingPlatform = findStreamingPlatform(props?.music?.streamingLink)
 
 function openStreamingLink() {
-  let url = ''
-
-  // If the is a link, just using it
-  if (!url && props.music?.streamingLink) {
-    url = props.music?.streamingLink
-  }
-
-  // If no link, use the search link of the streaming platform of the use
-  if (!url && authStore.user.streamingPlatform && streamingPlatforms?.[authStore.user.streamingPlatform]) {
-    url = streamingPlatforms[authStore.user.streamingPlatform].links.search
-    if (props.music?.title) url += `${props.music?.title}`
-    if (props.music?.artist) url += ` ${props.music?.artist}`
-  }
-
-  // If still no url, use the default search link
-  if (!url && streamingPlatform.value?.links?.search && props.music?.title) url = `${streamingPlatform.value.links.search}${props.music?.title} ${props.music?.artist}`
-
-  if (url) window.open(url, '_blank')
+  window.open(smartStreamingLink(musicStore.item?.data), '_blank')
 }
 
 function deleteMusic() {

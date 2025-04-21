@@ -92,7 +92,7 @@ import BottomActions from '@/components/actions/BottomActionsComponent.vue'
 import TopActions from '@/components/actions/TopActionsComponent.vue'
 import DatePicker from '@/components/fields/DatePickerComponent.vue'
 import { languages } from '@/composables/languages.js'
-import { streamingPlatforms } from '@/composables/streamingPlatforms.js'
+import { streamingPlatforms } from '@/composables/streamingPlatform.js'
 import { useRouter } from 'vue-router'
 
 const authStore = useAuthStore()

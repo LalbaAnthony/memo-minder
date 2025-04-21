@@ -23,7 +23,7 @@
             @click="openStreamingLink()" />
           <input v-model="musicStore.item.data.streamingLink" id="streamingLink"
             class="w-full sm:w-2/3 md:w-1/2 p-2 rounded-lg bg-gray-dark text-light"
-            placeholder="https://open.spotify.com/track/..." />
+            :placeholder="userStreamingPlatform().links.placeholder" />
           <ClipboardIcon
             :class="['size-6 text-gray', musicStore.item?.data?.streamingLink ? 'hover:text-gray-light cursor-pointer' : '']"
             @click="copyToClipboard(musicStore.item?.data?.streamingLink)" />
@@ -72,12 +72,20 @@ import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import { LinkIcon } from '@heroicons/vue/24/solid'
 import { ClipboardIcon } from '@heroicons/vue/24/solid'
 import debounce from '@/composables/debounce.js'
+import { userStreamingPlatform, smartStreamingLink } from '@/composables/streamingPlatform.js'
 
 const route = useRoute()
 const router = useRouter()
 const musicStore = useMusicStore()
 
 const watched = ref(0)
+
+function openStreamingLink() {
+  let url = ''
+  if (!url && musicStore.item.data?.streamingLink) url = musicStore.item.data.streamingLink
+  
+  if (url) window.open(url, '_blank')
+}
 
 function loadOrInitMusic() {
   if (route.params.musicId) {
@@ -87,14 +95,6 @@ function loadOrInitMusic() {
     if (route.query.title) musicStore.item.data.title = route.query.title // From the search page
   }
   watched.value = 0
-}
-
-function openStreamingLink() {
-  let url = ''
-  if (!url && musicStore.item.data?.streamingLink) url = musicStore.item.data.streamingLink
-  // TODO: Use the link.search of the streamingPlatform if it exists
-
-  if (url) window.open(url, '_blank')
 }
 
 function copyToClipboard(text) {
