@@ -7,14 +7,14 @@ Must:
 - [ ] When date picker has a default date, the return value is actually null so it is not saved
 - [ ] Item picker cant be scrolled
 - [ ] Ensure auth is secured (can a user access another user's data ?)
-- [ ] Create and implement email systeme with back/src/helpers/email.js (or remove emails ?)
+- [ ] Create and implement email systeme with back/src/helpers/email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
 - [ ] Music links: test everuthing works fine since it has been added in a terrible way
 - [ ] Merge manualUpdate and manualCreation on details pages
 - [ ] Faire un endpoint /serch (pour item picker et searc page) au lieu de plusieurs appel à plusieurs endpoints
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
-- [ ] Filter by date doesnt work (lasts and first added return the same)
+- [ ] Filter by date doesnt work (lasts and first added returns the same)
 - [ ] Add loader on search page and item picker
 - [ ] Check theme_color and background_color warning in console on production
 - [ ] Test unitaires et d'intégration des contrôleurs, modèles et routes
