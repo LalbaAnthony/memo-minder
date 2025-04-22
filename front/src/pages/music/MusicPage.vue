@@ -72,7 +72,7 @@ import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import { LinkIcon } from '@heroicons/vue/24/solid'
 import { ClipboardIcon } from '@heroicons/vue/24/solid'
 import debounce from '@/composables/debounce.js'
-import { userStreamingPlatform, smartStreamingLink } from '@/composables/streamingPlatform.js'
+import { userStreamingPlatform } from '@/composables/streamingPlatform.js'
 
 const route = useRoute()
 const router = useRouter()
