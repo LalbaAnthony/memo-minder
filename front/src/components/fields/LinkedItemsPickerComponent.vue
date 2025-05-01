@@ -4,8 +4,7 @@
       <TransitionChild as="template" enter="transition ease-in-out duration-300 transform" enter-from="translate-y-full"
         enter-to="translate-y-0" leave="transition ease-in-out duration-300 transform" leave-from="translate-y-0"
         leave-to="translate-y-full">
-        <DialogPanel class="bg-dark-light p-6 fixed inset-0">
-
+        <DialogPanel class="bg-dark-light p-6 fixed inset-0 h-dvh">
           <div class="flex items-center justify-between gap-3">
             <MagnifyingGlassIcon class="size-10 text-gray-light hidden sm:block" />
             <input v-model="search" id="search" type="text" class="w-full p-2 rounded-lg bg-gray-dark text-light"
