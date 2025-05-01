@@ -35,7 +35,6 @@ const props = defineProps({
   value: {
     type: String,
     required: false,
-    default: new Date().toISOString().split('T')[0],
   },
 });
 

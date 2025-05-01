@@ -4,7 +4,6 @@
 - [ ] Import my own data
 
 Must:
-- [ ] When date picker has a default date, the return value is actually null so it is not saved
 - [ ] Item picker cant be scrolled
 - [ ] Ensure auth is secured (can a user access another user's data ?)
 - [ ] Create and implement email systeme with back/src/helpers/email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
@@ -12,9 +11,7 @@ Must:
 Should:
 - [ ] Add smart link on music page with the platform logo button (!= link)
 - [ ] Merge manualUpdate and manualCreation on details pages
-- [ ] Faire un endpoint /serch (pour item picker et searc page) au lieu de plusieurs appel à plusieurs endpoints
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
-- [ ] Filter by date doesnt work (lasts and first added returns the same)
 - [ ] Add loader on search page and item picker
 - [ ] Check theme_color and background_color warning in console on production
 - [ ] Test unitaires et d'intégration des contrôleurs, modèles et routes
@@ -22,6 +19,7 @@ Should:
 Could:
 - [ ] Ne pas faire erreur 500 mais erreur XXX
 - [ ] Fix wrong imports in backend (ESM/CommonJS)
+- [ ] Faire un endpoint /search (pour item picker et searc page) au lieu de plusieurs appel à plusieurs endpoints
 - [ ] Faire listes differentes dans les stores pour chaque usage (use stores ? `lasts: {}` ?)
 - [ ] Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ? `toAdd: {}` ?)
 - [ ] Faire validator de données dans les stores ?
