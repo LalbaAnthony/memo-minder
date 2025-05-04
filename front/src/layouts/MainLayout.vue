@@ -95,7 +95,7 @@
 
     <!-- Mobile bottom menu -->
     <nav v-if="isMobile()"
-      class="fixed bottom-0 left-0 z-20 w-full flex justify-around items-center bg-dark-light border-t border-gray py-2 px-6 sm:px-32 gap-3">
+      class="fixed bottom-0 left-0 z-20 w-full flex justify-around items-center bg-dark-light py-2 px-6 sm:px-32 gap-3">
       <div
         class="flex flex-col items-center text-light transition-colors duration-200 ease-in-out rounded-lg px-2.5 py-1"
         @click.stop="toggleSidebar()">
