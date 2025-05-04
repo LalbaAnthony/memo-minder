@@ -12,9 +12,10 @@
         <div class="space-y-2">
           <button @click="resetSort"
             class="w-full text-left text-light transition-colors duration-200 hover:bg-gray px-4 py-2 rounded-md">Default</button>
-          <button v-for="item in props.sortItems" :key="item.value" @click="toggleSort(item.value)"
-            class="w-full text-left text-light transition-colors duration-200 hover:bg-gray px-4 py-2 rounded-md">{{
-              item.label }}</button>
+          <button v-for="item in props.sortItems" :key="item.value" @click="toggleSort(item.value)" :class="['w-full text-left text-light transition-colors duration-200 hover:bg-gray px-4 py-2 rounded-md',
+            isActive(item.value) ? 'bg-gray' : ''
+          ]">{{
+            item.label }}</button>
         </div>
       </template>
     </Dropdown>
@@ -50,4 +51,9 @@ function toggleSort(value) {
   }
   router.push({ path: route.path, query })
 }
+
+function isActive(value) {
+  return route.query.sort === value
+}
+
 </script>
