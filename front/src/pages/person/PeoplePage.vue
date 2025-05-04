@@ -3,8 +3,8 @@
     <SortFilter :sortItems="[
       { value: 'name-asc', label: 'Name (A-Z)' },
       { value: 'name-desc', label: 'Name (Z-A)' },
-      { value: 'updatedAt-asc', label: 'Add date (Oldest)' },
-      { value: 'updatedAt-desc', label: 'Add date (Newest)' }
+      { value: 'createdAt-asc', label: 'Add date (Oldest)' },
+      { value: 'createdAt-desc', label: 'Add date (Newest)' }
     ]" />
     <Loader v-if="personStore.items.loading" />
     <Grid v-else :items="personStore.items.data">

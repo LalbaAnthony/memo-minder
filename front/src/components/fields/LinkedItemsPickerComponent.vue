@@ -98,7 +98,7 @@ const loadSearch = debounce(async () => {
         results.value.push(...eventStore.items.data.map((event) => ({
           title: event.title,
           type: 'event',
-          action: () => { emit('add', { type: 'event', data: event }), emit('closePicker', true) }
+          action: () => { emit('add', { type: 'event', data: event }), emit('closePicker', true), search.value = '' }
         })))
       })
     })
@@ -111,7 +111,7 @@ const loadSearch = debounce(async () => {
         results.value.push(...personStore.items.data.map((person) => ({
           title: person.name,
           type: 'person',
-          action: () => { emit('add', { type: 'person', data: person }), emit('closePicker', true) }
+          action: () => { emit('add', { type: 'person', data: person }), emit('closePicker', true), search.value = '' }
         })))
       })
     })
@@ -124,7 +124,7 @@ const loadSearch = debounce(async () => {
         results.value.push(...musicStore.items.data.map((music) => ({
           title: music.title,
           type: 'music',
-          action: () => { emit('add', { type: 'music', data: music }), emit('closePicker', true) }
+          action: () => { emit('add', { type: 'music', data: music }), emit('closePicker', true), search.value = '' }
         })))
       })
     })
@@ -137,7 +137,7 @@ const loadSearch = debounce(async () => {
         results.value.push(...seasonStore.items.data.map((season) => ({
           title: season.title,
           type: 'season',
-          action: () => { emit('add', { type: 'season', data: season }), emit('closePicker', true) }
+          action: () => { emit('add', { type: 'season', data: season }), emit('closePicker', true), search.value = '' }
         })))
       })
     })
