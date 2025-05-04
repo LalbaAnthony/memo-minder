@@ -14,8 +14,8 @@ const toSetAssociations = ['musics', 'events', 'seasons'];
 exports.getAllPeople = baseController.getAll(Person, {
     searchFields,
     defaultSort: [
-        { order: 'ASC', orderBy: 'name' },
         { order: 'DESC', orderBy: 'createdAt' },
+        { order: 'ASC', orderBy: 'name' },
     ],
     associations,
 });

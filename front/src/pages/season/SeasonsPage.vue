@@ -3,8 +3,10 @@
     <SortFilter :sortItems="[
       { value: 'title-asc', label: 'Title (A-Z)' },
       { value: 'title-desc', label: 'Title (Z-A)' },
-      { value: 'dateEnd-asc', label: 'Date (Oldest)' },
-      { value: 'dateEnd-desc', label: 'Date (Newest)' }
+      { value: 'createdAt-asc', label: 'Add date (Oldest)' },
+      { value: 'createdAt-desc', label: 'Add date (Newest)' },
+      { value: 'dateStart-asc', label: 'Date (Oldest)' },
+      { value: 'dateStart-desc', label: 'Date (Newest)' }
     ]" />
     <Loader v-if="seasonStore.items.loading" />
     <Grid v-else :items="seasonStore.items.data">

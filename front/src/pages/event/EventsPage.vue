@@ -3,6 +3,8 @@
     <SortFilter :sortItems="[
       { value: 'title-asc', label: 'Title (A-Z)' },
       { value: 'title-desc', label: 'Title (Z-A)' },
+      { value: 'createdAt-asc', label: 'Add date (Oldest)' },
+      { value: 'createdAt-desc', label: 'Add date (Newest)' },
       { value: 'date-asc', label: 'Date (Oldest)' },
       { value: 'date-desc', label: 'Date (Newest)' }
     ]" />
