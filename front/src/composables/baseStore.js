@@ -68,9 +68,6 @@ export function createBaseStore(config) {
                     userId: authStore.user.userId,
                     page: this.items.pagination.page || config.pagination.page,
                     perPage: this.items.pagination.perPage || config.pagination.perPage,
-                    sort: [
-                        { order: 'DESC', orderBy: 'createdAt' },
-                    ],
                 }
 
                 // Merge custom parameters
