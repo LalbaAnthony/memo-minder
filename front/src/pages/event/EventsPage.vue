@@ -42,7 +42,8 @@ async function loadEvents() {
       orderBy: route.query.sort?.split('-')[0] || null,
       order: route.query.sort?.split('-')[1] || null
     }] : [
-      { order: 'ASC', orderBy: 'createdAt' },
+      { order: 'DESC', orderBy: 'createdAt' },
+      { order: 'DESC', orderBy: 'date' },
     ]
   })
 }

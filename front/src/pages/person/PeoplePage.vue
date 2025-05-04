@@ -13,9 +13,8 @@
       </template>
     </Grid>
     <Pagination :total="personStore.items.pagination.total" :page="personStore.items.pagination.page"
-      :perPage="personStore.items.pagination.perPage"
-      @update-page="(page) => personStore.changePage(page)" />
-      
+      :perPage="personStore.items.pagination.perPage" @update-page="(page) => personStore.changePage(page)" />
+
     <BottomActions :addButton="true" :goTopButton="true" />
   </div>
 </template>
@@ -39,9 +38,10 @@ async function loadPeople() {
     sort: route.query.sort ? [{
       orderBy: route.query.sort?.split('-')[0] || null,
       order: route.query.sort?.split('-')[1] || null
-    }] : [{
-      order: 'ASC', orderBy: 'name'
-    }]
+    }] : [
+      { order: 'DESC', orderBy: 'createdAt' },
+      { order: 'ASC', orderBy: 'name' },
+    ]
   })
 }
 
