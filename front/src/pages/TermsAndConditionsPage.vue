@@ -81,14 +81,6 @@
     </section>
 
     <section>
-      <h1 class="text-2xl font-bold mb-2">10. Last but not least</h1>
-      <p>
-        By using this Service, you acknowledge and accept these Terms and Conditions. If you disagree, discontinue use
-        immediately.
-      </p>
-    </section>
-
-    <section>
       <p>Last updated: March 2025</p>
     </section>
 
