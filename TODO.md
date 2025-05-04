@@ -8,6 +8,7 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
+- [ ] Check smart link in music item that migth open the previous opened in details
 - [ ] Add smart link on music page with the platform logo button (!= link)
 - [ ] Merge manualUpdate and manualCreation on details pages
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD

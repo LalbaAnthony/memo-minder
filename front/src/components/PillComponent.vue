@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['flex justify-between items-center gap-2 rounded-full px-3 py-1 bg-gray', props.clickable ? 'cursor-pointer' : '']">
+    :class="['flex justify-between items-center gap-2 rounded-full px-3 py-1 bg-gray-dark', props.clickable ? 'cursor-pointer' : '']">
     <HeartIcon v-if="props.type === 'mood'" class="size-6 text-primary-light" />
     <FilmIcon v-if="props.type === 'season'" class="size-6 text-primary-light" />
     <CalendarDaysIcon v-if="props.type === 'event'" class="size-6 text-primary-light" />
