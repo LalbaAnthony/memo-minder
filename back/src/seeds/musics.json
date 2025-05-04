@@ -12,32 +12,28 @@
         "userId": 1,
         "title": "To live is to die",
         "artist": "Metallica",
-        "releaseDate": "1988-07-07",
-        "streamingLink": "https://www.youtube.com/watch?v=k7_hwgD1ugg"
+        "releaseDate": "1988-07-07"
     },
     {
         "musicId": 3,
         "userId": 1,
         "title": "Dance Monkey",
         "artist": "Tones and I",
-        "releaseDate": "2019-05-10",
-        "streamingLink": "https://www.youtube.com/watch?v=q0hyYWKXF0Q"
+        "releaseDate": "2019-05-10"
     },
     {
         "musicId": 4,
         "userId": 1,
         "title": "The Trooper",
         "artist": "Iron Maiden",
-        "releaseDate": "1983-06-20",
-        "streamingLink": "https://www.youtube.com/watch?v=2G5rfPISIwo"
+        "releaseDate": "1983-06-20"
     },
     {
         "musicId": 5,
         "userId": 1,
         "title": "The Unforgiven",
         "artist": "Metallica",
-        "releaseDate": "1991-08-21",
-        "streamingLink": "https://www.youtube.com/watch?v=Ckom3gf57Yw"
+        "releaseDate": "1991-08-21"
     },
     {
         "musicId": 6,
