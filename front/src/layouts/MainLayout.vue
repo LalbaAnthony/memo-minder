@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Desktop header -->
-    <header v-if="!isMobile()" class="flex justify-between items-center bg-dark-light border-b border-gray p-4 gap-3">
+    <header v-if="!isMobile()" class="flex justify-between items-center bg-dark-light p-4 gap-3">
       <Bars3Icon class="size-10 text-gray-light rounded-lg p-1 cursor-pointer" @click.stop="toggleSidebar()" />
       <router-link :to="route.path">
         <h1 class="text-2xl font-bold text-light">
@@ -14,10 +14,14 @@
 
     <!-- Sidebar -->
     <TransitionRoot :show="showSidebar">
+      <TransitionChild enter="transition ease-in-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
+        leave="transition ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
+        <div class="fixed inset-0 bg-dark bg-opacity-90 transition-opacity z-40"></div>
+      </TransitionChild>
       <TransitionChild v-click-outside="() => hideSidebar()" as="aside"
         enter="transition ease-in-out duration-300 transform" enter-from="-translate-x-full" enter-to="translate-x-0"
         leave="transition ease-in-out duration-300 transform" leave-from="translate-x-0" leave-to="-translate-x-full"
-        class="fixed top-0 left-0 h-full w-72 bg-dark-light z-50 border-r border-gray">
+        class="fixed top-0 left-0 h-full w-72 bg-dark-light z-50">
 
         <!-- Close sidebar -->
         <div class="flex justify-end p-4">
