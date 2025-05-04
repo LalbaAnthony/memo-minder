@@ -16,7 +16,6 @@ Should:
 - [ ] Test unitaires et d'intégration des contrôleurs, modèles et routes
 
 Could:
-- [ ] Ne pas faire erreur 500 mais erreur XXX
 - [ ] Fix wrong imports in backend (ESM/CommonJS)
 - [ ] Faire un endpoint /search (pour item picker et searc page) au lieu de plusieurs appel à plusieurs endpoints
 - [ ] Faire listes differentes dans les stores pour chaque usage (use stores ? `lasts: {}` ?)
