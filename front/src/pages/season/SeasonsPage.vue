@@ -41,10 +41,7 @@ async function loadSeasons() {
     sort: route.query.sort ? [{
       orderBy: route.query.sort?.split('-')[0] || null,
       order: route.query.sort?.split('-')[1] || null
-    }] : [
-      { order: 'DESC', orderBy: 'dateStart' },
-      { order: 'DESC', orderBy: 'createdAt' },
-    ]
+    }] : []
   })
 }
 
