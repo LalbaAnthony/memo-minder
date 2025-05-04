@@ -50,7 +50,7 @@ const props = defineProps({
 const streamingPlatform = findStreamingPlatform(props?.music?.streamingLink)
 
 function openStreamingLink() {
-  window.open(smartStreamingLink(musicStore.item?.data), '_blank')
+  window.open(smartStreamingLink(props?.music), '_blank')
 }
 
 function deleteMusic() {
