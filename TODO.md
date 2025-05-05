@@ -10,13 +10,13 @@ Must:
 Should:
 - [ ] Wipe notif enable side menu
 - [ ] Add smart link on music page with the platform logo button (!= link)
-- [ ] Merge manualUpdate and manualCreation on details pages
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Check theme_color and background_color warning in console on production
 - [ ] Test unitaires et d'intégration des contrôleurs, modèles et routes
 - [ ] Filter by Pill/Items on list pages
 
 Could:
+- [ ] Merge manualUpdate and manualCreation on details pages
 - [ ] Fix wrong imports in backend (ESM/CommonJS)
 - [ ] Search by linked items
 - [ ] Faire un endpoint /search (pour item picker et searc page) au lieu de plusieurs appel à plusieurs endpoints
