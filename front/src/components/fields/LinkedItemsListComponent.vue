@@ -13,9 +13,9 @@
       deleteable @delete="emit('delete', season.seasonId, 'season')" clickable
       @click="router.push(`/season/${season.seasonId}`)" />
     <div
-      class="flex items-center justify-center rounded-full px-16 py-0.5 border-dashed border-2 cursor-pointer border-gray hover:border-gray-light transition-all transition-200"
+      class="flex items-center justify-center rounded-full px-16 py-0.5 border-dashed border-2 cursor-pointer border-gray transition-all transition-200"
       @click="emit('showPicker', true)">
-      <PlusIcon class="size-6 text-gray-light" />
+      <PlusIcon class="size-6 text-primary" />
     </div>
   </div>
 </template>
