@@ -2,7 +2,7 @@
   <div class="flex flex-col cursor-pointer border-2 border-gray rounded-[8px] bg-dark-light h-full overflow-hidden">
     <div class="flex-1 p-5" @click="goToEvent()">
       <div class="flex flex-col justify-center items-center w-full my-2">
-        <h1 class="text-2xl font-bold">{{ threeDotsString(props?.event?.title) }}</h1>
+        <h1 class="text-2xl font-bold text-center">{{ threeDotsString(props?.event?.title) }}</h1>
         <p class="text-sm text-gray-light">the {{ dateToNiceDate(props?.event?.date) }} {{ props?.event?.location ? `at
           ${props?.event?.location}` : '' }}</p>
       </div>

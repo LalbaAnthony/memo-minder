@@ -47,6 +47,12 @@ export function isValidDate(date) {
     return !isNaN(new Date(date)) && (new Date(date) !== "Invalid Date");
 }
 
+export function isDateInFuture(date) {
+    const today = new Date();
+    const inputDate = new Date(date);
+    return inputDate > today;
+}
+
 export function isValidColor(color) {
     return (color.length === 7 && color[0] === '#' && color.match(/^[0-9A-Fa-f]+$/))
 }

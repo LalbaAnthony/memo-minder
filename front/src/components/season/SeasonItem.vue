@@ -3,7 +3,7 @@
     <div class="h-6 w-full rounded-t-[6px]" :style="`background-color: ${props?.season?.color};`"></div>
     <div class="flex-1 p-5" @click="goToSeason()">
       <div class="flex flex-col justify-center items-center w-full my-2">
-        <h1 class="text-2xl font-bold">{{ threeDotsString(props?.season?.title) }}</h1>
+        <h1 class="text-2xl font-bold text-center">{{ threeDotsString(props?.season?.title) }}</h1>
         <p class="text-sm text-gray-light">{{ dateToNiceDate(props?.season?.dateStart) }} {{ props?.season?.dateStart &&
           props?.season?.dateEnd ? 'to' : '' }} {{ dateToNiceDate(props?.season?.dateEnd) }}</p>
       </div>
