@@ -2,7 +2,7 @@
   <div>
     <TopActions :goBackButton="true" />
 
-    <Loader v-if="personStore.item?.loading" />
+    <Loader v-if="personStore.item.loading" />
     <div v-else>
       <!-- Name and date section -->
       <section>

@@ -26,20 +26,22 @@
     </div>
 
     <div class="md:grid md:grid-cols-2 md:gap-24">
-      <section v-if="authStore?.user?.homePageEnableLasts && eventStore?.items?.data?.length > 0">
+      <section v-if="authStore?.user?.homePageEnableLasts">
         <h2 class="text-xl font-bold">Lasts events added</h2>
         <div class="my-4">
-          <Grid :items="eventStore.items.data">
+          <Loader v-if="eventStore.items.loading" position="static" />
+          <Grid v-else :items="eventStore.items.data">
             <template #item="{ item }">
               <Event :event="item" />
             </template>
           </Grid>
         </div>
       </section>
-      <section v-if="authStore?.user?.homePageEnableLasts && seasonStore?.items?.data?.length > 0">
+      <section v-if="authStore?.user?.homePageEnableLasts">
         <h2 class="text-xl font-bold">Lasts seasons added</h2>
         <div class="my-4">
-          <Grid :items="seasonStore.items.data">
+          <Loader v-if="seasonStore.items.loading" position="static" />
+          <Grid v-else :items="seasonStore.items.data">
             <template #item="{ item }">
               <Season :season="item" />
             </template>
@@ -49,7 +51,7 @@
     </div>
 
     <Footer />
-    
+
     <BottomActions :addButton="true" />
   </div>
 </template>
@@ -62,6 +64,7 @@ import Event from '@/components/event/EventItem.vue'
 import Stats from '@/components/homepage/StatsComponent.vue'
 import Spents from '@/components/homepage/SpentsComponent.vue'
 import BottomActions from '@/components/actions/BottomActionsComponent.vue'
+import Loader from '@/components/LoaderComponent.vue'
 import { useAuthStore } from '@/stores/auth'
 import { useSeasonStore } from '@/stores/season'
 import { useEventStore } from '@/stores/event'
@@ -78,13 +81,14 @@ onMounted(() => {
   if (authStore?.user?.homePageEnableLasts) {
     eventStore.fetchItems({
       sort: [{ order: 'DESC', orderBy: 'createdAt' }],
-      perPage: 4
+      perPage: 3
     })
     seasonStore.fetchItems({
       sort: [{ order: 'DESC', orderBy: 'createdAt' }],
-      perPage: 4
+      perPage: 3
     })
   }
+
   if (authStore?.user?.homePageEnableQuote) quoteStore.fetchQuoteIfTooOld()
 })
 
