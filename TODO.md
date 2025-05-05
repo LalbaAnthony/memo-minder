@@ -11,17 +11,16 @@ Should:
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Check theme_color and background_color warning in console on production
 - [ ] Test unitaires et d'intégration des contrôleurs, modèles et routes
-- [ ] Filter by Pill/Items on list pages
 
 Could:
 - [ ] Merge manualUpdate and manualCreation on details pages
+- [ ] Filter by Pill/Items on list pages
 - [ ] Fix wrong imports in backend (ESM/CommonJS)
 - [ ] Search by linked items
 - [ ] Faire un endpoint /search (pour item picker et searc page) au lieu de plusieurs appel à plusieurs endpoints
 - [ ] Faire listes differentes dans les stores pour chaque usage (use stores ? `lasts: {}` ?)
 - [ ] Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ? `toAdd: {}` ?)
 - [ ] Faire validator de données dans les stores ?
-- [ ] Faire en sorte que les dates picker ne s'initalise pas toujours sur la date d'aujourd'hui (utile pour les musiques, …) + vérifier qu'il est ok avec une valeur vide et pas 1970
 - [ ] make add button if no data on home page/lists
 
 Won't:
