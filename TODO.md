@@ -8,7 +8,6 @@ Must:
 
 Should:
 - [ ] Wipe notif enable side menu
-- [ ] Add smart link on music page with the platform logo button (!= link)
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Check theme_color and background_color warning in console on production
 - [ ] Test unitaires et d'intégration des contrôleurs, modèles et routes
