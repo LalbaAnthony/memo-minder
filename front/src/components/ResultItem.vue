@@ -9,9 +9,8 @@
     <h3 class="text-lg font-semibold">{{ threeDotsString(props.item.title) }}</h3>
     <ArrowLongRightIcon v-if="props.icon === 'arrow'"
       class="arrow size-8 text-primary ml-2 transition ease-in-out duration-300 transform" />
-    <PlusIcon v-else-if="props.icon === 'plus'"
+    <PlusIcon v-if="props.icon === 'plus'"
       class="arrow size-8 text-primary ml-2 transition ease-in-out duration-300 transform" />
-    <div v-else>&nbsp;</div>
   </div>
 </template>
 
