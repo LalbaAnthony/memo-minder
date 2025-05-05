@@ -3,7 +3,7 @@ import { notif } from '@/composables/notif.js'
 import router from '@/router'
 import { api } from '@/composables/api'
 import { isValidEmail } from '@/composables/helpers.js'
-import { isValidDate } from '@/composables/helpers.js'
+import { isValidDate, isDateInFuture } from '@/composables/helpers.js'
 import { missingsElementsPassword } from '@/composables/helpers.js'
 
 export const useAuthStore = defineStore('auth', {
@@ -113,6 +113,7 @@ export const useAuthStore = defineStore('auth', {
       if (!error && (!username || username.length === 0)) error = "Please enter your username"
       if (!error && (!birthdate || birthdate.length === 0)) error = "Please enter your birthdate"
       if (!error && !isValidDate(birthdate)) error = "Please enter a valid birthdate"
+      if (!error && isDateInFuture(birthdate)) error = "Birthdate must be in the past"
       if (!error && (!language || language.length === 0)) error = "Please select your language"
 
       if (error) {
@@ -279,6 +280,7 @@ export const useAuthStore = defineStore('auth', {
       if (!error && (!username || username.length === 0)) error = "Please enter your username"
       if (!error && (!birthdate || birthdate.length === 0)) error = "Please enter your birthdate"
       if (!error && !isValidDate(birthdate)) error = "Please enter a valid birthdate"
+      if (!error && isDateInFuture(birthdate)) error = "Birthdate must be in the past"
       if (!error && (!language || language.length === 0)) error = "Please select your language"
       if (!error && (!email || email.length === 0)) error = "Please enter your email"
       if (!error && !isValidEmail(email)) error = "Please enter a valid email"

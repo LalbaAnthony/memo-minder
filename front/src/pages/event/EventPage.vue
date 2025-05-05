@@ -91,6 +91,7 @@ function loadOrInitEvent() {
     if (route.query.title) eventStore.item.data.title = route.query.title // From the search page
   }
   watched.value = 0
+  eventStore.item.loading = false
 }
 
 function openMaps() {

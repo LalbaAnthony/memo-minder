@@ -95,6 +95,7 @@ function loadOrInitMusic() {
     if (route.query.title) musicStore.item.data.title = route.query.title // From the search page
   }
   watched.value = 0
+  musicStore.item.loading = false
 }
 
 function copyToClipboard(text) {

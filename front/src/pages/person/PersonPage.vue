@@ -62,6 +62,7 @@ function loadOrInitPerson() {
     if (route.query.name) personStore.item.data.name = route.query.name // From the search page
   }
   watched.value = 0
+  personStore.item.loading = false
 }
 
 function valid() {

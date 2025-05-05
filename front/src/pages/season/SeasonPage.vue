@@ -136,6 +136,7 @@ function loadOrInitSeason() {
     if (route.query.title) seasonStore.item.data.title = route.query.title // From the search page
   }
   watched.value = 0
+  seasonStore.item.loading = false
 }
 
 function valid() {
