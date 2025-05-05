@@ -72,7 +72,7 @@ import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import { LinkIcon } from '@heroicons/vue/24/solid'
 import { ClipboardIcon } from '@heroicons/vue/24/solid'
 import debounce from '@/composables/debounce.js'
-import { userStreamingPlatform } from '@/composables/streamingPlatform.js'
+import { userStreamingPlatform, smartStreamingLink } from '@/composables/streamingPlatform.js'
 
 const route = useRoute()
 const router = useRouter()
@@ -81,10 +81,7 @@ const musicStore = useMusicStore()
 const watched = ref(0)
 
 function openStreamingLink() {
-  let url = ''
-  if (!url && musicStore.item.data?.streamingLink) url = musicStore.item.data.streamingLink
-  
-  if (url) window.open(url, '_blank')
+  window.open(smartStreamingLink(musicStore.item.data), '_blank')
 }
 
 function loadOrInitMusic() {
