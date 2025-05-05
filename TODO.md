@@ -14,14 +14,12 @@ Should:
 
 Could:
 - [ ] Merge manualUpdate and manualCreation on details pages
+- [ ] Faire validator de données dans les stores ?
 - [ ] Filter by Pill/Items on list pages
 - [ ] Fix wrong imports in backend (ESM/CommonJS)
-- [ ] Search by linked items
+- [ ] Search including linked items
 - [ ] Faire un endpoint /search (pour item picker et searc page) au lieu de plusieurs appel à plusieurs endpoints
-- [ ] Faire listes differentes dans les stores pour chaque usage (use stores ? `lasts: {}` ?)
-- [ ] Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ? `toAdd: {}` ?)
-- [ ] Faire validator de données dans les stores ?
-- [ ] make add button if no data on home page/lists
+- [ ] Faire listes/items differentes dans les stores pour chaque usage (use stores ? `lasts: {}`, `toAdd: {}` ?)
 
 Won't:
 - [ ] Tests de bout en bout (faire de la création d'un utilisateur à son utilisation)

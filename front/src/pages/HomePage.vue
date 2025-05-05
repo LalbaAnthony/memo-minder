@@ -54,5 +54,4 @@ onMounted(() => {
   if (authStore?.user?.homePageEnableQuote) quoteStore.fetchQuoteIfTooOld()
 })
 
-
 </script>
