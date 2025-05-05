@@ -52,7 +52,7 @@
     </div>
 
     <!-- Results -->
-    <Loader v-if="searching" position="absolute" />
+    <Loader v-if="searching" :position="isMobile() ? 'static' : 'absolute'" />
     <Grid v-if="search" :items="results" :enable-no-item="!searching"
       :noItemPosition="isMobile() ? 'static' : 'absolute'">
       <template #item="{ item }">
