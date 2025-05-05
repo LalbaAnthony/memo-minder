@@ -2,7 +2,7 @@
   <div>
     <TopActions :goBackButton="true" />
 
-    <Loader v-if="seasonStore.item?.loading" />
+    <Loader v-if="seasonStore.item.loading" />
     <div v-else>
       <!-- Title and date section -->
       <section>

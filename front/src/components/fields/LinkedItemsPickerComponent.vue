@@ -21,6 +21,7 @@
             <TransitionChild enter="transition ease-in-out duration-300 transform" enter-from="opacity-0 scale-95"
               enter-to="opacity-100 scale-100" leave="transition ease-in-out duration-300 transform"
               leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
+              <Loader v-if="searching" position="static" />
               <Grid :items="results" :enable-no-item="!searching" clickables
                 :noItemPosition="isMobile() ? 'static' : 'absolute'">
                 <template #item="{ item }">
@@ -45,6 +46,7 @@ import {
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { XMarkIcon } from '@heroicons/vue/24/solid'
 import Grid from '@/components/GridComponent.vue'
+import Loader from '@/components/LoaderComponent.vue'
 import Result from '@/components/ResultItem.vue'
 import { watch, ref } from 'vue'
 import debounce from '@/composables/debounce.js'

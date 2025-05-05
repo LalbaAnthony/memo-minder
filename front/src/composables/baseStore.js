@@ -16,7 +16,7 @@ export function createBaseStore(config) {
                 pagination: config.pagination,
             },
             item: {
-                loading: false,
+                loading: true,
                 data: {},
             },
         }),
@@ -24,12 +24,12 @@ export function createBaseStore(config) {
         actions: {
             clearItem() {
                 this.item.data = {}
-                this.item.loading = false
+                this.item.loading = true
             },
 
             clearItems() {
                 this.items.data = []
-                this.items.loading = false
+                this.items.loading = true
                 this.items.pagination = config.pagination
             },
 

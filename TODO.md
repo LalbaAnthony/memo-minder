@@ -8,19 +8,17 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
-- [x] Clear the search field on item picker when an item is selected
-- [x] Chg sort and default sort for events and seasons
-- [x] Check smart link in music item that migth open the previous opened in details
 - [ ] Wipe notif enable side menu
 - [ ] Add smart link on music page with the platform logo button (!= link)
 - [ ] Merge manualUpdate and manualCreation on details pages
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
-- [ ] Add loader on search page and item picker
 - [ ] Check theme_color and background_color warning in console on production
 - [ ] Test unitaires et d'intégration des contrôleurs, modèles et routes
+- [ ] Filter by Pill/Items on list pages
 
 Could:
 - [ ] Fix wrong imports in backend (ESM/CommonJS)
+- [ ] Search by linked items
 - [ ] Faire un endpoint /search (pour item picker et searc page) au lieu de plusieurs appel à plusieurs endpoints
 - [ ] Faire listes differentes dans les stores pour chaque usage (use stores ? `lasts: {}` ?)
 - [ ] Ajouter un élément depuis item picker fait Oublier lemeent précédent (use stores ? `toAdd: {}` ?)
