@@ -8,6 +8,7 @@ Must:
 
 Should:
 - [ ] Wipe notif enable side menu
+- [ ] Faire en sorte que chaque nouveau évent est automatiquement ajouté à la saison en cours (la récup avec dateStart et dateEnd des saison)
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Check theme_color and background_color warning in console on production
 - [ ] Test unitaires et d'intégration des contrôleurs, modèles et routes
