@@ -23,6 +23,7 @@ const config = {
     data.people = []
     data.musics = []
 
+    // TODO: Use a dedicated endpoint to fetch the current season instead of fetching all seasons
     // Find the first season where the start date is before today and the end date is after today
     await seasonStore.fetchItems()
     const suggestedSeasons = seasonStore.items.data.filter(season => {
