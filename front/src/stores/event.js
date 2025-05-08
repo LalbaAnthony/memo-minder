@@ -1,4 +1,7 @@
 import { createBaseStore } from '@/composables/baseStore.js'
+import { useSeasonStore } from '@/stores/season'
+
+const seasonStore = useSeasonStore()
 
 const config = {
   primaryKey: 'eventId',
@@ -12,12 +15,23 @@ const config = {
     one: 'event',
   },
   pagination: { page: 1, perPage: 20, total: 1 },
-  initItem: (data) => {
+  initItem: async (data) => {
     const today = new Date().toISOString().split('T')[0]
+
     data.dateStart = today
-    data.seassons = []
+    data.seasons = []
     data.people = []
     data.musics = []
+
+    // Find the first season where the start date is before today and the end date is after today
+    if (!seasonStore.items.data.length) await seasonStore.fetchItems()
+    const suggestedSeasons = seasonStore.items.data.filter(season => {
+      const todayDate = new Date()
+      const dateStart = new Date(season.dateStart)
+      const dateEnd = new Date(season.dateEnd)
+      return dateStart && dateStart <= todayDate && dateEnd && dateEnd >= todayDate
+    })
+    if (suggestedSeasons.length) data.seasons = suggestedSeasons
   },
   mapRelations: (item) => {
     return {

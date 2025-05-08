@@ -13,7 +13,7 @@ const config = {
   },
   pagination: { page: 1, perPage: 20, total: 1 },
   initItem: (data) => {
-    data.seassons = []
+    data.seasons = []
     data.people = []
     data.events = []
   },
