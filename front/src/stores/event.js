@@ -24,7 +24,7 @@ const config = {
     data.musics = []
 
     // Find the first season where the start date is before today and the end date is after today
-    if (!seasonStore.items.data.length) await seasonStore.fetchItems()
+    await seasonStore.fetchItems()
     const suggestedSeasons = seasonStore.items.data.filter(season => {
       const todayDate = new Date()
       const dateStart = new Date(season.dateStart)
