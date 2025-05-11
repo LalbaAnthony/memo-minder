@@ -1,9 +1,5 @@
-- [ ] Utiliser app et noter Problemes
-- [ ] Truncate prod database from junk data before deploying for real
-- [ ] Vérifier la présence de TODO
-- [ ] Import my own data
-
 Must:
+- [ ] Make prepoduction
 - [ ] Create and implement email systeme with back/src/helpers/email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
