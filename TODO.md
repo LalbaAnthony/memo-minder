@@ -7,6 +7,7 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
+- [ ] Scroll à la bonne hauteur à l'ouverture de item picker
 - [ ] Wipe notif enable side menu
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Check theme_color and background_color warning in console on production
