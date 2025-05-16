@@ -6,7 +6,7 @@ Should:
 - [ ] Scroll à la bonne hauteur à l'ouverture de item picker
 - [ ] Wipe notif enable side menu
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
-- [ ] Check theme_color and background_color warning in console on production
+- [ ] Check theme_color and background_color warning in console on production (et copier solution sur Undercover)
 - [ ] Test unitaires et d'intégration des contrôleurs, modèles et routes
 
 Could:
