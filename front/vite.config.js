@@ -14,9 +14,9 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 // Get the version from package.json
-const version = require('./package.json').version || '0.0.0';
+const version = require('./package.json')?.version || '0.0.0';
 process.env.VITE_APP_VERSION = version;
-
+  
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -27,8 +27,8 @@ export default defineConfig({
         name: process.env.VITE_APP_NAME,
         short_name: process.env.VITE_APP_SHORT_NAME,
         description: process.env.VITE_APP_DESCRIPTION,
-        theme_color: process.env.VITE_APP_THEME_COLOR,
-        background_color: process.env.VITE_APP_BG_COLOR,
+        theme_color: `#${process.env.VITE_APP_THEME_COLOR}`, // Due to the pipe creating front .env file, we cannot use '#'
+        background_color: `#${process.env.VITE_APP_BG_COLOR}`,
         icons: [
           {
             src: 'android-chrome-192x192.png',
