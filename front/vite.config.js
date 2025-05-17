@@ -74,3 +74,4 @@ export default defineConfig({
     port: process.env.VITE_PORT || 5173,
   },
 })
+
