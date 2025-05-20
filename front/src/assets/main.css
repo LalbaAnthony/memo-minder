@@ -58,7 +58,6 @@ section {
   user-select: none;
 }
 
-
 /* Code for Firefox */
 ::-moz-selection,
 ::selection {
