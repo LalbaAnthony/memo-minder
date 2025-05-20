@@ -46,7 +46,7 @@ const props = defineProps({
 <style scoped>
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(350px, 100%), 1fr));
   grid-gap: 1rem;
 }
 
