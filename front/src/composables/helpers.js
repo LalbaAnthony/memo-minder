@@ -47,14 +47,19 @@ export function isValidDate(date) {
     return !isNaN(new Date(date)) && (new Date(date) !== "Invalid Date");
 }
 
-export function isDateInFuture(date) {
-    const today = new Date();
-    const inputDate = new Date(date);
-    return inputDate > today;
+export function isValidUrl(url) {
+    const pattern = /^(https?:\/\/)?([a-z0-9-]+\.)+[a-z]{2,6}(\/[^\s]*)?$/i;
+    return pattern.test(url);
 }
 
 export function isValidColor(color) {
     return (color.length === 7 && color[0] === '#' && color.match(/^[0-9A-Fa-f]+$/))
+}
+
+export function isDateInFuture(date) {
+    const today = new Date();
+    const inputDate = new Date(date);
+    return inputDate > today;
 }
 
 export function roundNb(nb, precision = 2) {
@@ -88,7 +93,7 @@ export function randomColor() {
 }
 
 export function randomPastelColor() {
-    const r = Math.floor((Math.random() * 127) + 127); 
+    const r = Math.floor((Math.random() * 127) + 127);
     const g = Math.floor((Math.random() * 127) + 127);
     const b = Math.floor((Math.random() * 127) + 127);
 
@@ -111,4 +116,19 @@ export function missingsElementsPassword(password) {
     if (!password.match(/[^a-zA-Z\d]/)) missingsElements.push('1 special character')
 
     return missingsElements;
+}
+
+export function copyToClipboard(text = '') {
+    if (!text || text.length < 0) return;
+
+    navigator.clipboard.writeText(text)
+}
+
+export function openLink(url, blank = true) {
+    if (!url || url.length < 0) return;
+    if (!url.startsWith('http://') && !url.startsWith('https://')) url = 'http://' + url;
+    if (!isValidUrl(url)) return;
+
+    const target = blank ? '_blank' : '_self';
+    window.open(url, target);
 }

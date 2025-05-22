@@ -23,12 +23,15 @@
             <DatePicker class="max-w-[15rem]" :value="eventStore.item?.data?.date"
               @update="(v) => { eventStore.item.data.date = v }" />
             <span class="text-lg font-medium text-gray-light">at</span>
-            <div class="flex items-center justify-center gap-2">
-              <MapPinIcon
-                :class="['size-6 text-gray', eventStore.item?.data?.location ? 'hover:text-gray-light cursor-pointer' : '']"
-                @click="openMaps()" />
+            <div class="flex items-center justify-center gap-2 w-full max-w-[24rem]">
+              <ClipboardDocumentIcon
+                :class="['size-6', eventStore.item?.data?.location ? 'text-gray hover:text-gray-light cursor-pointer' : 'text-gray-dark']"
+                @click="copyToClipboard(eventStore.item?.data?.location)" />
               <input v-model="eventStore.item.data.location" id="location"
-                class="p-2 rounded-lg bg-gray-dark text-light" placeholder="Location" />
+                class="w-full p-2 rounded-lg bg-gray-dark text-light" placeholder="Location" />
+              <ArrowTopRightOnSquareIcon
+                :class="['size-7', eventStore.item?.data?.location ? 'text-gray hover:text-gray-light cursor-pointer' : 'text-gray-dark']"
+                @click="openLink(eventStore.item?.data?.location)" />
             </div>
           </div>
         </div>
@@ -68,7 +71,8 @@ import LinkedItemsWrapper from '@/components/fields/LinkedItemsWrapperComponent.
 import Loader from '@/components/LoaderComponent.vue'
 import MoodPicker from '@/components/fields/MoodPickerComponent.vue'
 import BottomActions from '@/components/actions/BottomActionsComponent.vue'
-import { MapPinIcon } from '@heroicons/vue/24/solid'
+import { ArrowTopRightOnSquareIcon } from '@heroicons/vue/24/solid'
+import { ClipboardDocumentIcon } from '@heroicons/vue/24/solid'
 import TopActions from '@/components/actions/TopActionsComponent.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useEventStore } from '@/stores/event'
@@ -76,6 +80,7 @@ import { notif } from '@/composables/notif.js'
 import { dateToNiceDate } from '@/composables/helpers.js'
 import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import debounce from '@/composables/debounce.js'
+import { copyToClipboard, openLink } from '@/composables/helpers.js'
 
 const route = useRoute()
 const router = useRouter()
@@ -92,10 +97,6 @@ function loadOrInitEvent() {
   }
   watched.value = 0
   eventStore.item.loading = false
-}
-
-function openMaps() {
-  if (eventStore.item?.data?.location) window.open(`http://maps.google.com/?q=${eventStore.item.data.location}`)
 }
 
 function valid() {
