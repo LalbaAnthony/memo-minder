@@ -9,9 +9,12 @@
         <div v-if="musicStore.item?.data?.updatedAt" class="mb-4">
           <span class="text-gray">Updated the {{ dateToNiceDate(musicStore.item?.data?.updatedAt) }}</span>
         </div>
-        <div class="flex items-center justify-between gap-2 flex-wrap">
+        <div class="flex items-center justify-between gap-2 w-full">
           <input v-model="musicStore.item.data.title" type="text"
             class="rounded-lg bg-dark placeholder-gray text-light text-2xl w-full" placeholder="Music title" />
+          <button class="rounded-full bg-primary p-2 hover:scale-105 transition-all duration-300">
+            <PlayIcon class="size-6 cursor-pointer" @click="openLink(smartStreamingLink(musicStore.item?.data))" />
+          </button>
         </div>
       </section>
 
@@ -71,9 +74,11 @@ import { dateToNiceDate } from '@/composables/helpers.js'
 import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/vue/24/solid'
 import { ClipboardDocumentIcon } from '@heroicons/vue/24/solid'
+import { PlayIcon } from '@heroicons/vue/24/solid'
 import debounce from '@/composables/debounce.js'
 import { userStreamingPlatform } from '@/composables/streamingPlatform.js'
 import { copyToClipboard, openLink } from '@/composables/helpers.js'
+import { smartStreamingLink } from '@/composables/streamingPlatform.js'
 
 const route = useRoute()
 const router = useRouter()
