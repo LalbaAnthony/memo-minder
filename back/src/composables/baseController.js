@@ -42,6 +42,9 @@ const getById = (Model, { associations = [] } = {}) => async (req, res) => {
     if (!req.params.id)
         return res.status(400).json(frmtr('error', null, 'No id provided'));
 
+    if (!/^\d+$/.test(req.params.id))
+        return res.status(400).json(frmtr('error', null, 'Invalid id provided'));
+
     const item = await Model.findByPk(parseInt(req.params.id), { include: associations });
 
     if (!item)

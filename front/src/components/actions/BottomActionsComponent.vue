@@ -13,13 +13,13 @@
 
     <!-- Create button -->
     <div v-if="props.createButton" @click="triggerCreate()"
-      class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-300">
+      class="flex items-center justify-center cursor-pointer text-dark-light bg-primary shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-300">
       <CheckIcon class="size-10" />
     </div>
 
     <!-- Update button -->
     <div v-if="props.updateButton" @click="triggerUpdate()"
-      class="flex items-center justify-center cursor-pointer text-primary bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-300">
+      class="flex items-center justify-center cursor-pointer text-dark-light bg-primary shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-300">
       <CheckIcon class="size-10" />
     </div>
 
