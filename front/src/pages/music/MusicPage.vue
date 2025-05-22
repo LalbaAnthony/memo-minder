@@ -12,7 +12,7 @@
         <div class="flex items-center justify-between gap-2 w-full">
           <input v-model="musicStore.item.data.title" type="text"
             class="rounded-lg bg-dark placeholder-gray text-light text-2xl w-full" placeholder="Music title" />
-          <button class="rounded-full bg-primary p-2 hover:scale-105 transition-all duration-300">
+          <button class="rounded-full bg-primary p-3 hover:scale-105 transition-all duration-300">
             <PlayIcon class="size-6 cursor-pointer" @click="openLink(smartStreamingLink(musicStore.item?.data))" />
           </button>
         </div>
