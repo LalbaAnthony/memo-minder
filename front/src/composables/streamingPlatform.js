@@ -55,7 +55,7 @@ const allStreamingPlatforms = {
     },
     default: {
         slug: 'default',
-        label: 'Default',
+        label: 'None',
         icon: shallowRef(DefaultIcon),
         regex: null,
         links: {

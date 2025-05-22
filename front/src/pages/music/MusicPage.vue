@@ -42,7 +42,7 @@
               @update="(v) => { musicStore.item.data.releaseDate = v }" />
             <span class="text-lg font-medium text-gray-light">by</span>
             <input v-model="musicStore.item.data.artist" id="artist"
-              class="max-w-[15rem] p-2 rounded-lg bg-gray-dark text-light" placeholder="Artist" />
+              class="w-full max-w-[24rem] p-2 rounded-lg bg-gray-dark text-light" placeholder="Artist" />
           </div>
         </div>
       </section>
