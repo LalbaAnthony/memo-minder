@@ -31,7 +31,7 @@
                 class="w-full p-2 rounded-lg bg-gray-dark text-light" placeholder="Location" />
               <ArrowTopRightOnSquareIcon
                 :class="['size-7', eventStore.item?.data?.location ? 'text-gray hover:text-gray-light cursor-pointer' : 'text-gray-dark']"
-                @click="openLink(eventStore.item?.data?.location)" />
+                @click="openLink(eventStore.item?.data?.location ? `http://maps.google.com/?q=${eventStore.item.data.location}` : '')" />
             </div>
           </div>
         </div>
