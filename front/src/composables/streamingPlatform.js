@@ -102,7 +102,7 @@ function smartStreamingLink(music = {}) {
     // If still no url, use the default search link
     if (!url && streamingPlatform.value?.links?.search && music?.title) url = `${streamingPlatform.value.links.search}${music?.title} ${music?.artist}`
 
-    return url
+    return encodeURI(url)
 }
 
 export {

@@ -4,8 +4,9 @@ Must:
 
 Should:
 - [ ] Musics:
-  - [ ] Remplacer le logo des items par un bouton 'Play' + le logo de l'app en suprerposition
-  - [ ] Ajouter bouton 'Play' avec smartStraming link dans page dataile (gros btn à la spotify ou fab ?)
+  - [ ] Remplacer le logo des items par un bouton 'Play' + le logo de l'app en suprerposition et en faire un bouton
+  - [ ] Faire toute les music item de clickable commme les autres items
+  - [ ] Faire toute les person item de clickable commme les autres items
 - [ ] Scroll à la bonne hauteur à l'ouverture de item picker
 - [ ] Wipe notif enable side menu
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD

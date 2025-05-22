@@ -13,13 +13,13 @@
 
     <!-- Create button -->
     <div v-if="props.createButton" @click="triggerCreate()"
-      class="flex items-center justify-center cursor-pointer text-dark-light bg-primary shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-300">
+      class="flex items-center justify-center cursor-pointer text-light bg-primary shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-300">
       <CheckIcon class="size-10" />
     </div>
 
     <!-- Update button -->
     <div v-if="props.updateButton" @click="triggerUpdate()"
-      class="flex items-center justify-center cursor-pointer text-dark-light bg-primary shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-300">
+      class="flex items-center justify-center cursor-pointer text-light bg-primary shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-300">
       <CheckIcon class="size-10" />
     </div>
 
@@ -52,7 +52,7 @@
         </TransitionChild>
       </TransitionRoot>
       <div
-        :class="['rounded-2xl', 'z-20 flex items-center justify-center cursor-pointer text-dark-light bg-primary shadow-xl p-2 transition-all duration-300 delay-100']"
+        :class="['rounded-2xl', 'z-20 flex items-center justify-center cursor-pointer text-light bg-primary shadow-xl p-2 transition-all duration-300 delay-100']"
         @click.stop="showAddSelector = !showAddSelector">
         <PlusIcon class="size-10" />
       </div>
