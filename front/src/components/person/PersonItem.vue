@@ -1,7 +1,10 @@
 <template>
   <div class="flex flex-row justify-between border-2 border-gray rounded-[8px] bg-dark-light h-full overflow-hidden">
-    <div
-      class="flex-1 flex justify-between rounded-l-[6px] p-5 cursor-pointer transition-colors duration-200">
+    <div class="flex-1 flex justify-left rounded-l-[6px] p-5 cursor-pointer transition-colors duration-200"
+      @click="goToPerson()">
+      <div class="flex items-center justify-center gap-4 pr-4">
+          <UserIcon class="size-10" />
+      </div>
       <div class="flex flex-col justify-center items-start">
         <h1 class="text-2xl font-bold">{{ threeDotsString(props?.person?.name) }}</h1>
         <p class="text-gray-light">{{ threeDotsString(props?.person?.description) }}</p>
@@ -23,6 +26,7 @@
 <script setup>
 import { usePersonStore } from '@/stores/person'
 import { TrashIcon } from '@heroicons/vue/24/outline'
+import { UserIcon } from '@heroicons/vue/24/solid'
 import { threeDotsString } from '@/composables/helpers'
 import { PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'

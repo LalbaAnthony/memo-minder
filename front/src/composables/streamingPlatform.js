@@ -95,8 +95,10 @@ function smartStreamingLink(music = {}) {
     // If no link, use the search link of the streaming platform of the use
     if (!url && authStore.user.streamingPlatform && userStreamingPlatform) {
         url = userStreamingPlatform().links.search
-        if (music?.title) url += `${music?.title}`
-        if (music?.artist) url += ` ${music?.artist}`
+        let terms = []
+        if (music?.artist) terms.push(music?.artist)
+        if (music?.title) terms.push(music?.title)
+        url += `${terms.join(' ')}`
     }
 
     // If still no url, use the default search link

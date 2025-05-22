@@ -1,9 +1,9 @@
 <template>
   <div class="flex flex-row justify-between border-2 border-gray rounded-[8px] bg-dark-light h-full overflow-hidden">
     <div class="flex-1 flex justify-left rounded-l-[6px] p-5 cursor-pointer transition-colors duration-200"
-      @click="openStreamingLink()">
-      <div class="flex items-center justify-center gap-4 p-2 pr-6">
-        <component v-if="streamingPlatform?.icon" :is="streamingPlatform.icon.value" />
+      @click="goToMusic()">
+      <div class="flex items-center justify-center gap-4 pr-4">
+          <MusicalNoteIcon class="size-10" />
       </div>
       <div class="flex flex-col justify-center items-start">
         <h1 class="text-2xl font-bold">{{ threeDotsString(props?.music?.title) }}</h1>
@@ -32,10 +32,10 @@
 import { getYearFromDate } from '@/composables/helpers.js'
 import { useMusicStore } from '@/stores/music'
 import { TrashIcon } from '@heroicons/vue/24/outline'
+import { MusicalNoteIcon } from '@heroicons/vue/24/solid'
 import { PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'
 import { threeDotsString } from '@/composables/helpers'
-import { findStreamingPlatform, smartStreamingLink } from '@/composables/streamingPlatform.js'
 
 const router = useRouter()
 const musicStore = useMusicStore()
@@ -46,12 +46,6 @@ const props = defineProps({
     required: true,
   },
 })
-
-const streamingPlatform = findStreamingPlatform(props?.music?.streamingLink)
-
-function openStreamingLink() {
-  window.open(smartStreamingLink(props?.music), '_blank')
-}
 
 function deleteMusic() {
   if (confirm('Are you sure you want to delete this music?')) musicStore.deleteItem(props.music.musicId, true)
