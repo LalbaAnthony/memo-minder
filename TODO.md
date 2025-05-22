@@ -3,6 +3,7 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
+- [ ] Check si ya un paramètre Spotify pour lancer la musique direct
 - [ ] Check theme colors
 - [ ] Chg FAB style so it dosnt mess up with the rest of the app
 - [ ] Musics:
