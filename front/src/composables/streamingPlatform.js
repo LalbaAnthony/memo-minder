@@ -61,7 +61,7 @@ const allStreamingPlatforms = {
         links: {
             home: null,
             search: 'https://www.google.com/search?q=',
-            placeholder: 'https://example.com/music/song/...',
+            placeholder: 'https://example.com/music/...',
         },
     },
 }
