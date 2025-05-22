@@ -3,6 +3,10 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
+- [ ] Le back plante si on rentre une URL de music qui existe pas (ID: 999999) ou une string (ID: 'kjugzdazd') 
+- [ ] Musics:
+  - [ ] Remplacer le logo des items par un bouton 'Play' + le logo de l'app en suprerposition
+  - [ ] Ajouter bouton 'Play' avec smartStraming link dans page dataile (gros btn à la spotify ou fab ?)
 - [ ] Scroll à la bonne hauteur à l'ouverture de item picker
 - [ ] Wipe notif enable side menu
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD

@@ -18,15 +18,15 @@
       <!-- Stream link section -->
       <section>
         <div class="flex items-center justify-center gap-2 bg-dark-light p-4 rounded-lg">
-          <LinkIcon
-            :class="['size-6 text-gray', musicStore.item?.data?.streamingLink ? 'hover:text-gray-light cursor-pointer' : '']"
-            @click="openStreamingLink()" />
+          <ClipboardDocumentIcon
+            :class="['size-6', musicStore.item?.data?.streamingLink ? 'text-gray hover:text-gray-light cursor-pointer' : 'text-gray-dark']"
+            @click="copyToClipboard(musicStore.item?.data?.streamingLink)" />
           <input v-model="musicStore.item.data.streamingLink" id="streamingLink"
             class="w-full sm:w-2/3 md:w-1/2 p-2 rounded-lg bg-gray-dark text-light"
             :placeholder="userStreamingPlatform().links.placeholder" />
-          <ClipboardIcon
-            :class="['size-6 text-gray', musicStore.item?.data?.streamingLink ? 'hover:text-gray-light cursor-pointer' : '']"
-            @click="copyToClipboard(musicStore.item?.data?.streamingLink)" />
+          <ArrowTopRightOnSquareIcon
+            :class="['size-7', musicStore.item?.data?.streamingLink ? 'text-gray hover:text-gray-light cursor-pointer' : 'text-gray-dark']"
+            @click="openLink(musicStore.item?.data?.streamingLink)" />
         </div>
       </section>
 
@@ -69,20 +69,17 @@ import { useMusicStore } from '@/stores/music'
 import { notif } from '@/composables/notif.js'
 import { dateToNiceDate } from '@/composables/helpers.js'
 import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
-import { LinkIcon } from '@heroicons/vue/24/solid'
-import { ClipboardIcon } from '@heroicons/vue/24/solid'
+import { ArrowTopRightOnSquareIcon } from '@heroicons/vue/24/solid'
+import { ClipboardDocumentIcon } from '@heroicons/vue/24/solid'
 import debounce from '@/composables/debounce.js'
-import { userStreamingPlatform, smartStreamingLink } from '@/composables/streamingPlatform.js'
+import { userStreamingPlatform } from '@/composables/streamingPlatform.js'
+import { copyToClipboard, openLink } from '@/composables/helpers.js'
 
 const route = useRoute()
 const router = useRouter()
 const musicStore = useMusicStore()
 
 const watched = ref(0)
-
-function openStreamingLink() {
-  window.open(smartStreamingLink(musicStore.item.data), '_blank')
-}
 
 function loadOrInitMusic() {
   if (route.params.musicId) {
@@ -93,13 +90,6 @@ function loadOrInitMusic() {
   }
   watched.value = 0
   musicStore.item.loading = false
-}
-
-function copyToClipboard(text) {
-  if (text) {
-    navigator.clipboard.writeText(text)
-    notif.notify('Link copied to clipboard', 'success')
-  }
 }
 
 function valid() {
