@@ -10,15 +10,15 @@ export function threeDotsString(str, maxLen = 100) {
     return str.slice(0, maxLen).trim() + " ...";
 }
 
-export function ageFromDate(birthDate) {
-    const today = new Date();
-    const birth = new Date(birthDate);
-    let age = today.getFullYear() - birth.getFullYear();
-    const m = today.getMonth() - birth.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
-        age--;
-    }
-    return age;
+export function ageFromDate(birthdate, precision = 3) {
+    const birth = new Date(birthdate);
+    const now = new Date();
+
+    const millisecondsPerYear = 365.25 * 24 * 60 * 60 * 1000; 
+    const ageInMilliseconds = now - birth;
+    const preciseAge = ageInMilliseconds / millisecondsPerYear;
+
+    return parseFloat(preciseAge.toFixed(precision));
 }
 
 export async function imageExists(url) {

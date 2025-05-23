@@ -3,7 +3,7 @@ Must:
 - [ ] Create and implement email systeme with back/src/helpers/email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
-- [ ] Améliorer précision des spents et stats, should not be upddated once a year
+- [x] Améliorer précision des spents et stats, should not be upddated once a year
 - [ ] Check theme colors
 - [ ] Chg FAB style so it dosnt mess up with the rest of the app + Faire en sorte que la categorie d'item en cours sur mit en évidance
 - [ ] Scroll à la bonne hauteur à l'ouverture de item picker
