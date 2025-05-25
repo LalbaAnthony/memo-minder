@@ -30,7 +30,23 @@
     </div>
 
     <!-- Add button -->
-    <div v-if="props.addButton"
+    <router-link v-if="props.addButton && route.name.includes('season')" to="/seasons/add"
+      class="rounded-2xl z-20 flex items-center justify-center cursor-pointer text-light bg-primary shadow-xl p-2">
+      <PlusIcon class="size-10" />
+    </router-link>
+    <router-link v-else-if="props.addButton && route.name.includes('event')" to="/events/add"
+      class="rounded-2xl z-20 flex items-center justify-center cursor-pointer text-light bg-primary shadow-xl p-2">
+      <PlusIcon class="size-10" />
+    </router-link>
+    <router-link v-else-if="props.addButton && route.name.includes('people')" to="/people/add"
+      class="rounded-2xl z-20 flex items-center justify-center cursor-pointer text-light bg-primary shadow-xl p-2">
+      <PlusIcon class="size-10" />
+    </router-link>
+    <router-link v-else-if="props.addButton && route.name.includes('music')" to="/musics/add"
+      class="rounded-2xl z-20 flex items-center justify-center cursor-pointer text-light bg-primary shadow-xl p-2">
+      <PlusIcon class="size-10" />
+    </router-link>
+    <div v-else-if="props.addButton"
       :class="[showAddSelector ? 'bg-gray-dark' : '', 'rounded-2xl ease-in-out duration-300 transition-all']">
       <TransitionRoot style="z-index: 10" :show="showAddSelector">
         <TransitionChild v-click-outside="() => showAddSelector = false" as="div" style="z-index: 10"
@@ -52,7 +68,7 @@
         </TransitionChild>
       </TransitionRoot>
       <div
-        :class="['rounded-2xl', 'z-20 flex items-center justify-center cursor-pointer text-light bg-primary shadow-xl p-2 transition-all duration-300 delay-100']"
+        class="rounded-2xl z-20 flex items-center justify-center cursor-pointer text-light bg-primary shadow-xl p-2 transition-all duration-300 delay-100"
         @click.stop="showAddSelector = !showAddSelector">
         <PlusIcon class="size-10" />
       </div>
@@ -74,7 +90,7 @@ import debounce from '@/composables/debounce.js'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { onMounted, ref } from 'vue'
 import vClickOutside from '@/composables/clickOutside.js'
-
+import { useRoute } from 'vue-router'
 
 const props = defineProps({
   goTopButton: {
@@ -103,6 +119,8 @@ const props = defineProps({
     default: false,
   },
 })
+
+const route = useRoute()
 
 const enableGoTop = ref(false)
 const showAddSelector = ref(false)

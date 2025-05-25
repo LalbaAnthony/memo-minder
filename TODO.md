@@ -4,8 +4,8 @@ Must:
 
 Should:
 - [x] Améliorer précision des spents et stats, should not be upddated once a year
+- [x] Chg FAB style so it dosnt mess up with the rest of the app + Faire en sorte que la categorie d'item en cours sur mit en évidance
 - [ ] Check theme colors
-- [ ] Chg FAB style so it dosnt mess up with the rest of the app + Faire en sorte que la categorie d'item en cours sur mit en évidance
 - [ ] Scroll à la bonne hauteur à l'ouverture de item picker
 - [ ] Wipe notif enable side menu
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
