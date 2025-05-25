@@ -82,7 +82,7 @@
             <UserCircleIcon class="size-7 text-gray-light" />
             <span class="ml-3 mt-0.5 text-md text-light">Account</span>
           </router-link>
-          <div class="flex items-center cursor-pointer rounded-lg hover:bg-gray p-2" @click.stop="authStore.logout()">
+          <div class="flex items-center cursor-pointer rounded-lg p-2" @click.stop="authStore.logout()">
             <ArrowLeftEndOnRectangleIcon class="size-8 text-danger" />
             <span class="ml-3 mt-0.5 text-md text-danger-light">Log out</span>
           </div>
