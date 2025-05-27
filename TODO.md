@@ -12,6 +12,7 @@ Should:
 - [ ] Test unitaires et d'intégration des contrôleurs, modèles et routes
 
 Could:
+- [ ] Ajout champ birthdate dans les personnes + fonction de rappel de date d'anniversaire avec endpoint dedié
 - [ ] Merge manualUpdate and manualCreation on details pages
 - [ ] Faire validator de données dans les stores ?
 - [ ] Filter by Pill/Items on list pages
