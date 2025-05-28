@@ -4,6 +4,7 @@ Must:
 
 Should:
 - [ ] Inverser ordre bouton sauvegarder et suprimer dans le détails,pour que bouton tombe sous le doigt
+- [ ] Re-add today as the default date on some date picker (just the event one). Make sure the date isnt half set like back in the days. 
 - [x] Améliorer précision des spents et stats, should not be upddated once a year
 - [x] Chg FAB style so it dosnt mess up with the rest of the app + Faire en sorte que la categorie d'item en cours sur mit en évidance
 - [ ] Check theme colors
