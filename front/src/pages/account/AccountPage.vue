@@ -58,7 +58,7 @@
         </div>
         <div class="flex flex-row gap-2">
           <input v-model="authStore.user.homePageEnableUpcomings" name="homePageEnableUpcomings" type="checkbox" />
-          <label for="homePageEnableUpcomings">Enable upcomings birthdays on homepage</label>
+          <label for="homePageEnableUpcomings">Enable upcoming birthdays on homepage</label>
         </div>
         <div class="flex flex-row gap-2">
           <input v-model="authStore.user.homePageEnableLasts" name="homePageEnableLasts" type="checkbox" />
