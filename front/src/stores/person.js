@@ -14,6 +14,7 @@ const config = {
     delete: 'person',
     all: 'people',
     one: 'person',
+    upcomingBirthdays: 'people/upcoming-birthdays',
   },
   pagination: { page: 1, perPage: 20, total: 1 },
   initItem: (data) => {
@@ -38,6 +39,7 @@ const config = {
       this.clearItems()
 
       const params = {
+        time: new Date().toISOString(), // TODO: delete this line once backend cache issue is resolved
         userId: authStore.user.userId,
         page: this.items.pagination.page || config.pagination.page,
         perPage: this.items.pagination.perPage || config.pagination.perPage,
@@ -46,7 +48,7 @@ const config = {
       // Merge custom parameters
       Object.assign(params, givenParams)
 
-      const resp = await api.get(`${config.endpoints.all}/upcoming-birthdays`, params)
+      const resp = await api.get(`${config.endpoints.upcomingBirthdays}`, params)
       this.items.data = resp.data.data || []
       this.items.pagination = resp.data.pagination || config.pagination
 
