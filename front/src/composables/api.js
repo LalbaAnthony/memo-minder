@@ -10,6 +10,9 @@ const axiosApi = axios.create({
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
+    'Cache-Control': 'no-cache',
+    'Pragma': 'no-cache',
+    'Expires': '0',
   },
   validateStatus: function (status) {
     return status >= 200 && status < 500
@@ -34,7 +37,7 @@ function verifyStatus(status) {
     useAuthStore().logout()
     return false
   }
-  
+
   // 204: No Content (ex: user not found)
   if (status === 204) {
     return false

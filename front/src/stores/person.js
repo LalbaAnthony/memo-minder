@@ -39,7 +39,6 @@ const config = {
       this.clearItems()
 
       const params = {
-        time: new Date().toISOString(), // TODO: delete this line once backend cache issue is resolved
         userId: authStore.user.userId,
         page: this.items.pagination.page || config.pagination.page,
         perPage: this.items.pagination.perPage || config.pagination.perPage,
