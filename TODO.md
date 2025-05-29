@@ -1,4 +1,5 @@
 Must:
+- [ ] Search isnt working anymore
 - [ ] Traiter todo du code (dont les birthday)
 - [ ] Make a prepoduction
 - [ ] Create and implement email systeme with email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
