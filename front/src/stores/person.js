@@ -1,4 +1,8 @@
 import { createBaseStore } from '@/composables/baseStore.js'
+import { useAuthStore } from '@/stores/auth'
+import { api } from '@/composables/api'
+
+const authStore = useAuthStore()
 
 const config = {
   primaryKey: 'personId',
@@ -25,6 +29,30 @@ const config = {
       seasons: item.seasons?.map(season => season.seasonId) || [],
     }
   },
+
+  actions: {
+    fetchUpcomingBirthdays: async function (givenParams) {
+      this.items.loading = true
+
+      // Clear the local list before fetching
+      this.clearItems()
+
+      const params = {
+        userId: authStore.user.userId,
+        page: this.items.pagination.page || config.pagination.page,
+        perPage: this.items.pagination.perPage || config.pagination.perPage,
+      }
+
+      // Merge custom parameters
+      Object.assign(params, givenParams)
+
+      const resp = await api.get(`${config.endpoints.all}/upcoming-birthdays`, params)
+      this.items.data = resp.data.data || []
+      this.items.pagination = resp.data.pagination || config.pagination
+
+      this.items.loading = false
+    }
+  }
 }
 
 export const usePersonStore = createBaseStore(config)

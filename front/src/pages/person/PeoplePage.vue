@@ -3,6 +3,8 @@
     <SortFilter :sortItems="[
       { value: 'name-asc', label: 'Name (A-Z)' },
       { value: 'name-desc', label: 'Name (Z-A)' },
+      { value: 'birthdate-asc', label: 'Birthdate (Older)' },
+      { value: 'birthdate-desc', label: 'Birthdate (Younger)' },
       { value: 'createdAt-asc', label: 'Add date (Oldest)' },
       { value: 'createdAt-desc', label: 'Add date (Newest)' }
     ]" />

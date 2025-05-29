@@ -15,7 +15,18 @@
         </div>
       </section>
 
-      <!-- Description & Mood section -->
+      <!-- Birthdate section -->
+      <section>
+        <div class="flex flex-col gap-4 sm:gap-1 bg-dark-light p-4 rounded-lg">
+          <div class="flex flex-col sm:flex-row items-center justify-start gap-x-2 gap-y-2">
+            <span class="text-lg font-medium text-gray-light">Born on</span>
+            <DatePicker class="max-w-[15rem]" :value="personStore.item?.data?.birthdate"
+              @update="(v) => { personStore.item.data.birthdate = v }" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Description section -->
       <section>
         <textarea v-model="personStore.item.data.description"
           class="w-full p-2 rounded-lg bg-gray-dark placeholder-gray-light text-light" rows="10"
@@ -47,6 +58,7 @@ import { notif } from '@/composables/notif.js'
 import { dateToNiceDate } from '@/composables/helpers.js'
 import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import debounce from '@/composables/debounce.js'
+import DatePicker from '@/components/fields/DatePickerComponent.vue'
 
 const route = useRoute()
 const router = useRouter()

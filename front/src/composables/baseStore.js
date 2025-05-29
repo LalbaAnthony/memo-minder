@@ -19,6 +19,8 @@ export function createBaseStore(config) {
                 loading: true,
                 data: {},
             },
+
+            ...config?.state || {},
         }),
 
         actions: {
@@ -165,6 +167,12 @@ export function createBaseStore(config) {
 
                 return true
             },
+
+            ...config?.actions || {},
+        },
+
+        getters: {
+            ...config?.getters || {},
         },
     })
 }
