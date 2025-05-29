@@ -106,6 +106,7 @@ export const useAuthStore = defineStore('auth', {
       const homePageEnableStats = this.user.homePageEnableStats || false
       const homePageEnableQuote = this.user.homePageEnableQuote || false
       const homePageEnableLasts = this.user.homePageEnableLasts || false
+      const homePageEnableUpcomings = this.user.homePageEnableUpcomings || false
       const streamingPlatform = this.user.streamingPlatform || 'youtube'
 
       let error = null
@@ -129,6 +130,7 @@ export const useAuthStore = defineStore('auth', {
         homePageEnableStats,
         homePageEnableQuote,
         homePageEnableLasts,
+        homePageEnableUpcomings,
         streamingPlatform,
       }
 

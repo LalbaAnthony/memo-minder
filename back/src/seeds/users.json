@@ -11,6 +11,7 @@
         "homePageEnableStats": true,
         "homePageEnableQuote": true,
         "homePageEnableLasts": true,
+        "homePageEnableUpcomings": true,
         "streamingPlatform": "youtube"
     }
 ]

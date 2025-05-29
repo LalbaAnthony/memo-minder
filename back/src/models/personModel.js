@@ -26,6 +26,10 @@ module.exports = (instance) => {
             type: DataTypes.STRING(1000),
             allowNull: true,
         },
+        birthdate: {
+            type: DataTypes.DATEONLY,
+            allowNull: true,
+        },
         updatedAt: {
             type: DataTypes.DATEONLY,
             allowNull: false,
