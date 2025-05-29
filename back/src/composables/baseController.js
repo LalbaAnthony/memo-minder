@@ -13,7 +13,7 @@ const getAll = (Model, { searchFields = [], defaultSort = [], associations = [] 
     // Build where clause
     let where = { userId };
     if (search && searchFields.length) {
-        where[Op.and] = searchFields.map(field => ({
+        where[Op.or] = searchFields.map(field => ({
             [field]: { [Op.like]: `%${search}%` }
         }));
     }
