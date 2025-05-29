@@ -26,7 +26,8 @@
     </div>
 
     <div class="md:grid md:grid-cols-2 md:gap-24">
-      <UpcomingBirthdaysComponent v-if="authStore?.user?.homePageEnableUpcomings" />
+      <!-- TODO: Disabled because of cache issues on production -->
+      <UpcomingBirthdaysComponent v-if="false && authStore?.user?.homePageEnableUpcomings" />
     </div>
     
     <div class="md:grid md:grid-cols-2 md:gap-24">
