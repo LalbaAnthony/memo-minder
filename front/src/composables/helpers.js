@@ -21,6 +21,23 @@ export function ageFromDate(birthdate, precision = 3) {
     return parseFloat(preciseAge.toFixed(precision));
 }
 
+export function daysFromBirthday(birthdate) {
+    if (!birthdate) return Infinity;
+    if (isNaN(new Date(birthdate))) return Infinity;
+    if (new Date(birthdate) > new Date()) return 0;
+
+    const today = new Date();
+    const birthdayThisYear = new Date(today.getFullYear(), new Date(birthdate).getMonth(), new Date(birthdate).getDate());
+
+    if (birthdayThisYear < today) {
+        birthdayThisYear.setFullYear(today.getFullYear() + 1);
+    }
+
+    const timeDiff = birthdayThisYear - today;
+    const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    return daysDiff;
+}
+
 export async function imageExists(url) {
     new Promise((resolve) => {
         var img = new Image();

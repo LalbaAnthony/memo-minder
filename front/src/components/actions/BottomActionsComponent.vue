@@ -1,16 +1,6 @@
 <template>
   <div
-    :class="['fixed z-20 flex flex-col justify-end gap-2 p-3', isMobile() ? 'bottom-20 right-0' : 'bottom-0 right-0']">
-    <!-- Scroll to top -->
-    <TransitionRoot :show="isMobile() && props.goTopButton && enableGoTop" @click="goTop()">
-      <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0"
-        enter-to="opacity-100" leave="transition ease-in-out duration-300 transform" leave-from=" opacity-100"
-        leave-to="opacity-0"
-        class="flex items-center justify-center cursor-pointer text-gray-light bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-300">
-        <ChevronUpIcon class="size-6" />
-      </TransitionChild>
-    </TransitionRoot>
-
+    :class="['fixed z-20 flex flex-col-reverse justify-end gap-2 p-3', isMobile() ? 'bottom-20 right-0' : 'bottom-0 right-0']">
     <!-- Create button -->
     <div v-if="props.createButton" @click="triggerCreate()"
       class="flex items-center justify-center cursor-pointer text-light bg-primary shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-300">
@@ -73,6 +63,16 @@
         <PlusIcon class="size-10" />
       </div>
     </div>
+
+    <!-- Scroll to top -->
+    <TransitionRoot :show="isMobile() && props.goTopButton && enableGoTop" @click="goTop()">
+      <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0"
+        enter-to="opacity-100" leave="transition ease-in-out duration-300 transform" leave-from=" opacity-100"
+        leave-to="opacity-0"
+        class="flex items-center justify-center cursor-pointer text-gray-light bg-dark-light shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-300">
+        <ChevronUpIcon class="size-6" />
+      </TransitionChild>
+    </TransitionRoot>
   </div>
 </template>
 

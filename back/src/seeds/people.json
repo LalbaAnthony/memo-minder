@@ -3,12 +3,49 @@
         "personId": 1,
         "userId": 1,
         "name": "Smith",
+        "birthdate": "1990-01-01",
         "description": "This man is a legend"
     },
     {
         "personId": 2,
         "userId": 1,
         "name": "Robert",
+        "birthdate": "1992-06-03",
         "description": "This man is a legend as well"
+    },
+    {
+        "personId": 3,
+        "userId": 1,
+        "name": "Alice",
+        "birthdate": "1988-12-15",
+        "description": "An inspiring leader and brilliant mind"
+    },
+    {
+        "personId": 4,
+        "userId": 1,
+        "name": "Maria",
+        "birthdate": "1995-05-22",
+        "description": "Known for her kindness and resilience"
+    },
+    {
+        "personId": 5,
+        "userId": 1,
+        "name": "James",
+        "birthdate": "1980-08-09",
+        "description": "Veteran software engineer and mentor"
+    },
+    {
+        "personId": 6,
+        "userId": 1,
+        "name": "Nina",
+        "birthdate": "2000-03-30",
+        "description": "A creative soul with a passion for art"
+    },
+    {
+        "personId": 7,
+        "userId": 1,
+        "name": "Victor",
+        "birthdate": "1983-11-11",
+        "description": "Driven entrepreneur and philanthropist"
     }
 ]

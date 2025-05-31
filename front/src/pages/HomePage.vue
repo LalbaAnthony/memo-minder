@@ -26,6 +26,11 @@
     </div>
 
     <div class="md:grid md:grid-cols-2 md:gap-24">
+      <!-- TODO: Disabled because of cache issues on production -->
+      <UpcomingBirthdaysComponent v-if="false && authStore?.user?.homePageEnableUpcomings" />
+    </div>
+    
+    <div class="md:grid md:grid-cols-2 md:gap-24">
       <LastsEventsComponent v-if="authStore?.user?.homePageEnableLasts" />
       <LastsSeasonsComponent v-if="authStore?.user?.homePageEnableLasts" />
     </div>
@@ -41,6 +46,7 @@ import Footer from '@/components/FooterComponent.vue'
 import Stats from '@/components/homepage/StatsComponent.vue'
 import Spents from '@/components/homepage/SpentsComponent.vue'
 import LastsEventsComponent from '@/components/homepage/LastsEventsComponent.vue'
+import UpcomingBirthdaysComponent from '@/components/homepage/UpcomingBirthdaysComponent.vue'
 import LastsSeasonsComponent from '@/components/homepage/LastsSeasonsComponent.vue'
 import BottomActions from '@/components/actions/BottomActionsComponent.vue'
 import { useAuthStore } from '@/stores/auth'

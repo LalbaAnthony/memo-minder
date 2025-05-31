@@ -5,7 +5,7 @@
       <div class="px-2 pt-2 flex justify-between items-center">
         <div>
           <button v-if="props.actions?.setToday" type="button"
-            class="dp__action_buttons dp__action_button date-picker-today-button" @click="setToday">Pick today</button>
+            class="dp__action_buttons dp__action_button date-picker-today-button" @click="setToday">Today</button>
         </div>
       </div>
     </template>
