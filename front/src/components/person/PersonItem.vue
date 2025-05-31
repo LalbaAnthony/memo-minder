@@ -7,10 +7,10 @@
       </div>
       <div class="flex flex-col justify-center items-start">
         <h1 class="text-2xl font-bold">{{ threeDotsString(props?.person?.name) }}</h1>
-        <p v-if="relainingsUntilBirthday >= props.birthdayScope" class="text-gray-light">{{
+        <p v-if="remainingsUntilBirthday >= props.birthdayScope" class="text-gray-light">{{
           threeDotsString(props?.person?.description) }}</p>
-        <Pill v-if="relainingsUntilBirthday > 0 && relainingsUntilBirthday < props.birthdayScope"
-          :text="relainingsUntilBirthday > 1 ? `Birthday in ${relainingsUntilBirthday} days` : 'Birthday tomorow'" type="event" class="mt-1" />
+        <Pill v-if="remainingsUntilBirthday > 0 && remainingsUntilBirthday < props.birthdayScope"
+          :text="remainingsUntilBirthday > 1 ? `Birthday in ${remainingsUntilBirthday} days` : 'Birthday tomorow'" type="event" class="mt-1" />
       </div>
     </div>
     <div class="grid grid-rows-2 divide-y-2 divide-gray cursor-pointer">
@@ -51,7 +51,7 @@ const props = defineProps({
 })
 
 
-const relainingsUntilBirthday = computed(() => {
+const remainingsUntilBirthday = computed(() => {
   return daysFromBirthday(props.person.birthdate)
 })
 
