@@ -7,10 +7,10 @@
       </div>
       <div class="flex flex-col justify-center items-start">
         <h1 class="text-2xl font-bold">{{ threeDotsString(props?.person?.name) }}</h1>
-        <p v-if="daysFromBirthday(props?.person?.birthdate) >= 31" class="text-gray-light">{{
+        <p v-if="remainingsUntilBirthday >= props.birthdayScope" class="text-gray-light">{{
           threeDotsString(props?.person?.description) }}</p>
-        <Pill v-if="daysFromBirthday(props?.person?.birthdate) < 31"
-          :text="`Birthday in ${daysFromBirthday(props?.person?.birthdate)} days`" type="event" class="mt-1" />
+        <Pill v-if="remainingsUntilBirthday > 0 && remainingsUntilBirthday < props.birthdayScope"
+          :text="remainingsUntilBirthday > 1 ? `Birthday in ${remainingsUntilBirthday} days` : 'Birthday tomorow'" type="event" class="mt-1" />
       </div>
     </div>
     <div class="grid grid-rows-2 divide-y-2 divide-gray cursor-pointer">
@@ -33,6 +33,7 @@ import { PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'
 import Pill from '@/components/PillComponent.vue'
 import { daysFromBirthday } from '@/composables/helpers'
+import { computed } from 'vue'
 
 const router = useRouter()
 
@@ -43,6 +44,15 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  birthdayScope: {
+    type: Number,
+    default: 31,
+  },
+})
+
+
+const remainingsUntilBirthday = computed(() => {
+  return daysFromBirthday(props.person.birthdate)
 })
 
 function deletePerson() {
