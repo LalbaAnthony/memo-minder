@@ -10,8 +10,6 @@ const axiosApi = axios.create({
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
-    'Cache-Control': 'no-cache',
-    'Pragma': 'no-cache',
   },
   validateStatus: function (status) {
     return status >= 200 && status < 500
