@@ -5,8 +5,9 @@ Must:
 - [ ] Create and implement email systeme with email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
+- [ ] Make mood selector a grid and add some logo to it
+- [ ] Add more mood to seeders and to production
 - [ ] Re-add today as the default date on some date picker (just the event one). Make sure the date isnt half set like back in the days. 
-- [ ] Check theme colors
 - [ ] Scroll à la bonne hauteur à l'ouverture de item picker
 - [ ] Wipe notif enable side menu
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
