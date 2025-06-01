@@ -41,7 +41,14 @@ app.use(bodyParser.json());
 
 // Routes
 BASE_PATH = '/api'
-app.use(BASE_PATH, routes);
+app.use(BASE_PATH, routes, (req, res, next) => {
+    // Remove cache headers
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    next();
+})
 
 // If nothing found above, return 404
 app.use(({ res }) => {
