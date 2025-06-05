@@ -1,5 +1,6 @@
 Must:
-- [ ] Traiter todo du code (dont les birthday)
+- [ ] Traiter TODO et WIP du code (dont les bdays)
+- [ ] Reparer soucis cache upcoming bdays
 - [ ] Make a prepoduction
 - [ ] Create and implement email systeme with email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
@@ -9,8 +10,8 @@ Should:
 - [ ] Add emoji to moods (stored in HTML)
 - [ ] Make language picker a component
 - [ ] Make streaming platform picker a component
-- [ ] Re-add today as the default date on some date picker (just the event one). Make sure the date isnt half set like back in the days.
 - [ ] Use https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template on home page
+- [ ] Re-add today as the default date on some date picker (just the event one). Make sure the date isnt half set like back in the days.
 - [ ] Scroll à la bonne hauteur à l'ouverture de item picker
 - [ ] Wipe notif enable side menu
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
