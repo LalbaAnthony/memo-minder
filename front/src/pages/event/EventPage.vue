@@ -39,7 +39,8 @@
 
       <!-- Color & Mood section -->
       <section>
-        <div class="flex flex-row justify-around gap-4 bg-dark-light p-4 rounded-lg">
+        <div class="flex flex-row justify-center items-center gap-4 bg-dark-light p-4 rounded-lg">
+          <span class="text-lg font-medium text-gray-light">with</span>
           <MoodPicker :value="eventStore.item.data.moodId" @update="(v) => { eventStore.item.data.moodId = v }" />
         </div>
       </section>

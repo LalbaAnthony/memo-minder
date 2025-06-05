@@ -43,7 +43,11 @@
         <div
           class="flex flex-col sm:flex-row justify-center sm:justify-around md:justify-center gap-4 bg-dark-light p-4 rounded-lg">
           <ColorPicker :value="seasonStore.item?.data?.color" @update="(v) => { seasonStore.item.data.color = v }" />
-          <MoodPicker :value="seasonStore?.item?.data?.moodId" @update="(v) => { seasonStore.item.data.moodId = v }" />
+          <div class="flex items-center justify-center gap-4">
+            <span class="text-lg font-medium text-gray-light">with</span>
+            <MoodPicker :value="seasonStore?.item?.data?.moodId"
+              @update="(v) => { seasonStore.item.data.moodId = v }" />
+          </div>
         </div>
       </section>
 
