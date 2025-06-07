@@ -5,8 +5,8 @@ Must:
 - [ ] Create and implement email systeme with email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
-- [x] Chg play icon on musics with an "open in new tab" icon if no actual link saved since cliking on it will trigger a search
 - [x] Make mood selector a classic select + add gray text on left like others fields
+- [ ] Chg play icon on musics with an "open in new tab" icon if no actual link saved since cliking on it will trigger a search
 - [ ] Add more mood to seeders and to production
 - [ ] Add emoji to moods (stored in HTML)
 - [ ] Make language picker a component
