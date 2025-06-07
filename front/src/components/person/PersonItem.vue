@@ -10,7 +10,7 @@
         <p v-if="remainingsUntilBirthday >= props.birthdayScope" class="text-gray-light">{{
           threeDotsString(props?.person?.description) }}</p>
         <Pill v-if="remainingsUntilBirthday > 0 && remainingsUntilBirthday < props.birthdayScope"
-          :text="remainingsUntilBirthday > 1 ? `Birthday in ${remainingsUntilBirthday} days` : 'Birthday tomorow'" type="event" class="mt-1" />
+          :text="remainingsUntilBirthday > 1 ? `B-day in ${remainingsUntilBirthday} days` : 'B-day tomorow'" type="event" class="mt-1" />
       </div>
     </div>
     <div class="grid grid-rows-2 divide-y-2 divide-gray cursor-pointer">
