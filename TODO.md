@@ -5,12 +5,10 @@ Must:
 - [ ] Create and implement email systeme with email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
-- [x] Make mood selector a classic select + add gray text on left like others fields
-- [ ] Chg play icon on musics with an "open in new tab" icon if no actual link saved since cliking on it will trigger a search
-- [ ] Add more mood to seeders and to production
-- [ ] Add emoji to moods (stored in HTML)
-- [ ] Make language picker a component
-- [ ] Make streaming platform picker a component
+- [ ] Format dateToNiceDate and langue so a language can no be handle by JS
+- [ ] Use icon of streaming plat. in picker
+- [ ] Use color of moods in picker
+- [ ] Make some checkobox sliders (params, ...)
 - [ ] Use https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template on home page
 - [ ] Re-add today as the default date on some date picker (just the event one). Make sure the date isnt half set like back in the days.
 - [ ] Scroll à la bonne hauteur à l'ouverture de item picker

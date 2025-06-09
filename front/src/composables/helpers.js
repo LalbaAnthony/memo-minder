@@ -1,4 +1,4 @@
-import { useAuthStore } from '@/stores/auth'
+// import { userLanguage } from '@/composables/languages.js'
 
 export function isMobile() {
     return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
@@ -14,7 +14,7 @@ export function ageFromDate(birthdate, precision = 3) {
     const birth = new Date(birthdate);
     const now = new Date();
 
-    const millisecondsPerYear = 365.25 * 24 * 60 * 60 * 1000; 
+    const millisecondsPerYear = 365.25 * 24 * 60 * 60 * 1000;
     const ageInMilliseconds = now - birth;
     const preciseAge = ageInMilliseconds / millisecondsPerYear;
 
@@ -64,7 +64,8 @@ export function isValidDate(date) {
     return !isNaN(new Date(date)) && (new Date(date) !== "Invalid Date");
 }
 
-export function isValidUrl(url) {
+export function isValidUrl(url, encodeFirst = false) {
+    if (encodeFirst) url = encodeURI(url);
     const pattern = /^(https?:\/\/)?([a-z0-9-]+\.)+[a-z]{2,6}(\/[^\s]*)?$/i;
     return pattern.test(url);
 }
@@ -74,9 +75,9 @@ export function isValidColor(color) {
 }
 
 export function isDateInFuture(date) {
-    const today = new Date();
-    const inputDate = new Date(date);
-    return inputDate > today;
+    const d1 = new Date();
+    const d2 = new Date(date);
+    return d2 > d1;
 }
 
 export function roundNb(nb, precision = 2) {
@@ -95,8 +96,9 @@ export function getYearFromDate(date) {
 }
 
 export function dateToNiceDate(date, language = 'en-US', options = { year: 'numeric', month: 'long', day: 'numeric' }) {
-    const authStore = useAuthStore()
-    const local = authStore?.user?.language || language || 'en-US'
+    // const local = authStore?.user?.language || language || 'en-US'
+    // const local = userLanguage()?.date || language || 'en-US'
+    const local = language || 'en-US'
     if (date) return new Date(date).toLocaleDateString(local, options);
     return "";
 }

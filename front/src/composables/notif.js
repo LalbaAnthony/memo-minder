@@ -9,11 +9,11 @@ let activeNotifications = 0;
 function notify(message, type = 'info') {
     if (!['info', 'success', 'error', 'warning'].includes(type)) {
         type = 'info';
-        console.error('Invalid type for notification. Defaulting to info.');
+        console.warn('Invalid type for notification. Defaulting to info.');
     }
 
     if (activeNotifications >= MAX_NOTIFICATIONS) {
-        console.warn('Max notifications reached. Ignoring new toast.');
+        console.error('Max notifications reached. Ignoring new toast.');
         return;
     }
 

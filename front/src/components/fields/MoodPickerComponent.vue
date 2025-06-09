@@ -1,5 +1,5 @@
 <template>
-  <select v-model="moodId" id="mood" class="px-4 p-2 rounded-lg bg-gray-dark text-light">
+  <select v-model="moodId" id="mood" class="sm:w-48 w-full px-4 p-2 rounded-lg bg-gray-dark text-light">
     <option value="" disabled>Mood</option>
     <option v-for="(value, key) in moodStore.items.data" :key="key" :value="value.moodId"
       :selected="value.moodId === moodId">
