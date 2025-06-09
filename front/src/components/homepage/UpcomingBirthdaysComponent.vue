@@ -1,19 +1,18 @@
 <template>
-    <div>
-        <section>
-            <h2 class="text-xl font-bold">Upcoming birthdays</h2>
-            <div class="my-4">
-                <Loader v-if="personStore.items.loading" position="static" />
-                <div v-else>
-                    <Grid v-if="personStore.items?.data?.length > 0" :items="personStore.items.data" noItemPosition="static">
-                        <template #item="{ item }">
-                            <Person :person="item" />
-                        </template>
-                    </Grid>
-                </div>
+    <section>
+        <h2 class="text-xl font-bold">Upcoming birthdays</h2>
+        <div class="my-4">
+            <Loader v-if="personStore.items.loading" position="static" />
+            <div v-else>
+                <Grid v-if="personStore.items?.data?.length > 0" :items="personStore.items.data"
+                    noItemPosition="static">
+                    <template #item="{ item }">
+                        <Person :person="item" />
+                    </template>
+                </Grid>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 </template>
 
 <script setup>

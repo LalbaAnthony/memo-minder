@@ -1,26 +1,23 @@
 <template>
-    <div>
-        <section>
-            <h2 class="text-xl font-bold">Lasts events added</h2>
-            <div class="my-4">
-                <Loader v-if="eventStore.items.loading" position="static" />
-                <div v-else>
-                    <Grid v-if="eventStore.items?.data?.length > 0" :items="eventStore.items.data">
-                        <template #item="{ item }">
-                            <Event :event="item" />
-                        </template>
-                    </Grid>
-                    <router-link to="/events/add" :class="['mt-6 flex items-center justify-center rounded-lg border-dashed border-2 cursor-pointer border-gray transition-all transition-200',
-                        eventStore.items?.data?.length === 0 ? 'p-16' : 'py-1.5']">
-                        <span v-if="eventStore.items?.data?.length === 0" class="text-light"> Add your first
-                            event</span>
-                        <PlusIcon
-                            class="arrow size-8 text-primary ml-2 transition ease-in-out duration-300 transform" />
-                    </router-link>
-                </div>
+    <section>
+        <h2 class="text-xl font-bold">Lasts events added</h2>
+        <div class="my-4">
+            <Loader v-if="eventStore.items.loading" position="static" />
+            <div v-else>
+                <Grid v-if="eventStore.items?.data?.length > 0" :items="eventStore.items.data">
+                    <template #item="{ item }">
+                        <Event :event="item" />
+                    </template>
+                </Grid>
+                <router-link to="/events/add" :class="['mt-6 flex items-center justify-center rounded-lg border-dashed border-2 cursor-pointer border-gray transition-all transition-200',
+                    eventStore.items?.data?.length === 0 ? 'p-16' : 'py-1.5']">
+                    <span v-if="eventStore.items?.data?.length === 0" class="text-light"> Add your first
+                        event</span>
+                    <PlusIcon class="arrow size-8 text-primary ml-2 transition ease-in-out duration-300 transform" />
+                </router-link>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 </template>
 
 <script setup>

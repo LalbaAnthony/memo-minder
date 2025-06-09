@@ -1,9 +1,15 @@
 <template>
-  <ul v-if="props.birthdate" class="list-disc list-inside">
-    <li v-for="(stat, index) in randomStats" :key="index">
-      <span v-html="stat"></span>
-    </li>
-  </ul>
+  <section v-if="props.birthdate">
+    <h2 class="text-xl font-bold">Stats</h2>
+    <div class="my-4">
+      <ul class="list-disc list-inside">
+        <li v-for="(stat, index) in randomStats" :key="index">
+          <span v-html="stat"></span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
 </template>
 
 <script setup>

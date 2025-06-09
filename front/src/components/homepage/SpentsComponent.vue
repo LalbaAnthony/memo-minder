@@ -1,22 +1,26 @@
 <template>
-    <div class="progress-bars-grid">
-        <div>
-            <h4 class="text-l font-bold">Spent childhood</h4>
-            <ProgressBar :value="childhoodPercentage" />
+    <section>
+        <div class="my-4">
+            <div class="progress-bars-grid">
+                <div>
+                    <h4 class="text-l font-bold">Spent childhood</h4>
+                    <ProgressBar :value="childhoodPercentage" />
+                </div>
+                <div>
+                    <h4 class="text-l font-bold">Spent adulthood</h4>
+                    <ProgressBar :value="adulthoodPercentage" />
+                </div>
+                <div>
+                    <h4 class="text-l font-bold">Spent oldhood</h4>
+                    <ProgressBar :value="oldhoodPercentage" />
+                </div>
+                <div>
+                    <h4 class="text-l font-bold">Total spent</h4>
+                    <ProgressBar :value="lifeTimePercentage" />
+                </div>
+            </div>
         </div>
-        <div>
-            <h4 class="text-l font-bold">Spent adulthood</h4>
-            <ProgressBar :value="adulthoodPercentage" />
-        </div>
-        <div>
-            <h4 class="text-l font-bold">Spent oldhood</h4>
-            <ProgressBar :value="oldhoodPercentage" />
-        </div>
-        <div>
-            <h4 class="text-l font-bold">Total spent</h4>
-            <ProgressBar :value="lifeTimePercentage" />
-        </div>
-    </div>
+    </section>
 </template>
 
 <script setup>
@@ -36,7 +40,7 @@ const age = computed(() => ageFromDate(props?.birthdate || '2000-01-01'))
 const childhoodPercentage = computed(() => {
     const yearStart = 0
     const yearEnd = 18
-    if (age.value >= yearEnd) return 100 
+    if (age.value >= yearEnd) return 100
     const percent = ((age.value - yearStart) / yearEnd) * 100
     if (percent < 0) return 0
     if (percent > 100) return 100
@@ -46,7 +50,7 @@ const childhoodPercentage = computed(() => {
 const adulthoodPercentage = computed(() => {
     const yearStart = 18
     const yearEnd = 64
-    if (age.value >= yearEnd) return 100 
+    if (age.value >= yearEnd) return 100
     const percent = ((age.value - yearStart) / yearEnd) * 100
     if (percent < 0) return 0
     if (percent > 100) return 100
@@ -56,7 +60,7 @@ const adulthoodPercentage = computed(() => {
 const oldhoodPercentage = computed(() => {
     const yearStart = 64
     const yearEnd = 80
-    if (age.value >= yearEnd) return 100 
+    if (age.value >= yearEnd) return 100
     const percent = ((age.value - yearStart) / yearEnd) * 100
     if (percent < 0) return 0
     if (percent > 100) return 100
@@ -66,7 +70,7 @@ const oldhoodPercentage = computed(() => {
 const lifeTimePercentage = computed(() => {
     const yearStart = 0
     const yearEnd = 80
-    if (age.value >= yearEnd) return 100 
+    if (age.value >= yearEnd) return 100
     const percent = ((age.value - yearStart) / yearEnd) * 100
     if (percent < 0) return 0
     if (percent > 100) return 100
