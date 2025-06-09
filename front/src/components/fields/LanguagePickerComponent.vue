@@ -8,7 +8,7 @@
 
 <script setup>
 import { ref, watch } from 'vue'
-import { allLanguages } from '@/composables/languages.js'
+import { allLanguages } from '@/composables/languages'
 
 const props = defineProps({
   value: {

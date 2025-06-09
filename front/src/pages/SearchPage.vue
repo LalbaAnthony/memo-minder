@@ -64,13 +64,13 @@
 
 <script setup>
 import { watch, onMounted, ref, computed } from 'vue'
-import debounce from '@/composables/debounce.js'
+import debounce from '@/composables/debounce'
 import { useRoute, useRouter } from 'vue-router'
 import Grid from '@/components/GridComponent.vue'
 import Result from '@/components/ResultItem.vue'
 import Pill from '@/components/PillComponent.vue'
 import Loader from '@/components/LoaderComponent.vue'
-import { isMobile } from '@/composables/helpers.js'
+import { isMobile } from '@/composables/helpers'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { useEventStore } from '@/stores/event'
 import { useMusicStore } from '@/stores/music'

@@ -13,7 +13,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { missingsElementsPassword } from '@/composables/helpers.js'
+import { missingsElementsPassword } from '@/composables/helpers'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 
 const props = defineProps({

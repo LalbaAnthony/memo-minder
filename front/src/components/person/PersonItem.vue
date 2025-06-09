@@ -6,9 +6,9 @@
         <UserIcon class="size-10" />
       </div>
       <div class="flex flex-col justify-center items-start">
-        <h1 class="text-2xl font-bold">{{ threeDotsString(props?.person?.name) }}</h1>
+        <h1 class="text-2xl font-bold">{{ limitString(props?.person?.name) }}</h1>
         <p v-if="remainingsUntilBirthday >= props.birthdayScope" class="text-gray-light">{{
-          threeDotsString(props?.person?.description) }}</p>
+          limitString(props?.person?.description) }}</p>
         <Pill v-if="remainingsUntilBirthday > 0 && remainingsUntilBirthday < props.birthdayScope"
           :text="remainingsUntilBirthday > 1 ? `B-day in ${remainingsUntilBirthday} days` : 'B-day tomorow'" type="event" class="mt-1" />
       </div>
@@ -28,7 +28,7 @@
 import { usePersonStore } from '@/stores/person'
 import { TrashIcon } from '@heroicons/vue/24/outline'
 import { UserIcon } from '@heroicons/vue/24/solid'
-import { threeDotsString } from '@/composables/helpers'
+import { limitString } from '@/composables/beautify'
 import { PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'
 import Pill from '@/components/PillComponent.vue'

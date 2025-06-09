@@ -6,7 +6,7 @@
     <CalendarDaysIcon v-if="props.item.type === 'event'" class="size-8 text-gray-light" />
     <UserIcon v-if="props.item.type === 'person'" class="size-8 text-gray-light" />
     <MusicalNoteIcon v-if="props.item.type === 'music'" class="size-8 text-gray-light" />
-    <h3 class="text-lg font-semibold">{{ threeDotsString(props.item.title) }}</h3>
+    <h3 class="text-lg font-semibold">{{ limitString(props.item.title) }}</h3>
     <ArrowLongRightIcon v-if="props.icon === 'arrow'"
       class="arrow size-8 text-primary ml-2 transition ease-in-out duration-300 transform" />
     <PlusIcon v-if="props.icon === 'plus'"
@@ -20,9 +20,9 @@ import { FilmIcon } from '@heroicons/vue/24/solid'
 import { CalendarDaysIcon } from '@heroicons/vue/24/solid'
 import { UserIcon } from '@heroicons/vue/24/solid'
 import { MusicalNoteIcon } from '@heroicons/vue/24/solid'
-import { randomInt } from '@/composables/helpers.js'
+import { randomInt } from '@/composables/helpers'
 import { PlusIcon } from '@heroicons/vue/24/solid'
-import { threeDotsString } from '@/composables/helpers'
+import { limitString } from '@/composables/beautify'
 import { ArrowLongRightIcon } from '@heroicons/vue/24/solid'
 
 const props = defineProps({

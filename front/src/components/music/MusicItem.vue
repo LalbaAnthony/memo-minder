@@ -6,7 +6,7 @@
           <MusicalNoteIcon class="size-10" />
       </div>
       <div class="flex flex-col justify-center items-start">
-        <h1 class="text-2xl font-bold">{{ threeDotsString(props?.music?.title) }}</h1>
+        <h1 class="text-2xl font-bold">{{ limitString(props?.music?.title) }}</h1>
         <p class="text-gray-light">
           {{ props?.music?.artist }}
           {{ props?.music?.artist && props?.music?.releaseDate ? '-' : '' }}
@@ -29,13 +29,13 @@
 </template>
 
 <script setup>
-import { getYearFromDate } from '@/composables/helpers.js'
+import { getYearFromDate } from '@/composables/helpers'
 import { useMusicStore } from '@/stores/music'
 import { TrashIcon } from '@heroicons/vue/24/outline'
 import { MusicalNoteIcon } from '@heroicons/vue/24/solid'
 import { PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'
-import { threeDotsString } from '@/composables/helpers'
+import { limitString } from '@/composables/beautify'
 
 const router = useRouter()
 const musicStore = useMusicStore()

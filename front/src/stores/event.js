@@ -1,4 +1,4 @@
-import { createBaseStore } from '@/composables/baseStore.js'
+import { createBaseStore } from '@/composables/baseStore'
 import { useSeasonStore } from '@/stores/season'
 
 const seasonStore = useSeasonStore()

@@ -13,7 +13,7 @@
 <script setup>
 import { nextTick, onMounted } from 'vue'
 import MainLayout from '@/layouts/MainLayout.vue'
-import { isMobile } from '@/composables/helpers.js'
+import { isMobile } from '@/composables/helpers'
 import { RouterView, useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 

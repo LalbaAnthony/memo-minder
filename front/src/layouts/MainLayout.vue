@@ -119,7 +119,7 @@
 </template>
 
 <script setup>
-import { isMobile } from '@/composables/helpers.js'
+import { isMobile } from '@/composables/helpers'
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { Bars3Icon } from '@heroicons/vue/24/solid'
 import { XMarkIcon } from '@heroicons/vue/24/solid'
@@ -134,7 +134,7 @@ import { ArrowLeftEndOnRectangleIcon } from '@heroicons/vue/24/outline'
 import { onMounted, ref } from 'vue'
 import { TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { useRoute, useRouter } from 'vue-router'
-import vClickOutside from '@/composables/clickOutside.js'
+import vClickOutside from '@/composables/clickOutside'
 import { useAuthStore } from '@/stores/auth'
 import { VITE_APP_VERSION } from '@/config';
 import { useSwipe } from '@/composables/useSwipe';

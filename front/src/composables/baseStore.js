@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { api } from '@/composables/api'
 import { useAuthStore } from '@/stores/auth'
-import { notif } from '@/composables/notif.js'
+import { notif } from '@/composables/notif'
 
 const authStore = useAuthStore()
 

@@ -5,7 +5,7 @@ Must:
 - [ ] Create and implement email systeme with email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
-- [ ] Format dateToNiceDate and langue so a language can no be handle by JS
+- [ ] Format translateDate and langue so a language can no be handle by JS
 - [ ] Use icon of streaming plat. in picker
 - [ ] Use color of moods in picker
 - [ ] Make some checkobox sliders (params, ...)
