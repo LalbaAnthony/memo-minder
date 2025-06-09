@@ -7,6 +7,7 @@ Must:
 - [ ] Create and implement email systeme with email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
+- [ ] Add the release year on smartLink search terms for musics
 - [ ] Use icon of streaming plat. in picker
 - [ ] Use color of moods in picker
 - [ ] Re-add today as the default date on some date picker (just the event one). Make sure the date isnt half set like back in the days.
