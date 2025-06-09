@@ -22,21 +22,12 @@
         </div>
         <div class="flex flex-col gap-2">
           <label for="language">Language</label>
-          <select v-model="authStore.user.language" id="language" class="px-4 p-2 rounded-lg bg-gray-dark text-light">
-            <option value="" disabled>Language</option>
-            <option v-for="(value, key) in languages" :key="key" :value="key"
-              :selected="key === authStore.user.language">
-              {{ value?.label }}</option>
-          </select>
+          <LanguagePicker :value="authStore.user.language" @update="(v) => { authStore.user.language = v }" />
         </div>
         <div class="flex flex-col gap-2">
           <label for="streamingPlatform">Streaming</label>
-          <select v-model="authStore.user.streamingPlatform" id="streamingPlatform" class="px-4 p-2 rounded-lg bg-gray-dark text-light">
-            <option value="" disabled>Platform</option>
-            <option v-for="(value, key) in allStreamingPlatforms" :key="key" :value="key"
-              :selected="key === authStore.user.streamingPlatform">
-              {{ value?.label }}</option>
-          </select>
+          <StreamingPlatformPicker :value="authStore.user.streamingPlatform"
+            @update="(v) => { authStore.user.streamingPlatform = v }" />
         </div>
       </div>
     </section>
@@ -95,9 +86,9 @@ import debounce from '@/composables/debounce.js'
 import BottomActions from '@/components/actions/BottomActionsComponent.vue'
 import TopActions from '@/components/actions/TopActionsComponent.vue'
 import DatePicker from '@/components/fields/DatePickerComponent.vue'
-import { languages } from '@/composables/languages.js'
-import { allStreamingPlatforms } from '@/composables/streamingPlatform.js'
 import { useRouter } from 'vue-router'
+import LanguagePicker from '@/components/fields/LanguagePickerComponent.vue'
+import StreamingPlatformPicker from '@/components/fields/StreamingPlatformPickerComponent.vue'
 
 const authStore = useAuthStore()
 const router = useRouter()

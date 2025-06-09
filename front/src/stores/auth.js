@@ -25,7 +25,7 @@ export const useAuthStore = defineStore('auth', {
         register: {
           fields: {
             username: '',
-            birthdate: '2000-01-01T00:00:00.000Z',
+            birthdate: '2000-01-01',
             email: '',
             language: 'en-US',
             password: '',
@@ -34,7 +34,7 @@ export const useAuthStore = defineStore('auth', {
           },
           default: {
             username: '',
-            birthdate: '2000-01-01T00:00:00.000Z',
+            birthdate: '2000-01-01',
             email: '',
             language: 'en-US',
             password: '',

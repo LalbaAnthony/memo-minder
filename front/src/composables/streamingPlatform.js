@@ -5,6 +5,7 @@ import DeezerIcon from '@/icons/DeezerIcon.vue'
 import DefaultIcon from '@/icons/DefaultIcon.vue'
 import SpotifyIcon from '@/icons/SpotifyIcon.vue'
 import YoutubeIcon from '@/icons/YoutubeIcon.vue'
+import { isValidUrl } from '@/composables/helpers'
 
 const authStore = useAuthStore()
 
@@ -85,24 +86,28 @@ function userStreamingPlatform() {
 
 function smartStreamingLink(music = {}) {
     let url = ''
-    const streamingPlatform = findStreamingPlatform(music?.streamingLink)
 
-    // If the is a link, just using it
+    let terms = []
+    if (music?.artist) terms.push(music?.artist)
+    if (music?.title) terms.push(music?.title)
+
+    // If there is a link, just using it
     if (!url && music?.streamingLink) {
-        url = music?.streamingLink
+        if (isValidUrl(music?.streamingLink)) url = music?.streamingLink
     }
 
-    // If no link, use the search link of the streaming platform of the use
-    if (!url && authStore.user.streamingPlatform && userStreamingPlatform) {
-        url = userStreamingPlatform().links.search
-        let terms = []
-        if (music?.artist) terms.push(music?.artist)
-        if (music?.title) terms.push(music?.title)
-        url += `${terms.join(' ')}`
+    // If still no url, use the search link of the streaming platform of the url (used for badly formatted links)
+    const streamingPlatform = findStreamingPlatform(music?.streamingLink)
+    if (!url && terms?.length > 0 && streamingPlatform && streamingPlatform?.links?.search) {
+        const builtUrl = `${streamingPlatform.links.search}${terms.join(' ')}`
+        if (isValidUrl(builtUrl, true)) url = builtUrl
     }
 
-    // If still no url, use the default search link
-    if (!url && streamingPlatform.value?.links?.search && music?.title) url = `${streamingPlatform.value.links.search}${music?.title} ${music?.artist}`
+    // If still no url, use the search link of the streaming platform of the user
+    if (!url && terms?.length > 0 && authStore.user.streamingPlatform && userStreamingPlatform) {
+        const builtUrl = `${userStreamingPlatform().links.search}${terms.join(' ')}`
+        if (isValidUrl(builtUrl, true)) url = builtUrl
+    }
 
     return encodeURI(url)
 }
