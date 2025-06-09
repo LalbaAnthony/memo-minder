@@ -1,14 +1,14 @@
+- Try hack the the web app
+
 Must:
-- [ ] Traiter TODO et WIP du code (dont les bdays)
-- [ ] Reparer soucis cache upcoming bdays
+- [ ] Search for TODO and WIP inside the codebase
+- [ ] Reparer soucis cache upcoming bdays et le réactiver
 - [ ] Make a prepoduction
 - [ ] Create and implement email systeme with email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
-- [ ] Format translateDate and langue so a language can no be handle by JS
 - [ ] Use icon of streaming plat. in picker
 - [ ] Use color of moods in picker
-- [ ] Make some checkobox sliders (params, ...)
 - [ ] Use https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template on home page
 - [ ] Re-add today as the default date on some date picker (just the event one). Make sure the date isnt half set like back in the days.
 - [ ] Scroll à la bonne hauteur à l'ouverture de item picker
