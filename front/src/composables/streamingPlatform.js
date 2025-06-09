@@ -98,7 +98,7 @@ function smartStreamingLink(music = {}) {
 
     // If still no url, use the search link of the streaming platform of the url (used for badly formatted links)
     const streamingPlatform = findStreamingPlatform(music?.streamingLink)
-    if (!url && terms?.length > 0 && streamingPlatform && streamingPlatform?.links?.search) {
+    if (!url && terms?.length > 0 && music?.streamingLink && streamingPlatform?.links?.search) {
         const builtUrl = `${streamingPlatform.links.search}${terms.join(' ')}`
         if (isValidUrl(builtUrl, true)) url = builtUrl
     }
