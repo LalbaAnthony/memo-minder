@@ -122,6 +122,9 @@ export function copyToClipboard(text = '') {
 
 export function openLink(url, blank = true) {
     if (!url || url.length < 0) return;
+
+    url = encodeURI(url.trim());
+
     if (!url.startsWith('http://') && !url.startsWith('https://')) url = 'http://' + url;
     if (!isValidUrl(url)) return;
 
