@@ -8,8 +8,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { ageFromDate } from "@/composables/helpers.js"
-import { roundNb } from "@/composables/helpers.js"
+import { ageFromDate } from '@/composables/helpers'
 
 const props = defineProps({
   birthdate: {
@@ -24,62 +23,62 @@ const remainingYears = computed(() => (lifeExpectancy.value - age.value) > 0 ? l
 
 const nbOfPet = computed(() => {
   const every = 15
-  return roundNb((remainingYears.value / every), 0)
+  return (remainingYears.value / every).toFixed(0)
 })
 
 const presidentialElections = computed(() => {
   const every = 5
-  return roundNb((remainingYears.value / every), 0)
+  return (remainingYears.value / every).toFixed(0)
 })
 
 const trips = computed(() => {
   const every = 2
-  return roundNb((remainingYears.value / every), 0)
+  return (remainingYears.value / every).toFixed(0)
 })
 
 const firstDrinkOfYear = computed(() => {
   const every = 1
-  return roundNb((remainingYears.value / every), 0)
+  return (remainingYears.value / every).toFixed(0)
 })
 
 const nbOfWorldCup = computed(() => {
   const every = 4
-  return roundNb((remainingYears.value / every), 0)
+  return (remainingYears.value / every).toFixed(0)
 })
 
 const solarEclipse = computed(() => {
   const every = 18
-  return roundNb((remainingYears.value / every), 0)
+  return (remainingYears.value / every).toFixed(0)
 })
 
 const masterAnInstrument = computed(() => {
   const every = 10
-  return roundNb((remainingYears.value / every), 0)
+  return (remainingYears.value / every).toFixed(0)
 })
 
 const learnALanguage = computed(() => {
   const every = 5
-  return roundNb((remainingYears.value / every), 0)
+  return (remainingYears.value / every).toFixed(0)
 })
 
 const readABook = computed(() => {
   const every = 0.5
-  return roundNb((remainingYears.value / every), 0)
+  return (remainingYears.value / every).toFixed(0)
 })
 
 const watchASerie = computed(() => {
   const every = 0.2
-  return roundNb((remainingYears.value / every), 0)
+  return (remainingYears.value / every).toFixed(0)
 })
 
 const nbOfRoadTrips = computed(() => {
   const every = 1.2
-  return roundNb((remainingYears.value / every), 0)
+  return (remainingYears.value / every).toFixed(0)
 })
 
 const nbOfHikes = computed(() => {
   const every = 0.7
-  return roundNb((remainingYears.value / every), 0)
+  return (remainingYears.value / every).toFixed(0)
 })
 
 // Life stats

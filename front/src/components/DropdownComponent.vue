@@ -26,7 +26,7 @@
 import { ref } from 'vue'
 import { Menu, TransitionRoot, TransitionChild } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/24/solid'
-import vClickOutside from '@/composables/clickOutside.js'
+import vClickOutside from '@/composables/clickOutside'
 
 const props = defineProps({
   buttonStyle: {

@@ -7,7 +7,7 @@
       <!-- Title and date section -->
       <section>
         <div v-if="eventStore.item?.data?.updatedAt" class="mb-4">
-          <span class="text-gray">Updated the {{ dateToNiceDate(eventStore.item?.data?.updatedAt) }}</span>
+          <span class="text-gray">Updated the {{ translateDate(eventStore.item?.data?.updatedAt) }}</span>
         </div>
         <div class="flex items-center justify-between gap-2 flex-wrap">
           <input v-model="eventStore.item.data.title" type="text"
@@ -77,11 +77,11 @@ import { ClipboardDocumentIcon } from '@heroicons/vue/24/solid'
 import TopActions from '@/components/actions/TopActionsComponent.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useEventStore } from '@/stores/event'
-import { notif } from '@/composables/notif.js'
-import { dateToNiceDate } from '@/composables/helpers.js'
+import { notif } from '@/composables/notif'
+import { translateDate } from '@/composables/beautify'
 import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
-import debounce from '@/composables/debounce.js'
-import { copyToClipboard, openLink } from '@/composables/helpers.js'
+import debounce from '@/composables/debounce'
+import { copyToClipboard, openLink } from '@/composables/helpers'
 
 const route = useRoute()
 const router = useRouter()

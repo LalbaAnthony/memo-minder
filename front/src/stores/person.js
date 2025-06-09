@@ -1,4 +1,4 @@
-import { createBaseStore } from '@/composables/baseStore.js'
+import { createBaseStore } from '@/composables/baseStore'
 import { useAuthStore } from '@/stores/auth'
 import { api } from '@/composables/api'
 

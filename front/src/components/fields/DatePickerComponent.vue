@@ -1,6 +1,6 @@
 <template>
   <VueDatePicker class="max-w-[24rem]" ref="datePicker" v-model="date" dark :enableTimePicker="false"
-    :format="dateToNiceDate" :preview-format="() => { return '' }">
+    :format="translateDate" :preview-format="() => { return '' }">
     <template #menu-header v-if="props.actions && Object.keys(props.actions).length > 0">
       <div class="px-2 pt-2 flex justify-between items-center">
         <div>
@@ -14,7 +14,7 @@
 
 <script setup>
 import { ref, watch } from 'vue';
-import { dateToNiceDate } from "@/composables/helpers.js";
+import { translateDate } from '@/composables/beautify';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 

@@ -1,5 +1,5 @@
-import { randomPastelColor } from '@/composables/helpers.js'
-import { createBaseStore } from '@/composables/baseStore.js'
+import { randomPastelColor } from '@/composables/helpers'
+import { createBaseStore } from '@/composables/baseStore'
 
 const config = {
   primaryKey: 'seasonId',

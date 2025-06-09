@@ -7,7 +7,7 @@
       <!-- Title and date section -->
       <section>
         <div v-if="musicStore.item?.data?.updatedAt" class="mb-4">
-          <span class="text-gray">Updated the {{ dateToNiceDate(musicStore.item?.data?.updatedAt) }}</span>
+          <span class="text-gray">Updated the {{ translateDate(musicStore.item?.data?.updatedAt) }}</span>
         </div>
         <div class="flex items-center justify-between gap-2 w-full">
           <input v-model="musicStore.item.data.title" type="text"
@@ -69,16 +69,16 @@ import BottomActions from '@/components/actions/BottomActionsComponent.vue'
 import LinkedItemsWrapper from '@/components/fields/LinkedItemsWrapperComponent.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useMusicStore } from '@/stores/music'
-import { notif } from '@/composables/notif.js'
-import { dateToNiceDate } from '@/composables/helpers.js'
+import { notif } from '@/composables/notif'
+import { translateDate } from '@/composables/beautify'
 import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/vue/24/solid'
 import { ClipboardDocumentIcon } from '@heroicons/vue/24/solid'
 import { PlayIcon } from '@heroicons/vue/24/solid'
-import debounce from '@/composables/debounce.js'
-import { userStreamingPlatform } from '@/composables/streamingPlatform.js'
-import { copyToClipboard, openLink } from '@/composables/helpers.js'
-import { smartStreamingLink } from '@/composables/streamingPlatform.js'
+import debounce from '@/composables/debounce'
+import { userStreamingPlatform } from '@/composables/streamingPlatform'
+import { copyToClipboard, openLink } from '@/composables/helpers'
+import { smartStreamingLink } from '@/composables/streamingPlatform'
 
 const route = useRoute()
 const router = useRouter()

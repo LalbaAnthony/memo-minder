@@ -8,7 +8,7 @@
 
 <script setup>
 import { ref, watch } from 'vue'
-import { allStreamingPlatforms } from '@/composables/streamingPlatform.js'
+import { allStreamingPlatforms } from '@/composables/streamingPlatform'
 
 const props = defineProps({
   value: {

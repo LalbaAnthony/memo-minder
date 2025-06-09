@@ -7,7 +7,7 @@
       <!-- Name and date section -->
       <section>
         <div v-if="personStore.item?.data?.updatedAt" class="mb-4">
-          <span class="text-gray">Updated the {{ dateToNiceDate(personStore.item?.data?.updatedAt) }}</span>
+          <span class="text-gray">Updated the {{ translateDate(personStore.item?.data?.updatedAt) }}</span>
         </div>
         <div class="flex items-center justify-between gap-2 flex-wrap">
           <input v-model="personStore.item.data.name" type="text"
@@ -54,10 +54,10 @@ import BottomActions from '@/components/actions/BottomActionsComponent.vue'
 import LinkedItemsWrapper from '@/components/fields/LinkedItemsWrapperComponent.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { usePersonStore } from '@/stores/person'
-import { notif } from '@/composables/notif.js'
-import { dateToNiceDate } from '@/composables/helpers.js'
+import { notif } from '@/composables/notif'
+import { translateDate } from '@/composables/beautify'
 import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
-import debounce from '@/composables/debounce.js'
+import debounce from '@/composables/debounce'
 import DatePicker from '@/components/fields/DatePickerComponent.vue'
 
 const route = useRoute()

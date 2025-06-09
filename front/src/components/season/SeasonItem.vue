@@ -3,9 +3,9 @@
     <div class="h-6 w-full rounded-t-[6px]" :style="`background-color: ${props?.season?.color};`"></div>
     <div class="flex-1 p-5" @click="goToSeason()">
       <div class="flex flex-col justify-center items-center w-full my-2">
-        <h1 class="text-2xl font-bold text-center">{{ threeDotsString(props?.season?.title) }}</h1>
-        <p class="text-sm text-gray-light">{{ dateToNiceDate(props?.season?.dateStart) }} {{ props?.season?.dateStart &&
-          props?.season?.dateEnd ? 'to' : '' }} {{ dateToNiceDate(props?.season?.dateEnd) }}</p>
+        <h1 class="text-2xl font-bold text-center">{{ limitString(props?.season?.title) }}</h1>
+        <p class="text-sm text-gray-light">{{ translateDate(props?.season?.dateStart) }} {{ props?.season?.dateStart &&
+          props?.season?.dateEnd ? 'to' : '' }} {{ translateDate(props?.season?.dateEnd) }}</p>
       </div>
       <div class="my-4">
         <div class="flex justify-start flex-wrap items-center w-full m-2 gap-2">
@@ -14,7 +14,7 @@
           <Pill v-if="props?.season?.people?.[0]" :text="props?.season?.people?.[0]?.name" type="person" />
           <Pill v-if="props?.season?.events?.[0]" :text="props?.season?.events?.[0]?.title" type="event" />
         </div>
-        <p class="m-2 my-4">{{ threeDotsString(props?.season?.description) }}</p>
+        <p class="m-2 my-4">{{ limitString(props?.season?.description) }}</p>
       </div>
     </div>
     <div class="grid grid-cols-2 divide-x-2 divide-gray cursor-pointer">
@@ -32,8 +32,8 @@
 import Pill from '@/components/PillComponent.vue'
 import { TrashIcon } from '@heroicons/vue/24/outline'
 import { PencilSquareIcon } from '@heroicons/vue/24/outline'
-import { threeDotsString } from '@/composables/helpers'
-import { dateToNiceDate } from '@/composables/helpers.js'
+import { limitString } from '@/composables/beautify'
+import { translateDate } from '@/composables/beautify'
 import { useSeasonStore } from '@/stores/season'
 import { useRouter } from 'vue-router'
 

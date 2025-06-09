@@ -10,7 +10,7 @@
 import { ref } from 'vue'
 import LinkedItemsList from '@/components/fields/LinkedItemsListComponent.vue'
 import LinkedItemsPicker from '@/components/fields/LinkedItemsPickerComponent.vue'
-import { notif } from '@/composables/notif.js'
+import { notif } from '@/composables/notif'
 import { useEventStore } from '@/stores/event'
 import { useMusicStore } from '@/stores/music'
 import { usePersonStore } from '@/stores/person'

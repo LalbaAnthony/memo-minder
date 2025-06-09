@@ -22,7 +22,7 @@
 <script setup>
 import ProgressBar from '@/components/ProgressBarComponent.vue'
 import { computed } from 'vue'
-import { ageFromDate } from "@/composables/helpers.js"
+import { ageFromDate } from '@/composables/helpers'
 
 const props = defineProps({
     birthdate: {

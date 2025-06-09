@@ -1,41 +1,5 @@
-// import { userLanguage } from '@/composables/languages.js'
-
 export function isMobile() {
     return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
-}
-
-export function threeDotsString(str, maxLen = 100) {
-    if (!str) return "";
-    if (str.length <= maxLen) return str;
-    return str.slice(0, maxLen).trim() + " ...";
-}
-
-export function ageFromDate(birthdate, precision = 3) {
-    const birth = new Date(birthdate);
-    const now = new Date();
-
-    const millisecondsPerYear = 365.25 * 24 * 60 * 60 * 1000;
-    const ageInMilliseconds = now - birth;
-    const preciseAge = ageInMilliseconds / millisecondsPerYear;
-
-    return parseFloat(preciseAge.toFixed(precision));
-}
-
-export function daysFromBirthday(birthdate) {
-    if (!birthdate) return Infinity;
-    if (isNaN(new Date(birthdate))) return Infinity;
-    if (new Date(birthdate) > new Date()) return 0;
-
-    const today = new Date();
-    const birthdayThisYear = new Date(today.getFullYear(), new Date(birthdate).getMonth(), new Date(birthdate).getDate());
-
-    if (birthdayThisYear < today) {
-        birthdayThisYear.setFullYear(today.getFullYear() + 1);
-    }
-
-    const timeDiff = birthdayThisYear - today;
-    const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-    return daysDiff;
 }
 
 export async function imageExists(url) {
@@ -56,14 +20,52 @@ export async function imageExists(url) {
     });
 }
 
-export function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 255 && email.length >= 5 && !email.includes("&") && !email.includes(" ");
+export function ageFromDate(birthdate, precision = 3) {
+    const birth = new Date(birthdate);
+    const now = new Date();
+
+    const millisecondsPerYear = 365.25 * 24 * 60 * 60 * 1000;
+    const ageInMilliseconds = now - birth;
+    const preciseAge = ageInMilliseconds / millisecondsPerYear;
+
+    return parseFloat(preciseAge.toFixed(precision));
 }
 
 export function isValidDate(date) {
     return !isNaN(new Date(date)) && (new Date(date) !== "Invalid Date");
 }
 
+export function isDateInFuture(date) {
+    const d1 = new Date();
+    const d2 = new Date(date);
+    return d2 > d1;
+}
+
+export function getYearFromDate(date) {
+    if (date) return date.split("-")[0];
+    return "";
+}
+
+export function daysFromBirthday(birthdate) {
+    if (!birthdate) return Infinity;
+    if (isNaN(new Date(birthdate))) return Infinity;
+    if (new Date(birthdate) > new Date()) return 0;
+
+    const today = new Date();
+    const birthdayThisYear = new Date(today.getFullYear(), new Date(birthdate).getMonth(), new Date(birthdate).getDate());
+
+    if (birthdayThisYear < today) {
+        birthdayThisYear.setFullYear(today.getFullYear() + 1);
+    }
+
+    const timeDiff = birthdayThisYear - today;
+    const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    return daysDiff;
+}
+
+export function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 255 && email.length >= 5 && !email.includes("&") && !email.includes(" ");
+}
 export function isValidUrl(url, encodeFirst = false) {
     if (encodeFirst) url = encodeURI(url);
     const pattern = /^(https?:\/\/)?([a-z0-9-]+\.)+[a-z]{2,6}(\/[^\s]*)?$/i;
@@ -74,33 +76,8 @@ export function isValidColor(color) {
     return (color.length === 7 && color[0] === '#' && color.match(/^[0-9A-Fa-f]+$/))
 }
 
-export function isDateInFuture(date) {
-    const d1 = new Date();
-    const d2 = new Date(date);
-    return d2 > d1;
-}
-
 export function roundNb(nb, precision = 2) {
     return nb.toFixed(precision);
-}
-
-export function roundNbNice(nb, precision = 2) {
-    let number = nb.toFixed(precision);
-    if (number.includes('.')) number = number.replace(/\.?0+$/, ''); // Remove all trailing zeros
-    return number;
-}
-
-export function getYearFromDate(date) {
-    if (date) return date.split("-")[0];
-    return "";
-}
-
-export function dateToNiceDate(date, language = 'en-US', options = { year: 'numeric', month: 'long', day: 'numeric' }) {
-    // const local = authStore?.user?.language || language || 'en-US'
-    // const local = userLanguage()?.date || language || 'en-US'
-    const local = language || 'en-US'
-    if (date) return new Date(date).toLocaleDateString(local, options);
-    return "";
 }
 
 export function randomInt(min = 1, max = 100) {

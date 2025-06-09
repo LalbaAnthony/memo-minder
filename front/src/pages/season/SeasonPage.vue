@@ -7,7 +7,7 @@
       <!-- Title and date section -->
       <section>
         <div v-if="seasonStore.item?.data?.updatedAt" class="mb-4">
-          <span class="text-gray">Updated the {{ dateToNiceDate(seasonStore.item?.data?.updatedAt) }}</span>
+          <span class="text-gray">Updated the {{ translateDate(seasonStore.item?.data?.updatedAt) }}</span>
         </div>
         <div class="flex items-center justify-between gap-2 flex-wrap">
           <input v-model="seasonStore.item.data.title" type="text"
@@ -82,10 +82,10 @@ import TopActions from '@/components/actions/TopActionsComponent.vue'
 import BottomActions from '@/components/actions/BottomActionsComponent.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useSeasonStore } from '@/stores/season'
-import { notif } from '@/composables/notif.js'
-import { dateToNiceDate } from '@/composables/helpers.js'
+import { notif } from '@/composables/notif'
+import { translateDate } from '@/composables/beautify'
 import { computed, ref, watch, onBeforeUnmount, onMounted } from 'vue'
-import debounce from '@/composables/debounce.js'
+import debounce from '@/composables/debounce'
 
 const route = useRoute()
 const router = useRouter()
