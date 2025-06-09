@@ -9,7 +9,6 @@ Must:
 Should:
 - [ ] Use icon of streaming plat. in picker
 - [ ] Use color of moods in picker
-- [ ] Add text field in color picker with a verification of the color
 - [ ] Re-add today as the default date on some date picker (just the event one). Make sure the date isnt half set like back in the days.
 - [ ] Scroll à la bonne hauteur à l'ouverture de item picker
 - [ ] Wipe notif enable side menu

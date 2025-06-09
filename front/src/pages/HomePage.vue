@@ -129,7 +129,7 @@ const authStore = useAuthStore()
       "e"
       "f";
     grid-template-columns: repeat(1, 1fr);
-    gap: 1rem;
+    gap: 0rem;
 
   }
 }
