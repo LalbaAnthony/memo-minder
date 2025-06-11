@@ -7,6 +7,7 @@ Must:
 - [ ] Create and implement email systeme with email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
+- [ ] Since at least the 2025-06-11, streaming like are opened with st like Carcass%20Heartwork in the search bar
 - [ ] Add the release year on smartLink search terms for musics
 - [ ] Use icon of streaming plat. in picker
 - [ ] Use color of moods in picker
