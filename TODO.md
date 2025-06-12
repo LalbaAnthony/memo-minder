@@ -11,6 +11,7 @@ Should:
 - [ ] Add the release year on smartLink search terms for musics
 - [ ] Use icon of streaming plat. in picker
 - [ ] Use color of moods in picker
+- [ ] On auth components, faire en sorte que tout les models de champs emails de tout les tab s'auto-copie en temps réel
 - [ ] Re-add today as the default date on some date picker (just the event one). Make sure the date isnt half set like back in the days.
 - [ ] Scroll à la bonne hauteur à l'ouverture de item picker
 - [ ] Wipe notif enable side menu
