@@ -9,7 +9,7 @@ const allLanguages = {
         label: 'English (US)',
         flag: {
             html: '&#127482;&#127480;',
-            emb: '🇺🇸',
+            embeded: '🇺🇸',
         },
     },
     'en-GB': {
@@ -18,7 +18,7 @@ const allLanguages = {
         label: 'English (UK)',
         flag: {
             html: '&#127468;&#127463;',
-            emb: '🇬🇧',
+            embeded: '🇬🇧',
         },
     }
 }

@@ -8,7 +8,6 @@ Must:
 
 Should:
 - [ ] Display modd color in the picker
-- [ ] Add flag to langague picker with its htlm code as &1234;
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Test unitaires et d'intégration des contrôleurs, modèles et routes
 

@@ -2,7 +2,7 @@
   <select v-model="languageKey" id="language" class="select sm:w-48 w-full px-4 p-2 rounded-lg bg-gray-dark text-light">
     <option value="" disabled>Language</option>
     <option v-for="(value, key) in allLanguages" :key="key" :value="key" :selected="key === languageKey">
-      {{ isMobile ? value?.flag?.emb : '' }}&nbsp;{{ value?.label }}
+      {{ isMobile ? value?.flag?.embeded : '' }}&nbsp;{{ value?.label }}
     </option>
   </select>
 </template>
