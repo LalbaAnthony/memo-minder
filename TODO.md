@@ -7,10 +7,9 @@ Must:
 - [ ] Create and implement email systeme with email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
-- [ ] Since at least the 2025-06-11, streaming like are opened with st like Carcass%20Heartwork in the search bar
-- [ ] Add the release year on smartLink search terms for musics
-- [ ] Use icon of streaming plat. in picker
-- [ ] Use color of moods in picker
+- [x] Since at least the 2025-06-11, streaming like are opened with st like Carcass%20Heartwork in the search bar
+- [x] Add the release year on smartLink search terms for musics
+- [ ] Use color of moods in picker (on options)
 - [ ] On auth components, faire en sorte que tout les models de champs emails de tout les tab s'auto-copie en temps réel
 - [ ] Re-add today as the default date on some date picker (just the event one). Make sure the date isnt half set like back in the days.
 - [ ] Scroll à la bonne hauteur à l'ouverture de item picker

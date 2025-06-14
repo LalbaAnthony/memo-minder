@@ -106,6 +106,10 @@ select {
 }
 
 select:focus {
+  outline: none;
+}
+
+.select:hover {
   border-color: var(--secondary);
   outline: var(--light) auto 1px;
 }

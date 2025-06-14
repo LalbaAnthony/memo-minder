@@ -1,4 +1,3 @@
-import { shallowRef } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import AppleIcon from '@/icons/AppleIcon.vue'
 import DeezerIcon from '@/icons/DeezerIcon.vue'
@@ -6,6 +5,7 @@ import DefaultIcon from '@/icons/DefaultIcon.vue'
 import SpotifyIcon from '@/icons/SpotifyIcon.vue'
 import YoutubeIcon from '@/icons/YoutubeIcon.vue'
 import { isValidUrl } from '@/composables/helpers'
+import { extractYear } from '@/composables/helpers'
 
 const authStore = useAuthStore()
 
@@ -13,7 +13,7 @@ const allStreamingPlatforms = {
     spotify: {
         slug: 'spotify',
         label: 'Spotify',
-        icon: shallowRef(SpotifyIcon),
+        icon: SpotifyIcon,
         regex: /(spotify)/i,
         links: {
             home: 'https://open.spotify.com',
@@ -24,7 +24,7 @@ const allStreamingPlatforms = {
     apple: {
         slug: 'apple',
         label: 'Apple',
-        icon: shallowRef(AppleIcon),
+        icon: AppleIcon,
         regex: /(apple)/i,
         links: {
             home: 'https://music.apple.com/',
@@ -35,7 +35,7 @@ const allStreamingPlatforms = {
     youtube: {
         slug: 'youtube',
         label: 'Youtube',
-        icon: shallowRef(YoutubeIcon),
+        icon: YoutubeIcon,
         regex: /(youtube|youtu.be)/i,
         links: {
             home: 'https://www.youtube.com/',
@@ -46,7 +46,7 @@ const allStreamingPlatforms = {
     deezer: {
         slug: 'deezer',
         label: 'Deezer',
-        icon: shallowRef(DeezerIcon),
+        icon: DeezerIcon,
         regex: /(deezer)/i,
         links: {
             home: 'https://www.deezer.com/',
@@ -57,7 +57,7 @@ const allStreamingPlatforms = {
     default: {
         slug: 'default',
         label: 'None',
-        icon: shallowRef(DefaultIcon),
+        icon: DefaultIcon,
         regex: null,
         links: {
             home: null,
@@ -80,8 +80,12 @@ function findStreamingPlatform(string) {
     return allStreamingPlatforms?.[found || 'default'] || {}
 }
 
+function getStreamingPlatform(slug = 'default') {
+    return allStreamingPlatforms?.[slug] || allStreamingPlatforms?.default || {}
+}
+
 function userStreamingPlatform() {
-    return allStreamingPlatforms?.[authStore.user?.streamingPlatform || 'default'] || {}
+    return getStreamingPlatform(authStore.user?.streamingPlatform)
 }
 
 function smartStreamingLink(music = {}) {
@@ -90,6 +94,7 @@ function smartStreamingLink(music = {}) {
     let terms = []
     if (music?.artist) terms.push(music?.artist)
     if (music?.title) terms.push(music?.title)
+    if (music?.releaseDate) terms.push(`${extractYear(music?.releaseDate)}`)
 
     // If there is a link, just using it
     if (!url && music?.streamingLink) {
@@ -115,6 +120,7 @@ function smartStreamingLink(music = {}) {
 export {
     allStreamingPlatforms,
     findStreamingPlatform,
+    getStreamingPlatform,
     userStreamingPlatform,
     smartStreamingLink,
 }
