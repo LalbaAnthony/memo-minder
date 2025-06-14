@@ -1,5 +1,5 @@
 <template>
-  <select v-model="languageKey" id="language" class="sm:w-48 w-full px-4 p-2 rounded-lg bg-gray-dark text-light">
+  <select v-model="languageKey" id="language" class="select m:w-48 w-full px-4 p-2 rounded-lg bg-gray-dark text-light">
     <option value="" disabled>Language</option>
     <option v-for="(value, key) in allLanguages" :key="key" :value="key" :selected="key === languageKey">
       {{ value?.label }}</option>

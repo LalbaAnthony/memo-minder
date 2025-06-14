@@ -13,7 +13,7 @@
           <input v-model="musicStore.item.data.title" type="text"
             class="rounded-lg bg-dark placeholder-gray text-light text-2xl w-full" placeholder="Music title" />
           <button class="rounded-2xl bg-gray-dark p-3 hover:scale-105 transition-all duration-300">
-            <PlayIcon class="size-6 cursor-pointer" @click="openLink(smartStreamingLink(musicStore.item?.data))" />
+            <PlayIcon class="size-6 cursor-pointer" @click="openLink(smartStreamingLink(musicStore.item?.data), true, false)" />
           </button>
         </div>
       </section>

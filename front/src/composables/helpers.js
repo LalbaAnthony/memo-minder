@@ -63,6 +63,11 @@ export function daysFromBirthday(birthdate) {
     return daysDiff;
 }
 
+export function extractYear (date = null) {
+    if (!date) return "";
+    return new Date(date).getFullYear();
+}
+
 export function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 255 && email.length >= 5 && !email.includes("&") && !email.includes(" ");
 }
@@ -120,14 +125,15 @@ export function copyToClipboard(text = '') {
     navigator.clipboard.writeText(text)
 }
 
-export function openLink(url, blank = true) {
+export function openLink(url, blank = true, encode = true) {
     if (!url || url.length < 0) return;
 
-    url = encodeURI(url.trim());
-
+    url = url.trim();
+    if (encode) url = encodeURI(url);
+    
     if (!url.startsWith('http://') && !url.startsWith('https://')) url = 'http://' + url;
-    if (!isValidUrl(url)) return;
-
+    if (!isValidUrl(url, !encode)) return;
+    
     const target = blank ? '_blank' : '_self';
     window.open(url, target);
 }
