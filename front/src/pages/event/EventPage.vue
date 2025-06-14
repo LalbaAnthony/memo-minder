@@ -20,7 +20,7 @@
         <div class="flex flex-col gap-4 sm:gap-1 bg-dark-light p-4 rounded-lg">
           <div class="flex flex-col sm:flex-row items-center justify-start gap-x-4 gap-y-2">
             <span class="text-lg font-medium text-gray-light">on</span>
-            <DatePicker class="max-w-[15rem]" :default="true" :value="eventStore.item?.data?.date"
+            <DatePicker class="max-w-[15rem]" :value="eventStore.item?.data?.date"
               @update="(v) => { eventStore.item.data.date = v }" />
             <span class="text-lg font-medium text-gray-light">at</span>
             <div class="flex items-center justify-center gap-2 w-full max-w-[24rem] p-1.5 rounded-lg bg-gray-dark">
