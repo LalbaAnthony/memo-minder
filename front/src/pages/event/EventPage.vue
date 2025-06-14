@@ -20,17 +20,17 @@
         <div class="flex flex-col gap-4 sm:gap-1 bg-dark-light p-4 rounded-lg">
           <div class="flex flex-col sm:flex-row items-center justify-start gap-x-4 gap-y-2">
             <span class="text-lg font-medium text-gray-light">on</span>
-            <DatePicker class="max-w-[15rem]" :value="eventStore.item?.data?.date"
+            <DatePicker class="max-w-[15rem]" :default="true" :value="eventStore.item?.data?.date"
               @update="(v) => { eventStore.item.data.date = v }" />
             <span class="text-lg font-medium text-gray-light">at</span>
-            <div class="flex items-center justify-center gap-2 w-full max-w-[24rem]">
+            <div class="flex items-center justify-center gap-2 w-full max-w-[24rem] p-1.5 rounded-lg bg-gray-dark">
               <ClipboardDocumentIcon
-                :class="['size-6', eventStore.item?.data?.location ? 'text-gray hover:text-gray-light cursor-pointer' : 'text-gray-dark']"
+                :class="['size-5', eventStore.item?.data?.location ? 'text-[#9ca3af] cursor-pointer' : 'text-gray']"
                 @click="copyToClipboard(eventStore.item?.data?.location)" />
               <input v-model="eventStore.item.data.location" id="location"
-                class="w-full p-2 rounded-lg bg-gray-dark text-light" placeholder="Location" />
+                class="w-full rounded-lg bg-gray-dark text-light" placeholder="Location" />
               <ArrowTopRightOnSquareIcon
-                :class="['size-7', eventStore.item?.data?.location ? 'text-gray hover:text-gray-light cursor-pointer' : 'text-gray-dark']"
+                :class="['size-6', eventStore.item?.data?.location ? 'text-[#9ca3af] cursor-pointer' : 'text-gray']"
                 @click="openLink(eventStore.item.data?.location ? `http://maps.google.com/?q=${eventStore.item.data.location}` : '')" />
             </div>
           </div>

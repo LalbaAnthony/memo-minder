@@ -17,8 +17,7 @@ const config = {
   pagination: { page: 1, perPage: 20, total: 1 },
   initItem: async (data) => {
     const today = new Date().toISOString().split('T')[0]
-
-    data.dateStart = today
+    data.date = today
     data.seasons = []
     data.people = []
     data.musics = []

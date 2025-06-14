@@ -14,8 +14,8 @@ const config = {
   },
   pagination: { page: 1, perPage: 20, total: 1 },
   initItem: (data) => {
-    data.color = randomPastelColor()
     const today = new Date().toISOString().split('T')[0]
+    data.color = randomPastelColor()
     data.dateStart = today
     data.dateEnd = today
     data.musics = []

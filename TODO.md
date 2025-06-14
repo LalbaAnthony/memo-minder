@@ -7,15 +7,10 @@ Must:
 - [ ] Create and implement email systeme with email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
-- [x] On auth components, faire en sorte que tout les models de champs emails de tout les tab s'auto-copie en temps réel
-- [x] Wipe notif enable side menu
-- [ ] Scroll à la bonne hauteur à l'ouverture de item picker
-- [ ] Re-add today as the default date on some date picker (just the event one). Make sure the date isnt half set like back in the days.
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Test unitaires et d'intégration des contrôleurs, modèles et routes
 
 Could:
-- [ ] Ajout champ birthdate dans les personnes + affichage dans les items + fonction de rappel de date d'anniversaire avec endpoint dedié
 - [ ] Merge manualUpdate and manualCreation on details pages
 - [ ] Faire validator de données dans les stores ?
 - [ ] Filter by Pill/Items on list pages
