@@ -181,14 +181,19 @@ function triggerSearch() {
   }
 }
 
-useSwipe((direction) => {
-  if (!isMobile()) return
-  if (direction === 'left') {
-    hideSidebar()
-  } else if (direction === 'right') {
-    revealSidebar()
+useSwipe(
+  (direction) => {
+    if (!isMobile()) return;
+    if (direction === 'left') {
+      hideSidebar();
+    } else if (direction === 'right') {
+      revealSidebar();
+    }
+  },
+  {
+    ignores: ['no-swipe', 'Vue-Toastification__toast']
   }
-});
+);
 
 onMounted(() => {
   // Add shortcuts

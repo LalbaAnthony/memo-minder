@@ -11,7 +11,7 @@ import AuthLogin from '@/components/auth/AuthLogin.vue'
 import AuthRegister from '@/components/auth/AuthRegister.vue'
 import AuthForgotPassword from '@/components/auth/AuthForgotPassword.vue'
 import AuthResetPassword from '@/components/auth/AuthResetPassword.vue'
-import { ref, shallowRef } from 'vue'
+import { ref, shallowRef, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 
 const authStore = useAuthStore()
@@ -34,5 +34,10 @@ const tabs = ref({
     component: shallowRef(AuthResetPassword),
   }
 })
+
+watch(() => authStore.authentication.tabs.login.fields.email, (value) => {
+  authStore.authentication.tabs.forgotPassword.fields.email = value
+  authStore.authentication.tabs.register.fields.email = value
+});
 
 </script>
