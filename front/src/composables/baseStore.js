@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { api } from '@/composables/api'
 import { useAuthStore } from '@/stores/auth'
 import { notif } from '@/composables/notif'
+import { nextTick } from 'vue'
 
 const authStore = useAuthStore()
 
@@ -82,9 +83,9 @@ export function createBaseStore(config) {
                 this.items.loading = false
             },
 
-            changePage(page, scroll = true) {
+            async changePage(page, scroll = true) {
                 this.items.pagination.page = page
-                this.fetchItems()
+                this.fetchItems({page: this.items.pagination.page})
                 if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' })
             },
 
