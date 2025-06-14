@@ -115,7 +115,9 @@ function goMid() {
 
 function setShowPicker(value) {
   showPicker.value = value
-  if (value === true) goMid()
+  setTimeout(() => {
+    if (value === true) goMid()
+  }, 200)
 }
 
 </script>
