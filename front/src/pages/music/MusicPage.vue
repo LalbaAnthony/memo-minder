@@ -22,26 +22,17 @@
       <!-- Stream link section -->
       <section>
         <div class="flex items-center justify-center gap-2 bg-dark-light p-4 rounded-lg">
-          <!-- <ClipboardDocumentIcon
-            :class="['size-6', musicStore.item?.data?.streamingLink ? 'text-gray hover:text-gray-light cursor-pointer' : 'text-gray-dark']"
-            @click="copyToClipboard(musicStore.item?.data?.streamingLink)" />
-          <input v-model="musicStore.item.data.streamingLink" id="streamingLink"
-            class="w-full sm:w-2/3 md:w-1/2 p-2 rounded-lg bg-gray-dark text-light"
-            :placeholder="userStreamingPlatform().links.placeholder" />
-          <ArrowTopRightOnSquareIcon
-            :class="['size-7', musicStore.item?.data?.streamingLink ? 'text-gray hover:text-gray-light cursor-pointer' : 'text-gray-dark']"
-            @click="openLink(musicStore.item?.data?.streamingLink)" /> -->
-            <div class="flex items-center justify-center gap-2 w-full max-w-[24rem] p-1.5 rounded-lg bg-gray-dark">
-              <ClipboardDocumentIcon
-                :class="['size-5', musicStore.item?.data?.streamingLink ? 'text-[#9ca3af] cursor-pointer' : 'text-gray']"
-                @click="copyToClipboard(musicStore.item?.data?.streamingLink)" />
-              <input v-model="musicStore.item.data.streamingLink" id="location"
-                class="w-full rounded-lg bg-gray-dark text-light"
-                :placeholder="userStreamingPlatform().links.placeholder" />
-              <ArrowTopRightOnSquareIcon
-                :class="['size-6', musicStore.item?.data?.streamingLink ? 'text-[#9ca3af] cursor-pointer' : 'text-gray']"
-                @click="openLink(musicStore.item?.data?.streamingLink)" />
-            </div>
+          <div class="flex items-center justify-center gap-2 w-full max-w-[24rem] p-1.5 px-2.5 rounded-lg bg-gray-dark">
+            <ClipboardDocumentIcon
+              :class="['size-5', musicStore.item?.data?.streamingLink ? 'text-gray-light cursor-pointer' : 'text-gray']"
+              @click="copyToClipboard(musicStore.item?.data?.streamingLink)" />
+            <input v-model="musicStore.item.data.streamingLink" id="location"
+              class="w-full rounded-lg bg-gray-dark text-light"
+              :placeholder="userStreamingPlatform().links.placeholder" />
+            <ArrowTopRightOnSquareIcon
+              :class="['size-6', musicStore.item?.data?.streamingLink ? 'text-gray-light cursor-pointer' : 'text-gray']"
+              @click="openLink(musicStore.item?.data?.streamingLink)" />
+          </div>
         </div>
 
       </section>
