@@ -1,11 +1,11 @@
 <template>
-    <select v-model="streamingPlatformKey" id="streamingPlatform"
-      class="select m:w-48 w-full px-4 p-2 rounded-lg bg-gray-dark text-light">
-      <option value="" disabled>Platform</option>
-      <option v-for="(value, key) in allStreamingPlatforms" :key="key" :value="key"
-        :selected="key === streamingPlatformKey">
-        {{ value?.label }}</option>
-    </select>
+  <select v-model="streamingPlatformKey" id="streamingPlatform"
+    class="select sm:w-48 w-full px-4 p-2 rounded-lg bg-gray-dark text-light">
+    <option value="" disabled>Platform</option>
+    <option v-for="(value, key) in allStreamingPlatforms" :key="key" :value="key"
+      :selected="key === streamingPlatformKey">
+      {{ value?.label }}</option>
+  </select>
 </template>
 
 <script setup>
