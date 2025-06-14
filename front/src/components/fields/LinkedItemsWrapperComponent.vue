@@ -1,8 +1,8 @@
 <template>
-  <LinkedItemsList :item="props.item" @show-picker="showPicker = true"
+  <LinkedItemsList :item="props.item" @show-picker="setShowPicker(true)"
     @delete="(id, type) => { deleteItem(id, type) }" />
 
-  <LinkedItemsPicker :childrenTypes="props.childrenTypes" :show="showPicker" @close-picker="showPicker = false"
+  <LinkedItemsPicker :childrenTypes="props.childrenTypes" :show="showPicker" @close-picker="setShowPicker(false)"
     @add="(object) => { addItem(object) }" />
 </template>
 
@@ -95,15 +95,27 @@ function addItem(object) {
     notif.notify('This item is already linked to this item', 'error')
     return
   }
-  
+
   store.value.item.data[path].push(object.data)
 }
 
 function deleteItem(id, type) {
   const path = getChildrenPath(type)
   const pk = getChildrenPk(type)
-  
+
   store.value.item.data[path] = store.value.item.data[path].filter(item => item[pk] !== id)
+}
+
+function goMid() {
+  window.scrollBy({
+    top: window.innerHeight * 0.5,
+    behavior: 'smooth'
+  });
+}
+
+function setShowPicker(value) {
+  showPicker.value = value
+  if (value === true) goMid()
 }
 
 </script>

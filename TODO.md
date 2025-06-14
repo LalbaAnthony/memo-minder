@@ -7,10 +7,10 @@ Must:
 - [ ] Create and implement email systeme with email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
-- [ ] On auth components, faire en sorte que tout les models de champs emails de tout les tab s'auto-copie en temps réel
-- [ ] Re-add today as the default date on some date picker (just the event one). Make sure the date isnt half set like back in the days.
+- [x] On auth components, faire en sorte que tout les models de champs emails de tout les tab s'auto-copie en temps réel
+- [x] Wipe notif enable side menu
 - [ ] Scroll à la bonne hauteur à l'ouverture de item picker
-- [ ] Wipe notif enable side menu
+- [ ] Re-add today as the default date on some date picker (just the event one). Make sure the date isnt half set like back in the days.
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Test unitaires et d'intégration des contrôleurs, modèles et routes
 

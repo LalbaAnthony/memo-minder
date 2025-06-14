@@ -18,7 +18,7 @@
                 placeholder="Confirm password" />
             <PasswordStrength
                 :password="authStore.authentication.tabs.register.fields.password || authStore.authentication.tabs.register.fields.confirmPassword || ''" />
-            <label class="flex flex-start space-x-2">
+            <label class="flex flex-start py-2 space-x-2">
                 <input v-model="authStore.authentication.tabs.register.fields.acceptTerms" id="acceptTerms"
                     type="checkbox" />
                 <span class="text-light">I accept <router-link to="/terms-and-conditions"

@@ -99,6 +99,7 @@ input[type="checkbox"] {
 }
 
 select {
+  height: 36px;
   background-color: var(--gray-dark);
   color: var(--light);
   appearance: none;
