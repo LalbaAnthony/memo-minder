@@ -2,13 +2,15 @@
   <select v-model="languageKey" id="language" class="select sm:w-48 w-full px-4 p-2 rounded-lg bg-gray-dark text-light">
     <option value="" disabled>Language</option>
     <option v-for="(value, key) in allLanguages" :key="key" :value="key" :selected="key === languageKey">
-      {{ value?.label }}</option>
+      {{ isMobile ? value?.flag?.emb : '' }}&nbsp;{{ value?.label }}
+    </option>
   </select>
 </template>
 
 <script setup>
 import { ref, watch } from 'vue'
 import { allLanguages } from '@/composables/languages'
+import { isMobile } from '@/composables/helpers'
 
 const props = defineProps({
   value: {
