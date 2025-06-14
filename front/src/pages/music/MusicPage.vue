@@ -13,7 +13,8 @@
           <input v-model="musicStore.item.data.title" type="text"
             class="rounded-lg bg-dark placeholder-gray text-light text-2xl w-full" placeholder="Music title" />
           <button class="rounded-2xl bg-gray-dark p-3 hover:scale-105 transition-all duration-300">
-            <PlayIcon class="size-6 cursor-pointer" @click="openLink(smartStreamingLink(musicStore.item?.data), true, false)" />
+            <PlayIcon class="size-6 cursor-pointer"
+              @click="openLink(smartStreamingLink(musicStore.item?.data), true, false)" />
           </button>
         </div>
       </section>
@@ -21,7 +22,7 @@
       <!-- Stream link section -->
       <section>
         <div class="flex items-center justify-center gap-2 bg-dark-light p-4 rounded-lg">
-          <ClipboardDocumentIcon
+          <!-- <ClipboardDocumentIcon
             :class="['size-6', musicStore.item?.data?.streamingLink ? 'text-gray hover:text-gray-light cursor-pointer' : 'text-gray-dark']"
             @click="copyToClipboard(musicStore.item?.data?.streamingLink)" />
           <input v-model="musicStore.item.data.streamingLink" id="streamingLink"
@@ -29,8 +30,20 @@
             :placeholder="userStreamingPlatform().links.placeholder" />
           <ArrowTopRightOnSquareIcon
             :class="['size-7', musicStore.item?.data?.streamingLink ? 'text-gray hover:text-gray-light cursor-pointer' : 'text-gray-dark']"
-            @click="openLink(musicStore.item?.data?.streamingLink)" />
+            @click="openLink(musicStore.item?.data?.streamingLink)" /> -->
+            <div class="flex items-center justify-center gap-2 w-full max-w-[24rem] p-1.5 rounded-lg bg-gray-dark">
+              <ClipboardDocumentIcon
+                :class="['size-5', musicStore.item?.data?.streamingLink ? 'text-[#9ca3af] cursor-pointer' : 'text-gray']"
+                @click="copyToClipboard(musicStore.item?.data?.streamingLink)" />
+              <input v-model="musicStore.item.data.streamingLink" id="location"
+                class="w-full rounded-lg bg-gray-dark text-light"
+                :placeholder="userStreamingPlatform().links.placeholder" />
+              <ArrowTopRightOnSquareIcon
+                :class="['size-6', musicStore.item?.data?.streamingLink ? 'text-[#9ca3af] cursor-pointer' : 'text-gray']"
+                @click="openLink(musicStore.item?.data?.streamingLink)" />
+            </div>
         </div>
+
       </section>
 
       <!-- Date & Artist section -->
