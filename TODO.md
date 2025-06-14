@@ -8,6 +8,7 @@ Must:
 
 Should:
 - [ ] Issue on pagination ?
+- [ ] Add x padding on location and streamingLink
 - [ ] Display modd color in the picker
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Test unitaires et d'intégration des contrôleurs, modèles et routes
