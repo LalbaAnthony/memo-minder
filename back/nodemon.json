@@ -1,0 +1,8 @@
+{
+    "watch": [
+        "src",
+        "main.js"
+    ],
+    "ext": "js,json",
+    "exec": "node main.js"
+}
