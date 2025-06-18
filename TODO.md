@@ -1,6 +1,7 @@
 - Try hack the the web app
 
 Must:
+- [ ] Convert all import to ESM
 - [ ] Search for TODO and WIP inside the codebase
 - [ ] Reparer soucis cache upcoming bdays et le réactiver
 - [ ] Make a prepoduction

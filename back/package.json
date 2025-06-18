@@ -1,7 +1,6 @@
 {
   "name": "memo-minder-back",
   "version": "1.0.0",
-  "type": "module",
   "private": true,
   "main": "main.js",
   "scripts": {
