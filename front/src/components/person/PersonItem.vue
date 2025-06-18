@@ -9,8 +9,10 @@
         <h1 class="text-2xl font-bold">{{ limitString(props?.person?.name) }}</h1>
         <p v-if="remainingsUntilBirthday >= props.birthdayScope" class="text-gray-light">{{
           limitString(props?.person?.description) }}</p>
-        <Pill v-if="remainingsUntilBirthday > 0 && remainingsUntilBirthday < props.birthdayScope"
-          :text="remainingsUntilBirthday > 1 ? `B-day in ${remainingsUntilBirthday} days` : 'B-day tomorow'" type="event" class="mt-1" />
+        <p v-if="remainingsUntilBirthday < props.birthdayScope" class="text-gray-light inline-flex items-end gap-1">
+          <CalendarDaysIcon class="size-6 text-primary-light" />
+          {{ limitString(remainingsUntilBirthday > 1 ? `Birthday in ${remainingsUntilBirthday} days` : 'Birthday tomorow') }}
+        </p>
       </div>
     </div>
     <div class="grid grid-rows-2 divide-y-2 divide-gray cursor-pointer">
@@ -30,6 +32,7 @@ import { TrashIcon } from '@heroicons/vue/24/outline'
 import { UserIcon } from '@heroicons/vue/24/solid'
 import { limitString } from '@/composables/beautify'
 import { PencilSquareIcon } from '@heroicons/vue/24/outline'
+import { CalendarDaysIcon } from '@heroicons/vue/24/solid'
 import { useRouter } from 'vue-router'
 import Pill from '@/components/PillComponent.vue'
 import { daysFromBirthday } from '@/composables/helpers'
