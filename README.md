@@ -5,7 +5,7 @@
 This web app have been inspired by [this youtube video](https://www.youtube.com/watch?v=X7ZxomW71Vs).
 This web app use [https://github.com/well300/quotes-api](https://github.com/well300/quotes-api) to fetch quotes in the home page.
 
-## 📖 Technos
+## 📖 - Technos
 
 - [Node.js](https://nodejs.org/en/)
 - [Express](https://expressjs.com/)
@@ -13,7 +13,7 @@ This web app use [https://github.com/well300/quotes-api](https://github.com/well
 - [Tailwind](https://tailwindcss.com/)
 - [Headless UI](https://headlessui.dev/)
 
-## 🚀 Quick Start
+## 🚀 - Quick Start
 
 ### Config
 
@@ -43,7 +43,7 @@ cd back/ && npm run seed
 cd back/ && npm run test
 ```
 
-## 🚢 Deployment
+## 🚢 - Deployment
 
 ### Secrets
 
