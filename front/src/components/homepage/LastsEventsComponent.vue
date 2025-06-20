@@ -13,7 +13,7 @@
                     eventStore.items?.data?.length === 0 ? 'p-16' : 'py-1.5']">
                     <span v-if="eventStore.items?.data?.length === 0" class="text-light"> Add your first
                         event</span>
-                    <PlusIcon class="arrow size-8 text-white ml-2 transition ease-in-out duration-300 transform" />
+                    <PlusIcon class="arrow size-8 text-gray-light ml-2 transition ease-in-out duration-300 transform" />
                 </router-link>
             </div>
         </div>

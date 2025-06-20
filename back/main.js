@@ -24,11 +24,7 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 const app = express()
 
 // CORS middleware
-app.use(cors({
-    origin: process.env.VITE_FRONT_URL,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(cors({}));
 
 // Log middleware
 app.use(logging);

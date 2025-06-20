@@ -8,10 +8,10 @@ Must:
 - [ ] Create and implement email systeme with email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
-- [ ] Mettre percentage en blanc pour les bars ?
-- [ ] Ajouter espace entre éléments sur page légal et page info
-- [ ] Mettre bouton de add recent en gris 
-- [ ] Display modd color in the picker
+- [x] Mettre percentage en blanc pour les bars ?
+- [x] Ajouter espace entre éléments sur page légal et page info
+- [x] Mettre bouton de add recent en gris 
+- [ ] Display mood color in the picker
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Test unitaires et d'intégration des contrôleurs, modèles et routes
 
