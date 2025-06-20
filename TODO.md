@@ -9,7 +9,7 @@ Must:
 
 Should:
 - [ ] Mettre percentage en blanc pour les bars ?
-- [ ] Ajouter espace sur entre éléments sur page légal et page info
+- [ ] Ajouter espace entre éléments sur page légal et page info
 - [ ] Mettre bouton de add recent en gris 
 - [ ] Display modd color in the picker
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
