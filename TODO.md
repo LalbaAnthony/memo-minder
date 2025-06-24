@@ -16,6 +16,7 @@ Could:
 - [ ] Merge manualUpdate and manualCreation on details pages
 - [ ] Faire validator de données dans les stores ?
 - [ ] Filter by Pill/Items on list pages
+- [ ] Basculer vers UUID car plus secure
 - [ ] Fix wrong imports in backend (ESM/CommonJS)
 - [ ] Search including linked items
 - [ ] Faire un endpoint /search (pour item picker et searc page) au lieu de plusieurs appel à plusieurs endpoints
