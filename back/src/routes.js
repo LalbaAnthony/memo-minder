@@ -36,7 +36,7 @@ router.post('/people', checkToken, personController.createPerson);
 router.put('/person/:id', checkToken, personController.updatePerson);
 router.delete('/person/:id', checkToken, personController.deletePerson);
 
-// Seaons
+// Seasons
 router.get('/seasons', checkToken, seasonController.getAllSeasons);
 router.get('/season/:id', checkToken, seasonController.getSeasonById);
 router.post('/seasons', checkToken, seasonController.createSeason);
