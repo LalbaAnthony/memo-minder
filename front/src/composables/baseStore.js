@@ -2,7 +2,6 @@ import { defineStore } from 'pinia'
 import { api } from '@/composables/api'
 import { useAuthStore } from '@/stores/auth'
 import { notif } from '@/composables/notif'
-import { nextTick } from 'vue'
 
 const authStore = useAuthStore()
 
@@ -61,11 +60,11 @@ export function createBaseStore(config) {
                 this.item.loading = false
             },
 
-            async fetchItems(givenParams = {}) {
+            async fetchItems(givenParams = {}, clearFirst = true) {
                 this.items.loading = true
 
                 // Clear the local list before fetching
-                this.clearItems()
+                if (clearFirst) this.clearItems()
 
                 const params = {
                     userId: authStore.user.userId,
@@ -83,9 +82,9 @@ export function createBaseStore(config) {
                 this.items.loading = false
             },
 
-            async changePage(page, scroll = true) {
+            async changePage(page, fetch = true, scroll = true) {
                 this.items.pagination.page = page
-                this.fetchItems({page: this.items.pagination.page})
+                if (fetch) this.fetchItems()
                 if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' })
             },
 
