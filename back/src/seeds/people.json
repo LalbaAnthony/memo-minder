@@ -47,5 +47,26 @@
         "name": "Victor",
         "birthdate": "1983-11-11",
         "description": "Driven entrepreneur and philanthropist"
+    },
+    {
+        "personId": 8,
+        "userId": 1,
+        "name": "Emma",
+        "birthdate": "1998-07-20",
+        "description": "A rising star in the tech industry"
+    },
+    {
+        "personId": 9,
+        "userId": 1,
+        "name": "Liam",
+        "birthdate": "1994-02-14",
+        "description": "An avid traveler and cultural enthusiast"
+    },
+    {
+        "personId": 10,
+        "userId": 1,
+        "name": "Olivia",
+        "birthdate": "1991-09-30",
+        "description": "A passionate advocate for social change"
     }
 ]
