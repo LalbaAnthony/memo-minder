@@ -68,5 +68,82 @@
         "name": "Olivia",
         "birthdate": "1991-09-30",
         "description": "A passionate advocate for social change"
+    },
+    {
+        "personId": 11,
+        "userId": 1,
+        "name": "Ethan",
+        "birthdate": "1985-04-18",
+        "description": "A dedicated researcher and innovator"
+    },
+    {
+        "personId": 12,
+        "userId": 1,
+        "name": "Sophia",
+        "birthdate": "1996-10-05",
+        "description": "A talented musician with a bright future"
+    },
+    {
+        "personId": 13,
+        "userId": 1,
+        "name": "Mason",
+        "birthdate": "1987-12-25",
+        "description": "A charismatic leader with a vision"
+    },
+    {
+        "personId": 14,
+        "userId": 1,
+        "name": "Isabella",
+        "birthdate": "1993-03-15",
+        "description": "A compassionate healthcare professional"
+    },
+    {
+        "personId": 15,
+        "userId": 1,
+        "name": "Lucas",
+        "birthdate": "1999-08-08",
+        "description": "An aspiring athlete with great potential"
+    },
+    {
+        "personId": 16,
+        "userId": 1,
+        "name": "Ava",
+        "birthdate": "1990-06-30",
+        "description": "A brilliant scientist making waves in her field"
+    },
+    {
+        "personId": 17,
+        "userId": 1,
+        "name": "Noah",
+        "birthdate": "1982-01-20",
+        "description": "A seasoned journalist with a knack for storytelling"
+    },
+    {
+        "personId": 18,
+        "userId": 1,
+        "name": "Mia",
+        "birthdate": "1997-04-12",
+        "description": "A passionate environmentalist and activist"
+    },
+    {
+        "personId": 19,
+        "userId": 1,
+        "name": "Oliver",
+        "birthdate": "1995-11-05",
+        "description": "A tech-savvy entrepreneur with a global vision"
+    },
+    {
+        "personId": 20,
+        "userId": 1,
+        "name": "Charlotte",
+        "birthdate": "1994-07-22",
+        "description": "An inspiring educator shaping the future"
+    },
+    {
+        "personId": 21,
+        "userId": 1,
+        "name": "Liam",
+        "birthdate": "1991-02-28",
+        "description": "A creative writer with a unique perspective"
     }
 ]
