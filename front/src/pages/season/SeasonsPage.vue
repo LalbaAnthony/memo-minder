@@ -15,7 +15,10 @@
       </template>
     </Grid>
     <Pagination :total="seasonStore.items.pagination.total" :page="seasonStore.items.pagination.page"
-      :perPage="seasonStore.items.pagination.perPage" @update-page="(page) => seasonStore.changePage(page)" />
+      :perPage="seasonStore.items.pagination.perPage" @update-page="async (page) => {
+        seasonStore.changePage(page, false);
+        await loadSeasons()
+      }" />
 
     <BottomActions :addButton="true" :goTopButton="true" />
   </div>
@@ -42,7 +45,7 @@ async function loadSeasons() {
       orderBy: route.query.sort?.split('-')[0] || null,
       order: route.query.sort?.split('-')[1] || null
     }] : []
-  })
+  }, false)
 }
 
 // Fetch seasons on mount

@@ -16,7 +16,10 @@
     </Grid>
 
     <Pagination :total="eventStore.items.pagination.total" :page="eventStore.items.pagination.page"
-      :perPage="eventStore.items.pagination.perPage" @update-page="(page) => eventStore.changePage(page)" />
+      :perPage="eventStore.items.pagination.perPage" @update-page="async (page) => {
+        eventStore.changePage(page, false);
+        await loadEvents()
+      }" />
 
     <BottomActions :addButton="true" :goTopButton="true" />
   </div>
@@ -42,7 +45,7 @@ async function loadEvents() {
       orderBy: route.query.sort?.split('-')[0] || null,
       order: route.query.sort?.split('-')[1] || null
     }] : []
-  })
+  }, false)
 }
 
 // Fetch events on mount

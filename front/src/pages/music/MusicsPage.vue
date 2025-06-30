@@ -16,7 +16,10 @@
     </Grid>
 
     <Pagination :total="musicStore.items.pagination.total" :page="musicStore.items.pagination.page"
-      :perPage="musicStore.items.pagination.perPage" @update-page="(page) => musicStore.changePage(page)" />
+      :perPage="musicStore.items.pagination.perPage" @update-page="async (page) => {
+        musicStore.changePage(page, false);
+        await loadMusics()
+      }" />
 
     <BottomActions :addButton="true" :goTopButton="true" />
   </div>
@@ -42,7 +45,7 @@ async function loadMusics() {
       orderBy: route.query.sort?.split('-')[0] || null,
       order: route.query.sort?.split('-')[1] || null
     }] : []
-  })
+  }, false)
 }
 
 // Fetch musics on mount
