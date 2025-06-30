@@ -3,6 +3,6 @@
         "src",
         "main.js"
     ],
-    "ext": "js,json",
+    "ext": "js",
     "exec": "node main.js"
 }
