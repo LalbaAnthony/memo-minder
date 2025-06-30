@@ -32,11 +32,11 @@ const config = {
   },
 
   actions: {
-    fetchUpcomingBirthdays: async function (givenParams) {
+    fetchUpcomingBirthdays: async function (givenParams, clearFirst = true) {
       this.items.loading = true
 
       // Clear the local list before fetching
-      this.clearItems()
+      if (clearFirst) this.clearItems()
 
       const params = {
         userId: authStore.user.userId,

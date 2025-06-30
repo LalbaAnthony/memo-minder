@@ -15,7 +15,10 @@
       </template>
     </Grid>
     <Pagination :total="personStore.items.pagination.total" :page="personStore.items.pagination.page"
-      :perPage="personStore.items.pagination.perPage" @update-page="(page) => personStore.changePage(page)" />
+      :perPage="personStore.items.pagination.perPage" @update-page="async (page) => {
+        personStore.changePage(page, false);
+        await loadPeople()
+      }" />
 
     <BottomActions :addButton="true" :goTopButton="true" />
   </div>
@@ -41,7 +44,7 @@ async function loadPeople() {
       orderBy: route.query.sort?.split('-')[0] || null,
       order: route.query.sort?.split('-')[1] || null
     }] : []
-  })
+  }, false)
 }
 
 // Fetch people on mount
