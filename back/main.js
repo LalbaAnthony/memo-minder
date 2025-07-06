@@ -15,7 +15,7 @@ const logging = require('./src/middlewares/logging')
 const frmtr = require('./src/helpers/frmtr')
 const logConsole = require('./src/helpers/logConsole')
 
-// IMporting sequelize
+// Importing sequelize
 const { sequelize } = require('./src/database');
 
 // Load .env file
