@@ -7,11 +7,19 @@
       </div>
       <div class="flex flex-col justify-center items-start">
         <h1 class="text-2xl font-bold">{{ limitString(props?.person?.name) }}</h1>
-        <p v-if="remainingsUntilBirthday >= props.birthdayScope" class="text-gray-light">{{
+        <p v-if="remainingsUntilBirthday > props.birthdayScope" class="text-gray-light">{{
           limitString(props?.person?.description) }}</p>
-        <p v-if="remainingsUntilBirthday < props.birthdayScope" class="text-gray-light inline-flex items-end gap-1">
+        <p v-if="remainingsUntilBirthday <= props.birthdayScope" class="text-gray-light inline-flex items-end gap-1">
           <CalendarDaysIcon class="size-6 text-primary-light" />
-          {{ limitString(remainingsUntilBirthday > 1 ? `Birthday in ${remainingsUntilBirthday} days` : 'Birthday tomorow') }}
+          <span v-if="remainingsUntilBirthday > 1">
+            Birthday in {{ remainingsUntilBirthday }} days
+          </span>
+          <span v-if="remainingsUntilBirthday === 1">
+            Birthday tomorrow
+          </span>
+          <span v-if="remainingsUntilBirthday === 0">
+            Birthday today!
+          </span>
         </p>
       </div>
     </div>
@@ -34,7 +42,6 @@ import { limitString } from '@/composables/beautify'
 import { PencilSquareIcon } from '@heroicons/vue/24/outline'
 import { CalendarDaysIcon } from '@heroicons/vue/24/solid'
 import { useRouter } from 'vue-router'
-import Pill from '@/components/PillComponent.vue'
 import { daysFromBirthday } from '@/composables/helpers'
 import { computed } from 'vue'
 

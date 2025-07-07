@@ -52,18 +52,16 @@ export function daysFromBirthday(birthdate) {
     if (new Date(birthdate) > new Date()) return 0;
 
     const today = new Date();
-    const birthdayThisYear = new Date(today.getFullYear(), new Date(birthdate).getMonth(), new Date(birthdate).getDate());
+    today.setHours(0, 0, 0, 0); // Set to start of the day or it would lead to issues with time
+    const nextBirthday = new Date(today.getFullYear(), new Date(birthdate).getMonth(), new Date(birthdate).getDate());
+    if (nextBirthday < today) nextBirthday.setFullYear(today.getFullYear() + 1); // If the birthday has already occurred this year, set it to next year
 
-    if (birthdayThisYear < today) {
-        birthdayThisYear.setFullYear(today.getFullYear() + 1);
-    }
-
-    const timeDiff = birthdayThisYear - today;
+    const timeDiff = nextBirthday - today;
     const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
     return daysDiff;
 }
 
-export function extractYear (date = null) {
+export function extractYear(date = null) {
     if (!date) return "";
     return new Date(date).getFullYear();
 }
@@ -130,10 +128,10 @@ export function openLink(url, blank = true, encode = true) {
 
     url = url.trim();
     if (encode) url = encodeURI(url);
-    
+
     if (!url.startsWith('http://') && !url.startsWith('https://')) url = 'http://' + url;
     if (!isValidUrl(url, !encode)) return;
-    
+
     const target = blank ? '_blank' : '_self';
     window.open(url, target);
 }
