@@ -1,10 +1,9 @@
 - Try hack the the web app
 
 Must:
-- [ ] Convert all import to ESM
+- [ ] Fix wrong imports in backend (ESM/CommonJS)
 - [ ] Search for TODO and WIP inside the codebase
 - [ ] Reparer soucis cache upcoming bdays et le réactiver
-- [ ] Make a prepoduction
 - [ ] Create and implement email systeme with email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
@@ -16,8 +15,6 @@ Could:
 - [ ] Merge manualUpdate and manualCreation on details pages
 - [ ] Faire validator de données dans les stores ?
 - [ ] Filter by Pill/Items on list pages
-- [ ] Basculer vers UUID car plus secure
-- [ ] Fix wrong imports in backend (ESM/CommonJS)
 - [ ] Search including linked items
 - [ ] Faire un endpoint /search (pour item picker et searc page) au lieu de plusieurs appel à plusieurs endpoints
 - [ ] Faire listes/items differentes dans les stores pour chaque usage (use stores ? `lasts: {}`, `toAdd: {}` ?)
