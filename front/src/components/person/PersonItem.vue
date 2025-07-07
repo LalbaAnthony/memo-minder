@@ -15,10 +15,10 @@
             Birthday in {{ remainingsUntilBirthday }} days
           </span>
           <span v-if="remainingsUntilBirthday === 1">
-            Birthday tomorrow
+            Birthday is tomorrow
           </span>
           <span v-if="remainingsUntilBirthday === 0">
-            Birthday today!
+            Birthday is today!
           </span>
         </p>
       </div>
