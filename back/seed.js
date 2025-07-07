@@ -30,7 +30,7 @@ const seedData = async () => {
             await User.bulkCreate(sampleUsers);
             logConsole('Users data inserted', 'success');
         } else {
-            logConsole('Users data skipped due to prod env', 'success');
+            logConsole('Users data skipped due to prod env', 'warn');
         }
 
         // Sample data for Music table
@@ -39,7 +39,7 @@ const seedData = async () => {
             await Music.bulkCreate(sampleMusics);
             logConsole('Musics data inserted', 'success');
         } else {
-            logConsole('Musics data skipped due to prod env', 'success');
+            logConsole('Musics data skipped due to prod env', 'warn');
         }
 
         // Sample data for Person table
@@ -48,7 +48,7 @@ const seedData = async () => {
             await Person.bulkCreate(samplePeople);
             logConsole('People data inserted', 'success');
         } else {
-            logConsole('People data skipped due to prod env', 'success');
+            logConsole('People data skipped due to prod env', 'warn');
         }
 
         // Sample data for Season table
@@ -57,7 +57,7 @@ const seedData = async () => {
             await Season.bulkCreate(sampleSeasons);
             logConsole('Seasons data inserted', 'success');
         } else {
-            logConsole('Seasons data skipped due to prod env', 'success');
+            logConsole('Seasons data skipped due to prod env', 'warn');
         }
 
         // Sample data for Event table
@@ -66,7 +66,7 @@ const seedData = async () => {
             await Event.bulkCreate(sampleEvents);
             logConsole('Sample data inserted', 'success');
         } else {
-            logConsole('Sample data skipped due to prod env', 'success');
+            logConsole('Sample data skipped due to prod env', 'warn');
         }
 
     } catch (error) {
