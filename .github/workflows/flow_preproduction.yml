@@ -1,0 +1,143 @@
+name: Deploy to Preproduction
+
+on:
+  push:
+    branches:
+      - preprod
+    paths:
+      - ".github/workflows/*"
+      - "front/**"
+      - "back/**"
+
+jobs:
+  back_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Dependencies
+        working-directory: ./back
+        run: npm install
+
+      - name: Run Tests
+        working-directory: ./back
+        run: npm test
+
+  back_deploy:
+    runs-on: ubuntu-latest
+    needs: back_test
+    if: success()
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Transfer Back Files
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.PREPROD_SERVER_IP }}
+          username: ${{ secrets.PREPROD_SERVER_USER }}
+          key: ${{ secrets.PREPROD_SERVER_PRIVATE_KEY }}
+          source: "back/*"
+          target: "/var/www/html/memo-minder/back"
+          strip_components: 1 # Removes the 'back' portion and only transfers its contents
+
+      - name: Install Backend Dependencies and Restart node server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.PREPROD_SERVER_IP }}
+          username: ${{ secrets.PREPROD_SERVER_USER }}
+          key: ${{ secrets.PREPROD_SERVER_PRIVATE_KEY }}
+          script: |
+            cd /var/www/html/memo-minder/back
+            npm install
+
+            pm2 start main.js --name memo-minder-backend || pm2 restart memo-minder-backend
+
+      - name: Restart Apache server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.PREPROD_SERVER_IP }}
+          username: ${{ secrets.PREPROD_SERVER_USER }}
+          key: ${{ secrets.PREPROD_SERVER_PRIVATE_KEY }}
+          script: |
+            sudo systemctl restart apache2
+
+  front_deploy:
+    runs-on: ubuntu-latest
+    needs: back_deploy
+    if: success()
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Set up Environment Variables
+        run: |
+          echo "VITE_APP_SHORT_NAME=${{ secrets.PREPROD_VITE_APP_SHORT_NAME }}" >> .env
+          echo "VITE_APP_NAME=${{ secrets.PREPROD_VITE_APP_NAME }}" >> .env
+          echo "VITE_APP_COMPANY_NAME=${{ secrets.PREPROD_VITE_APP_COMPANY_NAME }}" >> .env
+          echo "VITE_APP_AUTHOR_NAME=${{ secrets.PREPROD_VITE_APP_AUTHOR_NAME }}" >> .env
+          echo "VITE_APP_DESCRIPTION=${{ secrets.PREPROD_VITE_APP_DESCRIPTION }}" >> .env
+          echo "VITE_APP_THEME_COLOR=${{ secrets.PREPROD_VITE_APP_THEME_COLOR }}" >> .env
+          echo "VITE_APP_BG_COLOR=${{ secrets.PREPROD_VITE_APP_BG_COLOR }}" >> .env
+          echo "VITE_PORT=${{ secrets.PREPROD_VITE_PORT }}" >> .env
+          echo "VITE_FRONT_URL=${{ secrets.PREPROD_VITE_FRONT_URL }}" >> .env
+          echo "VITE_BACK_API_URL=${{ secrets.PREPROD_VITE_BACK_API_URL }}" >> .env
+          echo "VITE_GIT_REPO=${{ secrets.PREPROD_VITE_GIT_REPO }}" >> .env
+
+      - name: Install and Build frontend
+        working-directory: ./front
+        run: |
+          npm install
+          npm run build
+
+      - name: Remove Front files on remote
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.PREPROD_SERVER_IP }}
+          username: ${{ secrets.PREPROD_SERVER_USER }}
+          key: ${{ secrets.PREPROD_SERVER_PRIVATE_KEY }}
+          script: |
+            rm -rf /var/www/html/memo-minder/front/*
+
+      - name: Transfer Front files
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.PREPROD_SERVER_IP }}
+          username: ${{ secrets.PREPROD_SERVER_USER }}
+          key: ${{ secrets.PREPROD_SERVER_PRIVATE_KEY }}
+          source: "front/dist/*"
+          target: "/var/www/html/memo-minder/front"
+          strip_components: 2 # Removes the 'front/dist' portion and only transfers its contents
+
+  apache_restart:
+    runs-on: ubuntu-latest
+    needs: front_deploy
+    if: success()
+
+    steps:
+      - name: Restart Apache server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.PREPROD_SERVER_IP }}
+          username: ${{ secrets.PREPROD_SERVER_USER }}
+          key: ${{ secrets.PREPROD_SERVER_PRIVATE_KEY }}
+          script: |
+            sudo systemctl restart apache2
