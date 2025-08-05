@@ -35,7 +35,7 @@ export default defineConfig({
             handler: 'NetworkOnly',
             options: {
               cacheableResponse: {
-                statuses: [0, 200, 401, 403, 404, 500] // Cache responses with these status codes
+                statuses: [200, 201, 202, 204, 206, 304] // Cache only successful responses
               }
             }
           }
