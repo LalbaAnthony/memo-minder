@@ -14,7 +14,7 @@ const config = {
     delete: 'person',
     all: 'people',
     one: 'person',
-    upcomingBirthdays: 'upcoming-birthdays',
+    upcomingBirthdays: 'people/upcoming-birthdays',
   },
   pagination: { page: 1, perPage: 20, total: 1 },
   initItem: (data) => {
