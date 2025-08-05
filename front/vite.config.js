@@ -16,13 +16,31 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') });
 // Get the version from package.json
 const version = require('./package.json')?.version || '0.0.0';
 process.env.VITE_APP_VERSION = version;
-  
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     VitePWA({
+      strategies: 'generateSW',
       registerType: 'autoUpdate',
+      navigateFallback: '/index.html',
+      navigateFallbackDenylist: [
+        /^\/api\/.*$/
+      ],
+      workbox: {
+        runtimeCaching: [
+          {
+            urlPattern: /^\/api\/.*$/,
+            handler: 'NetworkOnly',
+            options: {
+              cacheableResponse: {
+                statuses: [0, 200, 401, 403, 404, 500] // Cache responses with these status codes
+              }
+            }
+          }
+        ]
+      },
       manifest: {
         name: process.env.VITE_APP_NAME,
         short_name: process.env.VITE_APP_SHORT_NAME,
