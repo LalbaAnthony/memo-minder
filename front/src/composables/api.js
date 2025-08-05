@@ -49,16 +49,7 @@ async function get(endpoint, params = {}) {
   if (typeof params !== 'object') throw new Error('Params must be an object')
 
   try {
-    
-    // Set 'Cache-Control' to 'no-cache' and merging with existing headers
-    // const response = await axiosApi.get(endpoint, { params })
-    const response = await axiosApi.get(endpoint, {
-      params,
-      headers: {
-        'Cache-Control': 'no-cache',
-      },
-    })
-    
+    const response = await axiosApi.get(endpoint, { params })
 
     if (!verifyStatus(response.status)) return
 
