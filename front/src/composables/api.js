@@ -59,7 +59,7 @@ async function get(endpoint, params = {}) {
     }
   } catch (error) {
     console.error('Error during API call using api.js:', error.stack)
-    // window.location.href = `${VITE_FRONT_URL}/error-server`;
+    window.location.href = `${VITE_FRONT_URL}/error-server`;
   }
 }
 
@@ -79,7 +79,7 @@ async function post(endpoint, data = {}) {
     }
   } catch (error) {
     console.error('Error during API call using api.js:', error.stack)
-    // window.location.href = `${VITE_FRONT_URL}/error-server`;
+    window.location.href = `${VITE_FRONT_URL}/error-server`;
   }
 }
 
@@ -99,7 +99,7 @@ async function put(endpoint, data = {}) {
     }
   } catch (error) {
     console.error('Error during API call using api.js:', error.stack)
-    // window.location.href = `${VITE_FRONT_URL}/error-server`;
+    window.location.href = `${VITE_FRONT_URL}/error-server`;
   }
 }
 
@@ -119,7 +119,7 @@ async function del(endpoint, data = {}) {
     }
   } catch (error) {
     console.error('Error during API call using api.js:', error.stack)
-    // window.location.href = `${VITE_FRONT_URL}/error-server`;
+    window.location.href = `${VITE_FRONT_URL}/error-server`;
   }
 }
 
