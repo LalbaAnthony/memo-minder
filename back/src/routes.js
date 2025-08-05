@@ -30,7 +30,7 @@ router.delete('/music/:id', checkToken, musicController.deleteMusic);
 
 // Person
 router.get('/people', checkToken, personController.getAllPeople);
-router.get('/people/upcoming-birthdays', checkToken, personController.getUpcommingBirthdaysPeople);
+router.get('/upcoming-birthdays', checkToken, personController.getUpcommingBirthdaysPeople);
 router.get('/person/:id', checkToken, personController.getPersonById);
 router.post('/people', checkToken, personController.createPerson);
 router.put('/person/:id', checkToken, personController.updatePerson);
