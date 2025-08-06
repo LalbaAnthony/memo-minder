@@ -1,6 +1,7 @@
 - Try hack the the web app
 
 Must:
+- [ ] Fix open on dezzer not working (in app)
 - [ ] Fix wrong imports in backend (ESM/CommonJS)
 - [ ] Search for TODO and WIP inside the codebase
 - [ ] Reparer soucis cache upcoming bdays et le réactiver
