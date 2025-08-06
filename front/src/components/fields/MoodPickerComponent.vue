@@ -2,7 +2,7 @@
   <div class="select sm:w-48 w-full rounded-lg bg-gray-dark text-light flex items-center justify-start gap-2 px-3">
     <!-- <div :style="`background-color: ${mood?.color}`" v-if="mood?.color" class="w-6 h-5 py-2 rounded-full">
     </div> -->
-    <HeartIcon  class="size-6 text-primary-light" />
+    <HeartIcon  :class="['size-6', moodId ? 'text-primary-light' : 'text-gray']" />
     <select v-model="moodId" id="mood" class="w-full">
       <option value="" disabled>Mood</option>
       <option v-for="(value, key) in moodStore.items.data" :key="key" :value="value.moodId"
