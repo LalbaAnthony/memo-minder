@@ -1,6 +1,7 @@
 - Try hack the the web app
 
 Must:
+- [ ] Add aria on all field (esp Auth) et check for Dashlane autofill
 - [ ] Fix open on dezzer not working (in app)
 - [ ] Fix wrong imports in backend (ESM/CommonJS)
 - [ ] Search for TODO and WIP inside the codebase
