@@ -5,8 +5,6 @@
       { value: 'title-desc', label: 'Title (Z-A)' },
       { value: 'createdAt-asc', label: 'Add date (Oldest)' },
       { value: 'createdAt-desc', label: 'Add date (Newest)' },
-      { value: 'releaseDate-asc', label: 'Date (Oldest)' },
-      { value: 'releaseDate-desc', label: 'Date (Newest)' }
     ]" />
     <Loader v-if="musicStore.items.loading" />
     <Grid v-else :items="musicStore.items.data">

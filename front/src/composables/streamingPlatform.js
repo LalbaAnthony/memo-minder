@@ -94,7 +94,6 @@ function smartStreamingLink(music = {}) {
     let terms = []
     if (music?.artist) terms.push(music?.artist)
     if (music?.title) terms.push(music?.title)
-    if (music?.releaseDate) terms.push(`${extractYear(music?.releaseDate)}`)
 
     // If there is a link, just using it
     if (!url && music?.streamingLink) {

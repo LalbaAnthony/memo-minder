@@ -41,9 +41,6 @@
       <section>
         <div class="flex flex-col gap-4 sm:gap-1 bg-dark-light p-4 rounded-lg">
           <div class="flex flex-col sm:flex-row items-center justify-start gap-x-4 gap-y-2">
-            <span class="text-lg font-medium text-gray-light">on</span>
-            <DatePicker class="max-w-[15rem]" :value="musicStore.item?.data?.releaseDate"
-              @update="(v) => { musicStore.item.data.releaseDate = v }" />
             <span class="text-lg font-medium text-gray-light">by</span>
             <input v-model="musicStore.item.data.artist" id="artist"
               class="w-full max-w-[24rem] p-2 rounded-lg bg-gray-dark text-light" placeholder="Artist" />
@@ -67,7 +64,6 @@
 
 <script setup>
 import Loader from '@/components/LoaderComponent.vue'
-import DatePicker from '@/components/fields/DatePickerComponent.vue'
 import TopActions from '@/components/actions/TopActionsComponent.vue'
 import BottomActions from '@/components/actions/BottomActionsComponent.vue'
 import LinkedItemsWrapper from '@/components/fields/LinkedItemsWrapperComponent.vue'

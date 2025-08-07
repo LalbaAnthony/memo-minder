@@ -2,7 +2,7 @@ const { Music, Event, Person, Season } = require('../database');
 
 const baseController = require('../composables/baseController');
 
-const searchFields = ['title', 'artist', 'releaseDate', 'streamingLink'];
+const searchFields = ['title', 'artist', 'streamingLink'];
 const requiredFields = ['userId', 'title'];
 const associations = [
     { model: Event, as: 'events' },
@@ -15,7 +15,6 @@ exports.getAllMusics = baseController.getAll(Music, {
     searchFields,
     defaultSort: [
         { order: 'DESC', orderBy: 'createdAt' },
-        { order: 'DESC', orderBy: 'releaseDate' },
     ],
     associations: [
         { model: Event, as: 'events' },

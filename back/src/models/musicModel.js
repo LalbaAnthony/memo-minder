@@ -26,10 +26,6 @@ module.exports = (instance) => {
             type: DataTypes.STRING(100),
             allowNull: true,
         },
-        releaseDate: {
-            type: DataTypes.DATEONLY,
-            allowNull: true,
-        },
         streamingLink: {
             type: DataTypes.STRING(1000),
             allowNull: true,
