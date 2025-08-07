@@ -45,6 +45,20 @@ cd back/ && npm run test
 
 ## 🚢 - Deployment
 
+### Flow
+
+Push to `preprod` branch to deploy on preproduction server.
+```sh
+git checkout preprod
+git pull ; git add . ; git commit -m 'Remove release date from musics' ; git push
+```
+
+Merge `preprod` branch into `main` branch to deploy on production.
+```sh
+git checkout main ; git pull origin preprod ; git push
+git checkout preprod    
+```
+
 ### Secrets
 
 Those secrets are required in the deployment environment:
