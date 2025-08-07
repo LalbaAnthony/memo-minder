@@ -3,6 +3,7 @@
 Must:
 - [ ] Add aria on all field (esp Auth) et check for Dashlane autofill
 - [ ] Fix open on dezzer not working (in app)
+- [ ] Use a dedicated endpoint to retrieve the best season for a given date and use it to replace what's currntylly used on events + put it on musics 
 - [ ] Fix wrong imports in backend (ESM/CommonJS)
 - [ ] Search for TODO and WIP inside the codebase
 - [ ] Reparer soucis cache upcoming bdays et le réactiver
