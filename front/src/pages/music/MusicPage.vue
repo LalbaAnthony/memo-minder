@@ -12,7 +12,7 @@
         <div class="flex items-center justify-between gap-2 w-full">
           <input v-model="musicStore.item.data.title" type="text"
             class="rounded-lg bg-dark placeholder-gray text-light text-2xl w-full" placeholder="Music title" />
-          <button class="rounded-2xl bg-gray-dark p-3 hover:scale-105 transition-all duration-300">
+          <button class="play-button rounded-2xl bg-gray-dark p-3 hover:scale-105 transition-all duration-300">
             <PlayIcon class="size-6 cursor-pointer"
               @click="openLink(smartStreamingLink(musicStore.item?.data), true, false)" />
           </button>
@@ -162,3 +162,24 @@ watch(() => musicStore.item.data,
   { deep: true }
 );
 </script>
+
+<style scoped>
+
+.play-button:not(:hover) {
+  animation: iddle 2s linear infinite;
+}
+
+@keyframes iddle {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+</style>
