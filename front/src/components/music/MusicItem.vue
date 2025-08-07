@@ -9,8 +9,6 @@
         <h1 class="text-2xl font-bold">{{ limitString(props?.music?.title) }}</h1>
         <p class="text-gray-light">
           {{ props?.music?.artist }}
-          {{ props?.music?.artist && props?.music?.releaseDate ? '-' : '' }}
-          {{ getYearFromDate(props?.music?.releaseDate) }}
         </p>
       </div>
       <div>

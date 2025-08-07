@@ -4,7 +4,6 @@
         "userId": 1,
         "title": "Hasarder",
         "artist": "Lompal",
-        "releaseDate": "2022-09-16",
         "streamingLink": "https://open.spotify.com/track/6V40xLcDlYwZpz3oKIVNhL"
     },
     {
@@ -12,35 +11,30 @@
         "userId": 1,
         "title": "To live is to die",
         "artist": "Metallica",
-        "releaseDate": "1988-07-07"
     },
     {
         "musicId": 3,
         "userId": 1,
         "title": "Dance Monkey",
         "artist": "Tones and I",
-        "releaseDate": "2019-05-10"
     },
     {
         "musicId": 4,
         "userId": 1,
         "title": "The Trooper",
         "artist": "Iron Maiden",
-        "releaseDate": "1983-06-20"
     },
     {
         "musicId": 5,
         "userId": 1,
         "title": "The Unforgiven",
         "artist": "Metallica",
-        "releaseDate": "1991-08-21"
     },
     {
         "musicId": 6,
         "userId": 1,
         "title": "Enter Sandman",
         "artist": "Metallica",
-        "releaseDate": "1991-07-29",
         "streamingLink": "https://www.youtube.com/watch?v=CD-E-LDc384"
     },
     {
@@ -48,7 +42,6 @@
         "userId": 1,
         "title": "Bohemian Rhapsody",
         "artist": "Queen",
-        "releaseDate": "1975-10-31",
         "streamingLink": "https://www.youtube.com/watch?v=fJ9rUzIMcZQ"
     },
     {
@@ -56,7 +49,6 @@
         "userId": 1,
         "title": "Blinding Lights",
         "artist": "The Weeknd",
-        "releaseDate": "2019-11-29",
         "streamingLink": "https://www.youtube.com/watch?v=4NRXx6U8ABQ"
     },
     {
@@ -64,7 +56,6 @@
         "userId": 1,
         "title": "Numb",
         "artist": "Linkin Park",
-        "releaseDate": "2003-09-08",
         "streamingLink": "https://www.youtube.com/watch?v=kXYiU_JCYtU"
     },
     {
@@ -72,7 +63,6 @@
         "userId": 1,
         "title": "Shape of You",
         "artist": "Ed Sheeran",
-        "releaseDate": "2017-01-06",
         "streamingLink": "https://www.youtube.com/watch?v=JGwWNGJdvx8"
     },
     {
@@ -80,7 +70,6 @@
         "userId": 1,
         "title": "Bad Guy",
         "artist": "Billie Eilish",
-        "releaseDate": "2019-03-29",
         "streamingLink": "https://www.youtube.com/watch?v=DyDfgMOUjCI"
     },
     {
@@ -88,7 +77,6 @@
         "userId": 1,
         "title": "Hotel California",
         "artist": "Eagles",
-        "releaseDate": "1976-12-08",
         "streamingLink": "https://www.youtube.com/watch?v=EqPtz5qN7HM"
     },
     {
@@ -96,7 +84,6 @@
         "userId": 1,
         "title": "Smells Like Teen Spirit",
         "artist": "Nirvana",
-        "releaseDate": "1991-09-10",
         "streamingLink": "https://www.youtube.com/watch?v=hTWKbfoikeg"
     },
     {
@@ -104,7 +91,6 @@
         "userId": 1,
         "title": "Rolling in the Deep",
         "artist": "Adele",
-        "releaseDate": "2010-11-29",
         "streamingLink": "https://www.youtube.com/watch?v=rYEDA3JcQqw"
     },
     {
@@ -112,7 +98,6 @@
         "userId": 1,
         "title": "Back in Black",
         "artist": "AC/DC",
-        "releaseDate": "1980-07-25",
         "streamingLink": "https://www.youtube.com/watch?v=pAgnJDJN4VA"
     },
     {
@@ -120,7 +105,6 @@
         "userId": 1,
         "title": "Thunderstruck",
         "artist": "AC/DC",
-        "releaseDate": "1990-09-10",
         "streamingLink": "https://www.youtube.com/watch?v=v2AC41dglnM"
     },
     {
@@ -128,7 +112,6 @@
         "userId": 1,
         "title": "Highway to Hell",
         "artist": "AC/DC",
-        "releaseDate": "1979-07-27",
         "streamingLink": "https://www.youtube.com/watch?v=l482T0yNkeo"
     },
     {
@@ -136,7 +119,6 @@
         "userId": 1,
         "title": "Stairway to Heaven",
         "artist": "Led Zeppelin",
-        "releaseDate": "1971-11-08",
         "streamingLink": "https://www.youtube.com/watch?v=xbhCPt6PZIU"
     },
     {
@@ -144,7 +126,6 @@
         "userId": 1,
         "title": "Whole Lotta Love",
         "artist": "Led Zeppelin",
-        "releaseDate": "1969-10-22",
         "streamingLink": "https://www.youtube.com/watch?v=HQmmM_qwG4k"
     },
     {
@@ -152,7 +133,6 @@
         "userId": 1,
         "title": "Sweet Child O' Mine",
         "artist": "Guns N' Roses",
-        "releaseDate": "1987-08-17",
         "streamingLink": "https://www.youtube.com/watch?v=1w7OgIMMRc4"
     },
     {
@@ -160,7 +140,6 @@
         "userId": 1,
         "title": "Billie Jean",
         "artist": "Michael Jackson",
-        "releaseDate": "1983-01-02",
         "streamingLink": "https://www.youtube.com/watch?v=Zi_XLOBDo_Y"
     },
     {
@@ -168,7 +147,6 @@
         "userId": 1,
         "title": "Imagine",
         "artist": "John Lennon",
-        "releaseDate": "1971-10-11",
         "streamingLink": "https://www.youtube.com/watch?v=YkgkThdzX-8"
     },
     {
@@ -176,7 +154,6 @@
         "userId": 1,
         "title": "Hey Jude",
         "artist": "The Beatles",
-        "releaseDate": "1968-08-26",
         "streamingLink": "https://www.youtube.com/watch?v=A_MjCqQoLLA"
     },
     {
@@ -184,7 +161,6 @@
         "userId": 1,
         "title": "Paint It Black",
         "artist": "The Rolling Stones",
-        "releaseDate": "1966-05-07",
         "streamingLink": "https://www.youtube.com/watch?v=O4irXQhgMqg"
     },
     {
@@ -192,7 +168,6 @@
         "userId": 1,
         "title": "Wonderwall",
         "artist": "Oasis",
-        "releaseDate": "1995-10-02",
         "streamingLink": "https://www.youtube.com/watch?v=bx1Bh8ZvH84"
     },
     {
@@ -200,7 +175,6 @@
         "userId": 1,
         "title": "Radioactive",
         "artist": "Imagine Dragons",
-        "releaseDate": "2012-10-29",
         "streamingLink": "https://www.youtube.com/watch?v=ktvTqknDobU"
     },
     {
@@ -208,7 +182,6 @@
         "userId": 1,
         "title": "Take On Me",
         "artist": "A-ha",
-        "releaseDate": "1985-10-19",
         "streamingLink": "https://www.youtube.com/watch?v=djV11Xbc914"
     },
     {
@@ -216,7 +189,6 @@
         "userId": 1,
         "title": "Somebody That I Used to Know",
         "artist": "Gotye",
-        "releaseDate": "2011-07-05",
         "streamingLink": "https://www.youtube.com/watch?v=8UVNT4wvIGY"
     },
     {
@@ -224,7 +196,6 @@
         "userId": 1,
         "title": "Counting Stars",
         "artist": "OneRepublic",
-        "releaseDate": "2013-06-14",
         "streamingLink": "https://www.youtube.com/watch?v=hT_nvWreIhg"
     },
     {
@@ -232,7 +203,6 @@
         "userId": 1,
         "title": "We Will Rock You",
         "artist": "Queen",
-        "releaseDate": "1977-10-07",
         "streamingLink": "https://www.youtube.com/watch?v=-tJYN-eG1zk"
     },
     {
@@ -240,7 +210,6 @@
         "userId": 1,
         "title": "I Will Always Love You",
         "artist": "Whitney Houston",
-        "releaseDate": "1992-11-03",
         "streamingLink": "https://www.youtube.com/watch?v=3JWTaaS7LdU"
     },
     {
@@ -248,7 +217,6 @@
         "userId": 1,
         "title": "Toxic",
         "artist": "Britney Spears",
-        "releaseDate": "2004-01-13",
         "streamingLink": "https://www.youtube.com/watch?v=LOZuxwVk7TU"
     },
     {
@@ -256,7 +224,6 @@
         "userId": 1,
         "title": "Uptown Funk",
         "artist": "Mark Ronson ft. Bruno Mars",
-        "releaseDate": "2014-11-10",
         "streamingLink": "https://www.youtube.com/watch?v=OPf0YbXqDm0"
     },
     {
@@ -264,7 +231,6 @@
         "userId": 1,
         "title": "Someone Like You",
         "artist": "Adele",
-        "releaseDate": "2011-01-24",
         "streamingLink": "https://www.youtube.com/watch?v=hLQl3WQQoQ0"
     },
     {
@@ -272,7 +238,6 @@
         "userId": 1,
         "title": "Superstition",
         "artist": "Stevie Wonder",
-        "releaseDate": "1972-10-24",
         "streamingLink": "https://www.youtube.com/watch?v=0CFuCYNx-1g"
     }
 ]
