@@ -1,5 +1,5 @@
 Must:
-- [ ] Use a dedicated endpoint to retrieve the best season for a given date and use it to replace what's currntylly used on events + put it on musics 
+- [x] Use a dedicated endpoint to retrieve the best season for a given date and use it to replace what's currntylly used on events + put it on musics 
 - [ ] Fix open on dezzer not working (in app)
 - [ ] Fix wrong imports in backend (ESM/CommonJS)
 - [ ] Search for TODO and WIP inside the codebase
@@ -22,6 +22,6 @@ Won't:
 - [ ] Faire validator de données dans les stores ?
 - [ ] Tests de bout en bout (faire de la création d'un utilisateur à son utilisation)
 - [ ] https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color
-- [ ] Inifinte scroll
+- [ ] Infinite scroll
 - [ ] Faire en sorte qu'elle soit utilisable sans connection (store en persistant, liste de MAJ en FIFO...)
 - [ ] Ajouter langue francaise
