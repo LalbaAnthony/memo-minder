@@ -2,6 +2,7 @@
 
 Must:
 - [ ] Add aria on all field (esp Auth) et check for Dashlane autofill
+- [ ] Fix error URL: https://memo-minder.dev-it.app//error-server (double slash)
 - [ ] Fix open on dezzer not working (in app)
 - [ ] Use a dedicated endpoint to retrieve the best season for a given date and use it to replace what's currntylly used on events + put it on musics 
 - [ ] Fix wrong imports in backend (ESM/CommonJS)
