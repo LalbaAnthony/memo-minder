@@ -1,4 +1,7 @@
 import { createBaseStore } from '@/composables/baseStore'
+import { useSeasonStore } from '@/stores/season'
+
+const seasonStore = useSeasonStore()
 
 const config = {
   primaryKey: 'musicId',
@@ -12,10 +15,15 @@ const config = {
     one: 'music',
   },
   pagination: { page: 1, perPage: 20, total: 1 },
-  initItem: (data) => {
+  initItem: async (data) => {
     data.seasons = []
     data.people = []
     data.events = []
+
+    const currents = await seasonStore.getCurrent()
+    if (currents.length) {
+      data.seasons = currents
+    }
   },
   mapRelations: (item) => {
     return {

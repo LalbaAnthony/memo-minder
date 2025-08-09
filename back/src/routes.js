@@ -38,6 +38,7 @@ router.delete('/person/:id', checkToken, personController.deletePerson);
 
 // Seasons
 router.get('/seasons', checkToken, seasonController.getAllSeasons);
+router.get('/season/current', checkToken, seasonController.getCurrentSeason);
 router.get('/season/:id', checkToken, seasonController.getSeasonById);
 router.post('/seasons', checkToken, seasonController.createSeason);
 router.put('/season/:id', checkToken, seasonController.updateSeason);

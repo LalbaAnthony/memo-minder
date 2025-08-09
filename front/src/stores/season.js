@@ -1,5 +1,9 @@
 import { randomPastelColor } from '@/composables/helpers'
 import { createBaseStore } from '@/composables/baseStore'
+import { useAuthStore } from '@/stores/auth'
+import { api } from '@/composables/api'
+
+const authStore = useAuthStore()
 
 const config = {
   primaryKey: 'seasonId',
@@ -11,6 +15,7 @@ const config = {
     delete: 'season',
     all: 'seasons',
     one: 'season',
+    current: 'season/current',
   },
   pagination: { page: 1, perPage: 20, total: 1 },
   initItem: (data) => {
@@ -30,6 +35,16 @@ const config = {
       musics: item.musics?.map(music => music.musicId) || [],
     }
   },
+  actions: {
+    getCurrent: async function () {
+      const params = {
+        userId: authStore.user.userId,
+      }
+
+      const resp = await api.get(`${config.endpoints.current}`, params)
+      return resp.data.data || []
+    }
+  }
 }
 
 export const useSeasonStore = createBaseStore(config)
