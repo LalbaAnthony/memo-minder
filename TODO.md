@@ -1,5 +1,4 @@
 Must:
-- [x] Use a dedicated endpoint to retrieve the best season for a given date and use it to replace what's currntylly used on events + put it on musics 
 - [ ] Fix open on dezzer not working (in app)
 - [ ] Fix wrong imports in backend (ESM/CommonJS)
 - [ ] Search for TODO and WIP inside the codebase
