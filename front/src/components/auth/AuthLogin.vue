@@ -1,9 +1,11 @@
 <template>
     <div>
         <div class="flex flex-col items-center justify-center space-y-4 mt-4 mx-4">
-            <input v-model="authStore.authentication.tabs.login.fields.email" id="email" type="email" class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light"
+            <input v-model="authStore.authentication.tabs.login.fields.email" id="email" type="email" name="username"
+                autocomplete="username" class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light"
                 placeholder="Email" />
             <input v-model="authStore.authentication.tabs.login.fields.password" id="password" type="password"
+                name="password" autocomplete="current-password"
                 class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light" placeholder="Password" />
         </div>
         <div class="flex flex-row-reverse align-items-center justify-between m-4">

@@ -2,7 +2,8 @@
     <div>
         <div class="flex flex-col items-center justify-center space-y-4 mt-4 mx-4">
             <input v-model="authStore.authentication.tabs.forgotPassword.fields.email" id="email" type="email"
-                class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light" placeholder="Email" />
+                name="username" autocomplete="username" class="w-full px-4 p-2 rounded-lg bg-gray-dark text-light"
+                placeholder="Email" />
         </div>
         <div class="flex flex-row-reverse align-items-center justify-between m-4">
             <button class="text-light transition-colors duration-200 hover:text-gray-light cursor-pointer"
