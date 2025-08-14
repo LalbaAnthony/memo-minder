@@ -79,6 +79,13 @@ textarea:focus {
   outline: none;
 }
 
+input,
+textarea {
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
 textarea:disabled,
 input:disabled {
   color: var(--gray-light);
