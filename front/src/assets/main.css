@@ -81,9 +81,9 @@ textarea:focus {
 
 input,
 textarea {
-  -webkit-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
+  -webkit-user-select: all !important;
+  -ms-user-select: all !important;
+  user-select: all !important;
 }
 
 textarea:disabled,
