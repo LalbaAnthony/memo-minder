@@ -15,7 +15,7 @@
 
     <!-- Delete button -->
     <div v-if="props.deleteButton" @click="triggerDelete()"
-      class="flex items-center justify-center cursor-pointer text-danger bg-dark-light shadow-xl rounded-2xl p-3 hover:scale-105 transition-transform duration-300">
+      class="flex items-center justify-center cursor-pointer text-light bg-danger shadow-xl rounded-2xl p-3 hover:scale-105 transition-transform duration-300">
       <TrashIcon class="size-8" />
     </div>
 
