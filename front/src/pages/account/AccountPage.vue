@@ -3,7 +3,7 @@
     <TopActions :goBackButton="true" />
 
     <section>
-      <h2 class="text-xl font-bold my-4">Global</h2>
+      <h2 class="text-xl font-bold mb-6">Global</h2>
       <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 my-4 mx-2">
         <div class="flex flex-col gap-2">
           <label for="username">Username</label>
@@ -33,7 +33,7 @@
     </section>
     <hr>
     <section>
-      <h2 class="text-xl font-bold my-4">Homepage</h2>
+      <h2 class="text-xl font-bold mb-6">Homepage</h2>
       <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 my-4 mx-2">
         <div class="w-full sm:w-lg flex flex-row justify-between flexitems-center gap-4">
           <div class="flex flex-row items-center gap-2">
@@ -81,7 +81,7 @@
     </section>
     <hr>
     <section>
-      <h2 class="text-xl font-bold my-4">Danger zone</h2>
+      <h2 class="text-xl font-bold mb-6">Danger zone</h2>
       <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 my-4 mx-2">
         <button
           class="text-light p-2 rounded-lg cursor-pointer bg-danger hover:bg-danger-dark transition-colors duration-200"
