@@ -4,7 +4,7 @@
 
     <section>
       <h2 class="text-xl font-bold my-4">Global</h2>
-      <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 m-4">
+      <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 my-4 mx-2">
         <div class="flex flex-col gap-2">
           <label for="username">Username</label>
           <input v-model="authStore.user.username" id="username" type="text"
@@ -33,21 +33,56 @@
     </section>
     <hr>
     <section>
-      <h2 class="text-xl font-bold my-4">Parameters</h2>
-      <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 m-4">
-        <Switch v-model="authStore.user.homePageEnableSpents" label="Enable life spents on homepage" />
-        <Switch v-model="authStore.user.homePageEnableStats" label="Enable stats on homepage" />
-        <Switch v-model="authStore.user.homePageEnableQuote" label="Enable quote on homepage" />
-        <Switch v-model="authStore.user.homePageEnableUpcomings" label="Enable upcoming birthdays on homepage" />
-        <Switch v-model="authStore.user.homePageEnableLastsEvents" label="Enable lasts events added on homepage" />
-        <Switch v-model="authStore.user.homePageEnableLastsSeasons" label="Enable lasts seasons added on homepage" />
+      <h2 class="text-xl font-bold my-4">Homepage</h2>
+      <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 my-4 mx-2">
+        <div class="w-full sm:w-lg flex flex-row justify-between flexitems-center gap-4">
+          <div class="flex flex-row items-center gap-2">
+            <ChartBarIcon class="size-6 text-gray-light" />
+            <label>Enable life spents</label>
+          </div>
+          <Switch v-model="authStore.user.homePageEnableSpents" />
+        </div>
+        <div class="w-full sm:w-lg flex flex-row justify-between flexitems-center gap-4">
+          <div class="flex flex-row items-center gap-2">
+            <SquaresPlusIcon class="size-6 text-gray-light" />
+            <label>Enable stats</label>
+          </div>
+          <Switch v-model="authStore.user.homePageEnableStats" />
+        </div>
+        <div class="w-full sm:w-lg flex flex-row justify-between flexitems-center gap-4">
+          <div class="flex flex-row items-center gap-2">
+            <ChatBubbleBottomCenterIcon class="size-6 text-gray-light" />
+            <label>Enable quote</label>
+          </div>
+          <Switch v-model="authStore.user.homePageEnableQuote" />
+        </div>
+        <div class="w-full sm:w-lg flex flex-row justify-between flexitems-center gap-4">
+          <div class="flex flex-row items-center gap-2">
+            <UsersIcon class="size-6 text-gray-light" />
+            <label>Enable upcoming birthdays</label>
+          </div>
+          <Switch v-model="authStore.user.homePageEnableUpcomings" />
+        </div>
+        <div class="w-full sm:w-lg flex flex-row justify-between flexitems-center gap-4">
+          <div class="flex flex-row items-center gap-2">
+            <CalendarDaysIcon class="size-6 text-gray-light" />
+            <label>Enable lasts events added</label>
+          </div>
+          <Switch v-model="authStore.user.homePageEnableLastsEvents" />
+        </div>
+        <div class="w-full sm:w-lg flex flex-row justify-between flexitems-center gap-4">
+          <div class="flex flex-row items-center gap-2">
+            <FilmIcon class="size-6 text-gray-light" />
+            <label>Enable lasts seasons added</label>
+          </div>
+          <Switch v-model="authStore.user.homePageEnableLastsSeasons" />
+        </div>
       </div>
     </section>
     <hr>
-    <hr>
     <section>
       <h2 class="text-xl font-bold my-4">Danger zone</h2>
-      <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 m-4">
+      <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 my-4 mx-2">
         <button
           class="text-light p-2 rounded-lg cursor-pointer bg-danger hover:bg-danger-dark transition-colors duration-200"
           @click="clearLocalData()">
@@ -71,6 +106,12 @@ import { useAuthStore } from '@/stores/auth'
 import debounce from '@/composables/debounce'
 import BottomActions from '@/components/actions/BottomActionsComponent.vue'
 import TopActions from '@/components/actions/TopActionsComponent.vue'
+import { FilmIcon } from '@heroicons/vue/24/solid'
+import { ChatBubbleBottomCenterIcon } from '@heroicons/vue/24/solid'
+import { CalendarDaysIcon } from '@heroicons/vue/24/solid'
+import { UsersIcon } from '@heroicons/vue/24/solid'
+import { ChartBarIcon } from '@heroicons/vue/24/solid'
+import { SquaresPlusIcon } from '@heroicons/vue/24/solid'
 import DatePicker from '@/components/fields/DatePickerComponent.vue'
 import Switch from '@/components/SwitchComponent.vue'
 import { useRouter } from 'vue-router'

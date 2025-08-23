@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="['fixed z-20 flex flex-col-reverse justify-end gap-2 p-3', isMobile() ? 'bottom-20 right-0' : 'bottom-0 right-0']">
+    :class="['fixed z-20 flex flex-col-reverse justify-end gap-2 m-3 rounded-2xl darken-arround-shadow darken-arround-background', isMobile() ? 'bottom-20 right-0' : 'bottom-0 right-0']">
     <!-- Create button -->
     <div v-if="props.createButton" @click="triggerCreate()"
       class="flex items-center justify-center cursor-pointer text-light bg-primary shadow-xl rounded-2xl p-2 hover:scale-105 transition-transform duration-300">
@@ -160,3 +160,15 @@ onMounted(() => {
 })
 
 </script>
+
+<style scoped>
+
+.darken-arround-shadow {
+  box-shadow: 0px 0px 30px 15px var(--dark);
+}
+
+.darken-arround-background {
+  background: rgba(17, 24, 39, 0.6); /* 'dark' color */
+}
+
+</style>
