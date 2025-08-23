@@ -8,5 +8,85 @@
         "description": "The best season of the year",
         "dateStart": "2022-06-21",
         "dateEnd": "2022-09-23"
+    },
+    {
+        "seasonId": 2,
+        "userId": 1,
+        "moodId": 2,
+        "title": "Winter 2022",
+        "color": "#0000FF",
+        "description": "The coldest season of the year",
+        "dateStart": "2022-12-21",
+        "dateEnd": "2023-03-20"
+    },
+    {
+        "seasonId": 3,
+        "userId": 1,
+        "moodId": 3,
+        "title": "Spring 2023",
+        "color": "#00FF00",
+        "description": "The season of renewal and growth",
+        "dateStart": "2023-03-21",
+        "dateEnd": "2023-06-20"
+    },
+    {
+        "seasonId": 4,
+        "userId": 1,
+        "moodId": 4,
+        "title": "Autumn 2023",
+        "color": "#FFA500",
+        "description": "The season of change and harvest",
+        "dateStart": "2023-09-23",
+        "dateEnd": "2023-12-20"
+    },
+    {
+        "seasonId": 5,
+        "userId": 1,
+        "moodId": 1,
+        "title": "Summer 2023",
+        "color": "#FF69B4",
+        "description": "A warm and vibrant season",
+        "dateStart": "2023-06-21",
+        "dateEnd": "2023-09-22"
+    },
+    {
+        "seasonId": 6,
+        "userId": 1,
+        "moodId": 2,
+        "title": "Winter 2023",
+        "color": "#1E90FF",
+        "description": "A chilly and festive season",
+        "dateStart": "2023-12-21",
+        "dateEnd": "2024-03-19"
+    },
+    {
+        "seasonId": 7,
+        "userId": 1,
+        "moodId": 3,
+        "title": "Spring 2024",
+        "color": "#32CD32",
+        "description": "A season of blooming flowers",
+        "dateStart": "2024-03-20",
+        "dateEnd": "2024-06-20"
+    },
+    {
+        "seasonId": 8,
+        "userId": 1,
+        "moodId": 4,
+        "title": "Autumn 2024",
+        "color": "#FF8C00",
+        "description": "A season of falling leaves",
+        "dateStart": "2024-09-22",
+        "dateEnd": "2024-12-19"
+    },
+    {
+        "seasonId": 9,
+        "userId": 1,
+        "moodId": 1,
+        "title": "Summer 2024",
+        "color": "#FF4500",
+        "description": "A hot and sunny season",
+        "dateStart": "2024-06-21",
+        "dateEnd": "2024-09-22"
     }
 ]

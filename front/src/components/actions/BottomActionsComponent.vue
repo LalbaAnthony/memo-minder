@@ -65,7 +65,7 @@
     </div>
 
     <!-- Scroll to top -->
-    <TransitionRoot :show="isMobile() && props.goTopButton && enableGoTop" @click="goTop()">
+    <TransitionRoot :show="props.goTopButton && enableGoTop" @click="goTop()">
       <TransitionChild as="div" enter="transition ease-in-out duration-300 transform" enter-from="opacity-0"
         enter-to="opacity-100" leave="transition ease-in-out duration-300 transform" leave-from=" opacity-100"
         leave-to="opacity-0"
@@ -168,7 +168,7 @@ onMounted(() => {
 }
 
 .darken-arround-background {
-  background: rgba(17, 24, 39, 0.6); /* 'dark' color */
+  background: rgba(17, 24, 39, 0.83); /* 'dark' color */
 }
 
 </style>
