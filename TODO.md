@@ -1,8 +1,8 @@
 Must:
+- [ ] Split last events and last seasons added on home page
+- [ ] Put switchs instead of checkbox (from Undercover)
 - [ ] Fix open on dezzer not working (in app)
 - [ ] Adding an event with an old date should not set a default season (Adding it anyway then removing it ?)
-- [ ] Put switchs instead of checkbox (from Undercover)
-- [ ] Split last events and last seasons added on home page
 - [ ] Fix wrong imports in backend (ESM/CommonJS)
 - [ ] Search for TODO and WIP inside the codebase
 - [ ] Reparer soucis cache upcoming bdays et le réactiver
