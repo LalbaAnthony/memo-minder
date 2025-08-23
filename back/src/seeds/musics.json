@@ -10,25 +10,25 @@
         "musicId": 2,
         "userId": 1,
         "title": "To live is to die",
-        "artist": "Metallica",
+        "artist": "Metallica"
     },
     {
         "musicId": 3,
         "userId": 1,
         "title": "Dance Monkey",
-        "artist": "Tones and I",
+        "artist": "Tones and I"
     },
     {
         "musicId": 4,
         "userId": 1,
         "title": "The Trooper",
-        "artist": "Iron Maiden",
+        "artist": "Iron Maiden"
     },
     {
         "musicId": 5,
         "userId": 1,
         "title": "The Unforgiven",
-        "artist": "Metallica",
+        "artist": "Metallica"
     },
     {
         "musicId": 6,

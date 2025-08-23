@@ -39,7 +39,8 @@
         <Switch v-model="authStore.user.homePageEnableStats" label="Enable stats on homepage" />
         <Switch v-model="authStore.user.homePageEnableQuote" label="Enable quote on homepage" />
         <Switch v-model="authStore.user.homePageEnableUpcomings" label="Enable upcoming birthdays on homepage" />
-        <Switch v-model="authStore.user.homePageEnableLasts" label="Enable lasts elements added on homepage" />
+        <Switch v-model="authStore.user.homePageEnableLastsEvents" label="Enable lasts events added on homepage" />
+        <Switch v-model="authStore.user.homePageEnableLastsSeasons" label="Enable lasts seasons added on homepage" />
       </div>
     </section>
     <hr>

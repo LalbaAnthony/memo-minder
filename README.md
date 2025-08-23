@@ -98,4 +98,4 @@ MySQL is used to store the data. Make sure to install it on the server.
 
 Use the `mysql.prod.sql` file to configure the database.
 
-> NOTE: For now, no mmigration system is used. Which mean adding a new field in the database will require to update the database manually on production.
+> NOTE: For now, no migration system is used. Which mean adding a new field in the database will require to update the database manually on production.

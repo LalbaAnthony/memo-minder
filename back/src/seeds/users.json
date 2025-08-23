@@ -10,7 +10,8 @@
         "homePageEnableSpents": true,
         "homePageEnableStats": true,
         "homePageEnableQuote": true,
-        "homePageEnableLasts": true,
+        "homePageEnableLastsEvents": true,
+        "homePageEnableLastsSeasons": true,
         "homePageEnableUpcomings": true,
         "streamingPlatform": "youtube"
     }

@@ -33,7 +33,7 @@ const authStore = useAuthStore()
 const eventStore = useEventStore()
 
 onMounted(() => {
-    if (authStore?.user?.homePageEnableLasts) {
+    if (authStore?.user?.homePageEnableLastsEvents) {
         eventStore.fetchItems({
             sort: [{ order: 'DESC', orderBy: 'createdAt' }],
             perPage: 3
