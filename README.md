@@ -99,3 +99,14 @@ MySQL is used to store the data. Make sure to install it on the server.
 Use the `mysql.prod.sql` file to configure the database.
 
 > NOTE: For now, no migration system is used. Which mean adding a new field in the database will require to update the database manually on production.
+
+E.g. After removing `user.homePageEnableLasts` and adding `user.homePageEnableLastsEvents` and `user.homePageEnableLastsSeasons`, I had to run this SQL query on both preprod and prod databases:
+```sql
+ALTER TABLE `user`
+DROP COLUMN `homePageEnableLasts`;
+
+ALTER TABLE `user`
+ADD `homePageEnableLastsEvents` tinyint(1) NOT NULL DEFAULT 1;
+ALTER TABLE `user`
+ADD `homePageEnableLastsSeasons` tinyint(1) NOT NULL DEFAULT 1;
+```

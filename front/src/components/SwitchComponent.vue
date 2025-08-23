@@ -3,6 +3,8 @@
         :class="{ 'opacity-50 cursor-not-allowed': disabled }">
         <input type="checkbox" class="sr-only" :checked="localValue" @change="onChange" :disabled="disabled" />
 
+        <span v-if="props.direction === 'right' && label" class="mr-3 text-md text-light">{{ label }}</span>
+
         <span role="switch" :aria-checked="String(localValue)" :aria-label="label || 'switch'" tabindex="0"
             @keydown.space.prevent="toggle" @keydown.enter.prevent="toggle"
             class="relative inline-flex h-6 w-11 flex-shrink-0 items-center rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-400"
@@ -12,7 +14,7 @@
                 :class="localValue ? 'translate-x-6' : 'translate-x-1'" />
         </span>
 
-        <span v-if="label" class="ml-3 text-md text-light">{{ label }}</span>
+        <span v-if="props.direction === 'left' && label" class="ml-3 text-md text-light">{{ label }}</span>
     </label>
 </template>
 
@@ -32,6 +34,11 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
+    direction: {
+        type: String,
+        default: 'right',
+        possibleValues: ['right', 'left']
+    }
 })
 
 const emit = defineEmits(['update:modelValue'])
