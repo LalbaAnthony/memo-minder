@@ -33,7 +33,7 @@ const authStore = useAuthStore()
 const seasonStore = useSeasonStore()
 
 onMounted(() => {
-    if (authStore?.user?.homePageEnableLasts) {
+    if (authStore?.user?.homePageEnableLastsSeasons) {
         seasonStore.fetchItems({
             sort: [{ order: 'DESC', orderBy: 'createdAt' }],
             perPage: 3

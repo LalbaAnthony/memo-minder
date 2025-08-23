@@ -6,8 +6,8 @@
         :birthdate="authStore.user.birthdate" class="b" />
       <Quote v-if="authStore?.user?.homePageEnableQuote" class="c" />
       <UpcomingBirthdays v-if="false && authStore?.user?.homePageEnableUpcomings" class="d" />
-      <LastsEvents v-if="authStore?.user?.homePageEnableLasts" class="e" />
-      <LastsSeasons v-if="authStore?.user?.homePageEnableLasts" class="f" />
+      <LastsEvents v-if="authStore?.user?.homePageEnableLastsEvents" class="e" />
+      <LastsSeasons v-if="authStore?.user?.homePageEnableLastsSeasons" class="f" />
     </div>
 
     <Footer />

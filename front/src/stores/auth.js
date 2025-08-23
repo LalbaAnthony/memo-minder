@@ -105,7 +105,8 @@ export const useAuthStore = defineStore('auth', {
       const homePageEnableSpents = this.user.homePageEnableSpents || false
       const homePageEnableStats = this.user.homePageEnableStats || false
       const homePageEnableQuote = this.user.homePageEnableQuote || false
-      const homePageEnableLasts = this.user.homePageEnableLasts || false
+      const homePageEnableLastsEvents = this.user.homePageEnableLastsEvents || false
+      const homePageEnableLastsSeasons = this.user.homePageEnableLastsSeasons || false
       const homePageEnableUpcomings = this.user.homePageEnableUpcomings || false
       const streamingPlatform = this.user.streamingPlatform || 'youtube'
 
@@ -129,7 +130,8 @@ export const useAuthStore = defineStore('auth', {
         homePageEnableSpents,
         homePageEnableStats,
         homePageEnableQuote,
-        homePageEnableLasts,
+        homePageEnableLastsEvents,
+        homePageEnableLastsSeasons,
         homePageEnableUpcomings,
         streamingPlatform,
       }

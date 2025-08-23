@@ -36,7 +36,12 @@ module.exports = (instance) => {
             allowNull: false,
             defaultValue: false,
         },
-        homePageEnableLasts: {
+        homePageEnableLastsEvents: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true,
+        },
+        homePageEnableLastsSeasons: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: true,
