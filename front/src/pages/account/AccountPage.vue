@@ -35,26 +35,11 @@
     <section>
       <h2 class="text-xl font-bold my-4">Parameters</h2>
       <div class="flex flex-row flex-wrap flexitems-center gap-x-8 gap-y-4 m-4">
-        <div class="flex flex-row gap-2">
-          <input v-model="authStore.user.homePageEnableSpents" name="homePageEnableSpents" type="checkbox" />
-          <label for="homePageEnableSpents">Enable life spents on homepage</label>
-        </div>
-        <div class="flex flex-row gap-2">
-          <input v-model="authStore.user.homePageEnableStats" name="homePageEnableStats" type="checkbox" />
-          <label for="homePageEnableStats">Enable stats on homepage</label>
-        </div>
-        <div class="flex flex-row gap-2">
-          <input v-model="authStore.user.homePageEnableQuote" name="homePageEnableQuote" type="checkbox" />
-          <label for="homePageEnableQuote">Enable quote on homepage</label>
-        </div>
-        <div class="flex flex-row gap-2">
-          <input v-model="authStore.user.homePageEnableUpcomings" name="homePageEnableUpcomings" type="checkbox" />
-          <label for="homePageEnableUpcomings">Enable upcoming birthdays on homepage</label>
-        </div>
-        <div class="flex flex-row gap-2">
-          <input v-model="authStore.user.homePageEnableLasts" name="homePageEnableLasts" type="checkbox" />
-          <label for="homePageEnableLasts">Enable lasts elements added on homepage</label>
-        </div>
+        <Switch v-model="authStore.user.homePageEnableSpents" label="Enable life spents on homepage" />
+        <Switch v-model="authStore.user.homePageEnableStats" label="Enable stats on homepage" />
+        <Switch v-model="authStore.user.homePageEnableQuote" label="Enable quote on homepage" />
+        <Switch v-model="authStore.user.homePageEnableUpcomings" label="Enable upcoming birthdays on homepage" />
+        <Switch v-model="authStore.user.homePageEnableLasts" label="Enable lasts elements added on homepage" />
       </div>
     </section>
     <hr>
@@ -86,6 +71,7 @@ import debounce from '@/composables/debounce'
 import BottomActions from '@/components/actions/BottomActionsComponent.vue'
 import TopActions from '@/components/actions/TopActionsComponent.vue'
 import DatePicker from '@/components/fields/DatePickerComponent.vue'
+import Switch from '@/components/SwitchComponent.vue'
 import { useRouter } from 'vue-router'
 import LanguagePicker from '@/components/fields/LanguagePickerComponent.vue'
 import StreamingPlatformPicker from '@/components/fields/StreamingPlatformPickerComponent.vue'
