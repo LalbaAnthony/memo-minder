@@ -19,7 +19,7 @@
       <section>
         <div class="flex flex-col gap-4 sm:gap-1 bg-dark-light p-4 rounded-lg">
           <div class="flex flex-col sm:flex-row items-center justify-start gap-x-2 gap-y-2">
-            <span class="text-lg font-medium text-gray-light">Born on</span>
+            <span class="text-lg font-medium text-gray-light">born on</span>
             <DatePicker class="max-w-[15rem]" :value="personStore.item?.data?.birthdate"
               @update="(v) => { personStore.item.data.birthdate = v }" />
           </div>
