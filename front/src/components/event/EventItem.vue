@@ -3,7 +3,7 @@
     <div class="flex-1 p-5" @click="goToEvent()">
       <div class="flex flex-col justify-center items-center w-full my-2">
         <h1 class="text-2xl font-bold text-center">{{ limitString(props?.event?.title) }}</h1>
-        <p class="text-sm text-gray-light">the {{ translateDate(props?.event?.date) }} {{ props?.event?.location ? `at
+        <p class="text-sm text-gray-light">{{ translateDate(props?.event?.date) }} {{ props?.event?.location ? `in
           ${props?.event?.location}` : '' }}</p>
       </div>
       <div class="my-4">

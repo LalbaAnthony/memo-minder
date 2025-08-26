@@ -27,7 +27,6 @@
 </template>
 
 <script setup>
-import { getYearFromDate } from '@/composables/helpers'
 import { useMusicStore } from '@/stores/music'
 import { TrashIcon } from '@heroicons/vue/24/outline'
 import { MusicalNoteIcon } from '@heroicons/vue/24/solid'

@@ -1,12 +1,5 @@
 [
     {
-        "musicId": 1,
-        "userId": 1,
-        "title": "Hasarder",
-        "artist": "Lompal",
-        "streamingLink": "https://open.spotify.com/track/6V40xLcDlYwZpz3oKIVNhL"
-    },
-    {
         "musicId": 2,
         "userId": 1,
         "title": "To live is to die",
