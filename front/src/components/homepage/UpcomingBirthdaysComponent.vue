@@ -4,11 +4,15 @@
         <div class="my-4">
             <Loader v-if="personStore.items.loading" position="static" />
             <div v-else>
-                <Grid :items="personStore.items.data" noItemPosition="static">
+                <Grid v-if="personStore.items?.data?.length > 0" :items="personStore.items.data"
+                    noItemPosition="static">
                     <template #item="{ item }">
                         <Person :person="item" />
                     </template>
                 </Grid>
+                <div v-else class="text-center text-gray-light py-8">
+                    No upcoming birthdays
+                </div>
             </div>
         </div>
     </section>
