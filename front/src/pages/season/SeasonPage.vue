@@ -19,6 +19,7 @@
       <section>
         <div class="flex flex-col gap-4 sm:gap-1 bg-dark-light p-4 rounded-lg">
           <div class="flex flex-col sm:flex-row items-center justify-start gap-x-4 gap-y-2">
+            <span class="text-lg font-medium text-gray-light">from</span>
             <DatePicker class="max-w-[15rem]" :value="seasonStore.item?.data?.dateStart"
               @update="(v) => { seasonStore.item.data.dateStart = v }" />
             <span class="text-lg font-medium text-gray-light">to</span>
