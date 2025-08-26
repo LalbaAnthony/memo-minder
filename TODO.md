@@ -3,7 +3,6 @@ Must:
 - [ ] Adding an event with an old date should not set a default season (Adding it anyway then removing it ?)
 - [ ] Fix wrong imports in backend (ESM/CommonJS)
 - [ ] Search for TODO and WIP inside the codebase
-- [ ] Reparer soucis cache upcoming bdays et le réactiver
 - [ ] Create and implement email systeme with email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
