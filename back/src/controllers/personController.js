@@ -1,6 +1,7 @@
 const { Person, Music, Event, Season } = require('../database');
 const { Op, literal } = require('sequelize');
 const frmtr = require('../helpers/frmtr');
+const { sequelize } = require('../database');
 
 const baseController = require('../composables/baseController');
 
@@ -32,11 +33,16 @@ exports.getUpcommingBirthdaysPeople = async (req, res) => {
 
     // Build where clause
     let where = { userId };
+
     where[Op.and] = [
-        literal(`
+        ...(sequelize.getDialect() === 'mysql' ? [literal(`
+            DATE_FORMAT(Birthdate, '%m-%d') >= DATE_FORMAT(NOW(), '%m-%d')
+            AND DATE_FORMAT(Birthdate, '%m-%d') <= DATE_FORMAT(DATE_ADD(NOW(), INTERVAL ${days} DAY), '%m-%d')
+        `)] : []),
+        ...(sequelize.getDialect() === 'sqlite' ? [literal(`
             strftime('%m-%d', Birthdate) >= strftime('%m-%d', 'now')
             AND strftime('%m-%d', Birthdate) <= strftime('%m-%d', 'now', '+${days} days')
-        `)
+        `)] : [])
     ]
 
     // Pagination setup
@@ -52,7 +58,11 @@ exports.getUpcommingBirthdaysPeople = async (req, res) => {
 
     // Query, including associations if any
     const items = await Person.findAll({
-        where, offset, limit, include: associations, order: [literal(`strftime('%m-%d', Birthdate) ASC`)]
+        where, offset, limit, include: associations,
+        order: [
+            ...(sequelize.getDialect() === 'mysql' ? [literal(`DATE_FORMAT(Birthdate, '%m-%d') ASC`)] : []),
+            ...(sequelize.getDialect() === 'sqlite' ? [literal(`strftime('%m-%d', Birthdate) ASC`)] : [])
+        ]
     });
     res.status(200).json(frmtr('success', items, null, pagination));
 }
