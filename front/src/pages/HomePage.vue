@@ -5,7 +5,7 @@
       <Stats v-if="authStore?.user?.homePageEnableStats && authStore?.user?.birthdate"
         :birthdate="authStore.user.birthdate" class="b" />
       <Quote v-if="authStore?.user?.homePageEnableQuote" class="c" />
-      <UpcomingBirthdays v-if="false && authStore?.user?.homePageEnableUpcomings" class="d" />
+      <UpcomingBirthdays v-if="authStore?.user?.homePageEnableUpcomings" class="d" />
       <LastsEvents v-if="authStore?.user?.homePageEnableLastsEvents" class="e" />
       <LastsSeasons v-if="authStore?.user?.homePageEnableLastsSeasons" class="f" />
     </div>

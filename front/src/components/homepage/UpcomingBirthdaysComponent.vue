@@ -4,8 +4,7 @@
         <div class="my-4">
             <Loader v-if="personStore.items.loading" position="static" />
             <div v-else>
-                <Grid v-if="personStore.items?.data?.length > 0" :items="personStore.items.data"
-                    noItemPosition="static">
+                <Grid :items="personStore.items.data" noItemPosition="static">
                     <template #item="{ item }">
                         <Person :person="item" />
                     </template>
