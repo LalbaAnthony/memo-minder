@@ -89,7 +89,7 @@
           <span class="mx-2 my-0.5">Delete all local data</span>
         </button>
         <button
-          class="text-light p-2 rounded-lg cursor-pointer bg-danger-dark hover:bg-danger-dark transition-colors duration-200"
+          class="text-light p-2 rounded-lg cursor-pointer bg-danger hover:bg-danger-dark transition-colors duration-200"
           @click="deleteAccount()">
           <span class="mx-2 my-0.5">Delete my account</span>
         </button>
