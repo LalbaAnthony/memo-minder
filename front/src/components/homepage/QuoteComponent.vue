@@ -1,6 +1,6 @@
 <template>
     <section>
-        <h2 class="text-xl font-bold">Quote</h2>
+        <h2 class="text-xl font-bold">Quote of the day</h2>
         <div class="my-4">
             <p class="my-2">
                 <span class="text-lg">"</span>{{ quoteStore.quote.data.quote }}<span class="text-lg">"</span>
