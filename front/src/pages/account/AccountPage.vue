@@ -52,7 +52,7 @@
         <div class="w-full flex flex-row justify-between items-center gap-4">
           <div class="flex flex-row items-center gap-2">
             <ChatBubbleBottomCenterIcon class="size-6 text-gray-light" />
-            <label>Enable quote</label>
+            <label>Enable quote of the day</label>
           </div>
           <Switch v-model="authStore.user.homePageEnableQuote" />
         </div>
