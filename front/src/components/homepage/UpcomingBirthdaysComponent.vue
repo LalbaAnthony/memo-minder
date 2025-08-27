@@ -11,7 +11,7 @@
                     </template>
                 </Grid>
                 <div v-else class="text-center text-gray-light py-8">
-                    No upcoming birthdays
+                    No birthdays this month
                 </div>
             </div>
         </div>
