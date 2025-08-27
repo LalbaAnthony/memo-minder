@@ -258,6 +258,8 @@ export const useAuthStore = defineStore('auth', {
           return false
         }
 
+        notif.notify('Your account has been deleted', 'success')
+
         this.logout()
 
         return true
