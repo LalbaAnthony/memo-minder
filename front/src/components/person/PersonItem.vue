@@ -56,7 +56,7 @@ const props = defineProps({
   },
   birthdayScope: {
     type: Number,
-    default: 31,
+    default: 0,
   },
 })
 
