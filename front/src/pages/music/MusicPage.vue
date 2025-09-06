@@ -29,9 +29,6 @@
             <input v-model="musicStore.item.data.streamingLink" id="location"
               class="w-full rounded-lg bg-gray-dark text-light"
               :placeholder="userStreamingPlatform().links.placeholder" />
-            <ArrowTopRightOnSquareIcon
-              :class="['size-6', musicStore.item?.data?.streamingLink ? 'text-gray-light cursor-pointer' : 'text-gray']"
-              @click="openLink(musicStore.item?.data?.streamingLink)" />
           </div>
         </div>
 
@@ -72,7 +69,6 @@ import { useMusicStore } from '@/stores/music'
 import { notif } from '@/composables/notif'
 import { translateDate } from '@/composables/beautify'
 import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
-import { ArrowTopRightOnSquareIcon } from '@heroicons/vue/24/solid'
 import { ClipboardDocumentIcon } from '@heroicons/vue/24/solid'
 import { PlayIcon } from '@heroicons/vue/24/solid'
 import debounce from '@/composables/debounce'
