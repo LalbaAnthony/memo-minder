@@ -85,7 +85,7 @@ function valid() {
 
 function manualDeletion() {
   personStore.deleteItem(personStore.item.data.personId, true)
-  router.push('/people')
+  router.go(-1)
 }
 
 async function manualCreation() {
@@ -96,7 +96,7 @@ async function manualCreation() {
   }
 
   const success = await personStore.createItem(personStore.item.data, true)
-  if (success) router.push('/people')
+  if (success) router.go(-1)
 }
 
 async function manualUpdate() {
@@ -109,7 +109,7 @@ async function manualUpdate() {
   }
 
   const success = await personStore.updateItem(personStore.item.data, true)
-  if (success) router.push('/people')
+  if (success) router.go(-1)
 }
 
 const debouncedUpdate = debounce(() => {

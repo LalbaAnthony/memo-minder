@@ -9,6 +9,9 @@
 
 <script setup>
 import { ChevronLeftIcon } from '@heroicons/vue/24/outline'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const props = defineProps({
   goBackButton: {
@@ -19,7 +22,7 @@ const props = defineProps({
 })
 
 function goBack() {
-  window.history.back()
+  router.go(-1)
 }
 
 </script>

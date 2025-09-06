@@ -108,7 +108,7 @@ function valid() {
 
 function manualDeletion() {
   eventStore.deleteItem(eventStore.item.data.eventId, true)
-  router.push('/events')
+  router.go(-1)
 }
 
 async function manualCreation() {
@@ -119,7 +119,7 @@ async function manualCreation() {
   }
 
   const success = await eventStore.createItem(eventStore.item.data, true)
-  if (success) router.push('/events')
+  if (success) router.go(-1)
 }
 
 async function manualUpdate() {
@@ -132,7 +132,7 @@ async function manualUpdate() {
   }
 
   const success = await eventStore.updateItem(eventStore.item.data, true)
-  if (success) router.push('/events')
+  if (success) router.go(-1)
 }
 
 const debouncedUpdate = debounce(() => {

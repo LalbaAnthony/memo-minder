@@ -105,7 +105,7 @@ function valid() {
 
 function manualDeletion() {
   musicStore.deleteItem(musicStore.item.data.musicId, true)
-  router.push('/musics')
+  router.go(-1)
 }
 
 async function manualCreation() {
@@ -116,7 +116,7 @@ async function manualCreation() {
   }
 
   const success = await musicStore.createItem(musicStore.item.data, true)
-  if (success) router.push('/musics')
+  if (success) router.go(-1)
 }
 
 async function manualUpdate() {
@@ -129,7 +129,7 @@ async function manualUpdate() {
   }
 
   const success = await musicStore.updateItem(musicStore.item.data, true)
-  if (success) router.push('/musics')
+  if (success) router.go(-1)
 }
 
 const debouncedUpdate = debounce(() => {
