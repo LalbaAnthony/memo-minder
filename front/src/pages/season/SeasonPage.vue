@@ -153,7 +153,7 @@ function valid() {
 
 function manualDeletion() {
   seasonStore.deleteItem(seasonStore.item.data.seasonId, true)
-  router.push('/events')
+  router.go(-1)
 }
 
 async function manualCreation() {
@@ -164,7 +164,7 @@ async function manualCreation() {
   }
 
   const success = await seasonStore.createItem(seasonStore.item.data, true)
-  if (success) router.push('/seasons')
+  if (success) router.go(-1)
 }
 
 async function manualUpdate() {
@@ -177,7 +177,7 @@ async function manualUpdate() {
   }
 
   const success = await seasonStore.updateItem(seasonStore.item.data, true)
-  if (success) router.push('/seasons')
+  if (success) router.go(-1)
 }
 
 const suggestedSeasons = computed(() => {

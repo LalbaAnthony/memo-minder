@@ -19,28 +19,24 @@ This web app use [https://github.com/well300/quotes-api](https://github.com/well
 
 Create a `.env` file in the project directory. Use the `.env.example` file as a template.
 
-### Backend
-
-```bash
-cd back/ && npm i && npm run dev
-```
-
 ### Frontend
 
 ```bash
-cd front/ && npm i && npm run dev
+cd front ; npm i ; npm run dev
 ```
 
-### Seed data
+### Backend
 
-Seed test data:
+Start backend with dev data:
+
 ```bash
-cd back/ && npm run seed
+cd back ; npm i ; npm run seed ; npm run dev
 ```
 
-### Tests
+Tests:
+
 ```bash
-cd back/ && npm run test
+cd back ; npm run test
 ```
 
 ## 🚢 - Deployment
