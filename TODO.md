@@ -1,5 +1,6 @@
 Must:
 - [ ] Fix open on dezzer not working (in app)
+- [ ] Retirer redirection 404 au fail d'un requete et mettre un autre message
 - [ ] Adding an event with an old date should not set a default season (Adding it anyway then removing it ?)
 - [ ] Fix wrong imports in backend (ESM/CommonJS)
 - [ ] Search for TODO and WIP inside the codebase
