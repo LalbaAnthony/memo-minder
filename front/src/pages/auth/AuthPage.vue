@@ -1,10 +1,15 @@
 <template>
-  <div class="rounded-lg border border-gray p-4 max-w-md mx-auto mt-8">
-    <h2 class="text-center text-light text-2xl font-semibold mt-4 mb-8">{{ tabs[authStore.authentication.tab].title }}
-    </h2>
-    <component :is="tabs[authStore.authentication.tab].component" />
+  <div
+    :class="[isMobile() ? 'mx-auto mt-8 px-4' : 'min-h-[calc(100vh-4rem)] overflow-hidden flex items-center justify-center']">
+    <div class="w-full max-w-md rounded-lg border border-gray p-4">
+      <h2 class="text-center text-light text-2xl font-semibold mt-4 mb-8">
+        {{ tabs[authStore.authentication.tab].title }}
+      </h2>
+      <component :is="tabs[authStore.authentication.tab].component" />
+    </div>
   </div>
 </template>
+
 
 <script setup>
 import AuthLogin from '@/components/auth/AuthLogin.vue'
@@ -13,6 +18,7 @@ import AuthForgotPassword from '@/components/auth/AuthForgotPassword.vue'
 import AuthResetPassword from '@/components/auth/AuthResetPassword.vue'
 import { ref, shallowRef, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth'
+import { isMobile } from '@/composables/helpers'
 
 const authStore = useAuthStore()
 
