@@ -7,7 +7,7 @@ Must:
 - [ ] Create and implement email systeme with email.js with https://chatgpt.com/share/6807b762-e3c0-800a-a49c-ccc0a19c1ac9
 
 Should:
-- [ ] Center le composant principale de AuthPage si sur desktop, sinon le laisser en haut sur mobile (por laisser place au clavier)
+- [x] Center le composant principale de AuthPage si sur desktop, sinon le laisser en haut sur mobile (por laisser place au clavier)
 - [ ] 'Add' button in item picker that allows to add a new item which will be automatically linked to item we are coming from
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Test unitaires et d'intégration des contrôleurs, modèles et routes
