@@ -55,3 +55,4 @@ router.put('/user/:id', checkToken, userController.userUpdate);
 router.delete('/user/:id', checkToken, userController.userDelete);
 
 module.exports = router;
+
