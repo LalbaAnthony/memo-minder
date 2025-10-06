@@ -164,7 +164,7 @@ onMounted(() => {
 <style scoped>
 
 .darken-arround-shadow {
-  box-shadow: 0px 0px 30px 10px var(--dark);
+  box-shadow: 0px 0px 30px 5px var(--dark);
 }
 
 .darken-arround-background {
