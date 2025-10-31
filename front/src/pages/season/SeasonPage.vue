@@ -86,6 +86,7 @@ import { notif } from '@/composables/notif'
 import { translateDate } from '@/composables/beautify'
 import { computed, ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import debounce from '@/composables/debounce'
+import { routing } from '@/composables/routing';
 
 const route = useRoute()
 const router = useRouter()
@@ -153,7 +154,7 @@ function valid() {
 
 function manualDeletion() {
   seasonStore.deleteItem(seasonStore.item.data.seasonId, true)
-  router.go(-1)
+  routing.goBackSafe(router)
 }
 
 async function manualCreation() {
@@ -164,7 +165,7 @@ async function manualCreation() {
   }
 
   const success = await seasonStore.createItem(seasonStore.item.data, true)
-  if (success) router.go(-1)
+  if (success) routing.goBackSafe(router)
 }
 
 async function manualUpdate() {
@@ -177,7 +178,7 @@ async function manualUpdate() {
   }
 
   const success = await seasonStore.updateItem(seasonStore.item.data, true)
-  if (success) router.go(-1)
+  if (success) routing.goBackSafe(router)
 }
 
 const suggestedSeasons = computed(() => {

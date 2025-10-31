@@ -75,6 +75,7 @@ import debounce from '@/composables/debounce'
 import { userStreamingPlatform } from '@/composables/streamingPlatform'
 import { copyToClipboard, openLink } from '@/composables/helpers'
 import { smartStreamingLink } from '@/composables/streamingPlatform'
+import { routing } from '@/composables/routing';
 
 const route = useRoute()
 const router = useRouter()
@@ -101,7 +102,7 @@ function valid() {
 
 function manualDeletion() {
   musicStore.deleteItem(musicStore.item.data.musicId, true)
-  router.go(-1)
+  routing.goBackSafe(router)
 }
 
 async function manualCreation() {
@@ -112,7 +113,7 @@ async function manualCreation() {
   }
 
   const success = await musicStore.createItem(musicStore.item.data, true)
-  if (success) router.go(-1)
+  if (success) routing.goBackSafe(router)
 }
 
 async function manualUpdate() {
@@ -125,7 +126,7 @@ async function manualUpdate() {
   }
 
   const success = await musicStore.updateItem(musicStore.item.data, true)
-  if (success) router.go(-1)
+  if (success) routing.goBackSafe(router)
 }
 
 const debouncedUpdate = debounce(() => {

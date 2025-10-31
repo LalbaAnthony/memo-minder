@@ -59,6 +59,7 @@ import { translateDate } from '@/composables/beautify'
 import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import debounce from '@/composables/debounce'
 import DatePicker from '@/components/fields/DatePickerComponent.vue'
+import { routing } from '@/composables/routing';
 
 const route = useRoute()
 const router = useRouter()
@@ -85,7 +86,7 @@ function valid() {
 
 function manualDeletion() {
   personStore.deleteItem(personStore.item.data.personId, true)
-  router.go(-1)
+  routing.goBackSafe(router)
 }
 
 async function manualCreation() {
@@ -96,7 +97,7 @@ async function manualCreation() {
   }
 
   const success = await personStore.createItem(personStore.item.data, true)
-  if (success) router.go(-1)
+  if (success) routing.goBackSafe(router)
 }
 
 async function manualUpdate() {
@@ -109,7 +110,7 @@ async function manualUpdate() {
   }
 
   const success = await personStore.updateItem(personStore.item.data, true)
-  if (success) router.go(-1)
+  if (success) routing.goBackSafe(router)
 }
 
 const debouncedUpdate = debounce(() => {
