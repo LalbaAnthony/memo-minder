@@ -13,12 +13,13 @@
 </template>
 
 <script setup>
+import { routing } from '@/composables/routing';
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
 function goBack() {
-  router.go(-1)
+  routing.goBackSafe(router)
 }
 
 </script>

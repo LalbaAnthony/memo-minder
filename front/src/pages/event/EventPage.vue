@@ -81,6 +81,7 @@ import { translateDate } from '@/composables/beautify'
 import { ref, watch, onBeforeUnmount, onMounted } from 'vue'
 import debounce from '@/composables/debounce'
 import { copyToClipboard, openLink } from '@/composables/helpers'
+import { routing } from '@/composables/routing';
 
 const route = useRoute()
 const router = useRouter()
@@ -108,7 +109,7 @@ function valid() {
 
 function manualDeletion() {
   eventStore.deleteItem(eventStore.item.data.eventId, true)
-  router.go(-1)
+  routing.goBackSafe(router)
 }
 
 async function manualCreation() {
@@ -119,7 +120,7 @@ async function manualCreation() {
   }
 
   const success = await eventStore.createItem(eventStore.item.data, true)
-  if (success) router.go(-1)
+  if (success) routing.goBackSafe(router)
 }
 
 async function manualUpdate() {
@@ -132,7 +133,7 @@ async function manualUpdate() {
   }
 
   const success = await eventStore.updateItem(eventStore.item.data, true)
-  if (success) router.go(-1)
+  if (success) routing.goBackSafe(router)
 }
 
 const debouncedUpdate = debounce(() => {

@@ -10,6 +10,7 @@
 <script setup>
 import { ChevronLeftIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'
+import { routing } from '@/composables/routing';
 
 const router = useRouter()
 
@@ -22,7 +23,7 @@ const props = defineProps({
 })
 
 function goBack() {
-  router.go(-1)
+  routing.goBackSafe(router)
 }
 
 </script>
