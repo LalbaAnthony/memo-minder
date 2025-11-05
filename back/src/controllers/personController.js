@@ -34,16 +34,34 @@ exports.getUpcommingBirthdaysPeople = async (req, res) => {
     // Build where clause
     let where = { userId };
 
-    where[Op.and] = [
-        ...(sequelize.getDialect() === 'mysql' ? [literal(`
-            DATE_FORMAT(Birthdate, '%m-%d') >= DATE_FORMAT(NOW(), '%m-%d')
-            AND DATE_FORMAT(Birthdate, '%m-%d') <= DATE_FORMAT(DATE_ADD(NOW(), INTERVAL ${days} DAY), '%m-%d')
-        `)] : []),
-        ...(sequelize.getDialect() === 'sqlite' ? [literal(`
-            strftime('%m-%d', Birthdate) >= strftime('%m-%d', 'now')
-            AND strftime('%m-%d', Birthdate) <= strftime('%m-%d', 'now', '+${days} days')
-        `)] : [])
-    ]
+    const dialect = sequelize.getDialect();
+
+    if (dialect === 'mysql') {
+        where[Op.and] = [
+            literal(`
+                    DATE_FORMAT(Birthdate, '%m-%d') >= DATE_FORMAT(NOW(), '%m-%d')
+                    AND DATE_FORMAT(Birthdate, '%m-%d') <= DATE_FORMAT(DATE_ADD(NOW(), INTERVAL ${days} DAY), '%m-%d')
+                `)
+        ];
+    } else if (dialect === 'sqlite') {
+        // Detect if the range crosses the year boundary (e.g., from November to February)
+        const now = new Date();
+        const end = new Date();
+        end.setDate(now.getDate() + days);
+        const crossesYearBoundary = end.getFullYear() > now.getFullYear();
+
+        const condition = crossesYearBoundary
+            ? `
+                    (strftime('%m-%d', Birthdate) >= strftime('%m-%d', 'now')
+                    OR strftime('%m-%d', Birthdate) <= strftime('%m-%d', 'now', '+${days} days'))
+                `
+            : `
+                    strftime('%m-%d', Birthdate) >= strftime('%m-%d', 'now')
+                    AND strftime('%m-%d', Birthdate) <= strftime('%m-%d', 'now', '+${days} days')
+                `;
+
+        where[Op.and] = [literal(condition)];
+    }
 
     // Pagination setup
     const totalCount = await Person.count({ where });
@@ -56,16 +74,22 @@ exports.getUpcommingBirthdaysPeople = async (req, res) => {
         total: Math.ceil(totalCount / limit)
     };
 
-    // Query, including associations if any
+    // Query with associations and ordering
     const items = await Person.findAll({
-        where, offset, limit, include: associations,
+        where,
+        offset,
+        limit,
+        include: associations,
         order: [
-            ...(sequelize.getDialect() === 'mysql' ? [literal(`DATE_FORMAT(Birthdate, '%m-%d') ASC`)] : []),
-            ...(sequelize.getDialect() === 'sqlite' ? [literal(`strftime('%m-%d', Birthdate) ASC`)] : [])
+            ...(dialect === 'mysql'
+                ? [literal(`DATE_FORMAT(Birthdate, '%m-%d') ASC`)]
+                : [literal(`strftime('%m-%d', Birthdate) ASC`)]
+            )
         ]
     });
+
     res.status(200).json(frmtr('success', items, null, pagination));
-}
+};
 
 exports.getPersonById = baseController.getById(Person, {
     associations,
