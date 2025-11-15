@@ -29,20 +29,28 @@
 
 <script setup>
 import { useAuthStore } from '@/stores/auth'
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import { isMobile } from '@/composables/helpers'
 
 const authStore = useAuthStore()
 
+function handleKeydown(e) {
+    // Enter to trigger main action
+    if (e.key === 'Enter') {
+        authStore.login()
+    }
+}
+
 onMounted(() => {
     // Add shortcuts
     if (!isMobile()) {
-        window.addEventListener('keydown', (e) => {
-            // Enter to trigger main action
-            if (e.key === 'Enter') {
-                authStore.login()
-            }
-        })
+        window.addEventListener('keydown', handleKeydown)
+    }
+})
+
+onUnmounted(() => {
+    if (!isMobile()) {
+        window.removeEventListener('keydown', handleKeydown)
     }
 })
 </script>

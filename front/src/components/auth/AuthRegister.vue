@@ -51,20 +51,28 @@ import DatePicker from '@/components/fields/DatePickerComponent.vue'
 import PasswordStrength from '@/components/PasswordStrengthComponent.vue'
 import LanguagePicker from '@/components/fields/LanguagePickerComponent.vue'
 import { useAuthStore } from '@/stores/auth'
-import { onMounted } from 'vue'
 import { isMobile } from '@/composables/helpers'
+import { onMounted, onUnmounted } from 'vue'
 
 const authStore = useAuthStore()
+
+function handleKeydown(e) {
+    // Enter to trigger main action
+    if (e.key === 'Enter') {
+        authStore.register()
+    }
+}
 
 onMounted(() => {
     // Add shortcuts
     if (!isMobile()) {
-        window.addEventListener('keydown', (e) => {
-            // Enter to trigger main action
-            if (e.key === 'Enter') {
-                authStore.register()
-            }
-        })
+        window.addEventListener('keydown', handleKeydown)
+    }
+})
+
+onUnmounted(() => {
+    if (!isMobile()) {
+        window.removeEventListener('keydown', handleKeydown)
     }
 })
 </script>

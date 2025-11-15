@@ -28,20 +28,28 @@
 <script setup>
 import PasswordStrength from '@/components/PasswordStrengthComponent.vue'
 import { useAuthStore } from '@/stores/auth'
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import { isMobile } from '@/composables/helpers'
 
 const authStore = useAuthStore()
 
+function handleKeydown(e) {
+    // Enter to trigger main action
+    if (e.key === 'Enter') {
+        authStore.forgotPassword()
+    }
+}
+
 onMounted(() => {
     // Add shortcuts
     if (!isMobile()) {
-        window.addEventListener('keydown', (e) => {
-            // Enter to trigger main action
-            if (e.key === 'Enter') {
-                authStore.resetPassword()
-            }
-        })
+        window.addEventListener('keydown', handleKeydown)
+    }
+})
+
+onUnmounted(() => {
+    if (!isMobile()) {
+        window.removeEventListener('keydown', handleKeydown)
     }
 })
 </script>
