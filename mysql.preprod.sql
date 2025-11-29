@@ -1,3 +1,4 @@
+CREATE DATABASE IF NOT EXISTS `preprod-memo-minder` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE 'preprod-memo-minder';
 
 -- Create user
