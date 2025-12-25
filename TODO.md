@@ -1,4 +1,6 @@
 Must:
+- [ ] Alert quand pas de saison en cours detécté.
+- [ ] Revoir ordre de tri dans les pages
 - [ ] Fix open on dezzer not working (in app)
 - [ ] Modifier lasts seasons on home page pour ne pas être les dernières modifié mais les plus récente selon leurs dates
 - [ ] Retirer redirection 404 au fail d'un requete et mettre un autre message
