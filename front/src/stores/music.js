@@ -14,7 +14,7 @@ const config = {
     all: 'musics',
     one: 'music',
   },
-  pagination: { page: 1, perPage: 40, total: 1 },
+  pagination: { page: 1, perPage: 26, total: 1 },
   initItem: async (data) => {
     data.seasons = []
     data.people = []

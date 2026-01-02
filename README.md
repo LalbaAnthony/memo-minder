@@ -39,6 +39,12 @@ Tests:
 cd back ; npm run test
 ```
 
+## 🧱 - Frontend
+
+### Stores
+
+In most Pinia stores, the `perPage` value in the `pagination` object is almost always a 12 multiple (12, 24, 36, ...). This is to ensure a good display in all screen sizes.
+
 ## 🚢 - Deployment
 
 ### Flow
