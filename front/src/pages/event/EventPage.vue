@@ -22,12 +22,13 @@
             <DatePicker class="max-w-[15rem]" :value="eventStore.item?.data?.date"
               @update="(v) => { eventStore.item.data.date = v }" />
             <span class="text-lg font-medium text-gray-light">in</span>
-            <div class="flex items-center justify-center gap-2 w-full max-w-[24rem] p-1.5 px-2.5 rounded-lg bg-gray-dark">
+            <div
+              class="flex items-center justify-center gap-2 w-full max-w-[24rem] p-1.5 px-2.5 rounded-lg bg-gray-dark">
               <ClipboardDocumentIcon
                 :class="['size-5', eventStore.item?.data?.location ? 'text-gray-light cursor-pointer' : 'text-gray']"
                 @click="copyToClipboard(eventStore.item?.data?.location)" />
-              <input v-model="eventStore.item.data.location" id="location"
-                class="w-full rounded-lg bg-gray-dark text-light" placeholder="Location" />
+              <input v-model="eventStore.item.data.location" class="w-full rounded-lg bg-gray-dark text-light"
+                placeholder="Location" />
               <ArrowTopRightOnSquareIcon
                 :class="['size-6', eventStore.item?.data?.location ? 'text-gray-light cursor-pointer' : 'text-gray']"
                 @click="openLink(eventStore.item.data?.location ? `http://maps.google.com/?q=${eventStore.item.data.location}` : '')" />
