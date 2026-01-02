@@ -17,7 +17,7 @@ const config = {
     one: 'season',
     current: 'season/current',
   },
-  pagination: { page: 1, perPage: 20, total: 1 },
+  pagination: { page: 1, perPage: 4, total: 1 },
   initItem: (data) => {
     const today = new Date().toISOString().split('T')[0]
     data.color = randomPastelColor()
