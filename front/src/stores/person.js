@@ -16,7 +16,7 @@ const config = {
     one: 'person',
     upcomingBirthdays: 'people/upcoming-birthdays',
   },
-  pagination: { page: 1, perPage: 20, total: 1 },
+  pagination: { page: 1, perPage: 15, total: 1 },
   initItem: (data) => {
     data.seasons = []
     data.musics = []

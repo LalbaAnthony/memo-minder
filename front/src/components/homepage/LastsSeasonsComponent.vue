@@ -1,6 +1,6 @@
 <template>
     <section>
-        <h2 class="text-xl font-bold">Lasts seasons added</h2>
+        <h2 class="text-xl font-bold">Lasts seasons</h2>
         <div class="my-4">
             <Loader v-if="seasonStore.items.loading" position="static" />
             <div v-else>
@@ -35,7 +35,11 @@ const seasonStore = useSeasonStore()
 onMounted(() => {
     if (authStore?.user?.homePageEnableLastsSeasons) {
         seasonStore.fetchItems({
-            sort: [{ order: 'DESC', orderBy: 'createdAt' }],
+            sort: [
+                { order: 'DESC', orderBy: 'dateStart' },
+                { order: 'DESC', orderBy: 'dateEnd' },
+                { order: 'DESC', orderBy: 'createdAt' }
+            ],
             perPage: 3
         })
     }
