@@ -14,7 +14,7 @@ const config = {
     all: 'events',
     one: 'event',
   },
-  pagination: { page: 1, perPage: 20, total: 1 },
+  pagination: { page: 1, perPage: 24, total: 1 },
   initItem: async (data) => {
     const today = new Date().toISOString().split('T')[0]
     data.date = today
