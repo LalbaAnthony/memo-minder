@@ -26,8 +26,7 @@
             <ClipboardDocumentIcon
               :class="['size-5', musicStore.item?.data?.streamingLink ? 'text-gray-light cursor-pointer' : 'text-gray']"
               @click="copyToClipboard(musicStore.item?.data?.streamingLink)" />
-            <input v-model="musicStore.item.data.streamingLink" id="location"
-              class="w-full rounded-lg bg-gray-dark text-light"
+            <input v-model="musicStore.item.data.streamingLink" class="w-full rounded-lg bg-gray-dark text-light"
               :placeholder="userStreamingPlatform().links.placeholder" />
           </div>
         </div>
