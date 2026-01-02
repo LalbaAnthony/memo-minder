@@ -35,7 +35,7 @@ onMounted(() => {
     if (authStore?.user?.homePageEnableUpcomings) {
         personStore.fetchUpcomingBirthdays({
             days: scope.value,
-            perPage: 3
+            perPage: 5
         })
     }
 })
