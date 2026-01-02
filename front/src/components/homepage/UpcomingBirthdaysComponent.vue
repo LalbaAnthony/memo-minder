@@ -29,7 +29,7 @@ import { onMounted, ref } from 'vue'
 const authStore = useAuthStore()
 const personStore = usePersonStore()
 
-const scope = ref(60)
+const scope = ref(90)
 
 onMounted(() => {
     if (authStore?.user?.homePageEnableUpcomings) {
