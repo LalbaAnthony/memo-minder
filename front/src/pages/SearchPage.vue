@@ -85,7 +85,7 @@ const musicStore = useMusicStore()
 const personStore = usePersonStore()
 const seasonStore = useSeasonStore()
 
-const PER_PAGE = 2
+const PER_PAGE = 3
 
 const searching = ref(false)
 const search = ref(route.query.search || '')
