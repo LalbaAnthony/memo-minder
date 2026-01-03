@@ -4,7 +4,7 @@
     <div class="flex-1 p-5" @click="goToSeason()">
       <div class="flex flex-col justify-center items-center w-full my-2">
         <h1 class="text-2xl font-bold text-center">{{ limitString(props?.season?.title) }}</h1>
-        <p class="text-sm text-gray-light">{{ translateDate(props?.season?.dateStart) }} {{ props?.season?.dateStart &&
+        <p class="text-sm text-gray-light text-center">{{ translateDate(props?.season?.dateStart) }} {{ props?.season?.dateStart &&
           props?.season?.dateEnd ? 'to' : '' }} {{ translateDate(props?.season?.dateEnd) }}</p>
       </div>
       <div class="my-4">
