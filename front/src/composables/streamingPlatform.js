@@ -5,7 +5,6 @@ import DefaultIcon from '@/icons/DefaultIcon.vue'
 import SpotifyIcon from '@/icons/SpotifyIcon.vue'
 import YoutubeIcon from '@/icons/YoutubeIcon.vue'
 import { isValidUrl } from '@/composables/helpers'
-import { extractYear } from '@/composables/helpers'
 
 const authStore = useAuthStore()
 
