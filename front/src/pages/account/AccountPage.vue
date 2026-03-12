@@ -35,21 +35,21 @@
     <section>
       <h2 class="text-xl font-bold mb-6">Homepage</h2>
       <div class="flex flex-row flex-wrap items-center gap-x-8 gap-y-6 my-4 mx-2">
-        <div class="w-full flex flex-row justify-between items-center gap-4">
+        <div v-if="authStore.user.userId === LIMIT_PRIVATE_SETTINGS_TO" class="w-full flex flex-row justify-between items-center gap-4">
           <div class="flex flex-row items-center gap-2">
             <ChartBarIcon class="size-6 text-gray-light" />
             <label>Enable life spents</label>
           </div>
           <Switch v-model="authStore.user.homePageEnableSpents" />
         </div>
-        <div class="w-full flex flex-row justify-between items-center gap-4">
+        <div v-if="authStore.user.userId === LIMIT_PRIVATE_SETTINGS_TO" class="w-full flex flex-row justify-between items-center gap-4">
           <div class="flex flex-row items-center gap-2">
             <SquaresPlusIcon class="size-6 text-gray-light" />
             <label>Enable stats</label>
           </div>
           <Switch v-model="authStore.user.homePageEnableStats" />
         </div>
-        <div class="w-full flex flex-row justify-between items-center gap-4">
+        <div v-if="authStore.user.userId === LIMIT_PRIVATE_SETTINGS_TO" class="w-full flex flex-row justify-between items-center gap-4">
           <div class="flex flex-row items-center gap-2">
             <ChatBubbleBottomCenterIcon class="size-6 text-gray-light" />
             <label>Enable quote of the day</label>
@@ -120,6 +120,10 @@ import StreamingPlatformPicker from '@/components/fields/StreamingPlatformPicker
 
 const authStore = useAuthStore()
 const router = useRouter()
+
+// Limit the private settings to a specific user for now, as they are not yet fully tested and may cause issues.
+// TODO: hardcoded for now, should be replaced with a dynamic value from the backend
+const LIMIT_PRIVATE_SETTINGS_TO = 1;
 
 const watched = ref(0)
 
