@@ -12,9 +12,8 @@
         <Music :music="item" />
       </template>
     </Grid>
-
-    <Pagination :total="musicStore.items.pagination.total" :page="musicStore.items.pagination.page"
-      :perPage="musicStore.items.pagination.perPage" @update-page="async (page) => {
+    <Pagination v-if="!musicStore.items.loading" :total="musicStore.items.pagination.total"
+      :page="musicStore.items.pagination.page" :perPage="musicStore.items.pagination.perPage" @update-page="async (page) => {
         musicStore.changePage(page, false);
         await loadMusics()
       }" />

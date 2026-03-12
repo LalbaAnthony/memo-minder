@@ -14,9 +14,8 @@
         <Event :event="item" />
       </template>
     </Grid>
-
-    <Pagination :total="eventStore.items.pagination.total" :page="eventStore.items.pagination.page"
-      :perPage="eventStore.items.pagination.perPage" @update-page="async (page) => {
+    <Pagination v-if="!eventStore.items.loading" :total="eventStore.items.pagination.total"
+      :page="eventStore.items.pagination.page" :perPage="eventStore.items.pagination.perPage" @update-page="async (page) => {
         eventStore.changePage(page, false);
         await loadEvents()
       }" />

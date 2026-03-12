@@ -14,8 +14,8 @@
         <Person :person="item" />
       </template>
     </Grid>
-    <Pagination :total="personStore.items.pagination.total" :page="personStore.items.pagination.page"
-      :perPage="personStore.items.pagination.perPage" @update-page="async (page) => {
+    <Pagination v-if="!personStore.items.loading" :total="personStore.items.pagination.total"
+      :page="personStore.items.pagination.page" :perPage="personStore.items.pagination.perPage" @update-page="async (page) => {
         personStore.changePage(page, false);
         await loadPeople()
       }" />
