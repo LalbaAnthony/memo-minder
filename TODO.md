@@ -11,6 +11,7 @@ Must:
 
 Should:
 - [ ] Add favorite items (with a star) and filter by it
+- [ ] Remove LIMIT_PRIVATE_SETTINGS_TO and replace it with a dynamic value from the backend (ex: a "beta tester" flag on the user)
 - [ ] 'Add' button in item picker that allows to add a new item which will be automatically linked to item we are coming from
 - [ ] Limites de longeurs de champs en front correspondent à celles de la BDD
 - [ ] Test unitaires et d'intégration des contrôleurs, modèles et routes
