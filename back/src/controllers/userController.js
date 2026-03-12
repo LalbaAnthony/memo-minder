@@ -19,8 +19,17 @@ exports.register = async (req, res) => {
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
 
+        const homePageDefauls = {
+            homePageEnableSpents: false,
+            homePageEnableStats: false,
+            homePageEnableQuote: false,
+            homePageEnableUpcomings: true,
+            homePageEnableLastsEvents: true,
+            homePageEnableLastsSeasons: true,
+        }
+
         // Create the user
-        const newUser = await User.create({ username, birthdate, email, password: hashedPassword, language });
+        const newUser = await User.create({ username, birthdate, email, password: hashedPassword, language, ...homePageDefauls });
         if (!newUser) return res.status(500).json(frmtr('error', null, 'Error while creating the account'));
 
         // Generate a reset code and save it to the user
