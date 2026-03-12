@@ -14,8 +14,8 @@
         <Season :season="item" />
       </template>
     </Grid>
-    <Pagination :total="seasonStore.items.pagination.total" :page="seasonStore.items.pagination.page"
-      :perPage="seasonStore.items.pagination.perPage" @update-page="async (page) => {
+    <Pagination v-if="!seasonStore.items.loading" :total="seasonStore.items.pagination.total"
+      :page="seasonStore.items.pagination.page" :perPage="seasonStore.items.pagination.perPage" @update-page="async (page) => {
         seasonStore.changePage(page, false);
         await loadSeasons()
       }" />
