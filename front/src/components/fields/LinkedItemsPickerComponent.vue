@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot appear :show="props.show" as="template">
-    <Dialog as="div" @close="emit('closePicker', true)" class="relative z-20">
+    <Dialog as="div" @close="emit('closePicker', true); search = ''" class="relative z-20">
       <TransitionChild enter="transition ease-in-out duration-300" enter-from="opacity-0" enter-to="opacity-100"
         leave="transition ease-in-out duration-300" leave-from="opacity-100" leave-to="opacity-0">
         <div class="fixed inset-0 bg-dark bg-opacity-90 transition-opacity"></div>

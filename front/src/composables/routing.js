@@ -1,9 +1,11 @@
 const goBackSafe = (router, defaulting = '/') => {
-    const referrer = document.referrer;
-    const currentOrigin = window.location.origin;
+    // history.state.back is only set by vue-router for in-app navigations,
+    // so a null value means going back would leave the website
 
-    if (referrer.startsWith(currentOrigin)) {
-        router.go(-1);
+    const previous = router.options.history.state?.back;
+
+    if (previous) {
+        router.back();
     } else {
         router.push(defaulting);
     }
