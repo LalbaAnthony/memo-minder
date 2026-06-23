@@ -88,6 +88,18 @@ sudo apt install npm
 npm i -g pm2
 ```
 
+### PM2
+
+```sh
+# Start production backend
+cd /var/www/html/memo-minder/back
+pm2 start main.js --name memo-minder-backend || pm2 restart memo-minder-backend
+
+# Start preproduction backend
+cd /var/www/html/preprod-memo-minder/back 
+pm2 start main.js --name preprod-memo-minder-backend || pm2 restart preprod-memo-minder-backend
+```
+
 ### Web server
 
 Apache is used to serve the frontend. Make sure to install it on the server.
