@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa';
 import dotenv from 'dotenv';
 import path from 'path';
+import { VITE_APP_NAME, VITE_APP_SHORT_NAME, VITE_APP_DESCRIPTION, VITE_APP_THEME_COLOR, VITE_APP_BG_COLOR } from './config.js';
 
 // Resolve the path to the .env file
 const __filename = fileURLToPath(import.meta.url);
@@ -42,11 +43,11 @@ export default defineConfig({
         ]
       },
       manifest: {
-        name: process.env.VITE_APP_NAME,
-        short_name: process.env.VITE_APP_SHORT_NAME,
-        description: process.env.VITE_APP_DESCRIPTION,
-        theme_color: `#${process.env.VITE_APP_THEME_COLOR}`, // Due to the pipe creating front .env file, we cannot use '#'
-        background_color: `#${process.env.VITE_APP_BG_COLOR}`,
+        name: VITE_APP_NAME,
+        short_name: VITE_APP_SHORT_NAME,
+        description: VITE_APP_DESCRIPTION,
+        theme_color: `#${VITE_APP_THEME_COLOR}`, // Due to the pipe creating front .env file, we cannot use '#'
+        background_color: `#${VITE_APP_BG_COLOR}`,
         icons: [
           {
             src: 'android-chrome-192x192.png',
@@ -73,23 +74,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  define: {
-    'process.env': {
-      VITE_APP_SHORT_NAME: process.env.VITE_APP_SHORT_NAME,
-      VITE_APP_NAME: process.env.VITE_APP_NAME,
-      VITE_APP_COMPANY_NAME: process.env.VITE_APP_COMPANY_NAME,
-      VITE_APP_AUTHOR_NAME: process.env.VITE_APP_AUTHOR_NAME,
-      VITE_APP_DESCRIPTION: process.env.VITE_APP_DESCRIPTION,
-      VITE_APP_THEME_COLOR: process.env.VITE_APP_THEME_COLOR,
-      VITE_APP_BG_COLOR: process.env.VITE_APP_BG_COLOR,
-      VITE_PORT: process.env.VITE_PORT,
-      VITE_FRONT_URL: process.env.VITE_FRONT_URL,
-      VITE_BACK_API_URL: process.env.VITE_BACK_API_URL,
-      VITE_GIT_REPO: process.env.VITE_GIT_REPO,
-    }
-  },
   server: {
-    port: process.env.VITE_PORT || 5173,
+    port: 5173,
   },
 })
 
