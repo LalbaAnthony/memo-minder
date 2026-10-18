@@ -7,18 +7,16 @@ on:
         description: Push the images to Docker Hub (needs the DOCKERHUB_USERNAME and DOCKERHUB_TOKEN secrets)
         type: boolean
         default: false
-      vite-front-url:
-        description: Public URL of the app, inlined into the frontend bundle (VITE_FRONT_URL). Required when push is true.
-        type: string
-        default: ""
-      vite-back-api-url:
-        description: API base path, inlined into the frontend bundle (VITE_BACK_API_URL)
-        type: string
-        default: /api
     secrets:
       DOCKERHUB_USERNAME:
         required: false
       DOCKERHUB_TOKEN:
+        required: false
+      VITE_FRONT_URL:
+        description: Public URL of the app, inlined into the frontend bundle. Required when push is true.
+        required: false
+      VITE_BACK_API_URL:
+        description: API base path, inlined into the frontend bundle. Defaults to /api.
         required: false
     outputs:
       back-image:
@@ -42,14 +40,7 @@ jobs:
     timeout-minutes: 20
     strategy:
       matrix:
-        include:
-          - service: back
-            build-args: ""
-          # VITE_* values are inlined into the bundle at build time
-          - service: front
-            build-args: |
-              VITE_FRONT_URL=${{ inputs.vite-front-url }}
-              VITE_BACK_API_URL=${{ inputs.vite-back-api-url }}
+        service: [back, front]
     outputs:
       # Both matrix legs compute the same values, so the leg that finishes last cannot change them
       back-image: ${{ steps.ref.outputs.back-image }}
@@ -62,10 +53,11 @@ jobs:
         env:
           SERVICE: ${{ matrix.service }}
           PUSH: ${{ inputs.push }}
-          VITE_FRONT_URL: ${{ inputs.vite-front-url }}
+          VITE_FRONT_URL: ${{ secrets.VITE_FRONT_URL }}
+          VITE_BACK_API_URL: ${{ secrets.VITE_BACK_API_URL || '/api' }}
         run: |
           if [[ "$PUSH" == "true" && "$SERVICE" == "front" && -z "$VITE_FRONT_URL" ]]; then
-            echo "::error::VITE_FRONT_URL is empty: set it as a repository variable before publishing images"
+            echo "::error::VITE_FRONT_URL is empty: set it as a repository secret before publishing images"
             exit 1
           fi
           tag="sha-${GITHUB_SHA}"
@@ -74,6 +66,14 @@ jobs:
             echo "image=${IMAGE_PREFIX}-${SERVICE}"
             echo "back-image=${IMAGE_PREFIX}-back:${tag}"
             echo "front-image=${IMAGE_PREFIX}-front:${tag}"
+            # VITE_* values are inlined into the bundle at build time. Set here because strategy.matrix cannot read secrets.
+            # A step output, never a job output: the runner drops job outputs that contain a secret value.
+            if [[ "$SERVICE" == "front" ]]; then
+              echo "build-args<<EOF"
+              echo "VITE_FRONT_URL=${VITE_FRONT_URL}"
+              echo "VITE_BACK_API_URL=${VITE_BACK_API_URL}"
+              echo "EOF"
+            fi
           } >> "$GITHUB_OUTPUT"
 
       - name: Set up Docker Buildx
@@ -104,7 +104,7 @@ jobs:
         with:
           context: ${{ matrix.service }}
           file: ${{ matrix.service }}/Dockerfile.prod
-          build-args: ${{ matrix.build-args }}
+          build-args: ${{ steps.ref.outputs.build-args }}
           # Resolve the base images again on every build, so a rebuild picks up their security patches
           pull: true
           push: ${{ inputs.push }}

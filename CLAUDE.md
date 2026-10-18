@@ -184,6 +184,7 @@ External services: MySQL 8.4 (container), the public quotes API (called from the
 - Compose Watch syncs sources (never `node_modules`) and rebuilds the image when `package.json`/`package-lock.json` changes.
 - `script-setup.ps1` overwrites `.env` with `.env.example` (`Copy-Item`) and seeds the database (drops all tables). Do not run it on a configured checkout.
 - `apache.conf` is a reference copy, not deployed; its proxy port (4560) must match the prod `FRONT_HOST_PORT`.
-- `deploy.flow.yml` rewrites the server `.env` on every deploy from its `Generate .env` step. A new variable in `docker-compose.yml` must be added there and to the GitHub settings, otherwise Compose interpolates an empty string in prod.
+- `deploy.flow.yml` rewrites the server `.env` on every deploy from its `Generate .env` step. A new variable in `docker-compose.yml` must be added there and as a GitHub secret, otherwise Compose interpolates an empty string in prod.
+- The workflows read every setting from `secrets`, none from `vars`. The `secrets` context is unavailable in `strategy`, in the `with:` of a reusable workflow call and in `environment.url`: pass values through `secrets:` and step `env`/`with`. A job output that contains a secret value is dropped by the runner.
 - `tests-*.flow.yml` are path-filtered and skip PRs into `main` (`deploy.flow.yml` runs every suite there). Marking one of their checks as required would block PRs that do not touch that side.
 - The deploy prunes this project's unused images on the server by the `org.opencontainers.image.source` label set in `docker.inc.yml`: change both together.

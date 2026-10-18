@@ -81,24 +81,22 @@ GitHub Actions workflows live in `.github/workflows/`. Reusable workflows (`*.in
 
 On `main`, the images are pushed to `docker.io/lalbaanthony/memo-minder-back` and `docker.io/lalbaanthony/memo-minder-front`, tagged `main` and `sha-<commit>`. They are built for `linux/amd64`. The Docker Hub repositories must be public, otherwise run `docker login` as the deploy user on the server. The deploy job connects over SSH, uploads `docker-compose.yml` and a `.env` generated from the GitHub settings to `DEPLOY_PATH`, then runs `docker compose pull` and `docker compose up -d --wait`. That `.env` pins the deployed `sha-<commit>` images (`BACK_IMAGE`, `FRONT_IMAGE`), so manual Compose commands on the server keep running them. It is rewritten on every deploy: change values in GitHub, not on the server. The monthly run rebuilds and redeploys `main` so the images pick up base image security patches.
 
-GitHub settings:
+GitHub settings, all of them Actions secrets :
 
-| Scope                    | Name                                                                        | Kind     | Notes                                                                                                                  |
-| ------------------------ | --------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Repository               | `DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN`                                     | Secret   | Docker Hub access token with read & write access                                                                       |
-| Repository               | `VITE_FRONT_URL`                                                            | Variable | `https://memo-minder.dev-it.app`. Repository level: the image build runs outside the `production` environment          |
-| Repository               | `VITE_BACK_API_URL`                                                         | Variable | Optional, defaults to `/api`                                                                                           |
-| `production` environment | `SSH_HOST`, `SSH_USER`, `SSH_PRIVATE_KEY`                                   | Secret   | Deploy user and its private key (no passphrase)                                                                        |
-| `production` environment | `SSH_PORT`                                                                  | Secret   | Optional, defaults to `22`                                                                                             |
-| `production` environment | `SSH_KNOWN_HOSTS`                                                           | Secret   | Output of `ssh-keyscan -p <port> <host>`, checked against the server fingerprint. Any other host key aborts the deploy |
-| `production` environment | `BACK_TOKEN_SECRET_KEY`, `BACK_DATABASE_PASSWORD`, `DATABASE_ROOT_PASSWORD` | Secret   |                                                                                                                        |
-| `production` environment | `BACK_EMAIL_PASSWORD`                                                       | Secret   | Optional, no mailer is wired                                                                                           |
-| `production` environment | `DEPLOY_PATH`                                                               | Variable | Absolute path of the stack folder on the server                                                                        |
-| `production` environment | `BACK_DATABASE_NAME`, `BACK_DATABASE_USERNAME`                              | Variable |                                                                                                                        |
-| `production` environment | `FRONT_HOST_PORT`, `BACK_APP_NAME`, `BACK_TOKEN_EXPIRES_IN`                 | Variable | Optional, default to `4560`, `Memo Minder` and `14d`                                                                   |
-| `production` environment | `BACK_EMAIL_FROM`, `BACK_EMAIL_USER`                                        | Variable | Optional, no mailer is wired                                                                                           |
+| Scope                    | Name                                                                     | Notes                                                                                                         |
+| ------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| Repository               | `DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN`                                  | Docker Hub access token with read & write access                                                              |
+| Repository               | `VITE_FRONT_URL`                                                         | `https://memo-minder.dev-it.app`. Repository level: the image build runs outside the `production` environment |
+| Repository               | `VITE_BACK_API_URL`                                                      | Optional, defaults to `/api`                                                                                  |
+| `production` environment | `SSH_HOST`, `SSH_USER`, `SSH_PRIVATE_KEY`                                | Deploy user and its private key (no passphrase)                                                               |
+| `production` environment | `SSH_PORT`                                                               | Optional, defaults to `22`                                                                                    |
+| `production` environment | `DEPLOY_PATH`                                                            | Absolute path of the stack folder on the server                                                               |
+| `production` environment | `BACK_TOKEN_SECRET_KEY`, `DATABASE_ROOT_PASSWORD`                        |                                                                                                               |
+| `production` environment | `BACK_DATABASE_NAME`, `BACK_DATABASE_USERNAME`, `BACK_DATABASE_PASSWORD` |                                                                                                               |
+| `production` environment | `FRONT_HOST_PORT`, `BACK_APP_NAME`, `BACK_TOKEN_EXPIRES_IN`              | Optional, default to `4560`, `Memo Minder` and `14d`                                                          |
+| `production` environment | `BACK_EMAIL_FROM`, `BACK_EMAIL_USER`, `BACK_EMAIL_PASSWORD`              | Optional, no mailer is wired                                                                                  |
 
-Values must not contain single quotes or line breaks (the `.env` is written single-quoted). Restrict the `production` environment to the `main` branch (Settings > Environments > Deployment branches). The database values must match the existing volume: MySQL only applies them when it initializes an empty data directory.
+Values must not contain single quotes or line breaks (the `.env` is written single-quoted). GitHub masks every occurrence of a secret value in the logs, short values included: a set `FRONT_HOST_PORT` turns each `4560` into `***`. Restrict the `production` environment to the `main` branch (Settings > Environments > Deployment branches). The database values must match the existing volume: MySQL only applies them when it initializes an empty data directory.
 
 ### Server setup
 

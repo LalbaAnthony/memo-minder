@@ -46,12 +46,12 @@ jobs:
     with:
       # Same condition as the deploy job: only main publishes. PRs and manual runs on other branches only check that the images build.
       push: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
-      # Repository variables: this job runs outside the production environment
-      vite-front-url: ${{ vars.VITE_FRONT_URL }}
-      vite-back-api-url: ${{ vars.VITE_BACK_API_URL || '/api' }}
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+      # Repository secrets: this job runs outside the production environment
+      VITE_FRONT_URL: ${{ secrets.VITE_FRONT_URL }}
+      VITE_BACK_API_URL: ${{ secrets.VITE_BACK_API_URL }}
 
   deploy:
     name: 🚀 Deploy to Production
@@ -59,11 +59,13 @@ jobs:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    environment:
-      name: production
-      url: ${{ vars.VITE_FRONT_URL }}
+    # No environment url: the secrets context is not available there, and the runner drops a url that contains a secret value
+    environment: production
     env:
-      DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
+      DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+      SSH_HOST: ${{ secrets.SSH_HOST }}
+      SSH_PORT: ${{ secrets.SSH_PORT || '22' }}
+      SSH_USER: ${{ secrets.SSH_USER }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -75,18 +77,18 @@ jobs:
           BACK_IMAGE: ${{ needs.use-docker.outputs.back-image }}
           FRONT_IMAGE: ${{ needs.use-docker.outputs.front-image }}
           # Must match the proxy port of apache.conf
-          FRONT_HOST_PORT: ${{ vars.FRONT_HOST_PORT || '4560' }}
-          VITE_FRONT_URL: ${{ vars.VITE_FRONT_URL }}
-          VITE_BACK_API_URL: ${{ vars.VITE_BACK_API_URL || '/api' }}
-          BACK_APP_NAME: ${{ vars.BACK_APP_NAME || 'Memo Minder' }}
+          FRONT_HOST_PORT: ${{ secrets.FRONT_HOST_PORT || '4560' }}
+          VITE_FRONT_URL: ${{ secrets.VITE_FRONT_URL }}
+          VITE_BACK_API_URL: ${{ secrets.VITE_BACK_API_URL || '/api' }}
+          BACK_APP_NAME: ${{ secrets.BACK_APP_NAME || 'Memo Minder' }}
           BACK_TOKEN_SECRET_KEY: ${{ secrets.BACK_TOKEN_SECRET_KEY }}
-          BACK_TOKEN_EXPIRES_IN: ${{ vars.BACK_TOKEN_EXPIRES_IN || '14d' }}
-          BACK_EMAIL_FROM: ${{ vars.BACK_EMAIL_FROM }}
-          BACK_EMAIL_USER: ${{ vars.BACK_EMAIL_USER }}
+          BACK_TOKEN_EXPIRES_IN: ${{ secrets.BACK_TOKEN_EXPIRES_IN || '14d' }}
+          BACK_EMAIL_FROM: ${{ secrets.BACK_EMAIL_FROM }}
+          BACK_EMAIL_USER: ${{ secrets.BACK_EMAIL_USER }}
           BACK_EMAIL_PASSWORD: ${{ secrets.BACK_EMAIL_PASSWORD }}
           # MySQL applies these only when it initializes an empty volume: they must match the existing database
-          BACK_DATABASE_NAME: ${{ vars.BACK_DATABASE_NAME }}
-          BACK_DATABASE_USERNAME: ${{ vars.BACK_DATABASE_USERNAME }}
+          BACK_DATABASE_NAME: ${{ secrets.BACK_DATABASE_NAME }}
+          BACK_DATABASE_USERNAME: ${{ secrets.BACK_DATABASE_USERNAME }}
           BACK_DATABASE_PASSWORD: ${{ secrets.BACK_DATABASE_PASSWORD }}
           DATABASE_ROOT_PASSWORD: ${{ secrets.DATABASE_ROOT_PASSWORD }}
         run: |
@@ -101,7 +103,7 @@ jobs:
           errors=0
           for key in "${required[@]}"; do
             if [[ -z "${!key}" ]]; then
-              echo "::error::${key} is empty: set it in the repository or production environment settings"
+              echo "::error::${key} is empty: set it as a repository or production environment secret"
               errors=1
             fi
           done
@@ -130,46 +132,16 @@ jobs:
             done
           } > .env
 
-      - name: Configure SSH
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_PORT: ${{ secrets.SSH_PORT || '22' }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
-        run: |
-          for key in SSH_HOST SSH_USER SSH_PRIVATE_KEY SSH_KNOWN_HOSTS; do
-            if [[ -z "${!key}" ]]; then
-              echo "::error::${key} is empty: set it in the production environment secrets"
-              exit 1
-            fi
-          done
-
-          install -d -m 700 ~/.ssh
-          umask 077
-          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
-          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/deploy_known_hosts
-          # Host key pinned by SSH_KNOWN_HOSTS: every run starts on a fresh runner, so accept-new would trust any key
-          cat > ~/.ssh/config <<EOF
-          Host deploy
-            HostName ${SSH_HOST}
-            Port ${SSH_PORT}
-            User ${SSH_USER}
-            IdentityFile ~/.ssh/deploy_key
-            IdentitiesOnly yes
-            UserKnownHostsFile ~/.ssh/deploy_known_hosts
-            StrictHostKeyChecking yes
-            BatchMode yes
-            ConnectTimeout 15
-            ServerAliveInterval 30
-          EOF
+      - name: Setup SSH key
+        uses: webfactory/ssh-agent@v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Upload Compose files
         run: |
-          # .env is restricted before it receives the secrets. DEPLOY_PATH is expanded on the runner on purpose.
-          # shellcheck disable=SC2029
-          ssh deploy "mkdir -p '${DEPLOY_PATH}' && touch '${DEPLOY_PATH}/.env' && chmod 600 '${DEPLOY_PATH}/.env'"
-          scp docker-compose.yml .env "deploy:${DEPLOY_PATH}/"
+          ssh -o StrictHostKeyChecking=accept-new -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
+            "mkdir -p '${DEPLOY_PATH}' && touch '${DEPLOY_PATH}/.env' && chmod 600 '${DEPLOY_PATH}/.env'"
+          scp -P "$SSH_PORT" docker-compose.yml .env "$SSH_USER@$SSH_HOST:${DEPLOY_PATH}/"
 
       - name: Pull images & restart the stack
         env:
@@ -179,7 +151,7 @@ jobs:
           # --wait fails the job when a container does not become healthy. There is no automatic rollback.
           # Unquoted heredoc: DEPLOY_PATH and REPO_URL are expanded on the runner on purpose.
           # shellcheck disable=SC2087
-          ssh deploy bash -s <<EOF
+          ssh -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" bash -s <<EOF
           set -euo pipefail
           cd '${DEPLOY_PATH}'
           docker compose --profile prod pull
