@@ -3,7 +3,7 @@ const { Music, Event, Person, Season } = require('../database');
 const baseController = require('../composables/baseController');
 
 const searchFields = ['title', 'artist', 'streamingLink'];
-const requiredFields = ['userId', 'title'];
+const requiredFields = ['title'];
 const associations = [
     { model: Event, as: 'events' },
     { model: Season, as: 'seasons' },

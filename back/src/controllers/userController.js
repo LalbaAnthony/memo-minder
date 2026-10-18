@@ -148,8 +148,13 @@ exports.resetPassword = async (req, res) => {
     }
 };
 
+// A user can only read, update or delete their own account: the :id param must match the authenticated user
+const isOwnAccount = (req) => req.params.id === String(req.user.userId);
+
 exports.userInfos = async (req, res) => {
-    const userId = req.params.id
+    if (!isOwnAccount(req)) return res.status(403).json(frmtr('error', null, 'Unauthorized'));
+
+    const { userId } = req.user;
     try {
         // Check if the user exists
         const user = await User.findByPk(userId);
@@ -167,7 +172,9 @@ exports.userInfos = async (req, res) => {
 };
 
 exports.userUpdate = async (req, res) => {
-    const userId = req.params.id
+    if (!isOwnAccount(req)) return res.status(403).json(frmtr('error', null, 'Unauthorized'));
+
+    const { userId } = req.user;
     const { username, birthdate, language, homePageEnableSpents, homePageEnableStats, homePageEnableQuote, homePageEnableLastsEvents, homePageEnableLastsSeasons, homePageEnableUpcomings, streamingPlatform } = req.body;
     try {
         // Check if the user exists
@@ -190,7 +197,9 @@ exports.userUpdate = async (req, res) => {
 };
 
 exports.userDelete = async (req, res) => {
-    const userId = req.params.id
+    if (!isOwnAccount(req)) return res.status(403).json(frmtr('error', null, 'Unauthorized'));
+
+    const { userId } = req.user;
     try {
         // Check if the user exists
         const user = await User.findByPk(userId);

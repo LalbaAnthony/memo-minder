@@ -5,7 +5,7 @@ const frmtr = require('../helpers/frmtr');
 const baseController = require('../composables/baseController');
 
 const searchFields = ['name', 'description'];
-const requiredFields = ['userId', 'name'];
+const requiredFields = ['name'];
 const associations = [
     { model: Music, as: 'musics' },
     { model: Event, as: 'events' },
@@ -23,9 +23,8 @@ exports.getAllPeople = baseController.getAll(Person, {
 });
 
 exports.getUpcommingBirthdaysPeople = async (req, res) => {
-    let { userId, page, perPage, days } = req.query;
-    if (!userId)
-        return res.status(400).json(frmtr('error', null, 'Missing fields: userId'));
+    const { userId } = req.user;
+    let { page, perPage, days } = req.query;
 
     const defaultDays = 30;
     days = parseInt(days) || defaultDays;

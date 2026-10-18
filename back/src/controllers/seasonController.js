@@ -4,7 +4,7 @@ const frmtr = require('../helpers/frmtr');
 const baseController = require('../composables/baseController');
 
 const searchFields = ['title', 'description'];
-const requiredFields = ['userId', 'title', 'color', 'dateStart'];
+const requiredFields = ['title', 'color', 'dateStart'];
 const associations = [
     { model: Music, as: 'musics' },
     { model: Person, as: 'people' },
@@ -23,9 +23,7 @@ exports.getAllSeasons = baseController.getAll(Season, {
 });
 
 exports.getCurrentSeason = async (req, res) => {
-    let { userId } = req.query;
-    if (!userId)
-        return res.status(400).json(frmtr('error', null, 'Missing fields: userId'));
+    const { userId } = req.user;
 
     let where = { userId };
 
