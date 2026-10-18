@@ -84,7 +84,7 @@ jobs:
           BACK_IMAGE: ${{ env.IMAGE_PREFIX }}-back:sha-${{ github.sha }}
           FRONT_IMAGE: ${{ env.IMAGE_PREFIX }}-front:sha-${{ github.sha }}
           # Must match the proxy port of apache.conf
-          FRONT_HOST_PORT: ${{ secrets.FRONT_HOST_PORT || '4560' }}
+          FRONT_HOST_PORT: ${{ secrets.FRONT_HOST_PORT || '4570' }}
           VITE_FRONT_URL: ${{ secrets.VITE_FRONT_URL }}
           VITE_BACK_API_URL: ${{ secrets.VITE_BACK_API_URL || '/api' }}
           BACK_APP_NAME: ${{ secrets.BACK_APP_NAME || 'Memo Minder' }}

@@ -151,7 +151,7 @@ A single `.env` lives at the repo root (template `.env.example`, git-ignored). C
 | Variable                                         | Consumer         | Notes                                                                                                                                                         |
 | ------------------------------------------------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `COMPOSE_PROFILES`                               | Compose          | `dev` or `prod`                                                                                                                                               |
-| `FRONT_HOST_PORT`                                | Compose          | Loopback port of `front-dev`/`front-prod`; prod value must match `apache.conf` (4560)                                                                         |
+| `FRONT_HOST_PORT`                                | Compose          | Loopback port of `front-dev`/`front-prod`; prod value must match `apache.conf` (4570)                                                                         |
 | `DATABASE_HOST_PORT`                             | Compose          | Dev only, loopback port of `db-dev`; keep the key in prod to avoid warnings                                                                                   |
 | `BACK_DATABASE_ROOT_PASSWORD`                         | `db-*`           | MySQL root password                                                                                                                                           |
 | `BACK_DATABASE_NAME` / `_USERNAME` / `_PASSWORD` | `back-*`, `db-*` | Also creates the MySQL database and user on first start                                                                                                       |
@@ -183,7 +183,7 @@ External services: MySQL 8.4 (container), the public quotes API (called from the
 - `back-prod`'s healthcheck is a TCP probe on purpose: an HTTP probe would add a line to `logs/logs.log` on every check.
 - Compose Watch syncs sources (never `node_modules`) and rebuilds the image when `package.json`/`package-lock.json` changes.
 - `script-setup.ps1` overwrites `.env` with `.env.example` (`Copy-Item`) and seeds the database (drops all tables). Do not run it on a configured checkout.
-- `apache.conf` is a reference copy, not deployed; its proxy port (4560) must match the prod `FRONT_HOST_PORT`.
+- `apache.conf` is a reference copy, not deployed; its proxy port (4570) must match the prod `FRONT_HOST_PORT`.
 - `deploy.flow.yml` rewrites the server `.env` on every deploy from its `Generate .env` step. A new variable in `docker-compose.yml` must be added there and as a GitHub secret, otherwise Compose interpolates an empty string in prod.
 - The workflows read every setting from `secrets`, none from `vars`. The `secrets` context is unavailable in `strategy`, in the `with:` of a reusable workflow call and in `environment.url`: pass values through `secrets:` and step `env`/`with`. A job output that contains a secret value is dropped by the runner.
 - The image references contain the Docker Hub namespace, which equals the `DOCKERHUB_USERNAME` secret, so `docker.inc.yml` cannot return them as outputs. `deploy.flow.yml` owns `IMAGE_PREFIX` (passed to `docker.inc.yml` as `image-prefix`) and rebuilds `<IMAGE_PREFIX>-<service>:sha-<commit>` itself: change the tag scheme in both files together.

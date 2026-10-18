@@ -93,10 +93,10 @@ GitHub settings, all of them Actions secrets :
 | `production` environment | `DEPLOY_PATH`                                                            | Absolute path of the stack folder on the server                                                               |
 | `production` environment | `BACK_TOKEN_SECRET_KEY`, `BACK_DATABASE_ROOT_PASSWORD`                        |                                                                                                               |
 | `production` environment | `BACK_DATABASE_NAME`, `BACK_DATABASE_USERNAME`, `BACK_DATABASE_PASSWORD` |                                                                                                               |
-| `production` environment | `FRONT_HOST_PORT`, `BACK_APP_NAME`, `BACK_TOKEN_EXPIRES_IN`              | Optional, default to `4560`, `Memo Minder` and `14d`                                                          |
+| `production` environment | `FRONT_HOST_PORT`, `BACK_APP_NAME`, `BACK_TOKEN_EXPIRES_IN`              | Optional, default to `4570`, `Memo Minder` and `14d`                                                          |
 | `production` environment | `BACK_EMAIL_FROM`, `BACK_EMAIL_USER`, `BACK_EMAIL_PASSWORD`              | Optional, no mailer is wired                                                                                  |
 
-Values must not contain single quotes or line breaks (the `.env` is written single-quoted). GitHub masks every occurrence of a secret value in the logs, short values included: a set `FRONT_HOST_PORT` turns each `4560` into `***`. Restrict the `production` environment to the `main` branch (Settings > Environments > Deployment branches). The database values must match the existing volume: MySQL only applies them when it initializes an empty data directory.
+Values must not contain single quotes or line breaks (the `.env` is written single-quoted). GitHub masks every occurrence of a secret value in the logs, short values included: a set `FRONT_HOST_PORT` turns each `4570` into `***`. Restrict the `production` environment to the `main` branch (Settings > Environments > Deployment branches). The database values must match the existing volume: MySQL only applies them when it initializes an empty data directory.
 
 ### Server setup
 
