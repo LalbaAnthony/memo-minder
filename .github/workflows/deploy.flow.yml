@@ -28,6 +28,10 @@ defaults:
   run:
     shell: bash
 
+env:
+  # Each service is published as <IMAGE_PREFIX>-<service>. Anchored: the `with:` of a reusable workflow call cannot read env.
+  IMAGE_PREFIX: &image-prefix docker.io/lalbaanthony/memo-minder
+
 jobs:
   # Every suite runs unconditionally here. The back/front `paths` split lives in tests-*.flow.yml only:
   # a deploy must never ship an image whose side was untested.
@@ -46,6 +50,7 @@ jobs:
     with:
       # Same condition as the deploy job: only main publishes. PRs and manual runs on other branches only check that the images build.
       push: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
+      image-prefix: *image-prefix
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -74,8 +79,10 @@ jobs:
 
       - name: Generate .env
         env:
-          BACK_IMAGE: ${{ needs.use-docker.outputs.back-image }}
-          FRONT_IMAGE: ${{ needs.use-docker.outputs.front-image }}
+          # The sha-<commit> tag pushed by docker.inc.yml in this run. Rebuilt here, not read from a job output: the
+          # reference contains the DOCKERHUB_USERNAME secret value, and the runner drops such outputs.
+          BACK_IMAGE: ${{ env.IMAGE_PREFIX }}-back:sha-${{ github.sha }}
+          FRONT_IMAGE: ${{ env.IMAGE_PREFIX }}-front:sha-${{ github.sha }}
           # Must match the proxy port of apache.conf
           FRONT_HOST_PORT: ${{ secrets.FRONT_HOST_PORT || '4560' }}
           VITE_FRONT_URL: ${{ secrets.VITE_FRONT_URL }}
@@ -97,7 +104,7 @@ jobs:
                 BACK_TOKEN_SECRET_KEY BACK_TOKEN_EXPIRES_IN BACK_EMAIL_FROM BACK_EMAIL_USER BACK_EMAIL_PASSWORD
                 BACK_DATABASE_NAME BACK_DATABASE_USERNAME BACK_DATABASE_PASSWORD BACK_DATABASE_ROOT_PASSWORD)
           # BACK_EMAIL_* stay optional: no mailer is wired in the backend
-          required=(DEPLOY_PATH BACK_IMAGE FRONT_IMAGE VITE_FRONT_URL BACK_TOKEN_SECRET_KEY
+          required=(DEPLOY_PATH VITE_FRONT_URL BACK_TOKEN_SECRET_KEY
                     BACK_DATABASE_NAME BACK_DATABASE_USERNAME BACK_DATABASE_PASSWORD BACK_DATABASE_ROOT_PASSWORD)
 
           errors=0

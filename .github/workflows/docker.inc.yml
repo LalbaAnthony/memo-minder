@@ -7,6 +7,10 @@ on:
         description: Push the images to Docker Hub (needs the DOCKERHUB_USERNAME and DOCKERHUB_TOKEN secrets)
         type: boolean
         default: false
+      image-prefix:
+        description: Each service is published as <image-prefix>-<service> (e.g. docker.io/<namespace>/<app>)
+        type: string
+        required: true
     secrets:
       DOCKERHUB_USERNAME:
         required: false
@@ -18,20 +22,14 @@ on:
       VITE_BACK_API_URL:
         description: API base path, inlined into the frontend bundle. Defaults to /api.
         required: false
-    outputs:
-      back-image:
-        description: Immutable backend image reference (<repository>:sha-<commit>)
-        value: ${{ jobs.build.outputs.back-image }}
-      front-image:
-        description: Immutable frontend image reference (<repository>:sha-<commit>)
-        value: ${{ jobs.build.outputs.front-image }}
+    # No image reference outputs: the reference contains the Docker Hub namespace, equal to the DOCKERHUB_USERNAME
+    # secret value, and the runner drops job outputs that contain a secret value. The caller rebuilds it instead.
 
 permissions:
   contents: read
 
 env:
-  # Each service is published as <IMAGE_PREFIX>-<service>
-  IMAGE_PREFIX: docker.io/lalbaanthony/memo-minder
+  IMAGE_PREFIX: ${{ inputs.image-prefix }}
 
 jobs:
   build:
@@ -41,10 +39,6 @@ jobs:
     strategy:
       matrix:
         service: [back, front]
-    outputs:
-      # Both matrix legs compute the same values, so the leg that finishes last cannot change them
-      back-image: ${{ steps.ref.outputs.back-image }}
-      front-image: ${{ steps.ref.outputs.front-image }}
     steps:
       - uses: actions/checkout@v7
 
@@ -64,8 +58,6 @@ jobs:
           {
             echo "tag=${tag}"
             echo "image=${IMAGE_PREFIX}-${SERVICE}"
-            echo "back-image=${IMAGE_PREFIX}-back:${tag}"
-            echo "front-image=${IMAGE_PREFIX}-front:${tag}"
             # VITE_* values are inlined into the bundle at build time. Set here because strategy.matrix cannot read secrets.
             # A step output, never a job output: the runner drops job outputs that contain a secret value.
             if [[ "$SERVICE" == "front" ]]; then
@@ -91,7 +83,8 @@ jobs:
         uses: docker/metadata-action@v6
         with:
           images: ${{ steps.ref.outputs.image }}
-          # sha-<commit> is the immutable reference deployed by deploy.flow.yml; the branch tag follows the branch head
+          # sha-<commit> is the immutable reference deployed by deploy.flow.yml, which rebuilds it on its side: change both together.
+          # The branch tag follows the branch head.
           tags: |
             type=raw,value=${{ steps.ref.outputs.tag }}
             type=ref,event=branch
