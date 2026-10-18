@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa';
 import dotenv from 'dotenv';
 import path from 'path';
-import { VITE_APP_NAME, VITE_APP_SHORT_NAME, VITE_APP_DESCRIPTION, VITE_APP_THEME_COLOR, VITE_APP_BG_COLOR } from './config.js';
+import { VITE_APP_NAME, VITE_APP_SHORT_NAME, VITE_APP_DESCRIPTION, VITE_APP_THEME_COLOR, VITE_APP_BG_COLOR } from './src/config.js';
 
 // Resolve the path to the .env file
 const __filename = fileURLToPath(import.meta.url);
