@@ -128,7 +128,7 @@ mysqldump --single-transaction -u root -p memo-minder > memo-minder.sql
 
 # Stop the app, import the dump over the empty tables created on startup, then restart it
 docker compose --profile prod stop front-prod back-prod
-docker compose --profile prod exec -T db-prod sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE"' < memo-minder.sql
+gunzip -c memo-minder-2026-08-10.sql.gz | docker compose --profile prod exec -T db-prod sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE"'
 docker compose --profile prod up -d
 ```
 
