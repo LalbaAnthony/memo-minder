@@ -24,10 +24,10 @@ Docker Engine (or Docker Desktop) with Compose v2.22+ for Compose Watch. Node.js
 
 Create a `.env` file at the project root, using `.env.example` as a template. It is the single configuration source: Docker Compose interpolates it and passes each container only the variables it needs. `COMPOSE_PROFILES` selects the stack (`dev` or `prod`), so `--profile` can be omitted once it is set.
 
-| Profile | Services | Purpose |
-| --- | --- | --- |
-| `dev` | `db-dev`, `back-dev`, `front-dev` | Hot reload through Compose Watch, MySQL |
-| `prod` | `db-prod`, `back-prod`, `front-prod` | Optimized images, MySQL, behind the host reverse proxy |
+| Profile | Services                             | Purpose                                                |
+| ------- | ------------------------------------ | ------------------------------------------------------ |
+| `dev`   | `db-dev`, `back-dev`, `front-dev`    | Hot reload through Compose Watch, MySQL                |
+| `prod`  | `db-prod`, `back-prod`, `front-prod` | Optimized images, MySQL, behind the host reverse proxy |
 
 ### Development
 
@@ -69,20 +69,52 @@ Internet -> Apache (host: TLS + ACME) -> 127.0.0.1:FRONT_HOST_PORT -> front-prod
 
 Only `front-prod` is published, and only on the loopback interface: Docker-published ports bypass host firewalls such as ufw. `db-prod` sits on an internal network that only `back-prod` can reach. `back-prod` and `front-prod` run as non-root users with a read-only root filesystem and no Linux capabilities.
 
+### CI/CD
+
+GitHub Actions workflows live in `.github/workflows/`. Reusable workflows (`*.inc.yml`) hold the jobs, entry workflows (`*.flow.yml`) define the triggers and include them.
+
+| Workflow                          | Runs on                                                                     | Jobs                                                                                               |
+| --------------------------------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `tests-back.flow.yml`             | Push on `develop` and PRs into any branch but `main`, when `back/` changes  | Jest (`tests-back.inc.yml`)                                                                        |
+| `tests-front.flow.yml`            | Push on `develop` and PRs into any branch but `main`, when `front/` changes | ESLint check and Vite build (`tests-front.inc.yml`)                                                |
+| `deploy.flow.yml` (`CI & Deploy`) | Push and PRs on `main` when app files change, the 2nd of each month, manual | Both test suites, prod image build (`docker.inc.yml`). On `main` only: push to Docker Hub, deploy |
+
+On `main`, the images are pushed to `docker.io/lalbaanthony/memo-minder-back` and `docker.io/lalbaanthony/memo-minder-front`, tagged `main` and `sha-<commit>`. They are built for `linux/amd64`. The Docker Hub repositories must be public, otherwise run `docker login` as the deploy user on the server. The deploy job connects over SSH, uploads `docker-compose.yml` and a `.env` generated from the GitHub settings to `DEPLOY_PATH`, then runs `docker compose pull` and `docker compose up -d --wait`. That `.env` pins the deployed `sha-<commit>` images (`BACK_IMAGE`, `FRONT_IMAGE`), so manual Compose commands on the server keep running them. It is rewritten on every deploy: change values in GitHub, not on the server. The monthly run rebuilds and redeploys `main` so the images pick up base image security patches.
+
+GitHub settings:
+
+| Scope                    | Name                                                                        | Kind     | Notes                                                                                                                  |
+| ------------------------ | --------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Repository               | `DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN`                                     | Secret   | Docker Hub access token with read & write access                                                                       |
+| Repository               | `VITE_FRONT_URL`                                                            | Variable | `https://memo-minder.dev-it.app`. Repository level: the image build runs outside the `production` environment          |
+| Repository               | `VITE_BACK_API_URL`                                                         | Variable | Optional, defaults to `/api`                                                                                           |
+| `production` environment | `SSH_HOST`, `SSH_USER`, `SSH_PRIVATE_KEY`                                   | Secret   | Deploy user and its private key (no passphrase)                                                                        |
+| `production` environment | `SSH_PORT`                                                                  | Secret   | Optional, defaults to `22`                                                                                             |
+| `production` environment | `SSH_KNOWN_HOSTS`                                                           | Secret   | Output of `ssh-keyscan -p <port> <host>`, checked against the server fingerprint. Any other host key aborts the deploy |
+| `production` environment | `BACK_TOKEN_SECRET_KEY`, `BACK_DATABASE_PASSWORD`, `DATABASE_ROOT_PASSWORD` | Secret   |                                                                                                                        |
+| `production` environment | `BACK_EMAIL_PASSWORD`                                                       | Secret   | Optional, no mailer is wired                                                                                           |
+| `production` environment | `DEPLOY_PATH`                                                               | Variable | Absolute path of the stack folder on the server                                                                        |
+| `production` environment | `BACK_DATABASE_NAME`, `BACK_DATABASE_USERNAME`                              | Variable |                                                                                                                        |
+| `production` environment | `FRONT_HOST_PORT`, `BACK_APP_NAME`, `BACK_TOKEN_EXPIRES_IN`                 | Variable | Optional, default to `4560`, `Memo Minder` and `14d`                                                                   |
+| `production` environment | `BACK_EMAIL_FROM`, `BACK_EMAIL_USER`                                        | Variable | Optional, no mailer is wired                                                                                           |
+
+Values must not contain single quotes or line breaks (the `.env` is written single-quoted). Restrict the `production` environment to the `main` branch (Settings > Environments > Deployment branches). The database values must match the existing volume: MySQL only applies them when it initializes an empty data directory.
+
 ### Server setup
 
-1. Install Docker Engine and the Compose plugin.
-2. Clone the repository and create `.env` from `.env.example` with `COMPOSE_PROFILES=prod`, `FRONT_HOST_PORT=4560`, `VITE_FRONT_URL=https://memo-minder.dev-it.app` and strong secrets (`openssl rand -hex 64`). Restrict it with `chmod 600 .env`.
-3. Install `apache.conf` as the virtual host (its proxy port must match `FRONT_HOST_PORT`), enable the required modules with `a2enmod proxy proxy_http headers ssl rewrite http2`, then reload Apache.
-4. Start the stack:
+1. Install Docker Engine and the Compose plugin. Create a deploy user in the `docker` group and add the public key matching `SSH_PRIVATE_KEY` to its `~/.ssh/authorized_keys`.
+2. Install `apache.conf` as the virtual host (its proxy port must match `FRONT_HOST_PORT`), enable the required modules with `a2enmod proxy proxy_http headers ssl rewrite http2`, then reload Apache.
+3. Fill in the GitHub settings above, then push to `main` or run `CI & Deploy` on `main` from the Actions tab. No clone is needed: the deploy creates `DEPLOY_PATH` and writes `docker-compose.yml` and `.env` (mode 600) there.
 
-```bash
-docker compose --profile prod up -d --build
-```
+`VITE_*` variables are inlined into the frontend bundle when the image is built: changing them requires a new `CI & Deploy` run.
 
-`VITE_*` variables are inlined into the frontend bundle at build time: any change to them requires rebuilding `front-prod`.
+Switching from a stack started from a clone: the Compose project is always named `memo-minder` (top-level `name`), so its containers and volumes are reused whatever `DEPLOY_PATH` is. Copy the values of its `.env` into the GitHub settings before the first CI deploy.
+
+Without CI, the stack still builds on the server from a clone: leave `BACK_IMAGE` and `FRONT_IMAGE` unset in `.env` and run `docker compose --profile prod up -d --build`.
 
 ### Database initialization
+
+The deploy never seeds the database. Commands below run from `DEPLOY_PATH`, after the first deploy has written `docker-compose.yml` and `.env` there.
 
 Fresh install: `seed.js` drops all tables, then inserts the reference moods (sample data is skipped in production). Never run it on a database holding real data.
 
@@ -96,21 +128,21 @@ Migration from the former host MySQL database:
 # On the host, before switching to Docker
 mysqldump --single-transaction -u root -p memo-minder > memo-minder.sql
 
-# Start the database container alone, import the dump, then start the full stack
-docker compose --profile prod up -d db-prod
+# Stop the app, import the dump over the empty tables created on startup, then restart it
+docker compose --profile prod stop front-prod back-prod
 docker compose --profile prod exec -T db-prod sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE"' < memo-minder.sql
-docker compose --profile prod up -d --build
+docker compose --profile prod up -d
 ```
 
 ### Deploy an update
 
-```bash
-git pull
-docker compose --profile prod up -d --build
-docker image prune -f
-```
+Merge into `main`: `CI & Deploy` tests, builds, pushes and deploys it.
+
+Rollback: re-run the `🚀 Deploy to Production` job of an earlier successful `CI & Deploy` run (GitHub allows re-runs for 30 days). It redeploys that run's `sha-<commit>` images with the current settings. Without CI, set `BACK_IMAGE` and `FRONT_IMAGE` in the server `.env` to an older `sha-<commit>` tag and run `docker compose --profile prod up -d`; the next deploy overwrites them.
 
 ### Operations
+
+From `DEPLOY_PATH` on the server:
 
 ```bash
 # Container logs

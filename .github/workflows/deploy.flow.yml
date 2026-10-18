@@ -1,0 +1,193 @@
+name: CI & Deploy
+
+on:
+  push:
+    branches: [main]
+    paths: &paths
+      - .github/workflows/deploy.flow.yml
+      - .github/workflows/*.inc.yml
+      - back/**
+      - front/**
+      - docker-compose.yml
+  pull_request:
+    branches: [main]
+    paths: *paths
+  schedule:
+    - cron: "0 4 2 * *"
+  workflow_dispatch:
+
+# A superseded PR run can be cancelled, a deploy in flight must never be.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  # Every suite runs unconditionally here. The back/front `paths` split lives in tests-*.flow.yml only:
+  # a deploy must never ship an image whose side was untested.
+  use-tests-back:
+    name: 🧪 Backend Tests
+    uses: ./.github/workflows/tests-back.inc.yml
+
+  use-tests-front:
+    name: 🧪 Frontend Tests
+    uses: ./.github/workflows/tests-front.inc.yml
+
+  use-docker:
+    name: 🐳 Docker Images
+    needs: [use-tests-back, use-tests-front]
+    uses: ./.github/workflows/docker.inc.yml
+    with:
+      # Same condition as the deploy job: only main publishes. PRs and manual runs on other branches only check that the images build.
+      push: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
+      # Repository variables: this job runs outside the production environment
+      vite-front-url: ${{ vars.VITE_FRONT_URL }}
+      vite-back-api-url: ${{ vars.VITE_BACK_API_URL || '/api' }}
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  deploy:
+    name: 🚀 Deploy to Production
+    needs: [use-docker]
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: production
+      url: ${{ vars.VITE_FRONT_URL }}
+    env:
+      DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: docker-compose.yml
+          sparse-checkout-cone-mode: false
+
+      - name: Generate .env
+        env:
+          BACK_IMAGE: ${{ needs.use-docker.outputs.back-image }}
+          FRONT_IMAGE: ${{ needs.use-docker.outputs.front-image }}
+          # Must match the proxy port of apache.conf
+          FRONT_HOST_PORT: ${{ vars.FRONT_HOST_PORT || '4560' }}
+          VITE_FRONT_URL: ${{ vars.VITE_FRONT_URL }}
+          VITE_BACK_API_URL: ${{ vars.VITE_BACK_API_URL || '/api' }}
+          BACK_APP_NAME: ${{ vars.BACK_APP_NAME || 'Memo Minder' }}
+          BACK_TOKEN_SECRET_KEY: ${{ secrets.BACK_TOKEN_SECRET_KEY }}
+          BACK_TOKEN_EXPIRES_IN: ${{ vars.BACK_TOKEN_EXPIRES_IN || '14d' }}
+          BACK_EMAIL_FROM: ${{ vars.BACK_EMAIL_FROM }}
+          BACK_EMAIL_USER: ${{ vars.BACK_EMAIL_USER }}
+          BACK_EMAIL_PASSWORD: ${{ secrets.BACK_EMAIL_PASSWORD }}
+          # MySQL applies these only when it initializes an empty volume: they must match the existing database
+          BACK_DATABASE_NAME: ${{ vars.BACK_DATABASE_NAME }}
+          BACK_DATABASE_USERNAME: ${{ vars.BACK_DATABASE_USERNAME }}
+          BACK_DATABASE_PASSWORD: ${{ secrets.BACK_DATABASE_PASSWORD }}
+          DATABASE_ROOT_PASSWORD: ${{ secrets.DATABASE_ROOT_PASSWORD }}
+        run: |
+          # Written to the server .env, in this order
+          keys=(BACK_IMAGE FRONT_IMAGE FRONT_HOST_PORT VITE_FRONT_URL VITE_BACK_API_URL BACK_APP_NAME
+                BACK_TOKEN_SECRET_KEY BACK_TOKEN_EXPIRES_IN BACK_EMAIL_FROM BACK_EMAIL_USER BACK_EMAIL_PASSWORD
+                BACK_DATABASE_NAME BACK_DATABASE_USERNAME BACK_DATABASE_PASSWORD DATABASE_ROOT_PASSWORD)
+          # BACK_EMAIL_* stay optional: no mailer is wired in the backend
+          required=(DEPLOY_PATH BACK_IMAGE FRONT_IMAGE VITE_FRONT_URL BACK_TOKEN_SECRET_KEY
+                    BACK_DATABASE_NAME BACK_DATABASE_USERNAME BACK_DATABASE_PASSWORD DATABASE_ROOT_PASSWORD)
+
+          errors=0
+          for key in "${required[@]}"; do
+            if [[ -z "${!key}" ]]; then
+              echo "::error::${key} is empty: set it in the repository or production environment settings"
+              errors=1
+            fi
+          done
+          for key in "${keys[@]}"; do
+            if [[ "${!key}" == *"'"* || "${!key}" == *$'\n'* ]]; then
+              echo "::error::${key} must not contain a single quote or a line break"
+              errors=1
+            fi
+          done
+          if [[ -n "$DEPLOY_PATH" && ! "$DEPLOY_PATH" =~ ^/[A-Za-z0-9._/-]+$ ]]; then
+            echo "::error::DEPLOY_PATH must be an absolute path made of letters, digits, '.', '_', '-' and '/'"
+            errors=1
+          fi
+          if (( errors )); then
+            exit 1
+          fi
+
+          # Single-quoted values are read literally by Compose: no ${} interpolation, no inline comment
+          umask 077
+          {
+            echo "COMPOSE_PROFILES='prod'"
+            # Only used by db-dev, declared so that Compose does not warn about an unset variable
+            echo "DATABASE_HOST_PORT='3306'"
+            for key in "${keys[@]}"; do
+              printf "%s='%s'\n" "$key" "${!key}"
+            done
+          } > .env
+
+      - name: Configure SSH
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT || '22' }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          for key in SSH_HOST SSH_USER SSH_PRIVATE_KEY SSH_KNOWN_HOSTS; do
+            if [[ -z "${!key}" ]]; then
+              echo "::error::${key} is empty: set it in the production environment secrets"
+              exit 1
+            fi
+          done
+
+          install -d -m 700 ~/.ssh
+          umask 077
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/deploy_known_hosts
+          # Host key pinned by SSH_KNOWN_HOSTS: every run starts on a fresh runner, so accept-new would trust any key
+          cat > ~/.ssh/config <<EOF
+          Host deploy
+            HostName ${SSH_HOST}
+            Port ${SSH_PORT}
+            User ${SSH_USER}
+            IdentityFile ~/.ssh/deploy_key
+            IdentitiesOnly yes
+            UserKnownHostsFile ~/.ssh/deploy_known_hosts
+            StrictHostKeyChecking yes
+            BatchMode yes
+            ConnectTimeout 15
+            ServerAliveInterval 30
+          EOF
+
+      - name: Upload Compose files
+        run: |
+          # .env is restricted before it receives the secrets. DEPLOY_PATH is expanded on the runner on purpose.
+          # shellcheck disable=SC2029
+          ssh deploy "mkdir -p '${DEPLOY_PATH}' && touch '${DEPLOY_PATH}/.env' && chmod 600 '${DEPLOY_PATH}/.env'"
+          scp docker-compose.yml .env "deploy:${DEPLOY_PATH}/"
+
+      - name: Pull images & restart the stack
+        env:
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+        run: |
+          # The server .env pins the sha-<commit> images: only the services whose image changed are recreated.
+          # --wait fails the job when a container does not become healthy. There is no automatic rollback.
+          # Unquoted heredoc: DEPLOY_PATH and REPO_URL are expanded on the runner on purpose.
+          # shellcheck disable=SC2087
+          ssh deploy bash -s <<EOF
+          set -euo pipefail
+          cd '${DEPLOY_PATH}'
+          docker compose --profile prod pull
+          if ! docker compose --profile prod up -d --no-build --remove-orphans --wait --wait-timeout 300; then
+            docker compose --profile prod ps
+            exit 1
+          fi
+          docker compose --profile prod ps
+          # Only this project's images (label set by docker.inc.yml): the host may run other stacks
+          docker image prune -af --filter 'label=org.opencontainers.image.source=${REPO_URL}'
+          EOF

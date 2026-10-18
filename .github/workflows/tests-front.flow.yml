@@ -1,0 +1,25 @@
+name: Frontend Tests
+
+on:
+  push:
+    branches: [develop]
+    paths: &paths
+      - .github/workflows/tests-front.flow.yml
+      - .github/workflows/tests-front.inc.yml
+      - front/**
+  pull_request:
+    branches-ignore: [main]
+    paths: *paths
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  use-tests-front:
+    name: 🧪 Frontend Tests
+    uses: ./.github/workflows/tests-front.inc.yml

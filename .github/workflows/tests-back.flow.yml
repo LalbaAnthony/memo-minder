@@ -1,0 +1,25 @@
+name: Backend Tests
+
+on:
+  push:
+    branches: [develop]
+    paths: &paths
+      - .github/workflows/tests-back.flow.yml
+      - .github/workflows/tests-back.inc.yml
+      - back/**
+  pull_request:
+    branches-ignore: [main]
+    paths: *paths
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  use-tests-back:
+    name: 🧪 Backend Tests
+    uses: ./.github/workflows/tests-back.inc.yml

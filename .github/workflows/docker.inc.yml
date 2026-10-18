@@ -1,0 +1,114 @@
+name: Docker Images
+
+on:
+  workflow_call:
+    inputs:
+      push:
+        description: Push the images to Docker Hub (needs the DOCKERHUB_USERNAME and DOCKERHUB_TOKEN secrets)
+        type: boolean
+        default: false
+      vite-front-url:
+        description: Public URL of the app, inlined into the frontend bundle (VITE_FRONT_URL). Required when push is true.
+        type: string
+        default: ""
+      vite-back-api-url:
+        description: API base path, inlined into the frontend bundle (VITE_BACK_API_URL)
+        type: string
+        default: /api
+    secrets:
+      DOCKERHUB_USERNAME:
+        required: false
+      DOCKERHUB_TOKEN:
+        required: false
+    outputs:
+      back-image:
+        description: Immutable backend image reference (<repository>:sha-<commit>)
+        value: ${{ jobs.build.outputs.back-image }}
+      front-image:
+        description: Immutable frontend image reference (<repository>:sha-<commit>)
+        value: ${{ jobs.build.outputs.front-image }}
+
+permissions:
+  contents: read
+
+env:
+  # Each service is published as <IMAGE_PREFIX>-<service>
+  IMAGE_PREFIX: docker.io/lalbaanthony/memo-minder
+
+jobs:
+  build:
+    name: 🐳 ${{ matrix.service }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      matrix:
+        include:
+          - service: back
+            build-args: ""
+          # VITE_* values are inlined into the bundle at build time
+          - service: front
+            build-args: |
+              VITE_FRONT_URL=${{ inputs.vite-front-url }}
+              VITE_BACK_API_URL=${{ inputs.vite-back-api-url }}
+    outputs:
+      # Both matrix legs compute the same values, so the leg that finishes last cannot change them
+      back-image: ${{ steps.ref.outputs.back-image }}
+      front-image: ${{ steps.ref.outputs.front-image }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Resolve image references
+        id: ref
+        env:
+          SERVICE: ${{ matrix.service }}
+          PUSH: ${{ inputs.push }}
+          VITE_FRONT_URL: ${{ inputs.vite-front-url }}
+        run: |
+          if [[ "$PUSH" == "true" && "$SERVICE" == "front" && -z "$VITE_FRONT_URL" ]]; then
+            echo "::error::VITE_FRONT_URL is empty: set it as a repository variable before publishing images"
+            exit 1
+          fi
+          tag="sha-${GITHUB_SHA}"
+          {
+            echo "tag=${tag}"
+            echo "image=${IMAGE_PREFIX}-${SERVICE}"
+            echo "back-image=${IMAGE_PREFIX}-back:${tag}"
+            echo "front-image=${IMAGE_PREFIX}-front:${tag}"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Log in to Docker Hub
+        if: inputs.push
+        uses: docker/login-action@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ${{ steps.ref.outputs.image }}
+          # sha-<commit> is the immutable reference deployed by deploy.flow.yml; the branch tag follows the branch head
+          tags: |
+            type=raw,value=${{ steps.ref.outputs.tag }}
+            type=ref,event=branch
+          # The deploy job prunes this project's old images on the server by this label
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+
+      - name: Build${{ inputs.push && ' & push' || '' }}
+        uses: docker/build-push-action@v7
+        with:
+          context: ${{ matrix.service }}
+          file: ${{ matrix.service }}/Dockerfile.prod
+          build-args: ${{ matrix.build-args }}
+          # Resolve the base images again on every build, so a rebuild picks up their security patches
+          pull: true
+          push: ${{ inputs.push }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha,scope=${{ matrix.service }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.service }}

@@ -1,0 +1,30 @@
+name: Backend Tests
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  jest:
+    name: 🧪 Jest
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: back
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: back/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test -- --ci

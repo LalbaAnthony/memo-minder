@@ -37,6 +37,7 @@ front/
   src/pages/  src/components/  src/layouts/  src/icons/  src/assets/
   vite.config.js                  Vite + PWA config, dev /api proxy
   nginx.conf                      Prod server config (SPA, /api proxy, cache headers, /healthz)
+.github/workflows/                CI/CD: *.flow.yml entry workflows (triggers) include *.inc.yml reusable workflows (jobs)
 docker-compose.yml                dev and prod profiles
 apache.conf                       Reference host vhost (not deployed automatically)
 script-setup.ps1                  One-shot local bootstrap (see Gotchas)
@@ -83,7 +84,14 @@ Build / prod:
 
 ```bash
 cd front && npm run build           # vite build -> front/dist (not verified: the host run aborted with a native Node crash after chunk rendering)
-docker compose --profile prod up -d --build
+docker build -f front/Dockerfile.prod --build-arg VITE_FRONT_URL=https://memo-minder.dev-it.app --build-arg VITE_BACK_API_URL=/api front   # Linux build, as in CI (verified)
+docker compose --profile prod up -d --build   # manual fallback; prod deploys go through .github/workflows/deploy.flow.yml
+```
+
+CI workflows (lint after editing `.github/workflows/`; from Git Bash prefix `MSYS_NO_PATHCONV=1` and mount `$(pwd -W)`):
+
+```bash
+docker run --rm -v "$PWD:/repo" -w /repo rhysd/actionlint:latest   # (verified)
 ```
 
 Add a dependency without host Node (Compose Watch rebuilds the image on lockfile change; same pattern for `front`):
@@ -92,7 +100,7 @@ Add a dependency without host Node (Compose Watch rebuilds the image on lockfile
 docker run --rm -v "$PWD/back:/app" -w /app node:24-alpine3.24 npm install --package-lock-only <package>
 ```
 
-No typecheck (no TypeScript). For production deploys, migrating from the former host MySQL database, backups and logs, see `README.md` § Production.
+No typecheck (no TypeScript). For production deploys (CI/CD and the GitHub settings it needs), migrating from the former host MySQL database, backups and logs, see `README.md` § Production.
 
 ## Architecture
 
@@ -153,10 +161,11 @@ A single `.env` lives at the repo root (template `.env.example`, git-ignored). C
 | `BACK_EMAIL_FROM` / `_USER` / `_PASSWORD`        | `back-*`         | Passed in but unused (no mailer wired, see Gotchas)                                                                                                           |
 | `VITE_FRONT_URL`                                 | front, back      | Prod build arg; backend uses it in logs and the email validation link                                                                                         |
 | `VITE_BACK_API_URL`                              | front            | `/api`; prod build arg                                                                                                                                        |
+| `BACK_IMAGE` / `FRONT_IMAGE`                     | Compose          | Prod only: written into the server `.env` by `deploy.flow.yml` (registry `sha-<commit>` images). Unset: local `--build` tags                                 |
 
 Set outside `.env`: `NODE_ENV`, `BACK_ENV`, `BACK_PORT=3000` (Dockerfiles); `BACK_DATABASE_HOST`, `BACK_DATABASE_PORT` (Compose; `database.js` falls back to `127.0.0.1:3306`); `DEV_API_PROXY_TARGET` (Compose, `front-dev` only).
 
-External services: MySQL 8.4 (container) and the public quotes API (called from the browser). No CI: `.github/` is empty.
+External services: MySQL 8.4 (container), the public quotes API (called from the browser), Docker Hub (prod images) and GitHub Actions (CI/CD, see `README.md` § CI/CD).
 
 ## Gotchas
 
@@ -175,3 +184,6 @@ External services: MySQL 8.4 (container) and the public quotes API (called from 
 - Compose Watch syncs sources (never `node_modules`) and rebuilds the image when `package.json`/`package-lock.json` changes.
 - `script-setup.ps1` overwrites `.env` with `.env.example` (`Copy-Item`) and seeds the database (drops all tables). Do not run it on a configured checkout.
 - `apache.conf` is a reference copy, not deployed; its proxy port (4560) must match the prod `FRONT_HOST_PORT`.
+- `deploy.flow.yml` rewrites the server `.env` on every deploy from its `Generate .env` step. A new variable in `docker-compose.yml` must be added there and to the GitHub settings, otherwise Compose interpolates an empty string in prod.
+- `tests-*.flow.yml` are path-filtered and skip PRs into `main` (`deploy.flow.yml` runs every suite there). Marking one of their checks as required would block PRs that do not touch that side.
+- The deploy prunes this project's unused images on the server by the `org.opencontainers.image.source` label set in `docker.inc.yml`: change both together.

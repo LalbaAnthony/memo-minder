@@ -111,7 +111,7 @@ services:
       VITE_BACK_API_URL: ${VITE_BACK_API_URL}
       DEV_API_PROXY_TARGET: http://back-dev:3000
     ports:
-      - "127.0.0.1:${FRONT_HOST_PORT}:5173"
+      - "${FRONT_HOST_PORT}:5173"
     develop:
       watch:
         - action: sync
@@ -141,6 +141,7 @@ services:
 
   back-prod:
     profiles: [prod]
+    image: ${BACK_IMAGE:-memo-minder-back-prod}
     build:
       context: ./back
       dockerfile: Dockerfile.prod
@@ -160,6 +161,7 @@ services:
 
   front-prod:
     profiles: [prod]
+    image: ${FRONT_IMAGE:-memo-minder-front-prod}
     build:
       context: ./front
       dockerfile: Dockerfile.prod
