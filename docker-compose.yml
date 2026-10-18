@@ -31,7 +31,7 @@ x-db: &db
     MYSQL_DATABASE: ${BACK_DATABASE_NAME}
     MYSQL_USER: ${BACK_DATABASE_USERNAME}
     MYSQL_PASSWORD: ${BACK_DATABASE_PASSWORD}
-    MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+    MYSQL_ROOT_PASSWORD: ${BACK_DATABASE_ROOT_PASSWORD}
   # TCP ping: the init-time temporary server uses --skip-networking, so this only succeeds once MySQL is really ready
   healthcheck:
     test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
