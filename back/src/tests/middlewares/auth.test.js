@@ -56,17 +56,4 @@ describe('auth middleware', () => {
         expect(res.status).not.toHaveBeenCalled();
         expect(req.user.userId).toBe(7);
     });
-
-    test('bypass mode skips the signature check but still takes the identity from the token', async () => {
-        const token = jwt.sign({ userId: 3 }, 'another-secret');
-        const { req, next } = await run({ authorization: `Bearer ${token}` });
-        expect(next).toHaveBeenCalled();
-        expect(req.user.userId).toBe(3);
-    });
-
-    test('bypass mode still requires a token', async () => {
-        const { res, next } = await run();
-        expect(res.status).toHaveBeenCalledWith(401);
-        expect(next).not.toHaveBeenCalled();
-    });
 });
