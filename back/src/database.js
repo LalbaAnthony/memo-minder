@@ -1,24 +1,15 @@
 const { Sequelize } = require('sequelize');
-const logConsole = require('./helpers/logConsole');
 const path = require('path');
 const dotenv = require('dotenv');
 
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
-const sequelizeDevelopment = new Sequelize({
-  dialect: 'sqlite',
-  storage: './database.sqlite',
-  logging: logConsole('Database connection established!', 'info')
-});
-
-const sequelizeProduction = new Sequelize(process.env.BACK_DATABASE_NAME, process.env.BACK_DATABASE_USERNAME, process.env.BACK_DATABASE_PASSWORD, {
+const sequelize = new Sequelize(process.env.BACK_DATABASE_NAME, process.env.BACK_DATABASE_USERNAME, process.env.BACK_DATABASE_PASSWORD, {
   host: process.env?.BACK_DATABASE_HOST || '127.0.0.1',
   port: process.env?.BACK_DATABASE_PORT || 3306,
   dialect: 'mysql',
   logging: false
 });
-
-const sequelize = process.env.BACK_ENV === 'development' ? sequelizeDevelopment : sequelizeProduction;
 
 const models = {
   User: require("./models/userModel")(sequelize),
@@ -34,13 +25,6 @@ Object.keys(models).forEach((modelName) => {
     models[modelName].associate(models);
   }
 });
-
-// Ensure structure of the database is up to date. Cannot be used in production since it would reset the database and have a chance to lose data.
-if (process.env.BACK_ENV === 'development') {
-  sequelize.sync({ alter: true })
-    .then(() => logConsole('Database synced', 'success'))
-    .catch((err) => logConsole('Error syncing database', 'error', err));
-}
 
 module.exports = {
   sequelize,

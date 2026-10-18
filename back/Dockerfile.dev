@@ -1,0 +1,23 @@
+# syntax=docker/dockerfile:1
+
+# Development image: full dependency tree (nodemon, jest), sources synced by Compose Watch, nodemon restarts on change
+FROM node:24-alpine3.24
+
+ENV NODE_ENV=development \
+    BACK_ENV=development \
+    BACK_PORT=3000
+
+WORKDIR /app
+
+# Compose Watch syncs files as the container user, and the app writes its logs (logs/)
+RUN mkdir -p /app/logs && chown -R node:node /app
+USER node
+
+COPY --chown=node:node package.json package-lock.json ./
+RUN --mount=type=cache,target=/home/node/.npm,uid=1000,gid=1000 npm ci
+
+COPY --chown=node:node . .
+
+EXPOSE 3000
+
+CMD ["npm", "run", "dev"]

@@ -76,6 +76,11 @@ export default defineConfig({
   },
   server: {
     port: 5173,
+    strictPort: true,
+    // Docker dev: same-origin /api calls are forwarded to the backend container, mirroring the nginx proxy used in prod
+    proxy: process.env.DEV_API_PROXY_TARGET
+      ? { '/api': { target: process.env.DEV_API_PROXY_TARGET } }
+      : {},
   },
 })
 

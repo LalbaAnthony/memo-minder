@@ -19,7 +19,6 @@ module.exports = (instance) => {
         email: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true,
         },
         homePageEnableSpents: {
             type: DataTypes.BOOLEAN,
@@ -97,6 +96,12 @@ module.exports = (instance) => {
         createdAt: 'createdAt',
         tableName: 'user',
         freezeTableName: true,
+        // Declared here rather than as `unique: true` on the column: with MySQL, every `sync({ alter: true })` re-adds a
+        // column-level UNIQUE as a new index (email_2, email_3...) until the 64-index limit. Model indexes are synced by
+        // name, so this one is created once. Named `email` to match the index MySQL created on existing databases.
+        indexes: [
+            { name: 'email', unique: true, fields: ['email'] },
+        ],
     });
 
     return User;

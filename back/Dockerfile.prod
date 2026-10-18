@@ -1,0 +1,38 @@
+# syntax=docker/dockerfile:1
+
+# ---- deps: production dependencies only (no nodemon, no jest) ----
+FROM node:24-alpine3.24 AS deps
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN --mount=type=cache,target=/root/.npm npm ci --omit=dev
+
+# ---- runtime: root-owned code (read-only for the app user), unprivileged process ----
+FROM node:24-alpine3.24 AS runtime
+
+# BACK_BYPASS_AUTH is baked to false so a misconfigured .env can never disable auth in production
+ENV NODE_ENV=production \
+    BACK_ENV=production \
+    BACK_PORT=3000 \
+    BACK_BYPASS_AUTH=false
+
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY package.json main.js seed.js ./
+COPY src ./src
+COPY public ./public
+
+# logs/ is the only path the app writes to (mounted as a volume by compose)
+RUN mkdir logs && chown node:node logs
+
+USER node
+
+EXPOSE 3000
+
+# TCP probe instead of an HTTP call: the logging middleware appends every HTTP request to logs/logs.log
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+    CMD ["node", "-e", "require('net').connect(process.env.BACK_PORT, '127.0.0.1').on('connect', () => process.exit(0)).on('error', () => process.exit(1))"]
+
+CMD ["node", "main.js"]

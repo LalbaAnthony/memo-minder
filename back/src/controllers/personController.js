@@ -1,7 +1,6 @@
 const { Person, Music, Event, Season } = require('../database');
 const { Op, literal } = require('sequelize');
 const frmtr = require('../helpers/frmtr');
-const { sequelize } = require('../database');
 
 const baseController = require('../composables/baseController');
 
@@ -33,7 +32,6 @@ exports.getUpcommingBirthdaysPeople = async (req, res) => {
 
     // Build where clause
     let where = { userId };
-    const dialect = sequelize.getDialect();
 
     // Calculate date boundary info for both logic and ordering
     const now = new Date();
@@ -41,35 +39,21 @@ exports.getUpcommingBirthdaysPeople = async (req, res) => {
     end.setDate(now.getDate() + days);
     const crossesYearBoundary = end.getFullYear() > now.getFullYear();
 
-    if (dialect === 'mysql') {
-        if (crossesYearBoundary) {
-            // Handle year wrap-around in MySQL
-            where[Op.and] = [
-                literal(`
-                        (DATE_FORMAT(Birthdate, '%m-%d') >= DATE_FORMAT(NOW(), '%m-%d')
-                        OR DATE_FORMAT(Birthdate, '%m-%d') <= DATE_FORMAT(DATE_ADD(NOW(), INTERVAL ${days} DAY), '%m-%d'))
-                    `)
-            ];
-        } else {
-            where[Op.and] = [
-                literal(`
-                        DATE_FORMAT(Birthdate, '%m-%d') >= DATE_FORMAT(NOW(), '%m-%d')
-                        AND DATE_FORMAT(Birthdate, '%m-%d') <= DATE_FORMAT(DATE_ADD(NOW(), INTERVAL ${days} DAY), '%m-%d')
-                    `)
-            ];
-        }
-    } else if (dialect === 'sqlite') {
-        // Handle year wrap-around in SQLite
-        const condition = crossesYearBoundary
-            ? `
-                    (strftime('%m-%d', Birthdate) >= strftime('%m-%d', 'now')
-                    OR strftime('%m-%d', Birthdate) <= strftime('%m-%d', 'now', '+${days} days'))
-                `
-            : `
-                    strftime('%m-%d', Birthdate) >= strftime('%m-%d', 'now')
-                    AND strftime('%m-%d', Birthdate) <= strftime('%m-%d', 'now', '+${days} days')
-                `;
-        where[Op.and] = [literal(condition)];
+    if (crossesYearBoundary) {
+        // Handle year wrap-around
+        where[Op.and] = [
+            literal(`
+                    (DATE_FORMAT(Birthdate, '%m-%d') >= DATE_FORMAT(NOW(), '%m-%d')
+                    OR DATE_FORMAT(Birthdate, '%m-%d') <= DATE_FORMAT(DATE_ADD(NOW(), INTERVAL ${days} DAY), '%m-%d'))
+                `)
+        ];
+    } else {
+        where[Op.and] = [
+            literal(`
+                    DATE_FORMAT(Birthdate, '%m-%d') >= DATE_FORMAT(NOW(), '%m-%d')
+                    AND DATE_FORMAT(Birthdate, '%m-%d') <= DATE_FORMAT(DATE_ADD(NOW(), INTERVAL ${days} DAY), '%m-%d')
+                `)
+        ];
     }
 
     // Pagination setup
@@ -84,28 +68,15 @@ exports.getUpcommingBirthdaysPeople = async (req, res) => {
     };
 
     // ORDER BY logic that correctly handles wrap-around
-    let orderLiteral;
-    if (dialect === 'mysql') {
-        orderLiteral = crossesYearBoundary
-            ? literal(`
-                    CASE
-                        WHEN DATE_FORMAT(Birthdate, '%m-%d') >= DATE_FORMAT(NOW(), '%m-%d') THEN 1
-                        ELSE 2
-                    END,
-                    DATE_FORMAT(Birthdate, '%m-%d') ASC
-                `)
-            : literal(`DATE_FORMAT(Birthdate, '%m-%d') ASC`);
-    } else if (dialect === 'sqlite') {
-        orderLiteral = crossesYearBoundary
-            ? literal(`
-                    CASE
-                        WHEN strftime('%m-%d', Birthdate) >= strftime('%m-%d', 'now') THEN 1
-                        ELSE 2
-                    END,
-                    strftime('%m-%d', Birthdate) ASC
-                `)
-            : literal(`strftime('%m-%d', Birthdate) ASC`);
-    }
+    const orderLiteral = crossesYearBoundary
+        ? literal(`
+                CASE
+                    WHEN DATE_FORMAT(Birthdate, '%m-%d') >= DATE_FORMAT(NOW(), '%m-%d') THEN 1
+                    ELSE 2
+                END,
+                DATE_FORMAT(Birthdate, '%m-%d') ASC
+            `)
+        : literal(`DATE_FORMAT(Birthdate, '%m-%d') ASC`);
 
     // Query with associations and corrected ordering
     const items = await Person.findAll({

@@ -45,14 +45,31 @@ app.use(({ res }) => {
 })
 
 // Synchronisation de la base de données et démarrage du serveur
-sequelize.sync()
+// In development, `alter` keeps the schema up to date with the models. Never in production: it can drop columns and lose data.
+// Done here rather than when database.js is loaded, so seed.js and the tests do not run a concurrent schema sync.
+sequelize.sync(process.env.BACK_ENV === 'development' ? { alter: true } : {})
     .then(() => {
         logConsole('Database & tables created!', 'success');
-        app.listen(process.env.BACK_PORT, () => {
+        const server = app.listen(process.env.BACK_PORT, () => {
             logConsole(`Listening on http://localhost:${process.env.BACK_PORT}/ for ${process.env.VITE_FRONT_URL}`, 'info');
         })
         logConsole('Server started!', 'success');
+
+        const shutdown = (signal) => {
+            logConsole(`${signal} received, shutting down`, 'warn');
+            server.close(() => {
+                sequelize.close()
+                    .then(() => process.exit(0))
+                    .catch((err) => {
+                        logConsole(`Error while closing the database connection: ${err}`, 'error');
+                        process.exit(1);
+                    });
+            });
+        };
+        process.once('SIGTERM', shutdown);
+        process.once('SIGINT', shutdown);
     })
     .catch(err => {
         logConsole(`An error occurred: ${err}`, 'error');
+        process.exit(1);
     });

@@ -1,0 +1,190 @@
+# Memo Minder
+#
+# Profiles:
+#   dev  -> db-dev + back-dev + front-dev, hot reload through Compose Watch: docker compose --profile dev up --build --watch
+#   prod -> db-prod + back-prod + front-prod, behind the host reverse proxy: docker compose --profile prod up -d --build
+#
+# Every ${VAR} is read from the .env file at the project root (template: .env.example).
+# Each container only receives the variables it needs; image invariants (NODE_ENV, BACK_ENV, BACK_PORT...) live in the Dockerfiles.
+
+name: memo-minder
+
+x-back-environment: &back-environment
+  BACK_APP_NAME: ${BACK_APP_NAME}
+  BACK_TOKEN_SECRET_KEY: ${BACK_TOKEN_SECRET_KEY}
+  BACK_TOKEN_EXPIRES_IN: ${BACK_TOKEN_EXPIRES_IN}
+  BACK_EMAIL_FROM: ${BACK_EMAIL_FROM}
+  BACK_EMAIL_USER: ${BACK_EMAIL_USER}
+  BACK_EMAIL_PASSWORD: ${BACK_EMAIL_PASSWORD}
+  BACK_DATABASE_PORT: "3306"
+  BACK_DATABASE_NAME: ${BACK_DATABASE_NAME}
+  BACK_DATABASE_USERNAME: ${BACK_DATABASE_USERNAME}
+  BACK_DATABASE_PASSWORD: ${BACK_DATABASE_PASSWORD}
+  VITE_FRONT_URL: ${VITE_FRONT_URL}
+
+# Shared by db-dev and db-prod: same engine, version and settings in every environment
+x-db: &db
+  image: mysql:8.4
+  # Same charset/collation as the historical production database, so imported dumps and new tables stay consistent
+  command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_general_ci"]
+  environment:
+    MYSQL_DATABASE: ${BACK_DATABASE_NAME}
+    MYSQL_USER: ${BACK_DATABASE_USERNAME}
+    MYSQL_PASSWORD: ${BACK_DATABASE_PASSWORD}
+    MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+  # TCP ping: the init-time temporary server uses --skip-networking, so this only succeeds once MySQL is really ready
+  healthcheck:
+    test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+    interval: 10s
+    timeout: 5s
+    retries: 5
+    start_period: 60s
+    start_interval: 2s
+
+x-prod-logging: &prod-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
+# Applied to the stateless prod containers: immutable root filesystem, no Linux capabilities, no privilege escalation
+x-prod-hardening: &prod-hardening
+  restart: unless-stopped
+  read_only: true
+  tmpfs:
+    - /tmp
+  cap_drop:
+    - ALL
+  security_opt:
+    - no-new-privileges:true
+  logging: *prod-logging
+
+services:
+  # ----------------- DEV -----------------
+
+  db-dev:
+    profiles: [dev]
+    <<: *db
+    # Loopback only, for local SQL clients
+    ports:
+      - "127.0.0.1:${DATABASE_HOST_PORT}:3306"
+    volumes:
+      - db-dev-data:/var/lib/mysql
+
+  back-dev:
+    profiles: [dev]
+    build:
+      context: ./back
+      dockerfile: Dockerfile.dev
+    init: true
+    depends_on:
+      db-dev:
+        condition: service_healthy
+    environment:
+      <<: *back-environment
+      BACK_BYPASS_AUTH: ${BACK_BYPASS_AUTH}
+      BACK_DATABASE_HOST: db-dev
+    develop:
+      watch:
+        - action: sync
+          path: ./back
+          target: /app
+          ignore:
+            - node_modules/
+            - logs/
+            - package.json
+            - package-lock.json
+        - action: rebuild
+          path: ./back/package.json
+        - action: rebuild
+          path: ./back/package-lock.json
+
+  front-dev:
+    profiles: [dev]
+    build:
+      context: ./front
+      dockerfile: Dockerfile.dev
+    init: true
+    depends_on:
+      - back-dev
+    environment:
+      VITE_FRONT_URL: ${VITE_FRONT_URL}
+      VITE_BACK_API_URL: ${VITE_BACK_API_URL}
+      DEV_API_PROXY_TARGET: http://back-dev:3000
+    ports:
+      - "127.0.0.1:${FRONT_HOST_PORT}:5173"
+    develop:
+      watch:
+        - action: sync
+          path: ./front
+          target: /app
+          ignore:
+            - node_modules/
+            - dist/
+            - package.json
+            - package-lock.json
+        - action: rebuild
+          path: ./front/package.json
+        - action: rebuild
+          path: ./front/package-lock.json
+
+  # ----------------- PROD -----------------
+
+  db-prod:
+    profiles: [prod]
+    <<: *db
+    restart: unless-stopped
+    volumes:
+      - db-prod-data:/var/lib/mysql
+    networks:
+      - data
+    logging: *prod-logging
+
+  back-prod:
+    profiles: [prod]
+    build:
+      context: ./back
+      dockerfile: Dockerfile.prod
+    <<: *prod-hardening
+    init: true
+    depends_on:
+      db-prod:
+        condition: service_healthy
+    environment:
+      <<: *back-environment
+      BACK_DATABASE_HOST: db-prod
+    volumes:
+      - back-prod-logs:/app/logs
+    networks:
+      - edge
+      - data
+
+  front-prod:
+    profiles: [prod]
+    build:
+      context: ./front
+      dockerfile: Dockerfile.prod
+      args:
+        VITE_FRONT_URL: ${VITE_FRONT_URL}
+        VITE_BACK_API_URL: ${VITE_BACK_API_URL}
+    <<: *prod-hardening
+    depends_on:
+      back-prod:
+        condition: service_healthy
+    # Loopback only: Docker-published ports bypass host firewalls (ufw), the host reverse proxy is the only public entrypoint
+    ports:
+      - "127.0.0.1:${FRONT_HOST_PORT}:8080"
+    networks:
+      - edge
+
+networks:
+  # front-prod <-> back-prod
+  edge:
+  # back-prod <-> db-prod, no route to the outside world
+  data:
+    internal: true
+
+volumes:
+  db-dev-data:
+  db-prod-data:
+  back-prod-logs:

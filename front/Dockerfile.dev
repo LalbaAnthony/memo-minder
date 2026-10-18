@@ -1,0 +1,22 @@
+# syntax=docker/dockerfile:1
+
+# Development image: Vite dev server with HMR, sources synced by Compose Watch
+FROM node:24-alpine3.24
+
+ENV NODE_ENV=development
+
+WORKDIR /app
+
+# Vite writes its pre-bundle cache (node_modules/.vite) and temporary config files at the project root
+RUN chown node:node /app
+USER node
+
+COPY --chown=node:node package.json package-lock.json ./
+RUN --mount=type=cache,target=/home/node/.npm,uid=1000,gid=1000 npm ci
+
+COPY --chown=node:node . .
+
+EXPOSE 5173
+
+# Listen on all interfaces so the published port reaches the dev server
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
